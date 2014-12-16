@@ -12,5 +12,7 @@ permalink: /spec.html
 {% include spec/thread.mdwn %}
 {% include spec/message.mdwn %}
 {% include spec/searchsnippet.mdwn %}
+{% include spec/contactgroups.mdwn %}
+{% include spec/contacts.mdwn %}
 {% include spec/push.mdwn %}
 {% include spec/upload.mdwn %}
