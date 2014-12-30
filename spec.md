@@ -15,6 +15,7 @@ permalink: /spec.html
 {% include spec/contactgroup.mdwn %}
 {% include spec/contact.mdwn %}
 {% include spec/calendar.mdwn %}
+{% include spec/calendareventlist.mdwn %}
 {% include spec/calendarevent.mdwn %}
 {% include spec/push.mdwn %}
 {% include spec/upload.mdwn %}
