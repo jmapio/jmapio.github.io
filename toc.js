@@ -92,7 +92,7 @@ var pageHeaderHeight = document.querySelector( 'header' ).offsetHeight;
 var recalculatePositions = function () {
     for ( var i = 0, l = tocItems.length, item; i < l; i += 1 ) {
         item = tocItems[i];
-        item.top = item.heading.offsetTop - pageHeaderHeight - 10;
+        item.top = item.heading.offsetTop - pageHeaderHeight - 15;
     }
 };
 window.addEventListener( 'load', recalculatePositions, false );
