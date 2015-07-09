@@ -13,7 +13,7 @@ blockquote {
 html {
     background: #fff;
     color: #1f1f1f;
-    font: 15px/1.55 "Open Sans", "Helvetica Neue", Arial, sans-serif;
+    font: 16px/1.55 "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
 }
 table {
     margin: 10px 0 15px 0;
@@ -89,7 +89,7 @@ blockquote:before {
     color:#eee;
 }
 blockquote p {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 300;
     line-height: 18px;
     margin-bottom: 0;
@@ -150,16 +150,16 @@ sup {
         top: 0;
         left: 0;
         right: 0;
-        height: 44px;
-        line-height: 44px;
+        height: 50px;
+        line-height: 50px;
         border-bottom: 1px solid #1f1f1f;
         background: #366683;
         color: #fff;
     }
     #logo {
         padding: 0 30px;
-        font-size: 32px;
-        font-weight: bold;
+        font-size: 24px;
+        font-weight: 600;
     }
     #nav {
         position: absolute;
@@ -198,7 +198,7 @@ sup {
     }
     #last-update {
         margin: -7px 0 15px;
-        font-size: 13px;
+        font-size: 14px;
         text-align: center;
     }
     /* Sidebar (Table of Contents) */
@@ -216,7 +216,7 @@ sup {
         margin: 0;
         padding: 15px 0;
         list-style: none;
-        font-size: 13px;
+        font-size: 14px;
     }
     .toc-selected {
         position: absolute;
