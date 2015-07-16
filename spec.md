@@ -13,6 +13,7 @@ permalink: /spec.html
 {% include spec/message.mdwn %}
 {% include spec/searchsnippet.mdwn %}
 {% include spec/contactgroup.mdwn %}
+{% include spec/contactlist.mdwn %}
 {% include spec/contact.mdwn %}
 {% include spec/calendar.mdwn %}
 {% include spec/calendareventlist.mdwn %}
