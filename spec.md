@@ -11,7 +11,9 @@ permalink: /spec.html
 {% include spec/messagelist.mdwn %}
 {% include spec/thread.mdwn %}
 {% include spec/message.mdwn %}
+{% include spec/identity.mdwn %}
 {% include spec/searchsnippet.mdwn %}
+{% include spec/vacationresponse.mdwn %}
 {% include spec/contactgroup.mdwn %}
 {% include spec/contactlist.mdwn %}
 {% include spec/contact.mdwn %}
