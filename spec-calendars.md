@@ -7,7 +7,11 @@ permalink: /spec-calendars.html
 
 This document specifies a data model for synchronising calendar data with a server using [JMAP](spec-core.html).
 
-{% include spec/calendars/intro.mdown %}
-{% include spec/calendars/calendar.mdown %}
-{% include spec/calendars/calendareventlist.mdown %}
-{% include spec/calendars/calendarevent.mdown %}
+{% capture x %}{% include spec/calendars/intro.mdown %}{% endcapture %}
+{{ x | replace: "# ", "## " | markdownify }}
+{% capture x %}{% include spec/calendars/calendar.mdown %}{% endcapture %}
+{{ x | replace: "# ", "## " | markdownify }}
+{% capture x %}{% include spec/calendars/calendareventlist.mdown %}{% endcapture %}
+{{ x | replace: "# ", "## " | markdownify }}
+{% capture x %}{% include spec/calendars/calendarevent.mdown %}{% endcapture %}
+{{ x | replace: "# ", "## " | markdownify }}

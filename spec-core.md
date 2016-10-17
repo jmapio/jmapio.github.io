@@ -9,9 +9,15 @@ This document specifies the core protocol for synchronising JSON-based data obje
 
 This is then built upon to provide [mail](spec-mail.html), [contacts](spec-contacts.html) and [calendar](spec-calendars.html) synchronisation protocols.
 
-{% include spec/jmap/intro.mdown %}
-{% include spec/jmap/authentication.mdown %}
-{% include spec/jmap/api.mdown %}
-{% include spec/jmap/download.mdown %}
-{% include spec/jmap/upload.mdown %}
-{% include spec/jmap/push.mdown %}
+{% capture x %}{% include spec/jmap/intro.mdown %}{% endcapture %}
+{{ x | replace: "# ", "## " | markdownify }}
+{% capture x %}{% include spec/jmap/authentication.mdown %}{% endcapture %}
+{{ x | replace: "# ", "## " | markdownify }}
+{% capture x %}{% include spec/jmap/api.mdown %}{% endcapture %}
+{{ x | replace: "# ", "## " | markdownify }}
+{% capture x %}{% include spec/jmap/download.mdown %}{% endcapture %}
+{{ x | replace: "# ", "## " | markdownify }}
+{% capture x %}{% include spec/jmap/upload.mdown %}{% endcapture %}
+{{ x | replace: "# ", "## " | markdownify }}
+{% capture x %}{% include spec/jmap/push.mdown %}{% endcapture %}
+{{ x | replace: "# ", "## " | markdownify }}
