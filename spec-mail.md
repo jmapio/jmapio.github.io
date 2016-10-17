@@ -7,11 +7,11 @@ permalink: /spec-mail.html
 
 This document specifies a data model for synchronising mail with a server using [JMAP](spec-core.html).
 
-{% include spec/mail/intro.mdown %}
-{% include spec/mail/mailbox.mdown %}
-{% include spec/mail/messagelist.mdown %}
-{% include spec/mail/thread.mdown %}
-{% include spec/mail/message.mdown %}
-{% include spec/mail/identity.mdown %}
-{% include spec/mail/searchsnippet.mdown %}
-{% include spec/mail/vacationresponse.mdown %}
+{{ {% include spec/mail/intro.mdown  %} | replace: "# ", "## " }}
+{{ {% include spec/mail/mailbox.mdown  %} | replace: "# ", "## " }}
+{{ {% include spec/mail/messagelist.mdown  %} | replace: "# ", "## " }}
+{{ {% include spec/mail/thread.mdown  %} | replace: "# ", "## " }}
+{{ {% include spec/mail/message.mdown  %} | replace: "# ", "## " }}
+{{ {% include spec/mail/identity.mdown  %} | replace: "# ", "## " }}
+{{ {% include spec/mail/searchsnippet.mdown  %} | replace: "# ", "## " }}
+{{ {% include spec/mail/vacationresponse.mdown  %} | replace: "# ", "## " }}
