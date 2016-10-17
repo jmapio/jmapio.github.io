@@ -3,7 +3,7 @@ layout: default
 permalink: /spec-mail.html
 ---
 
-# JSON Mail
+# JMAP Mail
 
 This document specifies a data model for synchronising mail with a server using [JMAP](spec-core.html).
 

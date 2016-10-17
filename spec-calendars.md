@@ -3,7 +3,7 @@ layout: default
 permalink: /spec-calendars.html
 ---
 
-# JSON Calendars
+# JMAP Calendars
 
 This document specifies a data model for synchronising calendar data with a server using [JMAP](spec-core.html).
 
