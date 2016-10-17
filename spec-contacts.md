@@ -7,7 +7,7 @@ permalink: /spec-contacts.html
 
 This document specifies a data model for synchronising contacts data with a server using [JMAP](spec-core.html).
 
-{% include spec/contacts/intro.mdown | replace: "# ", "## " %}
-{% include spec/contacts/contactgroup.mdown | replace: "# ", "## " %}
-{% include spec/contacts/contactlist.mdown | replace: "# ", "## " %}
-{% include spec/contacts/contact.mdown | replace: "# ", "## " %}
+{% include spec/contacts/intro.mdown %}
+{% include spec/contacts/contactgroup.mdown %}
+{% include spec/contacts/contactlist.mdown %}
+{% include spec/contacts/contact.mdown %}
