@@ -3,4 +3,4 @@ layout: default
 permalink: /index.html
 ---
 
-{% include home/faq.mdwn %}
+{% include home/faq.mdown %}
