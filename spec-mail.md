@@ -17,6 +17,10 @@ This document specifies a data model for synchronising mail with a server using 
 {{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/mail/message.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
+{% capture x %}{% include spec/mail/messagesubmissionlist.mdown %}{% endcapture %}
+{{ x | replace: "# ", "## " | markdownify }}
+{% capture x %}{% include spec/mail/messagesubmission.mdown %}{% endcapture %}
+{{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/mail/identity.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/mail/searchsnippet.mdown %}{% endcapture %}
