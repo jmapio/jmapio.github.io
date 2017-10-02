@@ -21,3 +21,5 @@ This is then built upon to provide [mail](spec-mail.html), [contacts](spec-conta
 {{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/jmap/push.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
+{% capture x %}{% include spec/jmap/securityconsiderations.mdown %}{% endcapture %}
+{{ x | replace: "# ", "## " | markdownify }}
