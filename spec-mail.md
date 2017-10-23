@@ -11,13 +11,9 @@ This document specifies a data model for synchronising mail with a server using 
 {{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/mail/mailbox.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
-{% capture x %}{% include spec/mail/messagelist.mdown %}{% endcapture %}
-{{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/mail/thread.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/mail/message.mdown %}{% endcapture %}
-{{ x | replace: "# ", "## " | markdownify }}
-{% capture x %}{% include spec/mail/messagesubmissionlist.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/mail/messagesubmission.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
