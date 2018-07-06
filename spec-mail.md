@@ -21,8 +21,6 @@ This document specifies a data model for synchronising mail with a server using 
 {{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/mail/searchsnippet.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
-{% capture x %}{% include spec/mail/vacationresponse.mdown %}{% endcapture %}
-{{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/mail/securityconsiderations.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/mail/ianaconsiderations.mdown %}{% endcapture %}
