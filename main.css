@@ -134,6 +134,37 @@ sup {
   -webkit-print-color-adjust: exact;
 }
 
+.toc,
+article {
+    counter-reset: section;
+}
+.toc-h2,
+h2 {
+    counter-increment: section;
+    counter-reset: subsection;
+}
+.toc-h2 > .toc-link:before,
+h2:before {
+    content: counter(section) ". ";
+}
+.toc-h3,
+h3 {
+    counter-increment: subsection;
+    counter-reset: subsubsection;
+}
+.toc-h3 > .toc-link:before,
+h3:before {
+    content: counter(section) "." counter(subsection) ". ";
+}
+h4 {
+    counter-increment: subsubsection;
+    counter-reset: subsubsubsection;
+}
+h4:before {
+    content: counter(section) "."
+        counter(subsection) "." counter(subsubsection) ". ";
+}
+
 @media print {
   body,code,pre code,h1,h2,h3,h4,h5,h6 {
     color: black;
