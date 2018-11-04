@@ -1,6 +1,7 @@
 ---
 layout: default
 permalink: /spec-contacts.html
+title: JMAP Contacts Specification
 ---
 
 # JMAP Contacts

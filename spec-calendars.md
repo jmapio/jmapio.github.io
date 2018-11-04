@@ -1,6 +1,7 @@
 ---
 layout: default
 permalink: /spec-calendars.html
+title: JMAP Calendars Specification
 ---
 
 # JMAP Calendars

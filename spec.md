@@ -1,6 +1,7 @@
 ---
 layout: default
 permalink: /spec.html
+title: JMAP Specifications
 ---
 
 # JMAP: The Specs

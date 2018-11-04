@@ -1,6 +1,7 @@
 ---
 layout: default
 permalink: /spec-mail.html
+title: JMAP Mail Specification
 ---
 
 # JMAP Mail
