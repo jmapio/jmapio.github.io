@@ -1,6 +1,7 @@
 ---
 layout: default
 permalink: /spec-core.html
+title: JMAP (JSON Meta Application Protocol) Specifications
 ---
 
 # JSON Meta Application Protocol (JMAP)
