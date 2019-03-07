@@ -1,9 +1,9 @@
 ---
 layout: default
 permalink: /news.html
-title: JMAP Server Implementation Guide
+title: JMAP news
 ---
-# <p class='text-center'>The big news this week</p>
+# <p class='text-center'>JMAP last News</p>
 > ## <p style="color: #555" >JMAP is on the home straight</p>
 27 December 2018 / Bron Gondwana
 >In 2014, we talked about [JMAP](https://fastmail.blog/2014/12/23/jmap-a-better-way-to-email/).  , the open protocol for modern email, which was born out of the web interface we have since 2011. We believe in open standards, both as a contribution to the community through what we have learned and as a bulwark against the growth of walled gardens.
