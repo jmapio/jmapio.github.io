@@ -1,7 +1,7 @@
 ---
 layout: default
 permalink: /news.html
-title: JMAP news
+title: JMAP News
 ---
 # <p class='text-center'>JMAP last News</p>
 > ## <p style="color: #555" >JMAP is on the home straight</p>
@@ -13,7 +13,7 @@ Let's look at what has happened in the last 4 years.
  [Continue reading... ](https://fastmail.blog/2018/12/27/jmap-is-on-the-home-straight/)
 
 
-> ## <p style="color: #555" >The JMAP Test Suite</p>
+> ## <p style="color: #555" >The JMAP Test Suite</p> 
 9 December 2016 / Ricardo Signes
 >This is the ninth post in the  [2016 FastMail Advent Calendar ](https://fastmail.blog/2016/12/01/fastmail-advent-2016/). Stay tuned for another post tomorrow.  
 
@@ -35,15 +35,7 @@ Let's look at what has happened in the last 4 years.
    [Continue reading... ](https://fastmail.blog/2015/08/11/an-open-source-jmap-proxy-javascript-library-and-webmail-demo/)
 
 
-   > ## <p style="color: #666" >Salada : A JMAP server</p>
-   [Fork the project on GitHub ](https://github.com/robn/salada)
-   Salada is a standalone JMAP server, suitable for development and experimentation. The initial goal is complete coverage of the JMAP spec in a small, fast server that requires minimal configuration (hopefully none!)
-
-  [Continue reading... ](https://github.com/robn/salada)
-
-
-
- > ## <p style="color: #666" >Dec 23: JMAP — A better way to email</p>
+  > ## <p style="color: #666" >Dec 23: JMAP — A better way to email</p>
  23 December 2014 / Bron Gondwana
  This blog post is part of the [ FastMail 2014 Advent Calendar](https://docs.framasoft.org/fr/grav/).
  The previous post on 22nd December was the  [long awaited beta of contact syncing](https://fastmail.blog/2014/12/22/carddav-beta-release/) . The final post on 24th December is [ about our work environment](https://fastmail.blog/2014/12/24/working-at-fastmail/) .
