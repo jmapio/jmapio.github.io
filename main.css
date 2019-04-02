@@ -178,6 +178,8 @@ h4:before {
     /* Header (Top level navigation) */
     header {
         position: fixed;
+        display: flex;
+        flex-direction: row;
         top: 0;
         left: 0;
         right: 0;
@@ -187,13 +189,72 @@ h4:before {
         background: #366683;
         color: #fff;
     }
+
+    #humberger-menu {
+        display: none;
+        padding: 11px 30px;
+    }
+
+    #humberger-menu input {
+        display: block;
+        width: 27px;
+        height: 27px;
+        position: absolute;
+        cursor: pointer;
+        opacity: 0; 
+        z-index: 2;
+        -webkit-touch-callout: none;
+    }
+    
+    #humberger-menu span:first-child {
+        transform-origin: 0% 0%;
+    }
+
+    #humberger-menu span:nth-last-child(2) {
+        transform-origin: 0% 100%;
+    }
+
+    #humberger-menu input:checked ~ span {
+        opacity: 1;
+        transform: rotate(-45deg) translate(-2px, -1px);
+        background: #232323;
+    }
+    
+    #humberger-menu input:checked ~ span:nth-last-child(2) {
+        opacity: 0;
+        transform: rotate(0deg) scale(0.2, 0.2);
+    }
+
+    #humberger-menu input:checked ~ span:nth-last-child(3) {
+        transform: rotate(45deg) translate(0, -1px);
+    }
+
+    #humberger-menu span {
+        display: block;
+        width: 33px;
+        display: block;
+        width: 33px;
+        height: 4px;
+        margin-bottom: 5px;
+        position: relative;
+        background: #cdcdcd;
+        border-radius: 3px;
+        z-index: 1;
+        transform-origin: 4px 0px;
+        transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                    background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+                    opacity 0.55s ease;
+    }
+    
     #logo {
         padding: 0 30px;
         font-size: 32px;
         font-weight: 600;
     }
+
     #nav {
-        position: absolute;
+        /* position: absolute; */
+        flex-grow: 1;
         top: 0;
         left: 230px;
         right: 0;
@@ -289,7 +350,6 @@ h4:before {
     header {
         position: relative;
     }
-    #logo,
     #github {
         display: none;
     }
@@ -314,3 +374,48 @@ h4:before {
         display: none;
     }
 }
+
+@media screen and (max-width: 770px){
+    #logo {
+        flex-grow: 1;
+    }
+
+    #nav {
+        display: none;
+        background: #366683;
+    }
+
+    #humberger-menu {
+        display: block;
+    }
+
+    #nav li {
+        display: block;
+    }
+
+    #nav li:hover {
+        background: #438fbe;
+    }
+
+    
+}
+
+@media screen and (max-width: 964px) {
+    #nav {
+        flex-grow: 0;
+    }
+}
+
+.activate {
+    position: absolute;
+    display: block !important;
+    top: 49px !important;
+}
+.activate .nav-item {
+    display: block;
+}
+
+.activate .nav-item:hover {
+    background: #438fbe !important;
+}
+
