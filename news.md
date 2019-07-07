@@ -4,6 +4,16 @@ permalink: /news.html
 title: JMAP News
 ---
 # JMAP News
+
+## Tuan LE CONG
+
+2 July 2019 / Tuan LE CONG
+
+>Last week, [Linagora Vietnam](http://linagora.vn/) was organizing a barcamp event during three days. The topic was [JSON Meta Application Protocol](https://jmap.io/) (JMAP), used for synchronizing and accessing mail data for [OpenPaaS](https://open-paas.org/) INBOX. Attendees were the James team, Jungles team, QA team and our guest [Michael Bailly](https://medium.com/@MichaelBailly), OpenPaaS product owner from Paris office.
+
+[Continue reading...](https://medium.com/linagora-engineering/jmap-barcamp-2019-5212944c3731)
+
+
 ## JMAP is on the home straight
 
 27 December 2018 / Bron Gondwana
