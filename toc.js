@@ -139,18 +139,3 @@ window.addEventListener( 'scroll', function () {
 }, false );
 
 }( document, window ) );
-
-document.addEventListener('DOMContentLoaded', function() {
-    var $menu = document.getElementById('nav');
-    var $humberger = document.getElementById("humberger-menu");
-    var $checkbox = document.querySelector("#humberger-menu input");
-
-    $checkbox.addEventListener('change', function(event) {
-        var checkbox = event.target;
-        if(checkbox.checked) {
-            $menu.classList.add('activate');
-        } else {
-            $menu.classList.remove('activate');
-        }
-    });
-})
