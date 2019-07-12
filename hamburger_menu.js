@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var menu = document.getElementById('nav');
     var hamburger_menu = document.createElement('div');
-    hamburger_menu.id = "humberger-menu";
+    hamburger_menu.id = "hamburger-menu";
 
     var hamburger_checkbox = document.createElement('input');
     hamburger_checkbox.type = "checkbox";
