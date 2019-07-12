@@ -3,9 +3,9 @@ layout: default
 permalink: /news.html
 title: JMAP News
 ---
-# JMAP Barcamp
+# JMAP News
 
-## Jmap Barcamp 2019
+## JMAP Barcamp 2019
 
 2 July 2019 / Tuan LE CONG
 
