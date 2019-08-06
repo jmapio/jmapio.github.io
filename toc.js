@@ -59,7 +59,7 @@ var headings = document.querySelectorAll( 'h2, h3' ),
 for ( i = 0, l = headings.length; i < l; i += 1 ) {
     heading = headings[i];
     text = heading.textContent;
-    url = '#' + text.replace( /\s+/g, '-' ).toLowerCase();
+    url = '#' + heading.id;
 
     while ( index[ url ] ) {
         url += '*';
