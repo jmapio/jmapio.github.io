@@ -1,3 +1,5 @@
+@import "header-footer.css";
+
 body,
 h1,
 h2,
@@ -29,9 +31,13 @@ th {
 
 a {
     color: #0069d6;
+    text-decoration: underline;
+    outline: none;
 }
+a:focus,
 a:hover {
     color: #0050a3;
+    outline: 0; /* For accessibility, diplay the visual outline when users use TAB key */
 }
 a img {
     border: none;
@@ -175,53 +181,6 @@ h4:before {
 }
 
 @media screen {
-    /* Header (Top level navigation) */
-    header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 49px;
-        line-height: 49px;
-        border-bottom: 1px solid #1f1f1f;
-        background: #366683;
-        color: #fff;
-    }
-    #logo {
-        padding: 0 30px;
-        font-size: 32px;
-        font-weight: 600;
-    }
-    #nav {
-        position: absolute;
-        top: 0;
-        left: 1px;
-        right: 0;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        text-align: center;
-    }
-    .nav-item {
-        display: inline-block;
-        margin: 0;
-        padding: 7px 0;
-        line-height: 30px;
-    }
-    .nav-link {
-        display: block;
-        margin: 0 3px;
-        padding: 0 10px;
-        color: #fff;
-        font-size: 17px;
-        text-decoration: none;
-    }
-    .nav-link:hover {
-        background: #ecf0f3;
-        border-radius: 5px;
-        color: #366683;
-    }
-
     /* Content */
     article {
         margin: 75px auto 30px;
@@ -286,16 +245,6 @@ h4:before {
     }
 }
 @media screen and (max-width: 768px) {
-    header {
-        position: relative;
-    }
-    #logo,
-    #github {
-        display: none;
-    }
-    #nav {
-        left: 0;
-    }
     article {
         margin: 30px;
         padding: 0;

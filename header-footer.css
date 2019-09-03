@@ -1,0 +1,220 @@
+/* HEADER */
+header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  background: #3aafa9;
+  color: #17242a;
+  font-size: 16px;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+}
+header a:focus, 
+header a:hover {
+  text-decoration: none;
+  color: currentColor;
+}
+header .logo {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  line-height: 2em;
+  padding-left: 20px;
+  padding-top: 0.5em;
+}
+header .name {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+header .slogan {
+  margin-left: 1em;
+  padding-left: 1em;
+  border-left: 1px solid currentColor;
+}
+header nav {
+  display: flex;
+  padding-right: 20px;
+}
+header nav .item, 
+header label {
+  text-decoration: none;
+  display: block;
+  padding: 0.5em 1em;
+  line-height: 2em;
+  cursor: pointer;
+  color: inherit;
+  font-weight: normal;
+  white-space: nowrap;
+}
+header label {
+  padding: 0.5em 20px;
+}
+header nav .item.boxed:focus, 
+header nav .item.boxed:hover {
+    background-color: #17242a;
+    color: #fff;
+}
+
+@media not all and (max-width: 900px) {
+  header nav .item:not(.boxed) {
+    box-shadow: inset 0 0 currentColor;
+    transition: box-shadow 0.1s;
+  }
+  header nav .item:not(.boxed):focus, 
+  header nav .item:not(.boxed):hover {
+    box-shadow: inset 0 -4px #17242a;
+  }
+  header nav .item.boxed {
+    margin: -0.5px 0 0 0.5em;
+    padding: 1px calc(1em + 2px);
+    box-shadow: inset 0 0 0 2px currentColor;
+    border-radius: 0.8em;
+    /* Note IE/Edge mangle this; workaround at EOF */
+    border: calc(0.5em + 0.4px) solid #3aafa9;
+    background-clip: padding-box;
+  }
+  header #show-nav, 
+  header label {
+    display: none;
+  }
+}
+
+@media (max-width: 1000px) {
+  header .slogan {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  header #show-nav:checked ~ .logo {
+    z-index: 10;
+    padding-top: 13px;
+  }
+  header #show-nav:checked ~ .logo .slogan {
+    display: none;
+  }
+  header #show-nav:checked ~ label {
+    padding: 15px 20px 0.5em 20px;
+  }
+  header #show-nav {
+    display: block;
+    position: absolute;
+    top: -99em;
+    left: -99em;
+  }
+  header #show-nav ~ label {
+    position: relative;
+    z-index: 10;
+    background: transparent; /* remove background in safari */
+  }
+  header #show-nav:not(:checked) ~ label::before {
+    content: "Menu";
+    margin-right: 0.5em;
+  }
+  header #show-nav ~ label::after {
+    content: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='15'%20height='11'%3E%3Cpath%20d='M0,.5h15m0,5h-15m0,5h15'%20stroke='%2317242a'/%3E%3C/svg%3E");
+  }
+  header #show-nav:checked ~ label::after {
+    content: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='16'%20height='16'%3E%3Cpath%20d='M0,0l16,16m0-16l-16,16'%20stroke='%2317242a'/%3E%3C/svg%3E");
+  }
+  header #show-nav:not(:checked) ~ nav {
+    display: none;
+  }
+  header nav.collapsible {
+    position: fixed;
+    overflow: auto;
+    z-index: 9;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #69b3e7;
+    background: linear-gradient(#3aafa9, #2b7a77);
+    padding: 60px 0;
+    /* 3em is exact, then some vh factor added for prettiness;
+     * 40vw - 60px is eyeballed to be 60px at 300px wide & 260 at 800 */
+    box-shadow: 0.1em 0.2em 0.3em rgba(51, 62, 72, -0.5);
+    text-align: left;
+    border-radius: 0 0 0.2em 0.2em;
+    animation: 0.2s nav-appear;
+  }
+  header nav .item {
+    padding: 10px 20px;
+    margin: 0;
+    border-bottom: 1px solid #fff 8;
+    box-sizing: border-box;
+  }
+  header nav .item:not(.boxed):focus, 
+  header nav .item:not(.boxed):hover {
+    background: #2b7a77;
+    color: #fff;
+  }
+  header nav .item.boxed {
+    margin: 30px 20px 0 20px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    text-align: center;
+    padding: 5px 0;
+    box-sizing: border-box;
+  }
+}
+
+
+@keyframes nav-appear {
+    0% {
+        opacity: 0;
+    }
+}
+
+/* IE and Edge≤15 mangle the inner shadow radius; I reported it at
+https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/12515080/
+and it got fixed for Edge 16. I have no good CSS hack to target Edge≤15, so I’m
+just going to ignore it, and only fix it for IE. */
+@media not all and (max-width: 900px) {
+    _:-ms-input-placeholder, /* this selector targets IE10–11 only */
+    body > header > nav .item.boxed {
+        /* We *could* make this abandon the border and padding trick, but this
+         * time I’m just going to drop the border-radius. More succinct. */
+        border-radius: 0;
+    }
+}
+
+/* FOOTER */
+footer {
+    position: relative;
+    z-index: 999;
+    background: #3aafa9;
+    text-align: center;
+    padding: 20px 0;
+}
+footer a {
+    display: inline-block;
+    padding: 0 1em;
+    color: #17242a !important;
+    text-decoration: none;
+}
+footer a:focus,
+footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    footer a {
+        padding: 0.5em 1em;
+    }
+}
+
+/* Footer ribbon */
+body::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #17242a, #0fe7dc, #17242a);
+    position: relative;
+    z-index: 1000;
+}
