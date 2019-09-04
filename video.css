@@ -1,0 +1,208 @@
+/* Popup link */
+.popup-link {
+  position: relative;
+  /* Create a cover placed on top of the svg */
+  /* This is to activate the popup link when it's being clicked */
+}
+.popup-link::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+}
+
+/* Video */
+.hero-video {
+  margin: 0;
+}
+.hero-video figcaption {
+  padding: 8px 15px 15px;
+}
+@media (max-width: 500px) {
+  .hero-video figcaption {
+    padding: 10px;
+  }
+}
+.hv-poster > img {
+  width: 100%;
+}
+.hv-poster {
+  position: relative;
+}
+.hv-play {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 500px) {
+  .hv-play {
+    transform: scale(0.8);
+  }
+}
+.hv-play > div {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 5px 20px 5px 5px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 25px;
+  box-shadow: 0 0 15px rgba(51, 62, 72, 0.5);
+  font-weight: bold;
+  font-size: 20px;
+}
+.hv-play > div > svg {
+  margin-right: 10px;
+  vertical-align: top;
+}
+a:focus .hv-poster::before, 
+a:hover .hv-poster::before {
+  box-shadow: 0 0 30px #333e48;
+  background: color(#333e48 blend(#333e48 10%));
+}
+a:focus .hv-play > div, 
+a:hover .hv-play > div {
+  background: #fff;
+  box-shadow: 0 0 30px rgba(51, 62, 72, 0.75);
+}
+.hero-video > a {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  font-weight: normal;
+  background: #eceff7;
+  box-shadow: 0 0 10px rgba(51, 62, 72, 0.3);
+  text-align: center;
+}
+.hero-video > a:focus, 
+.hero-video > a:hover {
+  color: #333e48;
+  box-shadow: 0 0 20px rgba(51, 62, 72, 0.5);
+}
+.hero-video figcaption {
+  font-weight: bold;
+}
+.lightbox {
+  position: fixed;
+  z-index: 2147483648; /* To sit above both Olark and the header */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 10vh 10vw;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+}
+.lightbox > div {
+  position: relative;
+  flex: 1;
+  background: #000;
+  box-shadow: 0 0 1em #000 9;
+}
+.lightbox > .screen {
+  padding: 30px;
+  position: relative;
+  background: #fff;
+  box-shadow: 0 0 1em #000 9;
+}
+.lightbox > .screen:not(.active) {
+  display: none;
+}
+.aspect-16-9 {
+  position: relative;
+  /* The usual approach would be this:
+   *
+   *   height: 0;
+   *   padding-bottom: 56.25%;
+   *
+   * Because percentages are relative to the width of the element. But alas,
+   * the flex module spec allows (but does not require!) percentages to be
+   * relative to the appropriate axis of the flex container insetad, and Edge
+   * does that. So doing it that way is broken if you work with a *direct*
+   * child of the flex parent. (And changing the flex-direction in the parent
+   * only makes it worse, and I was too fed up with the issue to figure out
+   * why.) Fortunately, pseudoelements allow us to cheat on this, because
+   * they’re not flex children (well, unless the element is a flex parent, but
+   * it’s not). So we do things with a pseudoelement, because that makes so
+   * much sense, right? At least it works consistently cross-browser.
+   *
+   * Further reading: https://stackoverflow.com/q/23717953
+   */
+}
+.aspect-16-9::after {
+  content: "";
+  display: block;
+  padding-bottom: 56.25%;
+}
+.lightbox-close {
+  cursor: pointer;
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-align: center;
+  font-size: 1.5em;
+  cursor: pointer;
+  /* Increase the size of the target to aim for (especially for mobile) */
+}
+.lightbox-close::before {
+  content: "×";
+}
+@media (min-width: 360.25px) and (min-height: 200.25px) {
+  .lightbox-close {
+    top: -0.5em;
+    right: -0.5em;
+    background: #ccc;
+    box-shadow: 0 0 1em #000 9, 0 0 0.2em #000 9;
+    border-radius: 50%;
+  }
+  .lightbox-close:focus, .lightbox-close:hover {
+    background: #eee;
+    box-shadow: 0 0 1em #000, 0 0 0.2em #000;
+  }
+}
+.lightbox-close::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  border-radius: 30%;
+}
+@media (max-width: 640px), (max-height: 360px) {
+  .lightbox {
+    padding: 25vh 5vw;
+  }
+}
+/* Using pure CSS for sizing aspect ratios makes it depend solely on width for
+ * size; and so when the aspect ratio becomes too extreme, it overflows
+ * vertically. Assuming 16:9 on the lightbox contents, we should cap the
+ * lightbox contents’ width at 100vh/9*16 (or if doing 5vh or 10vh vertical
+ * padding on the lightbox, replace 100vh with 90vh or 80vh), which means left
+ * and right padding of calc((100vw - (100vh / 9 * 16)) / 2). */
+@media (min-aspect-ratio: 1.77778) {
+  .lightbox {
+    padding: 10vh calc((100vw - (80vh / 9 * 16)) / 2);
+  }
+}
+@media (min-aspect-ratio: 1.77778) and (max-height: 360px) {
+  .lightbox {
+    padding: 5vh calc((100vw - (90vh / 9 * 16)) / 2);
+  }
+}
+@media (min-aspect-ratio: 1.77778) and (max-height: 200px) {
+  .lightbox {
+    padding: 0 calc((100vw - (100vh / 9 * 16)) / 2);
+  }
+}

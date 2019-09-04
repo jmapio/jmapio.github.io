@@ -150,7 +150,7 @@ header nav .item.boxed:hover {
   }
   header nav .item:not(.boxed):focus, 
   header nav .item:not(.boxed):hover {
-    background: #2b7a77;
+    background: #17242a;
     color: #fff;
   }
   header nav .item.boxed {
@@ -208,7 +208,7 @@ footer a:hover {
     }
 }
 
-/* Footer ribbon */
+/* Footer ribbon 
 body::after {
     content: "";
     display: block;
@@ -217,4 +217,4 @@ body::after {
     background: linear-gradient(90deg, #17242a, #0fe7dc, #17242a);
     position: relative;
     z-index: 1000;
-}
+}*/
