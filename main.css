@@ -200,7 +200,7 @@ h4:before {
     article {
         margin: 75px auto 30px;
         max-width: 700px;
-        padding: 0 30px 0 260px;
+        padding: 0 30px 65px 260px;
     }
     #last-update {
         margin: -7px 0 15px;
@@ -220,7 +220,7 @@ h4:before {
     .toc {
         position: relative;
         margin: 0;
-        padding: 15px 0;
+        padding: 15px 0 60px 0;
         list-style: none;
         font-size: 14px;
     }

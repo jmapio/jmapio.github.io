@@ -1,0 +1,17 @@
+/* Make the footer always stay at the bottom */
+body {
+    position: relative;
+    min-height: 100vh;
+}
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Adjust the article padding when there is no sidebar */
+@media screen and (min-width: 1200px) {
+    article {
+        padding-left: 30px;
+    }
+}

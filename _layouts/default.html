@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic' rel='stylesheet' type='text/css'>
 <link href="main.css" rel="stylesheet" type="text/css">
+{% if page.custom %}
+<link href="extra.css" rel="stylesheet" type="text/css">
+{% endif %}
 {% if page.path == "index.md" %}
 <link href="home.css" rel="stylesheet" type="text/css">
 {% endif %}
@@ -26,12 +29,12 @@
 <article>
 {{ content | safe }}
 </article>
-{% if page.path != "index.md" %}
+{% unless page.custom %}
 <aside>
 <div class="toc-selected"></div>
 <ol class="toc"></ol>
 </aside>
-{% endif %}
+{% endunless %}
 <footer>
     <a href="software.html">Try it</a>
     <a href="news.html">News</a>
@@ -39,9 +42,9 @@
     <a href="https://github.com/jmapio/jmap">JMAP on Github</a>
     <a href="https://twitter.com/search?q=%23jmap&src=typed_query">JMAP on Twitter</a>
 </footer>
-{% if page.path != "index.md" %}
+{% unless page.custom %}
 <script type="text/javascript" src="toc.js"></script>
-{% endif %}
+{% endunless %}
 {% if page.path == "index.md" %}
 <script type="text/javascript" src="details.js"></script>
 <script type="text/javascript" src="video-popup.js"></script>
