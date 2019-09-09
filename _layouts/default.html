@@ -8,8 +8,8 @@
 {% if page.custom %}
 <link href="extra.css" rel="stylesheet" type="text/css">
 {% endif %}
-{% if page.path == "index.md" %}
-<link href="home.css" rel="stylesheet" type="text/css">
+{% if page.style %}
+<link href="{{ page.style }}.css" rel="stylesheet" type="text/css">
 {% endif %}
 <title>{{ page.title }}</title>
 </head>

@@ -80,10 +80,10 @@ a:hover .hv-play > div {
   background: #eceff7;
   box-shadow: 0 0 10px rgba(51, 62, 72, 0.3);
   text-align: center;
+  color: #17242a;
 }
 .hero-video > a:focus, 
 .hero-video > a:hover {
-  color: #333e48;
   box-shadow: 0 0 20px rgba(51, 62, 72, 0.5);
 }
 .hero-video figcaption {
