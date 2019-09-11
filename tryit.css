@@ -1,1 +1,31 @@
 @import "banner.css";
+
+/* BANNER - extra styles for the Try it page */
+@media (min-width: 480px) {
+	#banner .cta {
+		padding: 8px 30px;
+	}
+	#banner .cta:first-of-type {
+		margin-right: 20px;
+	}
+	#banner .container {
+		padding: 50px 20px 50px 20px;
+	}
+}
+
+#banner-sub {
+	background: #def2f1;
+}
+#banner-sub a{
+	color: #17242a;
+}
+#banner-sub .container {
+	max-width: 700px;
+	display: block;
+	padding: 20px 0;
+}
+@media (max-width: 768px) {
+	#banner-sub .container {
+		padding: 20px 30px;
+	}
+}

@@ -1,29 +1,3 @@
-/* General */ 
-article {
-    max-width: inherit;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-}
-
-h2 {
-	border-bottom: 0;
-	text-align: center;
-}
-h2::before {
-    content: "";
-}
-
-.container {
-	position: relative;
-	max-width: 700px;
-	width: 100%;
-	margin: 0 auto;
-	padding-left: 20px;
-	padding-right: 20px;
-	box-sizing: border-box;
-}
-
 /* BANNER */
 #banner {
 	background: #3aafa9;
@@ -35,12 +9,15 @@ h2::before {
 	max-width: 1110px;
 	width: 100%;
 	margin: 0 auto;
-	padding: 70px 20px 90px 20px;
 	box-sizing: border-box;
+	align-items: center;
 }
 #banner .deco {
 	flex-basis: 60%;
 	padding-left: 5%;
+}
+#banner .deco img {
+	width: 100%;
 }
 #banner .text {
 	flex-basis: 35%;
@@ -71,12 +48,11 @@ h2::before {
 @media (max-width: 768px) {
 	#banner .container {
 		flex-flow: column nowrap;
-		padding-top: 40px;
-		padding-bottom: 60px;
+		padding: 40px 20px 60px 20px;
 	}
 	#banner .deco {
 		padding-left: 0;
-		margin-top: 35px;
+		margin-top: 25px;
 	}
 	#banner h1 {
 		font-size: 30px;

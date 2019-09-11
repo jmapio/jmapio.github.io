@@ -6,7 +6,7 @@
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic' rel='stylesheet' type='text/css'>
 <link href="main.css" rel="stylesheet" type="text/css">
 {% if page.custom %}
-<link href="extra.css" rel="stylesheet" type="text/css">
+<link href="custom.css" rel="stylesheet" type="text/css">
 {% endif %}
 {% if page.style %}
 <link href="{{ page.style }}.css" rel="stylesheet" type="text/css">
@@ -26,6 +26,9 @@
     <a class="item boxed" href="software.html">Try it</a>
 </nav>
 </header>
+{% if page.banner %}
+{{ page.banner }}
+{% endif %}
 <article>
 {{ content | safe }}
 </article>
