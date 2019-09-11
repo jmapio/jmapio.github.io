@@ -3,6 +3,10 @@ body {
     position: relative;
     min-height: 100vh;
 }
+article {
+	padding-bottom: 150px;
+	margin-bottom: 0;
+}
 footer {
     position: absolute;
     bottom: 0;
