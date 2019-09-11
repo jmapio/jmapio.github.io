@@ -292,6 +292,9 @@ h4:before {
         text-align: center;
         padding: 8px 20px;
     }
+    h1 {
+        font-size: 30px;
+    }
 }
 @media print {
     header,
