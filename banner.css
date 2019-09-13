@@ -11,6 +11,7 @@
 	margin: 0 auto;
 	box-sizing: border-box;
 	align-items: center;
+	text-align: left;
 }
 #banner .deco {
 	flex-basis: 60%;
