@@ -14,7 +14,7 @@
 }
 
 #banner-sub {
-	background: #def2f1;
+	background: #f2f2f2;
 }
 #banner-sub a{
 	color: #17242a;
@@ -28,4 +28,9 @@
 	#banner-sub .container {
 		padding: 20px 30px;
 	}
+}
+
+/* Remove heading toc list */
+h2::before {
+    content: "";
 }

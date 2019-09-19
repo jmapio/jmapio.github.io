@@ -21,6 +21,8 @@
 }
 .hero-video figcaption {
   padding: 8px 15px 15px;
+  font-size: 18px;
+  font-weight: normal;
 }
 @media (max-width: 500px) {
   .hero-video figcaption {
@@ -77,7 +79,7 @@ a:hover .hv-play > div {
   display: block;
   text-decoration: none;
   font-weight: normal;
-  background: #eceff7;
+  background: #f2f2f2;
   box-shadow: 0 0 10px rgba(51, 62, 72, 0.3);
   text-align: center;
   color: #17242a;
@@ -85,9 +87,6 @@ a:hover .hv-play > div {
 .hero-video > a:focus, 
 .hero-video > a:hover {
   box-shadow: 0 0 20px rgba(51, 62, 72, 0.5);
-}
-.hero-video figcaption {
-  font-weight: bold;
 }
 .lightbox {
   position: fixed;

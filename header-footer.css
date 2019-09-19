@@ -5,7 +5,7 @@ header {
   top: 0;
   z-index: 999;
   width: 100%;
-  background: #3aafa9;
+  background: #5cdb94;
   color: #17242a;
   font-size: 16px;
   display: flex;
@@ -54,8 +54,8 @@ header label {
 }
 header nav .item.boxed:focus, 
 header nav .item.boxed:hover {
-    background-color: #17242a;
-    color: #fff;
+  background-color: transparent;
+  color: #17242a;
 }
 
 @media not all and (max-width: 900px) {
@@ -70,11 +70,13 @@ header nav .item.boxed:hover {
   header nav .item.boxed {
     margin: -0.5px 0 0 0.5em;
     padding: 1px calc(1em + 2px);
-    box-shadow: inset 0 0 0 2px currentColor;
+    background-clip: padding-box;
+    background-color: #17242a;
+    color: #fff;
+    box-shadow: inset 0 0 0 2px #17242a;
     border-radius: 0.8em;
     /* Note IE/Edge mangle this; workaround at EOF */
-    border: calc(0.5em + 0.4px) solid #3aafa9;
-    background-clip: padding-box;
+    border: calc(0.5em + 0.4px) solid #5cdb94;
   }
   header #show-nav, 
   header label {
@@ -133,7 +135,7 @@ header nav .item.boxed:hover {
     right: 0;
     bottom: 0;
     background: #69b3e7;
-    background: linear-gradient(#3aafa9, #2b7a77);
+    background: linear-gradient(#5cdb94, #3aafa9);
     padding: 60px 0;
     /* 3em is exact, then some vh factor added for prettiness;
      * 40vw - 60px is eyeballed to be 60px at 300px wide & 260 at 800 */
@@ -155,11 +157,13 @@ header nav .item.boxed:hover {
   }
   header nav .item.boxed {
     margin: 30px 20px 0 20px;
-    border: 1px solid #fff;
+    border: 1px solid #17242a;
     border-radius: 4px;
     text-align: center;
     padding: 5px 0;
     box-sizing: border-box;
+    background-color: #17242a;
+    color: #fff;
   }
 }
 
@@ -187,7 +191,7 @@ just going to ignore it, and only fix it for IE. */
 footer {
     position: relative;
     z-index: 999;
-    background: #3aafa9;
+    background: #5cdb94;
     text-align: center;
     padding: 15px 0;
 }

@@ -1,6 +1,6 @@
 /* BANNER */
 #banner {
-	background: #3aafa9;
+	background: #5cdb94;
 	color: #17242a;
 }
 #banner .container {
@@ -36,14 +36,15 @@
 }
 #banner .cta {
 	margin-top: 30px;
-	background: #fdce4b;
-	border-color: #fdce4b;
-}
-#banner .cta:focus,
-#banner .cta:hover {
 	background: #17242a;
 	border-color: #17242a;
 	color: #fff;
+}
+#banner .cta:focus,
+#banner .cta:hover {
+	background: #5cdb94;
+	border-color: #17242a;
+	color: #17242a;
 }
 
 @media (max-width: 768px) {

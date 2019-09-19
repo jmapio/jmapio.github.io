@@ -195,7 +195,7 @@ h4:before {
     display: none;
 }
 .intro {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -294,6 +294,9 @@ h4:before {
     }
     h1 {
         font-size: 30px;
+    }
+    h2 {
+        font-size: 25px;
     }
 }
 @media print {
