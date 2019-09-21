@@ -4,6 +4,12 @@ permalink: /news.html
 title: JMAP News
 ---
 # JMAP Barcamp
+## JMAP Protocol development funding
+
+14 August 2019
+
+>The standard has just been publishded: [RFC 8621](https://www.rfc-editor.org/info/rfc8621)
+
 
 ## Jmap Barcamp 2019
 
