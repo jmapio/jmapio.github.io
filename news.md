@@ -3,7 +3,7 @@ layout: default
 permalink: /news.html
 title: JMAP News
 ---
-# JMAP Barcamp
+# JMAP News
 ## JMAP Email Specification have been published by Internet Engineering Task Force (IETF), marking a big victory for email tools now and in the future
 
 16 August 2019
@@ -18,8 +18,7 @@ title: JMAP News
 
 >The standard has just been publishded: [RFC 8621](https://www.rfc-editor.org/info/rfc8621)
 
-
-## Jmap Barcamp 2019
+## JMAP Barcamp 2019
 
 2 July 2019 / Tuan LE CONG
 
