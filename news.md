@@ -18,6 +18,8 @@ title: JMAP News
 
 >The standard has just been publishded: [RFC 8621](https://www.rfc-editor.org/info/rfc8621)
 
+[Continue reading...](https://github.com/k9mail/k-9/issues/3272#issuecomment-528326161)
+
 ## JMAP Barcamp 2019
 
 2 July 2019 / Tuan LE CONG
