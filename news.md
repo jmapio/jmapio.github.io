@@ -4,6 +4,14 @@ permalink: /news.html
 title: JMAP News
 ---
 # JMAP Barcamp
+## JMAP Email Specification have been published by Internet Engineering Task Force (IETF), marking a big victory for email tools now and in the future
+
+16 August 2019
+
+>Fastmail engineers have been working for the past five years to bring [JMAP technology](https://fastmail.blog/2014/12/23/jmap-a-better-way-to-email/) to developers and customers. We're proud to announce that [RFC 8620](https://tools.ietf.org/html/rfc8620), published on July 18th, and [RFC 8621](https://tools.ietf.org/html/rfc8621), published on August 13th, have introduced JMAP to the world!
+
+[Continue reading...](https://fastmail.blog/2018/12/27/jmap-is-on-the-home-straight/)
+
 ## JMAP Protocol development funding
 
 14 August 2019
