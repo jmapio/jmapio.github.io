@@ -1,0 +1,41 @@
+@keyframes summary-hide-focus {
+  to {
+    background: transparent;
+  }
+}
+details {
+  padding: 0;
+  border-top: 1px solid #17242a;
+}
+summary {
+  cursor: pointer;
+  display: flex;
+  /* See the note on details[open] > summary::after for some explanation. */
+  margin: 0 calc(-1 * 15px);
+  padding: 1em 60px 1em 15px;
+  display: block;
+  position: relative;
+  font-size: 20px;
+}
+summary:focus {
+  outline: none;
+  background: color(#333e48 a(5%));
+  animation: 1s 1s summary-hide-focus forwards;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+summary::after {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='%2317242a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-plus-circle'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 8v8m-4-4h8'/%3E%3C/svg%3E");
+  width: 25px;
+  height: 25px;
+  padding: 0 15px;
+  display: block;
+  transition: transform 0.2s;
+  position: absolute;
+  right: 0;
+  top: 1em;
+}
+details[open] > summary::after {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='%2317242a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-minus-circle'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M8 12h8'/%3E%3C/svg%3E");
+}

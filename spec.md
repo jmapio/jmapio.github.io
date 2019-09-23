@@ -2,6 +2,7 @@
 layout: default
 permalink: /spec.html
 title: JMAP Specifications
+custom: true
 ---
 
 # JMAP: The Specs
@@ -10,8 +11,8 @@ The specification for JMAP has now been split into several parts so it's not qui
 
 There are four specifications:
 
-* [The core protocol](spec-core.html)
-* [JMAP Mail](spec-mail.html)
+* [The core protocol](https://tools.ietf.org/html/rfc8620)
+* [JMAP Mail](https://tools.ietf.org/html/rfc8621)
 * [JMAP Contacts](spec-contacts.html)
 * [JMAP Calendars](spec-calendars.html)
 

@@ -1,1 +1,7 @@
 _site
+
+# ignore the jekyll files
+.jekyll-cache/
+404.html
+Gemfile
+Gemfile.lock
