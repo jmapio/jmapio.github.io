@@ -10,15 +10,7 @@ title: JMAP News
 
 >Fastmail engineers have been working for the past five years to bring [JMAP technology](https://fastmail.blog/2014/12/23/jmap-a-better-way-to-email/) to developers and customers. We're proud to announce that [RFC 8620](https://tools.ietf.org/html/rfc8620), published on July 18th, and [RFC 8621](https://tools.ietf.org/html/rfc8621), published on August 13th, have introduced JMAP to the world!
 
-[Continue reading...](https://fastmail.blog/2018/12/27/jmap-is-on-the-home-straight/)
-
-## JMAP Protocol development funding
-
-14 August 2019
-
->The standard has just been publishded: [RFC 8621](https://www.rfc-editor.org/info/rfc8621)
-
-[Continue reading...](https://github.com/k9mail/k-9/issues/3272#issuecomment-528326161)
+[Continue reading...](https://fastmail.blog/2019/08/16/jmap-new-email-open-standard/)
 
 ## JMAP Barcamp 2019
 
