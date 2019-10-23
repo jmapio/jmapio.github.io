@@ -6,23 +6,11 @@ title: JMAP Calendars Specification
 
 # JMAP Calendars
 
-This document specifies a data model for synchronizing calendar data with a server using [JMAP](spec-core.html).
+This document specifies a data model for synchronising calendar data with a server using [JMAP](spec-core.html).
 
 {% capture x %}{% include spec/calendars/intro.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
-{% capture x %}{% include spec/calendars/principal.mdown %}{% endcapture %}
-{{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/calendars/calendar.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
-{% capture x %}{% include spec/calendars/sharenotifications.mdown %}{% endcapture %}
-{{ x | replace: "# ", "## " | markdownify }}
-{% capture x %}{% include spec/calendars/event.mdown %}{% endcapture %}
-{{ x | replace: "# ", "## " | markdownify }}
-{% capture x %}{% include spec/calendars/alerts.mdown %}{% endcapture %}
-{{ x | replace: "# ", "## " | markdownify }}
-{% capture x %}{% include spec/calendars/eventnotifications.mdown %}{% endcapture %}
-{{ x | replace: "# ", "## " | markdownify }}
-{% capture x %}{% include spec/calendars/securityconsiderations.mdown %}{% endcapture %}
-{{ x | replace: "# ", "## " | markdownify }}
-{% capture x %}{% include spec/calendars/ianaconsiderations.mdown %}{% endcapture %}
+{% capture x %}{% include spec/calendars/calendarevent.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
