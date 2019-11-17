@@ -5,6 +5,18 @@ title: JMAP News
 ---
 # JMAP News
 
+## K-9 Mail is working on adding JMAP support 
+
+15 November 2019 / JMAP Community
+
+> JMAP is in constant evolution, it has a lot to offer, especially on mobile devices for which IMAP has not been designed. Since its creation, more and more solutions have already supported it or are considering integrating it as a protocol. This is the case of [K-9 Mail](https://k9mail.github.io/) which is an open source email client for Android with many advanced features. 
+
+>This was first announced as a proposed idea on K-9 Mail's proposed ideas page for [application for the Google Summer of Code 2017](https://github.com/k9mail/k-9/wiki/Google-Summer-of-Code-2017#jmap).
+Then, in September 2019, in a [comment](https://github.com/k9mail/k-9/issues/3272#issuecomment-528326161), [Cketti](https://github.com/cketti) indicated a possible work on the JMAP support for 6 months from September.
+
+> Moreover, through his [another comment](https://gitter.im/apache/james-project?at=5d766ca4c5939027203eb09d) of September 09, 2019, we can understand that the project is no longer in the proposed idea stage, but that he is already working on adding JMAP support to K-9 Mail.
+> Find the list of [solutions](https://jmap.io/software.html) that already support JMAP and those that are already working on it.
+
 ## JMAP Barcamp 2019
 
 2 July 2019 / Tuan LE CONG
