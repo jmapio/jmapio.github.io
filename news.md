@@ -5,6 +5,18 @@ title: JMAP News
 ---
 # JMAP News
 
+## JMAP as RFC 8260 (Proposed Standard)
+
+14 December 2019 / JMAP Community
+
+> [On 18 July 2019](https://twitter.com/Fastmail/status/1152281229083009025), the Internet Engineering Task Force ([IETF](https://ietf.org/about)), the first Internet standards body, developing open standards through open processes, published the public specifications for JMAP as [RFC 8260](https://tools.ietf.org/html/rfc8260), 
+the next standard for e-mail protocols, it makes JMAP the true open and modern standard to [replace IMAP and SMTP](https://www.coywolf.news/email/jmap-open-standard/) that is not hindered by proprietary protocols. These published specifications are important because the IETF, a trusted publisher, reviews, refines and publishes high quality, fully open technical specifications that enable [web interoperability](https://www.coywolf.news/email/jmap-open-standard/).
+
+> Emphasizing that open standards are [the engine of the power of the Internet](https://fastmail.blog/2019/08/16/jmap-new-email-open-standard/), JMAP standards are also open and have properties [that resolve the limitations](https://hub.packtpub.com/ietf-proposes-json-meta-application-protocol-jmap-as-the-next-standard-for-email-protocols/) encountered in current standards, making communication with mail servers [faster and more secure](https://www.coywolf.news/email/jmap-open-standard/). Here are some of the stunning benefits of JMAP: better for mobile environments, longer battery life for mobile users through query grouping, determination of the amount of data the server is allowed to send, a backward compatible data model, etc. 
+
+> JMAP standards simply make life easier for developers and allow [efficient use of network resources](https://hub.packtpub.com/ietf-proposes-json-meta-application-protocol-jmap-as-the-next-standard-for-email-protocols/).
+  Its standards ensure the proper functioning of the Internet, making it more useful, a demonstration of a great victory for email tools today and in the future. The published specifications have therefore [introduced JMAP to the world!](https://fastmail.blog/2019/08/16/jmap-new-email-open-standard/)
+
 ## K-9 Mail is working on adding JMAP support 
 
 15 November 2019 / JMAP Community
