@@ -100,15 +100,18 @@ window.addEventListener( 'resize', recalculatePositions, false );
 
 // 3. Make the links work
 toc.addEventListener( 'click', function ( event ) {
-    var target = event.target,
-        item;
+    var target = event.target;
+    var href, item;
     while ( target && target.nodeName !== 'A' ) {
         target = target.parentNode;
     }
     if ( target ) {
-        item = index[ target.getAttribute( 'href' ) ];
+        href = target.getAttribute( 'href' );
+        item = index[ href ];
     }
     if ( item ) {
+        event.preventDefault();
+        history.pushState( null, document.title, href );
         scrollTo( item.top );
     }
 });
