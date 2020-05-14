@@ -5,6 +5,16 @@ title: JMAP News
 ---
 # JMAP News
 
+## Cyrus IMAP 3.2.0 released with JMAP support
+
+14 May 2020 / JMAP Community
+
+> The Cyrus team proudly [announced](https://lists.andrew.cmu.edu/pipermail/cyrus-announce/2020-May/000175.html) the first stable release of the new [Cyrus IMAP](https://www.cyrusimap.org/index.html) 3.2 series: [3.2.0](https://www.cyrusimap.org/3.2/imap/download/release-notes/3.2/x/3.2.0.html).
+
+> This release includes many new features including [JMAP](https://jmap.io) protocol support. The implementation demonstrates the importance of the possibilities and [benefits](https://www.ietf.org/blog/jmap) of the protocol itself and its continued expansion.
+
+> It should also be noted that many other [solutions](https://jmap.io/software.html) also support the JMAP protocol, including for example [Cypht](https://cypht.org) and [Apache James](https://james.apache.org) clients.
+
 ## JMAP as “Proposed Standard”
 
 30 December 2019 / JMAP Community
