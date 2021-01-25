@@ -9,13 +9,14 @@ custom: true
 
 The specification for JMAP has now been split into several parts so it's not quite so big, and they can be finished and standardised independently.
 
-There are four specifications:
+There are five specifications:
 
 
 * [The core protocol](spec-core.html) [[RFC 8620](https://tools.ietf.org/html/rfc8620)]
 * [JMAP Mail](spec-mail.html) [[RFC 8621](https://tools.ietf.org/html/rfc8621)]
 * [JMAP Contacts](spec-contacts.html)
 * [JMAP Calendars](spec-calendars.html)
+* [JMAP Sharing](spec-sharing.html)
 
 If you want to get a quick idea of how JMAP works, you should probably read [the guide for client developers](client.html) first. This has lots of example exchanges and should give you a good feel for what JMAP is all about. The specs are heavier going; they attempts to document exactly what each method should do, and what should happen in a myriad of edge cases.
 

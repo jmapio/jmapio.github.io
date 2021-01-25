@@ -12,9 +12,9 @@ This document specifies a data model for synchronizing calendar data with a serv
 {{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/calendars/principal.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
-{% capture x %}{% include spec/calendars/calendar.mdown %}{% endcapture %}
+{% capture x %}{% include spec/calendars/participantidentity.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
-{% capture x %}{% include spec/calendars/sharenotifications.mdown %}{% endcapture %}
+{% capture x %}{% include spec/calendars/calendar.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/calendars/event.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
