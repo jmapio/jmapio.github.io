@@ -22,3 +22,4 @@ These specs are not yet final and will change before publication. There are undo
 * [JMAP Calendars](spec-calendars.html)
 * [JMAP Sharing](spec-sharing.html)
 * [JMAP Contacts](spec-contacts.html)
+* [JMAP Tasks](spec-tasks.html)
