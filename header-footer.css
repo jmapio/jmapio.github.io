@@ -68,8 +68,8 @@ header nav .item.boxed:hover {
     box-shadow: inset 0 -4px #17242a;
   }
   header nav .item.boxed {
-    margin: -0.5px 0 0 0.5em;
-    padding: 1px calc(1em + 2px);
+    margin: 0 0 0 0.5em;
+    padding: 0 calc(1em + 2px);
     background-clip: padding-box;
     background-color: #17242a;
     color: #fff;
