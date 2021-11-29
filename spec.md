@@ -23,3 +23,11 @@ These specs are not yet final and will change before publication. There are undo
 * [JMAP Sharing](spec-sharing.html)
 * [JMAP Contacts](spec-contacts.html)
 * [JMAP Tasks](spec-tasks.html)
+
+## Data formats
+
+JMAP was designed in conjunction with new JSON-based file formats for contacts and calendars, which can also be used standalone or in other protocols.
+
+JMAP Calendars uses [JSCalendar (RFC 8984)](https://tools.ietf.org/html/rfc8984) as the data format for events.
+
+JMAP Contacts will use [JSContact (currently under development)](https://datatracker.ietf.org/doc/draft-ietf-jmap-jscontact/) as the data format for contacts.
