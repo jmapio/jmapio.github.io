@@ -12,8 +12,6 @@ This document specifies a data model for synchronizing todo/task data with a ser
 {{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/tasks/principal.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
-{% capture x %}{% include spec/tasks/assigneeidentity.mdown %}{% endcapture %}
-{{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/tasks/list.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/tasks/task.mdown %}{% endcapture %}
