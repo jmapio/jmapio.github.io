@@ -4,6 +4,8 @@ permalink: /crash-course.html
 title: JMAP Crash Course
 ---
 
+# JMAP Crash Course
+
 This document will guide you through understanding the basics of JMAP and
 writing your first program using it.  The examples in this document are written
 in Perl, but they should be simple enough to translate into any language you
