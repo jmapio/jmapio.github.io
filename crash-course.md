@@ -174,9 +174,15 @@ Here’s the basics of a program to get just the most recent ten messages in you
 inbox.
 
 ```perl
+use strict;
+use warnings;
+use LWP::UserAgent;
+use JSON;
+
 my $www = LWP::UserAgent->new;
 my $bearer_token = 'xyz1-123-321';
 my $account_id = 'u2321401a'; # Retrieved from the session object, see above.
+my $inbox_id = '...'; # Retrieved in another Mailbox/query
 
 my $res = $www->post(
   'https://api.fastmail.com/jmap/api/',
@@ -188,7 +194,7 @@ my $res = $www->post(
       [ 'Email/query',
         {
           accountId => $account_id,
-          filter    => { inMailbox => $inbox_id }, # from a Mailbox/query
+          filter    => { inMailbox => $inbox_id },
           sort      => [ { property => "receivedAt", isAscending: JSON::false } ],
           limit     => 10,
         },
@@ -199,7 +205,7 @@ my $res = $www->post(
 );
 
 # Or Dumper or whatever you like for printing data structures!
-print pretty( decode_json($res->decoded_content) );
+print JSON->new->pretty( decode_json($res->decoded_content) );
 ```
 
 You’ll get back something a lot like the request, as expected.  Here are the
