@@ -11,9 +11,10 @@ writing your first program using it.  The examples in this document are written
 in Perl, but they should be simple enough to translate into any language you
 like.
 
-First, we strongly suggest you read the core and mail specifications.  They’re
-clear and precise, and will cover lots of material that you’ll need to know.
-What we’re including here is just enough to get you started.
+First, we strongly suggest you read the [core](https://jmap.io/spec-core.html)
+and [mail](https://jmap.io/spec-mail.html) specifications.  They’re clear and
+precise, and will cover lots of material that you’ll need to know.  What we’re
+including here is just enough to get you started.
 
 ## Core Concept: Request and Response
 
