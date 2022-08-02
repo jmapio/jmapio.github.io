@@ -20,8 +20,8 @@ including here is just enough to get you started.
 
 JMAP is built on HTTPS and JSON.  Every time you want to interact with your
 data on the JMAP server, you’ll use HTTPS to post a request to the server.
-You’ll express that request in JSON and, unless something goes wrong, you’ll
-get a corresponding response in JSON.
+You’ll express that request in JSON and you’ll get a corresponding response in
+JSON.
 
 A JMAP request looks like this:
 
