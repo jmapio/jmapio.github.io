@@ -19,7 +19,7 @@ including here is just enough to get you started.
 ## Core Concept: Request and Response
 
 JMAP is built on HTTPS and JSON.  Every time you want to interact with your
-data on the JMAP server, you’ll use HTTPS to post a request to the server.
+data on the JMAP server, you’ll use HTTPS to POST a request to the server.
 You’ll express that request in JSON and you’ll get a corresponding response in
 JSON.
 
@@ -41,7 +41,7 @@ Authorization: ...
 (We’ll come back to authentication later.)
 
 There are two key properties to talk about here:  `using` and `methodCalls`.
-The using key declares what JMAP capabilities you’re going to use.
+The `using` key declares what JMAP capabilities you’re going to use.
 Capabilities tell the server what standards you want to rely on, and the server
 is required to adhere to those standards.  If you don’t ask for some extension,
 the server won’t provide it.  In our example above, we show the capabilities
@@ -83,7 +83,7 @@ called the method call id.)
 
 Above, we put off describing authentication.  In part, that’s because JMAP
 doesn’t mandate a standard authentication mechanism.  Most likely you'll need
-to use bearer token, either via OAuth or configured via your service.  Check
+to use a bearer token, either via OAuth or configured via your service.  Check
 with your server provider!
 
 You'll also need to know how to reach your JMAP server.  *Probably* your
@@ -153,12 +153,13 @@ response we get, just slightly trimmed down:
 }
 ```
 
-There's a lot of useful information in this structure, called the "session
-object", but the things to look at now are the `accounts`, `primaryAccounts`,
-and `capabilities` properties.  These tell you which accounts you can access,
-what capabilities the server is exposing, which accounts are primary for what
-capabilities.  This session is nice and simple:  there's only one account
-available, and it's the primary for everything you can do.
+There's a lot of useful information in this structure, called the "[session
+object](https://jmap.io/spec-core.html#the-jmap-session-resource)", but the
+things to look at now are the `accounts`, `primaryAccounts`, and `capabilities`
+properties.  These tell you which accounts you can access, what capabilities
+the server is exposing, which accounts are primary for what capabilities.  This
+session is nice and simple:  there's only one account available, and it's the
+primary for everything you can do.
 
 Almost every method you'll call with JMAP will want an `accountId` parameter to
 indicate which account you're working with.  Methods that don't take an
@@ -261,7 +262,8 @@ arguments to an individual method call can make a reference to the a previous
 method’s results.  Instead of including a value for the argument `foo`, you
 include a value for `#foo`, and that value provides a pointer backward into the
 results so far, finding results by method call id, response name, and a
-(modified) JSON Pointer to a set of data in that result.
+(modified) [JSON Pointer](https://www.rfc-editor.org/rfc/rfc6901.html) to a set
+of data in that result.
 
 Let’s go back to our program…
 
@@ -300,7 +302,7 @@ my $res = $www->post(
   }),
 );
 
-for my $email (decode_json($res->decoded_content)->{methodResponses}[1]{list}->@*) {
+for my $email (decode_json($res->decoded_content)->{methodResponses}[0][1]{list}->@*) {
   printf "%20s - %s\n", $email->{receivedAt}, $email->{subject};
 }
 ```
