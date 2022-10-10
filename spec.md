@@ -23,6 +23,7 @@ These specs are not yet final and will change before publication. There are undo
 * [JMAP Sharing](spec-sharing.html)
 * [JMAP Contacts](spec-contacts.html)
 * [JMAP Tasks](spec-tasks.html)
+* [JMAP Quotas](spec-quotas.html)
 
 ## Data formats
 
