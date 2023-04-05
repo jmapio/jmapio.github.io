@@ -125,7 +125,7 @@ response we get, just slightly trimmed down:
       "isPersonal": true,
       "accountCapabilities": {
         "urn:ietf:params:jmap:submission": {
-          "submissionExtensions": [],
+          "submissionExtensions": {},
           "maxDelayedSend": 44236800
         },
         "urn:ietf:params:jmap:core": {},
