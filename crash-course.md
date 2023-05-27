@@ -103,7 +103,7 @@ those.  We only need to know that we'll be talking to `api.fastmail.com` on
 port 443.
 
 Finally, you need to know the account ids you'll be looking at.  Each account
-represets a set of data available to you, maybe yours or maybe shared with you.
+represents a set of data available to you, maybe yours or maybe shared with you.
 To see the accounts you can access, you can GET the well-known JMAP session
 URL.  That's always `/.well-known/jmap` at the host named in autodiscovery.
 
