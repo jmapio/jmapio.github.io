@@ -14,8 +14,6 @@ This document specifies a data model for synchronising contacts data with a serv
 {{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/contacts/card.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
-{% capture x %}{% include spec/contacts/cardgroup.mdown %}{% endcapture %}
-{{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/contacts/securityconsiderations.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/contacts/ianaconsiderations.mdown %}{% endcapture %}

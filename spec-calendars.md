@@ -22,8 +22,6 @@ This document specifies a data model for synchronizing calendar data with a serv
 {{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/calendars/eventnotifications.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
-{% capture x %}{% include spec/calendars/preferences.mdown %}{% endcapture %}
-{{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/calendars/examples.mdown %}{% endcapture %}
 {{ x | replace: "# ", "## " | markdownify }}
 {% capture x %}{% include spec/calendars/securityconsiderations.mdown %}{% endcapture %}
