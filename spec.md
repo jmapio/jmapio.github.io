@@ -14,6 +14,7 @@ The specifications for the core JMAP protocol and access to mail stores using JM
 * [The core protocol](spec-core.html) [[RFC 8620](https://tools.ietf.org/html/rfc8620)]
 * [JMAP Mail](spec-mail.html) [[RFC 8621](https://tools.ietf.org/html/rfc8621)]
 * A JMAP Subprotocol for WebSocket [[RFC8887](https://www.rfc-editor.org/rfc/rfc8887.html)]
+* JMAP Blob Management Extension [[RFC9404](https://www.rfc-editor.org/rfc/rfc9404.html)]
 
 ## In development
 
