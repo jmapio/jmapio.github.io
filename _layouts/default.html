@@ -12,23 +12,6 @@
 <link href="{{ page.style }}.css" rel="stylesheet" type="text/css">
 {% endif %}
 <title>{{ page.title }}</title>
-<script type="text/javascript">
-var _paq = [];
-_paq.push(['trackPageView']);
-_paq.push(['enableLinkTracking']);
-(function() {
-    _paq.push(['setTrackerUrl', 'https://fastmail.innocraft.cloud/matomo.php']);
-    _paq.push(['setSiteId', '7']);
-    var d=document,
-        g=d.createElement('script'),
-        s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript';
-    g.async=true;
-    g.defer=true;
-    g.src='//cdn.innocraft.cloud/fastmail.innocraft.cloud/matomo.js';
-    s.parentNode.insertBefore(g,s);
-})();
-</script>
 </head>
 <body>
 <a href="https://www.fastmail.com/digitalcitizen/why-open-internet-standards-are-so-important-to-your-future-with-bron-gondwana/" style="display: block;padding: 10px;background: #834270;color: #fff;font-weight: 600;text-align: center;">Listen to Fastmail CEO Bron Gondwana talk about JMAP on the Digital Citizen Podcast</a>
@@ -70,5 +53,6 @@ _paq.push(['enableLinkTracking']);
 <script type="text/javascript" src="details.js"></script>
 <script type="text/javascript" src="video-popup.js"></script>
 {% endif %}
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "5cafd4ae0400412b85e675f8296f7a36"}'></script>
 </body>
 </html>
