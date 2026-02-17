@@ -1,4 +1,5 @@
-_site
+/_site
+/vendor
 
 # ignore the jekyll files
 .jekyll-cache/

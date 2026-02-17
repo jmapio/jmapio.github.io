@@ -1,0 +1,23 @@
+#!/bin/bash
+set -e
+
+cd "$(dirname "$0")/.."
+
+docker run --rm \
+  -v "$PWD:/site" \
+  -w /site \
+  -p 4000:4000 \
+  -it \
+  ruby:3.3 \
+  bash -c '
+    if [ ! -f Gemfile ]; then
+      cat > Gemfile << EOF
+source "https://rubygems.org"
+gem "github-pages", group: :jekyll_plugins
+EOF
+      echo "Created Gemfile"
+    fi
+    bundle config set --local path vendor/bundle
+    bundle install
+    bundle exec jekyll serve --host 0.0.0.0 --watch
+  '
