@@ -7,24 +7,35 @@ custom: true
 
 # JMAP: The Specs
 
-The specifications for the core JMAP protocol and access to mail stores using JMAP have been finalised and published. The [JMAP working group](https://datatracker.ietf.org/wg/jmap/about/) is currently working on the calendars and sharing specs, with tasks and contacts expected to follow.
+The specifications for the core JMAP protocol and access to mail and contacts stores using JMAP have been finalised and published. The [JMAP working group](https://datatracker.ietf.org/wg/jmap/about/) is currently working on the calendars specs.
 
-## Finished
+## Core
 
-* [The core protocol](spec-core.html) [[RFC 8620](https://tools.ietf.org/html/rfc8620)]
-* [JMAP Mail](spec-mail.html) [[RFC 8621](https://tools.ietf.org/html/rfc8621)]
-* A JMAP Subprotocol for WebSocket [[RFC8887](https://www.rfc-editor.org/rfc/rfc8887.html)]
-* JMAP Blob Management Extension [[RFC9404](https://www.rfc-editor.org/rfc/rfc9404.html)]
-* JMAP Quotas [[RFC9425](https://www.rfc-editor.org/rfc/rfc9425.html)]
+These specifications define the core sync protocol and extensions that are useful no matter what data type you might be syncing.
 
-## In development
+* [The core JMAP protocol (RFC 8620)](https://www.rfc-editor.org/rfc/rfc8620.html)
+* [VAPID for JMAP Push (RFC 9749)](https://www.rfc-editor.org/rfc/rfc9749.html)
+* [JMAP Sharing (RFC 9670)](https://www.rfc-editor.org/rfc/rfc9670.html)
+* [JMAP via WebSocket (RFC 8887)](https://www.rfc-editor.org/rfc/rfc8887.html)
+* [JMAP Quotas (RFC 9425)](https://www.rfc-editor.org/rfc/rfc9425.html)
+* [JMAP Blob Management (RFC 9404)](https://www.rfc-editor.org/rfc/rfc9404.html)
 
-These specs are not yet final and may change before publication. There are undoubtably edge cases that are not yet covered. If you find one, please email [jmap@ietf.org](mailto:jmap@ietf.org) or make a pull request on GitHub if you have a proposed fix.
+## Mail
 
-* [JMAP Contacts](spec-contacts.html)
-* [JMAP Calendars](spec-calendars.html)
-* [JMAP Sharing](spec-sharing.html)
-* [JMAP Tasks](spec-tasks.html)
+* [JMAP Mail (RFC 8621)](https://www.rfc-editor.org/rfc/rfc8621.html)
+* [JMAP Sieve Scripts Management (RFC 9661)](https://www.rfc-editor.org/rfc/rfc9661.html)
+* [JMAP MDN Handling (RFC 9007)](https://www.rfc-editor.org/rfc/rfc9007.html)
+* [JMAP S/MIME Signature Verification (RFC 9219)](https://www.rfc-editor.org/rfc/rfc9219.html)
+
+## Contacts
+
+* [JMAP Contacts (RFC 9610)](https://www.rfc-editor.org/rfc/rfc9610.html)
+
+## Calendars
+
+This spec is not yet final and may change before publication. If you find any issues, please email [jmap@ietf.org](mailto:jmap@ietf.org) or make a pull request on GitHub if you have a proposed fix.
+
+* [JMAP Calendars (in progress)](https://www.ietf.org/archive/id/draft-ietf-jmap-calendars-26.html)
 
 ## Data formats
 
@@ -32,4 +43,4 @@ JMAP was designed in conjunction with new JSON-based file formats for contacts a
 
 JMAP Contacts uses [JSContact (RFC9553)](https://www.rfc-editor.org/rfc/rfc9553.html) as the data format for contacts.
 
-JMAP Calendars uses [JSCalendar (RFC 8984)](https://www.rfc-editor.org/rfc/rfc8984.html) as the data format for events.
+JMAP Calendars uses [JSCalendar 2.0 (in progress)](https://www.ietf.org/archive/id/draft-ietf-calext-jscalendarbis-15.html) as the data format for events.
