@@ -1,3 +1,3 @@
-baseurl: ""
-url: "http://jmap.io"
+baseurl: ''
+url: 'http://jmap.io'
 markdown: kramdown

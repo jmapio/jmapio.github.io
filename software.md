@@ -23,6 +23,7 @@ banner: '<div id="banner">
 </div>
 </div>'
 ---
+
 <p class="intro">See more of JMAP in action from these providers:</p>
 
-{% include software/software.mdown %}
+{% include jmap/software/software.mdown %}
