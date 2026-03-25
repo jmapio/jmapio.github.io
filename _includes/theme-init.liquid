@@ -1,0 +1,8 @@
+<script>
+    (function () {
+        var s = localStorage.getItem('jmap-theme');
+        var d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', s || (d ? 'dark' : 'light'));
+        document.documentElement.classList.replace('no-js', 'js');
+    })();
+</script>

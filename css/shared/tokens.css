@@ -1,0 +1,141 @@
+:root {
+    /* -- Fluid type scale */
+
+    /* @link https://utopia.fyi/type/calculator?c=320,16,1.125,1480,18,1.125,10,3,&s=0.75|0.5|0.25|0.125,1.25|1.5|2|2.5|3|3.5|4|4.5|5|6|7|8,xs-xl|s-l|s-xl|m-l|m-xl|l-5xl|xl-3xl|xl-7xl|xl-10xl|2xl-4xl|4xl-6xl&g=m,xl,5xl,12 */
+    --size-step--3: clamp(0.7023rem, 0.6781rem + 0.1211vw, 0.7901rem);
+    --size-step--2: clamp(0.7901rem, 0.7629rem + 0.1362vw, 0.8889rem);
+    --size-step--1: clamp(0.8889rem, 0.8582rem + 0.1533vw, 1rem);
+    --size-step-0: clamp(1rem, 0.9655rem + 0.1724vw, 1.125rem);
+    --size-step-1: clamp(1.125rem, 1.0862rem + 0.194vw, 1.2656rem);
+    --size-step-2: clamp(1.2656rem, 1.222rem + 0.2182vw, 1.4238rem);
+    --size-step-3: clamp(1.4238rem, 1.3747rem + 0.2455vw, 1.6018rem);
+    --size-step-4: clamp(1.6018rem, 1.5466rem + 0.2762vw, 1.802rem);
+    --size-step-5: clamp(1.802rem, 1.7399rem + 0.3107vw, 2.0273rem);
+    --size-step-6: clamp(2.0273rem, 1.9574rem + 0.3495vw, 2.2807rem);
+    --size-step-7: clamp(2.2807rem, 2.2021rem + 0.3932vw, 2.5658rem);
+    --size-step-8: clamp(2.5658rem, 2.4773rem + 0.4424vw, 2.8865rem);
+    --size-step-9: clamp(2.8865rem, 2.787rem + 0.4977vw, 3.2473rem);
+    --size-step-10: clamp(3.2473rem, 3.1353rem + 0.5599vw, 3.6532rem);
+
+    /* -- Spacing */
+
+    /* @link https://utopia.fyi/space/calculator?c=320,16,1.125,1480,18,1.125,10,3,&s=0.75|0.5|0.25|0.125,1.25|1.5|2|2.5|3|3.5|4|4.5|5|6|7|8,xs-xl|s-l|s-xl|m-l|m-xl|l-5xl|xl-3xl|xl-7xl|xl-10xl|2xl-4xl|4xl-6xl&g=m,xl,5xl,12 */
+    --space-4xs: clamp(0.125rem, 0.125rem + 0vw, 0.125rem);
+    --space-3xs: clamp(0.25rem, 0.2328rem + 0.0862vw, 0.3125rem);
+    --space-2xs: clamp(0.5rem, 0.4828rem + 0.0862vw, 0.5625rem);
+    --space-xs: clamp(0.75rem, 0.7155rem + 0.1724vw, 0.875rem);
+    --space-s: clamp(1rem, 0.9655rem + 0.1724vw, 1.125rem);
+    --space-m: clamp(1.25rem, 1.1983rem + 0.2586vw, 1.4375rem);
+    --space-l: clamp(1.5rem, 1.4483rem + 0.2586vw, 1.6875rem);
+    --space-xl: clamp(2rem, 1.931rem + 0.3448vw, 2.25rem);
+    --space-2xl: clamp(2.5rem, 2.4138rem + 0.431vw, 2.8125rem);
+    --space-3xl: clamp(3rem, 2.8966rem + 0.5172vw, 3.375rem);
+    --space-4xl: clamp(3.5rem, 3.3793rem + 0.6034vw, 3.9375rem);
+    --space-5xl: clamp(4rem, 3.8621rem + 0.6897vw, 4.5rem);
+    --space-6xl: clamp(4.5rem, 4.3448rem + 0.7759vw, 5.0625rem);
+    --space-7xl: clamp(5rem, 4.8276rem + 0.8621vw, 5.625rem);
+    --space-8xl: clamp(6rem, 5.7931rem + 1.0345vw, 6.75rem);
+    --space-9xl: clamp(7rem, 6.7586rem + 1.2069vw, 7.875rem);
+    --space-10xl: clamp(8rem, 7.7241rem + 1.3793vw, 9rem);
+
+    /* -- Grid */
+
+    /* @link https://utopia.fyi/grid/calculator?c=320,16,1.125,1480,18,1.125,10,3,&s=0.75|0.5|0.25|0.125,1.25|1.5|2|2.5|3|3.5|4|4.5|5|6|7|8,xs-xl|s-l|s-xl|m-l|m-xl|l-5xl|xl-3xl|xl-7xl|xl-10xl|2xl-4xl|4xl-6xl&g=m,xl,5xl,12 */
+    --grid-max-width: 83.25rem;
+    --grid-gutter: clamp(1.25rem, 0.9338rem + 1.581vw, 2.25rem);
+    --grid-columns: 12;
+
+    /* -- Fonts */
+    --font-display: 'Helvetica Neue', arial, sans-serif;
+    --font-mono: menlo, consolas, monospace;
+
+    /* -- Leading */
+    --leading: 1.7;
+    --leading-short: 1.5;
+    --leading-slim: 1.2;
+    --leading-fine: 1.1;
+    --leading-flat: 1;
+    --leading-mini: 0.9;
+    --leading-micro: 0.8;
+
+    /* -- Text size */
+    --text-size-base: var(--size-step-0);
+    --text-size-lede: var(--size-step-1);
+    --text-size-meta: var(--size-step--1);
+    --text-size-mini: var(--size-step--2);
+    --text-size-heading-1: var(--size-step-9);
+    --text-size-heading-2: var(--size-step-4);
+    --text-size-heading-3: var(--size-step-3);
+    --text-size-heading-4: var(--size-step-2);
+    --text-size-article: var(--text-size-base);
+    --text-size-jumbo: clamp(2.8rem, 7vw, 7rem);
+
+    /* -- Kerning */
+    --kerning: normal;
+    --kerning-tight: -0.03em;
+    --kerning-loose: 0.09em;
+
+    /* -- Font weight */
+    --font-thin: 100;
+    --font-light: 300;
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+
+    /* -- Corner radius */
+    --radius-s: 4px;
+    --radius-m: 8px;
+    --radius-l: 12px;
+    --radius-xl: 16px;
+    --radius-2xl: 20px;
+    --radius-full: 9999px;
+
+    /* -- Animation */
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --dur-s: 150ms;
+    --dur-m: 250ms;
+
+    --nav-h: 60px;
+    --sidebar-w: 260px;
+    --page-max: 1280px;
+}
+
+[data-theme='dark'] {
+    --theme-accent: #5cc2ad;
+    --theme-accent-bright: #7eded0;
+    --theme-accent-dim: rgb(92 194 173 / 8%);
+    --theme-accent-glow: rgb(92 194 173 / 15%);
+    --theme-accent-900: #041c18;
+    --theme-bg: #08100f;
+    --theme-bg-2: #0d1a18;
+    --theme-surface: #111f1d;
+    --theme-surface-2: #162322;
+    --theme-border: rgb(92 194 173 / 12%);
+    --theme-border-strong: rgb(92 194 173 / 28%);
+    --theme-ink: #f0faf8;
+    --theme-body: #c4c3bf;
+    --theme-muted: #6a8480;
+    --theme-glass-bg: rgb(255 255 255 / 4%);
+    --theme-glass-border: rgb(255 255 255 / 8%);
+    --theme-glass-blur: blur(24px) saturate(180%);
+}
+
+[data-theme='light'] {
+    --theme-accent: #0d7a68;
+    --theme-accent-bright: #0b6a5a;
+    --theme-accent-dim: rgb(13 122 104 / 8%);
+    --theme-accent-glow: rgb(13 122 104 / 12%);
+    --theme-accent-900: #fff;
+    --theme-bg: #eef5f3;
+    --theme-bg-2: #fff;
+    --theme-surface: #fff;
+    --theme-surface-2: #f0f7f5;
+    --theme-border: rgb(13 122 104 / 12%);
+    --theme-border-strong: rgb(13 122 104 / 30%);
+    --theme-ink: #0a2420;
+    --theme-body: #2e3b38;
+    --theme-muted: #4a6460;
+    --theme-glass-bg: rgb(255 255 255 / 70%);
+    --theme-glass-border: rgb(0 0 0 / 7%);
+}

@@ -1,0 +1,106 @@
+.header {
+    transition: background 0.3s;
+    z-index: 9999;
+    display: flex;
+    position: sticky;
+    align-items: center;
+    top: 0;
+    border-bottom: 1px solid rgb(92 194 173 / 14%);
+    height: var(--nav-h);
+    backdrop-filter: blur(28px) saturate(200%);
+    background: rgb(8 16 15 / 72%);
+    box-shadow:
+        0 1px 0 rgb(92 194 173 / 6%),
+        0 4px 24px rgb(0 0 0 / 18%);
+}
+[data-theme='light'] .header {
+    border-bottom: 1px solid rgb(13 122 104 / 15%);
+    backdrop-filter: blur(28px) saturate(180%);
+    background: rgb(238 245 243 / 88%);
+    box-shadow:
+        0 1px 0 rgb(13 122 104 / 8%),
+        0 4px 24px rgb(0 0 0 / 7%);
+}
+.header__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-s);
+    width: 100%;
+}
+.header__links {
+    display: flex;
+    gap: 0;
+    margin-left: var(--space-xs);
+    list-style: none;
+}
+.header__links > li {
+    list-style: none;
+}
+.header__links > li > a {
+    transition: color 0.15s;
+    display: block;
+    position: relative;
+    padding: 8px 12px;
+    color: var(--theme-muted);
+    font-size: var(--text-size-meta);
+    white-space: nowrap;
+}
+.header__links > li > a::after {
+    content: '';
+    position: absolute;
+    transform: scaleX(0);
+    right: 12px;
+    bottom: 0;
+    left: 12px;
+    height: 2px;
+    background: var(--theme-accent);
+    border-radius: 999px;
+    transform-origin: left;
+}
+.header__links > li > a:hover {
+    color: var(--theme-ink);
+}
+.header__links > li > a:hover::after,
+.header__links > li > a.active::after {
+    transform: scaleX(1);
+}
+.header__links > li > a.active {
+    color: var(--theme-accent);
+}
+.header__right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+.header__theme-button {
+    transition:
+        color 0.15s,
+        border-color 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--theme-border-strong);
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border-radius: var(--radius-m);
+    color: var(--theme-muted);
+    cursor: pointer;
+}
+.header__theme-button:hover {
+    border-color: var(--theme-accent);
+    color: var(--theme-accent);
+}
+.header__hamburger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--theme-border-strong);
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border-radius: var(--radius-m);
+    color: var(--theme-muted);
+    cursor: pointer;
+}

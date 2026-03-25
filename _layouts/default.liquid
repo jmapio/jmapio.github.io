@@ -1,0 +1,48 @@
+<!doctype html>
+<html
+    lang='en'
+    data-theme='dark'
+    class='no-js'
+>
+    <head>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=yes'>
+        <link
+            href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic'
+            rel='stylesheet'
+            type='text/css'
+        >
+        <link
+            href='/css/main.css'
+            rel='stylesheet'
+            type='text/css'
+        >
+        {% if page.style %}
+            <link
+                href='/css/page/{{ page.style }}.css'
+                rel='stylesheet'
+                type='text/css'
+            >
+        {% endif %}
+        <script type='module' src='/js/main.js'></script>
+        <title>
+            {{ page.title }}
+        </title>
+        <meta name='description' content='{{ page.description }}'>
+    </head>
+    <body
+        {% if page.data_page %}
+            data-page='{{ page.data_page }}'
+        {% endif %}
+    >
+        {% include theme-init.liquid %}
+        {% include header.liquid %}
+        {{ content }}
+        {% include footer.liquid %}
+        <script
+            defer
+            src='https://static.cloudflareinsights.com/beacon.min.js'
+            data-cf-beacon='{"token": "5cafd4ae0400412b85e675f8296f7a36"}'
+        ></script>
+    </body>
+</html>

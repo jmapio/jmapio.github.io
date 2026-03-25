@@ -1,0 +1,77 @@
+@import url('shared/tokens.css');
+
+@import url('shared/reset.css');
+
+@import url('shared/header.css');
+
+@import url('shared/footer.css');
+
+body {
+    line-height: var(--leading);
+    background: var(--theme-bg);
+    color: var(--theme-body);
+    font-family: var(--font-display);
+    font-size: var(--text-size-base);
+    font-weight: var(--font-regular);
+}
+
+[data-theme='dark'] .i-theme-light {
+    display: none;
+}
+[data-theme='light'] .i-theme-dark {
+    display: none;
+}
+
+.u-wrapper {
+    max-width: var(--grid-max-width);
+    margin-inline: auto;
+    padding-inline: var(--grid-gutter);
+}
+
+.u-grid {
+    display: grid;
+    gap: var(--grid-gutter);
+}
+
+.u-sq-12 {
+    flex-basis: 12px;
+    width: 12px;
+    height: 12px;
+}
+
+/* --- Logo */
+.jmap-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 8px;
+    color: var(--theme-ink);
+    font-size: var(--text-size-base);
+    font-weight: var(--font-bold);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+}
+.jmap-logo__mark {
+    display: grid;
+    flex-shrink: 0;
+    gap: 2.5px;
+    grid-template-columns: 1fr 1fr;
+    padding: 6px;
+    width: 28px;
+    height: 28px;
+    background: var(--theme-accent);
+    border-radius: var(--radius-m);
+}
+.jmap-logo__mark span {
+    background: var(--theme-accent-900);
+    border-radius: 2px;
+}
+.jmap-logo__mark span:nth-child(2) {
+    opacity: 0.55;
+}
+.jmap-logo__mark span:nth-child(3) {
+    opacity: 0.55;
+}
+.jmap-logo__mark span:nth-child(4) {
+    opacity: 0.25;
+}
