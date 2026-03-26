@@ -17,6 +17,8 @@
     --size-step-9: clamp(2.8865rem, 2.787rem + 0.4977vw, 3.2473rem);
     --size-step-10: clamp(3.2473rem, 3.1353rem + 0.5599vw, 3.6532rem);
 
+    --size-step-5-10: clamp(1.802rem, 0.7399rem + 3.5599vw, 3.6532rem);
+
     /* -- Spacing */
 
     /* @link https://utopia.fyi/space/calculator?c=320,16,1.125,1480,18,1.125,10,3,&s=0.75|0.5|0.25|0.125,1.25|1.5|2|2.5|3|3.5|4|4.5|5|6|7|8,xs-xl|s-l|s-xl|m-l|m-xl|l-5xl|xl-3xl|xl-7xl|xl-10xl|2xl-4xl|4xl-6xl&g=m,xl,5xl,12 */

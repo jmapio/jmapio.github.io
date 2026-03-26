@@ -661,6 +661,162 @@
     color: var(--theme-muted);
 }
 
+/* --- Standard section --- */
+
+.section {
+    padding-block: var(--space-8xl);
+}
+
+.section--accent {
+}
+
+.section--alt {
+    border-top: 1px solid var(--theme-border);
+    border-bottom: 1px solid var(--theme-border);
+    background: var(--theme-bg-2);
+}
+
+.section__label {
+    display: block;
+    margin-bottom: var(--space-s);
+    color: var(--theme-accent);
+    font-size: var(--size-step--1);
+    font-weight: var(--font-semibold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+.section__h2 {
+    margin-bottom: var(--space-xl);
+    max-width: 18ch;
+    line-height: 1.1;
+    color: var(--theme-ink);
+    font-size: var(--size-step-5-10);
+    font-weight: var(--font-bold);
+    letter-spacing: -0.02em;
+}
+
+.section__inline-code {
+    border: 1px solid var(--theme-border);
+    padding: 0.1em 0.4em;
+    background: rgb(92 194 173 / 14%);
+    border-radius: 4px;
+    color: var(--theme-accent);
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+}
+
+/* --- Get started --- */
+
+.get-started__grid {
+    counter-reset: steps;
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+    margin-top: var(--space-xl);
+}
+.get-started__card {
+    counter-increment: steps;
+    transition:
+        border-color var(--dur-s),
+        transform 0.3s var(--ease-out),
+        box-shadow 0.3s;
+    border: 1px solid rgb(255 255 255 / 8%);
+    padding: var(--space-l);
+    backdrop-filter: blur(20px);
+    background: rgb(255 255 255 / 3.5%);
+    border-radius: var(--radius-2xl);
+}
+
+[data-theme='light'] .get-started__card {
+    background: rgb(255 255 255 / 70%);
+    border-color: rgb(13 122 104 / 10%);
+}
+.get-started__card::before {
+    content: counter(steps, decimal-leading-zero);
+    display: block;
+    margin-bottom: var(--space-s);
+    color: var(--theme-accent);
+    font-family: var(--font-mono);
+    font-size: var(--size-step--2);
+    letter-spacing: 0.05em;
+}
+.get-started__card h4 {
+    margin-bottom: var(--space-xs);
+    color: var(--theme-ink);
+    font-size: var(--size-step-1);
+    font-weight: var(--font-bold);
+}
+.get-started__card p {
+    line-height: 1.65;
+    color: var(--theme-body);
+    font-size: var(--size-step--1);
+}
+
+/* --- Explore --- */
+
+.link-cards {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    margin-top: var(--space-xl);
+}
+.link-card {
+    transition:
+        border-color 0.2s,
+        transform 0.25s var(--ease-out),
+        box-shadow 0.25s;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(255 255 255 / 8%);
+    padding: var(--space-l);
+    backdrop-filter: blur(20px);
+    background: rgb(255 255 255 / 3.5%);
+    border-radius: var(--radius-2xl);
+    text-decoration: none;
+}
+.link-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--theme-accent);
+    box-shadow: 0 12px 32px rgb(92 194 173 / 18%);
+}
+.link-card:hover .link-card__arrow {
+    transform: translateX(4px);
+}
+.link-card__arrow {
+    transition: transform 0.2s var(--ease-out);
+    display: block;
+    margin-top: var(--space-m);
+    color: var(--theme-accent);
+    font-size: var(--size-step-0);
+}
+[data-theme='light'] .link-card {
+    background: rgb(255 255 255 / 70%);
+    border-color: rgb(13 122 104 / 10%);
+}
+[data-theme='light'] .link-card:hover {
+    box-shadow: 0 8px 24px rgb(13 122 104 / 14%);
+}
+.link-card__label {
+    margin-bottom: var(--space-xs);
+    color: var(--theme-accent);
+    font-size: var(--size-step--2);
+    font-weight: var(--font-semibold);
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+.link-card__title {
+    margin-bottom: var(--space-xs);
+    color: var(--theme-ink);
+    font-size: var(--size-step-1);
+    font-weight: var(--font-bold);
+    letter-spacing: -0.01em;
+}
+.link-card__desc {
+    flex: 1;
+    line-height: 1.6;
+    font-size: var(--size-step--1);
+}
+
 /* --- Code --- */
 
 .code-tabs {
