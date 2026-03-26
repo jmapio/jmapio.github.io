@@ -1,0 +1,49 @@
+name: Deploy Preview
+
+on:
+    push:
+        branches-ignore:
+            - master
+
+permissions:
+    contents: read
+    pages: write
+    id-token: write
+
+concurrency:
+    group: pages-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  submodules: true
+
+            - uses: ruby/setup-ruby@v1
+              with:
+                  ruby-version: '3.3'
+
+            - run: gem install jekyll kramdown
+
+            - name: Build with preview baseurl
+              run: jekyll build --baseurl /jmapio.github.io
+
+            - name: Remove CNAME for preview
+              run: rm -f _site/CNAME
+
+            - uses: actions/upload-pages-artifact@v3
+              with:
+                  path: _site
+
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        steps:
+            - id: deployment
+              uses: actions/deploy-pages@v4
