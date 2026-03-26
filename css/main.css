@@ -33,6 +33,10 @@ body {
     gap: var(--grid-gutter);
 }
 
+.u-flex-spacer {
+    flex: 1 1 auto;
+}
+
 .u-sq-12 {
     flex-basis: 12px;
     width: 12px;
