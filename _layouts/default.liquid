@@ -27,6 +27,11 @@
                 type='text/css'
             >
         {% endif %}
+        {% if layout.stylesheets %}
+            {% for style in layout.stylesheets %}
+                <link href='{{ site.baseurl }}/css/{{ style }}' rel='stylesheet' type='text/css'>
+            {% endfor %}
+        {% endif %}
         <script type='module' src='{{ site.baseurl }}/js/main.js'></script>
         <title>
             {{ page.title }}
