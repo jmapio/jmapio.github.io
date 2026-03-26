@@ -12,5 +12,11 @@ export default {
                 printWidth: 1000,
             },
         },
+        {
+            files: ['*.md'],
+            options: {
+                proseWrap: 'always',
+            },
+        },
     ],
 };
