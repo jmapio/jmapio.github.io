@@ -15,7 +15,7 @@
     color: var(--theme-muted);
     font-size: var(--text-size-meta);
 }
-.footer__col h5 {
+.footer__col h3 {
     margin-bottom: var(--space-s);
     color: var(--theme-ink);
     font-size: var(--text-size-meta);
