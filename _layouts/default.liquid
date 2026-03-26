@@ -13,18 +13,18 @@
             type='text/css'
         >
         <link
-            href='/css/main.css'
+            href='{{ site.baseurl }}/css/main.css'
             rel='stylesheet'
             type='text/css'
         >
         {% if page.style %}
             <link
-                href='/css/page/{{ page.style }}.css'
+                href='{{ site.baseurl }}/css/page/{{ page.style }}.css'
                 rel='stylesheet'
                 type='text/css'
             >
         {% endif %}
-        <script type='module' src='/js/main.js'></script>
+        <script type='module' src='{{ site.baseurl }}/js/main.js'></script>
         <title>
             {{ page.title }}
         </title>
