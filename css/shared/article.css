@@ -116,14 +116,16 @@
 
 /* --- Table --- */
 
+.u-article .table-wrapper {
+    overflow: auto;
+    margin-block: var(--space-l);
+}
 .u-article table {
-    overflow: hidden;
     border: 1px solid var(--theme-border);
     width: 100%;
     border-collapse: collapse;
     border-radius: var(--radius-l);
     font-size: var(--size-step--1);
-    margin-block: var(--space-l);
 }
 .u-article table th {
     border-bottom: 1px solid var(--theme-border);
