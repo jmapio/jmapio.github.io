@@ -3,6 +3,12 @@
     min-height: var(--nav-h);
 }
 
+@media (width <= 768px) {
+    .header {
+        padding-bottom: 12px;
+    }
+}
+
 @media (width > 768px) {
     .header {
         transition: background 0.3s;
