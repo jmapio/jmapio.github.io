@@ -30,6 +30,8 @@ jobs:
 
             - name: Build with preview baseurl
               run: jekyll build --baseurl /jmapio.github.io
+              env:
+                  JEKYLL_ENV: preview
 
             - name: Remove CNAME for preview
               run: rm -f _site/CNAME

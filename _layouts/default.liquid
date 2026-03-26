@@ -7,6 +7,9 @@
     <head>
         <meta charset='utf-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=yes'>
+        {% if jekyll.environment == 'preview' %}
+            <meta name='robots' content='noindex, nofollow'>
+        {% endif %}
         <link
             href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic'
             rel='stylesheet'
