@@ -2,8 +2,14 @@
 
 .hero {
     overflow: hidden;
-    padding-top: calc(var(--nav-h) + var(--space-2xl));
+    padding-top: var(--space-2xl);
     padding-bottom: var(--space-6xl);
+}
+
+@media (width > 768px) {
+    .hero {
+        padding-top: calc(var(--nav-h) + var(--space-2xl));
+    }
 }
 
 .hero__h1 {
