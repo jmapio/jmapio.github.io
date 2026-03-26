@@ -2,13 +2,13 @@
 
 .hero {
     overflow: hidden;
-    padding-top: var(--space-2xl);
-    padding-bottom: var(--space-6xl);
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-3xl);
 }
 
 @media (width > 768px) {
     .hero {
-        padding-top: calc(var(--nav-h) + var(--space-2xl));
+        padding-top: calc(var(--nav-h) + var(--space-xl));
     }
 }
 
@@ -17,7 +17,7 @@
     max-width: 16ch;
     line-height: var(--leading-mini);
     color: var(--theme-ink);
-    font-size: var(--text-size-jumbo);
+    font-size: var(--size-step-7);
     font-weight: var(--font-bold);
     letter-spacing: -0.03em;
 }
@@ -94,7 +94,7 @@
     display: grid;
     gap: 12px;
     grid-template-columns: repeat(12, 1fr);
-    padding-bottom: var(--space-6xl);
+    padding-bottom: var(--space-3xl);
 }
 
 .bento__card {
@@ -177,7 +177,7 @@
     margin-bottom: var(--space-xs);
     line-height: var(--leading-fine);
     color: var(--theme-ink);
-    font-size: var(--text-size-heading-2);
+    font-size: var(--text-size-heading-4);
     font-weight: var(--font-bold);
     letter-spacing: var(--kerning-tight);
 }
@@ -189,7 +189,7 @@
     margin-top: 8px;
     line-height: var(--leading-short);
     color: var(--theme-muted);
-    font-size: var(--size-step--3);
+    font-size: var(--size-step--2);
 }
 
 .stat-num {
@@ -670,7 +670,7 @@
 /* --- Standard section --- */
 
 .section {
-    padding-block: var(--space-8xl);
+    padding-block: var(--space-3xl);
 }
 
 .section--accent {
@@ -696,7 +696,7 @@
     max-width: 18ch;
     line-height: 1.1;
     color: var(--theme-ink);
-    font-size: var(--size-step-5-10);
+    font-size: var(--size-step-4);
     font-weight: var(--font-bold);
     letter-spacing: -0.02em;
 }
@@ -749,7 +749,7 @@
 .get-started__card h4 {
     margin-bottom: var(--space-xs);
     color: var(--theme-ink);
-    font-size: var(--size-step-1);
+    font-size: var(--size-step-0);
     font-weight: var(--font-bold);
 }
 .get-started__card p {
