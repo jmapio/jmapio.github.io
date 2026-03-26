@@ -8,8 +8,3 @@ document.getElementById('theme-toggle').addEventListener('click', function () {
     );
     localStorage.setItem('jmap-theme', isLight ? 'dark' : 'light');
 });
-document.getElementById('hamburger').addEventListener('click', function () {
-    const nl = document.getElementById('nav-links');
-    const o = nl.classList.toggle('open');
-    this.setAttribute('aria-expanded', o);
-});
