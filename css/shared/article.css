@@ -180,6 +180,9 @@
     gap: var(--space-2xl);
     grid-template-columns: auto 1fr;
 }
+.u-article-split > * {
+    min-width: 0;
+}
 
 .u-toc {
     position: sticky;
