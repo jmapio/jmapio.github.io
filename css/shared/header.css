@@ -106,7 +106,10 @@
     border-color: var(--theme-accent);
     color: var(--theme-accent);
 }
-
+.header__theme-button > svg {
+    width: 20px;
+    height: 20px;
+}
 .header .jmap-logo {
     padding-block: 16px;
 }
