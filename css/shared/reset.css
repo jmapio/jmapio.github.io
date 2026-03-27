@@ -97,6 +97,28 @@ table {
     border-spacing: 0;
 }
 
+button {
+    overflow: visible;
+    appearance: none;
+    margin: 0;
+    border: none;
+    padding: 0;
+    width: auto;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+}
+
+/* Remove inner border and padding in Firefox */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
 :target {
     scroll-margin-block: 5ex;
 }
