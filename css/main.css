@@ -1,10 +1,10 @@
-@import url('shared/tokens.css');
+@import url('module/tokens.css');
 
-@import url('shared/reset.css');
+@import url('module/reset.css');
 
-@import url('shared/header.css');
+@import url('module/header.css');
 
-@import url('shared/footer.css');
+@import url('module/footer.css');
 
 html {
     scroll-behavior: smooth;

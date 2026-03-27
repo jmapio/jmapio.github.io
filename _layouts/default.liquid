@@ -20,16 +20,14 @@
             rel='stylesheet'
             type='text/css'
         >
-        {% if page.style %}
-            <link
-                href='{{ site.baseurl }}/css/page/{{ page.style }}.css'
-                rel='stylesheet'
-                type='text/css'
-            >
-        {% endif %}
         {% if layout.stylesheets %}
             {% for style in layout.stylesheets %}
-                <link href='{{ site.baseurl }}/css/{{ style }}' rel='stylesheet' type='text/css'>
+                <link href='{{ site.baseurl }}/css/{{ style }}.css' rel='stylesheet' type='text/css'>
+            {% endfor %}
+        {% endif %}
+        {% if page.stylesheets %}
+            {% for style in page.stylesheets %}
+                <link href='{{ site.baseurl }}/css/{{ style }}.css' rel='stylesheet' type='text/css'>
             {% endfor %}
         {% endif %}
         <script type='module' src='{{ site.baseurl }}/js/main.js'></script>
