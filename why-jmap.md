@@ -7,7 +7,7 @@ description:
     in benchmarks and real implementation experience.'
 ---
 
-# It is time to replace IMAP with JMAP
+## Abstract
 
 <p class="author">Joseph Gentle & Neil Jenkins — Fastmail</p>
 
