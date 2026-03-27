@@ -10,6 +10,16 @@ html {
     scroll-behavior: smooth;
 }
 
+:target {
+    scroll-margin-block: 1ex;
+}
+
+@media screen and (width > 768px) {
+    :target {
+        scroll-margin-block: calc(var(--nav-h) + 1ex);
+    }
+}
+
 body {
     line-height: var(--leading);
     background: var(--theme-bg);
