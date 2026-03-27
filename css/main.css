@@ -6,6 +6,10 @@
 
 @import url('shared/footer.css');
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     line-height: var(--leading);
     background: var(--theme-bg);
