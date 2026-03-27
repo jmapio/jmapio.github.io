@@ -13,11 +13,13 @@
     font-weight: var(--font-bold);
 }
 .u-article h2 {
-    margin-top: var(--space-2xl);
     margin-bottom: var(--space-s);
     line-height: var(--leading-fine);
     font-size: var(--text-size-heading-2);
     font-weight: var(--font-bold);
+}
+.u-article h2:not(:first-child) {
+    margin-top: var(--space-2xl);
 }
 .u-article h3 {
     margin-top: var(--space-2xl);
@@ -169,4 +171,44 @@
     color: var(--theme-muted);
     font-size: var(--size-step--1);
     font-style: italic;
+}
+
+/* --- ToC --- */
+
+.u-article-split {
+    display: grid;
+    gap: var(--space-2xl);
+    grid-template-columns: auto 1fr;
+}
+
+.u-toc {
+    position: sticky;
+    top: calc(var(--nav-h) + var(--space-l));
+}
+
+.u-toc li + li {
+    margin-block: 2px;
+}
+
+.u-toc li a {
+    display: block;
+    position: relative;
+    line-height: var(--leading-fine);
+    color: var(--theme-muted);
+    font-size: var(--text-size-meta);
+    padding-block: 10px;
+}
+
+/* Using a psuedo element to keep alignment with page margin */
+.u-toc li a::after {
+    content: '';
+    transition: background var(--dur-s);
+    z-index: -1;
+    position: absolute;
+    inset: 0 -16px;
+    border-radius: var(--radius-m);
+}
+
+.u-toc li a:hover::after {
+    background: var(--theme-accent-dim);
 }

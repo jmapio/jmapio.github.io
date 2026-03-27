@@ -2,7 +2,6 @@
 layout: default
 stylesheets:
     - shared/article.css
-    - layouts/why-jmap.css
 ---
 <section class='hero hero--page'>
     <div class='u-wrapper'>
@@ -16,5 +15,8 @@ stylesheets:
 </section>
 
 <section class='section section--document'>
-    <article class='u-article u-wrapper'>{{ content }}</article>
+    <div class='u-wrapper u-article-split'>
+        <nav class='u-toc-wrapper'>{% include toc.liquid html=content class='u-toc' h_min=2 h_max=2 %}</nav>
+        <article class='u-article'>{{ content }}</article>
+    </div>
 </section>
