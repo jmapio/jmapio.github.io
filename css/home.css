@@ -746,7 +746,7 @@
     font-size: var(--size-step--2);
     letter-spacing: 0.05em;
 }
-.get-started__card h4 {
+.get-started__card h3 {
     margin-bottom: var(--space-xs);
     color: var(--theme-ink);
     font-size: var(--size-step-0);
