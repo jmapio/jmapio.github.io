@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+:root {
+    /* Allows animated transitions from <length> to auto etc. */
+    interpolate-size: allow-keywords;
+}
+
 html {
     text-size-adjust: none;
 }
@@ -117,4 +122,13 @@ button::-moz-focus-inner,
 input::-moz-focus-inner {
     border: 0;
     padding: 0;
+}
+
+summary {
+    cursor: pointer;
+}
+summary::-webkit-details-marker, /* For older WebKit/Blink browsers */
+summary::marker {
+    content: '';
+    display: none;
 }
