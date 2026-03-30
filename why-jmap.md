@@ -9,8 +9,6 @@ description:
 
 ## Abstract
 
-<p class="author">Joseph Gentle & Neil Jenkins — Fastmail</p>
-
 Email is essential to modern life. In 2025, an estimated 376 billion emails were
 sent and received every day. Yet email is still regularly delivered to end user
 devices over IMAP — a protocol from 1986.
