@@ -1,8 +1,7 @@
 ---
-layout: default
-permalink: /spec.html
+layout: article
+permalink: /spec/index.html
 title: JMAP Specifications
-custom: true
 ---
 
 # JMAP: The Specs

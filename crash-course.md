@@ -1,6 +1,6 @@
 ---
-layout: default
-permalink: /crash-course.html
+layout: article-toc
+permalink: /crash-course/index.html
 title: JMAP Crash Course
 ---
 

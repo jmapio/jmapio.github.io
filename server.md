@@ -1,6 +1,6 @@
 ---
-layout: default
-permalink: /server.html
+layout: article-toc
+permalink: /server/index.html
 title: JMAP Server Implementation Guide
 ---
 
