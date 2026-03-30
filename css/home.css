@@ -93,8 +93,29 @@
 .bento {
     display: grid;
     gap: 12px;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-areas:
+        'code'
+        'battery'
+        'spec'
+        'push'
+        'batch'
+        'bench'
+        'rfc'
+        'json'
+        'lang'
+        'attach';
     padding-bottom: var(--space-3xl);
+}
+
+@media (width > 768px) {
+    .bento {
+        grid-template-areas:
+            'code code code code code code code battery battery battery battery battery'
+            'code code code code code code code spec spec spec spec spec'
+            'push push push push batch batch batch batch bench bench bench bench'
+            'rfc rfc rfc rfc rfc rfc rfc json json json json json'
+            'lang lang lang attach attach attach attach json json json json json';
+    }
 }
 
 .bento__card {
@@ -111,39 +132,34 @@
 }
 
 .bento__card--code {
-    grid-row: span 2;
-    grid-column: span 7;
+    grid-area: code;
 }
 .bento__card--battery {
-    grid-column: span 5;
+    grid-area: battery;
 }
 .bento__card--spec {
-    grid-column: span 5;
+    grid-area: spec;
 }
 .bento__card--push {
-    grid-row: span 2;
-    grid-column: span 4;
+    grid-area: push;
 }
 .bento__card--batch {
-    grid-row: span 2;
-    grid-column: span 4;
+    grid-area: batch;
 }
 .bento__card--bench {
-    grid-row: span 2;
-    grid-column: span 4;
+    grid-area: bench;
 }
 .bento__card--rfc {
-    grid-column: span 7;
+    grid-area: rfc;
 }
 .bento__card--json {
-    grid-row: span 2;
-    grid-column: span 5;
+    grid-area: json;
 }
 .bento__card--lang {
-    grid-column: span 3;
+    grid-area: lang;
 }
 .bento__card--attach {
-    grid-column: span 4;
+    grid-area: attach;
 }
 
 .bento__card-wrapper {
