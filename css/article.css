@@ -197,6 +197,13 @@
     top: calc(var(--nav-h) + var(--space-l));
 }
 
+@media screen and (width > 768px) {
+    .u-toc {
+        width: 100%;
+        max-width: 210px;
+    }
+}
+
 .u-toc li + li {
     margin-block: 2px;
 }
@@ -204,10 +211,10 @@
 .u-toc li a {
     display: block;
     position: relative;
-    line-height: var(--leading-fine);
+    line-height: var(--leading-short);
     color: var(--theme-muted);
     font-size: var(--text-size-meta);
-    padding-block: 10px;
+    padding-block: 8px;
 }
 
 /* Using a psuedo element to keep alignment with page margin */
