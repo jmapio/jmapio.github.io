@@ -1,3 +1,5 @@
 baseurl: ''
 url: 'http://jmap.io'
 markdown: kramdown
+sass:
+  style: compressed

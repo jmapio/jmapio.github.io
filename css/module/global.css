@@ -1,11 +1,3 @@
-@import url('module/tokens.css');
-
-@import url('module/reset.css');
-
-@import url('module/header.css');
-
-@import url('module/footer.css');
-
 html {
     scroll-behavior: smooth;
 }

@@ -11,21 +11,29 @@
             <meta name='robots' content='noindex, nofollow'>
         {% endif %}
         <link
-            href='{{ site.baseurl }}/css/main.css'
+            href='{{ site.baseurl }}/css/main.css?ts={{ site.time | date: '%s' }}'
             rel='stylesheet'
             type='text/css'
         >
         {% if layout.stylesheets %}
             {% for style in layout.stylesheets %}
-                <link href='{{ site.baseurl }}/css/{{ style }}.css' rel='stylesheet' type='text/css'>
+                <link
+                    href='{{ site.baseurl }}/css/{{ style }}.css?ts={{ site.time | date: '%s' }}'
+                    rel='stylesheet'
+                    type='text/css'
+                >
             {% endfor %}
         {% endif %}
         {% if page.stylesheets %}
             {% for style in page.stylesheets %}
-                <link href='{{ site.baseurl }}/css/{{ style }}.css' rel='stylesheet' type='text/css'>
+                <link
+                    href='{{ site.baseurl }}/css/{{ style }}.css?ts={{ site.time | date: '%s' }}'
+                    rel='stylesheet'
+                    type='text/css'
+                >
             {% endfor %}
         {% endif %}
-        <script type='module' src='{{ site.baseurl }}/js/main.js'></script>
+        <script type='module' src='{{ site.baseurl }}/js/main.js?ts={{ site.time | date: '%s' }}'></script>
         <title>
             {{ page.title }}
         </title>
