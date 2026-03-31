@@ -7,6 +7,33 @@ description: >-
     faster, simpler, more powerful, and built for how email works today.
 stylesheets:
     - home
+explore:
+    eyebrow: Explore
+    title: Where to next?
+    cards:
+        -
+            href: /why-jmap/
+            eyebrow: Make the case
+            title: Why JMAP?
+            body: >-
+                The technical and practical argument for replacing IMAP,
+                grounded in Fastmail's benchmarks and real implementation
+                experience.
+        -
+            href: /spec/
+            eyebrow: Specifications and Guides
+            title: Read the spec
+            body: >-
+                The full JMAP protocol &mdash; core (RFC 8620), mail (RFC 8621),
+                contacts, calendars &mdash; plus client and server guides.
+        -
+            href: /software/
+            eyebrow: Software and Libraries
+            title: Find implementations
+            body: >-
+                Services with JMAP support, client libraries, server
+                implementations, and more.
+
 ---
 <section class='hero u-wrapper'>
     <div class='hero__inner'>
@@ -279,33 +306,18 @@ stylesheets:
     <div class='u-wrapper'>
         <span class='section__label u-text-sm u-font-semibold'>Explore</span>
         <h2 class='section__h2 u-text-3xl u-font-bold'>Where to next?</h2>
-        <div class='link-cards'>
-            <a href='{{ site.baseurl }}/why-jmap/' class='link-card'>
-                <span class='link-card__label u-text-xs u-font-semibold'>Make the case</span>
-                <span class='link-card__title u-text-lg u-font-bold'>Why JMAP?</span>
-                <span class='link-card__desc u-text-sm'
-                    >The technical and practical argument for replacing IMAP, grounded in Fastmail's benchmarks and real
-                    implementation experience.</span
-                >
-                <span class='link-card__arrow'>{% include icons/arrow-right.liquid %}</span>
-            </a>
-            <a href='{{ site.baseurl }}/spec/' class='link-card'>
-                <span class='link-card__label u-text-xs u-font-semibold'>Specifications and Guides</span>
-                <span class='link-card__title u-text-lg u-font-bold'>Read the spec</span>
-                <span class='link-card__desc u-text-sm'
-                    >The full JMAP protocol &mdash; core (RFC 8620), mail (RFC 8621), contacts, calendars &mdash; plus
-                    client and server guides.</span
-                >
-                <span class='link-card__arrow'>{% include icons/arrow-right.liquid %}</span>
-            </a>
-            <a href='{{ site.baseurl }}/software/' class='link-card'>
-                <span class='link-card__label u-text-xs u-font-semibold'>Software and Libraries</span>
-                <span class='link-card__title u-text-lg u-font-bold'>Find implementations</span>
-                <span class='link-card__desc u-text-sm'
-                    >Services with JMAP support, client libraries, server implementations, and more.</span
-                >
-                <span class='link-card__arrow'>{% include icons/arrow-right.liquid %}</span>
-            </a>
-        </div>
+        <ul class='card-grid'>
+            {% for card in page.explore.cards %}
+                <li>
+                    {%
+                        include components/link-card.liquid
+                        href=card.href
+                        eyebrow=card.eyebrow
+                        title=card.title
+                        body=card.body
+                    %}
+                </li>
+            {% endfor %}
+        </ul>
     </div>
 </section>
