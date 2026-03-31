@@ -107,9 +107,9 @@
 @media (width > 768px) {
     .bento {
         grid-template-areas:
+        'rfc rfc rfc rfc rfc rfc rfc json json json json json'
         'spec spec spec spec lang lang lang json json json json json'
-        'push push push push battery battery battery battery bench bench bench bench'
-        'rfc rfc rfc rfc rfc rfc rfc json json json json json';
+        'push push push push battery battery battery battery bench bench bench bench';
     }
 }
 
