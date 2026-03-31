@@ -4,15 +4,12 @@ stylesheets:
     - article
     - why-jmap
 ---
-<section class='hero hero--page'>
-    <div class='u-wrapper'>
-        <p class='hero__eyebrow'>The case for JMAP</p>
-        <h1 class='hero__h1'>Why JMAP?</h1>
-        <p class='hero__sub'>
-            IMAP is not ageing well. It is slow and inefficient, and expensive and difficult to implement and deploy. JMAP makes it vastly easier to build and deploy modern email apps, reduce server costs, and increase performance and battery life.
-        </p>
-    </div>
-</section>
+{%
+    include components/hero.liquid
+    eyebrow=page.hero.eyebrow
+    title=page.hero.title
+    sub=page.hero.sub
+%}
 
 {% capture pageContent %}
 <article class='u-article'>{{ content }}</article>

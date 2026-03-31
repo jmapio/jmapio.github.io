@@ -96,3 +96,9 @@
 .u-font-mono {
     font-family: var(--font-mono);
 }
+
+/* --- */
+
+.u-kerning-tight {
+    letter-spacing: var(--kerning-tight);
+}

@@ -5,6 +5,14 @@ title: Why JMAP?
 description:
     'The technical and practical argument for replacing IMAP with JMAP, grounded
     in benchmarks and real implementation experience.'
+hero:
+    eyebrow: The case for JMAP
+    title: Why JMAP?
+    sub: >-
+        IMAP is not ageing well. It is slow and inefficient, and expensive and 
+        difficult to implement and deploy. JMAP makes it vastly easier to build
+        and deploy modern email apps, reduce server costs, and increase
+        performance and battery life.
 ---
 
 ## JMAP is simpler than IMAP
