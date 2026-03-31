@@ -39,11 +39,7 @@
         </title>
         <meta name='description' content='{{ page.description }}'>
     </head>
-    <body
-        {% if page.data_page %}
-            data-page='{{ page.data_page }}'
-        {% endif %}
-    >
+    <body>
         {% include theme-init.liquid %}
         {% include header.liquid %}
         {{ content }}
