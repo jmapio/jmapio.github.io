@@ -17,9 +17,6 @@
                 <h3>Learn</h3>
                 <ul>
                     <li><a href='{{ site.baseurl }}/why-jmap/'>Why JMAP?</a></li>
-                    <li><a href='{{ site.baseurl }}/spec/'>Specifications</a></li>
-                    <li><a href='{{ site.baseurl }}/spec-core/'>Core spec (RFC 8620)</a></li>
-                    <li><a href='{{ site.baseurl }}/spec-mail/'>Mail spec (RFC 8621)</a></li>
                     <li><a href='{{ site.baseurl }}/client/'>Client guide</a></li>
                     <li><a href='{{ site.baseurl }}/server/'>Server guide</a></li>
                     <li><a href='{{ site.baseurl }}/crash-course/'>Crash course</a></li>
@@ -28,20 +25,11 @@
             <div class='footer__col'>
                 <h3>Implement</h3>
                 <ul>
+                    <li><a href='{{ site.baseurl }}/spec/'>Specifications</a></li>
                     <li><a href='{{ site.baseurl }}/software/'>Software and Libraries</a></li>
                     <li>
-                        <a href='https://www.rfc-editor.org/rfc/rfc8620' target='_blank' rel='noopener'
-                            >RFC 8620{% include icons/external-link.liquid -%}
-                        </a>
-                    </li>
-                    <li>
-                        <a href='https://www.rfc-editor.org/rfc/rfc8621' target='_blank' rel='noopener'
-                            >RFC 8621{% include icons/external-link.liquid -%}
-                        </a>
-                    </li>
-                    <li>
                         <a href='https://github.com/jmapio/jmap' target='_blank' rel='noopener'
-                            >GitHub{% include icons/external-link.liquid -%}
+                            >GitHub {% include icons/external-link.liquid -%}
                         </a>
                     </li>
                 </ul>
@@ -51,30 +39,29 @@
                 <ul>
                     <li>
                         <a href='https://datatracker.ietf.org/group/jmap/about/' target='_blank' rel='noopener'
-                            >The JMAP Working Group at the IETF{% include icons/external-link.liquid -%}
+                            >IETF JMAP Working Group {% include icons/external-link.liquid -%}
                         </a>
                     </li>
                     <li>
-                        <a href='https://datatracker.ietf.org/group/jmap/about/' target='_blank' rel='noopener'
-                            >Mailing list archives{% include icons/external-link.liquid -%}
+                        <a href='https://mailarchive.ietf.org/arch/browse/jmap/' target='_blank' rel='noopener'
+                            >Mailing list archives {% include icons/external-link.liquid -%}
                         </a>
                     </li>
                     <li>
                         <a href='https://github.com/jmapio/jmap/issues' target='_blank' rel='noopener'
-                            >GitHub issues{% include icons/external-link.liquid -%}
+                            >GitHub issues {% include icons/external-link.liquid -%}
                         </a>
                     </li>
                     <li>
                         <a href='https://www.fastmail.com' target='_blank' rel='noopener'
-                            >Fastmail{% include icons/external-link.liquid -%}
+                            >Fastmail {% include icons/external-link.liquid -%}
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
         <div class='footer__bottom'>
-            <span>&copy; 2026 JMAP contributors. An open IETF standard. </span>
-            <span>RFC 8620 &middot; RFC 8621 </span>
+            <span>&copy; { "now" | date: "%Y" } JMAP contributors. An open IETF standard. </span>
         </div>
     </div>
 </footer>
