@@ -1,0 +1,54 @@
+---
+layout: default
+permalink: /guides/index.html
+title: Guides
+description: >-
+    Learn the JMAP protocol with walkthroughs and practical guides for server
+    and client implementations.
+hero:
+    eyebrow: Guides
+    title: Learn JMAP
+    sub: >- 
+        A walkthrough of the protocol alongside practical guides for server and
+        client developers.
+cards:
+    -
+        href: /crash-course/
+        eyebrow: Get started
+        title: Crash course
+        body: >- 
+            Learn the basics of JMAP and write your first program using it.
+    -
+        href: /server/
+        eyebrow: Implementation guide
+        title: Server
+        body: >- 
+            A suggested set of database tables and algorithms for serving JMAP
+            efficiently.
+    -
+        href: /client/
+        eyebrow: Implementation guide
+        title: Client
+        body: >-
+            See how JMAP can be used to minimise bandwidth usage and round
+            trips.
+---
+{% include components/hero.liquid eyebrow=page.hero.eyebrow title=page.hero.title sub=page.hero.sub %}
+
+<section class='section'>
+    <div class='u-wrapper'>
+        <ul class='card-grid'>
+            {% for card in page.cards %}
+                <li>
+                    {%
+                        include components/link-card.liquid
+                        href=card.href
+                        eyebrow=card.eyebrow
+                        title=card.title
+                        body=card.body
+                    %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
