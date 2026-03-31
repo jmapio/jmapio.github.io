@@ -3,12 +3,6 @@
     min-height: var(--nav-h);
 }
 
-@media (width <= 768px) {
-    .header {
-        padding-bottom: 12px;
-    }
-}
-
 @media (width > 768px) {
     .header {
         transition: background 0.3s;
@@ -62,12 +56,6 @@
     flex-wrap: wrap;
     column-gap: 24px;
     grid-area: links;
-}
-
-@media (width <= 768px) {
-    .header__links {
-        border-block: 1px solid var(--theme-border);
-    }
 }
 
 @media (width > 768px) {
@@ -137,6 +125,27 @@
     width: 20px;
     height: 20px;
 }
-.header .jmap-logo {
-    padding-block: 16px;
+
+@media (width <= 768px) {
+    .header {
+        position: relative;
+    }
+    .header::before,
+    .header::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        left: 0;
+        height: 1px;
+        background: var(--theme-border);
+    }
+    .header::before {
+        top: var(--nav-h);
+    }
+    .header::after {
+        bottom: 0;
+    }
+    .header__inner {
+        grid-template-rows: var(--nav-h) auto;
+    }
 }
