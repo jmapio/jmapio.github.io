@@ -11,8 +11,8 @@ writing your first program using it. The examples in this document are written
 in Perl, but they should be simple enough to translate into any language you
 like.
 
-First, we strongly suggest you read the [core](https://jmap.io/spec-core.html)
-and [mail](https://jmap.io/spec-mail.html) specifications. They’re clear and
+First, we strongly suggest you read the [core](https://www.rfc-editor.org/rfc/rfc8620.html)
+and [mail](https://www.rfc-editor.org/rfc/rfc8621.html) specifications. They’re clear and
 precise, and will cover lots of material that you’ll need to know. What we’re
 including here is just enough to get you started.
 
@@ -46,7 +46,7 @@ to adhere to those standards. If you don’t ask for some extension, the server
 won’t provide it. In our example above, we show the capabilities for managing
 mail and core behaviors. That's what we'll be using in the rest of these
 examples, but other capabilities exist. You can look for those in
-[the specs](/spec.html) or in your JMAP server's documentation.
+[the specs](/spec/) or in your JMAP server's documentation.
 
 When we say “what standards you want to rely on,” we really mean “which methods
 you can call and what arguments you can pass them.” That’s all the stuff in the
@@ -314,7 +314,7 @@ This is really only the very, very tip of the iceberg. Not covered: creating
 things (like mailboxes or emails), sending mail, updating existing objects,
 updates and synchronization, retrieving or uploading blobs, and more core
 concepts. All these concepts (and more!) should be covered by
-[the specifications](https://jmap.io/spec.html).
+[the specifications](/spec/).
 
 You can also find a small, but growing, set of very simple sample JMAP programs
 for you to see how to do some other basic things, like create and send mail, in
