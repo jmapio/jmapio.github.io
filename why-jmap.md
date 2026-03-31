@@ -84,10 +84,10 @@ When a mail client is closed and reopened, it must synchronise with the server.
 This test measured bandwidth consumed when restarting the mail client with
 28,234 messages in the account:
 
-| Client           | Average  TCP connections | Traffic  |
-| ---------------- | ---------------          | -------- |
-| JMAP             | 1                        | 13.1 KB  |
-| Thunderbird      | 2.4                      | 2.1 MB   |
+| Client           | Average  TCP connections | Traffic |
+| ---------------- | ---------------          | ------- |
+| JMAP             | 1                        |   13 KB |
+| Thunderbird      | 2.4                      | 2100 KB |
 
 Without CONDSTORE and QRESYNC support, IMAP clients must query the read/unread
 flags on every message in the user’s entire mailbox at startup. This scales
@@ -116,7 +116,7 @@ battery drain.
 ## Webmail support
 
 IMAP cannot be used for webmail — it runs on raw TCP sockets not available to
-browsers. Every webmail provider (Gmail, iCloud Mail, Outlook.com) maintains a
+browsers. Every webmail provider (e.g., Gmail, iCloud Mail, Outlook.com) maintains a
 bespoke HTTP API service alongside their IMAP infrastructure. This is expensive
 to design, build, and maintain.
 
