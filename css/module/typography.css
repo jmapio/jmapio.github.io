@@ -19,7 +19,7 @@
 }
 
 .u-text-lg {
-    line-height: var(--leading-slim);
+    line-height: var(--leading-short);
     font-size: var(--size-step-1);
 }
 
