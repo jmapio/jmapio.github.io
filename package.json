@@ -8,6 +8,7 @@
     "homepage": "https://jmap.io",
     "devDependencies": {
         "@shopify/prettier-plugin-liquid": "^1.10.2",
+        "jsdom": "^29.0.1",
         "prettier": "^3.8.1",
         "stylelint": "^17.5.0",
         "stylelint-config-standard": "^40.0.0",

@@ -9,3 +9,4 @@ Gemfile
 node_modules
 
 .venv
+_tmp

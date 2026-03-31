@@ -3,3 +3,6 @@ url: 'http://jmap.io'
 markdown: kramdown
 sass:
   style: compressed
+exclude:
+  - _tmp
+  - scripts
