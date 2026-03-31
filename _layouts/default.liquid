@@ -34,9 +34,7 @@
             {% endfor %}
         {% endif %}
         <script type='module' src='{{ site.baseurl }}/js/main.js?ts={{ site.time | date: '%s' }}'></script>
-        <title>
-            {{ page.title }}
-        </title>
+        <title>{{ page.title }}</title>
         <meta name='description' content='{{ page.description }}'>
     </head>
     <body>
