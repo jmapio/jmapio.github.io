@@ -9,8 +9,7 @@ stylesheets:
         <p class='hero__eyebrow'>The case for JMAP</p>
         <h1 class='hero__h1'>Why JMAP?</h1>
         <p class='hero__sub'>
-            IMAP turns 40 this year. The case for replacing it — grounded in benchmarks, implementation experience, and
-            the realities of modern email infrastructure.
+            IMAP is not ageing well. It is slow and inefficient, and expensive and difficult to implement and deploy. JMAP can unlock a new era of email innovation, making it vastly easier to build and deploy modern email apps, reduce server costs, and increase performance and battery life.
         </p>
     </div>
 </section>
@@ -28,14 +27,7 @@ stylesheets:
         </summary>
         <div class='faq__answer'>
             <p>
-                JMAP (JSON Meta Application Protocol) is an open IETF standard for synchronising mail,
-                calendars, and contacts between a client and server. It replaces IMAP with a protocol built
-                on HTTPS and JSON, with efficient batch requests and real-time push updates built in.
-            </p>
-            <p>
-                JMAP is standardised as
-                <a href='https://www.rfc-editor.org/rfc/rfc8620' target='_blank'>RFC 8620</a> (core) and
-                <a href='https://www.rfc-editor.org/rfc/rfc8621' target='_blank'>RFC 8621</a> (mail).
+                JMAP (JSON Meta Application Protocol) is an open IETF standard for synchronising mail, calendars, and contacts between a client and server. It replaces IMAP, CardDAV, and CalDAV with a single consistent protocol built on HTTPS and JSON, with efficient batch requests and real-time push updates built in.
             </p>
         </div>
     </details>
@@ -48,13 +40,11 @@ stylesheets:
         </summary>
         <div class='faq__answer'>
             <p>
-                Yes, for client/server email access. JMAP covers everything IMAP does &mdash; reading,
-                searching, moving, flagging, and sending email &mdash; with a much cleaner and more
-                efficient API. JMAP also replaces POP3, client-side SMTP, CardDAV, and CalDAV.
+                Yes. JMAP covers everything IMAP does &mdash; reading,
+                searching, moving, flagging, and even sending email &mdash; with a much cleaner and more efficient API. JMAP also replaces POP3, client-side SMTP, CardDAV, and CalDAV.
             </p>
             <p>
-                JMAP does not replace server-to-server SMTP. Email servers still use SMTP to route messages
-                between domains.
+                JMAP does not replace server-to-server SMTP. Email servers still use SMTP to route messages between domains.
             </p>
         </div>
     </details>
@@ -67,10 +57,9 @@ stylesheets:
         </summary>
         <div class='faq__answer'>
             <p>
-                <strong>Fastmail</strong> is the largest JMAP provider and was instrumental in developing
-                the standard &mdash; their entire web and mobile client runs on JMAP.
-                <strong>Stalwart Mail Server</strong> is a modern open-source server with complete JMAP
-                support. <strong>Apache James</strong> and <strong>Cyrus IMAP</strong> both support JMAP.
+                <strong><a href="https://www.fastmail.com">Fastmail</a></strong> is the largest JMAP provider and was instrumental in developing the standard &mdash; their web, desktop, and mobile clients all run on JMAP.
+            </p>
+            <p><strong>Stalwart Mail Server</strong> is a modern open-source server with complete JMAP support. <strong>Apache James</strong> and <strong>Cyrus IMAP</strong> also both support JMAP.
             </p>
         </div>
     </details>
@@ -83,13 +72,7 @@ stylesheets:
         </summary>
         <div class='faq__answer'>
             <p>
-                Yes. RFC 8620 and RFC 8621 are published IETF standards and will not change in
-                backwards-incompatible ways. Fastmail has been running their entire production email service
-                on JMAP since 2019.
-            </p>
-            <p>
-                The contacts and calendars extensions are in active IETF development and close to final
-                publication.
+                Yes. RFC 8620 (Core), RFC 8621 (Mail), and RFC 9610 (Contacts) are published IETF standards and will not change in backwards-incompatible ways. Fastmail has been running their entire production email service on JMAP since 2019.
             </p>
         </div>
     </details>
@@ -102,9 +85,7 @@ stylesheets:
         </summary>
         <div class='faq__answer'>
             <p>
-                JMAP deliberately does not define its own authentication mechanism. It uses standard HTTP
-                authentication &mdash; in practice, OAuth 2.0 with Bearer tokens. This means JMAP works with
-                your existing identity infrastructure without any changes.
+                JMAP deliberately does not define its own authentication mechanism, it just uses standard HTTP authentication. In practice, that's often OAuth 2.0 with Bearer tokens. This means JMAP works with your existing identity infrastructure without any changes.
             </p>
         </div>
     </details>
@@ -117,15 +98,10 @@ stylesheets:
         </summary>
         <div class='faq__answer'>
             <p>
-                JMAP performs as well or better than IMAP in all tested scenarios. The resync benchmark
-                showed JMAP completing in 0.8 seconds vs 7.4 seconds for Outlook and 35 seconds for
-                Thunderbird (28,234 messages). iOS battery usage is 2&ndash;3&times; lower with JMAP vs IMAP
-                without push support.
+                JMAP performs as well or better than IMAP in all tested scenarios. The white paper contains detailed benchmarks.
             </p>
             <p>
-                Modern IMAP with all extensions enabled can be competitive, but this requires both the
-                client and server to implement the right extensions &mdash; which is rarely the case in
-                practice.
+                Modern IMAP with all extensions enabled can get a lot closer to JMAP's efficiency, but this requires both the client and server to implement the right extensions &mdash; which is rarely the case in practice.
             </p>
         </div>
     </details>
