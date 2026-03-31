@@ -2,6 +2,9 @@
 layout: default
 permalink: /index.html
 title: JSON Meta Application Protocol Specification (JMAP)
+description: >-
+    JMAP is the open protocol that replaces IMAP (and CardDAV and CalDAV). It’s
+    faster, simpler, more powerful, and built for how email works today.
 stylesheets:
     - home
 ---
@@ -12,8 +15,7 @@ stylesheets:
             <span class='hero__accent'>better email</span>
         </h1>
         <p class='hero__sub u-text-lg'>
-            JMAP is the open protocol that replaces IMAP (and CardDAV and CalDAV). It's faster, simpler, more powerful,
-            and built for how email works today.
+            {{ page.description }}
         </p>
         <div class='hero__links'>
             <a href='{{ site.baseurl }}/why-jmap/' class='button button--standard u-text-sm'>Why JMAP?</a>
