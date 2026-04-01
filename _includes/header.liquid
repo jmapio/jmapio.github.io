@@ -12,18 +12,19 @@
             </a>
         </div>
         <ul class='header__links'>
-            <li>
-                <a href='{{ site.baseurl }}/why-jmap/'>Why JMAP?</a>
-            </li>
-            <li>
-                <a href='{{ site.baseurl }}/spec/'>Specifications</a>
-            </li>
-            <li>
-                <a href='{{ site.baseurl }}/guides/'>Guides</a>
-            </li>
-            <li>
-                <a href='{{ site.baseurl }}/software/'>Software</a>
-            </li>
+            {%- for item in site.data.nav -%}
+                <li>
+                    <a
+                        href='{{ item.href | relative_url }}'
+                        {%- assign item_as_page_url = item.href | append: 'index.html' -%}
+                        {%- if page.url == item_as_page_url -%}
+                            class='active'
+                        {%- endif -%}
+                    >
+                        {{- item.label -}}
+                    </a>
+                </li>
+            {%- endfor -%}
         </ul>
         <div class='header__theme'>
             <button
