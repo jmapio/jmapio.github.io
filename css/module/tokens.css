@@ -51,10 +51,7 @@
 
     /* -- Text size */
     --text-size-base: var(--size-step-0);
-    --text-size-lede: var(--size-step-1);
     --text-size-meta: var(--size-step--1);
-    --text-size-mini: var(--size-step--2);
-    --text-size-sub: var(--size-step--3);
     --text-size-heading-1: var(--size-step-4);
     --text-size-heading-2: var(--size-step-3);
     --text-size-heading-3: var(--size-step-2);
