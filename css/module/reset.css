@@ -132,3 +132,7 @@ summary::marker {
     content: '';
     display: none;
 }
+
+address {
+    font-style: normal;
+}

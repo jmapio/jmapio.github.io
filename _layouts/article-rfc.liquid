@@ -1,0 +1,15 @@
+---
+layout: default
+stylesheets:
+    - article-rfc
+---
+{%
+    include components/hero.liquid
+    eyebrow='Spec'
+    title=page.title
+    sub=page.description
+%}
+
+<section class='section section--document'>
+    <article class='u-rfc u-wrapper'>{{ content }}</article>
+</section>
