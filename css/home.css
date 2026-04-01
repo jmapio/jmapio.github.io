@@ -528,34 +528,3 @@
 .get-started__p {
     color: var(--theme-body);
 }
-
-/* key */
-[data-lang='json'] .nl {
-    color: #7eded0;
-}
-[data-theme='light'] [data-lang='json'] .nl {
-    color: #0d7a68;
-}
-
-/* value */
-[data-lang='json'] .s2 {
-    color: #a8ded3;
-}
-[data-theme='light'] [data-lang='json'] .s2 {
-    color: #1a6b5e;
-}
-
-/* number */
-[data-lang='json'] .mi {
-    color: #8dd1c7;
-}
-
-/* punctuation */
-[data-lang='json'] .p {
-    color: var(--theme-muted);
-}
-
-/* bool */
-[data-lang='json'] .kc {
-    color: #5cc2ad;
-}
