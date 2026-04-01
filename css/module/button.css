@@ -2,7 +2,7 @@
     transition: all 0.2s var(--ease-out);
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     border: 1px solid transparent;
     padding: 9px 20px;
     border-radius: var(--radius-l);
@@ -46,4 +46,14 @@
 }
 .button--sm {
     padding: 5px 12px;
+}
+
+.button__icon {
+    flex-basis: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+.button__icon .i-external-link {
+    transform: translate3d(0, -2px, 0);
 }
