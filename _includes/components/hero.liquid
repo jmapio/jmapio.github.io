@@ -3,5 +3,14 @@
         <p class='hero__eyebrow'>{{ include.eyebrow }}</p>
         <h1 class='hero__h1 u-text-3xl u-kerning-tight'>{{ include.title }}</h1>
         <p class='hero__sub'>{{ include.sub }}</p>
+        {% if include.links %}
+            <div class='hero__links'>
+                {% for link in include.links %}
+                    <a href='{{ link.href | relative_url }}' class='button button--standard u-text-sm'>
+                        {{- link.label -}}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
 </section>

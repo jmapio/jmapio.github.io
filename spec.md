@@ -2,14 +2,20 @@
 layout: article
 permalink: /spec/index.html
 title: JMAP Specifications
+description: >-
+    The specifications for the core JMAP protocol and access to mail and
+    contacts stores using JMAP have been finalised and published.
+hero:
+    eyebrow: Specs
+    title: JMAP RFC
+    sub: >-
+        The specifications for the core JMAP protocol and access to mail and
+        contacts stores using JMAP have been finalised and published. The JMAP 
+        working group is currently working on the calendars specs.
+    links:
+        - href: https://datatracker.ietf.org/wg/jmap/about/
+          label: JMAP working group
 ---
-
-# JMAP: The Specs
-
-The specifications for the core JMAP protocol and access to mail and contacts
-stores using JMAP have been finalised and published. The
-[JMAP working group](https://datatracker.ietf.org/wg/jmap/about/) is currently
-working on the calendars specs.
 
 ## Core
 
