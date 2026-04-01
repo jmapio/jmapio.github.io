@@ -1,26 +1,28 @@
 .header {
+    transition: background 0.3s;
     display: flex;
-    min-height: var(--nav-h);
+    backdrop-filter: blur(28px) saturate(200%);
+    background: rgb(8 16 15 / 72%);
+}
+[data-theme='light'] .header {
+    backdrop-filter: blur(28px) saturate(180%);
+    background: rgb(238 245 243 / 88%);
 }
 
 @media (width > 768px) {
     .header {
-        transition: background 0.3s;
         z-index: 9999;
         position: sticky;
         top: 0;
         border-bottom: 1px solid rgb(92 194 173 / 14%);
         height: var(--nav-h);
-        backdrop-filter: blur(28px) saturate(200%);
-        background: rgb(8 16 15 / 72%);
+        min-height: var(--nav-h);
         box-shadow:
             0 1px 0 rgb(92 194 173 / 6%),
             0 4px 24px rgb(0 0 0 / 18%);
     }
     [data-theme='light'] .header {
         border-bottom: 1px solid rgb(13 122 104 / 15%);
-        backdrop-filter: blur(28px) saturate(180%);
-        background: rgb(238 245 243 / 88%);
         box-shadow:
             0 1px 0 rgb(13 122 104 / 8%),
             0 4px 24px rgb(0 0 0 / 7%);
