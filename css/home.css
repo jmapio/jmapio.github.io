@@ -476,7 +476,8 @@
     color: var(--theme-ink);
 }
 
-.section__inline-code {
+.section__inline-code,
+code:not([class]) {
     border: 1px solid var(--theme-border);
     padding: 0.1em 0.4em;
     background: rgb(92 194 173 / 14%);

@@ -7,6 +7,30 @@ description: >-
     faster, simpler, more powerful, and built for how email works today.
 stylesheets:
     - home
+get_started:
+    eyebrow: Get started
+    title: Up and running in minutes
+    cards:
+        -
+            title: Discover the endpoint
+            body: >-
+                Fetch <code>/.well-known/jmap</code> for the session object - capabilities,
+                accounts, and all API URLs.
+        -
+            title: Authenticate
+            body: >-
+                Standard OAuth 2.0 or Bearer tokens. No custom auth protocol to
+                implement. Works with what you already have.
+        -
+            title: Make your first call
+            body: >-
+                POST a <code>methodCalls</code> array. Query, fetch, and send, all in one
+                HTTP request.
+        -
+            title:  Subscribe to push
+            body: >-
+                Open an EventSource connection. Your UI stays current without
+                polling. All mailboxes, instantly.
 explore:
     eyebrow: Explore
     title: Where to next?
@@ -263,41 +287,19 @@ explore:
 
 <section class='section section--alt section--get-started'>
     <div class='u-wrapper'>
-        <span class='section__label u-text-sm u-font-semibold'>Get started</span>
+        <span class='section__label u-text-sm u-font-semibold'>
+            {{- page.get_started.eyebrow -}}
+        </span>
         <h2 class='section__h2 u-text-3xl u-font-bold'>
-            Up and running<br>
-            in minutes
+            {{- page.get_started.title -}}
         </h2>
         <div class='get-started__grid'>
-            <div class='get-started__card'>
-                <h3 class='get-started__h3 u-font-bold'>Discover the endpoint</h3>
-                <p class='get-started__p u-text-sm'>
-                    Fetch
-                    <code class='section__inline-code'>/.well-known/jmap</code>
-                    for the session object &mdash; capabilities, accounts, and all API URLs.
-                </p>
-            </div>
-            <div class='get-started__card'>
-                <h3 class='get-started__h3 u-font-bold'>Authenticate</h3>
-                <p class='get-started__p u-text-sm'>
-                    Standard OAuth 2.0 or Bearer tokens. No custom auth protocol to implement. Works with what you
-                    already have.
-                </p>
-            </div>
-            <div class='get-started__card'>
-                <h3 class='get-started__h3 u-font-bold'>Make your first call</h3>
-                <p class='get-started__p u-text-sm'>
-                    POST a
-                    <code class='section__inline-code'>methodCalls</code>
-                    array. Query, fetch, and send, all in one HTTP request.
-                </p>
-            </div>
-            <div class='get-started__card'>
-                <h3 class='get-started__h3 u-font-bold'>Subscribe to push</h3>
-                <p class='get-started__p u-text-sm'>
-                    Open an EventSource connection. Your UI stays current without polling. All mailboxes, instantly.
-                </p>
-            </div>
+            {% for card in page.get_started.cards %}
+                <div class='get-started__card'>
+                    <h3 class='get-started__h3 u-font-bold'>{{ card.title }}</h3>
+                    <p class='get-started__p u-text-sm'>{{ card.body }}</p>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </section>
