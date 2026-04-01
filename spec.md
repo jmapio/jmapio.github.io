@@ -15,7 +15,34 @@ hero:
     links:
         - href: https://datatracker.ietf.org/wg/jmap/about/
           label: JMAP working group
+specs:
+    - label: Calendars
+      href: /spec/calendars/
+    - label: Contacts
+      href: /spec/contacts/
+    - label: Keywords
+      href: /spec/keywords/
+    - label: OAuth
+      href: /spec/oauth/
+    - label: RFC 8620
+      href: /spec/rfc8620/
+    - label: RFC 8621
+      href: /spec/rfc8621/
+    - label: RFC 9610
+      href: /spec/rfc9610/
+    - label: RFC 9670
+      href: /spec/rfc9670/
+    - label: Sharing
+      href: /spec/sharing/
 ---
+
+## Generated from XML
+
+<ul>
+{%- for item in page.specs -%}
+<li><a href="{{ item.href | relative_url }}">{{ item.label }}</a></li>
+{% endfor %}
+</ul>
 
 ## Core
 
