@@ -16,34 +16,57 @@ hero:
         - href: https://datatracker.ietf.org/wg/jmap/about/
           label: JMAP working group
 specs:
-    - label: Calendars
-      href: /spec/calendars/
+    - label: Core
+      description: >-
+          These specifications define the core sync protocol and extensions
+          that 
+          are useful no matter what data type you might be syncing.
+      items:
+          - label: The core JMAP protocol (RFC 8620)
+            href: /spec/rfc8620/
+          - label: JMAP Sharing (RFC 9670)
+            href: /spec/rfc9670/
+    - label: Mail
+      description: >-
+          This spec is not yet final and may change before publication. If you 
+          find any issues, please email [jmap@ietf.org](mailto:jmap@ietf.org) or
+          make a pull request on GitHub if you have a proposed fix.
+      items:
+          - label: JMAP Mail (RFC 8621)
+            href: /spec/rfc8621/
+          - label: Keywords
+            href: /spec/keywords/
     - label: Contacts
-      href: /spec/contacts/
-    - label: Keywords
-      href: /spec/keywords/
+      items:
+          - label: JMAP Contacts (RFC 9610)
+            href: /spec/rfc9610/
+    - label: Calendars
+      items:
+          - label: JMAP Calendars (in progress)
+            href: /spec/calendars/
     - label: OAuth
-      href: /spec/oauth/
-    - label: RFC 8620
-      href: /spec/rfc8620/
-    - label: RFC 8621
-      href: /spec/rfc8621/
-    - label: RFC 9610
-      href: /spec/rfc9610/
-    - label: RFC 9670
-      href: /spec/rfc9670/
-    - label: Sharing
-      href: /spec/sharing/
+      items:
+          - label: OAuth
+            href: /spec/oauth/
 ---
+<h1>Generated from XML</h1>
 
-## Generated from XML
-
-<ul>
-{%- for item in page.specs -%}
-<li><a href="{{ item.href | relative_url }}">{{ item.label }}</a></li>
+{%- for section in page.specs -%}
+    <h3>{{ section.label }}</h3>
+    {%- if section.description -%}
+        <p>{{ section.description }}</p>
+    {%- endif -%}
+    <ul>
+        {%- for item in section.items -%}
+            <li>
+                <a href='{{ item.href | relative_url }}'>{{ item.label }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endfor %}
-</ul>
 
+{% comment %} prettier-ignore-start {% endcomment %}
+{% capture old_content %}
 ## Core
 
 These specifications define the core sync protocol and extensions that are
@@ -87,3 +110,7 @@ format for contacts.
 JMAP Calendars uses
 [JSCalendar 2.0 (in progress)](https://www.ietf.org/archive/id/draft-ietf-calext-jscalendarbis-15.html)
 as the data format for events.
+{% endcapture %}
+{% comment %} prettier-ignore-end {% endcomment %}
+
+{{ old_content | markdownify }}
