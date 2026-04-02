@@ -100,7 +100,7 @@ for (const fileName of DOCUMENTS) {
     domBody.remove(document.querySelector('#toc'));
 
     const domH1 = domBody.querySelectorAll('h1');
-    const title = [...domH1][0].textContent;
+    const title = [...domH1].map((el) => el.textContent).join(' – ');
     domH1.forEach((h1) => h1.remove());
     domBody.querySelectorAll('script').forEach((script) => script.remove());
     domBody
