@@ -1,6 +1,7 @@
 ---
 layout: article-rfc
 permalink: /spec/oauth/index.html
+toc: generated-rfc-toc/oauth.html
 title: OAuth Profile for Open Public Clients
 description: >-
     This document specifies a profile of the OAuth authorization protocol to allow for interoperability between native clients and servers using open protocols, such as JMAP, IMAP, SMTP, POP, CalDAV, and CardDAV.
@@ -17,220 +18,25 @@ meta:
         - CardDAV
         - CalDAV
 ---
-
-<div class="table-wrapper"><table class="ears">
-<thead><tr>
-<td class="left">Internet-Draft</td>
-<td class="center">OAuth Public</td>
-<td class="right">August 2025</td>
-</tr></thead>
-<tfoot><tr>
-<td class="left">Jenkins &amp; Bucksch</td>
-<td class="center">Expires 12 February 2026</td>
-<td class="right">[Page]</td>
-</tr></tfoot>
-</table></div>
-<div id="external-metadata" class="document-information"></div>
-<div id="internal-metadata" class="document-information">
-<dl id="identifiers">
-<dt class="label-workgroup">Workgroup:</dt>
-<dd class="workgroup">Mail Maintenance</dd>
-<dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-ietf-mailmaint-oauth-public-02</dd>
-<dt class="label-published">Published:</dt>
-<dd class="published">
-<time datetime="2025-08-11" class="published">11 August 2025</time>
-    </dd>
-<dt class="label-intended-status">Intended Status:</dt>
-<dd class="intended-status">Informational</dd>
-<dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-02-12">12 February 2026</time></dd>
-<dt class="label-authors">Authors:</dt>
-<dd class="authors">
-<div class="author">
-      <div class="author-name">N.M. Jenkins, <span class="editor">Ed.</span>
-</div>
-<div class="org">Fastmail</div>
-</div>
-<div class="author">
-      <div class="author-name">B. Bucksch</div>
-<div class="org">Beonex</div>
-</div>
-</dd>
-</dl>
-</div>
-
-<section id="section-abstract">
-      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document specifies a profile of the OAuth authorization protocol to allow for interoperability between native clients and servers using open protocols, such as JMAP, IMAP, SMTP, POP, CalDAV, and CardDAV.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-</section>
-<div id="status-of-memo">
-<section id="section-boilerplate.1">
-        <h2 id="name-status-of-this-memo">
-<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
-        </h2>
-<p id="section-boilerplate.1-1">
-        This Internet-Draft is submitted in full conformance with the
-        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.1-2">
-        Internet-Drafts are working documents of the Internet Engineering Task
-        Force (IETF). Note that other groups may also distribute working
-        documents as Internet-Drafts. The list of current Internet-Drafts is
-        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.1-3">
-        Internet-Drafts are draft documents valid for a maximum of six months
-        and may be updated, replaced, or obsoleted by other documents at any
-        time. It is inappropriate to use Internet-Drafts as reference
-        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 12 February 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="copyright">
-<section id="section-boilerplate.2">
-        <h2 id="name-copyright-notice">
-<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
-        </h2>
-<p id="section-boilerplate.2-1">
-            Copyright (c) 2025 IETF Trust and the persons identified as the
-            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.2-2">
-            This document is subject to BCP 78 and the IETF Trust's Legal
-            Provisions Relating to IETF Documents
-            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
-            publication of this document. Please review these documents
-            carefully, as they describe your rights and restrictions with
-            respect to this document. Code Components extracted from this
-            document must include Revised BSD License text as described in
-            Section 4.e of the Trust Legal Provisions and are provided without
-            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="toc">
-<section id="section-toc.1">
-        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
-<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
-        </h2>
-<nav class="toc"><ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
-            <p id="section-toc.1-1.1.1"><a href="#section-1" class="auto internal xref">1</a>.&nbsp;&nbsp;<a href="#name-introduction" class="internal xref">Introduction</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.&nbsp;&nbsp;<a href="#name-presumptions" class="internal xref">Presumptions</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
-                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.&nbsp;&nbsp;<a href="#name-getting-the-authorization-s" class="internal xref">Getting the Authorization Server Issuer Identifier</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3">
-                <p id="section-toc.1-1.1.2.3.1" class="keepWithNext"><a href="#section-1.3" class="auto internal xref">1.3</a>.&nbsp;&nbsp;<a href="#name-notational-conventions" class="internal xref">Notational Conventions</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.&nbsp;&nbsp;<a href="#name-the-open-public-client-oaut" class="internal xref">The Open Public Client OAuth Profile</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
-                <p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1" class="auto internal xref">2.1</a>.&nbsp;&nbsp;<a href="#name-overview" class="internal xref">Overview</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
-                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.&nbsp;&nbsp;<a href="#name-fetching-the-authorization-" class="internal xref">Fetching the Authorization Server Metadata</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3">
-                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="auto internal xref">2.3</a>.&nbsp;&nbsp;<a href="#name-dynamic-client-registration" class="internal xref">Dynamic Client Registration</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.4">
-                <p id="section-toc.1-1.2.2.4.1"><a href="#section-2.4" class="auto internal xref">2.4</a>.&nbsp;&nbsp;<a href="#name-authorization" class="internal xref">Authorization</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.5">
-                <p id="section-toc.1-1.2.2.5.1"><a href="#section-2.5" class="auto internal xref">2.5</a>.&nbsp;&nbsp;<a href="#name-obtaining-a-refresh-token" class="internal xref">Obtaining a Refresh Token</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.6">
-                <p id="section-toc.1-1.2.2.6.1"><a href="#section-2.6" class="auto internal xref">2.6</a>.&nbsp;&nbsp;<a href="#name-using-the-access-token" class="internal xref">Using the Access Token</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.7">
-                <p id="section-toc.1-1.2.2.7.1"><a href="#section-2.7" class="auto internal xref">2.7</a>.&nbsp;&nbsp;<a href="#name-scopes" class="internal xref">Scopes</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.8">
-                <p id="section-toc.1-1.2.2.8.1"><a href="#section-2.8" class="auto internal xref">2.8</a>.&nbsp;&nbsp;<a href="#name-getting-a-new-access-token" class="internal xref">Getting a New Access Token</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.9">
-                <p id="section-toc.1-1.2.2.9.1"><a href="#section-2.9" class="auto internal xref">2.9</a>.&nbsp;&nbsp;<a href="#name-token-expiry-times" class="internal xref">Token Expiry Times</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.10">
-                <p id="section-toc.1-1.2.2.10.1"><a href="#section-2.10" class="auto internal xref">2.10</a>.&nbsp;<a href="#name-client-id-validity" class="internal xref">Client Id Validity</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.&nbsp;&nbsp;<a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.&nbsp;&nbsp;<a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.&nbsp;&nbsp;<a href="#name-interoperable-oauth-scopes-" class="internal xref">Interoperable OAuth Scopes Registry</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.1">
-                    <p id="section-toc.1-1.4.2.1.2.1.1"><a href="#section-4.1.1" class="auto internal xref">4.1.1</a>.&nbsp;&nbsp;<a href="#name-registration-procedure" class="internal xref">Registration Procedure</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.2">
-                    <p id="section-toc.1-1.4.2.1.2.2.1"><a href="#section-4.1.2" class="auto internal xref">4.1.2</a>.&nbsp;&nbsp;<a href="#name-registration-template" class="internal xref">Registration Template</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.3">
-                    <p id="section-toc.1-1.4.2.1.2.3.1"><a href="#section-4.1.3" class="auto internal xref">4.1.3</a>.&nbsp;&nbsp;<a href="#name-initial-registry-contents" class="internal xref">Initial Registry Contents</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
-                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.&nbsp;&nbsp;<a href="#name-update-to-the-jmap-capabilt" class="internal xref">Update to the JMAP Capabilties Registry</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.1">
-                    <p id="section-toc.1-1.4.2.2.2.1.1"><a href="#section-4.2.1" class="auto internal xref">4.2.1</a>.&nbsp;&nbsp;<a href="#name-initial-interoperable-oauth" class="internal xref">Initial Interoperable OAuth Scopes Values for the JMAP Capabilities Fegistry</a></p>
-</li>
-                </ul>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.&nbsp;&nbsp;<a href="#name-informative-references" class="internal xref">Informative References</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.&nbsp;&nbsp;<a href="#name-normative-references" class="internal xref">Normative References</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
-</li>
-        </ul>
-</nav>
-</section>
-</div>
 <div id="introduction">
 <section id="section-1">
-      <h2 id="name-introduction">
-<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
-      </h2>
+      <h2 id="name-introduction"><a href="#section-1">1.&nbsp;&nbsp;Introduction</a></h2>
 <p id="section-1-1">This document pulls together several existing standards and uses them to specifiy a specific OAuth profile, allowing interoperable modern authentication for native clients of open protocols, such as IMAP, JMAP, SMTP, POP, CalDAV, and CardDAV. For these protocols, there are many servers and many clients with no pre-existing relationship, that need to be able to connect. At the moment, the only interoperable way to do so is with a basic username and password, which has many deficiences from a security standpoint.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <div id="presumptions">
 <section id="section-1.1">
-        <h3 id="name-presumptions">
-<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-presumptions" class="section-name selfRef">Presumptions</a>
-        </h3>
+        <h3 id="name-presumptions"><a href="#section-1.1">1.1.&nbsp;&nbsp;Presumptions</a></h3>
 <p id="section-1.1-1">This OAuth flow presumes you have a set of one or more Application Server endpoints (e.g., for JMAP/IMAP/SMTP/POP/CardDAV/CalDAV), and a common authorization server issuer identifier for all of them. For example, you might have a JMAP session endpoint <code>https://api.example.com/jmap/session</code>, an IMAP endpoint <code>imaps://imap.example.com:993</code>, and an issuer identifer <code>https://auth.example.com</code>.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="getting-the-issuer-identifier">
 <section id="section-1.2">
-        <h3 id="name-getting-the-authorization-s">
-<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-getting-the-authorization-s" class="section-name selfRef">Getting the Authorization Server Issuer Identifier</a>
-        </h3>
+        <h3 id="name-getting-the-authorization-s"><a href="#section-1.2">1.2.&nbsp;&nbsp;Getting the Authorization Server Issuer Identifier</a></h3>
 <p id="section-1.2-1">The endpoints may be discovered via an autoconfiguration mechanism or manual user input. Autoconfiguration may also include the issuer identifier. To allow OAuth configuration for manual input or when the isser identifier is not included in the autoconfig, HTTP endpoints that support this profile MUST support <span><a href="#RFC9728" class="internal xref">Protected Resource Metadata</a> [<a href="#RFC9728" class="cite xref">RFC9728</a>]</span>, accessible via the <code>oauth-protected-resource</code> well-known path, as specified in <span><a href="https://rfc-editor.org/rfc/rfc9728#section-3" class="relref">Section 3</a> of [<a href="#RFC9728" class="cite xref">RFC9728</a>]</span>. The <code>authorization_servers</code> property MUST be present in the resource metadata, with the value containing the authorization server issuer identifier. HTTP requests made without valid authentication to the resource endpoints MUST indicate the protected resource metadata URL in the <code>WWW-Authenticate</code> HTTP response header field, as described in <span><a href="https://rfc-editor.org/rfc/rfc9728#section-5" class="relref">Section 5</a> of [<a href="#RFC9728" class="cite xref">RFC9728</a>]</span>.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="notational-conventions">
 <section id="section-1.3">
-        <h3 id="name-notational-conventions">
-<a href="#section-1.3" class="section-number selfRef">1.3. </a><a href="#name-notational-conventions" class="section-name selfRef">Notational Conventions</a>
-        </h3>
+        <h3 id="name-notational-conventions"><a href="#section-1.3">1.3.&nbsp;&nbsp;Notational Conventions</a></h3>
 <p id="section-1.3-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in all capitals, as shown here.<a href="#section-1.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -238,14 +44,10 @@ meta:
 </div>
 <div id="the-open-public-client-oauth-profile">
 <section id="section-2">
-      <h2 id="name-the-open-public-client-oaut">
-<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-the-open-public-client-oaut" class="section-name selfRef">The Open Public Client OAuth Profile</a>
-      </h2>
+      <h2 id="name-the-open-public-client-oaut"><a href="#section-2">2.&nbsp;&nbsp;The Open Public Client OAuth Profile</a></h2>
 <div id="overview">
 <section id="section-2.1">
-        <h3 id="name-overview">
-<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-overview" class="section-name selfRef">Overview</a>
-        </h3>
+        <h3 id="name-overview"><a href="#section-2.1">2.1.&nbsp;&nbsp;Overview</a></h3>
 <p id="section-2.1-1">OAuth 2 <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>, can be used in many different ways. This document specifies one particular set of options to ensure interoperability and security. Servers may implement more options, but MUST support the flow as described in this document for interoperability with clients. Similarly, clients may choose to support additional flows but there is no guarantee that this will be interoperable.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 <p id="section-2.1-2">The general flow works like this:<a href="#section-2.1-2" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="compact type-1" id="section-2.1-3">
@@ -264,9 +66,7 @@ meta:
 </div>
 <div id="fetching-the-authorization-server-data">
 <section id="section-2.2">
-        <h3 id="name-fetching-the-authorization-">
-<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-fetching-the-authorization-" class="section-name selfRef">Fetching the Authorization Server Metadata</a>
-        </h3>
+        <h3 id="name-fetching-the-authorization-"><a href="#section-2.2">2.2.&nbsp;&nbsp;Fetching the Authorization Server Metadata</a></h3>
 <p id="section-2.2-1">The authorization server issuer identifier MUST be an HTTPS URL with no path, query parameters, or fragment part, i.e. it MUST be just "https://" followed by a hostname. Otherwise, abort the flow. The authorization server metadata may be fetched by a GET request to the <code>/.well-known/oauth-authorization-server</code> path at this origin.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
 <p id="section-2.2-2">When fetched, a successful response is indicated by a 200 OK HTTP status code. The reponse MUST have an "application/json" content type. Anything else MUST be treated as an error, and the flow MUST be aborted.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
 <p id="section-2.2-3">The authorization server metadata is a JSON document with properties as specified in <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>. It MUST include the following properties:<a href="#section-2.2-3" class="pilcrow">¶</a></p>
@@ -349,9 +149,7 @@ This MUST include "S256".<a href="#section-2.2-4.18.1" class="pilcrow">¶</a></p
 </div>
 <div id="dynamic-client-registration">
 <section id="section-2.3">
-        <h3 id="name-dynamic-client-registration">
-<a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-dynamic-client-registration" class="section-name selfRef">Dynamic Client Registration</a>
-        </h3>
+        <h3 id="name-dynamic-client-registration"><a href="#section-2.3">2.3.&nbsp;&nbsp;Dynamic Client Registration</a></h3>
 <p id="section-2.3-1">To register, the client instance sends an HTTP POST to the client registration endpoint (as found in the metadata) with a content type of "application/json", and a body consisting of a JSON document with the following properties:<a href="#section-2.3-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-2.3-2">
           <dt id="section-2.3-2.1"><code>redirect_uris</code></dt>
@@ -464,9 +262,7 @@ This MUST include "S256".<a href="#section-2.2-4.18.1" class="pilcrow">¶</a></p
 </div>
 <div id="authorization">
 <section id="section-2.4">
-        <h3 id="name-authorization">
-<a href="#section-2.4" class="section-number selfRef">2.4. </a><a href="#name-authorization" class="section-name selfRef">Authorization</a>
-        </h3>
+        <h3 id="name-authorization"><a href="#section-2.4">2.4.&nbsp;&nbsp;Authorization</a></h3>
 <p id="section-2.4-1">Clients construct an authorization request URL by taking the <code>authorization_endpoint</code> from the authorization server metadata and adding the following additional query parameters:<a href="#section-2.4-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-2.4-2">
           <dt id="section-2.4-2.1"><code>client_id</code></dt>
@@ -544,9 +340,7 @@ request was indeed initiated by the client and not an attacker.<a href="#section
 </div>
 <div id="obtaining-a-refresh-token">
 <section id="section-2.5">
-        <h3 id="name-obtaining-a-refresh-token">
-<a href="#section-2.5" class="section-number selfRef">2.5. </a><a href="#name-obtaining-a-refresh-token" class="section-name selfRef">Obtaining a Refresh Token</a>
-        </h3>
+        <h3 id="name-obtaining-a-refresh-token"><a href="#section-2.5">2.5.&nbsp;&nbsp;Obtaining a Refresh Token</a></h3>
 <p id="section-2.5-1">Following authorization, the client instance will obtain initial refresh and
 access tokens by making a POST request to the token_endpoint URL. The following parameters MUST be present, using the "application/x-www-form-urlencoded" format with a character encoding of UTF-8 in the HTTP request entity-body:<a href="#section-2.5-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-2.5-2">
@@ -603,26 +397,20 @@ object with the following properties:<a href="#section-2.5-4" class="pilcrow">¶
 </div>
 <div id="using-the-access-token">
 <section id="section-2.6">
-        <h3 id="name-using-the-access-token">
-<a href="#section-2.6" class="section-number selfRef">2.6. </a><a href="#name-using-the-access-token" class="section-name selfRef">Using the Access Token</a>
-        </h3>
+        <h3 id="name-using-the-access-token"><a href="#section-2.6">2.6.&nbsp;&nbsp;Using the Access Token</a></h3>
 <p id="section-2.6-1">The client instance is now authenticated. It can connect to the servers given in the discovered auto config with the Bearer scheme <span>[<a href="#RFC6750" class="cite xref">RFC6750</a>]</span>. For HTTP-based protocols, this means setting an <code>Authorization</code> header with the value <code>Bearer {access_token}</code> (where <code>{access_token}</code> is replaced with the value of the access_token). If using DPoP, the client instance must also set a DPoP header in accordance with <span><a href="https://rfc-editor.org/rfc/rfc9449#section-7" class="relref">Section 7</a> of [<a href="#RFC9449" class="cite xref">RFC9449</a>]</span>.<a href="#section-2.6-1" class="pilcrow">¶</a></p>
 <p id="section-2.6-2">For protocols that use SASL authentication, such as IMAP, POP, and SMTP, the access token is used in accordance with the OAUTHBEARER mechanism defined in <span>[<a href="#RFC7628" class="cite xref">RFC7628</a>]</span>. Servers MUST NOT require the username associated with the resource (the "authzid") be included in the GS2 header.<a href="#section-2.6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="scopes">
 <section id="section-2.7">
-        <h3 id="name-scopes">
-<a href="#section-2.7" class="section-number selfRef">2.7. </a><a href="#name-scopes" class="section-name selfRef">Scopes</a>
-        </h3>
+        <h3 id="name-scopes"><a href="#section-2.7">2.7.&nbsp;&nbsp;Scopes</a></h3>
 <p id="section-2.7-1">To work interoperably, clients and server must use a standard set of scopes for access. This document creates a new IANA registry for such scopes (see <a href="#iana-considerations" class="auto internal xref">Section 4</a>), and registers scopes to cover IMAP, SMTP, CardDAV, CalDAV, WebDAV, and JMAP.<a href="#section-2.7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="getting-a-new-access-token">
 <section id="section-2.8">
-        <h3 id="name-getting-a-new-access-token">
-<a href="#section-2.8" class="section-number selfRef">2.8. </a><a href="#name-getting-a-new-access-token" class="section-name selfRef">Getting a New Access Token</a>
-        </h3>
+        <h3 id="name-getting-a-new-access-token"><a href="#section-2.8">2.8.&nbsp;&nbsp;Getting a New Access Token</a></h3>
 <p id="section-2.8-1">Client should keep using an access token they have been issued until it expires,
 which will result in getting a <code>401</code> error back.<a href="#section-2.8-1" class="pilcrow">¶</a></p>
 <p id="section-2.8-2">When the access token expires, the client instance must get a new one by making another POST request to the authorization server token endpoint. The following parameters MUST be present, using the "application/x-www-form-urlencoded" format with a character encoding of UTF-8 in the HTTP request entity-body:<a href="#section-2.8-2" class="pilcrow">¶</a></p>
@@ -648,9 +436,7 @@ which will result in getting a <code>401</code> error back.<a href="#section-2.8
 </div>
 <div id="token-expiry-times">
 <section id="section-2.9">
-        <h3 id="name-token-expiry-times">
-<a href="#section-2.9" class="section-number selfRef">2.9. </a><a href="#name-token-expiry-times" class="section-name selfRef">Token Expiry Times</a>
-        </h3>
+        <h3 id="name-token-expiry-times"><a href="#section-2.9">2.9.&nbsp;&nbsp;Token Expiry Times</a></h3>
 <p id="section-2.9-1">To ensure a good user experience, access tokens MUST have a lifetime of at least 1 hour. Refresh tokens SHOULD NOT expire, unless the user explicitly revokes the token or it has been unused for a considerable period of time (at least 30 days).<a href="#section-2.9-1" class="pilcrow">¶</a></p>
 <p id="section-2.9-2">For stateful connection-based protocols such as SMTP and IMAP the access token is only presented on first connection. Expiry of the access token SHOULD NOT affect current IMAP/SMTP etc. sessions that have already authenticated. However, should the server choose to force reauthorization it MUST do so by unilaterally closing the connection, as there is no way to reauthenticate an existing session in these protocols and all clients have to be able to handle reconnection in the case of dropped connections.<a href="#section-2.9-2" class="pilcrow">¶</a></p>
 <p id="section-2.9-3">If the refresh token is revoked, all existing stateful connections MUST immediately be closed.<a href="#section-2.9-3" class="pilcrow">¶</a></p>
@@ -658,9 +444,7 @@ which will result in getting a <code>401</code> error back.<a href="#section-2.8
 </div>
 <div id="dynamic-client-registration-considerations">
 <section id="section-2.10">
-        <h3 id="name-client-id-validity">
-<a href="#section-2.10" class="section-number selfRef">2.10. </a><a href="#name-client-id-validity" class="section-name selfRef">Client Id Validity</a>
-        </h3>
+        <h3 id="name-client-id-validity"><a href="#section-2.10">2.10.&nbsp;&nbsp;Client Id Validity</a></h3>
 <p id="section-2.10-1">The client id MUST remain valid for as long as there is a valid refresh token associated with that client id.<a href="#section-2.10-1" class="pilcrow">¶</a></p>
 <p id="section-2.10-2">To ensure a good user experience, the client id assigned upon dynamic registration SHOULD be valid for use in the authorization flow (<a href="#authorization" class="auto internal xref">Section 2.4</a>) for at least one hour after issuance.<a href="#section-2.10-2" class="pilcrow">¶</a></p>
 <p id="section-2.10-3">Clients MUST associate a client id with each refresh token it has. If the refresh token is invalidated and the client instance has to reauthenticate, it MUST submit the dynamic client registration (<a href="#dynamic-client-registration" class="auto internal xref">Section 2.3</a>) again and use the client id returned, which MAY be different to the previous time.<a href="#section-2.10-3" class="pilcrow">¶</a></p>
@@ -681,9 +465,7 @@ which will result in getting a <code>401</code> error back.<a href="#section-2.8
 </div>
 <div id="security-considerations">
 <section id="section-3">
-      <h2 id="name-security-considerations">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
-      </h2>
+      <h2 id="name-security-considerations"><a href="#section-3">3.&nbsp;&nbsp;Security Considerations</a></h2>
 <p id="section-3-1">This profile mandates best practices for OAuth with native clients, as defined in <span>[<a href="#RFC8252" class="cite xref">RFC8252</a>]</span>.  A thorough discussion of the security considerations generally applicable to OAuth is out of scope for this document, but can be found in <span>[<a href="#RFC6819" class="cite xref">RFC6819</a>]</span>, as well as the security considerations (Section 10) of <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">Implementors are encouraged to read all of the above documents for a more thorough consideration of the specific threats and mitigations with OAuth.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <p id="section-3-3">The choices made for this profile are intended to mitigate as far as possible the inherent risks that come from allowing arbitrary clients to talk to arbitrary servers.<a href="#section-3-3" class="pilcrow">¶</a></p>
@@ -706,20 +488,14 @@ which will result in getting a <code>401</code> error back.<a href="#section-2.8
 </div>
 <div id="iana-considerations">
 <section id="section-4">
-      <h2 id="name-iana-considerations">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
-      </h2>
+      <h2 id="name-iana-considerations"><a href="#section-4">4.&nbsp;&nbsp;IANA Considerations</a></h2>
 <div id="scopes-registry">
 <section id="section-4.1">
-        <h3 id="name-interoperable-oauth-scopes-">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-interoperable-oauth-scopes-" class="section-name selfRef">Interoperable OAuth Scopes Registry</a>
-        </h3>
+        <h3 id="name-interoperable-oauth-scopes-"><a href="#section-4.1">4.1.&nbsp;&nbsp;Interoperable OAuth Scopes Registry</a></h3>
 <p id="section-4.1-1">IANA shall add a new registry called "Interoperable OAuth Scopes" to the "OAuth Parameters" registry group. The registry records interoperable OAuth scope values. Each scope provides specific access rights to protected resources.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <div id="registration-procedure">
 <section id="section-4.1.1">
-          <h4 id="name-registration-procedure">
-<a href="#section-4.1.1" class="section-number selfRef">4.1.1. </a><a href="#name-registration-procedure" class="section-name selfRef">Registration Procedure</a>
-          </h4>
+          <h4 id="name-registration-procedure"><a href="#section-4.1.1">4.1.1.&nbsp;&nbsp;Registration Procedure</a></h4>
 <p id="section-4.1.1-1">The "Specification Required" policy, as defined in <span><a href="https://rfc-editor.org/rfc/rfc8126#section-4.6" class="relref">Section 4.6</a> of [<a href="#RFC8126" class="cite xref">RFC8126</a>]</span>, shall govern registrations in this registry. The Designated Expert shall verify that:<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-4.1.1-2">
 <li id="section-4.1.1-2.1">The proposed scope name follows established naming conventions.<a href="#section-4.1.1-2.1" class="pilcrow">¶</a>
@@ -733,9 +509,7 @@ which will result in getting a <code>401</code> error back.<a href="#section-2.8
 </div>
 <div id="registration-template">
 <section id="section-4.1.2">
-          <h4 id="name-registration-template">
-<a href="#section-4.1.2" class="section-number selfRef">4.1.2. </a><a href="#name-registration-template" class="section-name selfRef">Registration Template</a>
-          </h4>
+          <h4 id="name-registration-template"><a href="#section-4.1.2">4.1.2.&nbsp;&nbsp;Registration Template</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-4.1.2-1">
             <dt id="section-4.1.2-1.1">Scope Name:</dt>
             <dd id="section-4.1.2-1.2">The name of the OAuth scope value.<a href="#section-4.1.2-1.2" class="pilcrow">¶</a>
@@ -754,9 +528,7 @@ which will result in getting a <code>401</code> error back.<a href="#section-2.8
 </div>
 <div id="initial-registry-contents">
 <section id="section-4.1.3">
-          <h4 id="name-initial-registry-contents">
-<a href="#section-4.1.3" class="section-number selfRef">4.1.3. </a><a href="#name-initial-registry-contents" class="section-name selfRef">Initial Registry Contents</a>
-          </h4>
+          <h4 id="name-initial-registry-contents"><a href="#section-4.1.3">4.1.3.&nbsp;&nbsp;Initial Registry Contents</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-4.1.3-1">
             <dt id="section-4.1.3-1.1">Scope Name:</dt>
             <dd id="section-4.1.3-1.2">
@@ -833,15 +605,11 @@ which will result in getting a <code>401</code> error back.<a href="#section-2.8
 </section>
 </div>
 <section id="section-4.2">
-        <h3 id="name-update-to-the-jmap-capabilt">
-<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-update-to-the-jmap-capabilt" class="section-name selfRef">Update to the JMAP Capabilties Registry</a>
-        </h3>
+        <h3 id="name-update-to-the-jmap-capabilt"><a href="#section-4.2">4.2.&nbsp;&nbsp;Update to the JMAP Capabilties Registry</a></h3>
 <p id="section-4.2-1">IANA shall update the "JMAP Capabilities" registry established in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> to add a new column called "Interoperable OAuth Scopes". For each capability, this column shall contain a list of zero or more scopes registered in the Interoperable OAuth Scopes Registry. Authorisation for any scope in the list will grant access to use that JMAP capability, if the capability is supported by the server.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2-2">Future registrations in the "JMAP Capabilities" registry SHOULD specify a value for the Interoperable OAuth Scopes column in addition to the fields established in the registration template by <span><a href="https://rfc-editor.org/rfc/rfc8620#section-9.4.5" class="relref">Section 9.4.5</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>. If omitted, registrations will be added with no value for this column (i.e., no interoperable scopes are available to grant access to this capability via OAuth).<a href="#section-4.2-2" class="pilcrow">¶</a></p>
 <section id="section-4.2.1">
-          <h4 id="name-initial-interoperable-oauth">
-<a href="#section-4.2.1" class="section-number selfRef">4.2.1. </a><a href="#name-initial-interoperable-oauth" class="section-name selfRef">Initial Interoperable OAuth Scopes Values for the JMAP Capabilities Fegistry</a>
-          </h4>
+          <h4 id="name-initial-interoperable-oauth"><a href="#section-4.2.1">4.2.1.&nbsp;&nbsp;Initial Interoperable OAuth Scopes Values for the JMAP Capabilities Fegistry</a></h4>
 <p id="section-4.2.1-1">IANA shall update the existing JMAP Capabilities registrations with the following values for the Interoperable OAuth Scopes column.<a href="#section-4.2.1-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-4.2.1-2">
             <dt id="section-4.2.1-2.1">Capability Name:</dt>
@@ -998,9 +766,7 @@ which will result in getting a <code>401</code> error back.<a href="#section-2.8
 </section>
 </div>
 <section id="section-5">
-      <h2 id="name-informative-references">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
-      </h2>
+      <h2 id="name-informative-references"><a href="#section-5">5.&nbsp;&nbsp;Informative References</a></h2>
 <dl class="references">
 <dt id="RFC1939">[RFC1939]</dt>
       <dd>
@@ -1033,9 +799,7 @@ which will result in getting a <code>401</code> error back.<a href="#section-2.8
 </dl>
 </section>
 <section id="section-6">
-      <h2 id="name-normative-references">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
-      </h2>
+      <h2 id="name-normative-references"><a href="#section-6">6.&nbsp;&nbsp;Normative References</a></h2>
 <dl class="references">
 <dt id="RFC2119">[RFC2119]</dt>
       <dd>
@@ -1111,39 +875,44 @@ which will result in getting a <code>401</code> error back.<a href="#section-2.8
 <dd class="break"></dd>
 </dl>
 </section>
-<div id="authors-addresses">
-<section id="appendix-A">
-      <h2 id="name-authors-addresses">
-<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
-      </h2>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Neil Jenkins (<span class="role">editor</span>)</span></div>
-<div dir="auto" class="left"><span class="org">Fastmail</span></div>
-<div dir="auto" class="left"><span class="street-address">PO Box 234, Collins St West</span></div>
-<div dir="auto" class="left">
-<span class="locality">Melbourne</span>  <span class="postal-code">VIC 8007</span>
-</div>
-<div dir="auto" class="left"><span class="country-name">Australia</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:neilj@fastmailteam.com" class="email">neilj@fastmailteam.com</a>
-</div>
-<div class="url">
-<span>URI:</span>
-<a href="https://www.fastmail.com" class="url">https://www.fastmail.com</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Ben Bucksch</span></div>
-<div dir="auto" class="left"><span class="org">Beonex</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:ben.bucksch@beonex.com" class="email">ben.bucksch@beonex.com</a>
-</div>
-</address>
+
+
+
+
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo"><a href="#name-status-of-this-memo">Status of This Memo</a></h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 12 February 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div><div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice"><a href="#name-copyright-notice">Copyright Notice</a></h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2025 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-
-
-
-

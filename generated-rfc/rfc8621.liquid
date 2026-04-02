@@ -1,7 +1,8 @@
 ---
 layout: article-rfc
 permalink: /spec/rfc8621/index.html
-title: RFC 8621
+toc: generated-rfc-toc/rfc8621.html
+title: RFC 8621 – The JSON Meta Application Protocol (JMAP) for Mail
 description: >-
     This document specifies a data model for synchronising email data with a server using the JSON Meta Application Protocol (JMAP).    Clients can use this to efficiently search, access, organise, and send  messages, and to get push notifications for fast resynchronisation when new  messages are delivered or a change is made in another client.
 meta:
@@ -13,444 +14,9 @@ meta:
         - JSON
         - email
 ---
-
-<div class="table-wrapper"><table class="ears">
-<thead><tr>
-<td class="left">RFC 8621</td>
-<td class="center">JMAP Mail</td>
-<td class="right">August 2019</td>
-</tr></thead>
-<tfoot><tr>
-<td class="left">Jenkins &amp; Newman</td>
-<td class="center">Standards Track</td>
-<td class="right">[Page]</td>
-</tr></tfoot>
-</table></div>
-<div id="external-metadata" class="document-information"></div>
-<div id="internal-metadata" class="document-information">
-<dl id="identifiers">
-<dt class="label-stream">Stream:</dt>
-<dd class="stream">Internet Engineering Task Force (IETF)</dd>
-<dt class="label-rfc">RFC:</dt>
-<dd class="rfc"><a href="https://www.rfc-editor.org/rfc/rfc8621" class="eref">8621</a></dd>
-<dt class="label-updates">Updates:</dt>
-<dd class="updates">
-<a href="https://www.rfc-editor.org/rfc/rfc5788" class="eref">5788</a> </dd>
-<dt class="label-category">Category:</dt>
-<dd class="category">Standards Track</dd>
-<dt class="label-published">Published:</dt>
-<dd class="published">
-<time datetime="2019-08" class="published">August 2019</time>
-    </dd>
-<dt class="label-issn">ISSN:</dt>
-<dd class="issn">2070-1721</dd>
-<dt class="label-authors">Authors:</dt>
-<dd class="authors">
-<div class="author">
-      <div class="author-name">N.M. Jenkins</div>
-<div class="org">Fastmail</div>
-</div>
-<div class="author">
-      <div class="author-name">C. Newman</div>
-<div class="org">Oracle</div>
-</div>
-</dd>
-</dl>
-</div>
-
-
-<section id="section-abstract">
-      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document specifies a data model for synchronising email data with a
-server using the JSON Meta Application Protocol (JMAP).
-
-
- Clients can use this to efficiently search, access, organise, and send
- messages, and to get push notifications for fast resynchronisation when new
- messages are delivered or a change is made in another client.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-</section>
-<div id="status-of-memo">
-<section id="section-boilerplate.1">
-        <h2 id="name-status-of-this-memo">
-<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
-        </h2>
-<p id="section-boilerplate.1-1">
-            This is an Internet Standards Track document.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.1-2">
-            This document is a product of the Internet Engineering Task Force
-            (IETF).  It represents the consensus of the IETF community.  It has
-            received public review and has been approved for publication by
-            the Internet Engineering Steering Group (IESG).  Further
-            information on Internet Standards is available in Section 2 of 
-            RFC 7841.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.1-3">
-            Information about the current status of this document, any
-            errata, and how to provide feedback on it may be obtained at
-            <span><a href="https://www.rfc-editor.org/info/rfc8621">https://www.rfc-editor.org/info/rfc8621</a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="copyright">
-<section id="section-boilerplate.2">
-        <h2 id="name-copyright-notice">
-<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
-        </h2>
-<p id="section-boilerplate.2-1">
-            Copyright (c) 2019 IETF Trust and the persons identified as the
-            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.2-2">
-            This document is subject to BCP 78 and the IETF Trust's Legal
-            Provisions Relating to IETF Documents
-            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
-            publication of this document. Please review these documents
-            carefully, as they describe your rights and restrictions with
-            respect to this document. Code Components extracted from this
-            document must include Revised BSD License text as described in
-            Section 4.e of the Trust Legal Provisions and are provided without
-            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="toc">
-<section id="section-toc.1">
-        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
-<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
-        </h2>
-<nav class="toc"><ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
-            <p id="section-toc.1-1.1.1"><a href="#section-1" class="auto internal xref">1</a>.&nbsp;&nbsp;<a href="#name-introduction" class="internal xref">Introduction</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.&nbsp;&nbsp;<a href="#name-notational-conventions" class="internal xref">Notational Conventions</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
-                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.&nbsp;&nbsp;<a href="#name-terminology" class="internal xref">Terminology</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3">
-                <p id="section-toc.1-1.1.2.3.1"><a href="#section-1.3" class="auto internal xref">1.3</a>.&nbsp;&nbsp;<a href="#name-additions-to-the-capabiliti" class="internal xref">Additions to the Capabilities Object</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3.2.1">
-                    <p id="section-toc.1-1.1.2.3.2.1.1" class="keepWithNext"><a href="#section-1.3.1" class="auto internal xref">1.3.1</a>.&nbsp;&nbsp;<a href="#name-urnietfparamsjmapmail" class="internal xref">urn:ietf:params:jmap:mail</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3.2.2">
-                    <p id="section-toc.1-1.1.2.3.2.2.1"><a href="#section-1.3.2" class="auto internal xref">1.3.2</a>.&nbsp;&nbsp;<a href="#name-urnietfparamsjmapsubmission" class="internal xref">urn:ietf:params:jmap:submission</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3.2.3">
-                    <p id="section-toc.1-1.1.2.3.2.3.1"><a href="#section-1.3.3" class="auto internal xref">1.3.3</a>.&nbsp;&nbsp;<a href="#name-urnietfparamsjmapvacationre" class="internal xref">urn:ietf:params:jmap:vacationresponse</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4">
-                <p id="section-toc.1-1.1.2.4.1"><a href="#section-1.4" class="auto internal xref">1.4</a>.&nbsp;&nbsp;<a href="#name-data-type-support-in-differ" class="internal xref">Data Type Support in Different Accounts</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.5">
-                <p id="section-toc.1-1.1.2.5.1"><a href="#section-1.5" class="auto internal xref">1.5</a>.&nbsp;&nbsp;<a href="#name-push" class="internal xref">Push</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.5.2.1">
-                    <p id="section-toc.1-1.1.2.5.2.1.1"><a href="#section-1.5.1" class="auto internal xref">1.5.1</a>.&nbsp;&nbsp;<a href="#name-example" class="internal xref">Example</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.6">
-                <p id="section-toc.1-1.1.2.6.1"><a href="#section-1.6" class="auto internal xref">1.6</a>.&nbsp;&nbsp;<a href="#name-ids" class="internal xref">Ids</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.&nbsp;&nbsp;<a href="#name-mailboxes" class="internal xref">Mailboxes</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
-                <p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1" class="auto internal xref">2.1</a>.&nbsp;&nbsp;<a href="#name-mailbox-get" class="internal xref">Mailbox/get</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
-                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.&nbsp;&nbsp;<a href="#name-mailbox-changes" class="internal xref">Mailbox/changes</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3">
-                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="auto internal xref">2.3</a>.&nbsp;&nbsp;<a href="#name-mailbox-query" class="internal xref">Mailbox/query</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.4">
-                <p id="section-toc.1-1.2.2.4.1"><a href="#section-2.4" class="auto internal xref">2.4</a>.&nbsp;&nbsp;<a href="#name-mailbox-querychanges" class="internal xref">Mailbox/queryChanges</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.5">
-                <p id="section-toc.1-1.2.2.5.1"><a href="#section-2.5" class="auto internal xref">2.5</a>.&nbsp;&nbsp;<a href="#name-mailbox-set" class="internal xref">Mailbox/set</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.6">
-                <p id="section-toc.1-1.2.2.6.1"><a href="#section-2.6" class="auto internal xref">2.6</a>.&nbsp;&nbsp;<a href="#name-example-2" class="internal xref">Example</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.&nbsp;&nbsp;<a href="#name-threads" class="internal xref">Threads</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.&nbsp;&nbsp;<a href="#name-thread-get" class="internal xref">Thread/get</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1.2.1">
-                    <p id="section-toc.1-1.3.2.1.2.1.1"><a href="#section-3.1.1" class="auto internal xref">3.1.1</a>.&nbsp;&nbsp;<a href="#name-example-3" class="internal xref">Example</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.&nbsp;&nbsp;<a href="#name-thread-changes" class="internal xref">Thread/changes</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.&nbsp;&nbsp;<a href="#name-emails" class="internal xref">Emails</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.&nbsp;&nbsp;<a href="#name-properties-of-the-email-obj" class="internal xref">Properties of the Email Object</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.1">
-                    <p id="section-toc.1-1.4.2.1.2.1.1"><a href="#section-4.1.1" class="auto internal xref">4.1.1</a>.&nbsp;&nbsp;<a href="#name-metadata" class="internal xref">Metadata</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.2">
-                    <p id="section-toc.1-1.4.2.1.2.2.1"><a href="#section-4.1.2" class="auto internal xref">4.1.2</a>.&nbsp;&nbsp;<a href="#name-header-fields-parsed-forms" class="internal xref">Header Fields Parsed Forms</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.3">
-                    <p id="section-toc.1-1.4.2.1.2.3.1"><a href="#section-4.1.3" class="auto internal xref">4.1.3</a>.&nbsp;&nbsp;<a href="#name-header-fields-properties" class="internal xref">Header Fields Properties</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1.2.4">
-                    <p id="section-toc.1-1.4.2.1.2.4.1"><a href="#section-4.1.4" class="auto internal xref">4.1.4</a>.&nbsp;&nbsp;<a href="#name-body-parts" class="internal xref">Body Parts</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
-                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.&nbsp;&nbsp;<a href="#name-email-get" class="internal xref">Email/get</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.1">
-                    <p id="section-toc.1-1.4.2.2.2.1.1"><a href="#section-4.2.1" class="auto internal xref">4.2.1</a>.&nbsp;&nbsp;<a href="#name-example-4" class="internal xref">Example</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
-                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.&nbsp;&nbsp;<a href="#name-email-changes" class="internal xref">Email/changes</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
-                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.&nbsp;&nbsp;<a href="#name-email-query" class="internal xref">Email/query</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4.2.1">
-                    <p id="section-toc.1-1.4.2.4.2.1.1"><a href="#section-4.4.1" class="auto internal xref">4.4.1</a>.&nbsp;&nbsp;<a href="#name-filtering" class="internal xref">Filtering</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4.2.2">
-                    <p id="section-toc.1-1.4.2.4.2.2.1"><a href="#section-4.4.2" class="auto internal xref">4.4.2</a>.&nbsp;&nbsp;<a href="#name-sorting" class="internal xref">Sorting</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4.2.3">
-                    <p id="section-toc.1-1.4.2.4.2.3.1"><a href="#section-4.4.3" class="auto internal xref">4.4.3</a>.&nbsp;&nbsp;<a href="#name-thread-collapsing" class="internal xref">Thread Collapsing</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.5">
-                <p id="section-toc.1-1.4.2.5.1"><a href="#section-4.5" class="auto internal xref">4.5</a>.&nbsp;&nbsp;<a href="#name-email-querychanges" class="internal xref">Email/queryChanges</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.6">
-                <p id="section-toc.1-1.4.2.6.1"><a href="#section-4.6" class="auto internal xref">4.6</a>.&nbsp;&nbsp;<a href="#name-email-set" class="internal xref">Email/set</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.7">
-                <p id="section-toc.1-1.4.2.7.1"><a href="#section-4.7" class="auto internal xref">4.7</a>.&nbsp;&nbsp;<a href="#name-email-copy" class="internal xref">Email/copy</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.8">
-                <p id="section-toc.1-1.4.2.8.1"><a href="#section-4.8" class="auto internal xref">4.8</a>.&nbsp;&nbsp;<a href="#name-email-import" class="internal xref">Email/import</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.9">
-                <p id="section-toc.1-1.4.2.9.1"><a href="#section-4.9" class="auto internal xref">4.9</a>.&nbsp;&nbsp;<a href="#name-email-parse" class="internal xref">Email/parse</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.10">
-                <p id="section-toc.1-1.4.2.10.1"><a href="#section-4.10" class="auto internal xref">4.10</a>.&nbsp;<a href="#name-examples" class="internal xref">Examples</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.&nbsp;&nbsp;<a href="#name-search-snippets" class="internal xref">Search Snippets</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
-                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.&nbsp;&nbsp;<a href="#name-searchsnippet-get" class="internal xref">SearchSnippet/get</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
-                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.&nbsp;&nbsp;<a href="#name-example-5" class="internal xref">Example</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.&nbsp;&nbsp;<a href="#name-identities" class="internal xref">Identities</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
-                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.&nbsp;&nbsp;<a href="#name-identity-get" class="internal xref">Identity/get</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
-                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.&nbsp;&nbsp;<a href="#name-identity-changes" class="internal xref">Identity/changes</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
-                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.&nbsp;&nbsp;<a href="#name-identity-set" class="internal xref">Identity/set</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.4">
-                <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="auto internal xref">6.4</a>.&nbsp;&nbsp;<a href="#name-example-6" class="internal xref">Example</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.&nbsp;&nbsp;<a href="#name-email-submission" class="internal xref">Email Submission</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.&nbsp;&nbsp;<a href="#name-emailsubmission-get" class="internal xref">EmailSubmission/get</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.&nbsp;&nbsp;<a href="#name-emailsubmission-changes" class="internal xref">EmailSubmission/changes</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
-                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.&nbsp;&nbsp;<a href="#name-emailsubmission-query" class="internal xref">EmailSubmission/query</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4">
-                <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="auto internal xref">7.4</a>.&nbsp;&nbsp;<a href="#name-emailsubmission-querychange" class="internal xref">EmailSubmission/queryChanges</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.5">
-                <p id="section-toc.1-1.7.2.5.1"><a href="#section-7.5" class="auto internal xref">7.5</a>.&nbsp;&nbsp;<a href="#name-emailsubmission-set" class="internal xref">EmailSubmission/set</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.5.2.1">
-                    <p id="section-toc.1-1.7.2.5.2.1.1"><a href="#section-7.5.1" class="auto internal xref">7.5.1</a>.&nbsp;&nbsp;<a href="#name-example-7" class="internal xref">Example</a></p>
-</li>
-                </ul>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.&nbsp;&nbsp;<a href="#name-vacation-response" class="internal xref">Vacation Response</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.&nbsp;&nbsp;<a href="#name-vacationresponse-get" class="internal xref">VacationResponse/get</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
-                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.&nbsp;&nbsp;<a href="#name-vacationresponse-set" class="internal xref">VacationResponse/set</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.&nbsp;&nbsp;<a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.&nbsp;&nbsp;<a href="#name-emailbodypart-value" class="internal xref">EmailBodyPart Value</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.&nbsp;&nbsp;<a href="#name-html-email-display" class="internal xref">HTML Email Display</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3">
-                <p id="section-toc.1-1.9.2.3.1"><a href="#section-9.3" class="auto internal xref">9.3</a>.&nbsp;&nbsp;<a href="#name-multiple-part-display" class="internal xref">Multiple Part Display</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.4">
-                <p id="section-toc.1-1.9.2.4.1"><a href="#section-9.4" class="auto internal xref">9.4</a>.&nbsp;&nbsp;<a href="#name-email-submission-2" class="internal xref">Email Submission</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.5">
-                <p id="section-toc.1-1.9.2.5.1"><a href="#section-9.5" class="auto internal xref">9.5</a>.&nbsp;&nbsp;<a href="#name-partial-account-access" class="internal xref">Partial Account Access</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.6">
-                <p id="section-toc.1-1.9.2.6.1"><a href="#section-9.6" class="auto internal xref">9.6</a>.&nbsp;&nbsp;<a href="#name-permission-to-send-from-an-" class="internal xref">Permission to Send from an Address</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>.&nbsp;<a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
-                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.&nbsp;&nbsp;<a href="#name-jmap-capability-registratio" class="internal xref">JMAP Capability Registration for "mail"</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
-                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref">10.2</a>.&nbsp;&nbsp;<a href="#name-jmap-capability-registration" class="internal xref">JMAP Capability Registration for "submission"</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.3">
-                <p id="section-toc.1-1.10.2.3.1"><a href="#section-10.3" class="auto internal xref">10.3</a>.&nbsp;&nbsp;<a href="#name-jmap-capability-registration-" class="internal xref">JMAP Capability Registration for "vacationresponse"</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.4">
-                <p id="section-toc.1-1.10.2.4.1"><a href="#section-10.4" class="auto internal xref">10.4</a>.&nbsp;&nbsp;<a href="#name-imap-and-jmap-keywords-regi" class="internal xref">IMAP and JMAP Keywords Registry</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.4.2.1">
-                    <p id="section-toc.1-1.10.2.4.2.1.1"><a href="#section-10.4.1" class="auto internal xref">10.4.1</a>.&nbsp;&nbsp;<a href="#name-registration-of-jmap-keywor" class="internal xref">Registration of JMAP Keyword "$draft"</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.4.2.2">
-                    <p id="section-toc.1-1.10.2.4.2.2.1"><a href="#section-10.4.2" class="auto internal xref">10.4.2</a>.&nbsp;&nbsp;<a href="#name-registration-of-jmap-keyword" class="internal xref">Registration of JMAP Keyword "$seen"</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.4.2.3">
-                    <p id="section-toc.1-1.10.2.4.2.3.1"><a href="#section-10.4.3" class="auto internal xref">10.4.3</a>.&nbsp;&nbsp;<a href="#name-registration-of-jmap-keyword-" class="internal xref">Registration of JMAP Keyword "$flagged"</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.4.2.4">
-                    <p id="section-toc.1-1.10.2.4.2.4.1"><a href="#section-10.4.4" class="auto internal xref">10.4.4</a>.&nbsp;&nbsp;<a href="#name-registration-of-jmap-keyword-a" class="internal xref">Registration of JMAP Keyword "$answered"</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.4.2.5">
-                    <p id="section-toc.1-1.10.2.4.2.5.1"><a href="#section-10.4.5" class="auto internal xref">10.4.5</a>.&nbsp;&nbsp;<a href="#name-registration-of-recent-keyw" class="internal xref">Registration of "$recent" Keyword</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.5">
-                <p id="section-toc.1-1.10.2.5.1"><a href="#section-10.5" class="auto internal xref">10.5</a>.&nbsp;&nbsp;<a href="#name-imap-mailbox-name-attribute" class="internal xref">IMAP Mailbox Name Attributes Registry</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.5.2.1">
-                    <p id="section-toc.1-1.10.2.5.2.1.1"><a href="#section-10.5.1" class="auto internal xref">10.5.1</a>.&nbsp;&nbsp;<a href="#name-registration-of-inbox-role" class="internal xref">Registration of "inbox" Role</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.6">
-                <p id="section-toc.1-1.10.2.6.1"><a href="#section-10.6" class="auto internal xref">10.6</a>.&nbsp;&nbsp;<a href="#name-jmap-error-codes-registry" class="internal xref">JMAP Error Codes Registry</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.6.2.1">
-                    <p id="section-toc.1-1.10.2.6.2.1.1"><a href="#section-10.6.1" class="auto internal xref">10.6.1</a>.&nbsp;&nbsp;<a href="#name-mailboxhaschild" class="internal xref">mailboxHasChild</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.6.2.2">
-                    <p id="section-toc.1-1.10.2.6.2.2.1"><a href="#section-10.6.2" class="auto internal xref">10.6.2</a>.&nbsp;&nbsp;<a href="#name-mailboxhasemail" class="internal xref">mailboxHasEmail</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.6.2.3">
-                    <p id="section-toc.1-1.10.2.6.2.3.1"><a href="#section-10.6.3" class="auto internal xref">10.6.3</a>.&nbsp;&nbsp;<a href="#name-blobnotfound" class="internal xref">blobNotFound</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.6.2.4">
-                    <p id="section-toc.1-1.10.2.6.2.4.1"><a href="#section-10.6.4" class="auto internal xref">10.6.4</a>.&nbsp;&nbsp;<a href="#name-toomanykeywords" class="internal xref">tooManyKeywords</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.6.2.5">
-                    <p id="section-toc.1-1.10.2.6.2.5.1"><a href="#section-10.6.5" class="auto internal xref">10.6.5</a>.&nbsp;&nbsp;<a href="#name-toomanymailboxes" class="internal xref">tooManyMailboxes</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.6.2.6">
-                    <p id="section-toc.1-1.10.2.6.2.6.1"><a href="#section-10.6.6" class="auto internal xref">10.6.6</a>.&nbsp;&nbsp;<a href="#name-invalidemail" class="internal xref">invalidEmail</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.6.2.7">
-                    <p id="section-toc.1-1.10.2.6.2.7.1"><a href="#section-10.6.7" class="auto internal xref">10.6.7</a>.&nbsp;&nbsp;<a href="#name-toomanyrecipients" class="internal xref">tooManyRecipients</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.6.2.8">
-                    <p id="section-toc.1-1.10.2.6.2.8.1"><a href="#section-10.6.8" class="auto internal xref">10.6.8</a>.&nbsp;&nbsp;<a href="#name-norecipients" class="internal xref">noRecipients</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.6.2.9">
-                    <p id="section-toc.1-1.10.2.6.2.9.1"><a href="#section-10.6.9" class="auto internal xref">10.6.9</a>.&nbsp;&nbsp;<a href="#name-invalidrecipients" class="internal xref">invalidRecipients</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.6.2.10">
-                    <p id="section-toc.1-1.10.2.6.2.10.1"><a href="#section-10.6.10" class="auto internal xref">10.6.10</a>.&nbsp;<a href="#name-forbiddenmailfrom" class="internal xref">forbiddenMailFrom</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.6.2.11">
-                    <p id="section-toc.1-1.10.2.6.2.11.1"><a href="#section-10.6.11" class="auto internal xref">10.6.11</a>.&nbsp;<a href="#name-forbiddenfrom" class="internal xref">forbiddenFrom</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.6.2.12">
-                    <p id="section-toc.1-1.10.2.6.2.12.1"><a href="#section-10.6.12" class="auto internal xref">10.6.12</a>.&nbsp;<a href="#name-forbiddentosend" class="internal xref">forbiddenToSend</a></p>
-</li>
-                </ul>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>.&nbsp;<a href="#name-references" class="internal xref">References</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.1">
-                <p id="section-toc.1-1.11.2.1.1"><a href="#section-11.1" class="auto internal xref">11.1</a>.&nbsp;&nbsp;<a href="#name-normative-references" class="internal xref">Normative References</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11.2.2">
-                <p id="section-toc.1-1.11.2.2.1"><a href="#section-11.2" class="auto internal xref">11.2</a>.&nbsp;&nbsp;<a href="#name-informative-references" class="internal xref">Informative References</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
-</li>
-        </ul>
-</nav>
-</section>
-</div>
 <div id="introduction">
 <section id="section-1">
-      <h2 id="name-introduction">
-<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
-      </h2>
+      <h2 id="name-introduction"><a href="#section-1">1.&nbsp;&nbsp;Introduction</a></h2>
 <p id="section-1-1">The JSON Meta Application Protocol (JMAP) <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> is a generic protocol for synchronising data, such as mail, calendars, or contacts between a client and a server. It is optimised for mobile and web environments and aims to provide a consistent interface to different data types.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">This specification defines a data model for accessing a mail store over JMAP,
 allowing you to query, read, organise, and submit mail for sending.<a href="#section-1-2" class="pilcrow">¶</a></p>
@@ -472,9 +38,7 @@ the user restricted permissions for certain mailboxes, for example, if another
 user's inbox has been shared as read-only with them.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <div id="notational-conventions">
 <section id="section-1.1">
-        <h3 id="name-notational-conventions">
-<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-notational-conventions" class="section-name selfRef">Notational Conventions</a>
-        </h3>
+        <h3 id="name-notational-conventions"><a href="#section-1.1">1.1.&nbsp;&nbsp;Notational Conventions</a></h3>
 <p id="section-1.1-1">    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
     NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
     "MAY", and "OPTIONAL" in this document are to be interpreted as
@@ -486,9 +50,7 @@ user's inbox has been shared as read-only with them.<a href="#section-1-6" class
 </div>
 <div id="terminology">
 <section id="section-1.2">
-        <h3 id="name-terminology">
-<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
-        </h3>
+        <h3 id="name-terminology"><a href="#section-1.2">1.2.&nbsp;&nbsp;Terminology</a></h3>
 <p id="section-1.2-1">This document uses the same terminology as in the core JMAP specification.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 <p id="section-1.2-2">The terms Mailbox, Thread, Email, SearchSnippet, EmailSubmission and VacationResponse (with that specific capitalisation) are used to refer to the data types defined in this document and instances of those data types.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
 <p id="section-1.2-3">The term message refers to a document in Internet Message Format, as described in <span>[<a href="#RFC5322" class="cite xref">RFC5322</a>]</span>. The Email data type represents messages in the mail store and associated metadata.<a href="#section-1.2-3" class="pilcrow">¶</a></p>
@@ -496,16 +58,12 @@ user's inbox has been shared as read-only with them.<a href="#section-1-6" class
 </div>
 <div id="additions-to-the-capabilities-object">
 <section id="section-1.3">
-        <h3 id="name-additions-to-the-capabiliti">
-<a href="#section-1.3" class="section-number selfRef">1.3. </a><a href="#name-additions-to-the-capabiliti" class="section-name selfRef">Additions to the Capabilities Object</a>
-        </h3>
+        <h3 id="name-additions-to-the-capabiliti"><a href="#section-1.3">1.3.&nbsp;&nbsp;Additions to the Capabilities Object</a></h3>
 <p id="section-1.3-1">The capabilities object is returned as part of the JMAP Session object; see <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 2.<a href="#section-1.3-1" class="pilcrow">¶</a></p>
 <p id="section-1.3-2">This document defines three additional capability URIs.<a href="#section-1.3-2" class="pilcrow">¶</a></p>
 <div id="urnietfparamsjmapmail">
 <section id="section-1.3.1">
-          <h4 id="name-urnietfparamsjmapmail">
-<a href="#section-1.3.1" class="section-number selfRef">1.3.1. </a><a href="#name-urnietfparamsjmapmail" class="section-name selfRef">urn:ietf:params:jmap:mail</a>
-          </h4>
+          <h4 id="name-urnietfparamsjmapmail"><a href="#section-1.3.1">1.3.1.&nbsp;&nbsp;urn:ietf:params:jmap:mail</a></h4>
 <p id="section-1.3.1-1">This represents support for the Mailbox, Thread, Email, and SearchSnippet data types and associated API methods. The value of this property in the JMAP session <code>capabilities</code> property is an empty object.<a href="#section-1.3.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.3.1-2">The value of this property in an account's <code>accountCapabilities</code> property is an object that MUST contain the following information on server capabilities and permissions for that account:<a href="#section-1.3.1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -550,9 +108,7 @@ a null parentId. (Permission for creating a child of an existing Mailbox is give
 </div>
 <div id="urnietfparamsjmapsubmission">
 <section id="section-1.3.2">
-          <h4 id="name-urnietfparamsjmapsubmission">
-<a href="#section-1.3.2" class="section-number selfRef">1.3.2. </a><a href="#name-urnietfparamsjmapsubmission" class="section-name selfRef">urn:ietf:params:jmap:submission</a>
-          </h4>
+          <h4 id="name-urnietfparamsjmapsubmission"><a href="#section-1.3.2">1.3.2.&nbsp;&nbsp;urn:ietf:params:jmap:submission</a></h4>
 <p id="section-1.3.2-1">This represents support for the Identity and EmailSubmission data types and associated API methods. The value of this property in the JMAP session <code>capabilities</code> property is an empty object.<a href="#section-1.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-1.3.2-2">The value of this property in an account's <code>accountCapabilities</code> property is an object that MUST contain the following information on server capabilities and permissions for that account:<a href="#section-1.3.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -599,9 +155,7 @@ The full IANA registry of submission extensions can be found at
 </div>
 <div id="urnietfparamsjmapvacationresponse">
 <section id="section-1.3.3">
-          <h4 id="name-urnietfparamsjmapvacationre">
-<a href="#section-1.3.3" class="section-number selfRef">1.3.3. </a><a href="#name-urnietfparamsjmapvacationre" class="section-name selfRef">urn:ietf:params:jmap:vacationresponse</a>
-          </h4>
+          <h4 id="name-urnietfparamsjmapvacationre"><a href="#section-1.3.3">1.3.3.&nbsp;&nbsp;urn:ietf:params:jmap:vacationresponse</a></h4>
 <p id="section-1.3.3-1">This represents support for the VacationResponse data type and associated API methods. The value of this property is an empty object in both the JMAP session <code>capabilities</code> property and an account's <code>accountCapabilities</code> property.<a href="#section-1.3.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -609,25 +163,19 @@ The full IANA registry of submission extensions can be found at
 </div>
 <div id="data-type-support-in-different-accounts">
 <section id="section-1.4">
-        <h3 id="name-data-type-support-in-differ">
-<a href="#section-1.4" class="section-number selfRef">1.4. </a><a href="#name-data-type-support-in-differ" class="section-name selfRef">Data Type Support in Different Accounts</a>
-        </h3>
+        <h3 id="name-data-type-support-in-differ"><a href="#section-1.4">1.4.&nbsp;&nbsp;Data Type Support in Different Accounts</a></h3>
 <p id="section-1.4-1">The server MUST include the appropriate capability strings as keys in the <code>accountCapabilities</code> property of any account with which the user may use the data types represented by that URI. Supported data types may differ between accounts the user has access to. For example, in the user's personal account, they may have access to all three sets of data, but in a shared account, they may only have data for <code>urn:ietf:params:jmap:mail</code>. This means they can access Mailbox/Thread/Email data in the shared account but are not allowed to send as that account (and so do not have access to Identity/EmailSubmission objects) or view/set its VacationResponse.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="push">
 <section id="section-1.5">
-        <h3 id="name-push">
-<a href="#section-1.5" class="section-number selfRef">1.5. </a><a href="#name-push" class="section-name selfRef">Push</a>
-        </h3>
+        <h3 id="name-push"><a href="#section-1.5">1.5.&nbsp;&nbsp;Push</a></h3>
 <p id="section-1.5-1">Servers MUST support the JMAP push mechanisms, as specified in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 7, to receive notifications when the state changes for any of the types defined in this specification.<a href="#section-1.5-1" class="pilcrow">¶</a></p>
 <p id="section-1.5-2">In addition, servers that implement the "urn:ietf:params:jmap:mail" capability MUST support pushing state changes for a type called "EmailDelivery". There are no methods to act on this type; it only exists as part of the push mechanism. The state string for this MUST change whenever a new Email is added to the store, but it SHOULD NOT change upon any other change to the Email objects, for example, if one is marked as read or deleted.<a href="#section-1.5-2" class="pilcrow">¶</a></p>
 <p id="section-1.5-3">Clients in battery-constrained environments may wish to delay fetching changes initiated by the user but fetch new Emails immediately so they can notify the user. To do this, they can register for pushes for the EmailDelivery type rather than the Email type (as defined in <a href="#emails" class="auto internal xref">Section 4</a>).<a href="#section-1.5-3" class="pilcrow">¶</a></p>
 <div id="example">
 <section id="section-1.5.1">
-          <h4 id="name-example">
-<a href="#section-1.5.1" class="section-number selfRef">1.5.1. </a><a href="#name-example" class="section-name selfRef">Example</a>
-          </h4>
+          <h4 id="name-example"><a href="#section-1.5.1">1.5.1.&nbsp;&nbsp;Example</a></h4>
 <p id="section-1.5.1-1">The client has registered for push notifications (see <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>) just for the EmailDelivery type. The user marks an Email as read on another device, causing the state string for the Email type to change; however, as nothing new was added to the store, the EmailDelivery state does not change and nothing is pushed to the client. A new message arrives in the user's inbox, again causing the Email state to change. This time, the EmailDelivery state also changes, and a StateChange object is pushed to the client with the new state string. The client may then resync to fetch the new Email immediately.<a href="#section-1.5.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -635,9 +183,7 @@ The full IANA registry of submission extensions can be found at
 </div>
 <div id="ids">
 <section id="section-1.6">
-        <h3 id="name-ids">
-<a href="#section-1.6" class="section-number selfRef">1.6. </a><a href="#name-ids" class="section-name selfRef">Ids</a>
-        </h3>
+        <h3 id="name-ids"><a href="#section-1.6">1.6.&nbsp;&nbsp;Ids</a></h3>
 <p id="section-1.6-1">If a JMAP Mail server also provides an IMAP interface to the data and supports IMAP Extension for Object Identifiers <span>[<a href="#RFC8474" class="cite xref">RFC8474</a>]</span>, the ids SHOULD be the same for Mailbox, Thread, and Email objects in JMAP.<a href="#section-1.6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -645,9 +191,7 @@ The full IANA registry of submission extensions can be found at
 </div>
 <div id="mailboxes">
 <section id="section-2">
-      <h2 id="name-mailboxes">
-<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-mailboxes" class="section-name selfRef">Mailboxes</a>
-      </h2>
+      <h2 id="name-mailboxes"><a href="#section-2">2.&nbsp;&nbsp;Mailboxes</a></h2>
 <p id="section-2-1">A Mailbox represents a named set of Email objects. This is the primary mechanism
 for organising messages within an account. It is analogous to a folder or a
 label in other systems. A Mailbox may perform a certain role in the system;
@@ -797,18 +341,14 @@ This property corresponds to IMAP <span>[<a href="#RFC3501" class="cite xref">RF
 <p id="section-2-6">The following JMAP methods are supported.<a href="#section-2-6" class="pilcrow">¶</a></p>
 <div id="mailboxget">
 <section id="section-2.1">
-        <h3 id="name-mailbox-get">
-<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-mailbox-get" class="section-name selfRef">Mailbox/get</a>
-        </h3>
+        <h3 id="name-mailbox-get"><a href="#section-2.1">2.1.&nbsp;&nbsp;Mailbox/get</a></h3>
 <p id="section-2.1-1">This is a standard "/get" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>,
 Section 5.1. The <code>ids</code> argument may be <code>null</code> to fetch all at once.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="mailboxchanges">
 <section id="section-2.2">
-        <h3 id="name-mailbox-changes">
-<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-mailbox-changes" class="section-name selfRef">Mailbox/changes</a>
-        </h3>
+        <h3 id="name-mailbox-changes"><a href="#section-2.2">2.2.&nbsp;&nbsp;Mailbox/changes</a></h3>
 <p id="section-2.2-1">This is a standard "/changes" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.2 but with one extra argument to the response:<a href="#section-2.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2.2-2.1">
@@ -822,9 +362,7 @@ If only the "totalEmails", "unreadEmails", "totalThreads", and/or "unreadThreads
 </div>
 <div id="mailboxquery">
 <section id="section-2.3">
-        <h3 id="name-mailbox-query">
-<a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-mailbox-query" class="section-name selfRef">Mailbox/query</a>
-        </h3>
+        <h3 id="name-mailbox-query"><a href="#section-2.3">2.3.&nbsp;&nbsp;Mailbox/query</a></h3>
 <p id="section-2.3-1">This is a standard "/query" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.5 but with the following additional request argument:<a href="#section-2.3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2.3-2.1">
@@ -895,17 +433,13 @@ The <code>isSubscribed</code> property of the Mailbox must be identical to the v
 </div>
 <div id="mailboxquerychanges">
 <section id="section-2.4">
-        <h3 id="name-mailbox-querychanges">
-<a href="#section-2.4" class="section-number selfRef">2.4. </a><a href="#name-mailbox-querychanges" class="section-name selfRef">Mailbox/queryChanges</a>
-        </h3>
+        <h3 id="name-mailbox-querychanges"><a href="#section-2.4">2.4.&nbsp;&nbsp;Mailbox/queryChanges</a></h3>
 <p id="section-2.4-1">This is a standard "/queryChanges" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.6.<a href="#section-2.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="mailboxset">
 <section id="section-2.5">
-        <h3 id="name-mailbox-set">
-<a href="#section-2.5" class="section-number selfRef">2.5. </a><a href="#name-mailbox-set" class="section-name selfRef">Mailbox/set</a>
-        </h3>
+        <h3 id="name-mailbox-set"><a href="#section-2.5">2.5.&nbsp;&nbsp;Mailbox/set</a></h3>
 <p id="section-2.5-1">This is a standard "/set" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.3 but with the following additional request argument:<a href="#section-2.5-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2.5-2.1">
@@ -930,9 +464,7 @@ the <code>onDestroyRemoveEmails</code> argument was false.<a href="#section-2.5-
 </div>
 <div id="example-1">
 <section id="section-2.6">
-        <h3 id="name-example-2">
-<a href="#section-2.6" class="section-number selfRef">2.6. </a><a href="#name-example-2" class="section-name selfRef">Example</a>
-        </h3>
+        <h3 id="name-example-2"><a href="#section-2.6">2.6.&nbsp;&nbsp;Example</a></h3>
 <p id="section-2.6-1">Fetching all Mailboxes in an account:<a href="#section-2.6-1" class="pilcrow">¶</a></p>
 <div class="alignCenter art-text artwork" id="section-2.6-2">
 <pre>[[ "Mailbox/get", {
@@ -1078,9 +610,7 @@ the <code>onDestroyRemoveEmails</code> argument was false.<a href="#section-2.5-
 </div>
 <div id="threads">
 <section id="section-3">
-      <h2 id="name-threads">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-threads" class="section-name selfRef">Threads</a>
-      </h2>
+      <h2 id="name-threads"><a href="#section-3">3.&nbsp;&nbsp;Threads</a></h2>
 <p id="section-3-1">Replies are grouped together with the original message to form a Thread. In JMAP, a Thread is simply a flat list of Emails, ordered by date. Every Email MUST belong to a Thread, even if it is the only Email in the Thread.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">The exact algorithm for determining whether two Emails belong to the same Thread is not mandated in this spec to allow for compatibility with different existing systems. For new implementations, it is suggested that two messages belong in the same Thread if both of the following conditions apply:<a href="#section-3-2" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-3-3">
@@ -1110,15 +640,11 @@ The ids of the Emails in the Thread, sorted by the <code>receivedAt</code> date 
 <p id="section-3-7">The following JMAP methods are supported.<a href="#section-3-7" class="pilcrow">¶</a></p>
 <div id="threadget">
 <section id="section-3.1">
-        <h3 id="name-thread-get">
-<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-thread-get" class="section-name selfRef">Thread/get</a>
-        </h3>
+        <h3 id="name-thread-get"><a href="#section-3.1">3.1.&nbsp;&nbsp;Thread/get</a></h3>
 <p id="section-3.1-1">This is a standard "/get" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.1.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <div id="example-2">
 <section id="section-3.1.1">
-          <h4 id="name-example-3">
-<a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-example-3" class="section-name selfRef">Example</a>
-          </h4>
+          <h4 id="name-example-3"><a href="#section-3.1.1">3.1.1.&nbsp;&nbsp;Example</a></h4>
 <p id="section-3.1.1-1">Request:<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
 <div class="alignCenter art-text artwork" id="section-3.1.1-2">
 <pre>[[ "Thread/get", {
@@ -1152,9 +678,7 @@ The ids of the Emails in the Thread, sorted by the <code>receivedAt</code> date 
 </div>
 <div id="threadchanges">
 <section id="section-3.2">
-        <h3 id="name-thread-changes">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-thread-changes" class="section-name selfRef">Thread/changes</a>
-        </h3>
+        <h3 id="name-thread-changes"><a href="#section-3.2">3.2.&nbsp;&nbsp;Thread/changes</a></h3>
 <p id="section-3.2-1">This is a standard "/changes" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.2.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1162,15 +686,11 @@ The ids of the Emails in the Thread, sorted by the <code>receivedAt</code> date 
 </div>
 <div id="emails">
 <section id="section-4">
-      <h2 id="name-emails">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-emails" class="section-name selfRef">Emails</a>
-      </h2>
+      <h2 id="name-emails"><a href="#section-4">4.&nbsp;&nbsp;Emails</a></h2>
 <p id="section-4-1">An <strong>Email</strong> object is a representation of a message <span>[<a href="#RFC5322" class="cite xref">RFC5322</a>]</span>, which allows clients to avoid the complexities of MIME parsing, transfer encoding, and character encoding.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div id="properties-of-the-email-object">
 <section id="section-4.1">
-        <h3 id="name-properties-of-the-email-obj">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-properties-of-the-email-obj" class="section-name selfRef">Properties of the Email Object</a>
-        </h3>
+        <h3 id="name-properties-of-the-email-obj"><a href="#section-4.1">4.1.&nbsp;&nbsp;Properties of the Email Object</a></h3>
 <p id="section-4.1-1">Broadly, a message consists of two parts: a list of header fields and then a body. The Email data type provides a way to access the full structure or to use simplified properties and avoid some complexity if this is sufficient for the client application.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.1-2">While raw headers can be fetched and set, the vast majority of clients should use an appropriate parsed form for each of the header fields it wants to process, as this allows it to avoid the complexities of various encodings that are required in a valid message per RFC 5322.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.1-3">The body of a message is normally a MIME-encoded set of documents in a tree structure. This may be arbitrarily nested, but the majority of email clients present a flat model of a message body (normally plaintext or HTML) with a set of attachments. Flattening the MIME structure to form this model can be difficult and causes inconsistency between clients. Therefore, in addition to the <code>bodyStructure</code> property, which gives the full tree, the Email object contains 3 alternate properties with flat lists of body parts:<a href="#section-4.1-3" class="pilcrow">¶</a></p>
@@ -1191,9 +711,7 @@ Because MIME allows for multiple representations of the same data (using <code>m
 <p id="section-4.1-7">Due to the number of properties involved, the set of Email properties is specified over the following four subsections. This is purely for readability; all properties are top-level peers.<a href="#section-4.1-7" class="pilcrow">¶</a></p>
 <div id="metadata">
 <section id="section-4.1.1">
-          <h4 id="name-metadata">
-<a href="#section-4.1.1" class="section-number selfRef">4.1.1. </a><a href="#name-metadata" class="section-name selfRef">Metadata</a>
-          </h4>
+          <h4 id="name-metadata"><a href="#section-4.1.1">4.1.1.&nbsp;&nbsp;Metadata</a></h4>
 <p id="section-4.1.1-1">These properties represent metadata about the message in the mail store and are not derived from parsing the message itself.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.1.1-2.1">
@@ -1284,15 +802,11 @@ The date the Email was received by the message store. This is the <code>internal
 </div>
 <div id="header-fields-parsed-forms">
 <section id="section-4.1.2">
-          <h4 id="name-header-fields-parsed-forms">
-<a href="#section-4.1.2" class="section-number selfRef">4.1.2. </a><a href="#name-header-fields-parsed-forms" class="section-name selfRef">Header Fields Parsed Forms</a>
-          </h4>
+          <h4 id="name-header-fields-parsed-forms"><a href="#section-4.1.2">4.1.2.&nbsp;&nbsp;Header Fields Parsed Forms</a></h4>
 <p id="section-4.1.2-1">Header field properties are derived from the message header fields <span>[<a href="#RFC5322" class="cite xref">RFC5322</a>]</span> <span>[<a href="#RFC6532" class="cite xref">RFC6532</a>]</span>. All header fields may be fetched in a raw form. Some header fields may also be fetched in a parsed form. The structured form that may be fetched depends on the header. The forms are defined in the subsections that follow.<a href="#section-4.1.2-1" class="pilcrow">¶</a></p>
 <div id="raw">
 <section id="section-4.1.2.1">
-            <h5 id="name-raw">
-<a href="#section-4.1.2.1" class="section-number selfRef">4.1.2.1. </a><a href="#name-raw" class="section-name selfRef">Raw</a>
-            </h5>
+            <h5 id="name-raw"><a href="#section-4.1.2.1">4.1.2.1.&nbsp;&nbsp;Raw</a></h5>
 <p id="section-4.1.2.1-1">Type: <code>String</code><a href="#section-4.1.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.1.2.1-2">The raw octets of the header field value from the first octet following the header field name terminating colon, up to but excluding the header field terminating CRLF. Any standards-compliant message MUST be either ASCII (RFC 5322) or UTF-8 (RFC 6532); however, other encodings exist in the wild. A server SHOULD replace any octet or octet run with the high bit set that violates UTF-8 syntax with the unicode replacement character (U+FFFD). Any NUL octet MUST be dropped.<a href="#section-4.1.2.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.1.2.1-3">This form will typically have a leading space, as most generated messages
@@ -1301,9 +815,7 @@ insert a space after the colon that terminates the header field name.<a href="#s
 </div>
 <div id="text">
 <section id="section-4.1.2.2">
-            <h5 id="name-text">
-<a href="#section-4.1.2.2" class="section-number selfRef">4.1.2.2. </a><a href="#name-text" class="section-name selfRef">Text</a>
-            </h5>
+            <h5 id="name-text"><a href="#section-4.1.2.2">4.1.2.2.&nbsp;&nbsp;Text</a></h5>
 <p id="section-4.1.2.2-1">Type: <code>String</code><a href="#section-4.1.2.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.1.2.2-2">The header field value with:<a href="#section-4.1.2.2-2" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-4.1.2.2-3">
@@ -1348,9 +860,7 @@ character (U+FFFD) and attempt to continue as much as possible.<a href="#section
 </div>
 <div id="addresses">
 <section id="section-4.1.2.3">
-            <h5 id="name-addresses">
-<a href="#section-4.1.2.3" class="section-number selfRef">4.1.2.3. </a><a href="#name-addresses" class="section-name selfRef">Addresses</a>
-            </h5>
+            <h5 id="name-addresses"><a href="#section-4.1.2.3">4.1.2.3.&nbsp;&nbsp;Addresses</a></h5>
 <p id="section-4.1.2.3-1">Type: <code>EmailAddress[]</code><a href="#section-4.1.2.3-1" class="pilcrow">¶</a></p>
 <p id="section-4.1.2.3-2">The header field is parsed as an <code>address-list</code> value, as specified in <span>[<a href="#RFC5322" class="cite xref">RFC5322</a>]</span>, Section 3.4, into the <code>EmailAddress[]</code> type. There is an EmailAddress item for each <code>mailbox</code> parsed from the <code>address-list</code>. Group and comment information is discarded.<a href="#section-4.1.2.3-2" class="pilcrow">¶</a></p>
 <p id="section-4.1.2.3-3">An <strong>EmailAddress</strong> object has the following properties:<a href="#section-4.1.2.3-3" class="pilcrow">¶</a></p>
@@ -1446,9 +956,7 @@ MAY have an <code>email</code> property that does not conform to the <code>addr-
 </div>
 <div id="groupedaddresses">
 <section id="section-4.1.2.4">
-            <h5 id="name-groupedaddresses">
-<a href="#section-4.1.2.4" class="section-number selfRef">4.1.2.4. </a><a href="#name-groupedaddresses" class="section-name selfRef">GroupedAddresses</a>
-            </h5>
+            <h5 id="name-groupedaddresses"><a href="#section-4.1.2.4">4.1.2.4.&nbsp;&nbsp;GroupedAddresses</a></h5>
 <p id="section-4.1.2.4-1">Type: <code>EmailAddressGroup[]</code><a href="#section-4.1.2.4-1" class="pilcrow">¶</a></p>
 <p id="section-4.1.2.4-2">This is similar to the Addresses form but preserves group information. The header field is parsed as an <code>address-list</code> value, as specified in <span>[<a href="#RFC5322" class="cite xref">RFC5322</a>]</span>, Section 3.4, into the <code>GroupedAddresses[]</code> type. Consecutive <code>mailbox</code> values that are not part of a group are still collected under an EmailAddressGroup object to provide a uniform type.<a href="#section-4.1.2.4-2" class="pilcrow">¶</a></p>
 <p id="section-4.1.2.4-3">An <strong>EmailAddressGroup</strong> object has the following properties:<a href="#section-4.1.2.4-3" class="pilcrow">¶</a></p>
@@ -1493,9 +1001,7 @@ accommodate invalid messages and semi-complete drafts.<a href="#section-4.1.2.4-
 </div>
 <div id="messageids">
 <section id="section-4.1.2.5">
-            <h5 id="name-messageids">
-<a href="#section-4.1.2.5" class="section-number selfRef">4.1.2.5. </a><a href="#name-messageids" class="section-name selfRef">MessageIds</a>
-            </h5>
+            <h5 id="name-messageids"><a href="#section-4.1.2.5">4.1.2.5.&nbsp;&nbsp;MessageIds</a></h5>
 <p id="section-4.1.2.5-1">Type: <code>String[]|null</code><a href="#section-4.1.2.5-1" class="pilcrow">¶</a></p>
 <p id="section-4.1.2.5-2">The header field is parsed as a list of <code>msg-id</code> values, as specified in <span>[<a href="#RFC5322" class="cite xref">RFC5322</a>]</span>, Section 3.6.4, into the <code>String[]</code> type. Comments and/or folding white space (CFWS) and surrounding angle brackets (<code>&lt;&gt;</code>) are removed. If parsing fails, the value is null.<a href="#section-4.1.2.5-2" class="pilcrow">¶</a></p>
 <p id="section-4.1.2.5-3">To prevent obviously nonsense behaviour, which can lead to interoperability issues, this form may only be fetched or set for the following header fields:<a href="#section-4.1.2.5-3" class="pilcrow">¶</a></p>
@@ -1520,9 +1026,7 @@ accommodate invalid messages and semi-complete drafts.<a href="#section-4.1.2.4-
 </div>
 <div id="date">
 <section id="section-4.1.2.6">
-            <h5 id="name-date">
-<a href="#section-4.1.2.6" class="section-number selfRef">4.1.2.6. </a><a href="#name-date" class="section-name selfRef">Date</a>
-            </h5>
+            <h5 id="name-date"><a href="#section-4.1.2.6">4.1.2.6.&nbsp;&nbsp;Date</a></h5>
 <p id="section-4.1.2.6-1">Type: <code>Date|null</code><a href="#section-4.1.2.6-1" class="pilcrow">¶</a></p>
 <p id="section-4.1.2.6-2">The header field is parsed as a <code>date-time</code> value, as specified in <span>[<a href="#RFC5322" class="cite xref">RFC5322</a>]</span>, Section 3.3, into the <code>Date</code> type. If parsing fails, the value is null.<a href="#section-4.1.2.6-2" class="pilcrow">¶</a></p>
 <p id="section-4.1.2.6-3">To prevent obviously nonsense behaviour, which can lead to interoperability issues, this form may only be fetched or set for the following header fields:<a href="#section-4.1.2.6-3" class="pilcrow">¶</a></p>
@@ -1541,9 +1045,7 @@ accommodate invalid messages and semi-complete drafts.<a href="#section-4.1.2.4-
 </div>
 <div id="urls">
 <section id="section-4.1.2.7">
-            <h5 id="name-urls">
-<a href="#section-4.1.2.7" class="section-number selfRef">4.1.2.7. </a><a href="#name-urls" class="section-name selfRef">URLs</a>
-            </h5>
+            <h5 id="name-urls"><a href="#section-4.1.2.7">4.1.2.7.&nbsp;&nbsp;URLs</a></h5>
 <p id="section-4.1.2.7-1">Type: <code>String[]|null</code><a href="#section-4.1.2.7-1" class="pilcrow">¶</a></p>
 <p id="section-4.1.2.7-2">The header field is parsed as a list of URLs, as described in <span>[<a href="#RFC2369" class="cite xref">RFC2369</a>]</span>, into the <code>String[]</code> type. Values do not include the surrounding angle brackets or any comments in the header field with the URLs. If parsing fails, the value is null.<a href="#section-4.1.2.7-2" class="pilcrow">¶</a></p>
 <p id="section-4.1.2.7-3">To prevent obviously nonsense behaviour, which can lead to interoperability issues, this form may only be fetched or set for the following header fields:<a href="#section-4.1.2.7-3" class="pilcrow">¶</a></p>
@@ -1576,9 +1078,7 @@ accommodate invalid messages and semi-complete drafts.<a href="#section-4.1.2.4-
 </div>
 <div id="header-fields-properties">
 <section id="section-4.1.3">
-          <h4 id="name-header-fields-properties">
-<a href="#section-4.1.3" class="section-number selfRef">4.1.3. </a><a href="#name-header-fields-properties" class="section-name selfRef">Header Fields Properties</a>
-          </h4>
+          <h4 id="name-header-fields-properties"><a href="#section-4.1.3">4.1.3.&nbsp;&nbsp;Header Fields Properties</a></h4>
 <p id="section-4.1.3-1">The following low-level Email property is specified for complete access to the header data of the message:<a href="#section-4.1.3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.1.3-2.1">
@@ -1697,9 +1197,7 @@ The value is identical to the value of <code>header:Date:asDate</code>.<a href="
 </div>
 <div id="body-parts">
 <section id="section-4.1.4">
-          <h4 id="name-body-parts">
-<a href="#section-4.1.4" class="section-number selfRef">4.1.4. </a><a href="#name-body-parts" class="section-name selfRef">Body Parts</a>
-          </h4>
+          <h4 id="name-body-parts"><a href="#section-4.1.4">4.1.4.&nbsp;&nbsp;Body Parts</a></h4>
 <p id="section-4.1.4-1">These properties are derived from the message body <span>[<a href="#RFC5322" class="cite xref">RFC5322</a>]</span> and its MIME entities <span>[<a href="#RFC2045" class="cite xref">RFC2045</a>]</span>.<a href="#section-4.1.4-1" class="pilcrow">¶</a></p>
 <p id="section-4.1.4-2">An <strong>EmailBodyPart</strong> object has the following properties:<a href="#section-4.1.4-2" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -1983,9 +1481,7 @@ attachments =&gt; [ C, F, G, H, J ]
 </div>
 <div id="emailget">
 <section id="section-4.2">
-        <h3 id="name-email-get">
-<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-email-get" class="section-name selfRef">Email/get</a>
-        </h3>
+        <h3 id="name-email-get"><a href="#section-4.2">4.2.&nbsp;&nbsp;Email/get</a></h3>
 <p id="section-4.2-1">This is a standard "/get" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.1 with the following additional request arguments:<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.2-2.1">
@@ -2094,9 +1590,7 @@ The server MUST ensure the truncation results in valid UTF-8 and does not occur 
 <p id="section-4.2-9">Where a specific header field is requested as a property, the capitalization of the property name in the response MUST be identical to that used in the request.<a href="#section-4.2-9" class="pilcrow">¶</a></p>
 <div id="example-3">
 <section id="section-4.2.1">
-          <h4 id="name-example-4">
-<a href="#section-4.2.1" class="section-number selfRef">4.2.1. </a><a href="#name-example-4" class="section-name selfRef">Example</a>
-          </h4>
+          <h4 id="name-example-4"><a href="#section-4.2.1">4.2.1.&nbsp;&nbsp;Example</a></h4>
 <p id="section-4.2.1-1">Request:<a href="#section-4.2.1-1" class="pilcrow">¶</a></p>
 <div class="alignCenter art-text artwork" id="section-4.2.1-2">
 <pre>[[ "Email/get", {
@@ -2161,17 +1655,13 @@ The server MUST ensure the truncation results in valid UTF-8 and does not occur 
 </div>
 <div id="emailchanges">
 <section id="section-4.3">
-        <h3 id="name-email-changes">
-<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-email-changes" class="section-name selfRef">Email/changes</a>
-        </h3>
+        <h3 id="name-email-changes"><a href="#section-4.3">4.3.&nbsp;&nbsp;Email/changes</a></h3>
 <p id="section-4.3-1">This is a standard "/changes" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.2. If generating intermediate states for a large set of changes, it is recommended that newer changes be returned first, as these are generally of more interest to users.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="emailquery">
 <section id="section-4.4">
-        <h3 id="name-email-query">
-<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-email-query" class="section-name selfRef">Email/query</a>
-        </h3>
+        <h3 id="name-email-query"><a href="#section-4.4">4.4.&nbsp;&nbsp;Email/query</a></h3>
 <p id="section-4.4-1">This is a standard "/query" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.5 but with the following additional request arguments:<a href="#section-4.4-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.4-2.1">
@@ -2183,9 +1673,7 @@ If true, Emails in the same Thread as a previous Email in the list (given the fi
 <p id="section-4.4-3">In quality implementations, the query <code>total</code> property is expected to be fast to calculate when the filter consists solely of a single <code>inMailbox</code> property, as it is the same as the totalEmails or totalThreads properties (depending on whether collapseThreads is true) of the associated Mailbox object.<a href="#section-4.4-3" class="pilcrow">¶</a></p>
 <div id="filtering">
 <section id="section-4.4.1">
-          <h4 id="name-filtering">
-<a href="#section-4.4.1" class="section-number selfRef">4.4.1. </a><a href="#name-filtering" class="section-name selfRef">Filtering</a>
-          </h4>
+          <h4 id="name-filtering"><a href="#section-4.4.1">4.4.1.&nbsp;&nbsp;Filtering</a></h4>
 <p id="section-4.4.1-1">A <strong>FilterCondition</strong> object has the following properties, any of which may be omitted:<a href="#section-4.4.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.4.1-2.1">
@@ -2321,9 +1809,7 @@ Within a phrase, to match one of the following characters you MUST escape it by 
 </div>
 <div id="sorting">
 <section id="section-4.4.2">
-          <h4 id="name-sorting">
-<a href="#section-4.4.2" class="section-number selfRef">4.4.2. </a><a href="#name-sorting" class="section-name selfRef">Sorting</a>
-          </h4>
+          <h4 id="name-sorting"><a href="#section-4.4.2">4.4.2.&nbsp;&nbsp;Sorting</a></h4>
 <p id="section-4.4.2-1">The following value for the <code>property</code> field on the Comparator object MUST be supported for sorting:<a href="#section-4.4.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.4.2-2.1">
@@ -2378,9 +1864,7 @@ Within a phrase, to match one of the following characters you MUST escape it by 
 </div>
 <div id="thread-collapsing">
 <section id="section-4.4.3">
-          <h4 id="name-thread-collapsing">
-<a href="#section-4.4.3" class="section-number selfRef">4.4.3. </a><a href="#name-thread-collapsing" class="section-name selfRef">Thread Collapsing</a>
-          </h4>
+          <h4 id="name-thread-collapsing"><a href="#section-4.4.3">4.4.3.&nbsp;&nbsp;Thread Collapsing</a></h4>
 <p id="section-4.4.3-1">When <code>collapseThreads</code> is true, then after filtering and sorting the Email list, the list is further winnowed by removing any Emails for a Thread id that has already been seen (when passing through the list sequentially). A Thread will therefore only appear <strong>once</strong> in the result, at the position of the first Email in the list that belongs to the Thread (given the current sort/filter).<a href="#section-4.4.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2388,9 +1872,7 @@ Within a phrase, to match one of the following characters you MUST escape it by 
 </div>
 <div id="emailquerychanges">
 <section id="section-4.5">
-        <h3 id="name-email-querychanges">
-<a href="#section-4.5" class="section-number selfRef">4.5. </a><a href="#name-email-querychanges" class="section-name selfRef">Email/queryChanges</a>
-        </h3>
+        <h3 id="name-email-querychanges"><a href="#section-4.5">4.5.&nbsp;&nbsp;Email/queryChanges</a></h3>
 <p id="section-4.5-1">This is a standard "/queryChanges" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.6 with the following additional request argument:<a href="#section-4.5-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.5-2.1">
@@ -2403,9 +1885,7 @@ The <code>collapseThreads</code> argument that was used with <code>Email/query</
 </div>
 <div id="emailset">
 <section id="section-4.6">
-        <h3 id="name-email-set">
-<a href="#section-4.6" class="section-number selfRef">4.6. </a><a href="#name-email-set" class="section-name selfRef">Email/set</a>
-        </h3>
+        <h3 id="name-email-set"><a href="#section-4.6">4.6.&nbsp;&nbsp;Email/set</a></h3>
 <p id="section-4.6-1">This is a standard "/set" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.3. The <code>Email/set</code> method encompasses:<a href="#section-4.6-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.6-2.1">
@@ -2513,9 +1993,7 @@ server-defined maximum.<a href="#section-4.6-16.1.1" class="pilcrow">¶</a></p>
 </div>
 <div id="emailcopy">
 <section id="section-4.7">
-        <h3 id="name-email-copy">
-<a href="#section-4.7" class="section-number selfRef">4.7. </a><a href="#name-email-copy" class="section-name selfRef">Email/copy</a>
-        </h3>
+        <h3 id="name-email-copy"><a href="#section-4.7">4.7.&nbsp;&nbsp;Email/copy</a></h3>
 <p id="section-4.7-1">This is a standard "/copy" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.4, except only the <code>mailboxIds</code>, <code>keywords</code>, and <code>receivedAt</code> properties may be set during the copy. This method cannot modify the message represented by the Email.<a href="#section-4.7-1" class="pilcrow">¶</a></p>
 <p id="section-4.7-2">The server MAY forbid two Email objects with identical message content <span>[<a href="#RFC5322" class="cite xref">RFC5322</a>]</span>, or even just with the same Message-ID <span>[<a href="#RFC5322" class="cite xref">RFC5322</a>]</span>, to coexist within an account; if the target account already has the Email, the copy will be rejected with a standard <code>alreadyExists</code> error.<a href="#section-4.7-2" class="pilcrow">¶</a></p>
 <p id="section-4.7-3">For successfully copied Email objects, the <code>created</code> response contains the <code>id</code>, <code>blobId</code>, <code>threadId</code>, and <code>size</code> properties of the new object.<a href="#section-4.7-3" class="pilcrow">¶</a></p>
@@ -2523,9 +2001,7 @@ server-defined maximum.<a href="#section-4.6-16.1.1" class="pilcrow">¶</a></p>
 </div>
 <div id="emailimport">
 <section id="section-4.8">
-        <h3 id="name-email-import">
-<a href="#section-4.8" class="section-number selfRef">4.8. </a><a href="#name-email-import" class="section-name selfRef">Email/import</a>
-        </h3>
+        <h3 id="name-email-import"><a href="#section-4.8">4.8.&nbsp;&nbsp;Email/import</a></h3>
 <p id="section-4.8-1">The <code>Email/import</code> method adds messages  <span>[<a href="#RFC5322" class="cite xref">RFC5322</a>]</span> to the set of Emails in an account. The server MUST support messages with Email Address Internationalization (EAI) headers <span>[<a href="#RFC6532" class="cite xref">RFC6532</a>]</span>. The messages must first be uploaded as blobs using the standard upload mechanism. The method takes the following arguments:<a href="#section-4.8-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.8-2.1">
@@ -2606,9 +2082,7 @@ A map of the creation id to a SetError object for each Email that failed to be c
 </div>
 <div id="emailparse">
 <section id="section-4.9">
-        <h3 id="name-email-parse">
-<a href="#section-4.9" class="section-number selfRef">4.9. </a><a href="#name-email-parse" class="section-name selfRef">Email/parse</a>
-        </h3>
+        <h3 id="name-email-parse"><a href="#section-4.9">4.9.&nbsp;&nbsp;Email/parse</a></h3>
 <p id="section-4.9-1">This method allows you to parse blobs as messages <span>[<a href="#RFC5322" class="cite xref">RFC5322</a>]</span> to get Email objects. The server MUST support messages with EAI headers <span>[<a href="#RFC6532" class="cite xref">RFC6532</a>]</span>. This can be used to parse and display attached messages without having to import them as top-level Email objects in the mail store in their own right.<a href="#section-4.9-1" class="pilcrow">¶</a></p>
 <p id="section-4.9-2">The following metadata properties on the Email objects will be null if requested:<a href="#section-4.9-2" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -2702,9 +2176,7 @@ A list of blob ids given that could not be found, or null if none.<a href="#sect
 </div>
 <div id="examples">
 <section id="section-4.10">
-        <h3 id="name-examples">
-<a href="#section-4.10" class="section-number selfRef">4.10. </a><a href="#name-examples" class="section-name selfRef">Examples</a>
-        </h3>
+        <h3 id="name-examples"><a href="#section-4.10">4.10.&nbsp;&nbsp;Examples</a></h3>
 <p id="section-4.10-1">A client logs in for the first time. It first fetches the set of Mailboxes. Now it will display the inbox to the user, which we will presume has Mailbox id "fb666a55". The inbox may be (very!) large, but the user's screen is only so big, so the client can just load the Threads it needs to fill the screen and then load in more only when the user scrolls. The client sends this request:<a href="#section-4.10-1" class="pilcrow">¶</a></p>
 <div class="alignCenter art-text artwork" id="section-4.10-2">
 <pre>[[ "Email/query",{
@@ -3104,9 +2576,7 @@ is, we
 </div>
 <div id="search-snippets">
 <section id="section-5">
-      <h2 id="name-search-snippets">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-search-snippets" class="section-name selfRef">Search Snippets</a>
-      </h2>
+      <h2 id="name-search-snippets"><a href="#section-5">5.&nbsp;&nbsp;Search Snippets</a></h2>
 <p id="section-5-1">When doing a search on a <code>String</code> property, the client may wish to show the relevant section of the body that matches the search as a preview and to highlight any matching terms in both this and the subject of the Email. Search snippets represent this data.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">A <strong>SearchSnippet</strong> object has the following properties:<a href="#section-5-2" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -3141,9 +2611,7 @@ If text from the filter matches the plaintext or HTML body, this is the relevant
 <p id="section-5-6">The following JMAP method is supported.<a href="#section-5-6" class="pilcrow">¶</a></p>
 <div id="searchsnippetget">
 <section id="section-5.1">
-        <h3 id="name-searchsnippet-get">
-<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-searchsnippet-get" class="section-name selfRef">SearchSnippet/get</a>
-        </h3>
+        <h3 id="name-searchsnippet-get"><a href="#section-5.1">5.1.&nbsp;&nbsp;SearchSnippet/get</a></h3>
 <p id="section-5.1-1">To fetch search snippets, make a call to <code>SearchSnippet/get</code>. It takes the following arguments:<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.1-2.1">
@@ -3189,9 +2657,7 @@ ids were found.<a href="#section-5.1-4.3.2" class="pilcrow">¶</a></p>
 </div>
 <div id="example-4">
 <section id="section-5.2">
-        <h3 id="name-example-5">
-<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-example-5" class="section-name selfRef">Example</a>
-        </h3>
+        <h3 id="name-example-5"><a href="#section-5.2">5.2.&nbsp;&nbsp;Example</a></h3>
 <p id="section-5.2-1">Here, we did an <code>Email/query</code> to search for any Email in the account containing the word "foo"; now, we are fetching the search snippets for some of the ids that were returned in the results:<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <div class="alignCenter art-text artwork" id="section-5.2-2">
 <pre>[[ "SearchSnippet/get", {
@@ -3239,9 +2705,7 @@ ids were found.<a href="#section-5.1-4.3.2" class="pilcrow">¶</a></p>
 </div>
 <div id="identities">
 <section id="section-6">
-      <h2 id="name-identities">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-identities" class="section-name selfRef">Identities</a>
-      </h2>
+      <h2 id="name-identities"><a href="#section-6">6.&nbsp;&nbsp;Identities</a></h2>
 <p id="section-6-1">An <strong>Identity</strong> object stores information about an email address or domain the user may send from. It has the following properties:<a href="#section-6-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-6-2.1">
@@ -3290,25 +2754,19 @@ Is the user allowed to delete this Identity? Servers may wish to set this to fal
 <p id="section-6-5">The following JMAP methods are supported.<a href="#section-6-5" class="pilcrow">¶</a></p>
 <div id="identityget">
 <section id="section-6.1">
-        <h3 id="name-identity-get">
-<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-identity-get" class="section-name selfRef">Identity/get</a>
-        </h3>
+        <h3 id="name-identity-get"><a href="#section-6.1">6.1.&nbsp;&nbsp;Identity/get</a></h3>
 <p id="section-6.1-1">This is a standard "/get" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.1. The <code>ids</code> argument may be null to fetch all at once.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="identitychanges">
 <section id="section-6.2">
-        <h3 id="name-identity-changes">
-<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-identity-changes" class="section-name selfRef">Identity/changes</a>
-        </h3>
+        <h3 id="name-identity-changes"><a href="#section-6.2">6.2.&nbsp;&nbsp;Identity/changes</a></h3>
 <p id="section-6.2-1">This is a standard "/changes" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.2.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="identityset">
 <section id="section-6.3">
-        <h3 id="name-identity-set">
-<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-identity-set" class="section-name selfRef">Identity/set</a>
-        </h3>
+        <h3 id="name-identity-set"><a href="#section-6.3">6.3.&nbsp;&nbsp;Identity/set</a></h3>
 <p id="section-6.3-1">This is a standard "/set" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.3. The following extra SetError types are defined:<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.3-2">For <code>create</code>:<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -3321,9 +2779,7 @@ the <code>email</code> property of the Identity.<a href="#section-6.3-3.1.1" cla
 </div>
 <div id="example-5">
 <section id="section-6.4">
-        <h3 id="name-example-6">
-<a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-example-6" class="section-name selfRef">Example</a>
-        </h3>
+        <h3 id="name-example-6"><a href="#section-6.4">6.4.&nbsp;&nbsp;Example</a></h3>
 <p id="section-6.4-1">Request:<a href="#section-6.4-1" class="pilcrow">¶</a></p>
 <div class="alignCenter art-text artwork" id="section-6.4-2">
 <pre>[ "Identity/get", {
@@ -3372,9 +2828,7 @@ the <code>email</code> property of the Identity.<a href="#section-6.3-3.1.1" cla
 </div>
 <div id="email-submission">
 <section id="section-7">
-      <h2 id="name-email-submission">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-email-submission" class="section-name selfRef">Email Submission</a>
-      </h2>
+      <h2 id="name-email-submission"><a href="#section-7">7.&nbsp;&nbsp;Email Submission</a></h2>
 <p id="section-7-1">An <strong>EmailSubmission</strong> object represents the submission of an Email for delivery to one or more recipients. It has the following properties:<a href="#section-7-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7-2.1">
@@ -3604,25 +3058,19 @@ retrying to send the message. For very basic SMTP proxies, this MAY be immediate
 <p id="section-7-5">The following JMAP methods are supported.<a href="#section-7-5" class="pilcrow">¶</a></p>
 <div id="emailsubmissionget">
 <section id="section-7.1">
-        <h3 id="name-emailsubmission-get">
-<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-emailsubmission-get" class="section-name selfRef">EmailSubmission/get</a>
-        </h3>
+        <h3 id="name-emailsubmission-get"><a href="#section-7.1">7.1.&nbsp;&nbsp;EmailSubmission/get</a></h3>
 <p id="section-7.1-1">This is a standard "/get" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.1.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="emailsubmissionchanges">
 <section id="section-7.2">
-        <h3 id="name-emailsubmission-changes">
-<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-emailsubmission-changes" class="section-name selfRef">EmailSubmission/changes</a>
-        </h3>
+        <h3 id="name-emailsubmission-changes"><a href="#section-7.2">7.2.&nbsp;&nbsp;EmailSubmission/changes</a></h3>
 <p id="section-7.2-1">This is a standard "/changes" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.2.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="emailsubmissionquery">
 <section id="section-7.3">
-        <h3 id="name-emailsubmission-query">
-<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-emailsubmission-query" class="section-name selfRef">EmailSubmission/query</a>
-        </h3>
+        <h3 id="name-emailsubmission-query"><a href="#section-7.3">7.3.&nbsp;&nbsp;EmailSubmission/query</a></h3>
 <p id="section-7.3-1">This is a standard "/query" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.5.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
 <p id="section-7.3-2">A <strong>FilterCondition</strong> object has the following properties, any of which may be omitted:<a href="#section-7.3-2" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -3677,17 +3125,13 @@ The <code>sendAt</code> property of the EmailSubmission object must be the same 
 </div>
 <div id="emailsubmissionquerychanges">
 <section id="section-7.4">
-        <h3 id="name-emailsubmission-querychange">
-<a href="#section-7.4" class="section-number selfRef">7.4. </a><a href="#name-emailsubmission-querychange" class="section-name selfRef">EmailSubmission/queryChanges</a>
-        </h3>
+        <h3 id="name-emailsubmission-querychange"><a href="#section-7.4">7.4.&nbsp;&nbsp;EmailSubmission/queryChanges</a></h3>
 <p id="section-7.4-1">This is a standard "/queryChanges" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.6.<a href="#section-7.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="emailsubmissionset">
 <section id="section-7.5">
-        <h3 id="name-emailsubmission-set">
-<a href="#section-7.5" class="section-number selfRef">7.5. </a><a href="#name-emailsubmission-set" class="section-name selfRef">EmailSubmission/set</a>
-        </h3>
+        <h3 id="name-emailsubmission-set"><a href="#section-7.5">7.5.&nbsp;&nbsp;EmailSubmission/set</a></h3>
 <p id="section-7.5-1">This is a standard "/set" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.3 with the following two additional request arguments:<a href="#section-7.5-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7.5-2.1">
@@ -3749,9 +3193,7 @@ EmailSubmission object from <code>pending</code> to <code>canceled</code>, but t
         </ul>
 <div id="example-6">
 <section id="section-7.5.1">
-          <h4 id="name-example-7">
-<a href="#section-7.5.1" class="section-number selfRef">7.5.1. </a><a href="#name-example-7" class="section-name selfRef">Example</a>
-          </h4>
+          <h4 id="name-example-7"><a href="#section-7.5.1">7.5.1.&nbsp;&nbsp;Example</a></h4>
 <p id="section-7.5.1-1">The following example presumes a draft of the Email to be sent has already been saved, and its Email id is "M7f6ed5bcfd7e2604d1753f6c". This call then sends the Email immediately, and if successful, removes the <code>$draft</code> flag and moves it from the drafts folder (which has Mailbox id "7cb4e8ee-df87-4757-b9c4-2ea1ca41b38e") to the sent folder (which we presume has Mailbox id "73dbcb4b-bffc-48bd-8c2a-a2e91ca672f6").<a href="#section-7.5.1-1" class="pilcrow">¶</a></p>
 <div class="alignCenter art-text artwork" id="section-7.5.1-2">
 <pre>[[ "EmailSubmission/set", {
@@ -3836,9 +3278,7 @@ EmailSubmission object from <code>pending</code> to <code>canceled</code>, but t
 </div>
 <div id="vacation-response">
 <section id="section-8">
-      <h2 id="name-vacation-response">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-vacation-response" class="section-name selfRef">Vacation Response</a>
-      </h2>
+      <h2 id="name-vacation-response"><a href="#section-8">8.&nbsp;&nbsp;Vacation Response</a></h2>
 <p id="section-8-1">A vacation response sends an automatic reply when a message is delivered to the mail store, informing the original sender that their message may not be read for some time.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <p id="section-8-2">Automated message sending can produce undesirable behaviour. To avoid this, implementors MUST follow the recommendations set forth in <span>[<a href="#RFC3834" class="cite xref">RFC3834</a>]</span>.<a href="#section-8-2" class="pilcrow">¶</a></p>
 <p id="section-8-3">The <strong>VacationResponse</strong> object represents the state of vacation-response-related
@@ -3883,18 +3323,14 @@ The HTML body to send in response to messages when the vacation response is enab
 <p id="section-8-5">The following JMAP methods are supported.<a href="#section-8-5" class="pilcrow">¶</a></p>
 <div id="vacationresponseget">
 <section id="section-8.1">
-        <h3 id="name-vacationresponse-get">
-<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-vacationresponse-get" class="section-name selfRef">VacationResponse/get</a>
-        </h3>
+        <h3 id="name-vacationresponse-get"><a href="#section-8.1">8.1.&nbsp;&nbsp;VacationResponse/get</a></h3>
 <p id="section-8.1-1">This is a standard "/get" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.1.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
 <p id="section-8.1-2">There MUST only be exactly one VacationResponse object in an account. It MUST have the id "singleton".<a href="#section-8.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="vacationresponseset">
 <section id="section-8.2">
-        <h3 id="name-vacationresponse-set">
-<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-vacationresponse-set" class="section-name selfRef">VacationResponse/set</a>
-        </h3>
+        <h3 id="name-vacationresponse-set"><a href="#section-8.2">8.2.&nbsp;&nbsp;VacationResponse/set</a></h3>
 <p id="section-8.2-1">This is a standard "/set" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Section 5.3.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3902,15 +3338,11 @@ The HTML body to send in response to messages when the vacation response is enab
 </div>
 <div id="security-considerations">
 <section id="section-9">
-      <h2 id="name-security-considerations">
-<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
-      </h2>
+      <h2 id="name-security-considerations"><a href="#section-9">9.&nbsp;&nbsp;Security Considerations</a></h2>
 <p id="section-9-1">All security considerations of JMAP <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> apply to this specification. Additional considerations specific to the data types and functionality introduced by this document are described in the following subsections.<a href="#section-9-1" class="pilcrow">¶</a></p>
 <div id="emailbodypart-value">
 <section id="section-9.1">
-        <h3 id="name-emailbodypart-value">
-<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-emailbodypart-value" class="section-name selfRef">EmailBodyPart Value</a>
-        </h3>
+        <h3 id="name-emailbodypart-value"><a href="#section-9.1">9.1.&nbsp;&nbsp;EmailBodyPart Value</a></h3>
 <p id="section-9.1-1">Service providers typically perform security filtering on incoming messages, and it's important that the detection of content-type and charset for the security filter aligns with the heuristics performed by JMAP servers. Servers that apply heuristics to determine the content-type or charset for an EmailBodyValue SHOULD document the heuristics and provide a mechanism to turn them off in the event they are misaligned with the security filter used at a particular mail host.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
 <p id="section-9.1-2">Automatic conversion of charsets that allow hidden channels for ASCII text, such as UTF-7, have been problematic for security filters in the past, so server implementations can mitigate this risk by having such conversions  off-by-default and/or separately configurable.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
 <p id="section-9.1-3">To allow the client to restrict the volume of data it can receive in response to a request, a maximum length may be requested for the data returned for a textual body part. However, truncating the data may change the semantic meaning, for example, truncating a URL changes its location. Servers that scan for links to malicious sites should take care to either ensure truncation is not at a semantically significant point or rescan the truncated value for malicious content before returning it.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
@@ -3918,9 +3350,7 @@ The HTML body to send in response to messages when the vacation response is enab
 </div>
 <div id="html-email-display">
 <section id="section-9.2">
-        <h3 id="name-html-email-display">
-<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-html-email-display" class="section-name selfRef">HTML Email Display</a>
-        </h3>
+        <h3 id="name-html-email-display"><a href="#section-9.2">9.2.&nbsp;&nbsp;HTML Email Display</a></h3>
 <p id="section-9.2-1">HTML message bodies provide richer formatting for messages but present a number of security challenges, especially when embedded in a webmail context in combination with interface HTML. Clients that render HTML messages should carefully consider the potential risks, including:<a href="#section-9.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-9.2-2.1">
@@ -4000,17 +3430,13 @@ redirect the user to a phishing site.<a href="#section-9.2-4.6.1" class="pilcrow
 </div>
 <div id="multiple-part-display">
 <section id="section-9.3">
-        <h3 id="name-multiple-part-display">
-<a href="#section-9.3" class="section-number selfRef">9.3. </a><a href="#name-multiple-part-display" class="section-name selfRef">Multiple Part Display</a>
-        </h3>
+        <h3 id="name-multiple-part-display"><a href="#section-9.3">9.3.&nbsp;&nbsp;Multiple Part Display</a></h3>
 <p id="section-9.3-1">Messages may consist of multiple parts to be displayed sequentially as a body. Clients MUST render each part in isolation and MUST NOT concatenate the raw text values to render. Doing so may change the overall semantics of the message. If the client or server is decrypting a Pretty Good Privacy (PGP) or S/MIME encrypted part, concatenating with other parts may leak the decrypted text to an attacker, as described in <span>[<a href="#EFAIL" class="cite xref">EFAIL</a>]</span>.<a href="#section-9.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="email-submission-1">
 <section id="section-9.4">
-        <h3 id="name-email-submission-2">
-<a href="#section-9.4" class="section-number selfRef">9.4. </a><a href="#name-email-submission-2" class="section-name selfRef">Email Submission</a>
-        </h3>
+        <h3 id="name-email-submission-2"><a href="#section-9.4">9.4.&nbsp;&nbsp;Email Submission</a></h3>
 <p id="section-9.4-1">SMTP submission servers <span>[<a href="#RFC6409" class="cite xref">RFC6409</a>]</span> use a number of mechanisms to mitigate damage caused by compromised user accounts and end-user systems including rate limiting, anti-virus/anti-spam milters (mail filters), and other technologies. The technologies work better when they have more information about the client connection. If JMAP email submission is implemented as a proxy to an SMTP submission server, it is useful to communicate this information from the JMAP proxy to the submission server. The de facto XCLIENT extension to SMTP <span>[<a href="#XCLIENT" class="cite xref">XCLIENT</a>]</span> can be used to do this, but use of an authenticated channel is recommended to limit use of that extension to explicitly authorised proxies.<a href="#section-9.4-1" class="pilcrow">¶</a></p>
 <p id="section-9.4-2">JMAP servers that proxy to an SMTP submission server SHOULD allow use of
 the submissions port <span>[<a href="#RFC8314" class="cite xref">RFC8314</a>]</span>. Implementation of a mechanism similar to SMTP XCLIENT is
@@ -4026,9 +3452,7 @@ Salted Challenge Response Authentication Mechanism (SCRAM) <span>[<a href="#RFC7
 </div>
 <div id="partial-account-access">
 <section id="section-9.5">
-        <h3 id="name-partial-account-access">
-<a href="#section-9.5" class="section-number selfRef">9.5. </a><a href="#name-partial-account-access" class="section-name selfRef">Partial Account Access</a>
-        </h3>
+        <h3 id="name-partial-account-access"><a href="#section-9.5">9.5.&nbsp;&nbsp;Partial Account Access</a></h3>
 <p id="section-9.5-1">A user may only have permission to access a subset of the data that exists in an account. To avoid leaking unauthorised information, in such a situation, the server MUST treat any data the user does not have permission to access the same as if it did not exist.<a href="#section-9.5-1" class="pilcrow">¶</a></p>
 <p id="section-9.5-2">For example, suppose user A has an account with two Mailboxes, inbox and sent, but only shares the inbox with user B. In this case, when user B fetches Mailboxes for this account, the server MUST behave as though the sent Mailbox did not exist. Similarly, when querying or fetching Email objects, it MUST treat any messages that just belong to the sent Mailbox as though they did not exist. Fetching Thread objects MUST only return ids for Email objects the user has permission to access; if none, the Thread again MUST be treated the same as if it did not exist.<a href="#section-9.5-2" class="pilcrow">¶</a></p>
 <p id="section-9.5-3">If the server forbids a single account from having two identical messages, or two messages with the same Message-Id header field, a user with write access can use the error returned by trying to create/import such a message to detect whether it already exists in an inaccessible portion of the account.<a href="#section-9.5-3" class="pilcrow">¶</a></p>
@@ -4036,9 +3460,7 @@ Salted Challenge Response Authentication Mechanism (SCRAM) <span>[<a href="#RFC7
 </div>
 <div id="permission-to-send-from-an-address">
 <section id="section-9.6">
-        <h3 id="name-permission-to-send-from-an-">
-<a href="#section-9.6" class="section-number selfRef">9.6. </a><a href="#name-permission-to-send-from-an-" class="section-name selfRef">Permission to Send from an Address</a>
-        </h3>
+        <h3 id="name-permission-to-send-from-an-"><a href="#section-9.6">9.6.&nbsp;&nbsp;Permission to Send from an Address</a></h3>
 <p id="section-9.6-1">In recent years, the email ecosystem has moved towards associating trust with the From address in the message <span>[<a href="#RFC5322" class="cite xref">RFC5322</a>]</span>, particularly with schemes such as Domain-based Message Authentication, Reporting, and Conformance (DMARC) <span>[<a href="#RFC7489" class="cite xref">RFC7489</a>]</span>.<a href="#section-9.6-1" class="pilcrow">¶</a></p>
 <p id="section-9.6-2">The set of Identity objects (see <a href="#identities" class="auto internal xref">Section 6</a>) in an account lets the client know which email addresses the user has permission to send from. Each email submission is associated with an Identity, and servers SHOULD reject submissions where the From header field of the message does not correspond to the associated Identity.<a href="#section-9.6-2" class="pilcrow">¶</a></p>
 <p id="section-9.6-3">The server MAY allow an exception to send an exact copy of an existing message received into the mail store to another address (otherwise known as "redirecting" or "bouncing"), although it is RECOMMENDED the server limit this to destinations the user has verified they also control.<a href="#section-9.6-3" class="pilcrow">¶</a></p>
@@ -4051,14 +3473,10 @@ Salted Challenge Response Authentication Mechanism (SCRAM) <span>[<a href="#RFC7
 </div>
 <div id="iana-considerations">
 <section id="section-10">
-      <h2 id="name-iana-considerations">
-<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
-      </h2>
+      <h2 id="name-iana-considerations"><a href="#section-10">10.&nbsp;&nbsp;IANA Considerations</a></h2>
 <div id="jmap-capability-registration-for-mail">
 <section id="section-10.1">
-        <h3 id="name-jmap-capability-registratio">
-<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-jmap-capability-registratio" class="section-name selfRef">JMAP Capability Registration for "mail"</a>
-        </h3>
+        <h3 id="name-jmap-capability-registratio"><a href="#section-10.1">10.1.&nbsp;&nbsp;JMAP Capability Registration for "mail"</a></h3>
 <p id="section-10.1-1">IANA has registered the "mail" JMAP Capability as follows:<a href="#section-10.1-1" class="pilcrow">¶</a></p>
 <p id="section-10.1-2">Capability Name: urn:ietf:params:jmap:mail<a href="#section-10.1-2" class="pilcrow">¶</a></p>
 <p id="section-10.1-3">Specification document: this document<a href="#section-10.1-3" class="pilcrow">¶</a></p>
@@ -4069,9 +3487,7 @@ Salted Challenge Response Authentication Mechanism (SCRAM) <span>[<a href="#RFC7
 </div>
 <div id="jmap-capability-registration-for-submission">
 <section id="section-10.2">
-        <h3 id="name-jmap-capability-registration">
-<a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-jmap-capability-registration" class="section-name selfRef">JMAP Capability Registration for "submission"</a>
-        </h3>
+        <h3 id="name-jmap-capability-registration"><a href="#section-10.2">10.2.&nbsp;&nbsp;JMAP Capability Registration for "submission"</a></h3>
 <p id="section-10.2-1">IANA has registered the "submission" JMAP Capability as follows:<a href="#section-10.2-1" class="pilcrow">¶</a></p>
 <p id="section-10.2-2">Capability Name: urn:ietf:params:jmap:submission<a href="#section-10.2-2" class="pilcrow">¶</a></p>
 <p id="section-10.2-3">Specification document: this document<a href="#section-10.2-3" class="pilcrow">¶</a></p>
@@ -4082,9 +3498,7 @@ Salted Challenge Response Authentication Mechanism (SCRAM) <span>[<a href="#RFC7
 </div>
 <div id="jmap-capability-registration-for-vacationresponse">
 <section id="section-10.3">
-        <h3 id="name-jmap-capability-registration-">
-<a href="#section-10.3" class="section-number selfRef">10.3. </a><a href="#name-jmap-capability-registration-" class="section-name selfRef">JMAP Capability Registration for "vacationresponse"</a>
-        </h3>
+        <h3 id="name-jmap-capability-registration-"><a href="#section-10.3">10.3.&nbsp;&nbsp;JMAP Capability Registration for "vacationresponse"</a></h3>
 <p id="section-10.3-1">IANA has registered the "vacationresponse" JMAP Capability as follows:<a href="#section-10.3-1" class="pilcrow">¶</a></p>
 <p id="section-10.3-2">Capability Name: urn:ietf:params:jmap:vacationresponse<a href="#section-10.3-2" class="pilcrow">¶</a></p>
 <p id="section-10.3-3">Specification document: this document<a href="#section-10.3-3" class="pilcrow">¶</a></p>
@@ -4095,9 +3509,7 @@ Salted Challenge Response Authentication Mechanism (SCRAM) <span>[<a href="#RFC7
 </div>
 <div id="imap-and-jmap-keywords-registry">
 <section id="section-10.4">
-        <h3 id="name-imap-and-jmap-keywords-regi">
-<a href="#section-10.4" class="section-number selfRef">10.4. </a><a href="#name-imap-and-jmap-keywords-regi" class="section-name selfRef">IMAP and JMAP Keywords Registry</a>
-        </h3>
+        <h3 id="name-imap-and-jmap-keywords-regi"><a href="#section-10.4">10.4.&nbsp;&nbsp;IMAP and JMAP Keywords Registry</a></h3>
 <p id="section-10.4-1">This document makes two changes to the IMAP keywords registry as defined in <span>[<a href="#RFC5788" class="cite xref">RFC5788</a>]</span>.<a href="#section-10.4-1" class="pilcrow">¶</a></p>
 <p id="section-10.4-2">First, the name of the registry is changed to the "IMAP and JMAP
 Keywords" registry.<a href="#section-10.4-2" class="pilcrow">¶</a></p>
@@ -4118,9 +3530,7 @@ appropriate for use in IMAP. These keywords cannot be subsequently
 registered for use in IMAP except via standards action.<a href="#section-10.4-5" class="pilcrow">¶</a></p>
 <div id="registration-of-jmap-keyword-draft">
 <section id="section-10.4.1">
-          <h4 id="name-registration-of-jmap-keywor">
-<a href="#section-10.4.1" class="section-number selfRef">10.4.1. </a><a href="#name-registration-of-jmap-keywor" class="section-name selfRef">Registration of JMAP Keyword "$draft"</a>
-          </h4>
+          <h4 id="name-registration-of-jmap-keywor"><a href="#section-10.4.1">10.4.1.&nbsp;&nbsp;Registration of JMAP Keyword "$draft"</a></h4>
 <p id="section-10.4.1-1">This registers the "JMAP-only" keyword <code>$draft</code> in the "IMAP and JMAP Keywords" registry.<a href="#section-10.4.1-1" class="pilcrow">¶</a></p>
 <p id="section-10.4.1-2">Keyword name: $draft<a href="#section-10.4.1-2" class="pilcrow">¶</a></p>
 <p id="section-10.4.1-3">Scope: JMAP-only<a href="#section-10.4.1-3" class="pilcrow">¶</a></p>
@@ -4155,9 +3565,7 @@ JMAP mailing list &lt;jmap@ietf.org&gt;<a href="#section-10.4.1-12" class="pilcr
 </div>
 <div id="registration-of-jmap-keyword-seen">
 <section id="section-10.4.2">
-          <h4 id="name-registration-of-jmap-keyword">
-<a href="#section-10.4.2" class="section-number selfRef">10.4.2. </a><a href="#name-registration-of-jmap-keyword" class="section-name selfRef">Registration of JMAP Keyword "$seen"</a>
-          </h4>
+          <h4 id="name-registration-of-jmap-keyword"><a href="#section-10.4.2">10.4.2.&nbsp;&nbsp;Registration of JMAP Keyword "$seen"</a></h4>
 <p id="section-10.4.2-1">This registers the "JMAP-only" keyword <code>$seen</code> in the "IMAP and JMAP
 Keywords" registry.<a href="#section-10.4.2-1" class="pilcrow">¶</a></p>
 <p id="section-10.4.2-2">Keyword name: $seen<a href="#section-10.4.2-2" class="pilcrow">¶</a></p>
@@ -4188,9 +3596,7 @@ JMAP mailing list &lt;jmap@ietf.org&gt;<a href="#section-10.4.2-12" class="pilcr
 </div>
 <div id="registration-of-jmap-keyword-flagged">
 <section id="section-10.4.3">
-          <h4 id="name-registration-of-jmap-keyword-">
-<a href="#section-10.4.3" class="section-number selfRef">10.4.3. </a><a href="#name-registration-of-jmap-keyword-" class="section-name selfRef">Registration of JMAP Keyword "$flagged"</a>
-          </h4>
+          <h4 id="name-registration-of-jmap-keyword-"><a href="#section-10.4.3">10.4.3.&nbsp;&nbsp;Registration of JMAP Keyword "$flagged"</a></h4>
 <p id="section-10.4.3-1">This registers the "JMAP-only" keyword <code>$flagged</code> in the "IMAP and JMAP
 Keywords" registry.<a href="#section-10.4.3-1" class="pilcrow">¶</a></p>
 <p id="section-10.4.3-2">Keyword name: $flagged<a href="#section-10.4.3-2" class="pilcrow">¶</a></p>
@@ -4222,9 +3628,7 @@ JMAP mailing list &lt;jmap@ietf.org&gt;<a href="#section-10.4.3-12" class="pilcr
 </div>
 <div id="registration-of-jmap-keyword-answered">
 <section id="section-10.4.4">
-          <h4 id="name-registration-of-jmap-keyword-a">
-<a href="#section-10.4.4" class="section-number selfRef">10.4.4. </a><a href="#name-registration-of-jmap-keyword-a" class="section-name selfRef">Registration of JMAP Keyword "$answered"</a>
-          </h4>
+          <h4 id="name-registration-of-jmap-keyword-a"><a href="#section-10.4.4">10.4.4.&nbsp;&nbsp;Registration of JMAP Keyword "$answered"</a></h4>
 <p id="section-10.4.4-1">This registers the "JMAP-only" keyword <code>$answered</code> in the "IMAP and JMAP
 Keywords" registry.<a href="#section-10.4.4-1" class="pilcrow">¶</a></p>
 <p id="section-10.4.4-2">Keyword name: $answered<a href="#section-10.4.4-2" class="pilcrow">¶</a></p>
@@ -4255,9 +3659,7 @@ JMAP mailing list &lt;jmap@ietf.org&gt;<a href="#section-10.4.4-12" class="pilcr
 </div>
 <div id="registration-of-recent-keyword">
 <section id="section-10.4.5">
-          <h4 id="name-registration-of-recent-keyw">
-<a href="#section-10.4.5" class="section-number selfRef">10.4.5. </a><a href="#name-registration-of-recent-keyw" class="section-name selfRef">Registration of "$recent" Keyword</a>
-          </h4>
+          <h4 id="name-registration-of-recent-keyw"><a href="#section-10.4.5">10.4.5.&nbsp;&nbsp;Registration of "$recent" Keyword</a></h4>
 <p id="section-10.4.5-1">This registers the keyword <code>$recent</code> in the "IMAP and JMAP Keywords" registry.<a href="#section-10.4.5-1" class="pilcrow">¶</a></p>
 <p id="section-10.4.5-2">Keyword name: $recent<a href="#section-10.4.5-2" class="pilcrow">¶</a></p>
 <p id="section-10.4.5-3">Scope: reserved<a href="#section-10.4.5-3" class="pilcrow">¶</a></p>
@@ -4273,14 +3675,10 @@ JMAP mailing list &lt;jmap@ietf.org&gt;<a href="#section-10.4.5-6" class="pilcro
 </div>
 <div id="imap-mailbox-name-attributes-registry">
 <section id="section-10.5">
-        <h3 id="name-imap-mailbox-name-attribute">
-<a href="#section-10.5" class="section-number selfRef">10.5. </a><a href="#name-imap-mailbox-name-attribute" class="section-name selfRef">IMAP Mailbox Name Attributes Registry</a>
-        </h3>
+        <h3 id="name-imap-mailbox-name-attribute"><a href="#section-10.5">10.5.&nbsp;&nbsp;IMAP Mailbox Name Attributes Registry</a></h3>
 <div id="registration-of-inbox-role">
 <section id="section-10.5.1">
-          <h4 id="name-registration-of-inbox-role">
-<a href="#section-10.5.1" class="section-number selfRef">10.5.1. </a><a href="#name-registration-of-inbox-role" class="section-name selfRef">Registration of "inbox" Role</a>
-          </h4>
+          <h4 id="name-registration-of-inbox-role"><a href="#section-10.5.1">10.5.1.&nbsp;&nbsp;Registration of "inbox" Role</a></h4>
 <p id="section-10.5.1-1">This registers the "JMAP-only" "inbox" attribute in the "IMAP Mailbox Name Attributes" registry, as established in <span>[<a href="#RFC8457" class="cite xref">RFC8457</a>]</span>.<a href="#section-10.5.1-1" class="pilcrow">¶</a></p>
 <p id="section-10.5.1-2">Attribute Name: Inbox<a href="#section-10.5.1-2" class="pilcrow">¶</a></p>
 <p id="section-10.5.1-3">Description: New mail is delivered here by default.<a href="#section-10.5.1-3" class="pilcrow">¶</a></p>
@@ -4292,16 +3690,12 @@ JMAP mailing list &lt;jmap@ietf.org&gt;<a href="#section-10.4.5-6" class="pilcro
 </div>
 <div id="jmap-error-codes-registry">
 <section id="section-10.6">
-        <h3 id="name-jmap-error-codes-registry">
-<a href="#section-10.6" class="section-number selfRef">10.6. </a><a href="#name-jmap-error-codes-registry" class="section-name selfRef">JMAP Error Codes Registry</a>
-        </h3>
+        <h3 id="name-jmap-error-codes-registry"><a href="#section-10.6">10.6.&nbsp;&nbsp;JMAP Error Codes Registry</a></h3>
 <p id="section-10.6-1">The following subsections register several new error codes in the "JMAP
 Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-10.6-1" class="pilcrow">¶</a></p>
 <div id="mailboxhaschild">
 <section id="section-10.6.1">
-          <h4 id="name-mailboxhaschild">
-<a href="#section-10.6.1" class="section-number selfRef">10.6.1. </a><a href="#name-mailboxhaschild" class="section-name selfRef">mailboxHasChild</a>
-          </h4>
+          <h4 id="name-mailboxhaschild"><a href="#section-10.6.1">10.6.1.&nbsp;&nbsp;mailboxHasChild</a></h4>
 <p id="section-10.6.1-1">JMAP Error Code: mailboxHasChild<a href="#section-10.6.1-1" class="pilcrow">¶</a></p>
 <p id="section-10.6.1-2">Intended use: common<a href="#section-10.6.1-2" class="pilcrow">¶</a></p>
 <p id="section-10.6.1-3">Change controller: IETF<a href="#section-10.6.1-3" class="pilcrow">¶</a></p>
@@ -4311,9 +3705,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="mailboxhasemail">
 <section id="section-10.6.2">
-          <h4 id="name-mailboxhasemail">
-<a href="#section-10.6.2" class="section-number selfRef">10.6.2. </a><a href="#name-mailboxhasemail" class="section-name selfRef">mailboxHasEmail</a>
-          </h4>
+          <h4 id="name-mailboxhasemail"><a href="#section-10.6.2">10.6.2.&nbsp;&nbsp;mailboxHasEmail</a></h4>
 <p id="section-10.6.2-1">JMAP Error Code: mailboxHasEmail<a href="#section-10.6.2-1" class="pilcrow">¶</a></p>
 <p id="section-10.6.2-2">Intended use: common<a href="#section-10.6.2-2" class="pilcrow">¶</a></p>
 <p id="section-10.6.2-3">Change controller: IETF<a href="#section-10.6.2-3" class="pilcrow">¶</a></p>
@@ -4323,9 +3715,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="blobnotfound">
 <section id="section-10.6.3">
-          <h4 id="name-blobnotfound">
-<a href="#section-10.6.3" class="section-number selfRef">10.6.3. </a><a href="#name-blobnotfound" class="section-name selfRef">blobNotFound</a>
-          </h4>
+          <h4 id="name-blobnotfound"><a href="#section-10.6.3">10.6.3.&nbsp;&nbsp;blobNotFound</a></h4>
 <p id="section-10.6.3-1">JMAP Error Code: blobNotFound<a href="#section-10.6.3-1" class="pilcrow">¶</a></p>
 <p id="section-10.6.3-2">Intended use: common<a href="#section-10.6.3-2" class="pilcrow">¶</a></p>
 <p id="section-10.6.3-3">Change controller: IETF<a href="#section-10.6.3-3" class="pilcrow">¶</a></p>
@@ -4335,9 +3725,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="toomanykeywords">
 <section id="section-10.6.4">
-          <h4 id="name-toomanykeywords">
-<a href="#section-10.6.4" class="section-number selfRef">10.6.4. </a><a href="#name-toomanykeywords" class="section-name selfRef">tooManyKeywords</a>
-          </h4>
+          <h4 id="name-toomanykeywords"><a href="#section-10.6.4">10.6.4.&nbsp;&nbsp;tooManyKeywords</a></h4>
 <p id="section-10.6.4-1">JMAP Error Code: tooManyKeywords<a href="#section-10.6.4-1" class="pilcrow">¶</a></p>
 <p id="section-10.6.4-2">Intended use: common<a href="#section-10.6.4-2" class="pilcrow">¶</a></p>
 <p id="section-10.6.4-3">Change controller: IETF<a href="#section-10.6.4-3" class="pilcrow">¶</a></p>
@@ -4347,9 +3735,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="toomanymailboxes">
 <section id="section-10.6.5">
-          <h4 id="name-toomanymailboxes">
-<a href="#section-10.6.5" class="section-number selfRef">10.6.5. </a><a href="#name-toomanymailboxes" class="section-name selfRef">tooManyMailboxes</a>
-          </h4>
+          <h4 id="name-toomanymailboxes"><a href="#section-10.6.5">10.6.5.&nbsp;&nbsp;tooManyMailboxes</a></h4>
 <p id="section-10.6.5-1">JMAP Error Code: tooManyMailboxes<a href="#section-10.6.5-1" class="pilcrow">¶</a></p>
 <p id="section-10.6.5-2">Intended use: common<a href="#section-10.6.5-2" class="pilcrow">¶</a></p>
 <p id="section-10.6.5-3">Change controller: IETF<a href="#section-10.6.5-3" class="pilcrow">¶</a></p>
@@ -4359,9 +3745,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="invalidemail">
 <section id="section-10.6.6">
-          <h4 id="name-invalidemail">
-<a href="#section-10.6.6" class="section-number selfRef">10.6.6. </a><a href="#name-invalidemail" class="section-name selfRef">invalidEmail</a>
-          </h4>
+          <h4 id="name-invalidemail"><a href="#section-10.6.6">10.6.6.&nbsp;&nbsp;invalidEmail</a></h4>
 <p id="section-10.6.6-1">JMAP Error Code: invalidEmail<a href="#section-10.6.6-1" class="pilcrow">¶</a></p>
 <p id="section-10.6.6-2">Intended use: common<a href="#section-10.6.6-2" class="pilcrow">¶</a></p>
 <p id="section-10.6.6-3">Change controller: IETF<a href="#section-10.6.6-3" class="pilcrow">¶</a></p>
@@ -4371,9 +3755,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="toomanyrecipients">
 <section id="section-10.6.7">
-          <h4 id="name-toomanyrecipients">
-<a href="#section-10.6.7" class="section-number selfRef">10.6.7. </a><a href="#name-toomanyrecipients" class="section-name selfRef">tooManyRecipients</a>
-          </h4>
+          <h4 id="name-toomanyrecipients"><a href="#section-10.6.7">10.6.7.&nbsp;&nbsp;tooManyRecipients</a></h4>
 <p id="section-10.6.7-1">JMAP Error Code: tooManyRecipients<a href="#section-10.6.7-1" class="pilcrow">¶</a></p>
 <p id="section-10.6.7-2">Intended use: common<a href="#section-10.6.7-2" class="pilcrow">¶</a></p>
 <p id="section-10.6.7-3">Change controller: IETF<a href="#section-10.6.7-3" class="pilcrow">¶</a></p>
@@ -4383,9 +3765,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="norecipients">
 <section id="section-10.6.8">
-          <h4 id="name-norecipients">
-<a href="#section-10.6.8" class="section-number selfRef">10.6.8. </a><a href="#name-norecipients" class="section-name selfRef">noRecipients</a>
-          </h4>
+          <h4 id="name-norecipients"><a href="#section-10.6.8">10.6.8.&nbsp;&nbsp;noRecipients</a></h4>
 <p id="section-10.6.8-1">JMAP Error Code: noRecipients<a href="#section-10.6.8-1" class="pilcrow">¶</a></p>
 <p id="section-10.6.8-2">Intended use: common<a href="#section-10.6.8-2" class="pilcrow">¶</a></p>
 <p id="section-10.6.8-3">Change controller: IETF<a href="#section-10.6.8-3" class="pilcrow">¶</a></p>
@@ -4395,9 +3775,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="invalidrecipients">
 <section id="section-10.6.9">
-          <h4 id="name-invalidrecipients">
-<a href="#section-10.6.9" class="section-number selfRef">10.6.9. </a><a href="#name-invalidrecipients" class="section-name selfRef">invalidRecipients</a>
-          </h4>
+          <h4 id="name-invalidrecipients"><a href="#section-10.6.9">10.6.9.&nbsp;&nbsp;invalidRecipients</a></h4>
 <p id="section-10.6.9-1">JMAP Error Code: invalidRecipients<a href="#section-10.6.9-1" class="pilcrow">¶</a></p>
 <p id="section-10.6.9-2">Intended use: common<a href="#section-10.6.9-2" class="pilcrow">¶</a></p>
 <p id="section-10.6.9-3">Change controller: IETF<a href="#section-10.6.9-3" class="pilcrow">¶</a></p>
@@ -4407,9 +3785,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="forbiddenmailfrom">
 <section id="section-10.6.10">
-          <h4 id="name-forbiddenmailfrom">
-<a href="#section-10.6.10" class="section-number selfRef">10.6.10. </a><a href="#name-forbiddenmailfrom" class="section-name selfRef">forbiddenMailFrom</a>
-          </h4>
+          <h4 id="name-forbiddenmailfrom"><a href="#section-10.6.10">10.6.10.&nbsp;&nbsp;forbiddenMailFrom</a></h4>
 <p id="section-10.6.10-1">JMAP Error Code: forbiddenMailFrom<a href="#section-10.6.10-1" class="pilcrow">¶</a></p>
 <p id="section-10.6.10-2">Intended use: common<a href="#section-10.6.10-2" class="pilcrow">¶</a></p>
 <p id="section-10.6.10-3">Change controller: IETF<a href="#section-10.6.10-3" class="pilcrow">¶</a></p>
@@ -4420,9 +3796,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="forbiddenfrom">
 <section id="section-10.6.11">
-          <h4 id="name-forbiddenfrom">
-<a href="#section-10.6.11" class="section-number selfRef">10.6.11. </a><a href="#name-forbiddenfrom" class="section-name selfRef">forbiddenFrom</a>
-          </h4>
+          <h4 id="name-forbiddenfrom"><a href="#section-10.6.11">10.6.11.&nbsp;&nbsp;forbiddenFrom</a></h4>
 <p id="section-10.6.11-1">JMAP Error Code: forbiddenFrom<a href="#section-10.6.11-1" class="pilcrow">¶</a></p>
 <p id="section-10.6.11-2">Intended use: common<a href="#section-10.6.11-2" class="pilcrow">¶</a></p>
 <p id="section-10.6.11-3">Change controller: IETF<a href="#section-10.6.11-3" class="pilcrow">¶</a></p>
@@ -4432,9 +3806,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="forbiddentosend">
 <section id="section-10.6.12">
-          <h4 id="name-forbiddentosend">
-<a href="#section-10.6.12" class="section-number selfRef">10.6.12. </a><a href="#name-forbiddentosend" class="section-name selfRef">forbiddenToSend</a>
-          </h4>
+          <h4 id="name-forbiddentosend"><a href="#section-10.6.12">10.6.12.&nbsp;&nbsp;forbiddenToSend</a></h4>
 <p id="section-10.6.12-1">JMAP Error Code: forbiddenToSend<a href="#section-10.6.12-1" class="pilcrow">¶</a></p>
 <p id="section-10.6.12-2">Intended use: common<a href="#section-10.6.12-2" class="pilcrow">¶</a></p>
 <p id="section-10.6.12-3">Change controller: IETF<a href="#section-10.6.12-3" class="pilcrow">¶</a></p>
@@ -4447,13 +3819,9 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </section>
 </div>
 <section id="section-11">
-      <h2 id="name-references">
-<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-references" class="section-name selfRef">References</a>
-      </h2>
+      <h2 id="name-references"><a href="#section-11">11.&nbsp;&nbsp;References</a></h2>
 <section id="section-11.1">
-        <h3 id="name-normative-references">
-<a href="#section-11.1" class="section-number selfRef">11.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
-        </h3>
+        <h3 id="name-normative-references"><a href="#section-11.1">11.1.&nbsp;&nbsp;Normative References</a></h3>
 <dl class="references">
 <dt id="HTML">[HTML]</dt>
         <dd>
@@ -4610,9 +3978,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </dl>
 </section>
 <section id="section-11.2">
-        <h3 id="name-informative-references">
-<a href="#section-11.2" class="section-number selfRef">11.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
-        </h3>
+        <h3 id="name-informative-references"><a href="#section-11.2">11.2.&nbsp;&nbsp;Informative References</a></h3>
 <dl class="references">
 <dt id="EFAIL">[EFAIL]</dt>
         <dd>
@@ -4637,44 +4003,42 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </dl>
 </section>
 </section>
-<div id="authors-addresses">
-<section id="appendix-A">
-      <h2 id="name-authors-addresses">
-<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
-      </h2>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Neil Jenkins</span></div>
-<div dir="auto" class="left"><span class="org">Fastmail</span></div>
-<div dir="auto" class="left"><span class="street-address">PO Box 234, Collins St. West</span></div>
-<div dir="auto" class="left">
-<span class="locality">Melbourne</span> <span class="region">VIC</span> <span class="postal-code">8007</span>
-</div>
-<div dir="auto" class="left"><span class="country-name">Australia</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:neilj@fastmailteam.com" class="email">neilj@fastmailteam.com</a>
-</div>
-<div class="url">
-<span>URI:</span>
-<a href="https://www.fastmail.com" class="url">https://www.fastmail.com</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Chris Newman</span></div>
-<div dir="auto" class="left"><span class="org">Oracle</span></div>
-<div dir="auto" class="left"><span class="street-address">440 E. Huntington Dr., Suite 400</span></div>
-<div dir="auto" class="left">
-<span class="locality">Arcadia</span>, <span class="region">CA</span> <span class="postal-code">91006</span>
-</div>
-<div dir="auto" class="left"><span class="country-name">United States of America</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:chris.newman@oracle.com" class="email">chris.newman@oracle.com</a>
-</div>
-</address>
+
+
+
+
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo"><a href="#name-status-of-this-memo">Status of This Memo</a></h2>
+<p id="section-boilerplate.1-1">
+            This is an Internet Standards Track document.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+            This document is a product of the Internet Engineering Task Force
+            (IETF).  It represents the consensus of the IETF community.  It has
+            received public review and has been approved for publication by
+            the Internet Engineering Steering Group (IESG).  Further
+            information on Internet Standards is available in Section 2 of 
+            RFC 7841.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+            Information about the current status of this document, any
+            errata, and how to provide feedback on it may be obtained at
+            <span><a href="https://www.rfc-editor.org/info/rfc8621">https://www.rfc-editor.org/info/rfc8621</a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+</section>
+</div><div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice"><a href="#name-copyright-notice">Copyright Notice</a></h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2019 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-
-
-
-

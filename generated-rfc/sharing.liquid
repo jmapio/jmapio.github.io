@@ -1,6 +1,7 @@
 ---
 layout: article-rfc
 permalink: /spec/sharing/index.html
+toc: generated-rfc-toc/sharing.html
 title: JMAP Sharing
 description: >-
     This document specifies a data model for sharing data between users using JMAP. Future documents can reference this document when defining data types to support a consistent model of sharing.
@@ -12,257 +13,14 @@ meta:
         - JSON
         - sharing
 ---
-
-<div class="table-wrapper"><table class="ears">
-<thead><tr>
-<td class="left">Internet-Draft</td>
-<td class="center">JMAP Sharing</td>
-<td class="right">April 2024</td>
-</tr></thead>
-<tfoot><tr>
-<td class="left">Jenkins</td>
-<td class="center">Expires 20 October 2024</td>
-<td class="right">[Page]</td>
-</tr></tfoot>
-</table></div>
-<div id="external-metadata" class="document-information"></div>
-<div id="internal-metadata" class="document-information">
-<dl id="identifiers">
-<dt class="label-workgroup">Workgroup:</dt>
-<dd class="workgroup">JMAP</dd>
-<dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-ietf-jmap-sharing-09</dd>
-<dt class="label-updates">Updates:</dt>
-<dd class="updates">
-<a href="https://www.rfc-editor.org/rfc/rfc8620" class="eref">8620</a> (if approved)</dd>
-<dt class="label-published">Published:</dt>
-<dd class="published">
-<time datetime="2024-04-18" class="published">18 April 2024</time>
-    </dd>
-<dt class="label-intended-status">Intended Status:</dt>
-<dd class="intended-status">Standards Track</dd>
-<dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-10-20">20 October 2024</time></dd>
-<dt class="label-authors">Author:</dt>
-<dd class="authors">
-<div class="author">
-      <div class="author-name">N.M. Jenkins, <span class="editor">Ed.</span>
-</div>
-<div class="org">Fastmail</div>
-</div>
-</dd>
-</dl>
-</div>
-
-<section id="section-abstract">
-      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document specifies a data model for sharing data between users using JMAP. Future documents can reference this document when defining data types to support a consistent model of sharing.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-</section>
-<div id="status-of-memo">
-<section id="section-boilerplate.1">
-        <h2 id="name-status-of-this-memo">
-<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
-        </h2>
-<p id="section-boilerplate.1-1">
-        This Internet-Draft is submitted in full conformance with the
-        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.1-2">
-        Internet-Drafts are working documents of the Internet Engineering Task
-        Force (IETF). Note that other groups may also distribute working
-        documents as Internet-Drafts. The list of current Internet-Drafts is
-        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.1-3">
-        Internet-Drafts are draft documents valid for a maximum of six months
-        and may be updated, replaced, or obsoleted by other documents at any
-        time. It is inappropriate to use Internet-Drafts as reference
-        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 October 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="copyright">
-<section id="section-boilerplate.2">
-        <h2 id="name-copyright-notice">
-<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
-        </h2>
-<p id="section-boilerplate.2-1">
-            Copyright (c) 2024 IETF Trust and the persons identified as the
-            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.2-2">
-            This document is subject to BCP 78 and the IETF Trust's Legal
-            Provisions Relating to IETF Documents
-            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
-            publication of this document. Please review these documents
-            carefully, as they describe your rights and restrictions with
-            respect to this document. Code Components extracted from this
-            document must include Revised BSD License text as described in
-            Section 4.e of the Trust Legal Provisions and are provided without
-            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="toc">
-<section id="section-toc.1">
-        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
-<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
-        </h2>
-<nav class="toc"><ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
-            <p id="section-toc.1-1.1.1"><a href="#section-1" class="auto internal xref">1</a>.&nbsp;&nbsp;<a href="#name-introduction" class="internal xref">Introduction</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.&nbsp;&nbsp;<a href="#name-notational-conventions" class="internal xref">Notational Conventions</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
-                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.&nbsp;&nbsp;<a href="#name-terminology" class="internal xref">Terminology</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3">
-                <p id="section-toc.1-1.1.2.3.1" class="keepWithNext"><a href="#section-1.3" class="auto internal xref">1.3</a>.&nbsp;&nbsp;<a href="#name-data-model-overview" class="internal xref">Data Model Overview</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4">
-                <p id="section-toc.1-1.1.2.4.1"><a href="#section-1.4" class="auto internal xref">1.4</a>.&nbsp;&nbsp;<a href="#name-subscribing-to-shared-data" class="internal xref">Subscribing to Shared Data</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.5">
-                <p id="section-toc.1-1.1.2.5.1"><a href="#section-1.5" class="auto internal xref">1.5</a>.&nbsp;&nbsp;<a href="#name-addition-to-the-capabilitie" class="internal xref">Addition to the Capabilities Object</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.5.2.1">
-                    <p id="section-toc.1-1.1.2.5.2.1.1"><a href="#section-1.5.1" class="auto internal xref">1.5.1</a>.&nbsp;&nbsp;<a href="#name-urnietfparamsjmapprincipals" class="internal xref">urn:ietf:params:jmap:principals</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.5.2.2">
-                    <p id="section-toc.1-1.1.2.5.2.2.1"><a href="#section-1.5.2" class="auto internal xref">1.5.2</a>.&nbsp;&nbsp;<a href="#name-urnietfparamsjmapprincipalso" class="internal xref">urn:ietf:params:jmap:principals:owner</a></p>
-</li>
-                </ul>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.&nbsp;&nbsp;<a href="#name-principals" class="internal xref">Principals</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
-                <p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1" class="auto internal xref">2.1</a>.&nbsp;&nbsp;<a href="#name-principal-get" class="internal xref">Principal/get</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
-                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.&nbsp;&nbsp;<a href="#name-principal-changes" class="internal xref">Principal/changes</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3">
-                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="auto internal xref">2.3</a>.&nbsp;&nbsp;<a href="#name-principal-set" class="internal xref">Principal/set</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.4">
-                <p id="section-toc.1-1.2.2.4.1"><a href="#section-2.4" class="auto internal xref">2.4</a>.&nbsp;&nbsp;<a href="#name-principal-query" class="internal xref">Principal/query</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.4.2.1">
-                    <p id="section-toc.1-1.2.2.4.2.1.1"><a href="#section-2.4.1" class="auto internal xref">2.4.1</a>.&nbsp;&nbsp;<a href="#name-filtering" class="internal xref">Filtering</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.5">
-                <p id="section-toc.1-1.2.2.5.1"><a href="#section-2.5" class="auto internal xref">2.5</a>.&nbsp;&nbsp;<a href="#name-principal-querychanges" class="internal xref">Principal/queryChanges</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.&nbsp;&nbsp;<a href="#name-share-notifications" class="internal xref">Share Notifications</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.&nbsp;&nbsp;<a href="#name-auto-deletion-of-notificati" class="internal xref">Auto-deletion of Notifications</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.&nbsp;&nbsp;<a href="#name-object-properties" class="internal xref">Object Properties</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.&nbsp;&nbsp;<a href="#name-sharenotification-get" class="internal xref">ShareNotification/get</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
-                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.&nbsp;&nbsp;<a href="#name-sharenotification-changes" class="internal xref">ShareNotification/changes</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5">
-                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.&nbsp;&nbsp;<a href="#name-sharenotification-set" class="internal xref">ShareNotification/set</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.6">
-                <p id="section-toc.1-1.3.2.6.1"><a href="#section-3.6" class="auto internal xref">3.6</a>.&nbsp;&nbsp;<a href="#name-sharenotification-query" class="internal xref">ShareNotification/query</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.6.2.1">
-                    <p id="section-toc.1-1.3.2.6.2.1.1"><a href="#section-3.6.1" class="auto internal xref">3.6.1</a>.&nbsp;&nbsp;<a href="#name-filtering-2" class="internal xref">Filtering</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.6.2.2">
-                    <p id="section-toc.1-1.3.2.6.2.2.1"><a href="#section-3.6.2" class="auto internal xref">3.6.2</a>.&nbsp;&nbsp;<a href="#name-sorting" class="internal xref">Sorting</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.7">
-                <p id="section-toc.1-1.3.2.7.1"><a href="#section-3.7" class="auto internal xref">3.7</a>.&nbsp;&nbsp;<a href="#name-sharenotification-querychan" class="internal xref">ShareNotification/queryChanges</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.&nbsp;&nbsp;<a href="#name-framework-for-shared-data" class="internal xref">Framework for Shared Data</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.&nbsp;&nbsp;<a href="#name-example" class="internal xref">Example</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.&nbsp;&nbsp;<a href="#name-internationalisation-consid" class="internal xref">Internationalisation Considerations</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.&nbsp;&nbsp;<a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
-                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.&nbsp;&nbsp;<a href="#name-spoofing" class="internal xref">Spoofing</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
-                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.&nbsp;&nbsp;<a href="#name-unnoticed-sharing" class="internal xref">Unnoticed Sharing</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
-                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.&nbsp;&nbsp;<a href="#name-denial-of-service" class="internal xref">Denial of Service</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.4">
-                <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="auto internal xref">6.4</a>.&nbsp;&nbsp;<a href="#name-unauthorised-principals" class="internal xref">Unauthorised Principals</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.&nbsp;&nbsp;<a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.&nbsp;&nbsp;<a href="#name-jmap-capability-registratio" class="internal xref">JMAP Capability Registration for "principals"</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.&nbsp;&nbsp;<a href="#name-jmap-capability-registration" class="internal xref">JMAP Capability Registration for "principals:owner"</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
-                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.&nbsp;&nbsp;<a href="#name-jmap-data-type-registration" class="internal xref">JMAP Data Type Registration for "Principal"</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4">
-                <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="auto internal xref">7.4</a>.&nbsp;&nbsp;<a href="#name-jmap-data-type-registration-" class="internal xref">JMAP Data Type Registration for "ShareNotification"</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.&nbsp;&nbsp;<a href="#name-normative-references" class="internal xref">Normative References</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.&nbsp;&nbsp;<a href="#name-informative-references" class="internal xref">Informative References</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
-</li>
-        </ul>
-</nav>
-</section>
-</div>
 <div id="introduction">
 <section id="section-1">
-      <h2 id="name-introduction">
-<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
-      </h2>
+      <h2 id="name-introduction"><a href="#section-1">1.&nbsp;&nbsp;Introduction</a></h2>
 <p id="section-1-1">JMAP (<span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> JSON Meta Application Protocol) is a generic protocol for synchronizing data, such as mail, calendars or contacts, between a client and a server. It is optimized for mobile and web environments, and provides a consistent interface to query, read, and modify different data types, including comprehensive error handling.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">This specification defines a data model to represent entities in a collaborative environment, and a framework for sharing data between them that can be used to provide a consistent sharing model for different data types. It does not define <em>what</em> may be shared, or the granularity of permissions, as this will depend on the data in question.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <div id="notational-conventions">
 <section id="section-1.1">
-        <h3 id="name-notational-conventions">
-<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-notational-conventions" class="section-name selfRef">Notational Conventions</a>
-        </h3>
+        <h3 id="name-notational-conventions"><a href="#section-1.1">1.1.&nbsp;&nbsp;Notational Conventions</a></h3>
 <p id="section-1.1-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">Type signatures, examples, and property descriptions in this document follow the conventions established in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-1.1" class="relref">Section 1.1</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.  Data types defined in the core specification are also used in this document.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 <p id="section-1.1-3">Examples of API exchanges only show the methodCalls array of the Request object or the methodResponses array of the Response object. For compactness, the rest of the Request/Response object is omitted.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
@@ -270,27 +28,21 @@ meta:
 </div>
 <div id="terminology">
 <section id="section-1.2">
-        <h3 id="name-terminology">
-<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
-        </h3>
+        <h3 id="name-terminology"><a href="#section-1.2">1.2.&nbsp;&nbsp;Terminology</a></h3>
 <p id="section-1.2-1">The same terminology is used in this document as in the core JMAP specification, see <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-1.6" class="relref">Section 1.6</a></span>.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 <p id="section-1.2-2">The terms Principal, and ShareNotification (with these specific capitalizations) are used to refer to the data types defined in this document and instances of those data types.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="data-model-overview">
 <section id="section-1.3">
-        <h3 id="name-data-model-overview">
-<a href="#section-1.3" class="section-number selfRef">1.3. </a><a href="#name-data-model-overview" class="section-name selfRef">Data Model Overview</a>
-        </h3>
+        <h3 id="name-data-model-overview"><a href="#section-1.3">1.3.&nbsp;&nbsp;Data Model Overview</a></h3>
 <p id="section-1.3-1">A Principal (see <a href="#principals" class="auto internal xref">Section 2</a>) represents an individual, team, or resource (e.g., a room or projector). The object contains information about the entity being represented, such as a name, description, and time zone. It may also hold domain-specific information. A Principal may be associated with zero or more Accounts (see <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-1.6.2" class="relref">Section 1.6.2</a></span>) containing data belonging to the Principal. Managing the set of Principals within a system is out of scope for this specification, as it is highly domain specific. It is likely to map directly from a directory service or other user management system.<a href="#section-1.3-1" class="pilcrow">¶</a></p>
 <p id="section-1.3-2">Data types may allow users to share data with others by assigning permissions to Principals. When a user's permissions are changed, a ShareNotification object is created for them so a client can inform the user of the changes.<a href="#section-1.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="subscriptions">
 <section id="section-1.4">
-        <h3 id="name-subscribing-to-shared-data">
-<a href="#section-1.4" class="section-number selfRef">1.4. </a><a href="#name-subscribing-to-shared-data" class="section-name selfRef">Subscribing to Shared Data</a>
-        </h3>
+        <h3 id="name-subscribing-to-shared-data"><a href="#section-1.4">1.4.&nbsp;&nbsp;Subscribing to Shared Data</a></h3>
 <p id="section-1.4-1">Permissions determine whether a user <em>may</em> access data, but not whether they <em>want</em> to. Some shared data is of equal importance as the user's own, while other data is just there should the user wish to explicitly go find it. Clients will often want to differentiate the two. For example, a company may share mailing list archives for all departments with all employees, but a user may only generally be interested in the few they belong to. They would have <em>permission</em> to access many mailboxes, but can <em>subscribe</em> to just the ones they care about. The client would provide separate interfaces for reading mail in subscribed mailboxes and browsing all mailboxes they have permission to access in order to manage which they are subscribed to.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
 <p id="section-1.4-2">The JMAP Session object (see <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-2" class="relref">Section 2</a></span>) is defined to include an object in the <code>accounts</code> property for every account that the user has access to. Collaborative systems may share data between a very large number of Principals, most of which the user does not care about day-to-day. For servers implementing this specification, the Session object <span class="bcp14">MUST</span> only include Accounts where either the user is subscribed to at least one record (see <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-1.6.3" class="relref">Section 1.6.3</a></span>) in the account, or the account belongs to the user. StateChange events (<span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-7.1" class="relref">Section 7.1</a></span>) for changes to data <span class="bcp14">SHOULD</span> only be sent for data the user has subscribed to and <span class="bcp14">MUST NOT</span> be sent for any account where the user is not subscribed to any records in the account, except where that account belongs to the user.<a href="#section-1.4-2" class="pilcrow">¶</a></p>
 <p id="section-1.4-3">The server <span class="bcp14">MAY</span> reject the user's attempt to subscribe to some resources even if they have permission to access them (e.g., a calendar representing a location).<a href="#section-1.4-3" class="pilcrow">¶</a></p>
@@ -299,15 +51,11 @@ meta:
 </div>
 <div id="addition-to-the-capabilities-object">
 <section id="section-1.5">
-        <h3 id="name-addition-to-the-capabilitie">
-<a href="#section-1.5" class="section-number selfRef">1.5. </a><a href="#name-addition-to-the-capabilitie" class="section-name selfRef">Addition to the Capabilities Object</a>
-        </h3>
+        <h3 id="name-addition-to-the-capabilitie"><a href="#section-1.5">1.5.&nbsp;&nbsp;Addition to the Capabilities Object</a></h3>
 <p id="section-1.5-1">The capabilities object is returned as part of the JMAP Session object; see <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-2" class="relref">Section 2</a></span>. This document defines two additional capability URIs.<a href="#section-1.5-1" class="pilcrow">¶</a></p>
 <div id="urn-ietf-params-jmap-principals">
 <section id="section-1.5.1">
-          <h4 id="name-urnietfparamsjmapprincipals">
-<a href="#section-1.5.1" class="section-number selfRef">1.5.1. </a><a href="#name-urnietfparamsjmapprincipals" class="section-name selfRef">urn:ietf:params:jmap:principals</a>
-          </h4>
+          <h4 id="name-urnietfparamsjmapprincipals"><a href="#section-1.5.1">1.5.1.&nbsp;&nbsp;urn:ietf:params:jmap:principals</a></h4>
 <p id="section-1.5.1-1">The <code>urn:ietf:params:jmap:principals</code> capability represents support for the Principal and ShareNotification data types and associated API methods.<a href="#section-1.5.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.5.1-2">The value of this property in the JMAP Session capabilities property is an empty object.<a href="#section-1.5.1-2" class="pilcrow">¶</a></p>
 <p id="section-1.5.1-3">The value of this property in an account’s accountCapabilities property is an object that <span class="bcp14">MUST</span> contain the following information on server capabilities and permissions for that account:<a href="#section-1.5.1-3" class="pilcrow">¶</a></p>
@@ -321,9 +69,7 @@ meta:
 </div>
 <div id="urn-ietf-params-jmap-principals-owner">
 <section id="section-1.5.2">
-          <h4 id="name-urnietfparamsjmapprincipalso">
-<a href="#section-1.5.2" class="section-number selfRef">1.5.2. </a><a href="#name-urnietfparamsjmapprincipalso" class="section-name selfRef">urn:ietf:params:jmap:principals:owner</a>
-          </h4>
+          <h4 id="name-urnietfparamsjmapprincipalso"><a href="#section-1.5.2">1.5.2.&nbsp;&nbsp;urn:ietf:params:jmap:principals:owner</a></h4>
 <p id="section-1.5.2-1">The URI <code>urn:ietf:params:jmap:principals:owner</code> is solely used as a key in an account’s accountCapabilities property. It does not appear in the JMAP Session capabilities — support is indicated by the <code>urn:ietf:params:jmap:principals</code> URI being present in the session capabilities.<a href="#section-1.5.2-1" class="pilcrow">¶</a></p>
 <p id="section-1.5.2-2">If <code>urn:ietf:params:jmap:principals:owner</code> is a key in an account’s accountCapabilities, that account (and data therein) is owned by a Principal. Some accounts may not be owned by a Principal (e.g., the account that contains the data for the Principals themselves), in which case this property is omitted.<a href="#section-1.5.2-2" class="pilcrow">¶</a></p>
 <p id="section-1.5.2-3">The value of this property is an object with the following properties:<a href="#section-1.5.2-3" class="pilcrow">¶</a></p>
@@ -346,9 +92,7 @@ capability that contains the corresponding Principal object.<a href="#section-1.
 </div>
 <div id="principals">
 <section id="section-2">
-      <h2 id="name-principals">
-<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-principals" class="section-name selfRef">Principals</a>
-      </h2>
+      <h2 id="name-principals"><a href="#section-2">2.&nbsp;&nbsp;Principals</a></h2>
 <p id="section-2-1">A Principal represents an individual, group, location (e.g., a room), resource (e.g., a projector) or other entity in a collaborative environment. Sharing in JMAP is generally configured by assigning rights to certain data within an account to other Principals. For example, a user may assign permission to read their calendar to a Principal representing another user or their team.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">In a shared environment such as a workplace, a user may have access to a large number of Principals.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">In most systems, the user will have access to a single Account containing Principal objects. In some situations, for example when aggregating data from different places, there may be multiple Accounts containing Principal objects.<a href="#section-2-3" class="pilcrow">¶</a></p>
@@ -407,25 +151,19 @@ for this Principal that the user has access to, or null if none.<a href="#sectio
       </ul>
 <div id="principal-get">
 <section id="section-2.1">
-        <h3 id="name-principal-get">
-<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-principal-get" class="section-name selfRef">Principal/get</a>
-        </h3>
+        <h3 id="name-principal-get"><a href="#section-2.1">2.1.&nbsp;&nbsp;Principal/get</a></h3>
 <p id="section-2.1-1">This is a standard "/get" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.1" class="relref">Section 5.1</a></span>.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="principal-changes">
 <section id="section-2.2">
-        <h3 id="name-principal-changes">
-<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-principal-changes" class="section-name selfRef">Principal/changes</a>
-        </h3>
+        <h3 id="name-principal-changes"><a href="#section-2.2">2.2.&nbsp;&nbsp;Principal/changes</a></h3>
 <p id="section-2.2-1">This is a standard "/changes" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.2" class="relref">Section 5.2</a></span>. Note: implementations backed by an external directory may be unable to calculate changes. In this case, they will always return a "cannotCalculateChanges" error as described in the core JMAP specification.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="principal-set">
 <section id="section-2.3">
-        <h3 id="name-principal-set">
-<a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-principal-set" class="section-name selfRef">Principal/set</a>
-        </h3>
+        <h3 id="name-principal-set"><a href="#section-2.3">2.3.&nbsp;&nbsp;Principal/set</a></h3>
 <p id="section-2.3-1">This is a standard "/set" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.3" class="relref">Section 5.3</a></span>.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
 <p id="section-2.3-2">Managing Principals is likely tied to a directory service or some other vendor-specific solution. This management may occur out-of-band, or via an additional capability defined elsewhere. Allowing direct user modification of properties has security considerations, as noted in <a href="#security-considerations" class="auto internal xref">Section 6</a>. Servers MUST reject any change it doesn’t allow with a <code>forbidden</code> SetError.<a href="#section-2.3-2" class="pilcrow">¶</a></p>
 <p id="section-2.3-3">Where a server does support changes via this API, it <span class="bcp14">SHOULD</span> allow an update to the "name", "description" and "timeZone" properties of the Principal with the same id as the "currentUserPrincipalId" in the Account capabilities. This allows the user to update their own details.<a href="#section-2.3-3" class="pilcrow">¶</a></p>
@@ -433,15 +171,11 @@ for this Principal that the user has access to, or null if none.<a href="#sectio
 </div>
 <div id="principal-query">
 <section id="section-2.4">
-        <h3 id="name-principal-query">
-<a href="#section-2.4" class="section-number selfRef">2.4. </a><a href="#name-principal-query" class="section-name selfRef">Principal/query</a>
-        </h3>
+        <h3 id="name-principal-query"><a href="#section-2.4">2.4.&nbsp;&nbsp;Principal/query</a></h3>
 <p id="section-2.4-1">This is a standard "/query" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.5" class="relref">Section 5.5</a></span><a href="#section-2.4-1" class="pilcrow">¶</a></p>
 <div id="filtering">
 <section id="section-2.4.1">
-          <h4 id="name-filtering">
-<a href="#section-2.4.1" class="section-number selfRef">2.4.1. </a><a href="#name-filtering" class="section-name selfRef">Filtering</a>
-          </h4>
+          <h4 id="name-filtering"><a href="#section-2.4.1">2.4.1.&nbsp;&nbsp;Filtering</a></h4>
 <p id="section-2.4.1-1">A <strong>FilterCondition</strong> object has the following properties, all of which are optional:<a href="#section-2.4.1-1" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-2.4.1-2.1">
@@ -477,9 +211,7 @@ for this Principal that the user has access to, or null if none.<a href="#sectio
 </div>
 <div id="principal-querychanges">
 <section id="section-2.5">
-        <h3 id="name-principal-querychanges">
-<a href="#section-2.5" class="section-number selfRef">2.5. </a><a href="#name-principal-querychanges" class="section-name selfRef">Principal/queryChanges</a>
-        </h3>
+        <h3 id="name-principal-querychanges"><a href="#section-2.5">2.5.&nbsp;&nbsp;Principal/queryChanges</a></h3>
 <p id="section-2.5-1">This is a standard "/queryChanges" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.6" class="relref">Section 5.6</a></span>. Note: implementations backed by an external directory may be unable to calculate changes. In this case, they will always return a "cannotCalculateChanges" error as described in the core JMAP specification.<a href="#section-2.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -487,26 +219,20 @@ for this Principal that the user has access to, or null if none.<a href="#sectio
 </div>
 <div id="share-notifications">
 <section id="section-3">
-      <h2 id="name-share-notifications">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-share-notifications" class="section-name selfRef">Share Notifications</a>
-      </h2>
+      <h2 id="name-share-notifications"><a href="#section-3">3.&nbsp;&nbsp;Share Notifications</a></h2>
 <p id="section-3-1">The ShareNotification data type records when the user's permissions to access a shared object changes. ShareNotification are only created by the server; users cannot create them explicitly. Notifications are stored in the same Account as the Principals.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">Clients may present the list of notifications to the user and allow them to dismiss them. To dismiss a notification you use a standard "/set" call to destroy it.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <p id="section-3-3">The server <span class="bcp14">SHOULD</span> create a ShareNotification whenever the user's permissions change on an object. It <span class="bcp14">MAY</span> choose not to create a notification for permission changes to a group Principal, even if the user is in the group, if this is more likely to be overwhelming than helpful, or would create excessive notifications within the system.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <div id="auto-deletion-of-notifications">
 <section id="section-3.1">
-        <h3 id="name-auto-deletion-of-notificati">
-<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-auto-deletion-of-notificati" class="section-name selfRef">Auto-deletion of Notifications</a>
-        </h3>
+        <h3 id="name-auto-deletion-of-notificati"><a href="#section-3.1">3.1.&nbsp;&nbsp;Auto-deletion of Notifications</a></h3>
 <p id="section-3.1-1">The server <span class="bcp14">MAY</span> limit the maximum number of notifications it will store for a user. When the limit is reached, any new notification will cause the previously oldest notification to be automatically deleted.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1-2">The server <span class="bcp14">MAY</span> coalesce notifications if appropriate, or remove notifications that it deems are no longer relevant or after a certain period of time.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="object-properties">
 <section id="section-3.2">
-        <h3 id="name-object-properties">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-object-properties" class="section-name selfRef">Object Properties</a>
-        </h3>
+        <h3 id="name-object-properties"><a href="#section-3.2">3.2.&nbsp;&nbsp;Object Properties</a></h3>
 <p id="section-3.2-1">The <strong>ShareNotification</strong> object has the following properties:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-3.2-2.1">
@@ -564,25 +290,19 @@ for this Principal that the user has access to, or null if none.<a href="#sectio
 </div>
 <div id="sharenotification-get">
 <section id="section-3.3">
-        <h3 id="name-sharenotification-get">
-<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-sharenotification-get" class="section-name selfRef">ShareNotification/get</a>
-        </h3>
+        <h3 id="name-sharenotification-get"><a href="#section-3.3">3.3.&nbsp;&nbsp;ShareNotification/get</a></h3>
 <p id="section-3.3-1">This is a standard "/get" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.1" class="relref">Section 5.1</a></span>.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sharenotification-changes">
 <section id="section-3.4">
-        <h3 id="name-sharenotification-changes">
-<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-sharenotification-changes" class="section-name selfRef">ShareNotification/changes</a>
-        </h3>
+        <h3 id="name-sharenotification-changes"><a href="#section-3.4">3.4.&nbsp;&nbsp;ShareNotification/changes</a></h3>
 <p id="section-3.4-1">This is a standard "/changes" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.2" class="relref">Section 5.2</a></span>.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sharenotification-set">
 <section id="section-3.5">
-        <h3 id="name-sharenotification-set">
-<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-sharenotification-set" class="section-name selfRef">ShareNotification/set</a>
-        </h3>
+        <h3 id="name-sharenotification-set"><a href="#section-3.5">3.5.&nbsp;&nbsp;ShareNotification/set</a></h3>
 <p id="section-3.5-1">This is a standard "/set" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.3" class="relref">Section 5.3</a></span>.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
 <p id="section-3.5-2">Only destroy is supported; any attempt to create/update <span class="bcp14">MUST</span> be rejected with a
 <code>forbidden</code> SetError.<a href="#section-3.5-2" class="pilcrow">¶</a></p>
@@ -590,15 +310,11 @@ for this Principal that the user has access to, or null if none.<a href="#sectio
 </div>
 <div id="sharenotification-query">
 <section id="section-3.6">
-        <h3 id="name-sharenotification-query">
-<a href="#section-3.6" class="section-number selfRef">3.6. </a><a href="#name-sharenotification-query" class="section-name selfRef">ShareNotification/query</a>
-        </h3>
+        <h3 id="name-sharenotification-query"><a href="#section-3.6">3.6.&nbsp;&nbsp;ShareNotification/query</a></h3>
 <p id="section-3.6-1">This is a standard "/query" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.5" class="relref">Section 5.5</a></span>.<a href="#section-3.6-1" class="pilcrow">¶</a></p>
 <div id="filtering-1">
 <section id="section-3.6.1">
-          <h4 id="name-filtering-2">
-<a href="#section-3.6.1" class="section-number selfRef">3.6.1. </a><a href="#name-filtering-2" class="section-name selfRef">Filtering</a>
-          </h4>
+          <h4 id="name-filtering-2"><a href="#section-3.6.1">3.6.1.&nbsp;&nbsp;Filtering</a></h4>
 <p id="section-3.6.1-1">A <strong>FilterCondition</strong> object has the following properties, all of which are optional:<a href="#section-3.6.1-1" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-3.6.1-2.1">
@@ -623,9 +339,7 @@ for this Principal that the user has access to, or null if none.<a href="#sectio
 </div>
 <div id="sorting">
 <section id="section-3.6.2">
-          <h4 id="name-sorting">
-<a href="#section-3.6.2" class="section-number selfRef">3.6.2. </a><a href="#name-sorting" class="section-name selfRef">Sorting</a>
-          </h4>
+          <h4 id="name-sorting"><a href="#section-3.6.2">3.6.2.&nbsp;&nbsp;Sorting</a></h4>
 <p id="section-3.6.2-1">The "created" property <span class="bcp14">MUST</span> be supported for sorting.<a href="#section-3.6.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -633,9 +347,7 @@ for this Principal that the user has access to, or null if none.<a href="#sectio
 </div>
 <div id="sharenotification-querychanges">
 <section id="section-3.7">
-        <h3 id="name-sharenotification-querychan">
-<a href="#section-3.7" class="section-number selfRef">3.7. </a><a href="#name-sharenotification-querychan" class="section-name selfRef">ShareNotification/queryChanges</a>
-        </h3>
+        <h3 id="name-sharenotification-querychan"><a href="#section-3.7">3.7.&nbsp;&nbsp;ShareNotification/queryChanges</a></h3>
 <p id="section-3.7-1">This is a standard "/queryChanges" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.6" class="relref">Section 5.6</a></span>.<a href="#section-3.7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -643,9 +355,7 @@ for this Principal that the user has access to, or null if none.<a href="#sectio
 </div>
 <div id="framework-for-shared-data">
 <section id="section-4">
-      <h2 id="name-framework-for-shared-data">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-framework-for-shared-data" class="section-name selfRef">Framework for Shared Data</a>
-      </h2>
+      <h2 id="name-framework-for-shared-data"><a href="#section-4">4.&nbsp;&nbsp;Framework for Shared Data</a></h2>
 <p id="section-4-1">Shareable data types <span class="bcp14">MUST</span> define the following three properties:<a href="#section-4-1" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-4-2.1">
@@ -664,9 +374,7 @@ for this Principal that the user has access to, or null if none.<a href="#sectio
       </ul>
 <div id="example">
 <section id="section-4.1">
-        <h3 id="name-example">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-example" class="section-name selfRef">Example</a>
-        </h3>
+        <h3 id="name-example"><a href="#section-4.1">4.1.&nbsp;&nbsp;Example</a></h3>
 <p id="section-4.1-1">Suppose we are designing a data model for a very simple todo list. There is a Todo data type representing a single item to do, each of which belongs to a single TodoList. The specification makes the lists shareable by referencing this document and defining the common properties.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.1-2">First it would define a set of domain-specific rights. For example, a TodoListRights object may have the following properties:<a href="#section-4.1-2" class="pilcrow">¶</a></p>
 <ul class="compact">
@@ -807,48 +515,36 @@ for this Principal that the user has access to, or null if none.<a href="#sectio
 </section>
 </div>
 <section id="section-5">
-      <h2 id="name-internationalisation-consid">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-internationalisation-consid" class="section-name selfRef">Internationalisation Considerations</a>
-      </h2>
+      <h2 id="name-internationalisation-consid"><a href="#section-5">5.&nbsp;&nbsp;Internationalisation Considerations</a></h2>
 <p id="section-5-1">Experience has shown that unrestricted use of Unicode can lead to problems such as inconsistent rendering, users reading text and interpreting it differently than intended, and unexpected results when copying text from one location to another. Servers MAY choose to mitigate this by restricting the set of characters allowed in otherwise unconstrained <code>String</code> fields. The FreeformClass, as documented in <span>[<a href="#RFC8264" class="cite xref">RFC8264</a>], <a href="https://rfc-editor.org/rfc/rfc8264#section-4.3" class="relref">Section 4.3</a></span> might be a good starting point for this.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">Attempts to set a value containing code points outside of the permissible set can be handled in a few ways by the server. The first option is to simply strip the forbidden characters and store the resulting string. This is likely to be appropriate for control characters for example, where they can end up in data accidentally due to copy-and-paste issues, and are probably invisible to the end user. JMAP allows the server to transform data on create/update, as long as any changed properties are returned to the client in the <code>/set</code> response, so it knows what has changed, as per <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.3" class="relref">Section 5.3</a></span>. Alternatively, the server MAY just reject the create/update with an <code>invalidProperties</code> SetError.<a href="#section-5-2" class="pilcrow">¶</a></p>
 </section>
 <div id="security-considerations">
 <section id="section-6">
-      <h2 id="name-security-considerations">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
-      </h2>
+      <h2 id="name-security-considerations"><a href="#section-6">6.&nbsp;&nbsp;Security Considerations</a></h2>
 <p id="section-6-1">All security considerations of JMAP <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> apply to this specification. Additional considerations are detailed below.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <div id="spoofing">
 <section id="section-6.1">
-        <h3 id="name-spoofing">
-<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-spoofing" class="section-name selfRef">Spoofing</a>
-        </h3>
+        <h3 id="name-spoofing"><a href="#section-6.1">6.1.&nbsp;&nbsp;Spoofing</a></h3>
 <p id="section-6.1-1">Allowing users to edit their own Principal's name (and, to a lesser extent, email, description, or type) could allow a user to change their Principal to look like another user in the system, potentially tricking others into sharing private data with them. Servers may choose to forbid this, and <span class="bcp14">SHOULD</span> keep logs of such changes to provide an audit trail.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.1-2">Note that simply forbidding the use of a name already in the system is insufficient protection, as a malicious user could still change their name to something easily confused with the existing name by using trivial misspellings or visually similar Unicode characters.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="unnoticed-sharing">
 <section id="section-6.2">
-        <h3 id="name-unnoticed-sharing">
-<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-unnoticed-sharing" class="section-name selfRef">Unnoticed Sharing</a>
-        </h3>
+        <h3 id="name-unnoticed-sharing"><a href="#section-6.2">6.2.&nbsp;&nbsp;Unnoticed Sharing</a></h3>
 <p id="section-6.2-1">Sharing data with another user allows someone to turn a transitory account compromise (e.g., brief access to an unlocked or logged-in client) into a persistent compromise (by setting up sharing with a user that is controlled by the attacker). This can be mitigated by requiring further authorisation for configuring sharing, or sending notifications to the sharer via another channel whenever a new sharee is added.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="dos">
 <section id="section-6.3">
-        <h3 id="name-denial-of-service">
-<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-denial-of-service" class="section-name selfRef">Denial of Service</a>
-        </h3>
+        <h3 id="name-denial-of-service"><a href="#section-6.3">6.3.&nbsp;&nbsp;Denial of Service</a></h3>
 <p id="section-6.3-1">By creating many changes to the sharing status of objects, a user can cause many ShareNotifications to be generated, which could lead to resource exhaustion. Servers can mitigate this by coalescing multiple changes to the same object into a single notification, limiting the maximum number of notifications it stores per user, and/or rate limiting the changes to sharing permissions in the first place. Automatically deleting older notifications after reaching a limit can mean the user is not made aware of a sharing change, which can itself be a security issue. For this reason, it is better to coalesce changes and use other mitigation strategies.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="unauthorised-principals">
 <section id="section-6.4">
-        <h3 id="name-unauthorised-principals">
-<a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-unauthorised-principals" class="section-name selfRef">Unauthorised Principals</a>
-        </h3>
+        <h3 id="name-unauthorised-principals"><a href="#section-6.4">6.4.&nbsp;&nbsp;Unauthorised Principals</a></h3>
 <p id="section-6.4-1">The set of Principals within a shared environment <span class="bcp14">MUST</span> be strictly controlled. If adding a new Principal is open to the public, risks include:<a href="#section-6.4-1" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-6.4-2.1">An increased risk of a user accidentally sharing data with an unintended person.<a href="#section-6.4-2.1" class="pilcrow">¶</a>
@@ -864,14 +560,10 @@ for this Principal that the user has access to, or null if none.<a href="#sectio
 </div>
 <div id="iana-considerations">
 <section id="section-7">
-      <h2 id="name-iana-considerations">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
-      </h2>
+      <h2 id="name-iana-considerations"><a href="#section-7">7.&nbsp;&nbsp;IANA Considerations</a></h2>
 <div id="jmap-capability-registration-for-principals">
 <section id="section-7.1">
-        <h3 id="name-jmap-capability-registratio">
-<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-jmap-capability-registratio" class="section-name selfRef">JMAP Capability Registration for "principals"</a>
-        </h3>
+        <h3 id="name-jmap-capability-registratio"><a href="#section-7.1">7.1.&nbsp;&nbsp;JMAP Capability Registration for "principals"</a></h3>
 <p id="section-7.1-1">IANA will register the "principals" JMAP Capability as follows:<a href="#section-7.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.1-2">Capability Name: <code>urn:ietf:params:jmap:principals</code><a href="#section-7.1-2" class="pilcrow">¶</a></p>
 <p id="section-7.1-3">Specification document: this document<a href="#section-7.1-3" class="pilcrow">¶</a></p>
@@ -882,9 +574,7 @@ for this Principal that the user has access to, or null if none.<a href="#sectio
 </div>
 <div id="jmap-capability-registration-for-principals-owner">
 <section id="section-7.2">
-        <h3 id="name-jmap-capability-registration">
-<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-jmap-capability-registration" class="section-name selfRef">JMAP Capability Registration for "principals:owner"</a>
-        </h3>
+        <h3 id="name-jmap-capability-registration"><a href="#section-7.2">7.2.&nbsp;&nbsp;JMAP Capability Registration for "principals:owner"</a></h3>
 <p id="section-7.2-1">IANA will register the "principals:owner" JMAP Capability as follows:<a href="#section-7.2-1" class="pilcrow">¶</a></p>
 <p id="section-7.2-2">Capability Name: <code>urn:ietf:params:jmap:principals:owner</code><a href="#section-7.2-2" class="pilcrow">¶</a></p>
 <p id="section-7.2-3">Specification document: this document<a href="#section-7.2-3" class="pilcrow">¶</a></p>
@@ -895,9 +585,7 @@ for this Principal that the user has access to, or null if none.<a href="#sectio
 </div>
 <div id="jmap-data-type-registration-for-principal">
 <section id="section-7.3">
-        <h3 id="name-jmap-data-type-registration">
-<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-jmap-data-type-registration" class="section-name selfRef">JMAP Data Type Registration for "Principal"</a>
-        </h3>
+        <h3 id="name-jmap-data-type-registration"><a href="#section-7.3">7.3.&nbsp;&nbsp;JMAP Data Type Registration for "Principal"</a></h3>
 <p id="section-7.3-1">IANA will register the "Principal" JMAP Data Type as follows:<a href="#section-7.3-1" class="pilcrow">¶</a></p>
 <p id="section-7.3-2">Type Name: <code>Principal</code><a href="#section-7.3-2" class="pilcrow">¶</a></p>
 <p id="section-7.3-3">Can reference blobs: no<a href="#section-7.3-3" class="pilcrow">¶</a></p>
@@ -908,9 +596,7 @@ for this Principal that the user has access to, or null if none.<a href="#sectio
 </div>
 <div id="jmap-data-type-registration-for-sharenotification">
 <section id="section-7.4">
-        <h3 id="name-jmap-data-type-registration-">
-<a href="#section-7.4" class="section-number selfRef">7.4. </a><a href="#name-jmap-data-type-registration-" class="section-name selfRef">JMAP Data Type Registration for "ShareNotification"</a>
-        </h3>
+        <h3 id="name-jmap-data-type-registration-"><a href="#section-7.4">7.4.&nbsp;&nbsp;JMAP Data Type Registration for "ShareNotification"</a></h3>
 <p id="section-7.4-1">IANA will register the "ShareNotification" JMAP Data Type as follows:<a href="#section-7.4-1" class="pilcrow">¶</a></p>
 <p id="section-7.4-2">Type Name: <code>ShareNotification</code><a href="#section-7.4-2" class="pilcrow">¶</a></p>
 <p id="section-7.4-3">Can reference blobs: no<a href="#section-7.4-3" class="pilcrow">¶</a></p>
@@ -922,9 +608,7 @@ for this Principal that the user has access to, or null if none.<a href="#sectio
 </section>
 </div>
 <section id="section-8">
-      <h2 id="name-normative-references">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
-      </h2>
+      <h2 id="name-normative-references"><a href="#section-8">8.&nbsp;&nbsp;Normative References</a></h2>
 <dl class="references">
 <dt id="RFC2119">[RFC2119]</dt>
       <dd>
@@ -945,9 +629,7 @@ for this Principal that the user has access to, or null if none.<a href="#sectio
 </dl>
 </section>
 <section id="section-9">
-      <h2 id="name-informative-references">
-<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
-      </h2>
+      <h2 id="name-informative-references"><a href="#section-9">9.&nbsp;&nbsp;Informative References</a></h2>
 <dl class="references">
 <dt id="RFC8264">[RFC8264]</dt>
     <dd>
@@ -955,31 +637,44 @@ for this Principal that the user has access to, or null if none.<a href="#sectio
 <dd class="break"></dd>
 </dl>
 </section>
-<div id="authors-addresses">
-<section id="appendix-A">
-      <h2 id="name-authors-address">
-<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
-      </h2>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Neil Jenkins (<span class="role">editor</span>)</span></div>
-<div dir="auto" class="left"><span class="org">Fastmail</span></div>
-<div dir="auto" class="left"><span class="street-address">PO Box 234, Collins St West</span></div>
-<div dir="auto" class="left">
-<span class="locality">Melbourne</span>  <span class="postal-code">VIC 8007</span>
-</div>
-<div dir="auto" class="left"><span class="country-name">Australia</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:neilj@fastmailteam.com" class="email">neilj@fastmailteam.com</a>
-</div>
-<div class="url">
-<span>URI:</span>
-<a href="https://www.fastmail.com" class="url">https://www.fastmail.com</a>
-</div>
-</address>
+
+
+
+
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo"><a href="#name-status-of-this-memo">Status of This Memo</a></h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 20 October 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div><div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice"><a href="#name-copyright-notice">Copyright Notice</a></h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2024 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-
-
-
-

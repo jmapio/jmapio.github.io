@@ -1,7 +1,8 @@
 ---
 layout: article-rfc
 permalink: /spec/rfc9610/index.html
-title: RFC 9610
+toc: generated-rfc-toc/rfc9610.html
+title: RFC 9610 – JSON Meta Application Protocol (JMAP) for Contacts
 description: >-
     This document specifies a data model for synchronising contact data with a server using the JSON Meta Application Protocol (JMAP).
 meta:
@@ -12,246 +13,14 @@ meta:
         - JSON
         - contacts
 ---
-
-<div class="table-wrapper"><table class="ears">
-<thead><tr>
-<td class="left">RFC 9610</td>
-<td class="center">JMAP Contacts</td>
-<td class="right">December 2024</td>
-</tr></thead>
-<tfoot><tr>
-<td class="left">Jenkins</td>
-<td class="center">Standards Track</td>
-<td class="right">[Page]</td>
-</tr></tfoot>
-</table></div>
-<div id="external-metadata" class="document-information"></div>
-<div id="internal-metadata" class="document-information">
-<dl id="identifiers">
-<dt class="label-stream">Stream:</dt>
-<dd class="stream">Internet Engineering Task Force (IETF)</dd>
-<dt class="label-rfc">RFC:</dt>
-<dd class="rfc"><a href="https://www.rfc-editor.org/rfc/rfc9610" class="eref">9610</a></dd>
-<dt class="label-category">Category:</dt>
-<dd class="category">Standards Track</dd>
-<dt class="label-published">Published:</dt>
-<dd class="published">
-<time datetime="2024-12" class="published">December 2024</time>
-    </dd>
-<dt class="label-issn">ISSN:</dt>
-<dd class="issn">2070-1721</dd>
-<dt class="label-authors">Author:</dt>
-<dd class="authors">
-<div class="author">
-      <div class="author-name">N. Jenkins, <span class="editor">Ed.</span>
-</div>
-<div class="org">Fastmail</div>
-</div>
-</dd>
-</dl>
-</div>
-
-
-<section id="section-abstract">
-      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document specifies a data model for synchronising contact data with a server using the JSON Meta Application Protocol (JMAP).<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-</section>
-<div id="status-of-memo">
-<section id="section-boilerplate.1">
-        <h2 id="name-status-of-this-memo">
-<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
-        </h2>
-<p id="section-boilerplate.1-1">
-            This is an Internet Standards Track document.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.1-2">
-            This document is a product of the Internet Engineering Task Force
-            (IETF).  It represents the consensus of the IETF community.  It has
-            received public review and has been approved for publication by
-            the Internet Engineering Steering Group (IESG).  Further
-            information on Internet Standards is available in Section 2 of 
-            RFC 7841.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.1-3">
-            Information about the current status of this document, any
-            errata, and how to provide feedback on it may be obtained at
-            <span><a href="https://www.rfc-editor.org/info/rfc9610">https://www.rfc-editor.org/info/rfc9610</a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="copyright">
-<section id="section-boilerplate.2">
-        <h2 id="name-copyright-notice">
-<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
-        </h2>
-<p id="section-boilerplate.2-1">
-            Copyright (c) 2024 IETF Trust and the persons identified as the
-            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.2-2">
-            This document is subject to BCP 78 and the IETF Trust's Legal
-            Provisions Relating to IETF Documents
-            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
-            publication of this document. Please review these documents
-            carefully, as they describe your rights and restrictions with
-            respect to this document. Code Components extracted from this
-            document must include Revised BSD License text as described in
-            Section 4.e of the Trust Legal Provisions and are provided without
-            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="toc">
-<section id="section-toc.1">
-        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
-<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
-        </h2>
-<nav class="toc"><ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
-            <p id="section-toc.1-1.1.1"><a href="#section-1" class="auto internal xref">1</a>.&nbsp;&nbsp;<a href="#name-introduction" class="internal xref">Introduction</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.&nbsp;&nbsp;<a href="#name-notational-conventions" class="internal xref">Notational Conventions</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
-                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.&nbsp;&nbsp;<a href="#name-terminology" class="internal xref">Terminology</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3">
-                <p id="section-toc.1-1.1.2.3.1" class="keepWithNext"><a href="#section-1.3" class="auto internal xref">1.3</a>.&nbsp;&nbsp;<a href="#name-data-model-overview" class="internal xref">Data Model Overview</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4">
-                <p id="section-toc.1-1.1.2.4.1"><a href="#section-1.4" class="auto internal xref">1.4</a>.&nbsp;&nbsp;<a href="#name-addition-to-the-capabilitie" class="internal xref">Addition to the Capabilities Object</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4.2.1">
-                    <p id="section-toc.1-1.1.2.4.2.1.1"><a href="#section-1.4.1" class="auto internal xref">1.4.1</a>.&nbsp;&nbsp;<a href="#name-urnietfparamsjmapcontacts" class="internal xref">urn:ietf:params:jmap:contacts</a></p>
-</li>
-                </ul>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.&nbsp;&nbsp;<a href="#name-addressbooks" class="internal xref">AddressBooks</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
-                <p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1" class="auto internal xref">2.1</a>.&nbsp;&nbsp;<a href="#name-addressbook-get" class="internal xref">AddressBook/get</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
-                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.&nbsp;&nbsp;<a href="#name-addressbook-changes" class="internal xref">AddressBook/changes</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3">
-                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="auto internal xref">2.3</a>.&nbsp;&nbsp;<a href="#name-addressbook-set" class="internal xref">AddressBook/set</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.&nbsp;&nbsp;<a href="#name-contactcards" class="internal xref">ContactCards</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.&nbsp;&nbsp;<a href="#name-contactcard-get" class="internal xref">ContactCard/get</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.&nbsp;&nbsp;<a href="#name-contactcard-changes" class="internal xref">ContactCard/changes</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.&nbsp;&nbsp;<a href="#name-contactcard-query" class="internal xref">ContactCard/query</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.1">
-                    <p id="section-toc.1-1.3.2.3.2.1.1"><a href="#section-3.3.1" class="auto internal xref">3.3.1</a>.&nbsp;&nbsp;<a href="#name-filtering" class="internal xref">Filtering</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.2">
-                    <p id="section-toc.1-1.3.2.3.2.2.1"><a href="#section-3.3.2" class="auto internal xref">3.3.2</a>.&nbsp;&nbsp;<a href="#name-sorting" class="internal xref">Sorting</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
-                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.&nbsp;&nbsp;<a href="#name-contactcard-querychanges" class="internal xref">ContactCard/queryChanges</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5">
-                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.&nbsp;&nbsp;<a href="#name-contactcard-set" class="internal xref">ContactCard/set</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.6">
-                <p id="section-toc.1-1.3.2.6.1"><a href="#section-3.6" class="auto internal xref">3.6</a>.&nbsp;&nbsp;<a href="#name-contactcard-copy" class="internal xref">ContactCard/copy</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.&nbsp;&nbsp;<a href="#name-examples" class="internal xref">Examples</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.&nbsp;&nbsp;<a href="#name-fetching-initial-data" class="internal xref">Fetching Initial Data</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
-                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.&nbsp;&nbsp;<a href="#name-changing-the-default-addres" class="internal xref">Changing the Default Address Book</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.&nbsp;&nbsp;<a href="#name-internationalisation-consid" class="internal xref">Internationalisation Considerations</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.&nbsp;&nbsp;<a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.&nbsp;&nbsp;<a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.&nbsp;&nbsp;<a href="#name-jmap-capability-registratio" class="internal xref">JMAP Capability Registration for "contacts"</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.&nbsp;&nbsp;<a href="#name-jmap-data-type-registration" class="internal xref">JMAP Data Type Registration for "AddressBook"</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
-                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.&nbsp;&nbsp;<a href="#name-jmap-data-type-registration-" class="internal xref">JMAP Data Type Registration for "ContactCard"</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4">
-                <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="auto internal xref">7.4</a>.&nbsp;&nbsp;<a href="#name-jmap-error-codes-registry" class="internal xref">JMAP Error Codes Registry</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4.2.1">
-                    <p id="section-toc.1-1.7.2.4.2.1.1"><a href="#section-7.4.1" class="auto internal xref">7.4.1</a>.&nbsp;&nbsp;<a href="#name-addressbookhascontents" class="internal xref">addressBookHasContents</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.5">
-                <p id="section-toc.1-1.7.2.5.1"><a href="#section-7.5" class="auto internal xref">7.5</a>.&nbsp;&nbsp;<a href="#name-jscontact-property-registra" class="internal xref">JSContact Property Registrations</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.5.2.1">
-                    <p id="section-toc.1-1.7.2.5.2.1.1"><a href="#section-7.5.1" class="auto internal xref">7.5.1</a>.&nbsp;&nbsp;<a href="#name-id" class="internal xref">id</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.5.2.2">
-                    <p id="section-toc.1-1.7.2.5.2.2.1"><a href="#section-7.5.2" class="auto internal xref">7.5.2</a>.&nbsp;&nbsp;<a href="#name-addressbookids" class="internal xref">addressBookIds</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.5.2.3">
-                    <p id="section-toc.1-1.7.2.5.2.3.1"><a href="#section-7.5.3" class="auto internal xref">7.5.3</a>.&nbsp;&nbsp;<a href="#name-blobid" class="internal xref">blobId</a></p>
-</li>
-                </ul>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.&nbsp;&nbsp;<a href="#name-references" class="internal xref">References</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.&nbsp;&nbsp;<a href="#name-normative-references" class="internal xref">Normative References</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
-                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.&nbsp;&nbsp;<a href="#name-informative-references" class="internal xref">Informative References</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
-</li>
-        </ul>
-</nav>
-</section>
-</div>
 <div id="introduction">
 <section id="section-1">
-      <h2 id="name-introduction">
-<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
-      </h2>
+      <h2 id="name-introduction"><a href="#section-1">1.&nbsp;&nbsp;Introduction</a></h2>
 <p id="section-1-1">The JSON Meta Application Protocol (JMAP) <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> is a generic protocol for synchronising data, such as mail, calendars, or contacts, between a client and a server. It is optimised for mobile and web environments and aims to provide a consistent interface to different data types.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">This specification defines a data model for synchronising contacts between a client and a server using JMAP.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <div id="notational-conventions">
 <section id="section-1.1">
-        <h3 id="name-notational-conventions">
-<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-notational-conventions" class="section-name selfRef">Notational Conventions</a>
-        </h3>
+        <h3 id="name-notational-conventions"><a href="#section-1.1">1.1.&nbsp;&nbsp;Notational Conventions</a></h3>
 <p id="section-1.1-1">
     The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
     "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
@@ -262,33 +31,25 @@ meta:
 </div>
 <div id="terminology">
 <section id="section-1.2">
-        <h3 id="name-terminology">
-<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
-        </h3>
+        <h3 id="name-terminology"><a href="#section-1.2">1.2.&nbsp;&nbsp;Terminology</a></h3>
 <p id="section-1.2-1">The same terminology used in the core JMAP specification (see <span><a href="https://rfc-editor.org/rfc/rfc8620#section-1.6" class="relref">Section 1.6</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>) is also used in this document.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 <p id="section-1.2-2">The terms AddressBook and ContactCard (with these specific capitalizations) are used to refer to the data types defined in this document and instances of those data types.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="data-model-overview">
 <section id="section-1.3">
-        <h3 id="name-data-model-overview">
-<a href="#section-1.3" class="section-number selfRef">1.3. </a><a href="#name-data-model-overview" class="section-name selfRef">Data Model Overview</a>
-        </h3>
+        <h3 id="name-data-model-overview"><a href="#section-1.3">1.3.&nbsp;&nbsp;Data Model Overview</a></h3>
 <p id="section-1.3-1">An Account (see <span><a href="https://rfc-editor.org/rfc/rfc8620#section-1.6.2" class="relref">Section 1.6.2</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>) with support for the contact data model contains zero or more AddressBook objects, which is a named collection of zero or more ContactCards. A ContactCard is a representation of a person, company, entity, or a group of such entities in JSContact Card format, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9553#section-2" class="relref">Section 2</a> of [<a href="#RFC9553" class="cite xref">RFC9553</a>]</span>. Each ContactCard belongs to one or more AddressBooks.<a href="#section-1.3-1" class="pilcrow">¶</a></p>
 <p id="section-1.3-2">In servers with support for JMAP Sharing <span>[<a href="#RFC9670" class="cite xref">RFC9670</a>]</span>, users may see and configure sharing of contact data with others. Sharing permissions are managed per AddressBook.<a href="#section-1.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="addition-to-the-capabilities-object">
 <section id="section-1.4">
-        <h3 id="name-addition-to-the-capabilitie">
-<a href="#section-1.4" class="section-number selfRef">1.4. </a><a href="#name-addition-to-the-capabilitie" class="section-name selfRef">Addition to the Capabilities Object</a>
-        </h3>
+        <h3 id="name-addition-to-the-capabilitie"><a href="#section-1.4">1.4.&nbsp;&nbsp;Addition to the Capabilities Object</a></h3>
 <p id="section-1.4-1">The capabilities object is returned as part of the JMAP Session object; see <span><a href="https://rfc-editor.org/rfc/rfc8620#section-2" class="relref">Section 2</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>. This document defines one additional capability URI.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
 <div id="urn-ietf-params-jmap-contacts">
 <section id="section-1.4.1">
-          <h4 id="name-urnietfparamsjmapcontacts">
-<a href="#section-1.4.1" class="section-number selfRef">1.4.1. </a><a href="#name-urnietfparamsjmapcontacts" class="section-name selfRef">urn:ietf:params:jmap:contacts</a>
-          </h4>
+          <h4 id="name-urnietfparamsjmapcontacts"><a href="#section-1.4.1">1.4.1.&nbsp;&nbsp;urn:ietf:params:jmap:contacts</a></h4>
 <p id="section-1.4.1-1">This represents support for the AddressBook and ContactCard data types and associated API methods. The value of this property in the JMAP Session "capabilities" property is an empty object.<a href="#section-1.4.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.4.1-2">The value of this property in an account's "accountCapabilities" property is an object that <span class="bcp14">MUST</span> contain the following information on server capabilities and permissions for that account:<a href="#section-1.4.1-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-1.4.1-3">
@@ -313,9 +74,7 @@ meta:
 </div>
 <div id="addressbooks">
 <section id="section-2">
-      <h2 id="name-addressbooks">
-<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-addressbooks" class="section-name selfRef">AddressBooks</a>
-      </h2>
+      <h2 id="name-addressbooks"><a href="#section-2">2.&nbsp;&nbsp;AddressBooks</a></h2>
 <p id="section-2-1">An AddressBook is a named collection of ContactCards. All ContactCards are associated with one or more AddressBooks.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">An <strong>AddressBook</strong> object has the following properties:<a href="#section-2-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-2-3">
@@ -402,25 +161,19 @@ displayed when the user explicitly requests it. The UI may offer to the user the
 </dl>
 <div id="addressbook-get">
 <section id="section-2.1">
-        <h3 id="name-addressbook-get">
-<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-addressbook-get" class="section-name selfRef">AddressBook/get</a>
-        </h3>
+        <h3 id="name-addressbook-get"><a href="#section-2.1">2.1.&nbsp;&nbsp;AddressBook/get</a></h3>
 <p id="section-2.1-1">This is a standard "/get" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.1" class="relref">Section 5.1</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>. The "ids" argument may be null to fetch all at once.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="addressbook-changes">
 <section id="section-2.2">
-        <h3 id="name-addressbook-changes">
-<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-addressbook-changes" class="section-name selfRef">AddressBook/changes</a>
-        </h3>
+        <h3 id="name-addressbook-changes"><a href="#section-2.2">2.2.&nbsp;&nbsp;AddressBook/changes</a></h3>
 <p id="section-2.2-1">This is a standard "/changes" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.2" class="relref">Section 5.2</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="addressbook-set">
 <section id="section-2.3">
-        <h3 id="name-addressbook-set">
-<a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-addressbook-set" class="section-name selfRef">AddressBook/set</a>
-        </h3>
+        <h3 id="name-addressbook-set"><a href="#section-2.3">2.3.&nbsp;&nbsp;AddressBook/set</a></h3>
 <p id="section-2.3-1">This is a standard "/set" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.3" class="relref">Section 5.3</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, but with the following additional request arguments:<a href="#section-2.3-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-2.3-2">
           <dt id="section-2.3-2.1">
@@ -461,9 +214,7 @@ in this case.<a href="#section-2.3-3" class="pilcrow">¶</a></p>
 </div>
 <div id="contactcards">
 <section id="section-3">
-      <h2 id="name-contactcards">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-contactcards" class="section-name selfRef">ContactCards</a>
-      </h2>
+      <h2 id="name-contactcards"><a href="#section-3">3.&nbsp;&nbsp;ContactCards</a></h2>
 <p id="section-3-1">A <strong>ContactCard</strong> object contains information about a person, company, or other entity, or represents a group of such entities. It is a JSContact Card object as defined in <span><a href="https://rfc-editor.org/rfc/rfc9553#section-2" class="relref">Section 2</a> of [<a href="#RFC9553" class="cite xref">RFC9553</a>]</span> with the following additional properties:<a href="#section-3-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-3-2">
         <dt id="section-3-2.1">
@@ -492,31 +243,23 @@ in this case.<a href="#section-2.3-3" class="pilcrow">¶</a></p>
 Clients should consider the group to contain any ContactCard with a matching uid from any account they have access to that has support for the <code>urn:ietf:params:jmap:contacts</code> capability. Any uid that cannot be found <span class="bcp14">SHOULD</span> be ignored but preserved. For example, suppose a user adds contacts from a shared address book to their private group, then temporarily loses access to this address book. The uids cannot be resolved, so the contacts will disappear from the group. However, if they are given permission to access the data again, the uids will be found and the contacts will reappear.<a href="#section-3-6" class="pilcrow">¶</a></p>
 <div id="contactcard-get">
 <section id="section-3.1">
-        <h3 id="name-contactcard-get">
-<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-contactcard-get" class="section-name selfRef">ContactCard/get</a>
-        </h3>
+        <h3 id="name-contactcard-get"><a href="#section-3.1">3.1.&nbsp;&nbsp;ContactCard/get</a></h3>
 <p id="section-3.1-1">This is a standard "/get" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.1" class="relref">Section 5.1</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contactcard-changes">
 <section id="section-3.2">
-        <h3 id="name-contactcard-changes">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-contactcard-changes" class="section-name selfRef">ContactCard/changes</a>
-        </h3>
+        <h3 id="name-contactcard-changes"><a href="#section-3.2">3.2.&nbsp;&nbsp;ContactCard/changes</a></h3>
 <p id="section-3.2-1">This is a standard "/changes" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.2" class="relref">Section 5.2</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contactcard-query">
 <section id="section-3.3">
-        <h3 id="name-contactcard-query">
-<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-contactcard-query" class="section-name selfRef">ContactCard/query</a>
-        </h3>
+        <h3 id="name-contactcard-query"><a href="#section-3.3">3.3.&nbsp;&nbsp;ContactCard/query</a></h3>
 <p id="section-3.3-1">This is a standard "/query" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.5" class="relref">Section 5.5</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <div id="filtering">
 <section id="section-3.3.1">
-          <h4 id="name-filtering">
-<a href="#section-3.3.1" class="section-number selfRef">3.3.1. </a><a href="#name-filtering" class="section-name selfRef">Filtering</a>
-          </h4>
+          <h4 id="name-filtering"><a href="#section-3.3.1">3.3.1.&nbsp;&nbsp;Filtering</a></h4>
 <p id="section-3.3.1-1">A <strong>FilterCondition</strong> object has the following properties, any of which may be omitted:<a href="#section-3.3.1-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-3.3.1-2">
             <dt id="section-3.3.1-2.1">
@@ -656,9 +399,7 @@ Clients should consider the group to contain any ContactCard with a matching uid
 </div>
 <div id="sorting">
 <section id="section-3.3.2">
-          <h4 id="name-sorting">
-<a href="#section-3.3.2" class="section-number selfRef">3.3.2. </a><a href="#name-sorting" class="section-name selfRef">Sorting</a>
-          </h4>
+          <h4 id="name-sorting"><a href="#section-3.3.2">3.3.2.&nbsp;&nbsp;Sorting</a></h4>
 <p id="section-3.3.2-1">The following values for the "property" field on the Comparator object
 <span class="bcp14">MUST</span> be supported for sorting:<a href="#section-3.3.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -685,26 +426,20 @@ property whose "kind" is "surname2".<a href="#section-3.3.2-4.3" class="pilcrow"
 </div>
 <div id="contactcard-querychanges">
 <section id="section-3.4">
-        <h3 id="name-contactcard-querychanges">
-<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-contactcard-querychanges" class="section-name selfRef">ContactCard/queryChanges</a>
-        </h3>
+        <h3 id="name-contactcard-querychanges"><a href="#section-3.4">3.4.&nbsp;&nbsp;ContactCard/queryChanges</a></h3>
 <p id="section-3.4-1">This is a standard "/queryChanges" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.6" class="relref">Section 5.6</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contactcard-set">
 <section id="section-3.5">
-        <h3 id="name-contactcard-set">
-<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-contactcard-set" class="section-name selfRef">ContactCard/set</a>
-        </h3>
+        <h3 id="name-contactcard-set"><a href="#section-3.5">3.5.&nbsp;&nbsp;ContactCard/set</a></h3>
 <p id="section-3.5-1">This is a standard "/set" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.3" class="relref">Section 5.3</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
 <p id="section-3.5-2">To set a new photo, the file must first be uploaded using the upload mechanism as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-6.1" class="relref">Section 6.1</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>. This will give the client a valid blobId, size, and type to use. The server <span class="bcp14">MUST</span> reject attempts to set a file that is not a recognised image type as the photo for a card.<a href="#section-3.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="contactcard-copy">
 <section id="section-3.6">
-        <h3 id="name-contactcard-copy">
-<a href="#section-3.6" class="section-number selfRef">3.6. </a><a href="#name-contactcard-copy" class="section-name selfRef">ContactCard/copy</a>
-        </h3>
+        <h3 id="name-contactcard-copy"><a href="#section-3.6">3.6.&nbsp;&nbsp;ContactCard/copy</a></h3>
 <p id="section-3.6-1">This is a standard "/copy" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.4" class="relref">Section 5.4</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-3.6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -712,15 +447,11 @@ property whose "kind" is "surname2".<a href="#section-3.3.2-4.3" class="pilcrow"
 </div>
 <div id="examples">
 <section id="section-4">
-      <h2 id="name-examples">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-examples" class="section-name selfRef">Examples</a>
-      </h2>
+      <h2 id="name-examples"><a href="#section-4">4.&nbsp;&nbsp;Examples</a></h2>
 <p id="section-4-1">For brevity, only the "methodCalls" property of the Request object and the "methodResponses" property of the Response object is shown in the following examples.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div id="fetching-initial-data">
 <section id="section-4.1">
-        <h3 id="name-fetching-initial-data">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-fetching-initial-data" class="section-name selfRef">Fetching Initial Data</a>
-        </h3>
+        <h3 id="name-fetching-initial-data"><a href="#section-4.1">4.1.&nbsp;&nbsp;Fetching Initial Data</a></h3>
 <p id="section-4.1-1">A user has authenticated and the client has fetched the JMAP Session object. It finds a single Account with the "urn:ietf:params:jmap:contacts" capability with id "a0x9" and wants to fetch all the address books and contacts. It might make the following request:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <span id="name-methodcalls-property-of-a-j"></span><figure id="figure-1">
           <div class="lang-json sourcecode" id="section-4.1-2.1">
@@ -816,9 +547,7 @@ property whose "kind" is "surname2".<a href="#section-3.3.2-4.3" class="pilcrow"
 </div>
 <div id="changing-the-default-address-book">
 <section id="section-4.2">
-        <h3 id="name-changing-the-default-addres">
-<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-changing-the-default-addres" class="section-name selfRef">Changing the Default Address Book</a>
-        </h3>
+        <h3 id="name-changing-the-default-addres"><a href="#section-4.2">4.2.&nbsp;&nbsp;Changing the Default Address Book</a></h3>
 <p id="section-4.2-1">The client tries to change the default address book from "Personal" to "Autosaved" (and makes no other change):<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <span id="name-methodcalls-property-of-a-jm"></span><figure id="figure-3">
           <div class="lang-json sourcecode" id="section-4.2-2.1">
@@ -859,18 +588,14 @@ property whose "kind" is "surname2".<a href="#section-3.3.2-4.3" class="pilcrow"
 </section>
 </div>
 <section id="section-5">
-      <h2 id="name-internationalisation-consid">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-internationalisation-consid" class="section-name selfRef">Internationalisation Considerations</a>
-      </h2>
+      <h2 id="name-internationalisation-consid"><a href="#section-5">5.&nbsp;&nbsp;Internationalisation Considerations</a></h2>
 <p id="section-5-1">Experience has shown that unrestricted use of Unicode can lead to problems such as inconsistent rendering, users reading text and interpreting it differently than intended, and unexpected results when copying text from one location to another. Servers <span class="bcp14">MAY</span> choose to mitigate this by restricting the set of characters allowed in otherwise unconstrained <code>String</code> fields. The FreeformClass, as documented in <span><a href="https://rfc-editor.org/rfc/rfc8264#section-4.3" class="relref">Section 4.3</a> of [<a href="#RFC8264" class="cite xref">RFC8264</a>]</span>, might be a good starting point for 
 this.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">Attempts to set a value containing code points outside of the permissible set can be handled in a few ways by the server. The server could choose to strip the forbidden characters or replace them with U+FFFD (the Unicode replacement character) and store the resulting string. This is likely to be appropriate for non-printable characters -- such as the "Control Codes" defined in <a href="https://www.unicode.org/versions/latest/core-spec/chapter-23/#G20365">Section 23.1</a> of <span>[<a href="#UNICODE" class="cite xref">UNICODE</a>]</span>, excluding newline (U+000A), carriage return (U+000D), and tab (U+0009) -- that can end up in data accidentally due to copy-and-paste issues but are invisible to the end user. JMAP allows the server to transform data on create/update as long as any changed properties are returned to the client in the "/set" response so it knows what has changed, as per <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.3" class="relref">Section 5.3</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>. Alternatively, the server <span class="bcp14">MAY</span> just reject the create/update with an "invalidProperties" SetError.<a href="#section-5-2" class="pilcrow">¶</a></p>
 </section>
 <div id="security-considerations">
 <section id="section-6">
-      <h2 id="name-security-considerations">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
-      </h2>
+      <h2 id="name-security-considerations"><a href="#section-6">6.&nbsp;&nbsp;Security Considerations</a></h2>
 <p id="section-6-1">All security considerations of JMAP <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> apply to this specification. Additional considerations specific to the data types and functionality introduced by this document are described in the following subsection.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">Contacts consist almost entirely of private, personally identifiable information, and represent the social connections of users. Privacy leaks can have real world consequences, and contact servers and clients <span class="bcp14">MUST</span> be mindful of the need to keep all data secure.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <p id="section-6-3">Servers <span class="bcp14">MUST</span> enforce the Access Control Lists (ACLs) set on address books to ensure only authorised data is shared.<a href="#section-6-3" class="pilcrow">¶</a></p>
@@ -878,14 +603,10 @@ this.<a href="#section-5-1" class="pilcrow">¶</a></p>
 </div>
 <div id="iana-considerations">
 <section id="section-7">
-      <h2 id="name-iana-considerations">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
-      </h2>
+      <h2 id="name-iana-considerations"><a href="#section-7">7.&nbsp;&nbsp;IANA Considerations</a></h2>
 <div id="jmap-capability-registration-for-contacts">
 <section id="section-7.1">
-        <h3 id="name-jmap-capability-registratio">
-<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-jmap-capability-registratio" class="section-name selfRef">JMAP Capability Registration for "contacts"</a>
-        </h3>
+        <h3 id="name-jmap-capability-registratio"><a href="#section-7.1">7.1.&nbsp;&nbsp;JMAP Capability Registration for "contacts"</a></h3>
 <p id="section-7.1-1">IANA has registered "contacts" in the "JMAP Capabilities" registry as follows:<a href="#section-7.1-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-7.1-2">
           <dt id="section-7.1-2.1">Capability Name:</dt>
@@ -914,9 +635,7 @@ this.<a href="#section-5-1" class="pilcrow">¶</a></p>
 </div>
 <div id="jmap-data-type-registration-for-addressbook">
 <section id="section-7.2">
-        <h3 id="name-jmap-data-type-registration">
-<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-jmap-data-type-registration" class="section-name selfRef">JMAP Data Type Registration for "AddressBook"</a>
-        </h3>
+        <h3 id="name-jmap-data-type-registration"><a href="#section-7.2">7.2.&nbsp;&nbsp;JMAP Data Type Registration for "AddressBook"</a></h3>
 <p id="section-7.2-1">IANA has registered "AddressBook" in the "JMAP Data Types" registry as follows:<a href="#section-7.2-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-7.2-2">
           <dt id="section-7.2-2.1">Type Name:</dt>
@@ -946,9 +665,7 @@ this.<a href="#section-5-1" class="pilcrow">¶</a></p>
 </div>
 <div id="jmap-data-type-registration-for-contactcard">
 <section id="section-7.3">
-        <h3 id="name-jmap-data-type-registration-">
-<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-jmap-data-type-registration-" class="section-name selfRef">JMAP Data Type Registration for "ContactCard"</a>
-        </h3>
+        <h3 id="name-jmap-data-type-registration-"><a href="#section-7.3">7.3.&nbsp;&nbsp;JMAP Data Type Registration for "ContactCard"</a></h3>
 <p id="section-7.3-1">IANA has registered "ContactCard" in the "JMAP Data Types" registry as follows:<a href="#section-7.3-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-7.3-2">
           <dt id="section-7.3-2.1">Type Name:</dt>
@@ -978,16 +695,12 @@ this.<a href="#section-5-1" class="pilcrow">¶</a></p>
 </div>
 <div id="jmap-error-codes-registry">
 <section id="section-7.4">
-        <h3 id="name-jmap-error-codes-registry">
-<a href="#section-7.4" class="section-number selfRef">7.4. </a><a href="#name-jmap-error-codes-registry" class="section-name selfRef">JMAP Error Codes Registry</a>
-        </h3>
+        <h3 id="name-jmap-error-codes-registry"><a href="#section-7.4">7.4.&nbsp;&nbsp;JMAP Error Codes Registry</a></h3>
 <p id="section-7.4-1">The following subsection has registered a new error code in the "JMAP
 Error Codes" registry, as defined in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-9" class="relref">Section 9</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-7.4-1" class="pilcrow">¶</a></p>
 <div id="addressbookhascontents">
 <section id="section-7.4.1">
-          <h4 id="name-addressbookhascontents">
-<a href="#section-7.4.1" class="section-number selfRef">7.4.1. </a><a href="#name-addressbookhascontents" class="section-name selfRef">addressBookHasContents</a>
-          </h4>
+          <h4 id="name-addressbookhascontents"><a href="#section-7.4.1">7.4.1.&nbsp;&nbsp;addressBookHasContents</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-7.4.1-1">
             <dt id="section-7.4.1-1.1">JMAP Error Code:</dt>
             <dd id="section-7.4.1-1.2">addressBookHasContents<a href="#section-7.4.1-1.2" class="pilcrow">¶</a>
@@ -1016,15 +729,11 @@ Error Codes" registry, as defined in <span><a href="https://rfc-editor.org/rfc/r
 </div>
 <div id="jscontact-property-registrations">
 <section id="section-7.5">
-        <h3 id="name-jscontact-property-registra">
-<a href="#section-7.5" class="section-number selfRef">7.5. </a><a href="#name-jscontact-property-registra" class="section-name selfRef">JSContact Property Registrations</a>
-        </h3>
+        <h3 id="name-jscontact-property-registra"><a href="#section-7.5">7.5.&nbsp;&nbsp;JSContact Property Registrations</a></h3>
 <p id="section-7.5-1">IANA has registered the following additional properties in the "JSContact Properties" registry, as defined in <span><a href="https://rfc-editor.org/rfc/rfc9553#section-3" class="relref">Section 3</a> of [<a href="#RFC9553" class="cite xref">RFC9553</a>]</span>.<a href="#section-7.5-1" class="pilcrow">¶</a></p>
 <div id="id">
 <section id="section-7.5.1">
-          <h4 id="name-id">
-<a href="#section-7.5.1" class="section-number selfRef">7.5.1. </a><a href="#name-id" class="section-name selfRef">id</a>
-          </h4>
+          <h4 id="name-id"><a href="#section-7.5.1">7.5.1.&nbsp;&nbsp;id</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-7.5.1-1">
             <dt id="section-7.5.1-1.1">Property Name:</dt>
             <dd id="section-7.5.1-1.2">id<a href="#section-7.5.1-1.2" class="pilcrow">¶</a>
@@ -1059,9 +768,7 @@ Error Codes" registry, as defined in <span><a href="https://rfc-editor.org/rfc/r
 </div>
 <div id="addressBookIds">
 <section id="section-7.5.2">
-          <h4 id="name-addressbookids">
-<a href="#section-7.5.2" class="section-number selfRef">7.5.2. </a><a href="#name-addressbookids" class="section-name selfRef">addressBookIds</a>
-          </h4>
+          <h4 id="name-addressbookids"><a href="#section-7.5.2">7.5.2.&nbsp;&nbsp;addressBookIds</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-7.5.2-1">
             <dt id="section-7.5.2-1.1">Property Name:</dt>
             <dd id="section-7.5.2-1.2">addressBookIds<a href="#section-7.5.2-1.2" class="pilcrow">¶</a>
@@ -1096,9 +803,7 @@ Error Codes" registry, as defined in <span><a href="https://rfc-editor.org/rfc/r
 </div>
 <div id="blobId">
 <section id="section-7.5.3">
-          <h4 id="name-blobid">
-<a href="#section-7.5.3" class="section-number selfRef">7.5.3. </a><a href="#name-blobid" class="section-name selfRef">blobId</a>
-          </h4>
+          <h4 id="name-blobid"><a href="#section-7.5.3">7.5.3.&nbsp;&nbsp;blobId</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-7.5.3-1">
             <dt id="section-7.5.3-1.1">Property Name:</dt>
             <dd id="section-7.5.3-1.2">blobId<a href="#section-7.5.3-1.2" class="pilcrow">¶</a>
@@ -1136,13 +841,9 @@ Error Codes" registry, as defined in <span><a href="https://rfc-editor.org/rfc/r
 </section>
 </div>
 <section id="section-8">
-      <h2 id="name-references">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-references" class="section-name selfRef">References</a>
-      </h2>
+      <h2 id="name-references"><a href="#section-8">8.&nbsp;&nbsp;References</a></h2>
 <section id="section-8.1">
-        <h3 id="name-normative-references">
-<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
-        </h3>
+        <h3 id="name-normative-references"><a href="#section-8.1">8.1.&nbsp;&nbsp;Normative References</a></h3>
 <dl class="references">
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
@@ -1171,9 +872,7 @@ Error Codes" registry, as defined in <span><a href="https://rfc-editor.org/rfc/r
 </dl>
 </section>
 <section id="section-8.2">
-        <h3 id="name-informative-references">
-<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
-        </h3>
+        <h3 id="name-informative-references"><a href="#section-8.2">8.2.&nbsp;&nbsp;Informative References</a></h3>
 <dl class="references">
 <dt id="RFC8264">[RFC8264]</dt>
         <dd>
@@ -1186,31 +885,42 @@ Error Codes" registry, as defined in <span><a href="https://rfc-editor.org/rfc/r
 </dl>
 </section>
 </section>
-<div id="authors-addresses">
-<section id="appendix-A">
-      <h2 id="name-authors-address">
-<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
-      </h2>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Neil Jenkins (<span class="role">editor</span>)</span></div>
-<div dir="auto" class="left"><span class="org">Fastmail</span></div>
-<div dir="auto" class="left"><span class="street-address">PO Box 234, Collins St West</span></div>
-<div dir="auto" class="left">
-<span class="locality">Melbourne</span>  <span class="postal-code">VIC 8007</span>
-</div>
-<div dir="auto" class="left"><span class="country-name">Australia</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:neilj@fastmailteam.com" class="email">neilj@fastmailteam.com</a>
-</div>
-<div class="url">
-<span>URI:</span>
-<a href="https://www.fastmail.com" class="url">https://www.fastmail.com</a>
-</div>
-</address>
+
+
+
+
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo"><a href="#name-status-of-this-memo">Status of This Memo</a></h2>
+<p id="section-boilerplate.1-1">
+            This is an Internet Standards Track document.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+            This document is a product of the Internet Engineering Task Force
+            (IETF).  It represents the consensus of the IETF community.  It has
+            received public review and has been approved for publication by
+            the Internet Engineering Steering Group (IESG).  Further
+            information on Internet Standards is available in Section 2 of 
+            RFC 7841.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+            Information about the current status of this document, any
+            errata, and how to provide feedback on it may be obtained at
+            <span><a href="https://www.rfc-editor.org/info/rfc9610">https://www.rfc-editor.org/info/rfc9610</a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+</section>
+</div><div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice"><a href="#name-copyright-notice">Copyright Notice</a></h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2024 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-
-
-
-

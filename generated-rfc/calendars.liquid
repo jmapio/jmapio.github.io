@@ -1,6 +1,7 @@
 ---
 layout: article-rfc
 permalink: /spec/calendars/index.html
+toc: generated-rfc-toc/calendars.html
 title: JSON Meta Application Protocol (JMAP) for Calendars
 description: >-
     This document specifies a data model for synchronizing calendar data with a server using JMAP. Clients can use this to efficiently read, write, and share calendars and events, receive push notifications for changes or event reminders, and keep track of changes made by others in a multi-user environment.
@@ -13,509 +14,34 @@ meta:
         - JSON
         - calendars
 ---
-
-<div class="table-wrapper"><table class="ears">
-<thead><tr>
-<td class="left">Internet-Draft</td>
-<td class="center">JMAP Calendars</td>
-<td class="right">November 2025</td>
-</tr></thead>
-<tfoot><tr>
-<td class="left">Jenkins &amp; Douglass</td>
-<td class="center">Expires 9 May 2026</td>
-<td class="right">[Page]</td>
-</tr></tfoot>
-</table></div>
-<div id="external-metadata" class="document-information"></div>
-<div id="internal-metadata" class="document-information">
-<dl id="identifiers">
-<dt class="label-workgroup">Workgroup:</dt>
-<dd class="workgroup">JMAP</dd>
-<dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-ietf-jmap-calendars-26</dd>
-<dt class="label-published">Published:</dt>
-<dd class="published">
-<time datetime="2025-11-05" class="published">5 November 2025</time>
-    </dd>
-<dt class="label-intended-status">Intended Status:</dt>
-<dd class="intended-status">Standards Track</dd>
-<dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-05-09">9 May 2026</time></dd>
-<dt class="label-authors">Authors:</dt>
-<dd class="authors">
-<div class="author">
-      <div class="author-name">N.M. Jenkins, <span class="editor">Ed.</span>
-</div>
-<div class="org">Fastmail</div>
-</div>
-<div class="author">
-      <div class="author-name">M. Douglass, <span class="editor">Ed.</span>
-</div>
-<div class="org">Spherical Cow Group</div>
-</div>
-</dd>
-</dl>
-</div>
-
-<section id="section-abstract">
-      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document specifies a data model for synchronizing calendar data with a server using JMAP. Clients can use this to efficiently read, write, and share calendars and events, receive push notifications for changes or event reminders, and keep track of changes made by others in a multi-user environment.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-</section>
-<div id="status-of-memo">
-<section id="section-boilerplate.1">
-        <h2 id="name-status-of-this-memo">
-<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
-        </h2>
-<p id="section-boilerplate.1-1">
-        This Internet-Draft is submitted in full conformance with the
-        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.1-2">
-        Internet-Drafts are working documents of the Internet Engineering Task
-        Force (IETF). Note that other groups may also distribute working
-        documents as Internet-Drafts. The list of current Internet-Drafts is
-        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.1-3">
-        Internet-Drafts are draft documents valid for a maximum of six months
-        and may be updated, replaced, or obsoleted by other documents at any
-        time. It is inappropriate to use Internet-Drafts as reference
-        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 9 May 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="copyright">
-<section id="section-boilerplate.2">
-        <h2 id="name-copyright-notice">
-<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
-        </h2>
-<p id="section-boilerplate.2-1">
-            Copyright (c) 2025 IETF Trust and the persons identified as the
-            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.2-2">
-            This document is subject to BCP 78 and the IETF Trust's Legal
-            Provisions Relating to IETF Documents
-            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
-            publication of this document. Please review these documents
-            carefully, as they describe your rights and restrictions with
-            respect to this document. Code Components extracted from this
-            document must include Revised BSD License text as described in
-            Section 4.e of the Trust Legal Provisions and are provided without
-            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="toc">
-<section id="section-toc.1">
-        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
-<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
-        </h2>
-<nav class="toc"><ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
-            <p id="section-toc.1-1.1.1"><a href="#section-1" class="auto internal xref">1</a>.&nbsp;&nbsp;<a href="#name-introduction" class="internal xref">Introduction</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.&nbsp;&nbsp;<a href="#name-notational-conventions" class="internal xref">Notational Conventions</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
-                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.&nbsp;&nbsp;<a href="#name-data-types" class="internal xref">Data Types</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3">
-                <p id="section-toc.1-1.1.2.3.1" class="keepWithNext"><a href="#section-1.3" class="auto internal xref">1.3</a>.&nbsp;&nbsp;<a href="#name-terminology" class="internal xref">Terminology</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4">
-                <p id="section-toc.1-1.1.2.4.1"><a href="#section-1.4" class="auto internal xref">1.4</a>.&nbsp;&nbsp;<a href="#name-data-model-overview" class="internal xref">Data Model Overview</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4.2.1">
-                    <p id="section-toc.1-1.1.2.4.2.1.1"><a href="#section-1.4.1" class="auto internal xref">1.4.1</a>.&nbsp;&nbsp;<a href="#name-uids-and-calendarevent-ids" class="internal xref">UIDs and CalendarEvent Ids</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.5">
-                <p id="section-toc.1-1.1.2.5.1"><a href="#section-1.5" class="auto internal xref">1.5</a>.&nbsp;&nbsp;<a href="#name-addition-to-the-capabilitie" class="internal xref">Addition to the Capabilities Object</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.5.2.1">
-                    <p id="section-toc.1-1.1.2.5.2.1.1"><a href="#section-1.5.1" class="auto internal xref">1.5.1</a>.&nbsp;&nbsp;<a href="#name-urnietfparamsjmapcalendars" class="internal xref">urn:ietf:params:jmap:calendars</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.5.2.2">
-                    <p id="section-toc.1-1.1.2.5.2.2.1"><a href="#section-1.5.2" class="auto internal xref">1.5.2</a>.&nbsp;&nbsp;<a href="#name-urnietfparamsjmapprincipals" class="internal xref">urn:ietf:params:jmap:principals:availability</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.5.2.3">
-                    <p id="section-toc.1-1.1.2.5.2.3.1"><a href="#section-1.5.3" class="auto internal xref">1.5.3</a>.&nbsp;&nbsp;<a href="#name-urnietfparamsjmapcalendarsp" class="internal xref">urn:ietf:params:jmap:calendars:parse</a></p>
-</li>
-                </ul>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.&nbsp;&nbsp;<a href="#name-principals-and-sharing" class="internal xref">Principals and Sharing</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
-                <p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1" class="auto internal xref">2.1</a>.&nbsp;&nbsp;<a href="#name-principal-capability-urniet" class="internal xref">Principal Capability urn:ietf:params:jmap:calendars</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
-                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.&nbsp;&nbsp;<a href="#name-principal-getavailability" class="internal xref">Principal/getAvailability</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3">
-                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="auto internal xref">2.3</a>.&nbsp;&nbsp;<a href="#name-principal-query-extension" class="internal xref">Principal/query extension</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.&nbsp;&nbsp;<a href="#name-participant-identities" class="internal xref">Participant Identities</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.&nbsp;&nbsp;<a href="#name-participantidentity-get" class="internal xref">ParticipantIdentity/get</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.&nbsp;&nbsp;<a href="#name-participantidentity-changes" class="internal xref">ParticipantIdentity/changes</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.&nbsp;&nbsp;<a href="#name-participantidentity-set" class="internal xref">ParticipantIdentity/set</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.&nbsp;&nbsp;<a href="#name-calendars" class="internal xref">Calendars</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.&nbsp;&nbsp;<a href="#name-calendar-get" class="internal xref">Calendar/get</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
-                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.&nbsp;&nbsp;<a href="#name-calendar-changes" class="internal xref">Calendar/changes</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
-                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.&nbsp;&nbsp;<a href="#name-calendar-set" class="internal xref">Calendar/set</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.&nbsp;&nbsp;<a href="#name-calendar-events" class="internal xref">Calendar Events</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
-                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.&nbsp;&nbsp;<a href="#name-additional-common-use-jscal" class="internal xref">Additional common-use JSCalendar properties</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.1">
-                    <p id="section-toc.1-1.5.2.1.2.1.1"><a href="#section-5.1.1" class="auto internal xref">5.1.1</a>.&nbsp;&nbsp;<a href="#name-mayinviteself" class="internal xref">mayInviteSelf</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.2">
-                    <p id="section-toc.1-1.5.2.1.2.2.1"><a href="#section-5.1.2" class="auto internal xref">5.1.2</a>.&nbsp;&nbsp;<a href="#name-mayinviteothers" class="internal xref">mayInviteOthers</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1.2.3">
-                    <p id="section-toc.1-1.5.2.1.2.3.1"><a href="#section-5.1.3" class="auto internal xref">5.1.3</a>.&nbsp;&nbsp;<a href="#name-hideattendees" class="internal xref">hideAttendees</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
-                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.&nbsp;&nbsp;<a href="#name-additional-reserved-jscalen" class="internal xref">Additional reserved JSCalendar properties</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2.2.1">
-                    <p id="section-toc.1-1.5.2.2.2.1.1"><a href="#section-5.2.1" class="auto internal xref">5.2.1</a>.&nbsp;&nbsp;<a href="#name-schedulesequence" class="internal xref">scheduleSequence</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2.2.2">
-                    <p id="section-toc.1-1.5.2.2.2.2.1"><a href="#section-5.2.2" class="auto internal xref">5.2.2</a>.&nbsp;&nbsp;<a href="#name-scheduleupdated" class="internal xref">scheduleUpdated</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
-                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.&nbsp;&nbsp;<a href="#name-attachments" class="internal xref">Attachments</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4">
-                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.&nbsp;&nbsp;<a href="#name-per-user-properties" class="internal xref">Per-user properties</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.5">
-                <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="auto internal xref">5.5</a>.&nbsp;&nbsp;<a href="#name-recurring-events" class="internal xref">Recurring events</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.6">
-                <p id="section-toc.1-1.5.2.6.1"><a href="#section-5.6" class="auto internal xref">5.6</a>.&nbsp;&nbsp;<a href="#name-updating-for-this-and-futur" class="internal xref">Updating for "this-and-future"</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.6.2.1">
-                    <p id="section-toc.1-1.5.2.6.2.1.1"><a href="#section-5.6.1" class="auto internal xref">5.6.1</a>.&nbsp;&nbsp;<a href="#name-splitting-an-event" class="internal xref">Splitting an event</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.6.2.2">
-                    <p id="section-toc.1-1.5.2.6.2.2.1"><a href="#section-5.6.2" class="auto internal xref">5.6.2</a>.&nbsp;&nbsp;<a href="#name-updating-the-base-event-and" class="internal xref">Updating the base event and overriding previous</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.7">
-                <p id="section-toc.1-1.5.2.7.1"><a href="#section-5.7" class="auto internal xref">5.7</a>.&nbsp;&nbsp;<a href="#name-calendarevent-get" class="internal xref">CalendarEvent/get</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.8">
-                <p id="section-toc.1-1.5.2.8.1"><a href="#section-5.8" class="auto internal xref">5.8</a>.&nbsp;&nbsp;<a href="#name-calendarevent-changes" class="internal xref">CalendarEvent/changes</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.9">
-                <p id="section-toc.1-1.5.2.9.1"><a href="#section-5.9" class="auto internal xref">5.9</a>.&nbsp;&nbsp;<a href="#name-calendarevent-set" class="internal xref">CalendarEvent/set</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.9.2.1">
-                    <p id="section-toc.1-1.5.2.9.2.1.1"><a href="#section-5.9.1" class="auto internal xref">5.9.1</a>.&nbsp;&nbsp;<a href="#name-patching" class="internal xref">Patching</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.9.2.2">
-                    <p id="section-toc.1-1.5.2.9.2.2.1"><a href="#section-5.9.2" class="auto internal xref">5.9.2</a>.&nbsp;&nbsp;<a href="#name-sending-invitations-and-res" class="internal xref">Sending invitations and responses</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.10">
-                <p id="section-toc.1-1.5.2.10.1"><a href="#section-5.10" class="auto internal xref">5.10</a>.&nbsp;<a href="#name-calendarevent-copy" class="internal xref">CalendarEvent/copy</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.11">
-                <p id="section-toc.1-1.5.2.11.1"><a href="#section-5.11" class="auto internal xref">5.11</a>.&nbsp;<a href="#name-calendarevent-query" class="internal xref">CalendarEvent/query</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.11.2.1">
-                    <p id="section-toc.1-1.5.2.11.2.1.1"><a href="#section-5.11.1" class="auto internal xref">5.11.1</a>.&nbsp;&nbsp;<a href="#name-filtering" class="internal xref">Filtering</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.11.2.2">
-                    <p id="section-toc.1-1.5.2.11.2.2.1"><a href="#section-5.11.2" class="auto internal xref">5.11.2</a>.&nbsp;&nbsp;<a href="#name-sorting" class="internal xref">Sorting</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.12">
-                <p id="section-toc.1-1.5.2.12.1"><a href="#section-5.12" class="auto internal xref">5.12</a>.&nbsp;<a href="#name-calendarevent-querychanges" class="internal xref">CalendarEvent/queryChanges</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.13">
-                <p id="section-toc.1-1.5.2.13.1"><a href="#section-5.13" class="auto internal xref">5.13</a>.&nbsp;<a href="#name-calendarevent-parse" class="internal xref">CalendarEvent/parse</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.&nbsp;&nbsp;<a href="#name-alerts" class="internal xref">Alerts</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
-                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.&nbsp;&nbsp;<a href="#name-default-alerts" class="internal xref">Default alerts</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
-                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.&nbsp;&nbsp;<a href="#name-acknowledging-an-alert" class="internal xref">Acknowledging an alert</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
-                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.&nbsp;&nbsp;<a href="#name-snoozing-an-alert" class="internal xref">Snoozing an alert</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.4">
-                <p id="section-toc.1-1.6.2.4.1"><a href="#section-6.4" class="auto internal xref">6.4</a>.&nbsp;&nbsp;<a href="#name-push-events" class="internal xref">Push events</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.&nbsp;&nbsp;<a href="#name-calendar-event-notification" class="internal xref">Calendar Event Notifications</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.&nbsp;&nbsp;<a href="#name-calendareventnotification-g" class="internal xref">CalendarEventNotification/get</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.&nbsp;&nbsp;<a href="#name-calendareventnotification-c" class="internal xref">CalendarEventNotification/changes</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
-                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.&nbsp;&nbsp;<a href="#name-calendareventnotification-s" class="internal xref">CalendarEventNotification/set</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4">
-                <p id="section-toc.1-1.7.2.4.1"><a href="#section-7.4" class="auto internal xref">7.4</a>.&nbsp;&nbsp;<a href="#name-calendareventnotification-q" class="internal xref">CalendarEventNotification/query</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4.2.1">
-                    <p id="section-toc.1-1.7.2.4.2.1.1"><a href="#section-7.4.1" class="auto internal xref">7.4.1</a>.&nbsp;&nbsp;<a href="#name-filtering-2" class="internal xref">Filtering</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.4.2.2">
-                    <p id="section-toc.1-1.7.2.4.2.2.1"><a href="#section-7.4.2" class="auto internal xref">7.4.2</a>.&nbsp;&nbsp;<a href="#name-sorting-2" class="internal xref">Sorting</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.5">
-                <p id="section-toc.1-1.7.2.5.1"><a href="#section-7.5" class="auto internal xref">7.5</a>.&nbsp;&nbsp;<a href="#name-calendareventnotification-qu" class="internal xref">CalendarEventNotification/queryChanges</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.&nbsp;&nbsp;<a href="#name-examples" class="internal xref">Examples</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.&nbsp;&nbsp;<a href="#name-fetching-initial-data" class="internal xref">Fetching initial data</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
-                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.&nbsp;&nbsp;<a href="#name-creating-an-event" class="internal xref">Creating an event</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3">
-                <p id="section-toc.1-1.8.2.3.1"><a href="#section-8.3" class="auto internal xref">8.3</a>.&nbsp;&nbsp;<a href="#name-snoozing-an-alert-2" class="internal xref">Snoozing an alert</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.4">
-                <p id="section-toc.1-1.8.2.4.1"><a href="#section-8.4" class="auto internal xref">8.4</a>.&nbsp;&nbsp;<a href="#name-changing-the-default-calend" class="internal xref">Changing the default calendar</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.5">
-                <p id="section-toc.1-1.8.2.5.1"><a href="#section-8.5" class="auto internal xref">8.5</a>.&nbsp;&nbsp;<a href="#name-parsing-an-icalendar-file" class="internal xref">Parsing an iCalendar file</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.&nbsp;&nbsp;<a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.&nbsp;&nbsp;<a href="#name-privacy" class="internal xref">Privacy</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.&nbsp;&nbsp;<a href="#name-spoofing" class="internal xref">Spoofing</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3">
-                <p id="section-toc.1-1.9.2.3.1"><a href="#section-9.3" class="auto internal xref">9.3</a>.&nbsp;&nbsp;<a href="#name-denial-of-service" class="internal xref">Denial-of-service</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3.2.1">
-                    <p id="section-toc.1-1.9.2.3.2.1.1"><a href="#section-9.3.1" class="auto internal xref">9.3.1</a>.&nbsp;&nbsp;<a href="#name-expanding-recurrences" class="internal xref">Expanding Recurrences</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3.2.2">
-                    <p id="section-toc.1-1.9.2.3.2.2.1"><a href="#section-9.3.2" class="auto internal xref">9.3.2</a>.&nbsp;&nbsp;<a href="#name-firing-alerts" class="internal xref">Firing alerts</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3.2.3">
-                    <p id="section-toc.1-1.9.2.3.2.3.1"><a href="#section-9.3.3" class="auto internal xref">9.3.3</a>.&nbsp;&nbsp;<a href="#name-load-spikes" class="internal xref">Load spikes</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.4">
-                <p id="section-toc.1-1.9.2.4.1"><a href="#section-9.4" class="auto internal xref">9.4</a>.&nbsp;&nbsp;<a href="#name-spam" class="internal xref">Spam</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>.&nbsp;<a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
-                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.&nbsp;&nbsp;<a href="#name-jmap-capability-registratio" class="internal xref">JMAP Capability Registration for "calendars"</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
-                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref">10.2</a>.&nbsp;&nbsp;<a href="#name-jmap-capability-registration" class="internal xref">JMAP Capability Registration for "principals:availability"</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.3">
-                <p id="section-toc.1-1.10.2.3.1"><a href="#section-10.3" class="auto internal xref">10.3</a>.&nbsp;&nbsp;<a href="#name-jmap-data-type-registration" class="internal xref">JMAP Data Type Registration for "Calendar"</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.4">
-                <p id="section-toc.1-1.10.2.4.1"><a href="#section-10.4" class="auto internal xref">10.4</a>.&nbsp;&nbsp;<a href="#name-jmap-data-type-registration-" class="internal xref">JMAP Data Type Registration for "CalendarEvent"</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.5">
-                <p id="section-toc.1-1.10.2.5.1"><a href="#section-10.5" class="auto internal xref">10.5</a>.&nbsp;&nbsp;<a href="#name-jmap-data-type-registration-f" class="internal xref">JMAP Data Type Registration for "CalendarEventNotification"</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.6">
-                <p id="section-toc.1-1.10.2.6.1"><a href="#section-10.6" class="auto internal xref">10.6</a>.&nbsp;&nbsp;<a href="#name-jmap-data-type-registration-fo" class="internal xref">JMAP Data Type Registration for "ParticipantIdentity"</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.7">
-                <p id="section-toc.1-1.10.2.7.1"><a href="#section-10.7" class="auto internal xref">10.7</a>.&nbsp;&nbsp;<a href="#name-jmap-error-codes-registry" class="internal xref">JMAP Error Codes Registry</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.7.2.1">
-                    <p id="section-toc.1-1.10.2.7.2.1.1"><a href="#section-10.7.1" class="auto internal xref">10.7.1</a>.&nbsp;&nbsp;<a href="#name-calendarhasevent" class="internal xref">calendarHasEvent</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.7.2.2">
-                    <p id="section-toc.1-1.10.2.7.2.2.1"><a href="#section-10.7.2" class="auto internal xref">10.7.2</a>.&nbsp;&nbsp;<a href="#name-nosupportedschedulemethods" class="internal xref">noSupportedScheduleMethods</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.7.2.3">
-                    <p id="section-toc.1-1.10.2.7.2.3.1"><a href="#section-10.7.3" class="auto internal xref">10.7.3</a>.&nbsp;&nbsp;<a href="#name-expanddurationtoolarge" class="internal xref">expandDurationTooLarge</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.7.2.4">
-                    <p id="section-toc.1-1.10.2.7.2.4.1"><a href="#section-10.7.4" class="auto internal xref">10.7.4</a>.&nbsp;&nbsp;<a href="#name-cannotcalculateoccurrences" class="internal xref">cannotCalculateOccurrences</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.8">
-                <p id="section-toc.1-1.10.2.8.1"><a href="#section-10.8" class="auto internal xref">10.8</a>.&nbsp;&nbsp;<a href="#name-update-to-the-jscalendar-pr" class="internal xref">Update to the JSCalendar Properties Registry</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.8.2.1">
-                    <p id="section-toc.1-1.10.2.8.2.1.1"><a href="#section-10.8.1" class="auto internal xref">10.8.1</a>.&nbsp;&nbsp;<a href="#name-update-to-jscalendar-proper" class="internal xref">Update to "JSCalendar Properties" Registry Template</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.8.2.2">
-                    <p id="section-toc.1-1.10.2.8.2.2.1"><a href="#section-10.8.2" class="auto internal xref">10.8.2</a>.&nbsp;&nbsp;<a href="#name-initial-values-for-existing" class="internal xref">Initial values for existing registrations</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.9">
-                <p id="section-toc.1-1.10.2.9.1"><a href="#section-10.9" class="auto internal xref">10.9</a>.&nbsp;&nbsp;<a href="#name-jscalendar-property-registr" class="internal xref">JSCalendar Property Registrations</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.9.2.1">
-                    <p id="section-toc.1-1.10.2.9.2.1.1"><a href="#section-10.9.1" class="auto internal xref">10.9.1</a>.&nbsp;&nbsp;<a href="#name-id" class="internal xref">id</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.9.2.2">
-                    <p id="section-toc.1-1.10.2.9.2.2.1"><a href="#section-10.9.2" class="auto internal xref">10.9.2</a>.&nbsp;&nbsp;<a href="#name-baseeventid" class="internal xref">baseEventId</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.9.2.3">
-                    <p id="section-toc.1-1.10.2.9.2.3.1"><a href="#section-10.9.3" class="auto internal xref">10.9.3</a>.&nbsp;&nbsp;<a href="#name-calendarids" class="internal xref">calendarIds</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.9.2.4">
-                    <p id="section-toc.1-1.10.2.9.2.4.1"><a href="#section-10.9.4" class="auto internal xref">10.9.4</a>.&nbsp;&nbsp;<a href="#name-isdraft" class="internal xref">isDraft</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.9.2.5">
-                    <p id="section-toc.1-1.10.2.9.2.5.1"><a href="#section-10.9.5" class="auto internal xref">10.9.5</a>.&nbsp;&nbsp;<a href="#name-isorigin" class="internal xref">isOrigin</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.9.2.6">
-                    <p id="section-toc.1-1.10.2.9.2.6.1"><a href="#section-10.9.6" class="auto internal xref">10.9.6</a>.&nbsp;&nbsp;<a href="#name-utcstart" class="internal xref">utcStart</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.9.2.7">
-                    <p id="section-toc.1-1.10.2.9.2.7.1"><a href="#section-10.9.7" class="auto internal xref">10.9.7</a>.&nbsp;&nbsp;<a href="#name-utcend" class="internal xref">utcEnd</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.9.2.8">
-                    <p id="section-toc.1-1.10.2.9.2.8.1"><a href="#section-10.9.8" class="auto internal xref">10.9.8</a>.&nbsp;&nbsp;<a href="#name-usedefaultalerts" class="internal xref">useDefaultAlerts</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.9.2.9">
-                    <p id="section-toc.1-1.10.2.9.2.9.1"><a href="#section-10.9.9" class="auto internal xref">10.9.9</a>.&nbsp;&nbsp;<a href="#name-mayinviteself-2" class="internal xref">mayInviteSelf</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.9.2.10">
-                    <p id="section-toc.1-1.10.2.9.2.10.1"><a href="#section-10.9.10" class="auto internal xref">10.9.10</a>.&nbsp;<a href="#name-mayinviteothers-2" class="internal xref">mayInviteOthers</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.9.2.11">
-                    <p id="section-toc.1-1.10.2.9.2.11.1"><a href="#section-10.9.11" class="auto internal xref">10.9.11</a>.&nbsp;<a href="#name-hideattendees-2" class="internal xref">hideAttendees</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.9.2.12">
-                    <p id="section-toc.1-1.10.2.9.2.12.1"><a href="#section-10.9.12" class="auto internal xref">10.9.12</a>.&nbsp;<a href="#name-schedulesequence-2" class="internal xref">scheduleSequence</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.9.2.13">
-                    <p id="section-toc.1-1.10.2.9.2.13.1"><a href="#section-10.9.13" class="auto internal xref">10.9.13</a>.&nbsp;<a href="#name-scheduleupdated-2" class="internal xref">scheduleUpdated</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.9.2.14">
-                    <p id="section-toc.1-1.10.2.9.2.14.1"><a href="#section-10.9.14" class="auto internal xref">10.9.14</a>.&nbsp;<a href="#name-blobid" class="internal xref">blobId</a></p>
-</li>
-                </ul>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>.&nbsp;<a href="#name-normative-references" class="internal xref">Normative References</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>.&nbsp;<a href="#name-informative-references" class="internal xref">Informative References</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
-</li>
-        </ul>
-</nav>
-</section>
-</div>
 <div id="introduction">
 <section id="section-1">
-      <h2 id="name-introduction">
-<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
-      </h2>
+      <h2 id="name-introduction"><a href="#section-1">1.&nbsp;&nbsp;Introduction</a></h2>
 <p id="section-1-1">JMAP (<span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> — JSON Meta Application Protocol) is a generic protocol for synchronizing data, such as mail, calendars or contacts, between a client and a server. It is optimized for mobile and web environments, and aims to provide a consistent interface to different data types.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">This specification defines a data model for synchronizing calendar data between a client and a server using JMAP. The data model is designed to allow a server to provide consistent access to the same data via CalDAV <span>[<a href="#RFC4791" class="cite xref">RFC4791</a>]</span> as well as JMAP, however the functionality offered over the two protocols may differ. Unlike CalDAV, this specification does not define access to tasks or journal entries (VTODO or VJOURNAL iCalendar components in CalDAV).<a href="#section-1-2" class="pilcrow">¶</a></p>
 <div id="notational-conventions">
 <section id="section-1.1">
-        <h3 id="name-notational-conventions">
-<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-notational-conventions" class="section-name selfRef">Notational Conventions</a>
-        </h3>
+        <h3 id="name-notational-conventions"><a href="#section-1.1">1.1.&nbsp;&nbsp;Notational Conventions</a></h3>
 <p id="section-1.1-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">Type signatures, examples, and property descriptions in this document follow the conventions established in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-1.1" class="relref">Section 1.1</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="the-localdate-data-type">
 <section id="section-1.2">
-        <h3 id="name-data-types">
-<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-data-types" class="section-name selfRef">Data Types</a>
-        </h3>
+        <h3 id="name-data-types"><a href="#section-1.2">1.2.&nbsp;&nbsp;Data Types</a></h3>
 <p id="section-1.2-1">The Id data type defined in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-1.2" class="relref">Section 1.2</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> is used in this document. So too are the UnsignedInt, UTCDateTime, LocalDateTime, Duration, and TimeZoneId data types defined in Sections <a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-jscalendarbis-15#section-1.4.3" class="relref">1.4.3</a>, <a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-jscalendarbis-15#section-1.4.4" class="relref">1.4.4</a>, <a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-jscalendarbis-15#section-1.4.5" class="relref">1.4.5</a>, <a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-jscalendarbis-15#section-1.4.6" class="relref">1.4.6</a>, and <a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-jscalendarbis-15#section-1.4.8" class="relref">1.4.8</a> of <span>[<a href="#I-D.ietf-calext-jscalendarbis" class="cite xref">I-D.ietf-calext-jscalendarbis</a>]</span> respectively.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="terminology">
 <section id="section-1.3">
-        <h3 id="name-terminology">
-<a href="#section-1.3" class="section-number selfRef">1.3. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
-        </h3>
+        <h3 id="name-terminology"><a href="#section-1.3">1.3.&nbsp;&nbsp;Terminology</a></h3>
 <p id="section-1.3-1">The same terminology is used in this document as in the core JMAP specification, see <span><a href="https://rfc-editor.org/rfc/rfc8620#section-1.6" class="relref">Section 1.6</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-1.3-1" class="pilcrow">¶</a></p>
 <p id="section-1.3-2">The terms ParticipantIdentity, Calendar, CalendarEvent, and CalendarEventNotification (with these specific capitalizations) are used to refer to the data types defined in this document and instances of those data types.<a href="#section-1.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="data-model-overview">
 <section id="section-1.4">
-        <h3 id="name-data-model-overview">
-<a href="#section-1.4" class="section-number selfRef">1.4. </a><a href="#name-data-model-overview" class="section-name selfRef">Data Model Overview</a>
-        </h3>
+        <h3 id="name-data-model-overview"><a href="#section-1.4">1.4.&nbsp;&nbsp;Data Model Overview</a></h3>
 <p id="section-1.4-1">An Account (see <span><a href="https://rfc-editor.org/rfc/rfc8620#section-1.6.2" class="relref">Section 1.6.2</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>) with support for the calendar data model contains zero or more Calendar objects, which is a named collection of CalendarEvents. Calendars can also provide defaults, such as alerts and a color to apply to events in the calendar. Clients commonly let users toggle visibility of events belonging to a particular calendar on/off. Servers may allow an event to belong to multiple Calendars within an account.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
 <p id="section-1.4-2">A CalendarEvent is a representation of an event or recurring series of events in JSCalendar Event <span>[<a href="#I-D.ietf-calext-jscalendarbis" class="cite xref">I-D.ietf-calext-jscalendarbis</a>]</span> format. Simple clients may ask the server to expand recurrences for them within a specific time period, and optionally convert times into UTC so they do not have to handle time zone conversion. More full-featured clients will want to access the full event information and handle recurrence expansion and time zone conversion locally.<a href="#section-1.4-2" class="pilcrow">¶</a></p>
 <p id="section-1.4-3">CalendarEventNotification objects keep track of the history of changes made to a calendar by other users, allowing calendar clients to notify the user of changes to their schedule.<a href="#section-1.4-3" class="pilcrow">¶</a></p>
@@ -524,9 +50,7 @@ meta:
 <p id="section-1.4-6">Users can normally subscribe to any calendar to which they have access. This indicates the user wants this calendar to appear in their regular list of calendars. The separate "isVisible" property stores whether the user would currently like to view the events in a subscribed calendar.<a href="#section-1.4-6" class="pilcrow">¶</a></p>
 <div id="uids-and-calendarevent-ids">
 <section id="section-1.4.1">
-          <h4 id="name-uids-and-calendarevent-ids">
-<a href="#section-1.4.1" class="section-number selfRef">1.4.1. </a><a href="#name-uids-and-calendarevent-ids" class="section-name selfRef">UIDs and CalendarEvent Ids</a>
-          </h4>
+          <h4 id="name-uids-and-calendarevent-ids"><a href="#section-1.4.1">1.4.1.&nbsp;&nbsp;UIDs and CalendarEvent Ids</a></h4>
 <p id="section-1.4.1-1">Each CalendarEvent has a "uid" property (<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-jscalendarbis-15#section-4.1.1" class="relref">Section 4.1.1</a> of [<a href="#I-D.ietf-calext-jscalendarbis" class="cite xref">I-D.ietf-calext-jscalendarbis</a>]</span>), which is a globally unique identifier that identifies the same event in different Accounts, or different instances of the same recurring event within an Account.<a href="#section-1.4.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.4.1-2">An Account MUST NOT contain more than one CalendarEvent with the same uid unless all of the CalendarEvent objects have distinct, non-null values for their "recurrenceId" property. (This situation occurs if the Principal is added to one or more specific instances of a recurring event without being invited to the whole series.)<a href="#section-1.4.1-2" class="pilcrow">¶</a></p>
 <p id="section-1.4.1-3">Each CalendarEvent also has an id, which is scoped to the JMAP Account and used for referencing it in JMAP methods. There is no necessary link between the uid and the CalendarEvent's id. CalendarEvents with the same uid in different Accounts may have different ids.<a href="#section-1.4.1-3" class="pilcrow">¶</a></p>
@@ -536,15 +60,11 @@ meta:
 </div>
 <div id="addition-to-the-capabilities-object">
 <section id="section-1.5">
-        <h3 id="name-addition-to-the-capabilitie">
-<a href="#section-1.5" class="section-number selfRef">1.5. </a><a href="#name-addition-to-the-capabilitie" class="section-name selfRef">Addition to the Capabilities Object</a>
-        </h3>
+        <h3 id="name-addition-to-the-capabilitie"><a href="#section-1.5">1.5.&nbsp;&nbsp;Addition to the Capabilities Object</a></h3>
 <p id="section-1.5-1">The capabilities object is returned as part of the JMAP Session object; see <span><a href="https://rfc-editor.org/rfc/rfc8620#section-2" class="relref">Section 2</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>. This document defines three additional capability URIs.<a href="#section-1.5-1" class="pilcrow">¶</a></p>
 <div id="urn-ietf-params-jmap-calendars">
 <section id="section-1.5.1">
-          <h4 id="name-urnietfparamsjmapcalendars">
-<a href="#section-1.5.1" class="section-number selfRef">1.5.1. </a><a href="#name-urnietfparamsjmapcalendars" class="section-name selfRef">urn:ietf:params:jmap:calendars</a>
-          </h4>
+          <h4 id="name-urnietfparamsjmapcalendars"><a href="#section-1.5.1">1.5.1.&nbsp;&nbsp;urn:ietf:params:jmap:calendars</a></h4>
 <p id="section-1.5.1-1">This represents support for the Calendar, CalendarEvent, CalendarEventNotification, and ParticipantIdentity data types and associated API methods, except for "CalendarEvent/parse". The value of this property in the JMAP Session "capabilities" property is an empty object.<a href="#section-1.5.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.5.1-2">The value of this property in an account's "accountCapabilities" property is an object that MUST contain the following information on server capabilities and permissions for that account:<a href="#section-1.5.1-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-1.5.1-3">
@@ -589,9 +109,7 @@ meta:
 </div>
 <div id="urn-ietf-params-jmap-principals-availability">
 <section id="section-1.5.2">
-          <h4 id="name-urnietfparamsjmapprincipals">
-<a href="#section-1.5.2" class="section-number selfRef">1.5.2. </a><a href="#name-urnietfparamsjmapprincipals" class="section-name selfRef">urn:ietf:params:jmap:principals:availability</a>
-          </h4>
+          <h4 id="name-urnietfparamsjmapprincipals"><a href="#section-1.5.2">1.5.2.&nbsp;&nbsp;urn:ietf:params:jmap:principals:availability</a></h4>
 <p id="section-1.5.2-1">Represents support for the "Principal/getAvailability" method. Any account with this capability MUST also have the <code>urn:ietf:params:jmap:principals</code> capability (see <span><a href="https://rfc-editor.org/rfc/rfc9670#section-1.5.1" class="relref">Section 1.5.1</a> of [<a href="#RFC9670" class="cite xref">RFC9670</a>]</span>).<a href="#section-1.5.2-1" class="pilcrow">¶</a></p>
 <p id="section-1.5.2-2">The value of this property in the JMAP Session "capabilities" property is an empty object.<a href="#section-1.5.2-2" class="pilcrow">¶</a></p>
 <p id="section-1.5.2-3">The value of this property in an account's "accountCapabilities" property is an object that MUST contain the following information on server capabilities and permissions for that account:<a href="#section-1.5.2-3" class="pilcrow">¶</a></p>
@@ -607,9 +125,7 @@ meta:
 </div>
 <div id="urn-ietf-params-jmap-calendars-parse">
 <section id="section-1.5.3">
-          <h4 id="name-urnietfparamsjmapcalendarsp">
-<a href="#section-1.5.3" class="section-number selfRef">1.5.3. </a><a href="#name-urnietfparamsjmapcalendarsp" class="section-name selfRef">urn:ietf:params:jmap:calendars:parse</a>
-          </h4>
+          <h4 id="name-urnietfparamsjmapcalendarsp"><a href="#section-1.5.3">1.5.3.&nbsp;&nbsp;urn:ietf:params:jmap:calendars:parse</a></h4>
 <p id="section-1.5.3-1">This represents support for the CalendarEvent/parse method (see <a href="#calendarevent-parse" class="auto internal xref">Section 5.13</a>). The value of this property is an empty object in both the JMAP session "capabilities" property and an account's "accountCapabilities" property.<a href="#section-1.5.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -619,15 +135,11 @@ meta:
 </div>
 <div id="principals-and-sharing">
 <section id="section-2">
-      <h2 id="name-principals-and-sharing">
-<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-principals-and-sharing" class="section-name selfRef">Principals and Sharing</a>
-      </h2>
+      <h2 id="name-principals-and-sharing"><a href="#section-2">2.&nbsp;&nbsp;Principals and Sharing</a></h2>
 <p id="section-2-1">For systems that also support JMAP Sharing <span>[<a href="#RFC9670" class="cite xref">RFC9670</a>]</span>, the <code>urn:ietf:params:jmap:calendars</code> capability is used to indicate that this Principal may be used with calendaring. A new method is defined to allow users to query availability when scheduling events.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <div id="principal-capability-urn-ietf-params-jmap-calendars">
 <section id="section-2.1">
-        <h3 id="name-principal-capability-urniet">
-<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-principal-capability-urniet" class="section-name selfRef">Principal Capability urn:ietf:params:jmap:calendars</a>
-        </h3>
+        <h3 id="name-principal-capability-urniet"><a href="#section-2.1">2.1.&nbsp;&nbsp;Principal Capability urn:ietf:params:jmap:calendars</a></h3>
 <p id="section-2.1-1">A "urn:ietf:params:jmap:calendars" property is added to the Principal "capabilities" object, the value of which is an object with the following properties:<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-2.1-2">
           <dt id="section-2.1-2.1">
@@ -659,9 +171,7 @@ meta:
 </div>
 <div id="principal-getavailability">
 <section id="section-2.2">
-        <h3 id="name-principal-getavailability">
-<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-principal-getavailability" class="section-name selfRef">Principal/getAvailability</a>
-        </h3>
+        <h3 id="name-principal-getavailability"><a href="#section-2.2">2.2.&nbsp;&nbsp;Principal/getAvailability</a></h3>
 <p id="section-2.2-1">This method calculates the availability of the Principal for scheduling within a requested time period. It takes the following arguments:<a href="#section-2.2-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-2.2-2">
           <dt id="section-2.2-2.1">
@@ -810,9 +320,7 @@ meta:
 </div>
 <div id="calendaraddress-filter">
 <section id="section-2.3">
-        <h3 id="name-principal-query-extension">
-<a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-principal-query-extension" class="section-name selfRef">Principal/query extension</a>
-        </h3>
+        <h3 id="name-principal-query-extension"><a href="#section-2.3">2.3.&nbsp;&nbsp;Principal/query extension</a></h3>
 <p id="section-2.3-1">The following extra optional property is added to the <strong>FilterCondition</strong> object for the <strong>Principal/query</strong> method when the <code>urn:ietf:params:jmap:principals:availability</code> capability is used:<a href="#section-2.3-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-2.3-2">
           <dt id="section-2.3-2.1">
@@ -828,9 +336,7 @@ meta:
 </div>
 <div id="participant-identities">
 <section id="section-3">
-      <h2 id="name-participant-identities">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-participant-identities" class="section-name selfRef">Participant Identities</a>
-      </h2>
+      <h2 id="name-participant-identities"><a href="#section-3">3.&nbsp;&nbsp;Participant Identities</a></h2>
 <p id="section-3-1">A ParticipantIdentity stores information about a URI that represents the user within that account in an event's participants.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">A <strong>ParticipantIdentity</strong> object has the following properties:<a href="#section-3-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-3-3">
@@ -870,25 +376,19 @@ invitees.)<a href="#section-3-3.8.1" class="pilcrow">¶</a></p>
 <p id="section-3-5">The following JMAP methods are supported.<a href="#section-3-5" class="pilcrow">¶</a></p>
 <div id="participantidentity-get">
 <section id="section-3.1">
-        <h3 id="name-participantidentity-get">
-<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-participantidentity-get" class="section-name selfRef">ParticipantIdentity/get</a>
-        </h3>
+        <h3 id="name-participantidentity-get"><a href="#section-3.1">3.1.&nbsp;&nbsp;ParticipantIdentity/get</a></h3>
 <p id="section-3.1-1">This is a standard "/get" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.1" class="relref">Section 5.1</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>. The "ids" argument may be null to fetch all at once.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="participantidentity-changes">
 <section id="section-3.2">
-        <h3 id="name-participantidentity-changes">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-participantidentity-changes" class="section-name selfRef">ParticipantIdentity/changes</a>
-        </h3>
+        <h3 id="name-participantidentity-changes"><a href="#section-3.2">3.2.&nbsp;&nbsp;ParticipantIdentity/changes</a></h3>
 <p id="section-3.2-1">This is a standard "/changes" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.2" class="relref">Section 5.2</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="participantidentity-set">
 <section id="section-3.3">
-        <h3 id="name-participantidentity-set">
-<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-participantidentity-set" class="section-name selfRef">ParticipantIdentity/set</a>
-        </h3>
+        <h3 id="name-participantidentity-set"><a href="#section-3.3">3.3.&nbsp;&nbsp;ParticipantIdentity/set</a></h3>
 <p id="section-3.3-1">This is a standard "/set" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.3" class="relref">Section 5.3</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, but with the following additional request argument:<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-3.3-2">
           <dt id="section-3.3-2.1">
@@ -915,9 +415,7 @@ creation-reference, so the id will be the creation id prefixed with a "#".)<a hr
 </div>
 <div id="calendars">
 <section id="section-4">
-      <h2 id="name-calendars">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-calendars" class="section-name selfRef">Calendars</a>
-      </h2>
+      <h2 id="name-calendars"><a href="#section-4">4.&nbsp;&nbsp;Calendars</a></h2>
 <p id="section-4-1">A Calendar is a named collection of events. All events are associated with at least one calendar.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">A <strong>Calendar</strong> object has the following properties:<a href="#section-4-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-4-3">
@@ -1122,26 +620,20 @@ calendar.<a href="#section-4-3.28.2.2" class="pilcrow">¶</a>
 <p id="section-4-8">An event has no owner if its "participants" property is null or omitted, or if none of the Participant objects have the "owner" role.<a href="#section-4-8" class="pilcrow">¶</a></p>
 <div id="calendar-get">
 <section id="section-4.1">
-        <h3 id="name-calendar-get">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-calendar-get" class="section-name selfRef">Calendar/get</a>
-        </h3>
+        <h3 id="name-calendar-get"><a href="#section-4.1">4.1.&nbsp;&nbsp;Calendar/get</a></h3>
 <p id="section-4.1-1">This is a standard "/get" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.1" class="relref">Section 5.1</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>. The "ids" argument may be null to fetch all at once.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.1-2">If mayReadFreeBusy is the only permission the user has, the calendar MUST NOT be returned in "Calendar/get" and "Calendar/query"; it must behave as though it did not exist. The data is just used as part of "Principal/getAvailability".<a href="#section-4.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="calendar-changes">
 <section id="section-4.2">
-        <h3 id="name-calendar-changes">
-<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-calendar-changes" class="section-name selfRef">Calendar/changes</a>
-        </h3>
+        <h3 id="name-calendar-changes"><a href="#section-4.2">4.2.&nbsp;&nbsp;Calendar/changes</a></h3>
 <p id="section-4.2-1">This is a standard "/changes" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.2" class="relref">Section 5.2</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="calendar-set">
 <section id="section-4.3">
-        <h3 id="name-calendar-set">
-<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-calendar-set" class="section-name selfRef">Calendar/set</a>
-        </h3>
+        <h3 id="name-calendar-set"><a href="#section-4.3">4.3.&nbsp;&nbsp;Calendar/set</a></h3>
 <p id="section-4.3-1">This is a standard "/set" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.3" class="relref">Section 5.3</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> but with the following additional request arguments:<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-4.3-2">
           <dt id="section-4.3-2.1">
@@ -1204,9 +696,7 @@ When modifying the "shareWith" property, the user cannot give a right to a Princ
 </div>
 <div id="calendar-events">
 <section id="section-5">
-      <h2 id="name-calendar-events">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-calendar-events" class="section-name selfRef">Calendar Events</a>
-      </h2>
+      <h2 id="name-calendar-events"><a href="#section-5">5.&nbsp;&nbsp;Calendar Events</a></h2>
 <p id="section-5-1">A <strong>CalendarEvent</strong> object contains information about an event, or recurring series of events, that takes place at a particular time. It is a JSCalendar Event object, as defined in <span>[<a href="#I-D.ietf-calext-jscalendarbis" class="cite xref">I-D.ietf-calext-jscalendarbis</a>]</span>, with the following additional properties:<a href="#section-5-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-5-2">
         <dt id="section-5-2.1">
@@ -1271,15 +761,11 @@ invitation from another calendar system)? This is true if, and only if:<a href="
 <p id="section-5-3">CalendarEvent objects MUST NOT have a "method" property as this is only used when representing iTIP <span>[<a href="#RFC5546" class="cite xref">RFC5546</a>]</span> scheduling messages, not events in a data store.<a href="#section-5-3" class="pilcrow">¶</a></p>
 <div id="additional-jscalendar-properties">
 <section id="section-5.1">
-        <h3 id="name-additional-common-use-jscal">
-<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-additional-common-use-jscal" class="section-name selfRef">Additional common-use JSCalendar properties</a>
-        </h3>
+        <h3 id="name-additional-common-use-jscal"><a href="#section-5.1">5.1.&nbsp;&nbsp;Additional common-use JSCalendar properties</a></h3>
 <p id="section-5.1-1">This document defines three new JSCalendar properties for common use.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 <div id="mayinviteself">
 <section id="section-5.1.1">
-          <h4 id="name-mayinviteself">
-<a href="#section-5.1.1" class="section-number selfRef">5.1.1. </a><a href="#name-mayinviteself" class="section-name selfRef">mayInviteSelf</a>
-          </h4>
+          <h4 id="name-mayinviteself"><a href="#section-5.1.1">5.1.1.&nbsp;&nbsp;mayInviteSelf</a></h4>
 <p id="section-5.1.1-1">Type: <code>Boolean</code> (default: false)<a href="#section-5.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.1.1-2">Context: Event, Task<a href="#section-5.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.1.1-3">If true, anyone may add themselves to the event as a participant with the "attendee" role. This property MUST NOT be altered in the recurrenceOverrides; it may only be set on the base object.<a href="#section-5.1.1-3" class="pilcrow">¶</a></p>
@@ -1287,9 +773,7 @@ invitation from another calendar system)? This is true if, and only if:<a href="
 </div>
 <div id="mayinviteothers">
 <section id="section-5.1.2">
-          <h4 id="name-mayinviteothers">
-<a href="#section-5.1.2" class="section-number selfRef">5.1.2. </a><a href="#name-mayinviteothers" class="section-name selfRef">mayInviteOthers</a>
-          </h4>
+          <h4 id="name-mayinviteothers"><a href="#section-5.1.2">5.1.2.&nbsp;&nbsp;mayInviteOthers</a></h4>
 <p id="section-5.1.2-1">Type: <code>Boolean</code> (default: false)<a href="#section-5.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.1.2-2">Context: Event, Task<a href="#section-5.1.2-2" class="pilcrow">¶</a></p>
 <p id="section-5.1.2-3">If true, any current participant with the "attendee" role may add new participants with the "attendee" role to the event. This property MUST NOT be altered in the recurrenceOverrides; it may only be set on the base object.<a href="#section-5.1.2-3" class="pilcrow">¶</a></p>
@@ -1297,9 +781,7 @@ invitation from another calendar system)? This is true if, and only if:<a href="
 </div>
 <div id="hideattendees">
 <section id="section-5.1.3">
-          <h4 id="name-hideattendees">
-<a href="#section-5.1.3" class="section-number selfRef">5.1.3. </a><a href="#name-hideattendees" class="section-name selfRef">hideAttendees</a>
-          </h4>
+          <h4 id="name-hideattendees"><a href="#section-5.1.3">5.1.3.&nbsp;&nbsp;hideAttendees</a></h4>
 <p id="section-5.1.3-1">Type: <code>Boolean</code> (default: false)<a href="#section-5.1.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.1.3-2">Context: Event, Task<a href="#section-5.1.3-2" class="pilcrow">¶</a></p>
 <p id="section-5.1.3-3">If true, only the owners of the event may see the full set of participants. Other users with access to the event may only see the owners and themselves. This property MUST NOT be altered in the recurrenceOverrides; it may only be set on the base object.<a href="#section-5.1.3-3" class="pilcrow">¶</a></p>
@@ -1309,15 +791,11 @@ invitation from another calendar system)? This is true if, and only if:<a href="
 </div>
 <div id="additional-reserved-jscalendar-properties">
 <section id="section-5.2">
-        <h3 id="name-additional-reserved-jscalen">
-<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-additional-reserved-jscalen" class="section-name selfRef">Additional reserved JSCalendar properties</a>
-        </h3>
+        <h3 id="name-additional-reserved-jscalen"><a href="#section-5.2">5.2.&nbsp;&nbsp;Additional reserved JSCalendar properties</a></h3>
 <p id="section-5.2-1">This document also reserves two new JSCalendar properties in the Participant object for use in JMAP Calendars:<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <div id="schedulesequence">
 <section id="section-5.2.1">
-          <h4 id="name-schedulesequence">
-<a href="#section-5.2.1" class="section-number selfRef">5.2.1. </a><a href="#name-schedulesequence" class="section-name selfRef">scheduleSequence</a>
-          </h4>
+          <h4 id="name-schedulesequence"><a href="#section-5.2.1">5.2.1.&nbsp;&nbsp;scheduleSequence</a></h4>
 <p id="section-5.2.1-1">Type: <code>UnsignedInt</code> (default: 0)<a href="#section-5.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.1-2">Context: Participant<a href="#section-5.2.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.2.1-3">This is the <code>sequence</code> property of the most recent iTIP response that has been applied for this participant. It can be compared to the <code>sequence</code> property in future responses to detect and discard older responses
@@ -1327,9 +805,7 @@ delivered out of order.<a href="#section-5.2.1-3" class="pilcrow">¶</a></p>
 </div>
 <div id="scheduleupdated">
 <section id="section-5.2.2">
-          <h4 id="name-scheduleupdated">
-<a href="#section-5.2.2" class="section-number selfRef">5.2.2. </a><a href="#name-scheduleupdated" class="section-name selfRef">scheduleUpdated</a>
-          </h4>
+          <h4 id="name-scheduleupdated"><a href="#section-5.2.2">5.2.2.&nbsp;&nbsp;scheduleUpdated</a></h4>
 <p id="section-5.2.2-1">Type: <code>UTCDateTime</code> (optional)<a href="#section-5.2.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.2.2-2">Context: Participant<a href="#section-5.2.2-2" class="pilcrow">¶</a></p>
 <p id="section-5.2.2-3">This is the <code>updated</code> property of the most recent iTIP response that has been applied for this participant. It can be compared to the <code>updated</code> property in future responses to detect and discard older responses
@@ -1341,18 +817,14 @@ delivered out of order (if the "scheduleSequence" is the same).<a href="#section
 </div>
 <div id="attachments">
 <section id="section-5.3">
-        <h3 id="name-attachments">
-<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-attachments" class="section-name selfRef">Attachments</a>
-        </h3>
+        <h3 id="name-attachments"><a href="#section-5.3">5.3.&nbsp;&nbsp;Attachments</a></h3>
 <p id="section-5.3-1">The Link object, as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-jscalendarbis-15#section-1.4.11" class="relref">Section 1.4.11</a> of [<a href="#I-D.ietf-calext-jscalendarbis" class="cite xref">I-D.ietf-calext-jscalendarbis</a>]</span>, with a "rel" property equal to "enclosure" is used to represent attachments. Instead of mandating an "href" property, clients may set a "blobId" property instead to reference a blob of binary data in the account, as per <span><a href="https://rfc-editor.org/rfc/rfc8620#section-6" class="relref">Section 6</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.3-2">The server MUST translate this to an embedded <code>data:</code> URL <span>[<a href="#RFC2397" class="cite xref">RFC2397</a>]</span> when sending the event to a system that cannot access the blob. Servers that support CalDAV access to the same data are recommended to expose these files as managed attachments <span>[<a href="#RFC8607" class="cite xref">RFC8607</a>]</span>.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="per-user-properties">
 <section id="section-5.4">
-        <h3 id="name-per-user-properties">
-<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-per-user-properties" class="section-name selfRef">Per-user properties</a>
-        </h3>
+        <h3 id="name-per-user-properties"><a href="#section-5.4">5.4.&nbsp;&nbsp;Per-user properties</a></h3>
 <p id="section-5.4-1">In shared calendars, any top-level property registered in the IANA registry as "Is Per-User: yes" (see <a href="#update-to-the-jscalendar-properties-registry" class="auto internal xref">Section 10.8</a>) MUST be stored per-user. This includes:<a href="#section-5.4-1" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-5.4-2.1">keywords<a href="#section-5.4-2.1" class="pilcrow">¶</a>
@@ -1372,9 +844,7 @@ delivered out of order (if the "scheduleSequence" is the same).<a href="#section
 </div>
 <div id="recurring-events">
 <section id="section-5.5">
-        <h3 id="name-recurring-events">
-<a href="#section-5.5" class="section-number selfRef">5.5. </a><a href="#name-recurring-events" class="section-name selfRef">Recurring events</a>
-        </h3>
+        <h3 id="name-recurring-events"><a href="#section-5.5">5.5.&nbsp;&nbsp;Recurring events</a></h3>
 <p id="section-5.5-1">Events may recur, in which case they represent multiple occurrences or instances. The data store will either contain a single base event, containing a recurrence rule and/or recurrence overrides; or, a set of individual instances (when invited to specific occurrences only).<a href="#section-5.5-1" class="pilcrow">¶</a></p>
 <p id="section-5.5-2">The client may ask the server to expand recurrences within a specific time range in "CalendarEvent/query". This will generate synthetic ids representing individual instances in the requested time range. The client can fetch and update the objects using these ids and the server will make the appropriate changes to the base event. Synthetic ids do not appear in "CalendarEvent/changes" responses; only the ids of events as actually stored on the server.<a href="#section-5.5-2" class="pilcrow">¶</a></p>
 <p id="section-5.5-3">If the user is invited to specific instances then later added to the base event, "CalendarEvent/changes" will show the ids of all the individual instances being destroyed and the id for the base event being created.<a href="#section-5.5-3" class="pilcrow">¶</a></p>
@@ -1382,23 +852,17 @@ delivered out of order (if the "scheduleSequence" is the same).<a href="#section
 </div>
 <div id="updating-for-this-and-future">
 <section id="section-5.6">
-        <h3 id="name-updating-for-this-and-futur">
-<a href="#section-5.6" class="section-number selfRef">5.6. </a><a href="#name-updating-for-this-and-futur" class="section-name selfRef">Updating for "this-and-future"</a>
-        </h3>
+        <h3 id="name-updating-for-this-and-futur"><a href="#section-5.6">5.6.&nbsp;&nbsp;Updating for "this-and-future"</a></h3>
 <p id="section-5.6-1">When editing a recurring event, you can either update the base event (affecting all instances unless overridden) or update an override for a specific occurrence. To update all occurrences from a specific point onwards, there are therefore two options: split the event, or update the base event and override all occurrences before the split point back to their original values.<a href="#section-5.6-1" class="pilcrow">¶</a></p>
 <div id="splitting-an-event">
 <section id="section-5.6.1">
-          <h4 id="name-splitting-an-event">
-<a href="#section-5.6.1" class="section-number selfRef">5.6.1. </a><a href="#name-splitting-an-event" class="section-name selfRef">Splitting an event</a>
-          </h4>
+          <h4 id="name-splitting-an-event"><a href="#section-5.6.1">5.6.1.&nbsp;&nbsp;Splitting an event</a></h4>
 <p id="section-5.6.1-1">If the event is not scheduled (has no participants), the simplest thing to do is to duplicate the event, modifying the recurrence rule of the original so it finishes before the split point, and the duplicate so it starts at the split point. As per JSCalendar <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-jscalendarbis-15#section-4.1.2" class="relref">Section 4.1.2</a> of [<a href="#I-D.ietf-calext-jscalendarbis" class="cite xref">I-D.ietf-calext-jscalendarbis</a>]</span>, a "next" and "first" relation MUST be set on the new objects respectively.<a href="#section-5.6.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="updating-the-base-event-and-overriding-previous">
 <section id="section-5.6.2">
-          <h4 id="name-updating-the-base-event-and">
-<a href="#section-5.6.2" class="section-number selfRef">5.6.2. </a><a href="#name-updating-the-base-event-and" class="section-name selfRef">Updating the base event and overriding previous</a>
-          </h4>
+          <h4 id="name-updating-the-base-event-and"><a href="#section-5.6.2">5.6.2.&nbsp;&nbsp;Updating the base event and overriding previous</a></h4>
 <p id="section-5.6.2-1">Splitting an event with participants is problematic, because they will see two separate changes and may not understand they are connected.<a href="#section-5.6.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.6.2-2">An alternative approach is to do the following:<a href="#section-5.6.2-2" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-5.6.2-3">
@@ -1416,9 +880,7 @@ delivered out of order (if the "scheduleSequence" is the same).<a href="#section
 </div>
 <div id="calendarevent-get">
 <section id="section-5.7">
-        <h3 id="name-calendarevent-get">
-<a href="#section-5.7" class="section-number selfRef">5.7. </a><a href="#name-calendarevent-get" class="section-name selfRef">CalendarEvent/get</a>
-        </h3>
+        <h3 id="name-calendarevent-get"><a href="#section-5.7">5.7.&nbsp;&nbsp;CalendarEvent/get</a></h3>
 <p id="section-5.7-1">This is a standard "/get" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.1" class="relref">Section 5.1</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, with four extra arguments:<a href="#section-5.7-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-5.7-2">
           <dt id="section-5.7-2.1">
@@ -1463,18 +925,14 @@ delivered out of order (if the "scheduleSequence" is the same).<a href="#section
 </div>
 <div id="calendarevent-changes">
 <section id="section-5.8">
-        <h3 id="name-calendarevent-changes">
-<a href="#section-5.8" class="section-number selfRef">5.8. </a><a href="#name-calendarevent-changes" class="section-name selfRef">CalendarEvent/changes</a>
-        </h3>
+        <h3 id="name-calendarevent-changes"><a href="#section-5.8">5.8.&nbsp;&nbsp;CalendarEvent/changes</a></h3>
 <p id="section-5.8-1">This is a standard "/changes" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.2" class="relref">Section 5.2</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-5.8-1" class="pilcrow">¶</a></p>
 <p id="section-5.8-2">Synthetic ids generated by the server expanding recurrences in "CalendarEvent/query" do not appear in "CalendarEvent/changes" responses; only the ids of events as actually stored on the server.<a href="#section-5.8-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="calendarevent-set">
 <section id="section-5.9">
-        <h3 id="name-calendarevent-set">
-<a href="#section-5.9" class="section-number selfRef">5.9. </a><a href="#name-calendarevent-set" class="section-name selfRef">CalendarEvent/set</a>
-        </h3>
+        <h3 id="name-calendarevent-set"><a href="#section-5.9">5.9.&nbsp;&nbsp;CalendarEvent/set</a></h3>
 <p id="section-5.9-1">This is a standard "/set" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.3" class="relref">Section 5.3</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, with the following extra argument:<a href="#section-5.9-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-5.9-2">
           <dt id="section-5.9-2.1">
@@ -1532,9 +990,7 @@ value is less than or equal to the current "sequence" value on the server;<a hre
 </dl>
 <div id="patching">
 <section id="section-5.9.1">
-          <h4 id="name-patching">
-<a href="#section-5.9.1" class="section-number selfRef">5.9.1. </a><a href="#name-patching" class="section-name selfRef">Patching</a>
-          </h4>
+          <h4 id="name-patching"><a href="#section-5.9.1">5.9.1.&nbsp;&nbsp;Patching</a></h4>
 <p id="section-5.9.1-1">The JMAP "/set" method allows you to update an object by sending a patch, rather than having to supply the whole object. When doing so, care must be taken if updating a property of a CalendarEvent where the value is itself a PatchObject, e.g. inside "localizations" or "recurrenceOverrides". In particular, you cannot add a property with value null to the CalendarEvent using a direct patch on that property, as this is interpreted instead as a patch to remove the property.<a href="#section-5.9.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.9.1-2">This is more easily understood with an example. Suppose you have a CalendarEvent object like so:<a href="#section-5.9.1-2" class="pilcrow">¶</a></p>
 <span id="name-a-calendarevent-object"></span><figure id="figure-1">
@@ -1680,9 +1136,7 @@ the occurrence on 2025-03-05, which starts an hour later than normal. Now, if Zo
 </div>
 <div id="sending-invitations-and-responses">
 <section id="section-5.9.2">
-          <h4 id="name-sending-invitations-and-res">
-<a href="#section-5.9.2" class="section-number selfRef">5.9.2. </a><a href="#name-sending-invitations-and-res" class="section-name selfRef">Sending invitations and responses</a>
-          </h4>
+          <h4 id="name-sending-invitations-and-res"><a href="#section-5.9.2">5.9.2.&nbsp;&nbsp;Sending invitations and responses</a></h4>
 <p id="section-5.9.2-1">If "sendSchedulingMessages" is true, the server MUST send appropriate iTIP <span>[<a href="#RFC5546" class="cite xref">RFC5546</a>]</span> scheduling messages after successfuly creating, updating or destroying a calendar event.<a href="#section-5.9.2-1" class="pilcrow">¶</a></p>
 <p id="section-5.9.2-2">When determining which scheduling messages to send, the server must first establish whether it is the <strong>origin</strong> of the event, as described in the "isOrigin" property.<a href="#section-5.9.2-2" class="pilcrow">¶</a></p>
 <p id="section-5.9.2-3">The server sends the scheduling message via iTIP <span>[<a href="#RFC5546" class="cite xref">RFC5546</a>]</span> to the "calendarAddress" property of a participant (if the server is the origin) or the "organizerCalendarAddress" property of the event (otherwise). If any of the recipients do not have a calendar address the server can send to, the server MUST reject the change with a <code>noSupportedScheduleMethods</code> SetError.<a href="#section-5.9.2-3" class="pilcrow">¶</a></p>
@@ -1690,9 +1144,7 @@ the occurrence on 2025-03-05, which starts an hour later than normal. Now, if Zo
 <p id="section-5.9.2-5">If sending via iMIP <span>[<a href="#RFC6047" class="cite xref">RFC6047</a>]</span>, the server MAY choose to only send updates it deems "essential" to avoid flooding the recipient's email with changes they do not care about. For example, changes to the participation status of another participant, or changes to events solely in the past may be omitted.<a href="#section-5.9.2-5" class="pilcrow">¶</a></p>
 <div id="request">
 <section id="section-5.9.2.1">
-            <h5 id="name-request">
-<a href="#section-5.9.2.1" class="section-number selfRef">5.9.2.1. </a><a href="#name-request" class="section-name selfRef">REQUEST</a>
-            </h5>
+            <h5 id="name-request"><a href="#section-5.9.2.1">5.9.2.1.&nbsp;&nbsp;REQUEST</a></h5>
 <p id="section-5.9.2.1-1">When the server is the origin for the event, a REQUEST message (<span>[<a href="#RFC5546" class="cite xref">RFC5546</a>], <a href="https://rfc-editor.org/rfc/rfc5546#section-3.2.2" class="relref">Section 3.2.2</a></span>) is sent to all current participants (except those corresponding to the owner of the calendar) if either:<a href="#section-5.9.2.1-1" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-5.9.2.1-2.1">
@@ -1709,9 +1161,7 @@ the occurrence on 2025-03-05, which starts an hour later than normal. Now, if Zo
 </div>
 <div id="cancel">
 <section id="section-5.9.2.2">
-            <h5 id="name-cancel">
-<a href="#section-5.9.2.2" class="section-number selfRef">5.9.2.2. </a><a href="#name-cancel" class="section-name selfRef">CANCEL</a>
-            </h5>
+            <h5 id="name-cancel"><a href="#section-5.9.2.2">5.9.2.2.&nbsp;&nbsp;CANCEL</a></h5>
 <p id="section-5.9.2.2-1">When the server is the origin for the event, a CANCEL message (<span>[<a href="#RFC5546" class="cite xref">RFC5546</a>], <a href="https://rfc-editor.org/rfc/rfc5546#section-3.2.5" class="relref">Section 3.2.5</a></span>) is sent if any of:<a href="#section-5.9.2.2-1" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-5.9.2.2-2.1">
@@ -1732,9 +1182,7 @@ the occurrence on 2025-03-05, which starts an hour later than normal. Now, if Zo
 </div>
 <div id="reply">
 <section id="section-5.9.2.3">
-            <h5 id="name-reply">
-<a href="#section-5.9.2.3" class="section-number selfRef">5.9.2.3. </a><a href="#name-reply" class="section-name selfRef">REPLY</a>
-            </h5>
+            <h5 id="name-reply"><a href="#section-5.9.2.3">5.9.2.3.&nbsp;&nbsp;REPLY</a></h5>
 <p id="section-5.9.2.3-1">When the server is <strong>not</strong> the origin for the event, a REPLY message (<span>[<a href="#RFC5546" class="cite xref">RFC5546</a>], <a href="https://rfc-editor.org/rfc/rfc5546#section-3.2.3" class="relref">Section 3.2.3</a></span>) is sent for every participant corresponding to one of the user's ParticipantIdentitities in the account if any of the following changes are made:<a href="#section-5.9.2.3-1" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-5.9.2.3-2.1">
@@ -1756,17 +1204,13 @@ the occurrence on 2025-03-05, which starts an hour later than normal. Now, if Zo
 </div>
 <div id="calendarevent-copy">
 <section id="section-5.10">
-        <h3 id="name-calendarevent-copy">
-<a href="#section-5.10" class="section-number selfRef">5.10. </a><a href="#name-calendarevent-copy" class="section-name selfRef">CalendarEvent/copy</a>
-        </h3>
+        <h3 id="name-calendarevent-copy"><a href="#section-5.10">5.10.&nbsp;&nbsp;CalendarEvent/copy</a></h3>
 <p id="section-5.10-1">This is a standard "/copy" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.4" class="relref">Section 5.4</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-5.10-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="calendarevent-query">
 <section id="section-5.11">
-        <h3 id="name-calendarevent-query">
-<a href="#section-5.11" class="section-number selfRef">5.11. </a><a href="#name-calendarevent-query" class="section-name selfRef">CalendarEvent/query</a>
-        </h3>
+        <h3 id="name-calendarevent-query"><a href="#section-5.11">5.11.&nbsp;&nbsp;CalendarEvent/query</a></h3>
 <p id="section-5.11-1">This is a standard "/query" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.5" class="relref">Section 5.5</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, with two extra arguments:<a href="#section-5.11-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-5.11-2">
           <dt id="section-5.11-2.1">
@@ -1788,9 +1232,7 @@ the occurrence on 2025-03-05, which starts an hour later than normal. Now, if Zo
 <p id="section-5.11-7"><code>cannotCalculateOccurrences</code>: The server cannot expand a recurrence required to return the results for this query.<a href="#section-5.11-7" class="pilcrow">¶</a></p>
 <div id="filtering">
 <section id="section-5.11.1">
-          <h4 id="name-filtering">
-<a href="#section-5.11.1" class="section-number selfRef">5.11.1. </a><a href="#name-filtering" class="section-name selfRef">Filtering</a>
-          </h4>
+          <h4 id="name-filtering"><a href="#section-5.11.1">5.11.1.&nbsp;&nbsp;Filtering</a></h4>
 <p id="section-5.11.1-1">A <strong>FilterCondition</strong> object has the following properties, any of which may be omitted:<a href="#section-5.11.1-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-5.11.1-2">
             <dt id="section-5.11.1-2.1">
@@ -1871,9 +1313,7 @@ the occurrence on 2025-03-05, which starts an hour later than normal. Now, if Zo
 </div>
 <div id="sorting">
 <section id="section-5.11.2">
-          <h4 id="name-sorting">
-<a href="#section-5.11.2" class="section-number selfRef">5.11.2. </a><a href="#name-sorting" class="section-name selfRef">Sorting</a>
-          </h4>
+          <h4 id="name-sorting"><a href="#section-5.11.2">5.11.2.&nbsp;&nbsp;Sorting</a></h4>
 <p id="section-5.11.2-1">The following properties MUST be supported for sorting:<a href="#section-5.11.2-1" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-5.11.2-2.1">start<a href="#section-5.11.2-2.1" class="pilcrow">¶</a>
@@ -1896,17 +1336,13 @@ the occurrence on 2025-03-05, which starts an hour later than normal. Now, if Zo
 </div>
 <div id="calendarevent-querychanges">
 <section id="section-5.12">
-        <h3 id="name-calendarevent-querychanges">
-<a href="#section-5.12" class="section-number selfRef">5.12. </a><a href="#name-calendarevent-querychanges" class="section-name selfRef">CalendarEvent/queryChanges</a>
-        </h3>
+        <h3 id="name-calendarevent-querychanges"><a href="#section-5.12">5.12.&nbsp;&nbsp;CalendarEvent/queryChanges</a></h3>
 <p id="section-5.12-1">This is a standard "/queryChanges" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.6" class="relref">Section 5.6</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-5.12-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="calendarevent-parse">
 <section id="section-5.13">
-        <h3 id="name-calendarevent-parse">
-<a href="#section-5.13" class="section-number selfRef">5.13. </a><a href="#name-calendarevent-parse" class="section-name selfRef">CalendarEvent/parse</a>
-        </h3>
+        <h3 id="name-calendarevent-parse"><a href="#section-5.13">5.13.&nbsp;&nbsp;CalendarEvent/parse</a></h3>
 <p id="section-5.13-1">This method allows the client to parse blobs as <code>iCalendar</code> files <span>[<a href="#RFC5545" class="cite xref">RFC5545</a>]</span> to get <code>CalendarEvent</code> objects. This can be used to parse, display, and import information from iCalendar files without having to implement iCalendar parsing in the client. Server support for this is optional, and indicated via the <code>urn:ietf:params:jmap:calendars:parse</code> capability, as per <a href="#urn-ietf-params-jmap-calendars-parse" class="auto internal xref">Section 1.5.3</a>.<a href="#section-5.13-1" class="pilcrow">¶</a></p>
 <p id="section-5.13-2">The following metadata properties on the CalendarEvent objects will be null if requested:<a href="#section-5.13-2" class="pilcrow">¶</a></p>
 <ul class="compact">
@@ -1976,18 +1412,14 @@ the occurrence on 2025-03-05, which starts an hour later than normal. Now, if Zo
 </div>
 <div id="alerts">
 <section id="section-6">
-      <h2 id="name-alerts">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-alerts" class="section-name selfRef">Alerts</a>
-      </h2>
+      <h2 id="name-alerts"><a href="#section-6">6.&nbsp;&nbsp;Alerts</a></h2>
 <p id="section-6-1">Alerts may be specified on events as described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-jscalendarbis-15#section-4.5" class="relref">Section 4.5</a> of [<a href="#I-D.ietf-calext-jscalendarbis" class="cite xref">I-D.ietf-calext-jscalendarbis</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">Alerts MUST only be triggered for events in calendars where the user is subscribed.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <p id="section-6-3">When an alert with an "email" action is triggered, the server MUST send an email to the user to notify them of the event. The content of the email is implementation specific. Clients MUST NOT perform an action for these alerts.<a href="#section-6-3" class="pilcrow">¶</a></p>
 <p id="section-6-4">When an alert with a "display" action is triggered, clients should display an alert in a platform-appropriate manner to the user to remind them of the event. Clients with a full offline cache of events may choose to calculate when alerts should trigger locally. Alternatively, they can subscribe to push events from the server.<a href="#section-6-4" class="pilcrow">¶</a></p>
 <div id="default-alerts">
 <section id="section-6.1">
-        <h3 id="name-default-alerts">
-<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-default-alerts" class="section-name selfRef">Default alerts</a>
-        </h3>
+        <h3 id="name-default-alerts"><a href="#section-6.1">6.1.&nbsp;&nbsp;Default alerts</a></h3>
 <p id="section-6.1-1">If the "useDefaultAlerts" property of an event is true, the alerts are taken from the "defaultAlertsWithTime" or "defaultAlertsWithoutTime" property of all Calendars (see <a href="#calendars" class="auto internal xref">Section 4</a>) the event is in, rather than the "alerts" property of the CalendarEvent.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.1-2">When using default alerts, the "alerts" property of the event is ignored except for the following:<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 <ul class="compact">
@@ -2000,18 +1432,14 @@ the occurrence on 2025-03-05, which starts an hour later than normal. Now, if Zo
 </div>
 <div id="acknowledging-an-alert">
 <section id="section-6.2">
-        <h3 id="name-acknowledging-an-alert">
-<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-acknowledging-an-alert" class="section-name selfRef">Acknowledging an alert</a>
-        </h3>
+        <h3 id="name-acknowledging-an-alert"><a href="#section-6.2">6.2.&nbsp;&nbsp;Acknowledging an alert</a></h3>
 <p id="section-6.2-1">To dismiss an alert, clients set the "acknowledged" property of the Alert object to the current date-time. If the alert was a calendar default, it may need to be added to the event at this point in order to acknowledge it. When other clients fetch the updated CalendarEvent they SHOULD automatically dismiss or suppress duplicate alerts (alerts with the same alert id that triggered on or before the "acknowledged" date-time) and alerts that have been removed from the event.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">Setting the "acknowledged" property MUST NOT create a new recurrence override. For a recurring calendar object, the "acknowledged" property of the parent object MUST be updated, unless the alert is already overridden in the "recurrenceOverrides" property.<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="snoozing-an-alert">
 <section id="section-6.3">
-        <h3 id="name-snoozing-an-alert">
-<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-snoozing-an-alert" class="section-name selfRef">Snoozing an alert</a>
-        </h3>
+        <h3 id="name-snoozing-an-alert"><a href="#section-6.3">6.3.&nbsp;&nbsp;Snoozing an alert</a></h3>
 <p id="section-6.3-1">Users may wish to dismiss an alert temporarily and have it come back after a specific period of time. To do this, clients MUST:<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="compact type-1" id="section-6.3-2">
 <li id="section-6.3-2.1">Acknowledge the alert as described in <a href="#acknowledging-an-alert" class="auto internal xref">Section 6.2</a>.<a href="#section-6.3-2.1" class="pilcrow">¶</a>
@@ -2024,9 +1452,7 @@ the occurrence on 2025-03-05, which starts an hour later than normal. Now, if Zo
 </div>
 <div id="push-events">
 <section id="section-6.4">
-        <h3 id="name-push-events">
-<a href="#section-6.4" class="section-number selfRef">6.4. </a><a href="#name-push-events" class="section-name selfRef">Push events</a>
-        </h3>
+        <h3 id="name-push-events"><a href="#section-6.4">6.4.&nbsp;&nbsp;Push events</a></h3>
 <p id="section-6.4-1">Servers that support the <code>urn:ietf:params:jmap:calendars</code> capability MUST support registering for the pseudo-type "CalendarAlert" in push subscriptions and event source connections, as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Sections <a href="https://rfc-editor.org/rfc/rfc8620#section-7.2" class="relref">7.2</a> and <a href="https://rfc-editor.org/rfc/rfc8620#section-7.3" class="relref">7.3</a>.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
 <p id="section-6.4-2">If requested, a CalendarAlert notification will be pushed whenever an alert is triggered for the user. For Event Source connections, this notification is pushed as an event called "calendarAlert".<a href="#section-6.4-2" class="pilcrow">¶</a></p>
 <p id="section-6.4-3">A <strong>CalendarAlert</strong> object has the following properties:<a href="#section-6.4-3" class="pilcrow">¶</a></p>
@@ -2077,9 +1503,7 @@ triggered, or null if the event is not recurring.<a href="#section-6.4-4.10" cla
 </div>
 <div id="calendar-event-notifications">
 <section id="section-7">
-      <h2 id="name-calendar-event-notification">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-calendar-event-notification" class="section-name selfRef">Calendar Event Notifications</a>
-      </h2>
+      <h2 id="name-calendar-event-notification"><a href="#section-7">7.&nbsp;&nbsp;Calendar Event Notifications</a></h2>
 <p id="section-7-1">The CalendarEventNotification data type represents changes to events in calendars that the user is subscribed to where the change was not explicitly made by the user themself. CalendarEventNotifications are only created by the server; users cannot create them explicitly. They are stored in the same Account as the CalendarEvent that was changed.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <p id="section-7-2">Clients may present the list of notifications to the user and allow the user to dismiss them. To dismiss a notification, use a standard "/set" call to destroy it.<a href="#section-7-2" class="pilcrow">¶</a></p>
 <p id="section-7-3">The server should create a CalendarEventNotification whenever an event is added, updated or destroyed by someone else. This includes:<a href="#section-7-3" class="pilcrow">¶</a></p>
@@ -2192,25 +1616,19 @@ data after the update.<a href="#section-7-9.18" class="pilcrow">¶</a>
 <p id="section-7-10">If the change only affects a single instance of a recurring event, the server MAY set the event and eventPatch properties for just that instance; the calendarEventId MUST still be for the base event.<a href="#section-7-10" class="pilcrow">¶</a></p>
 <div id="calendareventnotification-get">
 <section id="section-7.1">
-        <h3 id="name-calendareventnotification-g">
-<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-calendareventnotification-g" class="section-name selfRef">CalendarEventNotification/get</a>
-        </h3>
+        <h3 id="name-calendareventnotification-g"><a href="#section-7.1">7.1.&nbsp;&nbsp;CalendarEventNotification/get</a></h3>
 <p id="section-7.1-1">This is a standard "/get" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.1" class="relref">Section 5.1</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="calendareventnotification-changes">
 <section id="section-7.2">
-        <h3 id="name-calendareventnotification-c">
-<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-calendareventnotification-c" class="section-name selfRef">CalendarEventNotification/changes</a>
-        </h3>
+        <h3 id="name-calendareventnotification-c"><a href="#section-7.2">7.2.&nbsp;&nbsp;CalendarEventNotification/changes</a></h3>
 <p id="section-7.2-1">This is a standard "/changes" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.2" class="relref">Section 5.2</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="calendareventnotification-set">
 <section id="section-7.3">
-        <h3 id="name-calendareventnotification-s">
-<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-calendareventnotification-s" class="section-name selfRef">CalendarEventNotification/set</a>
-        </h3>
+        <h3 id="name-calendareventnotification-s"><a href="#section-7.3">7.3.&nbsp;&nbsp;CalendarEventNotification/set</a></h3>
 <p id="section-7.3-1">This is a standard "/set" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.3" class="relref">Section 5.3</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
 <p id="section-7.3-2">Only destroy is supported; any attempt to create/update MUST be rejected with a
 <code>forbidden</code> SetError.<a href="#section-7.3-2" class="pilcrow">¶</a></p>
@@ -2218,15 +1636,11 @@ data after the update.<a href="#section-7-9.18" class="pilcrow">¶</a>
 </div>
 <div id="calendareventnotification-query">
 <section id="section-7.4">
-        <h3 id="name-calendareventnotification-q">
-<a href="#section-7.4" class="section-number selfRef">7.4. </a><a href="#name-calendareventnotification-q" class="section-name selfRef">CalendarEventNotification/query</a>
-        </h3>
+        <h3 id="name-calendareventnotification-q"><a href="#section-7.4">7.4.&nbsp;&nbsp;CalendarEventNotification/query</a></h3>
 <p id="section-7.4-1">This is a standard "/query" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.5" class="relref">Section 5.5</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-7.4-1" class="pilcrow">¶</a></p>
 <div id="filtering-1">
 <section id="section-7.4.1">
-          <h4 id="name-filtering-2">
-<a href="#section-7.4.1" class="section-number selfRef">7.4.1. </a><a href="#name-filtering-2" class="section-name selfRef">Filtering</a>
-          </h4>
+          <h4 id="name-filtering-2"><a href="#section-7.4.1">7.4.1.&nbsp;&nbsp;Filtering</a></h4>
 <p id="section-7.4.1-1">A <strong>FilterCondition</strong> object has the following properties:<a href="#section-7.4.1-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlNewline" id="section-7.4.1-2">
             <dt id="section-7.4.1-2.1">
@@ -2258,9 +1672,7 @@ data after the update.<a href="#section-7-9.18" class="pilcrow">¶</a>
 </div>
 <div id="sorting-1">
 <section id="section-7.4.2">
-          <h4 id="name-sorting-2">
-<a href="#section-7.4.2" class="section-number selfRef">7.4.2. </a><a href="#name-sorting-2" class="section-name selfRef">Sorting</a>
-          </h4>
+          <h4 id="name-sorting-2"><a href="#section-7.4.2">7.4.2.&nbsp;&nbsp;Sorting</a></h4>
 <p id="section-7.4.2-1">The "created" property MUST be supported for sorting.<a href="#section-7.4.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2268,9 +1680,7 @@ data after the update.<a href="#section-7-9.18" class="pilcrow">¶</a>
 </div>
 <div id="calendareventnotification-querychanges">
 <section id="section-7.5">
-        <h3 id="name-calendareventnotification-qu">
-<a href="#section-7.5" class="section-number selfRef">7.5. </a><a href="#name-calendareventnotification-qu" class="section-name selfRef">CalendarEventNotification/queryChanges</a>
-        </h3>
+        <h3 id="name-calendareventnotification-qu"><a href="#section-7.5">7.5.&nbsp;&nbsp;CalendarEventNotification/queryChanges</a></h3>
 <p id="section-7.5-1">This is a standard "/queryChanges" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.6" class="relref">Section 5.6</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-7.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2278,15 +1688,11 @@ data after the update.<a href="#section-7-9.18" class="pilcrow">¶</a>
 </div>
 <div id="examples">
 <section id="section-8">
-      <h2 id="name-examples">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-examples" class="section-name selfRef">Examples</a>
-      </h2>
+      <h2 id="name-examples"><a href="#section-8">8.&nbsp;&nbsp;Examples</a></h2>
 <p id="section-8-1">For brevity, in the following examples only the "methodCalls" property of the Request object, and the "methodResponses" property of the Response object is shown.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <div id="fetching-initial-data">
 <section id="section-8.1">
-        <h3 id="name-fetching-initial-data">
-<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-fetching-initial-data" class="section-name selfRef">Fetching initial data</a>
-        </h3>
+        <h3 id="name-fetching-initial-data"><a href="#section-8.1">8.1.&nbsp;&nbsp;Fetching initial data</a></h3>
 <p id="section-8.1-1">A user has authenticated and the client has fetched the JMAP Session object. It finds a single Account with the <code>urn:ietf:params:jmap:calendars</code> capability, with id "a0x9", and wants to display all the calendar information for January 2023 in the Australia/Melbourne time zone. It might make the following request:<a href="#section-8.1-1" class="pilcrow">¶</a></p>
 <span id="name-methodcalls-property-of-a-jmap-"></span><figure id="figure-7">
           <div class="lang-json sourcecode" id="section-8.1-2.1">
@@ -2402,9 +1808,7 @@ data after the update.<a href="#section-7-9.18" class="pilcrow">¶</a>
 </div>
 <div id="creating-an-event">
 <section id="section-8.2">
-        <h3 id="name-creating-an-event">
-<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-creating-an-event" class="section-name selfRef">Creating an event</a>
-        </h3>
+        <h3 id="name-creating-an-event"><a href="#section-8.2">8.2.&nbsp;&nbsp;Creating an event</a></h3>
 <p id="section-8.2-1">Suppose the user asks the client to create a new event. The client should default to adding it to the "Work" calendar, as this is the default calendar for the user, unless it has information to make a more informed decision. (e.g. The client may have a feature to automatically choose the calendar based on the time of day, and the user indicates the event is at 7pm, so it knows to default to "Private".)<a href="#section-8.2-1" class="pilcrow">¶</a></p>
 <span id="name-methodcalls-property-of-a-jmap-r"></span><figure id="figure-9">
           <div class="lang-json sourcecode" id="section-8.2-2.1">
@@ -2486,9 +1890,7 @@ data after the update.<a href="#section-7-9.18" class="pilcrow">¶</a>
 </div>
 <div id="snoozing-an-alert-1">
 <section id="section-8.3">
-        <h3 id="name-snoozing-an-alert-2">
-<a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-snoozing-an-alert-2" class="section-name selfRef">Snoozing an alert</a>
-        </h3>
+        <h3 id="name-snoozing-an-alert-2"><a href="#section-8.3">8.3.&nbsp;&nbsp;Snoozing an alert</a></h3>
 <p id="section-8.3-1">The client is connected to the event source and receives a push:<a href="#section-8.3-1" class="pilcrow">¶</a></p>
 <span id="name-object-received-via-push-co"></span><figure id="figure-11">
           <div class="lang-json sourcecode" id="section-8.3-2.1">
@@ -2612,9 +2014,7 @@ data after the update.<a href="#section-7-9.18" class="pilcrow">¶</a>
 </div>
 <div id="changing-the-default-calendar">
 <section id="section-8.4">
-        <h3 id="name-changing-the-default-calend">
-<a href="#section-8.4" class="section-number selfRef">8.4. </a><a href="#name-changing-the-default-calend" class="section-name selfRef">Changing the default calendar</a>
-        </h3>
+        <h3 id="name-changing-the-default-calend"><a href="#section-8.4">8.4.&nbsp;&nbsp;Changing the default calendar</a></h3>
 <p id="section-8.4-1">The client tries to change the default calendar from "Work" to "Private" (and
 makes no other change):<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 <span id="name-methodcalls-property-of-a-jmap-requ"></span><figure id="figure-16">
@@ -2651,9 +2051,7 @@ makes no other change):<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 </div>
 <div id="parsing-an-icalendar-file">
 <section id="section-8.5">
-        <h3 id="name-parsing-an-icalendar-file">
-<a href="#section-8.5" class="section-number selfRef">8.5. </a><a href="#name-parsing-an-icalendar-file" class="section-name selfRef">Parsing an iCalendar file</a>
-        </h3>
+        <h3 id="name-parsing-an-icalendar-file"><a href="#section-8.5">8.5.&nbsp;&nbsp;Parsing an iCalendar file</a></h3>
 <p id="section-8.5-1">The client makes a request to parse the calendar event from a blob id representing an icalendar file:<a href="#section-8.5-1" class="pilcrow">¶</a></p>
 <span id="name-methodcalls-property-of-a-jmap-requ-2"></span><figure id="figure-18">
           <div class="lang-json sourcecode" id="section-8.5-2.1">
@@ -2734,15 +2132,11 @@ makes no other change):<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 </div>
 <div id="security-considerations">
 <section id="section-9">
-      <h2 id="name-security-considerations">
-<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
-      </h2>
+      <h2 id="name-security-considerations"><a href="#section-9">9.&nbsp;&nbsp;Security Considerations</a></h2>
 <p id="section-9-1">All security considerations of JMAP <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> and JSCalendar <span>[<a href="#I-D.ietf-calext-jscalendarbis" class="cite xref">I-D.ietf-calext-jscalendarbis</a>]</span> apply to this specification. Additional considerations specific to the data types and functionality introduced by this document are described in the following subsections.<a href="#section-9-1" class="pilcrow">¶</a></p>
 <div id="privacy">
 <section id="section-9.1">
-        <h3 id="name-privacy">
-<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-privacy" class="section-name selfRef">Privacy</a>
-        </h3>
+        <h3 id="name-privacy"><a href="#section-9.1">9.1.&nbsp;&nbsp;Privacy</a></h3>
 <p id="section-9.1-1">Calendars often contain the precise movements, activities, and contacts of people; all intensely private data. Privacy leaks can have real world consequences, and calendar servers and clients MUST be mindful of the need to keep all data secure.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
 <p id="section-9.1-2">Servers MUST enforce the ACLs set on calendars to ensure only authorised data is shared. The additional restrictions specified by the "privacy" property of a JSCalendar Event object (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-jscalendarbis-15#section-4.4.3" class="relref">Section 4.4.3</a> of [<a href="#I-D.ietf-calext-jscalendarbis" class="cite xref">I-D.ietf-calext-jscalendarbis</a>]</span>) MUST also be enforced.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
 <p id="section-9.1-3">Users may have multiple Participant Identities that they use for areas of their life kept private from one another. Using one identity with an event MUST NOT leak the existence of any other identity. For example, sending an RSVP from identity worklife@example.com MUST NOT reveal anything about another identity present in the account such as privatelife@example.org.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
@@ -2751,31 +2145,23 @@ makes no other change):<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 </div>
 <div id="spoofing">
 <section id="section-9.2">
-        <h3 id="name-spoofing">
-<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-spoofing" class="section-name selfRef">Spoofing</a>
-        </h3>
+        <h3 id="name-spoofing"><a href="#section-9.2">9.2.&nbsp;&nbsp;Spoofing</a></h3>
 <p id="section-9.2-1">When receiving events and updates from external systems, it can be hard to verify that the identity of the author is who they claim to be. When receiving events via email, DKIM <span>[<a href="#RFC6376" class="cite xref">RFC6376</a>]</span> and S/MIME <span>[<a href="#RFC8551" class="cite xref">RFC8551</a>]</span> are two mechanisms that may be used to verify certain properties about the email data, which can be correlated with the event information.<a href="#section-9.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="denial-of-service">
 <section id="section-9.3">
-        <h3 id="name-denial-of-service">
-<a href="#section-9.3" class="section-number selfRef">9.3. </a><a href="#name-denial-of-service" class="section-name selfRef">Denial-of-service</a>
-        </h3>
+        <h3 id="name-denial-of-service"><a href="#section-9.3">9.3.&nbsp;&nbsp;Denial-of-service</a></h3>
 <p id="section-9.3-1">There are many ways in which a calendar user can make a request liable to cause a calendar server to spend an inordinate amount of processing time. Care must be taken to limit resources allocated to any one user to ensure the system does not become unresponsive. The following subsections list particularly hazardous areas.<a href="#section-9.3-1" class="pilcrow">¶</a></p>
 <div id="expanding-recurrences">
 <section id="section-9.3.1">
-          <h4 id="name-expanding-recurrences">
-<a href="#section-9.3.1" class="section-number selfRef">9.3.1. </a><a href="#name-expanding-recurrences" class="section-name selfRef">Expanding Recurrences</a>
-          </h4>
+          <h4 id="name-expanding-recurrences"><a href="#section-9.3.1">9.3.1.&nbsp;&nbsp;Expanding Recurrences</a></h4>
 <p id="section-9.3.1-1">Recurrence rules can be crafted to occur as frequently as every second. Servers MUST be careful to not allow resources to be exhausted when expanding, and limit the number of expansions they will create. Equally, rules can be generated that never create any occurrences at all. Servers MUST be careful to limit the work spent iterating in search of the next occurrence.<a href="#section-9.3.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="firing-alerts">
 <section id="section-9.3.2">
-          <h4 id="name-firing-alerts">
-<a href="#section-9.3.2" class="section-number selfRef">9.3.2. </a><a href="#name-firing-alerts" class="section-name selfRef">Firing alerts</a>
-          </h4>
+          <h4 id="name-firing-alerts"><a href="#section-9.3.2">9.3.2.&nbsp;&nbsp;Firing alerts</a></h4>
 <p id="section-9.3.2-1">An alert firing for an event can cause a notification to be pushed to the user's devices, or to send them an email. Servers MUST rate limit the number of alerts sent for any one user. The combination of recurring events with multiple alerts can in particular define unreasonably frequent alerts, leading to denial of service for either the server processing them or the user's devices receiving them.<a href="#section-9.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-9.3.2-2">Similarly, clients generating alerts from the data on device must take the same precautions.<a href="#section-9.3.2-2" class="pilcrow">¶</a></p>
 <p id="section-9.3.2-3">The "email" alert type (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-jscalendarbis-15#section-4.5.1" class="relref">Section 4.5.1</a> of [<a href="#I-D.ietf-calext-jscalendarbis" class="cite xref">I-D.ietf-calext-jscalendarbis</a>]</span>) causes an email to be sent when triggered. Clients MUST ignore this alert type; the email is sent only by the calendar server. There is no mechanism in JSCalendar to specify a particular email address: the server MUST only allow alerts to be sent to an address it has verified as belonging to the user to avoid this being used as a spamming vector.<a href="#section-9.3.2-3" class="pilcrow">¶</a></p>
@@ -2783,9 +2169,7 @@ makes no other change):<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 </div>
 <div id="load-spikes">
 <section id="section-9.3.3">
-          <h4 id="name-load-spikes">
-<a href="#section-9.3.3" class="section-number selfRef">9.3.3. </a><a href="#name-load-spikes" class="section-name selfRef">Load spikes</a>
-          </h4>
+          <h4 id="name-load-spikes"><a href="#section-9.3.3">9.3.3.&nbsp;&nbsp;Load spikes</a></h4>
 <p id="section-9.3.3-1">Since most events are likely to start on the hour mark, a large spike of activity is often seen at these times, with particularly large spikes at certain common times in the time zone of the server's user base. In particular, a large number of alerts (across different users and events) will be triggered at the same time. Servers may mitigate this somewhat by adding jitter to the triggering of the alerts; it is RECOMMENDED to fire them slightly early rather than slightly late if needed to spread load.<a href="#section-9.3.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2793,9 +2177,7 @@ makes no other change):<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 </div>
 <div id="spam">
 <section id="section-9.4">
-        <h3 id="name-spam">
-<a href="#section-9.4" class="section-number selfRef">9.4. </a><a href="#name-spam" class="section-name selfRef">Spam</a>
-        </h3>
+        <h3 id="name-spam"><a href="#section-9.4">9.4.&nbsp;&nbsp;Spam</a></h3>
 <p id="section-9.4-1">Invitations received from an untrusted source may be spam. If this is added to the user's calendar automatically it can be very obtrusive, especially if it is a recurring event that now appears every day. It could also be used to attempt to phish the user, or cause them to physically go to a location included in the event. Incoming invitations to events should be subject to spam scanning, and suspicious events should not be added to the calendar automatically.<a href="#section-9.4-1" class="pilcrow">¶</a></p>
 <p id="section-9.4-2">Servers should strip any alerts on invitations when adding to the user's calendar; the "useDefaultAlerts" property should be set instead to apply the user's preferences.<a href="#section-9.4-2" class="pilcrow">¶</a></p>
 <p id="section-9.4-3">Similarly, a malicious user may use a calendar system to send spam by inviting people to an event. Outbound scheduling messages should be subject to all the same controls used on outbound email systems, and rate limited as appropriate. A rate limit on the number of distinct recipients as well as overall messages is recommended.<a href="#section-9.4-3" class="pilcrow">¶</a></p>
@@ -2805,14 +2187,10 @@ makes no other change):<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 </div>
 <div id="iana-considerations">
 <section id="section-10">
-      <h2 id="name-iana-considerations">
-<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
-      </h2>
+      <h2 id="name-iana-considerations"><a href="#section-10">10.&nbsp;&nbsp;IANA Considerations</a></h2>
 <div id="jmap-capability-registration-for-calendars">
 <section id="section-10.1">
-        <h3 id="name-jmap-capability-registratio">
-<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-jmap-capability-registratio" class="section-name selfRef">JMAP Capability Registration for "calendars"</a>
-        </h3>
+        <h3 id="name-jmap-capability-registratio"><a href="#section-10.1">10.1.&nbsp;&nbsp;JMAP Capability Registration for "calendars"</a></h3>
 <p id="section-10.1-1">IANA will register the "calendars" JMAP Capability as follows:<a href="#section-10.1-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.1-2">
           <dt id="section-10.1-2.1">Capability Name:</dt>
@@ -2841,9 +2219,7 @@ makes no other change):<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 </div>
 <div id="jmap-capability-registration-for-principals-availability">
 <section id="section-10.2">
-        <h3 id="name-jmap-capability-registration">
-<a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-jmap-capability-registration" class="section-name selfRef">JMAP Capability Registration for "principals:availability"</a>
-        </h3>
+        <h3 id="name-jmap-capability-registration"><a href="#section-10.2">10.2.&nbsp;&nbsp;JMAP Capability Registration for "principals:availability"</a></h3>
 <p id="section-10.2-1">IANA will register the "principals:availability" JMAP Capability as follows:<a href="#section-10.2-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.2-2">
           <dt id="section-10.2-2.1">Capability Name:</dt>
@@ -2872,9 +2248,7 @@ makes no other change):<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 </div>
 <div id="jmap-data-type-registration-for-calendar">
 <section id="section-10.3">
-        <h3 id="name-jmap-data-type-registration">
-<a href="#section-10.3" class="section-number selfRef">10.3. </a><a href="#name-jmap-data-type-registration" class="section-name selfRef">JMAP Data Type Registration for "Calendar"</a>
-        </h3>
+        <h3 id="name-jmap-data-type-registration"><a href="#section-10.3">10.3.&nbsp;&nbsp;JMAP Data Type Registration for "Calendar"</a></h3>
 <p id="section-10.3-1">IANA will register "Calendar" in the "JMAP Data Types" registry as follows:<a href="#section-10.3-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.3-2">
           <dt id="section-10.3-2.1">Type Name:</dt>
@@ -2903,9 +2277,7 @@ makes no other change):<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 </div>
 <div id="jmap-data-type-registration-for-calendarevent">
 <section id="section-10.4">
-        <h3 id="name-jmap-data-type-registration-">
-<a href="#section-10.4" class="section-number selfRef">10.4. </a><a href="#name-jmap-data-type-registration-" class="section-name selfRef">JMAP Data Type Registration for "CalendarEvent"</a>
-        </h3>
+        <h3 id="name-jmap-data-type-registration-"><a href="#section-10.4">10.4.&nbsp;&nbsp;JMAP Data Type Registration for "CalendarEvent"</a></h3>
 <p id="section-10.4-1">IANA will register "CalendarEvent" in the "JMAP Data Types" registry as follows:<a href="#section-10.4-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.4-2">
           <dt id="section-10.4-2.1">Type Name:</dt>
@@ -2934,9 +2306,7 @@ makes no other change):<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 </div>
 <div id="jmap-data-type-registration-for-calendareventnotification">
 <section id="section-10.5">
-        <h3 id="name-jmap-data-type-registration-f">
-<a href="#section-10.5" class="section-number selfRef">10.5. </a><a href="#name-jmap-data-type-registration-f" class="section-name selfRef">JMAP Data Type Registration for "CalendarEventNotification"</a>
-        </h3>
+        <h3 id="name-jmap-data-type-registration-f"><a href="#section-10.5">10.5.&nbsp;&nbsp;JMAP Data Type Registration for "CalendarEventNotification"</a></h3>
 <p id="section-10.5-1">IANA will register "CalendarEventNotification" in the "JMAP Data Types" registry as follows:<a href="#section-10.5-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.5-2">
           <dt id="section-10.5-2.1">Type Name:</dt>
@@ -2965,9 +2335,7 @@ makes no other change):<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 </div>
 <div id="jmap-data-type-registration-for-participantidentity">
 <section id="section-10.6">
-        <h3 id="name-jmap-data-type-registration-fo">
-<a href="#section-10.6" class="section-number selfRef">10.6. </a><a href="#name-jmap-data-type-registration-fo" class="section-name selfRef">JMAP Data Type Registration for "ParticipantIdentity"</a>
-        </h3>
+        <h3 id="name-jmap-data-type-registration-fo"><a href="#section-10.6">10.6.&nbsp;&nbsp;JMAP Data Type Registration for "ParticipantIdentity"</a></h3>
 <p id="section-10.6-1">IANA will register "ParticipantIdentity" in the "JMAP Data Types" registry as follows:<a href="#section-10.6-1" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.6-2">
           <dt id="section-10.6-2.1">Type Name:</dt>
@@ -2996,16 +2364,12 @@ makes no other change):<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 </div>
 <div id="jmap-error-codes-registry">
 <section id="section-10.7">
-        <h3 id="name-jmap-error-codes-registry">
-<a href="#section-10.7" class="section-number selfRef">10.7. </a><a href="#name-jmap-error-codes-registry" class="section-name selfRef">JMAP Error Codes Registry</a>
-        </h3>
+        <h3 id="name-jmap-error-codes-registry"><a href="#section-10.7">10.7.&nbsp;&nbsp;JMAP Error Codes Registry</a></h3>
 <p id="section-10.7-1">The following subsections register some new error codes in the "JMAP
 Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-10.7-1" class="pilcrow">¶</a></p>
 <div id="calendarhasevent">
 <section id="section-10.7.1">
-          <h4 id="name-calendarhasevent">
-<a href="#section-10.7.1" class="section-number selfRef">10.7.1. </a><a href="#name-calendarhasevent" class="section-name selfRef">calendarHasEvent</a>
-          </h4>
+          <h4 id="name-calendarhasevent"><a href="#section-10.7.1">10.7.1.&nbsp;&nbsp;calendarHasEvent</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.7.1-1">
             <dt id="section-10.7.1-1.1">JMAP Error Code:</dt>
             <dd id="section-10.7.1-1.2">calendarHasEvent<a href="#section-10.7.1-1.2" class="pilcrow">¶</a>
@@ -3032,9 +2396,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="nosupportedschedulemethods">
 <section id="section-10.7.2">
-          <h4 id="name-nosupportedschedulemethods">
-<a href="#section-10.7.2" class="section-number selfRef">10.7.2. </a><a href="#name-nosupportedschedulemethods" class="section-name selfRef">noSupportedScheduleMethods</a>
-          </h4>
+          <h4 id="name-nosupportedschedulemethods"><a href="#section-10.7.2">10.7.2.&nbsp;&nbsp;noSupportedScheduleMethods</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.7.2-1">
             <dt id="section-10.7.2-1.1">JMAP Error Code:</dt>
             <dd id="section-10.7.2-1.2">noSupportedScheduleMethods<a href="#section-10.7.2-1.2" class="pilcrow">¶</a>
@@ -3061,9 +2423,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="expanddurationtoolarge">
 <section id="section-10.7.3">
-          <h4 id="name-expanddurationtoolarge">
-<a href="#section-10.7.3" class="section-number selfRef">10.7.3. </a><a href="#name-expanddurationtoolarge" class="section-name selfRef">expandDurationTooLarge</a>
-          </h4>
+          <h4 id="name-expanddurationtoolarge"><a href="#section-10.7.3">10.7.3.&nbsp;&nbsp;expandDurationTooLarge</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.7.3-1">
             <dt id="section-10.7.3-1.1">JMAP Error Code:</dt>
             <dd id="section-10.7.3-1.2">expandDurationTooLarge<a href="#section-10.7.3-1.2" class="pilcrow">¶</a>
@@ -3090,9 +2450,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="cannotcalculateoccurrences">
 <section id="section-10.7.4">
-          <h4 id="name-cannotcalculateoccurrences">
-<a href="#section-10.7.4" class="section-number selfRef">10.7.4. </a><a href="#name-cannotcalculateoccurrences" class="section-name selfRef">cannotCalculateOccurrences</a>
-          </h4>
+          <h4 id="name-cannotcalculateoccurrences"><a href="#section-10.7.4">10.7.4.&nbsp;&nbsp;cannotCalculateOccurrences</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.7.4-1">
             <dt id="section-10.7.4-1.1">JMAP Error Code:</dt>
             <dd id="section-10.7.4-1.2">cannotCalculateOccurrences<a href="#section-10.7.4-1.2" class="pilcrow">¶</a>
@@ -3121,24 +2479,18 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="update-to-the-jscalendar-properties-registry">
 <section id="section-10.8">
-        <h3 id="name-update-to-the-jscalendar-pr">
-<a href="#section-10.8" class="section-number selfRef">10.8. </a><a href="#name-update-to-the-jscalendar-pr" class="section-name selfRef">Update to the JSCalendar Properties Registry</a>
-        </h3>
+        <h3 id="name-update-to-the-jscalendar-pr"><a href="#section-10.8">10.8.&nbsp;&nbsp;Update to the JSCalendar Properties Registry</a></h3>
 <p id="section-10.8-1">IANA will update the "JSCalendar Properties" registry, originally created in <span><a href="https://rfc-editor.org/rfc/rfc8984#section-8.2" class="relref">Section 8.2</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>, to add a new column called "Is Per-User". The value in this column for each entry MUST be either "yes" or "no", indicating whether each user with whom the object is shared should be able to set their own value for this property without affecting the value for other users.<a href="#section-10.8-1" class="pilcrow">¶</a></p>
 <div id="update-to-jscalendar-properties-registry-template">
 <section id="section-10.8.1">
-          <h4 id="name-update-to-jscalendar-proper">
-<a href="#section-10.8.1" class="section-number selfRef">10.8.1. </a><a href="#name-update-to-jscalendar-proper" class="section-name selfRef">Update to "JSCalendar Properties" Registry Template</a>
-          </h4>
+          <h4 id="name-update-to-jscalendar-proper"><a href="#section-10.8.1">10.8.1.&nbsp;&nbsp;Update to "JSCalendar Properties" Registry Template</a></h4>
 <p id="section-10.8.1-1">An additional field is added to the template:<a href="#section-10.8.1-1" class="pilcrow">¶</a></p>
 <p id="section-10.8.1-2">Is Per-User<a href="#section-10.8.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="initial-values-for-existing-registrations">
 <section id="section-10.8.2">
-          <h4 id="name-initial-values-for-existing">
-<a href="#section-10.8.2" class="section-number selfRef">10.8.2. </a><a href="#name-initial-values-for-existing" class="section-name selfRef">Initial values for existing registrations</a>
-          </h4>
+          <h4 id="name-initial-values-for-existing"><a href="#section-10.8.2">10.8.2.&nbsp;&nbsp;Initial values for existing registrations</a></h4>
 <p id="section-10.8.2-1">IANA will set "Is per-user: yes" on the following property registrations:<a href="#section-10.8.2-1" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-10.8.2-2.1">keywords<a href="#section-10.8.2-2.1" class="pilcrow">¶</a>
@@ -3159,15 +2511,11 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="jscalendar-property-registrations">
 <section id="section-10.9">
-        <h3 id="name-jscalendar-property-registr">
-<a href="#section-10.9" class="section-number selfRef">10.9. </a><a href="#name-jscalendar-property-registr" class="section-name selfRef">JSCalendar Property Registrations</a>
-        </h3>
+        <h3 id="name-jscalendar-property-registr"><a href="#section-10.9">10.9.&nbsp;&nbsp;JSCalendar Property Registrations</a></h3>
 <p id="section-10.9-1">IANA will register the following additional properties in the JSCalendar Properties Registry.<a href="#section-10.9-1" class="pilcrow">¶</a></p>
 <div id="id">
 <section id="section-10.9.1">
-          <h4 id="name-id">
-<a href="#section-10.9.1" class="section-number selfRef">10.9.1. </a><a href="#name-id" class="section-name selfRef">id</a>
-          </h4>
+          <h4 id="name-id"><a href="#section-10.9.1">10.9.1.&nbsp;&nbsp;id</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.1-1">
             <dt id="section-10.9.1-1.1">Property Name:</dt>
             <dd id="section-10.9.1-1.2">id<a href="#section-10.9.1-1.2" class="pilcrow">¶</a>
@@ -3194,9 +2542,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="baseeventid">
 <section id="section-10.9.2">
-          <h4 id="name-baseeventid">
-<a href="#section-10.9.2" class="section-number selfRef">10.9.2. </a><a href="#name-baseeventid" class="section-name selfRef">baseEventId</a>
-          </h4>
+          <h4 id="name-baseeventid"><a href="#section-10.9.2">10.9.2.&nbsp;&nbsp;baseEventId</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.2-1">
             <dt id="section-10.9.2-1.1">Property Name:</dt>
             <dd id="section-10.9.2-1.2">baseEventId<a href="#section-10.9.2-1.2" class="pilcrow">¶</a>
@@ -3223,9 +2569,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="calendarids">
 <section id="section-10.9.3">
-          <h4 id="name-calendarids">
-<a href="#section-10.9.3" class="section-number selfRef">10.9.3. </a><a href="#name-calendarids" class="section-name selfRef">calendarIds</a>
-          </h4>
+          <h4 id="name-calendarids"><a href="#section-10.9.3">10.9.3.&nbsp;&nbsp;calendarIds</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.3-1">
             <dt id="section-10.9.3-1.1">Property Name:</dt>
             <dd id="section-10.9.3-1.2">calendarIds<a href="#section-10.9.3-1.2" class="pilcrow">¶</a>
@@ -3252,9 +2596,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="isdraft">
 <section id="section-10.9.4">
-          <h4 id="name-isdraft">
-<a href="#section-10.9.4" class="section-number selfRef">10.9.4. </a><a href="#name-isdraft" class="section-name selfRef">isDraft</a>
-          </h4>
+          <h4 id="name-isdraft"><a href="#section-10.9.4">10.9.4.&nbsp;&nbsp;isDraft</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.4-1">
             <dt id="section-10.9.4-1.1">Property Name:</dt>
             <dd id="section-10.9.4-1.2">isDraft<a href="#section-10.9.4-1.2" class="pilcrow">¶</a>
@@ -3281,9 +2623,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="isorigin">
 <section id="section-10.9.5">
-          <h4 id="name-isorigin">
-<a href="#section-10.9.5" class="section-number selfRef">10.9.5. </a><a href="#name-isorigin" class="section-name selfRef">isOrigin</a>
-          </h4>
+          <h4 id="name-isorigin"><a href="#section-10.9.5">10.9.5.&nbsp;&nbsp;isOrigin</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.5-1">
             <dt id="section-10.9.5-1.1">Property Name:</dt>
             <dd id="section-10.9.5-1.2">isOrigin<a href="#section-10.9.5-1.2" class="pilcrow">¶</a>
@@ -3310,9 +2650,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="utcstart">
 <section id="section-10.9.6">
-          <h4 id="name-utcstart">
-<a href="#section-10.9.6" class="section-number selfRef">10.9.6. </a><a href="#name-utcstart" class="section-name selfRef">utcStart</a>
-          </h4>
+          <h4 id="name-utcstart"><a href="#section-10.9.6">10.9.6.&nbsp;&nbsp;utcStart</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.6-1">
             <dt id="section-10.9.6-1.1">Property Name:</dt>
             <dd id="section-10.9.6-1.2">utcStart<a href="#section-10.9.6-1.2" class="pilcrow">¶</a>
@@ -3339,9 +2677,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="utcend">
 <section id="section-10.9.7">
-          <h4 id="name-utcend">
-<a href="#section-10.9.7" class="section-number selfRef">10.9.7. </a><a href="#name-utcend" class="section-name selfRef">utcEnd</a>
-          </h4>
+          <h4 id="name-utcend"><a href="#section-10.9.7">10.9.7.&nbsp;&nbsp;utcEnd</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.7-1">
             <dt id="section-10.9.7-1.1">Property Name:</dt>
             <dd id="section-10.9.7-1.2">utcEnd<a href="#section-10.9.7-1.2" class="pilcrow">¶</a>
@@ -3368,9 +2704,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="usedefaultalerts">
 <section id="section-10.9.8">
-          <h4 id="name-usedefaultalerts">
-<a href="#section-10.9.8" class="section-number selfRef">10.9.8. </a><a href="#name-usedefaultalerts" class="section-name selfRef">useDefaultAlerts</a>
-          </h4>
+          <h4 id="name-usedefaultalerts"><a href="#section-10.9.8">10.9.8.&nbsp;&nbsp;useDefaultAlerts</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.8-1">
             <dt id="section-10.9.8-1.1">Property Name:</dt>
             <dd id="section-10.9.8-1.2">useDefaultAlerts<a href="#section-10.9.8-1.2" class="pilcrow">¶</a>
@@ -3397,9 +2731,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="mayinviteself-1">
 <section id="section-10.9.9">
-          <h4 id="name-mayinviteself-2">
-<a href="#section-10.9.9" class="section-number selfRef">10.9.9. </a><a href="#name-mayinviteself-2" class="section-name selfRef">mayInviteSelf</a>
-          </h4>
+          <h4 id="name-mayinviteself-2"><a href="#section-10.9.9">10.9.9.&nbsp;&nbsp;mayInviteSelf</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.9-1">
             <dt id="section-10.9.9-1.1">Property Name:</dt>
             <dd id="section-10.9.9-1.2">mayInviteSelf<a href="#section-10.9.9-1.2" class="pilcrow">¶</a>
@@ -3431,9 +2763,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="mayinviteothers-1">
 <section id="section-10.9.10">
-          <h4 id="name-mayinviteothers-2">
-<a href="#section-10.9.10" class="section-number selfRef">10.9.10. </a><a href="#name-mayinviteothers-2" class="section-name selfRef">mayInviteOthers</a>
-          </h4>
+          <h4 id="name-mayinviteothers-2"><a href="#section-10.9.10">10.9.10.&nbsp;&nbsp;mayInviteOthers</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.10-1">
             <dt id="section-10.9.10-1.1">Property Name:</dt>
             <dd id="section-10.9.10-1.2">mayInviteOthers<a href="#section-10.9.10-1.2" class="pilcrow">¶</a>
@@ -3465,9 +2795,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="hideattendees-1">
 <section id="section-10.9.11">
-          <h4 id="name-hideattendees-2">
-<a href="#section-10.9.11" class="section-number selfRef">10.9.11. </a><a href="#name-hideattendees-2" class="section-name selfRef">hideAttendees</a>
-          </h4>
+          <h4 id="name-hideattendees-2"><a href="#section-10.9.11">10.9.11.&nbsp;&nbsp;hideAttendees</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.11-1">
             <dt id="section-10.9.11-1.1">Property Name:</dt>
             <dd id="section-10.9.11-1.2">hideAttendees<a href="#section-10.9.11-1.2" class="pilcrow">¶</a>
@@ -3499,9 +2827,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="schedulesequence-1">
 <section id="section-10.9.12">
-          <h4 id="name-schedulesequence-2">
-<a href="#section-10.9.12" class="section-number selfRef">10.9.12. </a><a href="#name-schedulesequence-2" class="section-name selfRef">scheduleSequence</a>
-          </h4>
+          <h4 id="name-schedulesequence-2"><a href="#section-10.9.12">10.9.12.&nbsp;&nbsp;scheduleSequence</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.12-1">
             <dt id="section-10.9.12-1.1">Property Name:</dt>
             <dd id="section-10.9.12-1.2">scheduleSequence<a href="#section-10.9.12-1.2" class="pilcrow">¶</a>
@@ -3528,9 +2854,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="scheduleupdated-1">
 <section id="section-10.9.13">
-          <h4 id="name-scheduleupdated-2">
-<a href="#section-10.9.13" class="section-number selfRef">10.9.13. </a><a href="#name-scheduleupdated-2" class="section-name selfRef">scheduleUpdated</a>
-          </h4>
+          <h4 id="name-scheduleupdated-2"><a href="#section-10.9.13">10.9.13.&nbsp;&nbsp;scheduleUpdated</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.13-1">
             <dt id="section-10.9.13-1.1">Property Name:</dt>
             <dd id="section-10.9.13-1.2">scheduleUpdated<a href="#section-10.9.13-1.2" class="pilcrow">¶</a>
@@ -3557,9 +2881,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </div>
 <div id="blobid">
 <section id="section-10.9.14">
-          <h4 id="name-blobid">
-<a href="#section-10.9.14" class="section-number selfRef">10.9.14. </a><a href="#name-blobid" class="section-name selfRef">blobId</a>
-          </h4>
+          <h4 id="name-blobid"><a href="#section-10.9.14">10.9.14.&nbsp;&nbsp;blobId</a></h4>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.14-1">
             <dt id="section-10.9.14-1.1">Property Name:</dt>
             <dd id="section-10.9.14-1.2">blobId<a href="#section-10.9.14-1.2" class="pilcrow">¶</a>
@@ -3589,9 +2911,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </section>
 </div>
 <section id="section-11">
-      <h2 id="name-normative-references">
-<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
-      </h2>
+      <h2 id="name-normative-references"><a href="#section-11">11.&nbsp;&nbsp;Normative References</a></h2>
 <dl class="references">
 <dt id="RFC2119">[RFC2119]</dt>
       <dd>
@@ -3660,9 +2980,7 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 </dl>
 </section>
 <section id="section-12">
-      <h2 id="name-informative-references">
-<a href="#section-12" class="section-number selfRef">12. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
-      </h2>
+      <h2 id="name-informative-references"><a href="#section-12">12.&nbsp;&nbsp;Informative References</a></h2>
 <dl class="references">
 <dt id="RFC4791">[RFC4791]</dt>
       <dd>
@@ -3682,48 +3000,44 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 <dd class="break"></dd>
 </dl>
 </section>
-<div id="authors-addresses">
-<section id="appendix-A">
-      <h2 id="name-authors-addresses">
-<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
-      </h2>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Neil Jenkins (<span class="role">editor</span>)</span></div>
-<div dir="auto" class="left"><span class="org">Fastmail</span></div>
-<div dir="auto" class="left"><span class="street-address">PO Box 234, Collins St West</span></div>
-<div dir="auto" class="left">
-<span class="locality">Melbourne</span>  <span class="postal-code">VIC 8007</span>
-</div>
-<div dir="auto" class="left"><span class="country-name">Australia</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:neilj@fastmailteam.com" class="email">neilj@fastmailteam.com</a>
-</div>
-<div class="url">
-<span>URI:</span>
-<a href="https://www.fastmail.com" class="url">https://www.fastmail.com</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Michael Douglass (<span class="role">editor</span>)</span></div>
-<div dir="auto" class="left"><span class="org">Spherical Cow Group</span></div>
-<div dir="auto" class="left"><span class="street-address">226 3rd Street</span></div>
-<div dir="auto" class="left">
-<span class="locality">Troy</span>,  <span class="postal-code">NY 12180</span>
-</div>
-<div dir="auto" class="left"><span class="country-name">United States of America</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:mdouglass@sphericalcowgroup.com" class="email">mdouglass@sphericalcowgroup.com</a>
-</div>
-<div class="url">
-<span>URI:</span>
-<a href="http://sphericalcowgroup.com" class="url">http://sphericalcowgroup.com</a>
-</div>
-</address>
+
+
+
+
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo"><a href="#name-status-of-this-memo">Status of This Memo</a></h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 9 May 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div><div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice"><a href="#name-copyright-notice">Copyright Notice</a></h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2025 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-
-
-
-

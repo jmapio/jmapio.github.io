@@ -1,7 +1,8 @@
 ---
 layout: article-rfc
 permalink: /spec/rfc8620/index.html
-title: RFC 8620
+toc: generated-rfc-toc/rfc8620.html
+title: RFC 8620 – The JSON Meta Application Protocol (JMAP)
 description: >-
     This document specifies a protocol for clients to efficiently query, fetch, and modify JSON-based data objects, with support for push notification of changes and fast resynchronisation and for out-of-band binary data upload/download.
 meta:
@@ -12,393 +13,9 @@ meta:
         - JMAP
         - JSON
 ---
-
-<div class="table-wrapper"><table class="ears">
-<thead><tr>
-<td class="left">RFC 8620</td>
-<td class="center">JMAP</td>
-<td class="right">July 2019</td>
-</tr></thead>
-<tfoot><tr>
-<td class="left">Jenkins &amp; Newman</td>
-<td class="center">Standards Track</td>
-<td class="right">[Page]</td>
-</tr></tfoot>
-</table></div>
-<div id="external-metadata" class="document-information"></div>
-<div id="internal-metadata" class="document-information">
-<dl id="identifiers">
-<dt class="label-stream">Stream:</dt>
-<dd class="stream">Internet Engineering Task Force (IETF)</dd>
-<dt class="label-rfc">RFC:</dt>
-<dd class="rfc"><a href="https://www.rfc-editor.org/rfc/rfc8620" class="eref">8620</a></dd>
-<dt class="label-category">Category:</dt>
-<dd class="category">Standards Track</dd>
-<dt class="label-published">Published:</dt>
-<dd class="published">
-<time datetime="2019-07" class="published">July 2019</time>
-    </dd>
-<dt class="label-issn">ISSN:</dt>
-<dd class="issn">2070-1721</dd>
-<dt class="label-authors">Authors:</dt>
-<dd class="authors">
-<div class="author">
-      <div class="author-name">N.M. Jenkins</div>
-<div class="org">Fastmail</div>
-</div>
-<div class="author">
-      <div class="author-name">C. Newman</div>
-<div class="org">Oracle</div>
-</div>
-</dd>
-</dl>
-</div>
-
-
-<section id="section-abstract">
-      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This document specifies a protocol for clients to efficiently query, fetch,
-and modify JSON-based data objects, with support for push notification of
-changes and fast resynchronisation and for out-of-band binary data
-upload/download.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-</section>
-<div id="status-of-memo">
-<section id="section-boilerplate.1">
-        <h2 id="name-status-of-this-memo">
-<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
-        </h2>
-<p id="section-boilerplate.1-1">
-            This is an Internet Standards Track document.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.1-2">
-            This document is a product of the Internet Engineering Task Force
-            (IETF).  It represents the consensus of the IETF community.  It has
-            received public review and has been approved for publication by
-            the Internet Engineering Steering Group (IESG).  Further
-            information on Internet Standards is available in Section 2 of 
-            RFC 7841.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.1-3">
-            Information about the current status of this document, any
-            errata, and how to provide feedback on it may be obtained at
-            <span><a href="https://www.rfc-editor.org/info/rfc8620">https://www.rfc-editor.org/info/rfc8620</a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="copyright">
-<section id="section-boilerplate.2">
-        <h2 id="name-copyright-notice">
-<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
-        </h2>
-<p id="section-boilerplate.2-1">
-            Copyright (c) 2019 IETF Trust and the persons identified as the
-            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
-<p id="section-boilerplate.2-2">
-            This document is subject to BCP 78 and the IETF Trust's Legal
-            Provisions Relating to IETF Documents
-            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
-            publication of this document. Please review these documents
-            carefully, as they describe your rights and restrictions with
-            respect to this document. Code Components extracted from this
-            document must include Revised BSD License text as described in
-            Section 4.e of the Trust Legal Provisions and are provided without
-            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="toc">
-<section id="section-toc.1">
-        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
-<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
-        </h2>
-<nav class="toc"><ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
-            <p id="section-toc.1-1.1.1"><a href="#section-1" class="auto internal xref">1</a>.&nbsp;&nbsp;<a href="#name-introduction" class="internal xref">Introduction</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.&nbsp;&nbsp;<a href="#name-notational-conventions" class="internal xref">Notational Conventions</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
-                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.&nbsp;&nbsp;<a href="#name-the-id-data-type" class="internal xref">The Id Data Type</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.3">
-                <p id="section-toc.1-1.1.2.3.1" class="keepWithNext"><a href="#section-1.3" class="auto internal xref">1.3</a>.&nbsp;&nbsp;<a href="#name-the-int-and-unsignedint-dat" class="internal xref">The Int and UnsignedInt Data Types</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.4">
-                <p id="section-toc.1-1.1.2.4.1"><a href="#section-1.4" class="auto internal xref">1.4</a>.&nbsp;&nbsp;<a href="#name-the-date-and-utcdate-data-t" class="internal xref">The Date and UTCDate Data Types</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.5">
-                <p id="section-toc.1-1.1.2.5.1"><a href="#section-1.5" class="auto internal xref">1.5</a>.&nbsp;&nbsp;<a href="#name-json-as-the-data-encoding-f" class="internal xref">JSON as the Data Encoding Format</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.6">
-                <p id="section-toc.1-1.1.2.6.1"><a href="#section-1.6" class="auto internal xref">1.6</a>.&nbsp;&nbsp;<a href="#name-terminology" class="internal xref">Terminology</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.6.2.1">
-                    <p id="section-toc.1-1.1.2.6.2.1.1"><a href="#section-1.6.1" class="auto internal xref">1.6.1</a>.&nbsp;&nbsp;<a href="#name-user" class="internal xref">User</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.6.2.2">
-                    <p id="section-toc.1-1.1.2.6.2.2.1"><a href="#section-1.6.2" class="auto internal xref">1.6.2</a>.&nbsp;&nbsp;<a href="#name-accounts" class="internal xref">Accounts</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.6.2.3">
-                    <p id="section-toc.1-1.1.2.6.2.3.1"><a href="#section-1.6.3" class="auto internal xref">1.6.3</a>.&nbsp;&nbsp;<a href="#name-data-types-and-records" class="internal xref">Data Types and Records</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.7">
-                <p id="section-toc.1-1.1.2.7.1"><a href="#section-1.7" class="auto internal xref">1.7</a>.&nbsp;&nbsp;<a href="#name-the-jmap-api-model" class="internal xref">The JMAP API Model</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.8">
-                <p id="section-toc.1-1.1.2.8.1"><a href="#section-1.8" class="auto internal xref">1.8</a>.&nbsp;&nbsp;<a href="#name-vendor-specific-extensions" class="internal xref">Vendor-Specific Extensions</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.&nbsp;&nbsp;<a href="#name-the-jmap-session-resource" class="internal xref">The JMAP Session Resource</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
-                <p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1" class="auto internal xref">2.1</a>.&nbsp;&nbsp;<a href="#name-example" class="internal xref">Example</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
-                <p id="section-toc.1-1.2.2.2.1"><a href="#section-2.2" class="auto internal xref">2.2</a>.&nbsp;&nbsp;<a href="#name-service-autodiscovery" class="internal xref">Service Autodiscovery</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.&nbsp;&nbsp;<a href="#name-structured-data-exchange" class="internal xref">Structured Data Exchange</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.&nbsp;&nbsp;<a href="#name-making-an-api-request" class="internal xref">Making an API Request</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.&nbsp;&nbsp;<a href="#name-the-invocation-data-type" class="internal xref">The Invocation Data Type</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.&nbsp;&nbsp;<a href="#name-the-request-object" class="internal xref">The Request Object</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3.2.1">
-                    <p id="section-toc.1-1.3.2.3.2.1.1"><a href="#section-3.3.1" class="auto internal xref">3.3.1</a>.&nbsp;&nbsp;<a href="#name-example-request" class="internal xref">Example Request</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
-                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.&nbsp;&nbsp;<a href="#name-the-response-object" class="internal xref">The Response Object</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4.2.1">
-                    <p id="section-toc.1-1.3.2.4.2.1.1"><a href="#section-3.4.1" class="auto internal xref">3.4.1</a>.&nbsp;&nbsp;<a href="#name-example-response" class="internal xref">Example Response</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5">
-                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.&nbsp;&nbsp;<a href="#name-omitting-arguments" class="internal xref">Omitting Arguments</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.6">
-                <p id="section-toc.1-1.3.2.6.1"><a href="#section-3.6" class="auto internal xref">3.6</a>.&nbsp;&nbsp;<a href="#name-errors" class="internal xref">Errors</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.6.2.1">
-                    <p id="section-toc.1-1.3.2.6.2.1.1"><a href="#section-3.6.1" class="auto internal xref">3.6.1</a>.&nbsp;&nbsp;<a href="#name-request-level-errors" class="internal xref">Request-Level Errors</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.6.2.2">
-                    <p id="section-toc.1-1.3.2.6.2.2.1"><a href="#section-3.6.2" class="auto internal xref">3.6.2</a>.&nbsp;&nbsp;<a href="#name-method-level-errors" class="internal xref">Method-Level Errors</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.7">
-                <p id="section-toc.1-1.3.2.7.1"><a href="#section-3.7" class="auto internal xref">3.7</a>.&nbsp;&nbsp;<a href="#name-references-to-previous-meth" class="internal xref">References to Previous Method Results</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.8">
-                <p id="section-toc.1-1.3.2.8.1"><a href="#section-3.8" class="auto internal xref">3.8</a>.&nbsp;&nbsp;<a href="#name-localisation-of-user-visibl" class="internal xref">Localisation of User-Visible Strings</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.9">
-                <p id="section-toc.1-1.3.2.9.1"><a href="#section-3.9" class="auto internal xref">3.9</a>.&nbsp;&nbsp;<a href="#name-security" class="internal xref">Security</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.10">
-                <p id="section-toc.1-1.3.2.10.1"><a href="#section-3.10" class="auto internal xref">3.10</a>.&nbsp;<a href="#name-concurrency" class="internal xref">Concurrency</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.&nbsp;&nbsp;<a href="#name-the-core-echo-method" class="internal xref">The Core/echo Method</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.&nbsp;&nbsp;<a href="#name-example-3" class="internal xref">Example</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.&nbsp;&nbsp;<a href="#name-standard-methods-and-naming" class="internal xref">Standard Methods and Naming Convention</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
-                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.&nbsp;&nbsp;<a href="#name-get" class="internal xref">/get</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
-                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.&nbsp;&nbsp;<a href="#name-changes" class="internal xref">/changes</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
-                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.&nbsp;&nbsp;<a href="#name-set" class="internal xref">/set</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4">
-                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.&nbsp;&nbsp;<a href="#name-copy" class="internal xref">/copy</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.5">
-                <p id="section-toc.1-1.5.2.5.1"><a href="#section-5.5" class="auto internal xref">5.5</a>.&nbsp;&nbsp;<a href="#name-query" class="internal xref">/query</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.6">
-                <p id="section-toc.1-1.5.2.6.1"><a href="#section-5.6" class="auto internal xref">5.6</a>.&nbsp;&nbsp;<a href="#name-querychanges" class="internal xref">/queryChanges</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.7">
-                <p id="section-toc.1-1.5.2.7.1"><a href="#section-5.7" class="auto internal xref">5.7</a>.&nbsp;&nbsp;<a href="#name-examples" class="internal xref">Examples</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.8">
-                <p id="section-toc.1-1.5.2.8.1"><a href="#section-5.8" class="auto internal xref">5.8</a>.&nbsp;&nbsp;<a href="#name-proxy-considerations" class="internal xref">Proxy Considerations</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.&nbsp;&nbsp;<a href="#name-binary-data" class="internal xref">Binary Data</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
-                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.&nbsp;&nbsp;<a href="#name-uploading-binary-data" class="internal xref">Uploading Binary Data</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
-                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.&nbsp;&nbsp;<a href="#name-downloading-binary-data" class="internal xref">Downloading Binary Data</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3">
-                <p id="section-toc.1-1.6.2.3.1"><a href="#section-6.3" class="auto internal xref">6.3</a>.&nbsp;&nbsp;<a href="#name-blob-copy" class="internal xref">Blob/copy</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.&nbsp;&nbsp;<a href="#name-push" class="internal xref">Push</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
-                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.&nbsp;&nbsp;<a href="#name-the-statechange-object" class="internal xref">The StateChange Object</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1.2.1">
-                    <p id="section-toc.1-1.7.2.1.2.1.1"><a href="#section-7.1.1" class="auto internal xref">7.1.1</a>.&nbsp;&nbsp;<a href="#name-example-4" class="internal xref">Example</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
-                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.&nbsp;&nbsp;<a href="#name-pushsubscription" class="internal xref">PushSubscription</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2.2.1">
-                    <p id="section-toc.1-1.7.2.2.2.1.1"><a href="#section-7.2.1" class="auto internal xref">7.2.1</a>.&nbsp;&nbsp;<a href="#name-pushsubscription-get" class="internal xref">PushSubscription/get</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2.2.2">
-                    <p id="section-toc.1-1.7.2.2.2.2.1"><a href="#section-7.2.2" class="auto internal xref">7.2.2</a>.&nbsp;&nbsp;<a href="#name-pushsubscription-set" class="internal xref">PushSubscription/set</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2.2.3">
-                    <p id="section-toc.1-1.7.2.2.2.3.1"><a href="#section-7.2.3" class="auto internal xref">7.2.3</a>.&nbsp;&nbsp;<a href="#name-example-5" class="internal xref">Example</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
-                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.&nbsp;&nbsp;<a href="#name-event-source" class="internal xref">Event Source</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.&nbsp;&nbsp;<a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.&nbsp;&nbsp;<a href="#name-transport-confidentiality" class="internal xref">Transport Confidentiality</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
-                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.&nbsp;&nbsp;<a href="#name-authentication-scheme" class="internal xref">Authentication Scheme</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3">
-                <p id="section-toc.1-1.8.2.3.1"><a href="#section-8.3" class="auto internal xref">8.3</a>.&nbsp;&nbsp;<a href="#name-service-autodiscovery-2" class="internal xref">Service Autodiscovery</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.4">
-                <p id="section-toc.1-1.8.2.4.1"><a href="#section-8.4" class="auto internal xref">8.4</a>.&nbsp;&nbsp;<a href="#name-json-parsing" class="internal xref">JSON Parsing</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.5">
-                <p id="section-toc.1-1.8.2.5.1"><a href="#section-8.5" class="auto internal xref">8.5</a>.&nbsp;&nbsp;<a href="#name-denial-of-service" class="internal xref">Denial of Service</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.6">
-                <p id="section-toc.1-1.8.2.6.1"><a href="#section-8.6" class="auto internal xref">8.6</a>.&nbsp;&nbsp;<a href="#name-connection-to-unknown-push-" class="internal xref">Connection to Unknown Push Server</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.7">
-                <p id="section-toc.1-1.8.2.7.1"><a href="#section-8.7" class="auto internal xref">8.7</a>.&nbsp;&nbsp;<a href="#name-push-encryption" class="internal xref">Push Encryption</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.8">
-                <p id="section-toc.1-1.8.2.8.1"><a href="#section-8.8" class="auto internal xref">8.8</a>.&nbsp;&nbsp;<a href="#name-traffic-analysis" class="internal xref">Traffic Analysis</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.&nbsp;&nbsp;<a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.&nbsp;&nbsp;<a href="#name-assignment-of-jmap-service-" class="internal xref">Assignment of jmap Service Name</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.&nbsp;&nbsp;<a href="#name-registration-of-well-known-" class="internal xref">Registration of Well-Known URI Suffix for JMAP</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3">
-                <p id="section-toc.1-1.9.2.3.1"><a href="#section-9.3" class="auto internal xref">9.3</a>.&nbsp;&nbsp;<a href="#name-registration-of-the-jmap-ur" class="internal xref">Registration of the jmap URN Sub-namespace</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.4">
-                <p id="section-toc.1-1.9.2.4.1"><a href="#section-9.4" class="auto internal xref">9.4</a>.&nbsp;&nbsp;<a href="#name-creation-of-jmap-capabiliti" class="internal xref">Creation of "JMAP Capabilities" Registry</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.4.2.1">
-                    <p id="section-toc.1-1.9.2.4.2.1.1"><a href="#section-9.4.1" class="auto internal xref">9.4.1</a>.&nbsp;&nbsp;<a href="#name-preliminary-community-revie" class="internal xref">Preliminary Community Review</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.4.2.2">
-                    <p id="section-toc.1-1.9.2.4.2.2.1"><a href="#section-9.4.2" class="auto internal xref">9.4.2</a>.&nbsp;&nbsp;<a href="#name-submit-request-to-iana" class="internal xref">Submit Request to IANA</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.4.2.3">
-                    <p id="section-toc.1-1.9.2.4.2.3.1"><a href="#section-9.4.3" class="auto internal xref">9.4.3</a>.&nbsp;&nbsp;<a href="#name-designated-expert-review" class="internal xref">Designated Expert Review</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.4.2.4">
-                    <p id="section-toc.1-1.9.2.4.2.4.1"><a href="#section-9.4.4" class="auto internal xref">9.4.4</a>.&nbsp;&nbsp;<a href="#name-change-procedures" class="internal xref">Change Procedures</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.4.2.5">
-                    <p id="section-toc.1-1.9.2.4.2.5.1"><a href="#section-9.4.5" class="auto internal xref">9.4.5</a>.&nbsp;&nbsp;<a href="#name-jmap-capabilities-registry-" class="internal xref">JMAP Capabilities Registry Template</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.4.2.6">
-                    <p id="section-toc.1-1.9.2.4.2.6.1"><a href="#section-9.4.6" class="auto internal xref">9.4.6</a>.&nbsp;&nbsp;<a href="#name-initial-registration-for-jm" class="internal xref">Initial Registration for JMAP Core</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.4.2.7">
-                    <p id="section-toc.1-1.9.2.4.2.7.1"><a href="#section-9.4.7" class="auto internal xref">9.4.7</a>.&nbsp;&nbsp;<a href="#name-registration-for-jmap-error" class="internal xref">Registration for JMAP Error Placeholder in JMAP Capabilities Registry</a></p>
-</li>
-                </ul>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.5">
-                <p id="section-toc.1-1.9.2.5.1"><a href="#section-9.5" class="auto internal xref">9.5</a>.&nbsp;&nbsp;<a href="#name-creation-of-jmap-error-code" class="internal xref">Creation of "JMAP Error Codes" Registry</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.5.2.1">
-                    <p id="section-toc.1-1.9.2.5.2.1.1"><a href="#section-9.5.1" class="auto internal xref">9.5.1</a>.&nbsp;&nbsp;<a href="#name-expert-review" class="internal xref">Expert Review</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.5.2.2">
-                    <p id="section-toc.1-1.9.2.5.2.2.1"><a href="#section-9.5.2" class="auto internal xref">9.5.2</a>.&nbsp;&nbsp;<a href="#name-jmap-error-codes-registry-t" class="internal xref">JMAP Error Codes Registry Template</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.5.2.3">
-                    <p id="section-toc.1-1.9.2.5.2.3.1"><a href="#section-9.5.3" class="auto internal xref">9.5.3</a>.&nbsp;&nbsp;<a href="#name-initial-contents-for-the-jm" class="internal xref">Initial Contents for the JMAP Error Codes Registry</a></p>
-</li>
-                </ul>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>.&nbsp;<a href="#name-references" class="internal xref">References</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
-                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.&nbsp;&nbsp;<a href="#name-normative-references" class="internal xref">Normative References</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
-                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref">10.2</a>.&nbsp;&nbsp;<a href="#name-informative-references" class="internal xref">Informative References</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
-</li>
-        </ul>
-</nav>
-</section>
-</div>
 <div id="introduction">
 <section id="section-1">
-      <h2 id="name-introduction">
-<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
-      </h2>
+      <h2 id="name-introduction"><a href="#section-1">1.&nbsp;&nbsp;Introduction</a></h2>
 <p id="section-1-1">The JSON Meta Application Protocol (JMAP) is used for synchronising data,
 such as mail, calendars, or contacts, between a client and a server. It is
 optimised for mobile and web environments and aims to provide a consistent
@@ -417,9 +34,7 @@ separation of binary and structured data, and a data model for sharing that
 does not allow data dependencies between accounts.<a href="#section-1-4" class="pilcrow">¶</a></p>
 <div id="notational-conventions">
 <section id="section-1.1">
-        <h3 id="name-notational-conventions">
-<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-notational-conventions" class="section-name selfRef">Notational Conventions</a>
-        </h3>
+        <h3 id="name-notational-conventions"><a href="#section-1.1">1.1.&nbsp;&nbsp;Notational Conventions</a></h3>
 <p id="section-1.1-1">    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
     NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
     "MAY", and "OPTIONAL" in this document are to be interpreted as
@@ -493,9 +108,7 @@ argument or when creating a new object of this type.<a href="#section-1.1-10.3.1
 </div>
 <div id="the-id-data-type">
 <section id="section-1.2">
-        <h3 id="name-the-id-data-type">
-<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-the-id-data-type" class="section-name selfRef">The Id Data Type</a>
-        </h3>
+        <h3 id="name-the-id-data-type"><a href="#section-1.2">1.2.&nbsp;&nbsp;The Id Data Type</a></h3>
 <p id="section-1.2-1">All record ids are assigned by the server and are immutable.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 <p id="section-1.2-2">Where <code>Id</code> is given as a data type, it means a
 <code>String</code> of at least 1 and a maximum of 255 octets
@@ -532,9 +145,7 @@ alphabetical character.<a href="#section-1.2-5" class="pilcrow">¶</a></p>
 </div>
 <div id="the-int-and-unsignedint-data-types">
 <section id="section-1.3">
-        <h3 id="name-the-int-and-unsignedint-dat">
-<a href="#section-1.3" class="section-number selfRef">1.3. </a><a href="#name-the-int-and-unsignedint-dat" class="section-name selfRef">The Int and UnsignedInt Data Types</a>
-        </h3>
+        <h3 id="name-the-int-and-unsignedint-dat"><a href="#section-1.3">1.3.&nbsp;&nbsp;The Int and UnsignedInt Data Types</a></h3>
 <p id="section-1.3-1">Where <code>Int</code> is given as a data type, it means an
 integer in the range -2^53+1 &lt;= value &lt;= 2^53-1, the safe range for
 integers stored in a floating-point double, represented as a JSON <code>Number</code>.<a href="#section-1.3-1" class="pilcrow">¶</a></p>
@@ -545,40 +156,30 @@ means an <code>Int</code> where the value MUST be in the range
 </div>
 <div id="the-date-and-utcdate-data-types">
 <section id="section-1.4">
-        <h3 id="name-the-date-and-utcdate-data-t">
-<a href="#section-1.4" class="section-number selfRef">1.4. </a><a href="#name-the-date-and-utcdate-data-t" class="section-name selfRef">The Date and UTCDate Data Types</a>
-        </h3>
+        <h3 id="name-the-date-and-utcdate-data-t"><a href="#section-1.4">1.4.&nbsp;&nbsp;The Date and UTCDate Data Types</a></h3>
 <p id="section-1.4-1">Where <code>Date</code> is given as a type, it means a string in <code>date-time</code> format <span>[<a href="#RFC3339" class="cite xref">RFC3339</a>]</span>. To ensure a normalised form, the <code>time-secfrac</code> MUST always be omitted if zero, and any letters in the string (e.g., "T" and "Z") MUST be uppercase. For example, <code>2014-10-30T14:12:00+08:00</code>.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
 <p id="section-1.4-2">Where <code>UTCDate</code> is given as a type, it means a <code>Date</code> where the <code>time-offset</code> component MUST be <code>Z</code> (i.e., it must be in UTC time). For example, <code>2014-10-30T06:12:00Z</code>.<a href="#section-1.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="json-as-the-data-encoding-format">
 <section id="section-1.5">
-        <h3 id="name-json-as-the-data-encoding-f">
-<a href="#section-1.5" class="section-number selfRef">1.5. </a><a href="#name-json-as-the-data-encoding-f" class="section-name selfRef">JSON as the Data Encoding Format</a>
-        </h3>
+        <h3 id="name-json-as-the-data-encoding-f"><a href="#section-1.5">1.5.&nbsp;&nbsp;JSON as the Data Encoding Format</a></h3>
 <p id="section-1.5-1">JSON is a text-based data interchange format as specified in <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>. The Internet JSON (I-JSON) format defined in <span>[<a href="#RFC7493" class="cite xref">RFC7493</a>]</span> is a strict subset of this, adding restrictions to avoid potentially confusing scenarios (for example, it mandates that an object MUST NOT have two members with the same name).<a href="#section-1.5-1" class="pilcrow">¶</a></p>
 <p id="section-1.5-2">All data sent from the client to the server or from the server to the client (except binary file upload/download) MUST be valid I-JSON according to the RFC and is therefore case sensitive and encoded in UTF-8 <span>[<a href="#RFC3629" class="cite xref">RFC3629</a>]</span>.<a href="#section-1.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="terminology">
 <section id="section-1.6">
-        <h3 id="name-terminology">
-<a href="#section-1.6" class="section-number selfRef">1.6. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
-        </h3>
+        <h3 id="name-terminology"><a href="#section-1.6">1.6.&nbsp;&nbsp;Terminology</a></h3>
 <div id="user">
 <section id="section-1.6.1">
-          <h4 id="name-user">
-<a href="#section-1.6.1" class="section-number selfRef">1.6.1. </a><a href="#name-user" class="section-name selfRef">User</a>
-          </h4>
+          <h4 id="name-user"><a href="#section-1.6.1">1.6.1.&nbsp;&nbsp;User</a></h4>
 <p id="section-1.6.1-1">A user is a person accessing data via JMAP. A user has a set of permissions determining the data that they can see.<a href="#section-1.6.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="accounts">
 <section id="section-1.6.2">
-          <h4 id="name-accounts">
-<a href="#section-1.6.2" class="section-number selfRef">1.6.2. </a><a href="#name-accounts" class="section-name selfRef">Accounts</a>
-          </h4>
+          <h4 id="name-accounts"><a href="#section-1.6.2">1.6.2.&nbsp;&nbsp;Accounts</a></h4>
 <p id="section-1.6.2-1">An account is a collection of data. A single account may contain an arbitrary set of data types, for example, a collection of mail, contacts, and calendars. Most JMAP methods take a mandatory <code>accountId</code> argument that specifies on which account the operations are to take place.<a href="#section-1.6.2-1" class="pilcrow">¶</a></p>
 <p id="section-1.6.2-2">An account is not the same as a user, although it is common for a primary account to directly belong to the user. For example, you may have an account that contains data for a group or business, to which multiple users have access.<a href="#section-1.6.2-2" class="pilcrow">¶</a></p>
 <p id="section-1.6.2-3">A single set of credentials may provide access to multiple accounts, for example, if another user is sharing their work calendar with the authenticated user or if there is a group mailbox for a support-desk inbox.<a href="#section-1.6.2-3" class="pilcrow">¶</a></p>
@@ -587,9 +188,7 @@ means an <code>Int</code> where the value MUST be in the range
 </div>
 <div id="data-types-and-records">
 <section id="section-1.6.3">
-          <h4 id="name-data-types-and-records">
-<a href="#section-1.6.3" class="section-number selfRef">1.6.3. </a><a href="#name-data-types-and-records" class="section-name selfRef">Data Types and Records</a>
-          </h4>
+          <h4 id="name-data-types-and-records"><a href="#section-1.6.3">1.6.3.&nbsp;&nbsp;Data Types and Records</a></h4>
 <p id="section-1.6.3-1">JMAP provides a uniform interface for creating, retrieving, updating, and deleting various types of objects. A <code>data type</code> is a collection of named, typed properties, just like the schema for a database table. Each instance of a data type is called a <code>record</code>.<a href="#section-1.6.3-1" class="pilcrow">¶</a></p>
 <p id="section-1.6.3-2">The id of a record is immutable and assigned by the server. The id MUST be unique among all records of the <strong>same type</strong> within the <strong>same account</strong>.  Ids may clash across accounts or for two records of different types within the same account.<a href="#section-1.6.3-2" class="pilcrow">¶</a></p>
 </section>
@@ -598,9 +197,7 @@ means an <code>Int</code> where the value MUST be in the range
 </div>
 <div id="the-jmap-api-model">
 <section id="section-1.7">
-        <h3 id="name-the-jmap-api-model">
-<a href="#section-1.7" class="section-number selfRef">1.7. </a><a href="#name-the-jmap-api-model" class="section-name selfRef">The JMAP API Model</a>
-        </h3>
+        <h3 id="name-the-jmap-api-model"><a href="#section-1.7">1.7.&nbsp;&nbsp;The JMAP API Model</a></h3>
 <p id="section-1.7-1">JMAP uses HTTP <span>[<a href="#RFC7230" class="cite xref">RFC7230</a>]</span> to expose API, push, upload, and download resources. All HTTP requests MUST use the <code>https://</code> scheme (HTTP over TLS <span>[<a href="#RFC2818" class="cite xref">RFC2818</a>]</span>).
 All HTTP requests MUST be authenticated.<a href="#section-1.7-1" class="pilcrow">¶</a></p>
 <p id="section-1.7-2">An authenticated client can fetch the user's Session object with details about the data and capabilities the server can provide as shown in <a href="#the-jmap-session-resource" class="auto internal xref">Section 2</a>. The client may then exchange data with the server in the following ways:<a href="#section-1.7-2" class="pilcrow">¶</a></p>
@@ -619,9 +216,7 @@ All HTTP requests MUST be authenticated.<a href="#section-1.7-1" class="pilcrow"
 </div>
 <div id="vendorspecific-extensions">
 <section id="section-1.8">
-        <h3 id="name-vendor-specific-extensions">
-<a href="#section-1.8" class="section-number selfRef">1.8. </a><a href="#name-vendor-specific-extensions" class="section-name selfRef">Vendor-Specific Extensions</a>
-        </h3>
+        <h3 id="name-vendor-specific-extensions"><a href="#section-1.8">1.8.&nbsp;&nbsp;Vendor-Specific Extensions</a></h3>
 <p id="section-1.8-1">Individual services will have custom features they wish to expose over JMAP. This may take the form of extra data types and/or methods not in the spec, extra arguments to JMAP methods, or extra properties on existing data types (which may also appear in arguments to methods that take property names).<a href="#section-1.8-1" class="pilcrow">¶</a></p>
 <p id="section-1.8-2">The server can advertise custom extensions it supports by including the identifiers in the capabilities object. Identifiers for vendor extensions MUST be a URL belonging to a domain owned by the vendor, to avoid conflict. The URL SHOULD resolve to documentation for the changes the extension makes.<a href="#section-1.8-2" class="pilcrow">¶</a></p>
 <p id="section-1.8-3">The client MUST opt in to use an extension by passing the appropriate capability identifier in the <code>using</code> array of the Request object, as described in <a href="#the-request-object" class="auto internal xref">Section 3.3</a>. The server MUST only follow the specifications that are opted into and behave as though it does not implement anything else when processing a request. This is to ensure compatibility with clients that don't know about a specific custom extension and for compatibility with future versions of JMAP.<a href="#section-1.8-3" class="pilcrow">¶</a></p>
@@ -631,9 +226,7 @@ All HTTP requests MUST be authenticated.<a href="#section-1.7-1" class="pilcrow"
 </div>
 <div id="the-jmap-session-resource">
 <section id="section-2">
-      <h2 id="name-the-jmap-session-resource">
-<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-the-jmap-session-resource" class="section-name selfRef">The JMAP Session Resource</a>
-      </h2>
+      <h2 id="name-the-jmap-session-resource"><a href="#section-2">2.&nbsp;&nbsp;The JMAP Session Resource</a></h2>
 <p id="section-2-1">You need two things to connect to a JMAP server:<a href="#section-2-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-2-2">
 <li id="section-2-2.1">
@@ -797,9 +390,7 @@ A (preferably short) string representing the state of this object on the server.
 <p id="section-2-6">Implementors must take care to avoid inappropriate caching of the Session object at the HTTP layer. Since the client should only refetch when it detects there is a change (via the sessionState property of an API response), it is RECOMMENDED to disable HTTP caching altogether, for example, by setting <code>Cache-Control: no-cache, no-store, must-revalidate</code> on the response.<a href="#section-2-6" class="pilcrow">¶</a></p>
 <div id="example">
 <section id="section-2.1">
-        <h3 id="name-example">
-<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-example" class="section-name selfRef">Example</a>
-        </h3>
+        <h3 id="name-example"><a href="#section-2.1">2.1.&nbsp;&nbsp;Example</a></h3>
 <p id="section-2.1-1">In the following example Session object, the user has access to their own mail and contacts via JMAP, as well as read-only access to shared mail from another user. The server is advertising a custom <code>https://example.com/apis/foobar</code> capability.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 <div class="alignCenter art-text artwork" id="section-2.1-2">
 <pre>{
@@ -872,9 +463,7 @@ A (preferably short) string representing the state of this object on the server.
 </div>
 <div id="service-autodiscovery">
 <section id="section-2.2">
-        <h3 id="name-service-autodiscovery">
-<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-service-autodiscovery" class="section-name selfRef">Service Autodiscovery</a>
-        </h3>
+        <h3 id="name-service-autodiscovery"><a href="#section-2.2">2.2.&nbsp;&nbsp;Service Autodiscovery</a></h3>
 <p id="section-2.2-1">There are two standardised autodiscovery methods in use for Internet protocols:<a href="#section-2.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2.2-2.1">
@@ -892,24 +481,18 @@ A (preferably short) string representing the state of this object on the server.
 </div>
 <div id="structured-data-exchange">
 <section id="section-3">
-      <h2 id="name-structured-data-exchange">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-structured-data-exchange" class="section-name selfRef">Structured Data Exchange</a>
-      </h2>
+      <h2 id="name-structured-data-exchange"><a href="#section-3">3.&nbsp;&nbsp;Structured Data Exchange</a></h2>
 <p id="section-3-1">The client may make an API request to the server to get or set structured data. This request consists of an ordered series of method calls. These are processed by the server, which then returns an ordered series of responses.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div id="making-an-api-request">
 <section id="section-3.1">
-        <h3 id="name-making-an-api-request">
-<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-making-an-api-request" class="section-name selfRef">Making an API Request</a>
-        </h3>
+        <h3 id="name-making-an-api-request"><a href="#section-3.1">3.1.&nbsp;&nbsp;Making an API Request</a></h3>
 <p id="section-3.1-1">To make an API request, the client makes an authenticated POST request to the API resource, which is defined by the <code>apiUrl</code> property in the Session object (see <a href="#the-jmap-session-resource" class="auto internal xref">Section 2</a>).<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1-2">The request MUST be of type <code>application/json</code> and consist of a single JSON-encoded <code>Request</code> object, as defined in <a href="#the-request-object" class="auto internal xref">Section 3.3</a>. If successful, the response MUST also be of type <code>application/json</code> and consist of a single <code>Response</code> object, as defined in <a href="#the-response-object" class="auto internal xref">Section 3.4</a>.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="the-invocation-data-type">
 <section id="section-3.2">
-        <h3 id="name-the-invocation-data-type">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-the-invocation-data-type" class="section-name selfRef">The Invocation Data Type</a>
-        </h3>
+        <h3 id="name-the-invocation-data-type"><a href="#section-3.2">3.2.&nbsp;&nbsp;The Invocation Data Type</a></h3>
 <p id="section-3.2-1">Method calls and responses are represented by the <strong>Invocation</strong> data type. This is a tuple, represented as a JSON array containing three elements:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-3.2-2">
 <li id="section-3.2-2.1">
@@ -927,9 +510,7 @@ response.<a href="#section-3.2-2.2.1" class="pilcrow">¶</a></p>
 </div>
 <div id="the-request-object">
 <section id="section-3.3">
-        <h3 id="name-the-request-object">
-<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-the-request-object" class="section-name selfRef">The Request Object</a>
-        </h3>
+        <h3 id="name-the-request-object"><a href="#section-3.3">3.3.&nbsp;&nbsp;The Request Object</a></h3>
 <p id="section-3.3-1">A <strong>Request</strong> object has the following properties:<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.3-2.1">
@@ -960,9 +541,7 @@ The client can pass an initial value for this map as the <code>createdIds</code>
 <p id="section-3.3-3">Future specifications MAY add further properties to the Request object to extend the semantics. To ensure forwards compatibility, a server MUST ignore any other properties it does not understand on the JMAP Request object.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
 <div id="example-request">
 <section id="section-3.3.1">
-          <h4 id="name-example-request">
-<a href="#section-3.3.1" class="section-number selfRef">3.3.1. </a><a href="#name-example-request" class="section-name selfRef">Example Request</a>
-          </h4>
+          <h4 id="name-example-request"><a href="#section-3.3.1">3.3.1.&nbsp;&nbsp;Example Request</a></h4>
 <div class="alignCenter art-text artwork" id="section-3.3.1-1">
 <pre>{
   "using": [ "urn:ietf:params:jmap:core", "urn:ietf:params:jmap:mail" ],
@@ -985,9 +564,7 @@ The client can pass an initial value for this map as the <code>createdIds</code>
 </div>
 <div id="the-response-object">
 <section id="section-3.4">
-        <h3 id="name-the-response-object">
-<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-the-response-object" class="section-name selfRef">The Response Object</a>
-        </h3>
+        <h3 id="name-the-response-object"><a href="#section-3.4">3.4.&nbsp;&nbsp;The Response Object</a></h3>
 <p id="section-3.4-1">A <strong>Response</strong> object has the following properties:<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.4-2.1">
@@ -1015,9 +592,7 @@ Session object, as described in <a href="#the-jmap-session-resource" class="auto
 <p id="section-3.4-3">Unless otherwise specified, if the method call completed successfully, its response name is the same as the method name in the request.<a href="#section-3.4-3" class="pilcrow">¶</a></p>
 <div id="example-response">
 <section id="section-3.4.1">
-          <h4 id="name-example-response">
-<a href="#section-3.4.1" class="section-number selfRef">3.4.1. </a><a href="#name-example-response" class="section-name selfRef">Example Response</a>
-          </h4>
+          <h4 id="name-example-response"><a href="#section-3.4.1">3.4.1.&nbsp;&nbsp;Example Response</a></h4>
 <div class="alignCenter art-text artwork" id="section-3.4.1-1">
 <pre>{
   "methodResponses": [
@@ -1046,18 +621,14 @@ Session object, as described in <a href="#the-jmap-session-resource" class="auto
 </div>
 <div id="omitting-arguments">
 <section id="section-3.5">
-        <h3 id="name-omitting-arguments">
-<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-omitting-arguments" class="section-name selfRef">Omitting Arguments</a>
-        </h3>
+        <h3 id="name-omitting-arguments"><a href="#section-3.5">3.5.&nbsp;&nbsp;Omitting Arguments</a></h3>
 <p id="section-3.5-1">An argument to a method may be specified to have a default value. If omitted by the client, the server MUST treat the method call the same as if the default value had been specified. Similarly, the server MAY omit any argument in a response that has the default value.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
 <p id="section-3.5-2">Unless otherwise specified in a method description, null is the default value for any argument in a request or response where this is allowed by the type signature. Other arguments may only be omitted if an explicit default value is defined in the method description.<a href="#section-3.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="errors">
 <section id="section-3.6">
-        <h3 id="name-errors">
-<a href="#section-3.6" class="section-number selfRef">3.6. </a><a href="#name-errors" class="section-name selfRef">Errors</a>
-        </h3>
+        <h3 id="name-errors"><a href="#section-3.6">3.6.&nbsp;&nbsp;Errors</a></h3>
 <p id="section-3.6-1">There are three different levels of granularity at which an error may be returned in JMAP.<a href="#section-3.6-1" class="pilcrow">¶</a></p>
 <p id="section-3.6-2">When an API request is made, the request as a whole may be rejected due to
 rate limiting, malformed JSON, request for an unknown capability, etc. In this
@@ -1073,9 +644,7 @@ number of different records within a single call. Each record change may be
 separately rejected with a SetError, as described in <a href="#set" class="auto internal xref">Section 5.3</a>.<a href="#section-3.6-4" class="pilcrow">¶</a></p>
 <div id="requestlevel-errors">
 <section id="section-3.6.1">
-          <h4 id="name-request-level-errors">
-<a href="#section-3.6.1" class="section-number selfRef">3.6.1. </a><a href="#name-request-level-errors" class="section-name selfRef">Request-Level Errors</a>
-          </h4>
+          <h4 id="name-request-level-errors"><a href="#section-3.6.1">3.6.1.&nbsp;&nbsp;Request-Level Errors</a></h4>
 <p id="section-3.6.1-1">When an HTTP error response is returned to the client, the server
 SHOULD return a JSON "problem details" object as the response body,
 as per <span>[<a href="#RFC7807" class="cite xref">RFC7807</a>]</span>.<a href="#section-3.6.1-1" class="pilcrow">¶</a></p>
@@ -1108,9 +677,7 @@ being applied.<a href="#section-3.6.1-3.4.2" class="pilcrow">¶</a></p>
           </ul>
 <div id="example-1">
 <section id="section-3.6.1.1">
-            <h5 id="name-example-2">
-<a href="#section-3.6.1.1" class="section-number selfRef">3.6.1.1. </a><a href="#name-example-2" class="section-name selfRef">Example</a>
-            </h5>
+            <h5 id="name-example-2"><a href="#section-3.6.1.1">3.6.1.1.&nbsp;&nbsp;Example</a></h5>
 <div class="alignCenter art-text artwork" id="section-3.6.1.1-1">
 <pre>{
   "type": "urn:ietf:params:jmap:error:unknownCapability",
@@ -1138,9 +705,7 @@ being applied.<a href="#section-3.6.1-3.4.2" class="pilcrow">¶</a></p>
 </div>
 <div id="methodlevel-errors">
 <section id="section-3.6.2">
-          <h4 id="name-method-level-errors">
-<a href="#section-3.6.2" class="section-number selfRef">3.6.2. </a><a href="#name-method-level-errors" class="section-name selfRef">Method-Level Errors</a>
-          </h4>
+          <h4 id="name-method-level-errors"><a href="#section-3.6.2">3.6.2.&nbsp;&nbsp;Method-Level Errors</a></h4>
 <p id="section-3.6.2-1">If a method encounters an error, the appropriate <code>error</code> response MUST be inserted at the current point in the <code>methodResponses</code> array and, unless otherwise specified, further processing MUST NOT happen within that method call.<a href="#section-3.6.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.6.2-2">Any further method calls in the request MUST then be processed as normal. Errors at the method level MUST NOT generate an HTTP-level error.<a href="#section-3.6.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.6.2-3">An <code>error</code> response looks like this:<a href="#section-3.6.2-3" class="pilcrow">¶</a></p>
@@ -1171,9 +736,7 @@ being applied.<a href="#section-3.6.1-3.4.2" class="pilcrow">¶</a></p>
 </div>
 <div id="references-to-previous-method-results">
 <section id="section-3.7">
-        <h3 id="name-references-to-previous-meth">
-<a href="#section-3.7" class="section-number selfRef">3.7. </a><a href="#name-references-to-previous-meth" class="section-name selfRef">References to Previous Method Results</a>
-        </h3>
+        <h3 id="name-references-to-previous-meth"><a href="#section-3.7">3.7.&nbsp;&nbsp;References to Previous Method Results</a></h3>
 <p id="section-3.7-1">To allow clients to make more efficient use of the network and avoid round
 trips, an argument to one method can be taken from the result of a previous
 method call in the same request.<a href="#section-3.7-1" class="pilcrow">¶</a></p>
@@ -1395,9 +958,7 @@ them.<a href="#section-3.7-23" class="pilcrow">¶</a></p>
 </div>
 <div id="localisation-of-uservisible-strings">
 <section id="section-3.8">
-        <h3 id="name-localisation-of-user-visibl">
-<a href="#section-3.8" class="section-number selfRef">3.8. </a><a href="#name-localisation-of-user-visibl" class="section-name selfRef">Localisation of User-Visible Strings</a>
-        </h3>
+        <h3 id="name-localisation-of-user-visibl"><a href="#section-3.8">3.8.&nbsp;&nbsp;Localisation of User-Visible Strings</a></h3>
 <p id="section-3.8-1">If returning a custom string to be displayed to the user, for example, an error message, the server SHOULD use information from the Accept-Language header of the request (as defined in Section 5.3.5 of <span>[<a href="#RFC7231" class="cite xref">RFC7231</a>]</span>) to choose the best available localisation. The Content-Language header of the response (see Section 3.1.3.2 of <span>[<a href="#RFC7231" class="cite xref">RFC7231</a>]</span>) SHOULD indicate the language being used for user-visible strings.<a href="#section-3.8-1" class="pilcrow">¶</a></p>
 <p id="section-3.8-2">For example, suppose a request was made with the following header:<a href="#section-3.8-2" class="pilcrow">¶</a></p>
 <div class="alignCenter art-text artwork" id="section-3.8-3">
@@ -1413,17 +974,13 @@ them.<a href="#section-3.7-23" class="pilcrow">¶</a></p>
 </div>
 <div id="security">
 <section id="section-3.9">
-        <h3 id="name-security">
-<a href="#section-3.9" class="section-number selfRef">3.9. </a><a href="#name-security" class="section-name selfRef">Security</a>
-        </h3>
+        <h3 id="name-security"><a href="#section-3.9">3.9.&nbsp;&nbsp;Security</a></h3>
 <p id="section-3.9-1">As always, the server must be strict about data received from the client. Arguments need to be checked for validity; a malicious user could attempt to find an exploit through the API. In case of invalid arguments (unknown/insufficient/wrong type for data, etc.), the method MUST return an <code>invalidArguments</code> error and terminate.<a href="#section-3.9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="concurrency">
 <section id="section-3.10">
-        <h3 id="name-concurrency">
-<a href="#section-3.10" class="section-number selfRef">3.10. </a><a href="#name-concurrency" class="section-name selfRef">Concurrency</a>
-        </h3>
+        <h3 id="name-concurrency"><a href="#section-3.10">3.10.&nbsp;&nbsp;Concurrency</a></h3>
 <p id="section-3.10-1">Method calls within a single request MUST be executed in order. However, method calls from different concurrent API requests may be interleaved. This means that the data on the server may change between two method calls within a single API request.<a href="#section-3.10-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1431,15 +988,11 @@ them.<a href="#section-3.7-23" class="pilcrow">¶</a></p>
 </div>
 <div id="the-coreecho-method">
 <section id="section-4">
-      <h2 id="name-the-core-echo-method">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-the-core-echo-method" class="section-name selfRef">The Core/echo Method</a>
-      </h2>
+      <h2 id="name-the-core-echo-method"><a href="#section-4">4.&nbsp;&nbsp;The Core/echo Method</a></h2>
 <p id="section-4-1">The <code>Core/echo</code> method returns exactly the same arguments as it is given. It is useful for testing if you have a valid authenticated connection to a JMAP API endpoint.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <div id="example-2">
 <section id="section-4.1">
-        <h3 id="name-example-3">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-example-3" class="section-name selfRef">Example</a>
-        </h3>
+        <h3 id="name-example-3"><a href="#section-4.1">4.1.&nbsp;&nbsp;Example</a></h3>
 <p id="section-4.1-1">Request:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <div class="alignCenter art-text artwork" id="section-4.1-2">
 <pre>[[ "Core/echo", {
@@ -1462,16 +1015,12 @@ them.<a href="#section-3.7-23" class="pilcrow">¶</a></p>
 </div>
 <div id="standard-methods-and-naming-convention">
 <section id="section-5">
-      <h2 id="name-standard-methods-and-naming">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-standard-methods-and-naming" class="section-name selfRef">Standard Methods and Naming Convention</a>
-      </h2>
+      <h2 id="name-standard-methods-and-naming"><a href="#section-5">5.&nbsp;&nbsp;Standard Methods and Naming Convention</a></h2>
 <p id="section-5-1">JMAP provides a uniform interface for creating, retrieving, updating, and deleting objects of a particular type. For a <code>Foo</code> data type, records of that type would be fetched via a <code>Foo/get</code> call and modified via a <code>Foo/set</code> call. Delta updates may be fetched via a <code>Foo/changes</code> call. These methods all follow a standard format as described below.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">Some types may not have all these methods. Specifications defining types MUST specify which methods are available for the type.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <div id="get">
 <section id="section-5.1">
-        <h3 id="name-get">
-<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-get" class="section-name selfRef">/get</a>
-        </h3>
+        <h3 id="name-get"><a href="#section-5.1">5.1.&nbsp;&nbsp;/get</a></h3>
 <p id="section-5.1-1">Objects of type Foo are fetched via a call to <code>Foo/get</code>.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.1-2">It takes the following arguments:<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -1523,9 +1072,7 @@ the server is willing to process in a single method call.<a href="#section-5.1-7
 </div>
 <div id="changes">
 <section id="section-5.2">
-        <h3 id="name-changes">
-<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-changes" class="section-name selfRef">/changes</a>
-        </h3>
+        <h3 id="name-changes"><a href="#section-5.2">5.2.&nbsp;&nbsp;/changes</a></h3>
 <p id="section-5.2-1">When the state of the set of Foo records in an account changes on the server (whether due to creation, updates, or deletion), the <code>state</code> property of the <code>Foo/get</code> response will change. The <code>Foo/changes</code> method allows a client to efficiently update the state of its Foo cache to match the new state on the server. It takes the following arguments:<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.2-2.1">
@@ -1618,9 +1165,7 @@ hasMoreChanges: false
 </div>
 <div id="set">
 <section id="section-5.3">
-        <h3 id="name-set">
-<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-set" class="section-name selfRef">/set</a>
-        </h3>
+        <h3 id="name-set"><a href="#section-5.3">5.3.&nbsp;&nbsp;/set</a></h3>
 <p id="section-5.3-1">Modifying the state of Foo objects on the server is done via the <code>Foo/set</code> method. This encompasses creating, updating, and destroying Foo records. This allows the server to sort out ordering and dependencies that may exist if doing multiple operations at once (for example, to ensure there is always a minimum number of a certain record type).<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.3-2">The <code>Foo/set</code> method takes the following arguments:<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -1840,9 +1385,7 @@ process in a single method call.<a href="#section-5.3-20" class="pilcrow">¶</a>
 </div>
 <div id="copy">
 <section id="section-5.4">
-        <h3 id="name-copy">
-<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-copy" class="section-name selfRef">/copy</a>
-        </h3>
+        <h3 id="name-copy"><a href="#section-5.4">5.4.&nbsp;&nbsp;/copy</a></h3>
 <p id="section-5.4-1">The only way to move Foo records <strong>between</strong> two different accounts is to copy them using the <code>Foo/copy</code> method; once the copy has succeeded, delete the original. The <code>onSuccessDestroyOriginal</code> argument allows you to try to do this in one method call; however, note that the two different actions are not atomic, so it is possible for the copy to succeed but the original not to be destroyed for some reason.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
 <p id="section-5.4-2">The copy is conceptually in three phases:<a href="#section-5.4-2" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-5.4-3">
@@ -1944,9 +1487,7 @@ A map of the creation id to a SetError object for each record that failed to be 
 </div>
 <div id="query">
 <section id="section-5.5">
-        <h3 id="name-query">
-<a href="#section-5.5" class="section-number selfRef">5.5. </a><a href="#name-query" class="section-name selfRef">/query</a>
-        </h3>
+        <h3 id="name-query"><a href="#section-5.5">5.5.&nbsp;&nbsp;/query</a></h3>
 <p id="section-5.5-1">For data sets where the total amount of data is expected to be very small, clients can just fetch the complete set of data and then do any sorting/filtering locally. However, for large data sets (e.g., multi-gigabyte mailboxes), the client needs to be able to search/sort/window the data type on the server.<a href="#section-5.5-1" class="pilcrow">¶</a></p>
 <p id="section-5.5-2">A query on the set of Foos in an account is made by calling <code>Foo/query</code>.  This takes a number of arguments to determine which records to include, how they should be sorted, and which part of the result should be returned (the full list may be <strong>very</strong> long). The result is returned as a list of Foo ids.<a href="#section-5.5-2" class="pilcrow">¶</a></p>
 <p id="section-5.5-3">A call to <code>Foo/query</code> takes the following arguments:<a href="#section-5.5-3" class="pilcrow">¶</a></p>
@@ -2132,9 +1673,7 @@ SHOULD suggest that the user simplify their search.<a href="#section-5.5-13" cla
 </div>
 <div id="querychanges">
 <section id="section-5.6">
-        <h3 id="name-querychanges">
-<a href="#section-5.6" class="section-number selfRef">5.6. </a><a href="#name-querychanges" class="section-name selfRef">/queryChanges</a>
-        </h3>
+        <h3 id="name-querychanges"><a href="#section-5.6">5.6.&nbsp;&nbsp;/queryChanges</a></h3>
 <p id="section-5.6-1">The <code>Foo/queryChanges</code> method allows a client to efficiently update the state of a cached query to match the new state on the server. It takes the following arguments:<a href="#section-5.6-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.6-2.1">
@@ -2260,9 +1799,7 @@ fooIds =&gt; [ "id5", "id1", null, null, null, null, null, null, null ]
 </div>
 <div id="examples">
 <section id="section-5.7">
-        <h3 id="name-examples">
-<a href="#section-5.7" class="section-number selfRef">5.7. </a><a href="#name-examples" class="section-name selfRef">Examples</a>
-        </h3>
+        <h3 id="name-examples"><a href="#section-5.7">5.7.&nbsp;&nbsp;Examples</a></h3>
 <p id="section-5.7-1">Suppose we have a type <strong>Todo</strong> with the following properties:<a href="#section-5.7-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.7-2.1">
@@ -2508,9 +2045,7 @@ a new id) and deletes the original. Due to the implicit call to
 </div>
 <div id="proxy-considerations">
 <section id="section-5.8">
-        <h3 id="name-proxy-considerations">
-<a href="#section-5.8" class="section-number selfRef">5.8. </a><a href="#name-proxy-considerations" class="section-name selfRef">Proxy Considerations</a>
-        </h3>
+        <h3 id="name-proxy-considerations"><a href="#section-5.8">5.8.&nbsp;&nbsp;Proxy Considerations</a></h3>
 <p id="section-5.8-1">JMAP has been designed to allow an API endpoint to easily proxy through to one
 or more JMAP servers. This may be useful for load balancing, augmenting capabilities, or presenting a single endpoint to accounts hosted on different JMAP servers (splitting the request based on each method's "accountId" argument). The proxy need only understand the general structure of a JMAP Request object; it does not need to know anything specifically about the methods and arguments it will pass through to other servers.<a href="#section-5.8-1" class="pilcrow">¶</a></p>
 <p id="section-5.8-2">If splitting up the methods in a request to call them on different backend servers, the proxy must do two things to ensure back-references and creation-id references resolve the same as if the entire request were processed on a single server:<a href="#section-5.8-2" class="pilcrow">¶</a></p>
@@ -2531,9 +2066,7 @@ processed on a different server. This is a relatively simple syntactic substitut
 </div>
 <div id="binary-data">
 <section id="section-6">
-      <h2 id="name-binary-data">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-binary-data" class="section-name selfRef">Binary Data</a>
-      </h2>
+      <h2 id="name-binary-data"><a href="#section-6">6.&nbsp;&nbsp;Binary Data</a></h2>
 <p id="section-6-1">Binary data is referenced by a <strong>blobId</strong> in JMAP and uploaded/downloaded separately to the core API. The blobId solely represents the raw bytes of data, not any associated metadata such as a file name or content type. Such metadata is stored alongside the blobId in the object referencing it. The data represented by a blobId is immutable.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">Any blobId that exists within an account may be used when creating/updating
 another object in that account. For example, an Email type may have a blobId that represents the object in Internet Message Format <span>[<a href="#RFC5322" class="cite xref">RFC5322</a>]</span>. A client could create a new Email object with an attachment and use this blobId, in effect attaching the old message to the new one. Similarly, it could attach any existing attachment of an old message without having to download and upload it again.<a href="#section-6-2" class="pilcrow">¶</a></p>
@@ -2564,9 +2097,7 @@ reference, so that a client can issue a create and a destroy that both reference
       </ul>
 <div id="uploading-binary-data">
 <section id="section-6.1">
-        <h3 id="name-uploading-binary-data">
-<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-uploading-binary-data" class="section-name selfRef">Uploading Binary Data</a>
-        </h3>
+        <h3 id="name-uploading-binary-data"><a href="#section-6.1">6.1.&nbsp;&nbsp;Uploading Binary Data</a></h3>
 <p id="section-6.1-1">There is a single endpoint that handles all file uploads for an account, regardless of what they are to be used for. The Session object (see <a href="#the-jmap-session-resource" class="auto internal xref">Section 2</a>) has an <code>uploadUrl</code> property in URI Template (level 1) format <span>[<a href="#RFC6570" class="cite xref">RFC6570</a>]</span>, which MUST contain a variable called <code>accountId</code>. The client may use this template in combination with an <code>accountId</code> to get the URL of the file upload resource.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.1-2">To upload a file, the client submits an authenticated POST request to the file upload resource.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 <p id="section-6.1-3">A successful request MUST return a single JSON object with the following properties as the response:<a href="#section-6.1-3" class="pilcrow">¶</a></p>
@@ -2600,9 +2131,7 @@ The size of the file in octets.<a href="#section-6.1-4.4.2" class="pilcrow">¶</
 </div>
 <div id="downloading-binary-data">
 <section id="section-6.2">
-        <h3 id="name-downloading-binary-data">
-<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-downloading-binary-data" class="section-name selfRef">Downloading Binary Data</a>
-        </h3>
+        <h3 id="name-downloading-binary-data"><a href="#section-6.2">6.2.&nbsp;&nbsp;Downloading Binary Data</a></h3>
 <p id="section-6.2-1">The Session object (see <a href="#the-jmap-session-resource" class="auto internal xref">Section 2</a>) has a <code>downloadUrl</code> property, which is in URI Template (level 1) format <span>[<a href="#RFC6570" class="cite xref">RFC6570</a>]</span>. The URL MUST contain variables called <code>accountId</code>, <code>blobId</code>, <code>type</code>, and <code>name</code>.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.2-2">To download a file, the client makes an authenticated GET request to the download URL with the appropriate variables substituted in:<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -2628,9 +2157,7 @@ it sets a <code>Content-Disposition</code> header.<a href="#section-6.2-3.4.1" c
 </div>
 <div id="blobcopy">
 <section id="section-6.3">
-        <h3 id="name-blob-copy">
-<a href="#section-6.3" class="section-number selfRef">6.3. </a><a href="#name-blob-copy" class="section-name selfRef">Blob/copy</a>
-        </h3>
+        <h3 id="name-blob-copy"><a href="#section-6.3">6.3.&nbsp;&nbsp;Blob/copy</a></h3>
 <p id="section-6.3-1">Binary data may be copied <strong>between</strong> two different accounts using the <code>Blob/copy</code> method rather than having to download and then reupload on the client.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.3-2">The <code>Blob/copy</code> method takes the following arguments:<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -2682,16 +2209,12 @@ A map of blobId to a SetError object for each blob that failed to be copied, or 
 </div>
 <div id="push">
 <section id="section-7">
-      <h2 id="name-push">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-push" class="section-name selfRef">Push</a>
-      </h2>
+      <h2 id="name-push"><a href="#section-7">7.&nbsp;&nbsp;Push</a></h2>
 <p id="section-7-1">Push notifications allow clients to efficiently update (almost) instantly to stay in sync with data changes on the server. The general model for push is simple and sends minimal data over the push channel: just enough for the client to know whether it needs to resync. The format allows multiple changes to be coalesced into a single push update and the frequency of pushes to be rate limited by the server. It doesn't matter if some push events are dropped before they reach the client; the next time it gets/sets any records of a changed type, it will discover the data has changed and still sync all changes.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <p id="section-7-2">There are two different mechanisms by which a client can receive push notifications, to allow for the different environments in which a client may exist. An event source resource (see <a href="#event-source" class="auto internal xref">Section 7.3</a>) allows clients that can hold transport connections open to receive push notifications directly from the JMAP server. This is simple and avoids third parties, but it is often not feasible on constrained platforms such as mobile devices. Alternatively, clients can make use of any push service supported by their environment. A URL for the push service is registered with the JMAP server (see <a href="#pushsubscription" class="auto internal xref">Section 7.2</a>); the server then POSTs each notification to that URL. The push service is then responsible for routing these to the client.<a href="#section-7-2" class="pilcrow">¶</a></p>
 <div id="the-statechange-object">
 <section id="section-7.1">
-        <h3 id="name-the-statechange-object">
-<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-the-statechange-object" class="section-name selfRef">The StateChange Object</a>
-        </h3>
+        <h3 id="name-the-statechange-object"><a href="#section-7.1">7.1.&nbsp;&nbsp;The StateChange Object</a></h3>
 <p id="section-7.1-1">When something changes on the server, the server pushes a StateChange object to the client. A <strong>StateChange</strong> object has the following properties:<a href="#section-7.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-7.1-2.1">
@@ -2711,9 +2234,7 @@ The client can compare the new state strings with its current values to see whet
         </ul>
 <div id="example-3">
 <section id="section-7.1.1">
-          <h4 id="name-example-4">
-<a href="#section-7.1.1" class="section-number selfRef">7.1.1. </a><a href="#name-example-4" class="section-name selfRef">Example</a>
-          </h4>
+          <h4 id="name-example-4"><a href="#section-7.1.1">7.1.1.&nbsp;&nbsp;Example</a></h4>
 <p id="section-7.1.1-1">In this example, the server has amalgamated a few changes together across two different accounts the user has access to, before pushing the following StateChange object to the client:<a href="#section-7.1.1-1" class="pilcrow">¶</a></p>
 <div class="alignCenter art-text artwork" id="section-7.1.1-2">
 <pre>{
@@ -2740,9 +2261,7 @@ The client can compare the new state strings with its current values to see whet
 </div>
 <div id="pushsubscription">
 <section id="section-7.2">
-        <h3 id="name-pushsubscription">
-<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-pushsubscription" class="section-name selfRef">PushSubscription</a>
-        </h3>
+        <h3 id="name-pushsubscription"><a href="#section-7.2">7.2.&nbsp;&nbsp;PushSubscription</a></h3>
 <p id="section-7.2-1">Clients may create a PushSubscription to register a URL with the JMAP server. The JMAP server will then make an HTTP POST request to this URL for each push notification it wishes to send to the client.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
 <p id="section-7.2-2">As a push subscription causes the JMAP server to make a number of requests to a previously unknown endpoint, it can be used as a vector for launching a denial-of-service attack. To prevent this, when a subscription is created, the JMAP server immediately sends a PushVerification object to that URL (see <a href="#pushsubscriptionset" class="auto internal xref">Section 7.2.2</a>). The JMAP server MUST NOT make any further requests to the URL until the client receives the push and updates the subscription with the correct verification code.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
 <p id="section-7.2-3">A <strong>PushSubscription</strong> object has the following properties:<a href="#section-7.2-3" class="pilcrow">¶</a></p>
@@ -2820,9 +2339,7 @@ A list of types the client is interested in (using the same names as the keys in
 <p id="section-7.2-11">When a push subscription is destroyed, the server MUST securely erase the URL and encryption keys from memory and storage as soon as possible.<a href="#section-7.2-11" class="pilcrow">¶</a></p>
 <div id="pushsubscriptionget">
 <section id="section-7.2.1">
-          <h4 id="name-pushsubscription-get">
-<a href="#section-7.2.1" class="section-number selfRef">7.2.1. </a><a href="#name-pushsubscription-get" class="section-name selfRef">PushSubscription/get</a>
-          </h4>
+          <h4 id="name-pushsubscription-get"><a href="#section-7.2.1">7.2.1.&nbsp;&nbsp;PushSubscription/get</a></h4>
 <p id="section-7.2.1-1">Standard /get method as described in <a href="#get" class="auto internal xref">Section 5.1</a>, except it does <strong>not</strong> take or return an <code>accountId</code> argument, as push subscriptions are not tied to specific accounts. It also does <strong>not</strong> return a <code>state</code> argument. The <code>ids</code> argument may be null to fetch all at once.<a href="#section-7.2.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.2.1-2">The server MUST only return push subscriptions that were created using the same authentication credentials as for this <code>PushSubscription/get</code> request.<a href="#section-7.2.1-2" class="pilcrow">¶</a></p>
 <p id="section-7.2.1-3">As the <code>url</code> and <code>keys</code> properties may contain data that is private to a particular device, the values for these properties MUST NOT be returned. If the <code>properties</code> argument is null or omitted, the server MUST default to all properties excluding these two. If one of them is explicitly requested, the method call MUST be rejected with a <code>forbidden</code> error.<a href="#section-7.2.1-3" class="pilcrow">¶</a></p>
@@ -2830,9 +2347,7 @@ A list of types the client is interested in (using the same names as the keys in
 </div>
 <div id="pushsubscriptionset">
 <section id="section-7.2.2">
-          <h4 id="name-pushsubscription-set">
-<a href="#section-7.2.2" class="section-number selfRef">7.2.2. </a><a href="#name-pushsubscription-set" class="section-name selfRef">PushSubscription/set</a>
-          </h4>
+          <h4 id="name-pushsubscription-set"><a href="#section-7.2.2">7.2.2.&nbsp;&nbsp;PushSubscription/set</a></h4>
 <p id="section-7.2.2-1">Standard /set method  as described in <a href="#set" class="auto internal xref">Section 5.3</a>, except it does <strong>not</strong> take or return an <code>accountId</code> argument, as push subscriptions are not tied to specific accounts. It also does <strong>not</strong> take an <code>ifInState</code> argument or return <code>oldState</code> or <code>newState</code> arguments.<a href="#section-7.2.2-1" class="pilcrow">¶</a></p>
 <p id="section-7.2.2-2">The <code>url</code> and <code>keys</code> properties are immutable; if the client wishes to change these, it must destroy the current push subscription and create a new one.<a href="#section-7.2.2-2" class="pilcrow">¶</a></p>
 <p id="section-7.2.2-3">When a PushSubscription is created, the server MUST immediately push a <strong>PushVerification</strong> object to the URL. It has the following properties:<a href="#section-7.2.2-3" class="pilcrow">¶</a></p>
@@ -2861,9 +2376,7 @@ before the server makes any further requests to the subscription's URL. Attempts
 </div>
 <div id="example-4">
 <section id="section-7.2.3">
-          <h4 id="name-example-5">
-<a href="#section-7.2.3" class="section-number selfRef">7.2.3. </a><a href="#name-example-5" class="section-name selfRef">Example</a>
-          </h4>
+          <h4 id="name-example-5"><a href="#section-7.2.3">7.2.3.&nbsp;&nbsp;Example</a></h4>
 <p id="section-7.2.3-1">At <code>2018-07-06T02:14:29Z</code>, a client with deviceClientId <code>a889-ffea-910</code> fetches the set of push subscriptions currently on the server, making an API request with:<a href="#section-7.2.3-1" class="pilcrow">¶</a></p>
 <div class="alignCenter art-text artwork" id="section-7.2.3-2">
 <pre>[[ "PushSubscription/get", {
@@ -2966,9 +2479,7 @@ before the server makes any further requests to the subscription's URL. Attempts
 </div>
 <div id="event-source">
 <section id="section-7.3">
-        <h3 id="name-event-source">
-<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-event-source" class="section-name selfRef">Event Source</a>
-        </h3>
+        <h3 id="name-event-source"><a href="#section-7.3">7.3.&nbsp;&nbsp;Event Source</a></h3>
 <p id="section-7.3-1">Clients that can hold transport connections open can connect directly to the JMAP server to receive push notifications via a <code>text/event-stream</code> resource, as described in <span>[<a href="#EventSource" class="cite xref">EventSource</a>]</span>.
 
 This is a long running HTTP request, where the server can push data to the client by appending data without ending the response.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
@@ -3020,14 +2531,10 @@ Clients can monitor for the ping event to help determine when the closeafter mod
 </div>
 <div id="security-considerations">
 <section id="section-8">
-      <h2 id="name-security-considerations">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
-      </h2>
+      <h2 id="name-security-considerations"><a href="#section-8">8.&nbsp;&nbsp;Security Considerations</a></h2>
 <div id="transport-confidentiality">
 <section id="section-8.1">
-        <h3 id="name-transport-confidentiality">
-<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-transport-confidentiality" class="section-name selfRef">Transport Confidentiality</a>
-        </h3>
+        <h3 id="name-transport-confidentiality"><a href="#section-8.1">8.1.&nbsp;&nbsp;Transport Confidentiality</a></h3>
 <p id="section-8.1-1">To ensure the confidentiality and integrity of data sent and received via
 JMAP, all requests MUST use TLS 1.2 <span>[<a href="#RFC5246" class="cite xref">RFC5246</a>]</span> <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> or later,
 following the recommendations in <span>[<a href="#RFC7525" class="cite xref">RFC7525</a>]</span>. Servers SHOULD
@@ -3037,9 +2544,7 @@ support TLS 1.3 <span>[<a href="#RFC8446" class="cite xref">RFC8446</a>]</span> 
 </div>
 <div id="authentication-scheme">
 <section id="section-8.2">
-        <h3 id="name-authentication-scheme">
-<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-authentication-scheme" class="section-name selfRef">Authentication Scheme</a>
-        </h3>
+        <h3 id="name-authentication-scheme"><a href="#section-8.2">8.2.&nbsp;&nbsp;Authentication Scheme</a></h3>
 <p id="section-8.2-1">A number of HTTP authentication schemes have been standardised (see
 &lt;https://www.iana.org/assignments/http-authschemes/&gt;). Servers should
 take care to assess the security characteristics of different schemes in
@@ -3053,9 +2558,7 @@ differentiated by the server and access to be individually revoked.<a href="#sec
 </div>
 <div id="service-autodiscovery-1">
 <section id="section-8.3">
-        <h3 id="name-service-autodiscovery-2">
-<a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-service-autodiscovery-2" class="section-name selfRef">Service Autodiscovery</a>
-        </h3>
+        <h3 id="name-service-autodiscovery-2"><a href="#section-8.3">8.3.&nbsp;&nbsp;Service Autodiscovery</a></h3>
 <p id="section-8.3-1">Unless secured by something like DNSSEC, autodiscovery of server
 details using SRV DNS records is vulnerable to a DNS poisoning attack, which
 can lead to the client talking to an attacker's server instead of the real
@@ -3069,9 +2572,7 @@ its own requests.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
 </div>
 <div id="json-parsing">
 <section id="section-8.4">
-        <h3 id="name-json-parsing">
-<a href="#section-8.4" class="section-number selfRef">8.4. </a><a href="#name-json-parsing" class="section-name selfRef">JSON Parsing</a>
-        </h3>
+        <h3 id="name-json-parsing"><a href="#section-8.4">8.4.&nbsp;&nbsp;JSON Parsing</a></h3>
 <p id="section-8.4-1">The Security Considerations of <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> apply to the use of JSON as the data interchange format.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 <p id="section-8.4-2">As for any serialization format, parsers need to thoroughly check the
 syntax of the supplied data. JSON uses opening and closing tags for
@@ -3097,9 +2598,7 @@ context, to avoid untrusted data causing excessive memory allocation.<a href="#s
 </div>
 <div id="denial-of-service">
 <section id="section-8.5">
-        <h3 id="name-denial-of-service">
-<a href="#section-8.5" class="section-number selfRef">8.5. </a><a href="#name-denial-of-service" class="section-name selfRef">Denial of Service</a>
-        </h3>
+        <h3 id="name-denial-of-service"><a href="#section-8.5">8.5.&nbsp;&nbsp;Denial of Service</a></h3>
 <p id="section-8.5-1">A small request may result in a very large response and require considerable
 work on the server if resource limits are not enforced. JMAP provides
 mechanisms for advertising and enforcing a wide variety of limits for
@@ -3110,9 +2609,7 @@ single method call, number of methods in a single request, number of concurrent 
 </div>
 <div id="connection-to-unknown-push-server">
 <section id="section-8.6">
-        <h3 id="name-connection-to-unknown-push-">
-<a href="#section-8.6" class="section-number selfRef">8.6. </a><a href="#name-connection-to-unknown-push-" class="section-name selfRef">Connection to Unknown Push Server</a>
-        </h3>
+        <h3 id="name-connection-to-unknown-push-"><a href="#section-8.6">8.6.&nbsp;&nbsp;Connection to Unknown Push Server</a></h3>
 <p id="section-8.6-1">When a push subscription is registered, the application server will make POST requests to the given URL. There are a number of security considerations that MUST be considered when implementing this.<a href="#section-8.6-1" class="pilcrow">¶</a></p>
 <p id="section-8.6-2">The server MUST ensure the URL is externally resolvable to avoid server-side request forgery, where the server makes a request to a resource on its internal network.<a href="#section-8.6-2" class="pilcrow">¶</a></p>
 <p id="section-8.6-3">A malicious client may use the push subscription to attempt to flood a third party server with requests, creating a denial-of-service attack and masking the attacker's true identity. There is no guarantee that the URL given to the JMAP server is actually a valid push server. Upon creation of a push subscription, the JMAP server sends a PushVerification object to the URL and MUST NOT send any further requests until the client verifies it has received the initial push. The verification code MUST contain sufficient entropy to prevent the client from being able to verify the subscription via brute force.<a href="#section-8.6-3" class="pilcrow">¶</a></p>
@@ -3126,9 +2623,7 @@ a denial-of-service attack.<a href="#section-8.6-4" class="pilcrow">¶</a></p>
 </div>
 <div id="push-encryption">
 <section id="section-8.7">
-        <h3 id="name-push-encryption">
-<a href="#section-8.7" class="section-number selfRef">8.7. </a><a href="#name-push-encryption" class="section-name selfRef">Push Encryption</a>
-        </h3>
+        <h3 id="name-push-encryption"><a href="#section-8.7">8.7.&nbsp;&nbsp;Push Encryption</a></h3>
 <p id="section-8.7-1">When data changes, a small object is pushed with the new state strings for the types that have changed. While the data here is minimal, a passive man-in-the-middle attacker may be able to gain useful information. To ensure confidentiality and integrity, if the push is sent via a third party outside of the control of the client and JMAP server, the client MUST specify encryption keys when establishing the PushSubscription and ignore any push notification received that is not encrypted with those keys.<a href="#section-8.7-1" class="pilcrow">¶</a></p>
 <p id="section-8.7-2">The privacy and security considerations of <span>[<a href="#RFC8030" class="cite xref">RFC8030</a>]</span> and <span>[<a href="#RFC8291" class="cite xref">RFC8291</a>]</span> also apply to the use of the PushSubscription mechanism.<a href="#section-8.7-2" class="pilcrow">¶</a></p>
 <p id="section-8.7-3">As there is no crypto algorithm agility in Web Push Encryption <span>[<a href="#RFC8291" class="cite xref">RFC8291</a>]</span>, a new
@@ -3138,9 +2633,7 @@ the future.<a href="#section-8.7-3" class="pilcrow">¶</a></p>
 </div>
 <div id="traffic-analysis">
 <section id="section-8.8">
-        <h3 id="name-traffic-analysis">
-<a href="#section-8.8" class="section-number selfRef">8.8. </a><a href="#name-traffic-analysis" class="section-name selfRef">Traffic Analysis</a>
-        </h3>
+        <h3 id="name-traffic-analysis"><a href="#section-8.8">8.8.&nbsp;&nbsp;Traffic Analysis</a></h3>
 <p id="section-8.8-1">While the data is encrypted, a passive observer with the ability to monitor network traffic may be able to glean information from the timing of API requests and push notifications. For example, suppose an email or calendar invitation is sent from User A (hosted on Server X) to User B (hosted on Server Y). If Server X hosts data for many users, a passive observer can see that the two servers connected but does not know who the data was for. However, if a push notification is immediately sent to User B and the attacker can observe this as well, they may reasonably conclude that someone on Server X is connecting to User B.<a href="#section-8.8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3148,14 +2641,10 @@ the future.<a href="#section-8.7-3" class="pilcrow">¶</a></p>
 </div>
 <div id="iana-considerations">
 <section id="section-9">
-      <h2 id="name-iana-considerations">
-<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
-      </h2>
+      <h2 id="name-iana-considerations"><a href="#section-9">9.&nbsp;&nbsp;IANA Considerations</a></h2>
 <div id="assignment-of-jmap-service-name">
 <section id="section-9.1">
-        <h3 id="name-assignment-of-jmap-service-">
-<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-assignment-of-jmap-service-" class="section-name selfRef">Assignment of jmap Service Name</a>
-        </h3>
+        <h3 id="name-assignment-of-jmap-service-"><a href="#section-9.1">9.1.&nbsp;&nbsp;Assignment of jmap Service Name</a></h3>
 <p id="section-9.1-1">IANA has assigned the 'jmap' service name in the "Service Name and
 Transport Protocol Port Number Registry" <span>[<a href="#RFC6335" class="cite xref">RFC6335</a>]</span>.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
 <p id="section-9.1-2">Service Name: jmap<a href="#section-9.1-2" class="pilcrow">¶</a></p>
@@ -3169,9 +2658,7 @@ Transport Protocol Port Number Registry" <span>[<a href="#RFC6335" class="cite x
 </div>
 <div id="registration-of-wellknown-uri-suffix-for-jmap">
 <section id="section-9.2">
-        <h3 id="name-registration-of-well-known-">
-<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-registration-of-well-known-" class="section-name selfRef">Registration of Well-Known URI Suffix for JMAP</a>
-        </h3>
+        <h3 id="name-registration-of-well-known-"><a href="#section-9.2">9.2.&nbsp;&nbsp;Registration of Well-Known URI Suffix for JMAP</a></h3>
 <p id="section-9.2-1">IANA has registered the following suffix in the "Well-Known URIs" registry
 for JMAP, as described in <span>[<a href="#RFC8615" class="cite xref">RFC8615</a>]</span>:<a href="#section-9.2-1" class="pilcrow">¶</a></p>
 <p id="section-9.2-2">URI Suffix: jmap<a href="#section-9.2-2" class="pilcrow">¶</a></p>
@@ -3181,9 +2668,7 @@ for JMAP, as described in <span>[<a href="#RFC8615" class="cite xref">RFC8615</a
 </div>
 <div id="registration-of-the-jmap-urn-subnamespace">
 <section id="section-9.3">
-        <h3 id="name-registration-of-the-jmap-ur">
-<a href="#section-9.3" class="section-number selfRef">9.3. </a><a href="#name-registration-of-the-jmap-ur" class="section-name selfRef">Registration of the jmap URN Sub-namespace</a>
-        </h3>
+        <h3 id="name-registration-of-the-jmap-ur"><a href="#section-9.3">9.3.&nbsp;&nbsp;Registration of the jmap URN Sub-namespace</a></h3>
 <p id="section-9.3-1">IANA has registered the following URN sub-namespace in the "IETF URN
 Sub-namespace for Registered Protocol Parameter Identifiers" registry within
 the "Uniform Resource Name (URN) Namespace for IETF Use" registry as
@@ -3195,9 +2680,7 @@ described in <span>[<a href="#RFC3553" class="cite xref">RFC3553</a>]</span>.<a 
 </div>
 <div id="creation-of-jmap-capabilities-registry">
 <section id="section-9.4">
-        <h3 id="name-creation-of-jmap-capabiliti">
-<a href="#section-9.4" class="section-number selfRef">9.4. </a><a href="#name-creation-of-jmap-capabiliti" class="section-name selfRef">Creation of "JMAP Capabilities" Registry</a>
-        </h3>
+        <h3 id="name-creation-of-jmap-capabiliti"><a href="#section-9.4">9.4.&nbsp;&nbsp;Creation of "JMAP Capabilities" Registry</a></h3>
 <p id="section-9.4-1">IANA has created the "JMAP Capabilities" registry as described in <a href="#the-jmap-session-resource" class="auto internal xref">Section 2</a>. JMAP capabilities are advertised in the
 <code>capabilities</code> property of the JMAP Session
 resource. They are used to extend the functionality of a JMAP server. A
@@ -3221,9 +2704,7 @@ jmap URN namespace for another purpose but is typically not included in the
 resource.<a href="#section-9.4-5" class="pilcrow">¶</a></p>
 <div id="preliminary-community-review">
 <section id="section-9.4.1">
-          <h4 id="name-preliminary-community-revie">
-<a href="#section-9.4.1" class="section-number selfRef">9.4.1. </a><a href="#name-preliminary-community-revie" class="section-name selfRef">Preliminary Community Review</a>
-          </h4>
+          <h4 id="name-preliminary-community-revie"><a href="#section-9.4.1">9.4.1.&nbsp;&nbsp;Preliminary Community Review</a></h4>
 <p id="section-9.4.1-1">Notice of a potential JMAP common-use registration SHOULD be sent to the
 JMAP mailing list &lt;jmap@ietf.org&gt; for review. This mailing list is appropriate to
 solicit community feedback on a proposed JMAP capability. Registrations that
@@ -3238,17 +2719,13 @@ abandon the registration completely at any time.<a href="#section-9.4.1-2" class
 </div>
 <div id="submit-request-to-iana">
 <section id="section-9.4.2">
-          <h4 id="name-submit-request-to-iana">
-<a href="#section-9.4.2" class="section-number selfRef">9.4.2. </a><a href="#name-submit-request-to-iana" class="section-name selfRef">Submit Request to IANA</a>
-          </h4>
+          <h4 id="name-submit-request-to-iana"><a href="#section-9.4.2">9.4.2.&nbsp;&nbsp;Submit Request to IANA</a></h4>
 <p id="section-9.4.2-1">Registration requests can be sent to &lt;iana@iana.org&gt;.<a href="#section-9.4.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="designated-expert-review">
 <section id="section-9.4.3">
-          <h4 id="name-designated-expert-review">
-<a href="#section-9.4.3" class="section-number selfRef">9.4.3. </a><a href="#name-designated-expert-review" class="section-name selfRef">Designated Expert Review</a>
-          </h4>
+          <h4 id="name-designated-expert-review"><a href="#section-9.4.3">9.4.3.&nbsp;&nbsp;Designated Expert Review</a></h4>
 <p id="section-9.4.3-1">For a limited-use registration, the primary concern of the designated
 expert (DE) is preventing name collisions and encouraging the submitter to
 document security and privacy considerations; a published specification is not
@@ -3268,9 +2745,7 @@ IESG take action to process the request in a timely manner.<a href="#section-9.4
 </div>
 <div id="change-procedures">
 <section id="section-9.4.4">
-          <h4 id="name-change-procedures">
-<a href="#section-9.4.4" class="section-number selfRef">9.4.4. </a><a href="#name-change-procedures" class="section-name selfRef">Change Procedures</a>
-          </h4>
+          <h4 id="name-change-procedures"><a href="#section-9.4.4">9.4.4.&nbsp;&nbsp;Change Procedures</a></h4>
 <p id="section-9.4.4-1">Once a JMAP capability has been published by the IANA, the change
 controller may request a change to its definition. The same procedure that
 would be appropriate for the original registration request is used to process
@@ -3294,9 +2769,7 @@ unable to make changes that are important to the community.<a href="#section-9.4
 </div>
 <div id="jmap-capabilities-registry-template">
 <section id="section-9.4.5">
-          <h4 id="name-jmap-capabilities-registry-">
-<a href="#section-9.4.5" class="section-number selfRef">9.4.5. </a><a href="#name-jmap-capabilities-registry-" class="section-name selfRef">JMAP Capabilities Registry Template</a>
-          </h4>
+          <h4 id="name-jmap-capabilities-registry-"><a href="#section-9.4.5">9.4.5.&nbsp;&nbsp;JMAP Capabilities Registry Template</a></h4>
 <p id="section-9.4.5-1">Capability name: (see capability property in <a href="#the-jmap-session-resource" class="auto internal xref">Section 2</a>)<a href="#section-9.4.5-1" class="pilcrow">¶</a></p>
 <p id="section-9.4.5-2">Specification document:<a href="#section-9.4.5-2" class="pilcrow">¶</a></p>
 <p id="section-9.4.5-3">Intended use: (one of common, limited, placeholder, or obsolete)<a href="#section-9.4.5-3" class="pilcrow">¶</a></p>
@@ -3306,9 +2779,7 @@ unable to make changes that are important to the community.<a href="#section-9.4
 </div>
 <div id="initial-registration-for-jmap-core">
 <section id="section-9.4.6">
-          <h4 id="name-initial-registration-for-jm">
-<a href="#section-9.4.6" class="section-number selfRef">9.4.6. </a><a href="#name-initial-registration-for-jm" class="section-name selfRef">Initial Registration for JMAP Core</a>
-          </h4>
+          <h4 id="name-initial-registration-for-jm"><a href="#section-9.4.6">9.4.6.&nbsp;&nbsp;Initial Registration for JMAP Core</a></h4>
 <p id="section-9.4.6-1">Capability Name: <code>urn:ietf:params:jmap:core</code><a href="#section-9.4.6-1" class="pilcrow">¶</a></p>
 <p id="section-9.4.6-2">Specification document: RFC 8620, <a href="#the-jmap-session-resource" class="auto internal xref">Section 2</a><a href="#section-9.4.6-2" class="pilcrow">¶</a></p>
 <p id="section-9.4.6-3">Intended use: common<a href="#section-9.4.6-3" class="pilcrow">¶</a></p>
@@ -3318,9 +2789,7 @@ unable to make changes that are important to the community.<a href="#section-9.4
 </div>
 <div id="registration-for-jmap-error-placeholder-in-jmap-capabilities-registry">
 <section id="section-9.4.7">
-          <h4 id="name-registration-for-jmap-error">
-<a href="#section-9.4.7" class="section-number selfRef">9.4.7. </a><a href="#name-registration-for-jmap-error" class="section-name selfRef">Registration for JMAP Error Placeholder in JMAP Capabilities Registry</a>
-          </h4>
+          <h4 id="name-registration-for-jmap-error"><a href="#section-9.4.7">9.4.7.&nbsp;&nbsp;Registration for JMAP Error Placeholder in JMAP Capabilities Registry</a></h4>
 <p id="section-9.4.7-1">Capability Name: <code>urn:ietf:params:jmap:error:</code><a href="#section-9.4.7-1" class="pilcrow">¶</a></p>
 <p id="section-9.4.7-2">Specification document: RFC 8620, <a href="#creation-of-jmap-error-codes-registry" class="auto internal xref">Section 9.5</a><a href="#section-9.4.7-2" class="pilcrow">¶</a></p>
 <p id="section-9.4.7-3">Intended use: placeholder<a href="#section-9.4.7-3" class="pilcrow">¶</a></p>
@@ -3332,9 +2801,7 @@ unable to make changes that are important to the community.<a href="#section-9.4
 </div>
 <div id="creation-of-jmap-error-codes-registry">
 <section id="section-9.5">
-        <h3 id="name-creation-of-jmap-error-code">
-<a href="#section-9.5" class="section-number selfRef">9.5. </a><a href="#name-creation-of-jmap-error-code" class="section-name selfRef">Creation of "JMAP Error Codes" Registry</a>
-        </h3>
+        <h3 id="name-creation-of-jmap-error-code"><a href="#section-9.5">9.5.&nbsp;&nbsp;Creation of "JMAP Error Codes" Registry</a></h3>
 <p id="section-9.5-1">IANA has created the "JMAP Error Codes" registry. JMAP error codes appear
 in the "type" member of a JSON problem details object (as described
 in <a href="#requestlevel-errors" class="auto internal xref">Section 3.6.1</a>), the "type" member in a
@@ -3349,9 +2816,7 @@ registry, but it is optional. The change procedures for this registry are the sa
 as the change procedures for the "JMAP Capabilities" registry.<a href="#section-9.5-2" class="pilcrow">¶</a></p>
 <div id="designated-expert-review-1">
 <section id="section-9.5.1">
-          <h4 id="name-expert-review">
-<a href="#section-9.5.1" class="section-number selfRef">9.5.1. </a><a href="#name-expert-review" class="section-name selfRef">Expert Review</a>
-          </h4>
+          <h4 id="name-expert-review"><a href="#section-9.5.1">9.5.1.&nbsp;&nbsp;Expert Review</a></h4>
 <p id="section-9.5.1-1">The designated expert should review the following aspects of the registration:<a href="#section-9.5.1-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="section-9.5.1-2">
 <li id="section-9.5.1-2.1">
@@ -3385,9 +2850,7 @@ JMAP interoperability to make this a relatively lightweight process.<a href="#se
 </div>
 <div id="jmap-error-codes-registry-template">
 <section id="section-9.5.2">
-          <h4 id="name-jmap-error-codes-registry-t">
-<a href="#section-9.5.2" class="section-number selfRef">9.5.2. </a><a href="#name-jmap-error-codes-registry-t" class="section-name selfRef">JMAP Error Codes Registry Template</a>
-          </h4>
+          <h4 id="name-jmap-error-codes-registry-t"><a href="#section-9.5.2">9.5.2.&nbsp;&nbsp;JMAP Error Codes Registry Template</a></h4>
 <p id="section-9.5.2-1">JMAP Error Code:<a href="#section-9.5.2-1" class="pilcrow">¶</a></p>
 <p id="section-9.5.2-2">Intended use: (one of <code>common</code>, <code>limited</code>, <code>obsolete</code>)<a href="#section-9.5.2-2" class="pilcrow">¶</a></p>
 <p id="section-9.5.2-3">Change Controller: (<code>IETF</code> for Standards Track / BCP RFCs)<a href="#section-9.5.2-3" class="pilcrow">¶</a></p>
@@ -3397,9 +2860,7 @@ JMAP interoperability to make this a relatively lightweight process.<a href="#se
 </div>
 <div id="initial-jmap-error-codes-registry">
 <section id="section-9.5.3">
-          <h4 id="name-initial-contents-for-the-jm">
-<a href="#section-9.5.3" class="section-number selfRef">9.5.3. </a><a href="#name-initial-contents-for-the-jm" class="section-name selfRef">Initial Contents for the JMAP Error Codes Registry</a>
-          </h4>
+          <h4 id="name-initial-contents-for-the-jm"><a href="#section-9.5.3">9.5.3.&nbsp;&nbsp;Initial Contents for the JMAP Error Codes Registry</a></h4>
 <ul class="normal">
 <li class="normal" id="section-9.5.3-1.1">
               <p id="section-9.5.3-1.1.1">JMAP Error Code: accountNotFound<a href="#section-9.5.3-1.1.1" class="pilcrow">¶</a></p>
@@ -3810,13 +3271,9 @@ Description: The client requested an object be both updated and destroyed in the
 </section>
 </div>
 <section id="section-10">
-      <h2 id="name-references">
-<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-references" class="section-name selfRef">References</a>
-      </h2>
+      <h2 id="name-references"><a href="#section-10">10.&nbsp;&nbsp;References</a></h2>
 <section id="section-10.1">
-        <h3 id="name-normative-references">
-<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
-        </h3>
+        <h3 id="name-normative-references"><a href="#section-10.1">10.1.&nbsp;&nbsp;Normative References</a></h3>
 <dl class="references">
 <dt id="EventSource">[EventSource]</dt>
         <dd>
@@ -3957,9 +3414,7 @@ Description: The client requested an object be both updated and destroyed in the
 </dl>
 </section>
 <section id="section-10.2">
-        <h3 id="name-informative-references">
-<a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
-        </h3>
+        <h3 id="name-informative-references"><a href="#section-10.2">10.2.&nbsp;&nbsp;Informative References</a></h3>
 <dl class="references">
 <dt id="RFC8246">[RFC8246]</dt>
       <dd>
@@ -3968,44 +3423,42 @@ Description: The client requested an object be both updated and destroyed in the
 </dl>
 </section>
 </section>
-<div id="authors-addresses">
-<section id="appendix-A">
-      <h2 id="name-authors-addresses">
-<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
-      </h2>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Neil Jenkins</span></div>
-<div dir="auto" class="left"><span class="org">Fastmail</span></div>
-<div dir="auto" class="left"><span class="street-address">PO Box 234, Collins St. West</span></div>
-<div dir="auto" class="left">
-<span class="locality">Melbourne</span> <span class="region">VIC</span> <span class="postal-code">8007</span>
-</div>
-<div dir="auto" class="left"><span class="country-name">Australia</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:neilj@fastmailteam.com" class="email">neilj@fastmailteam.com</a>
-</div>
-<div class="url">
-<span>URI:</span>
-<a href="https://www.fastmail.com" class="url">https://www.fastmail.com</a>
-</div>
-</address>
-<address class="vcard">
-        <div dir="auto" class="left"><span class="fn nameRole">Chris Newman</span></div>
-<div dir="auto" class="left"><span class="org">Oracle</span></div>
-<div dir="auto" class="left"><span class="street-address">440 E. Huntington Dr., Suite 400</span></div>
-<div dir="auto" class="left">
-<span class="locality">Arcadia</span>, <span class="region">CA</span> <span class="postal-code">91006</span>
-</div>
-<div dir="auto" class="left"><span class="country-name">United States of America</span></div>
-<div class="email">
-<span>Email:</span>
-<a href="mailto:chris.newman@oracle.com" class="email">chris.newman@oracle.com</a>
-</div>
-</address>
+
+
+
+
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo"><a href="#name-status-of-this-memo">Status of This Memo</a></h2>
+<p id="section-boilerplate.1-1">
+            This is an Internet Standards Track document.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+            This document is a product of the Internet Engineering Task Force
+            (IETF).  It represents the consensus of the IETF community.  It has
+            received public review and has been approved for publication by
+            the Internet Engineering Steering Group (IESG).  Further
+            information on Internet Standards is available in Section 2 of 
+            RFC 7841.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+            Information about the current status of this document, any
+            errata, and how to provide feedback on it may be obtained at
+            <span><a href="https://www.rfc-editor.org/info/rfc8620">https://www.rfc-editor.org/info/rfc8620</a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+</section>
+</div><div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice"><a href="#name-copyright-notice">Copyright Notice</a></h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2019 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-
-
-
-
