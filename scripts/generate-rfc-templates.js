@@ -97,7 +97,7 @@ for (const fileName of DOCUMENTS) {
         tableOfContentsHTML,
         { encoding: 'utf-8' },
     );
-    domBody.remove(domTableOfContents);
+    domBody.remove(document.querySelector('#toc'));
 
     const domH1 = domBody.querySelectorAll('h1');
     const title = [...domH1][0].textContent;
