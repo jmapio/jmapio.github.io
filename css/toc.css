@@ -2,7 +2,7 @@
     .u-article-split {
         display: grid;
         gap: var(--space-2xl);
-        grid-template-columns: auto 1fr;
+        grid-template-columns: 22ch 1fr;
     }
     .u-article-split > * {
         min-width: 0;
@@ -16,18 +16,32 @@
 }
 
 .u-toc {
+    overflow: clip auto;
     position: sticky;
-    top: calc(var(--nav-h) + var(--space-l));
+    top: calc(var(--nav-h) + 24px);
+    max-height: calc(100vh - (var(--nav-h) + var(--space-l)));
+    max-height: calc(100dvh - (var(--nav-h) + var(--space-l)));
+    margin-inline: -16px;
+    padding-inline: 16px;
+    scrollbar-color: var(--theme-border) transparent;
+    scrollbar-width: thin;
+}
+
+.u-toc.scroll-border-top {
+    border-top: 1px solid var(--theme-border);
+}
+.u-toc.scroll-border-bottom {
+    border-bottom: 1px solid var(--theme-border);
 }
 
 @media screen and (width > 768px) {
     .u-toc {
         width: 100%;
-        max-width: 210px;
     }
 }
 
-.u-toc li + li {
+.u-toc li + li,
+.u-toc p + ul {
     margin-block: 2px;
 }
 
@@ -37,7 +51,10 @@
     line-height: var(--leading-short);
     color: var(--theme-muted);
     font-size: var(--text-size-meta);
+    hyphens: auto;
     padding-block: 8px;
+    white-space: break-spaces;
+    word-break: break-word;
 }
 
 /* Using a psuedo element to keep alignment with page margin */
@@ -51,12 +68,50 @@
 }
 
 .u-toc li a:hover::after,
-.u-toc li.highlight > a::after {
+.u-toc .highlight > a::after {
     background: var(--theme-accent-dim);
 }
 
-.u-toc li.highlight > a {
+.u-toc .highlight > a {
     color: var(--theme-fg);
+}
+
+ul.u-toc > li > p > a {
+    font-weight: var(--font-semibold);
+}
+
+.u-toc-wrapper ol {
+    counter-reset: section;
+}
+.u-toc-wrapper ol > li {
+    counter-increment: section;
+}
+.u-toc-wrapper ol > li > p > a::before {
+    content: counter(section) '. ';
+}
+.u-toc-wrapper ol li p a::before {
+    font-variant-numeric: tabular-nums;
+}
+
+.u-toc-wrapper ol > li > ol {
+    counter-reset: subsection;
+}
+.u-toc-wrapper ol > li > ol > li {
+    counter-increment: subsection;
+}
+.u-toc-wrapper ol > li > ol > li > p > a::before {
+    content: counter(section) '.' counter(subsection) ' ';
+}
+
+.u-toc-wrapper ol > li > ol > li > ol {
+    counter-reset: subsubsection;
+}
+.u-toc-wrapper ol > li > ol > li > ol > li {
+    counter-increment: subsubsection;
+}
+.u-toc-wrapper ol > li > ol > li > ol > li > p > a::before {
+    content: counter(section) '.' counter(subsection) '.' counter(subsubsection)
+        ' ';
 }
 
 /* --- FAB --- */

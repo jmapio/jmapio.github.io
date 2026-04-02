@@ -19,6 +19,9 @@
     font-size: var(--text-size-heading-2);
     font-weight: var(--font-bold);
 }
+.u-rfc #section-1 h2 {
+    margin-top: 0;
+}
 .u-rfc h3 {
     margin-top: var(--space-2xl);
     margin-bottom: var(--space-s);
@@ -91,7 +94,7 @@
     text-underline-offset: 4px;
 }
 
-.u-rfc ul > li {
+.u-rfc :is(ul, ol) > li {
     margin-left: 18px;
     list-style: disc;
 }

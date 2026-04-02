@@ -3,12 +3,12 @@ html {
 }
 
 :target {
-    scroll-margin-block: 1ex;
+    scroll-margin-block: calc(var(--nav-h) + 24px);
 }
 
 @media screen and (width > 768px) {
     :target {
-        scroll-margin-block: calc(var(--nav-h) + 1ex);
+        scroll-margin-block: calc(var(--nav-h) + 24px);
     }
 }
 

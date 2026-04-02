@@ -15,7 +15,7 @@ if (toc) {
 
     function setHighlight(id) {
         document
-            .querySelectorAll('.u-toc li')
+            .querySelectorAll('.u-toc .highlight')
             .forEach((li) => li.classList.remove('highlight'));
         document.querySelectorAll('.u-toc').forEach((tocEl) => {
             const a = tocEl.querySelector(`a[href="#${CSS.escape(id)}"]`);
