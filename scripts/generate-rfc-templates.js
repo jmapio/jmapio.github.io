@@ -71,7 +71,7 @@ ${meta.authors.map((author) => `        - ${author}`).join('\n')}
     keywords:
 ${meta.keywords.map((keyword) => `        - ${keyword}`).join('\n')}
 ---
-${rfcHTML}
+${rfcHTML.trim()}
 `;
     await fs.mkdir('generated-rfc', { recursive: true });
     await fs.writeFile(path.join('generated-rfc', `${name}.liquid`), template);
