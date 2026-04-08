@@ -24,8 +24,16 @@ specs:
       items:
           - label: The core JMAP protocol (RFC 8620)
             href: /spec/rfc8620/
+          - label: VAPID for JMAP Push (RFC 9749)
+            href: /spec/rfc9749/
           - label: JMAP Sharing (RFC 9670)
             href: /spec/rfc9670/
+          - label: JMAP via WebSocket (RFC 8887)
+            href: /spec/rfc8887/
+          - label: JMAP Quotas (RFC 9425)
+            href: /spec/rfc9425/
+          - label: JMAP Blob Management (RFC 9404)
+            href: /spec/rfc9404/
     - label: Mail
       description: >-
           This spec is not yet final and may change before publication. If you 
@@ -34,8 +42,12 @@ specs:
       items:
           - label: JMAP Mail (RFC 8621)
             href: /spec/rfc8621/
-          - label: Keywords
-            href: /spec/keywords/
+          - label: JMAP Sieve Scripts Management (RFC 9661)]
+            href: /spec/rfc9661/
+          - label: JMAP MDN Handling (RFC 9007)
+            href: /spec/rfc9007/
+          - label: JMAP S/MIME Signature Verification (RFC 9219)
+            href: /spec/rfc9219/
     - label: Contacts
       items:
           - label: JMAP Contacts (RFC 9610)
@@ -43,16 +55,20 @@ specs:
     - label: Calendars
       items:
           - label: JMAP Calendars (in progress)
-            href: /spec/calendars/
-    - label: OAuth
+            href: /spec/calendars-draft/
+    - label: Data formats
+      description: >-
+          JMAP was designed in conjunction with new JSON-based file formats for 
+          contacts and calendars, which can also be used standalone or in other
+          protocols.
       items:
-          - label: OAuth
-            href: /spec/oauth/
+          - label: JSContact (RFC9553)
+            href: /spec/rfc9553/
+          - label: JSCalendar 2.0 (in progress)
+            href: /spec/jscalendar-draft/
 ---
-<h1>Generated from XML</h1>
-
 {%- for section in page.specs -%}
-    <h3>{{ section.label }}</h3>
+    <h2>{{ section.label }}</h2>
     {%- if section.description -%}
         <p>{{ section.description }}</p>
     {%- endif -%}
@@ -64,53 +80,3 @@ specs:
         {% endfor %}
     </ul>
 {% endfor %}
-
-{% comment %} prettier-ignore-start {% endcomment %}
-{% capture old_content %}
-## Core
-
-These specifications define the core sync protocol and extensions that are
-useful no matter what data type you might be syncing.
-
-- [The core JMAP protocol (RFC 8620)](https://www.rfc-editor.org/rfc/rfc8620.html)
-- [VAPID for JMAP Push (RFC 9749)](https://www.rfc-editor.org/rfc/rfc9749.html)
-- [JMAP Sharing (RFC 9670)](https://www.rfc-editor.org/rfc/rfc9670.html)
-- [JMAP via WebSocket (RFC 8887)](https://www.rfc-editor.org/rfc/rfc8887.html)
-- [JMAP Quotas (RFC 9425)](https://www.rfc-editor.org/rfc/rfc9425.html)
-- [JMAP Blob Management (RFC 9404)](https://www.rfc-editor.org/rfc/rfc9404.html)
-
-## Mail
-
-- [JMAP Mail (RFC 8621)](https://www.rfc-editor.org/rfc/rfc8621.html)
-- [JMAP Sieve Scripts Management (RFC 9661)](https://www.rfc-editor.org/rfc/rfc9661.html)
-- [JMAP MDN Handling (RFC 9007)](https://www.rfc-editor.org/rfc/rfc9007.html)
-- [JMAP S/MIME Signature Verification (RFC 9219)](https://www.rfc-editor.org/rfc/rfc9219.html)
-
-## Contacts
-
-- [JMAP Contacts (RFC 9610)](https://www.rfc-editor.org/rfc/rfc9610.html)
-
-## Calendars
-
-This spec is not yet final and may change before publication. If you find any
-issues, please email [jmap@ietf.org](mailto:jmap@ietf.org) or make a pull
-request on GitHub if you have a proposed fix.
-
-- [JMAP Calendars (in progress)](https://www.ietf.org/archive/id/draft-ietf-jmap-calendars-26.html)
-
-## Data formats
-
-JMAP was designed in conjunction with new JSON-based file formats for contacts
-and calendars, which can also be used standalone or in other protocols.
-
-JMAP Contacts uses
-[JSContact (RFC9553)](https://www.rfc-editor.org/rfc/rfc9553.html) as the data
-format for contacts.
-
-JMAP Calendars uses
-[JSCalendar 2.0 (in progress)](https://www.ietf.org/archive/id/draft-ietf-calext-jscalendarbis-15.html)
-as the data format for events.
-{% endcapture %}
-{% comment %} prettier-ignore-end {% endcomment %}
-
-{{ old_content | markdownify }}
