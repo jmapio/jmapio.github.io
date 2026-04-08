@@ -28,6 +28,8 @@ const DOCUMENTS = [
 
 // ---
 
+const quote = (text, char = "'") => `${char}${text}${char}`;
+
 const makeXMLPath = (name) =>
     path.join('_includes', 'jmap', 'rfc', 'src', name);
 
@@ -67,7 +69,7 @@ const writeTemplate = async (name, rfcHTML, meta, title) => {
 layout: article-rfc
 permalink: /spec/${name}/index.html
 toc: generated-rfc-toc/${name}.html
-title: ${title.trim()}
+title: ${quote(title.trim())}
 description: >-
     ${meta.description.trim().replaceAll('\n', ' ')}
 meta:
