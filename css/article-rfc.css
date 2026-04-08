@@ -23,7 +23,7 @@
     margin-top: 0;
 }
 .u-rfc h3 {
-    margin-top: var(--space-2xl);
+    margin-top: var(--space-xl);
     margin-bottom: var(--space-s);
     line-height: var(--leading-fine);
     font-size: var(--text-size-heading-3);
@@ -56,6 +56,12 @@
 }
 .u-rfc p + blockquote {
     margin-top: var(--space-l);
+}
+.u-rfc ul + ul {
+    margin-top: var(--space-l);
+}
+.u-rfc li > p {
+    margin-top: var(--space-s);
 }
 .u-rfc :not(h1):not(h2):not(h3):not(h4):not(h5):not(h6) > a {
     color: var(--theme-accent);
@@ -244,9 +250,28 @@
 
 .u-rfc dl.references {
     display: grid;
-    gap: 16px 8px;
-    grid-template-columns: 12ch 1fr 0;
     margin-top: var(--space-m);
+    hyphens: auto;
+}
+.u-rfc .references dt {
+    font-weight: var(--font-semibold);
+}
+
+@media (width > 1000px) {
+    .u-rfc dl.references {
+        gap: 24px 16px;
+        grid-template-columns: 12ch 1fr;
+    }
+}
+
+@media (width <= 1000px) {
+    .u-rfc .references dt {
+        margin-top: var(--space-l);
+        font-weight: var(--font-semibold);
+    }
+    .u-rfc .references dd {
+        margin-top: 4px;
+    }
 }
 
 /* --- */
