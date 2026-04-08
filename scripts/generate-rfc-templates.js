@@ -146,6 +146,7 @@ for (const fileName of DOCUMENTS) {
     domBody.querySelector('#internal-metadata').remove();
     domBody.querySelector('#section-abstract').remove();
     domBody.querySelector('#authors-addresses').remove();
+    domBody.querySelectorAll('.break').forEach((domBreak) => domBreak.remove());
 
     // Move these sections to the bottom of the page since they push the main
     // content down.
