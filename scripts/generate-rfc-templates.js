@@ -6,32 +6,16 @@ import path from 'node:path';
 
 // ---
 
-await fs.mkdir('_tmp', { recursive: true });
-await fs.mkdir(path.join('generated-rfc'), { recursive: true });
-await fs.mkdir(path.join('_includes', 'generated-rfc-toc'), {
-    recursive: true,
+const INDIR = path.join('_tmp', 'rfc-xml');
+const DOCUMENTS = await fs.readdir(INDIR, {
+    encoding: 'utf8',
 });
-
-// ---
-
-const DOCUMENTS = [
-    'calendars.xml',
-    'contacts.xml',
-    'keywords.xml',
-    'oauth.xml',
-    'rfc8620.xml',
-    'rfc8621.xml',
-    'rfc9610.xml',
-    'rfc9670.xml',
-    'sharing.xml',
-];
 
 // ---
 
 const quote = (text, char = "'") => `${char}${text}${char}`;
 
-const makeXMLPath = (name) =>
-    path.join('_includes', 'jmap', 'rfc', 'src', name);
+const makeXMLPath = (name) => path.join(INDIR, name);
 
 const getFileNameWithoutExt = (filePath) => path.parse(filePath).name;
 
@@ -101,6 +85,13 @@ const mergeHeadingAnchors = (domParent) => {
     domAnchor.textContent = textContent;
     domParent.append(domAnchor);
 };
+
+// ---
+
+await fs.mkdir('generated-rfc');
+await fs.mkdir(path.join('_includes', 'generated-rfc-toc'), {
+    recursive: true,
+});
 
 // ---
 
