@@ -1,6 +1,5 @@
 import { JSDOM } from 'jsdom';
 
-import assert from 'node:assert';
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -118,6 +117,12 @@ for (const fileName of DOCUMENTS) {
     domTableOfContents
         .querySelectorAll('ul > li > ul > li > ul')
         .forEach((domUl) => domUl.remove());
+
+    const domToCAuthorsAddresses = domTableOfContents.querySelector(
+        'li:has(a[href="#name-authors-addresses"], a[href="#name-authors-address"])',
+    );
+    domToCAuthorsAddresses.remove();
+
     // Each list item in the ToC links seperately to the numbered and text
     // segments of the section heading. Reformat to just link to the numeric
     // part.
@@ -125,16 +130,6 @@ for (const fileName of DOCUMENTS) {
     domBody
         .querySelectorAll(':is(h2, h3, h4, h5)')
         .forEach(mergeHeadingAnchors);
-
-    const domToCAuthorsAddresses = domTableOfContents.querySelector(
-        'a[href="#appendix-A"]',
-    );
-    assert(
-        ["Authors' Addresses", "Author's Address"].includes(
-            domToCAuthorsAddresses.textContent,
-        ),
-    );
-    domToCAuthorsAddresses.remove();
 
     const domTopLevelToCList = domTableOfContents.querySelector('ul');
     domTopLevelToCList.classList.add('u-toc');
