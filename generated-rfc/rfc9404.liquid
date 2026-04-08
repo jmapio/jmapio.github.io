@@ -1,0 +1,1299 @@
+---
+layout: article-rfc
+permalink: /spec/rfc9404/index.html
+toc: generated-rfc-toc/rfc9404.html
+title: 'RFC 9404 – JSON Meta Application Protocol (JMAP) Blob Management Extension'
+description: >-
+    The JSON Meta Application Protocol (JMAP) base protocol (RFC 8620) provides the ability to upload and download arbitrary binary data via HTTP POST and GET on a defined endpoint.  This binary data is called a "blob".         This extension adds additional ways to create and access blobs by making inline method calls within a standard JMAP request.         This extension also adds a reverse lookup mechanism to discover where blobs are referenced within other data types.
+meta:
+    authors:
+        - Bron Gondwana
+    keywords:
+        - jmap
+---
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction"><a href="#section-1">1.&nbsp;&nbsp;Introduction</a></h2>
+<p id="section-1-1">Sometimes JMAP <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> interactions require creating
+a blob and then referencing it.  In the same way that IMAP literals were
+extended by <span>[<a href="#RFC7888" class="cite xref">RFC7888</a>]</span>, embedding small blobs directly
+into the JMAP method calls array can be an option for reducing round trips.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">Likewise, when fetching an object, it can be useful to also fetch the raw
+content of that object without a separate round trip.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">Since raw blobs may contain arbitrary binary data, this document defines
+a use of the base64 coding specified in <span>[<a href="#RFC4648" class="cite xref">RFC4648</a>]</span> for both creating and
+fetching blob data.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">When JMAP is proxied through a system that applies additional
+access restrictions, it can be useful to know which objects reference
+any particular blob; this document defines a way to discover those
+references.<a href="#section-1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="conventions-used-in-this-document">
+<section id="section-2">
+      <h2 id="name-conventions-used-in-this-do"><a href="#section-2">2.&nbsp;&nbsp;Conventions Used in This Document</a></h2>
+<p id="section-2-1">
+    The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>",
+    "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>",
+    "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+    "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are
+    to be interpreted as described in BCP&nbsp;14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span>
+        <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in all capitals,
+    as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">The definitions of JSON keys and datatypes in the document follow the
+conventions described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="addition-to-the-capabilities-object">
+<section id="section-3">
+      <h2 id="name-addition-to-the-capabilitie"><a href="#section-3">3.&nbsp;&nbsp;Addition to the Capabilities Object</a></h2>
+<p id="section-3-1">The capabilities object is returned as part of the JMAP Session
+object; see <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-2" class="relref">Section 2</a></span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">This document defines an additional capability URI.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<div id="urn-ietf-params-jmap-blob">
+<section id="section-3.1">
+        <h3 id="name-urnietfparamsjmapblob"><a href="#section-3.1">3.1.&nbsp;&nbsp;urn:ietf:params:jmap:blob</a></h3>
+<p id="section-3.1-1">The presence of the capability <code>urn:ietf:params:jmap:blob</code> in the
+accountCapabilities property of an account represents support for additional
+API methods on the Blob datatype.  Servers that include the capability in one
+or more accountCapabilities properties <span class="bcp14">MUST</span> also include the
+property in the capabilities property.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">The value of this property in the JMAP Session capabilities
+property <span class="bcp14">MUST</span> be an empty object.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-3">The value of this property in an account's accountCapabilities
+property is an object that <span class="bcp14">MUST</span> contain the following information
+on server capabilities and permissions for that account:<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.1-4.1">
+            <p id="section-3.1-4.1.1">maxSizeBlobSet: "UnsignedInt|null"<a href="#section-3.1-4.1.1" class="pilcrow">¶</a></p>
+<p id="section-3.1-4.1.2">The maximum size of the blob (in octets) that the server will
+  allow to be created (including blobs created by concatenating multiple data
+  sources together).<a href="#section-3.1-4.1.2" class="pilcrow">¶</a></p>
+<p id="section-3.1-4.1.3">Clients <span class="bcp14">MUST NOT</span> attempt to create blobs larger than this
+  size.<a href="#section-3.1-4.1.3" class="pilcrow">¶</a></p>
+<p id="section-3.1-4.1.4">If this value is <code>null</code>, then clients are not required to limit
+  the size of the blob they try to create, though servers can always reject
+  creation of blobs regardless of size, e.g., due to lack of disk space or 
+  per-user rate limits.<a href="#section-3.1-4.1.4" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.1-4.2">
+            <p id="section-3.1-4.2.1">maxDataSources: "UnsignedInt"<a href="#section-3.1-4.2.1" class="pilcrow">¶</a></p>
+<p id="section-3.1-4.2.2">The maximum number of DataSourceObjects allowed per creation in a
+  Blob/upload.<a href="#section-3.1-4.2.2" class="pilcrow">¶</a></p>
+<p id="section-3.1-4.2.3">Servers <span class="bcp14">MUST</span> allow at least 64 DataSourceObjects per
+  creation.<a href="#section-3.1-4.2.3" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.1-4.3">
+            <p id="section-3.1-4.3.1">supportedTypeNames: "String[]"<a href="#section-3.1-4.3.1" class="pilcrow">¶</a></p>
+<p id="section-3.1-4.3.2">An array of data type names that are supported for <code>Blob/lookup</code>.
+  If the server does not support lookups, then this will be the empty list.<a href="#section-3.1-4.3.2" class="pilcrow">¶</a></p>
+<p id="section-3.1-4.3.3">Note that the supportedTypeNames list may include private types that are not
+  in the "JMAP Data Types" registry defined by this document.  Clients
+  <span class="bcp14">MUST</span> ignore type names they do not recognise.<a href="#section-3.1-4.3.3" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.1-4.4">
+            <p id="section-3.1-4.4.1">supportedDigestAlgorithms: "String[]"<a href="#section-3.1-4.4.1" class="pilcrow">¶</a></p>
+<p id="section-3.1-4.4.2">An array of supported digest algorithms that are supported for
+  <code>Blob/get</code>.  If the server does not support calculating blob digests,
+  then this will be the empty list.  Algorithms in this list
+  <span class="bcp14">MUST</span> be present in the "HTTP Digest Algorithm Values"
+  registry defined by <span>[<a href="#RFC3230" class="cite xref">RFC3230</a>]</span>; however, in JMAP, they
+  must be lowercased, e.g., "md5" rather than "MD5".<a href="#section-3.1-4.4.2" class="pilcrow">¶</a></p>
+<p id="section-3.1-4.4.3">Clients <span class="bcp14">SHOULD</span> prefer algorithms listed earlier in this
+  list.<a href="#section-3.1-4.4.3" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<div id="capability-example">
+<section id="section-3.1.1">
+          <h4 id="name-capability-example"><a href="#section-3.1.1">3.1.1.&nbsp;&nbsp;Capability Example</a></h4>
+<div class="lang-json sourcecode" id="section-3.1.1-1">
+<pre>{
+  "capabilities": {
+    ...,
+    "urn:ietf:params:jmap:blob": {}
+  },
+  "accounts": {
+    "A13842": {
+      ...
+      "accountCapabilities": {
+        "urn:ietf:params:jmap:blob": {
+          "maxSizeBlobSet": 50000000,
+          "maxDataSources": 100,
+          "supportedTypeNames" : [
+            "Mailbox",
+            "Thread",
+            "Email"
+          ],
+          "supportedDigestAlgorithms" : [
+            "sha",
+            "sha-256"
+          ]
+        }
+      }
+    }
+  }
+}</pre><a href="#section-3.1.1-1" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="blob-methods">
+<section id="section-4">
+      <h2 id="name-blob-methods"><a href="#section-4">4.&nbsp;&nbsp;Blob Methods</a></h2>
+<p id="section-4-1">A blob is a sequence of zero or more octets.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">JMAP <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> defines the
+<code>Blob/copy</code> method, which is unchanged by this specification and is
+selected by the <code>urn:ietf:params:jmap:core</code> capability.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-4-3">The following JMAP methods are selected by the
+<code>urn:ietf:params:jmap:blob</code> capability.<a href="#section-4-3" class="pilcrow">¶</a></p>
+<div id="blob-upload">
+<section id="section-4.1">
+        <h3 id="name-blob-upload"><a href="#section-4.1">4.1.&nbsp;&nbsp;Blob/upload</a></h3>
+<p id="section-4.1-1">This is similar to a Foo/set in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> in some
+ways. However, blobs cannot be updated or deleted, so only <code>create</code> is
+allowed in the method call. Also, blobs do not have state, so there is no
+<code>state</code> field present in the method response.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2"><strong>Parameters</strong><a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.1-3.1">
+            <p id="section-4.1-3.1.1">accountId: "Id"<a href="#section-4.1-3.1.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-3.1.2">The id of the account in which the blobs will be created.<a href="#section-4.1-3.1.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-3.2">
+            <p id="section-4.1-3.2.1">create: "Id[UploadObject]"<a href="#section-4.1-3.2.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-3.2.2">A map of creation id to UploadObjects.<a href="#section-4.1-3.2.2" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.1-4"><strong>Result</strong><a href="#section-4.1-4" class="pilcrow">¶</a></p>
+<p id="section-4.1-5">The result is the same as for Foo/set in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, with <code>created</code> and <code>notCreated</code> objects
+mapping from the creation id.<a href="#section-4.1-5" class="pilcrow">¶</a></p>
+<p id="section-4.1-6">The <code>created</code> objects contain:<a href="#section-4.1-6" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.1-7.1">
+            <p id="section-4.1-7.1.1">id: "Id"<a href="#section-4.1-7.1.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-7.1.2">The blobId that was created.<a href="#section-4.1-7.1.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-7.2">
+            <p id="section-4.1-7.2.1">type: "String|null"<a href="#section-4.1-7.2.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-7.2.2">The media type as given in the creation (if any). If not provided, the
+  server <span class="bcp14">MAY</span> perform content analysis and return one of the
+  following: the calculated value, "application/octet-string", or
+  null.<a href="#section-4.1-7.2.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-7.3">
+            <p id="section-4.1-7.3.1">size: "UnsignedInt"<a href="#section-4.1-7.3.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-7.3.2">As per <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, the size of the
+  created blob in octets.<a href="#section-4.1-7.3.2" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.1-8">The created objects will also contain any other properties identical to
+   those that would be returned in the JSON response of the upload endpoint
+   described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.  This may be
+   extended in the future; in this document, it is anticipated that
+   implementations will extend both the upload endpoint and the Blob/upload
+   responses in the same way.<a href="#section-4.1-8" class="pilcrow">¶</a></p>
+<p id="section-4.1-9">If there is a problem with a creation, then the server will return a
+<code>notCreated</code> response with a map from the failed creation id to a
+<code>SetError</code> object.<a href="#section-4.1-9" class="pilcrow">¶</a></p>
+<p id="section-4.1-10">For each successful upload, servers <span class="bcp14">MUST</span> add an entry to the
+<code>createdIds</code> map (<span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-3.3" class="relref">Section 3.3</a></span>) for the request; even if the caller did not explicitly pass a
+createdIds, the value must be available to later methods defined in the same
+Request Object. This allows the blobId to be used via back-reference in
+subsequent method calls.<a href="#section-4.1-10" class="pilcrow">¶</a></p>
+<p id="section-4.1-11">The created blob will have the same lifetime and same expiry semantics as
+any other binary object created via the mechanism specified in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-6" class="relref">Section 6</a></span>.<a href="#section-4.1-11" class="pilcrow">¶</a></p>
+<p id="section-4.1-12">Uploads using this mechanism will be restricted by the maxUploadSize limit
+for JMAP requests specified by the server, and clients <span class="bcp14">SHOULD</span>
+consider using the upload mechanism defined by <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> for blobs larger than a megabyte.<a href="#section-4.1-12" class="pilcrow">¶</a></p>
+<p id="section-4.1-13"><strong>UploadObject</strong><a href="#section-4.1-13" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.1-14.1">
+            <p id="section-4.1-14.1.1">data: "DataSourceObject[]"<a href="#section-4.1-14.1.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-14.1.2">An array of zero or more octet sources in order (zero to create an empty
+  blob).  The result of each of these sources is concatenated in
+  order to create the blob.<a href="#section-4.1-14.1.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-14.2">
+            <p id="section-4.1-14.2.1">type: "String|null" (default: null)<a href="#section-4.1-14.2.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-14.2.2">A hint for media type of the data.<a href="#section-4.1-14.2.2" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.1-15"><strong>DataSourceObject</strong><a href="#section-4.1-15" class="pilcrow">¶</a></p>
+<p id="section-4.1-16">Exactly one of:<a href="#section-4.1-16" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.1-17.1">
+            <p id="section-4.1-17.1.1">data:asText: "String|null" (raw octets, must be UTF-8)<a href="#section-4.1-17.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-17.2">
+            <p id="section-4.1-17.2.1">data:asBase64: "String|null" (base64 representation of octets)<a href="#section-4.1-17.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.1-18">or a blobId source:<a href="#section-4.1-18" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.1-19.1">
+            <p id="section-4.1-19.1.1">blobId: "Id"<a href="#section-4.1-19.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-19.2">
+            <p id="section-4.1-19.2.1">offset: "UnsignedInt|null" (<span class="bcp14">MAY</span> be zero)<a href="#section-4.1-19.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-19.3">
+            <p id="section-4.1-19.3.1">length: "UnsignedInt|null" (<span class="bcp14">MAY</span> be zero)<a href="#section-4.1-19.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.1-20">If <code>null</code>, then offset is assumed to be zero.<a href="#section-4.1-20" class="pilcrow">¶</a></p>
+<p id="section-4.1-21">If <code>null</code>, then length is the remaining octets in the blob.<a href="#section-4.1-21" class="pilcrow">¶</a></p>
+<p id="section-4.1-22">If the range cannot be fully satisfied (i.e., it begins or extends past
+the end of the data in the blob), then the DataSourceObject is invalid
+and results in a notCreated response for this creation id.<a href="#section-4.1-22" class="pilcrow">¶</a></p>
+<p id="section-4.1-23">If the data properties have any invalid references or invalid data
+contained in them, the server <span class="bcp14">MUST NOT</span> guess the user's intent
+and <span class="bcp14">MUST</span> reject the creation and return a notCreated response for that
+creation id.<a href="#section-4.1-23" class="pilcrow">¶</a></p>
+<p id="section-4.1-24">Likewise, invalid characters in the base64 of data:asBase64 or invalid
+UTF-8 in data:asText <span class="bcp14">MUST</span> result in a notCreated response.<a href="#section-4.1-24" class="pilcrow">¶</a></p>
+<p id="section-4.1-25">It is envisaged that the definition for DataSourceObject might be
+extended in the future, for example, to fetch external content.<a href="#section-4.1-25" class="pilcrow">¶</a></p>
+<p id="section-4.1-26">A server <span class="bcp14">MUST</span> accept at least 64 DataSourceObjects per create, as
+described in <a href="#urn-ietf-params-jmap-blob" class="auto internal xref">Section 3.1</a> of this document.<a href="#section-4.1-26" class="pilcrow">¶</a></p>
+<div id="blob-upload-simple-example">
+<section id="section-4.1.1">
+          <h4 id="name-blob-upload-simple-example"><a href="#section-4.1.1">4.1.1.&nbsp;&nbsp;Blob/upload Simple Example</a></h4>
+<p id="section-4.1.1-1">The data:asBase64 field is set over multiple lines for ease of publication
+here; however, the entire data:asBase64 field would be sent as a continuous
+string with no wrapping on the wire.<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-2">Method Call:<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-4.1.1-3">
+<pre>[
+ "Blob/upload",
+ {
+  "accountId": "account1",
+  "create": {
+   "1": {
+    "data" : [
+    {
+     "data:asBase64": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKA
+                       AAAA1BMVEX/AAAZ4gk3AAAAAXRSTlN/gFy0ywAAAApJRE
+                       FUeJxjYgAAAAYAAzY3fKgAAAAASUVORK5CYII="
+    }
+   ],
+   "type": "image/png"
+   }
+  }
+ },
+ "R1"
+]</pre><a href="#section-4.1.1-3" class="pilcrow">¶</a>
+</div>
+<p id="section-4.1.1-4">Response:<a href="#section-4.1.1-4" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-4.1.1-5">
+<pre>[
+  "Blob/upload",
+  {
+    "accountId" : "account1",
+    "created" : {
+      "1": {
+        "id" : "G4c6751edf9dd6903ff54b792e432fba781271beb",
+        "type" : "image/png",
+        "size" : 95
+      }
+    }
+  },
+  "R1"
+]</pre><a href="#section-4.1.1-5" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="blob-upload-complex-example">
+<section id="section-4.1.2">
+          <h4 id="name-blob-upload-complex-example"><a href="#section-4.1.2">4.1.2.&nbsp;&nbsp;Blob/upload Complex Example</a></h4>
+<p id="section-4.1.2-1">Method Calls:<a href="#section-4.1.2-1" class="pilcrow">¶</a></p>
+<div class="breakable lang-json sourcecode" id="section-4.1.2-2">
+<pre>[
+ [
+  "Blob/upload",
+  {
+   "create": {
+    "b4": {
+     "data": [
+      {
+       "data:asText": "The quick brown fox jumped over the lazy dog."
+      }
+    ]
+   }
+  }
+ },
+ "S4"
+],
+[
+  "Blob/upload",
+  {
+   "create": {
+     "cat": {
+       "data": [
+         {
+           "data:asText": "How"
+         },
+         {
+           "blobId": "#b4",
+           "length": 7,
+           "offset": 3
+         },
+         {
+           "data:asText": "was t"
+         },
+         {
+           "blobId": "#b4",
+           "length": 1,
+           "offset": 1
+         },
+         {
+           "data:asBase64": "YXQ/"
+         }
+       ]
+     }
+   }
+  },
+  "CAT"
+],
+[
+  "Blob/get",
+  {
+   "properties": [
+     "data:asText",
+     "size"
+   ],
+   "ids": [
+     "#cat"
+   ]
+  },
+  "G4"
+ ]
+]</pre><a href="#section-4.1.2-2" class="pilcrow">¶</a>
+</div>
+<p id="section-4.1.2-3">Responses:<a href="#section-4.1.2-3" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-4.1.2-4">
+<pre>[
+  [
+    "Blob/upload",
+    {
+      "oldState": null,
+      "created": {
+        "b4": {
+          "id": "Gc0854fb9fb03c41cce3802cb0d220529e6eef94e",
+          "size": 45,
+          "type": "application/octet-stream"
+        }
+      },
+      "notCreated": null,
+      "accountId": "account1"
+    },
+    "S4"
+  ],
+  [
+    "Blob/upload",
+    {
+      "oldState": null,
+      "created": {
+        "cat": {
+          "id": "Gcc60576f036321ae6e8037ffc56bdee589bd3e23",
+          "size": 19,
+          "type": "application/octet-stream"
+        }
+      },
+      "notCreated": null,
+      "accountId": "account1"
+    },
+    "CAT"
+  ],
+  [
+    "Blob/get",
+    {
+      "list": [
+        {
+          "id": "Gcc60576f036321ae6e8037ffc56bdee589bd3e23",
+          "data:asText": "How quick was that?",
+          "size": 19
+        }
+      ],
+      "notFound": [],
+      "accountId": "account1"
+    },
+    "G4"
+  ]
+]</pre><a href="#section-4.1.2-4" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="blob-get">
+<section id="section-4.2">
+        <h3 id="name-blob-get"><a href="#section-4.2">4.2.&nbsp;&nbsp;Blob/get</a></h3>
+<p id="section-4.2-1">A standard JMAP get, with two additional optional parameters:<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.2-2.1">
+            <p id="section-4.2-2.1.1">offset: "UnsignedInt|null"<a href="#section-4.2-2.1.1" class="pilcrow">¶</a></p>
+<p id="section-4.2-2.1.2">Start this many octets into the blob data.  If null or unspecified, this
+  defaults to zero.<a href="#section-4.2-2.1.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.2-2.2">
+            <p id="section-4.2-2.2.1">length: "UnsignedInt|null"<a href="#section-4.2-2.2.1" class="pilcrow">¶</a></p>
+<p id="section-4.2-2.2.2">Return at most this many octets of the blob data.  If null or
+  unspecified, then all remaining octets in the blob are returned.  This can
+  be considered equivalent to an infinitely large length value, except that
+  the isTruncated warning is not given unless the start offset is past the end
+  of the blob.<a href="#section-4.2-2.2.2" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.2-3"><strong>Request Properties:</strong><a href="#section-4.2-3" class="pilcrow">¶</a></p>
+<p id="section-4.2-4">Any of:<a href="#section-4.2-4" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.2-5.1">data:asText<a href="#section-4.2-5.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-4.2-5.2">data:asBase64<a href="#section-4.2-5.2" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-4.2-5.3">data (returns data:asText if the selected octets are valid UTF-8 or data:asBase64)<a href="#section-4.2-5.3" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-4.2-5.4">digest:&lt;algorithm&gt; (where &lt;algorithm&gt; is one of the named algorithms in the <code>supportedDigestAlgorithms</code> capability)<a href="#section-4.2-5.4" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-4.2-5.5">size<a href="#section-4.2-5.5" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-4.2-6">If not given, the properties default to <code>data</code> and <code>size</code>.<a href="#section-4.2-6" class="pilcrow">¶</a></p>
+<p id="section-4.2-7"><strong>Result Properties:</strong><a href="#section-4.2-7" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.2-8.1">
+            <p id="section-4.2-8.1.1">data:asText: "String|null"<a href="#section-4.2-8.1.1" class="pilcrow">¶</a></p>
+<p id="section-4.2-8.1.2">The raw octets of the selected range if they are valid UTF-8; otherwise,
+  null.<a href="#section-4.2-8.1.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.2-8.2">
+            <p id="section-4.2-8.2.1">data:asBase64: "String"<a href="#section-4.2-8.2.1" class="pilcrow">¶</a></p>
+<p id="section-4.2-8.2.2">The base64 encoding of the octets in the selected range.<a href="#section-4.2-8.2.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.2-8.3">
+            <p id="section-4.2-8.3.1">digest:&lt;algorithm&gt;: "String"<a href="#section-4.2-8.3.1" class="pilcrow">¶</a></p>
+<p id="section-4.2-8.3.2">The base64 encoding of the digest of the octets in the selected range,
+  calculated using the named algorithm.<a href="#section-4.2-8.3.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.2-8.4">
+            <p id="section-4.2-8.4.1">isEncodingProblem: "Boolean" (default: false)<a href="#section-4.2-8.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.2-8.5">
+            <p id="section-4.2-8.5.1">isTruncated: "Boolean" (default: false)<a href="#section-4.2-8.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.2-8.6">
+            <p id="section-4.2-8.6.1">size: "UnsignedInt"<a href="#section-4.2-8.6.1" class="pilcrow">¶</a></p>
+<p id="section-4.2-8.6.2">The number of octets in the entire blob.<a href="#section-4.2-8.6.2" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.2-9">The size value <span class="bcp14">MUST</span> always be the number of octets in the underlying blob,
+regardless of offset and length.<a href="#section-4.2-9" class="pilcrow">¶</a></p>
+<p id="section-4.2-10">The data fields contain a representation of the octets within the selected
+range that are present in the blob.  If the octets selected are not valid
+UTF-8 (including truncating in the middle of a multi-octet sequence)
+and <code>data</code> or <code>data:asText</code> was requested, then the key <code>isEncodingProblem</code>
+          <span class="bcp14">MUST</span> be set to <code>true</code>, and the <code>data:asText</code> response value <span class="bcp14">MUST</span> be <code>null</code>.
+In the case where <code>data</code> was requested and the data is not valid UTF-8,
+then <code>data:asBase64</code> <span class="bcp14">MUST</span> be returned.<a href="#section-4.2-10" class="pilcrow">¶</a></p>
+<p id="section-4.2-11">If the selected range requests data outside the blob (i.e., the
+offset+length is larger than the blob), then the result is either just the
+octets from the offset to the end of the blob or an empty string if the
+offset is past the end of the blob.  Either way, the isTruncated
+property in the result <span class="bcp14">MUST</span> be set to <code>true</code> to tell the
+client that the requested range could not be fully satisfied.  If digest was
+requested, any <code>digest</code> is calculated on the octets that would be
+returned for a <code>data</code> field.<a href="#section-4.2-11" class="pilcrow">¶</a></p>
+<p id="section-4.2-12">Servers <span class="bcp14">SHOULD</span> store the size for blobs in a format that is
+efficient to read, and clients <span class="bcp14">SHOULD</span> limit their request to
+just the size parameter if that is all they need, as fetching blob content
+could be significantly more expensive and slower for the server.<a href="#section-4.2-12" class="pilcrow">¶</a></p>
+<div id="blob-get-simple-example">
+<section id="section-4.2.1">
+          <h4 id="name-blob-get-simple-example"><a href="#section-4.2.1">4.2.1.&nbsp;&nbsp;Blob/get Simple Example</a></h4>
+<p id="section-4.2.1-1">In this example, a blob containing the string "The quick brown fox jumped over
+the lazy dog." has blobId <code>Gc0854fb9fb03c41cce3802cb0d220529e6eef94e</code>.<a href="#section-4.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.1-2">The first method call requests just the size for multiple blobs, and
+the second requests both the size and a short range of the data for one
+of the blobs.<a href="#section-4.2.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.2.1-3">Method Calls:<a href="#section-4.2.1-3" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-4.2.1-4">
+<pre>[
+  [
+    "Blob/get",
+    {
+      "accountId" : "account1",
+      "ids" : [
+        "Gc0854fb9fb03c41cce3802cb0d220529e6eef94e",
+        "not-a-blob"
+      ],
+      "properties" : [
+        "data:asText",
+        "digest:sha",
+        "size"
+      ]
+    },
+    "R1"
+  ],
+  [
+    "Blob/get",
+    {
+      "accountId" : "account1",
+      "ids" : [
+        "Gc0854fb9fb03c41cce3802cb0d220529e6eef94e"
+      ],
+      "properties" : [
+        "data:asText",
+        "digest:sha",
+        "digest:sha-256",
+        "size"
+      ],
+      "offset" : 4,
+      "length" : 9
+    },
+    "R2"
+  ]
+]</pre><a href="#section-4.2.1-4" class="pilcrow">¶</a>
+</div>
+<p id="section-4.2.1-5">Responses:<a href="#section-4.2.1-5" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-4.2.1-6">
+<pre>[
+ [
+  "Blob/get",
+  {
+   "accountId": "account1",
+   "list": [
+    {
+     "id": "Gc0854fb9fb03c41cce3802cb0d220529e6eef94e",
+     "data:asText": "The quick brown fox jumped over the lazy dog.",
+     "digest:sha": "wIVPufsDxBzOOALLDSIFKebu+U4=",
+     "size": 45
+    }
+  ],
+  "notFound": [
+   "not-a-blob"
+  ]
+ },
+ "R1"
+],
+[
+ "Blob/get",
+ {
+  "accountId": "account1",
+  "list": [
+   {
+    "id": "Gc0854fb9fb03c41cce3802cb0d220529e6eef94e",
+    "data:asText": "quick bro",
+    "digest:sha": "QiRAPtfyX8K6tm1iOAtZ87Xj3Ww=",
+    "digest:sha-256": "gdg9INW7lwHK6OQ9u0dwDz2ZY/gubi0En0xlFpKt0OA=",
+    "size": 45
+    }
+   ]
+  },
+  "R2"
+ ]
+]</pre><a href="#section-4.2.1-6" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="blob-get-example-with-range-and-encoding-errors">
+<section id="section-4.2.2">
+          <h4 id="name-blob-get-example-with-range"><a href="#section-4.2.2">4.2.2.&nbsp;&nbsp;Blob/get Example with Range and Encoding Errors</a></h4>
+<p id="section-4.2.2-1">The <code>b1</code> value is the text "The quick brown fox jumped over the \x81\x81 dog.", which contains an invalid UTF-8 sequence.<a href="#section-4.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2.2-2">The results have the following properties:<a href="#section-4.2.2-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.2.2-3.1">
+              <p id="section-4.2.2-3.1.1">G1: Defaults to <code>data</code> and <code>size</code>, so b1 returns
+<code>isEncodingProblem</code> and a base64 value.<a href="#section-4.2.2-3.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-4.2.2-3.2">
+              <p id="section-4.2.2-3.2.1">G2: Since <code>data:asText</code> was explicitly selected, does not
+attempt to return a value for the data, just <code>isEncodingProblem</code> for
+b1.<a href="#section-4.2.2-3.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-4.2.2-3.3">
+              <p id="section-4.2.2-3.3.1">G3: Since only <code>data:asBase64</code> was requested, there is no
+encoding problem, and both values are returned.<a href="#section-4.2.2-3.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-4.2.2-3.4">
+              <p id="section-4.2.2-3.4.1">G4: Since the requested range could be satisfied as text, both blobs
+are returned as <code>data:asText</code>, and there is no encoding problem.<a href="#section-4.2.2-3.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-4.2.2-3.5">
+              <p id="section-4.2.2-3.5.1">G5: Both blobs cannot satisfy the requested range, so isTruncated is
+true for both.<a href="#section-4.2.2-3.5.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<aside id="section-4.2.2-4">
+            <p id="section-4.2.2-4.1">Note: Some values have been wrapped for line length. There would be
+no wrapping in the <code>data:asBase64</code> values on the wire.<a href="#section-4.2.2-4.1" class="pilcrow">¶</a></p>
+</aside>
+<p id="section-4.2.2-5">Method Calls:<a href="#section-4.2.2-5" class="pilcrow">¶</a></p>
+<div class="breakable lang-json sourcecode" id="section-4.2.2-6">
+<pre>[
+  [
+    "Blob/upload",
+    {
+      "create": {
+        "b1": {
+          "data": [
+            {
+              "data:asBase64": "VGhlIHF1aWNrIGJyb3duIGZveCBqdW1wZW
+                                Qgb3ZlciB0aGUggYEgZG9nLg=="
+            }
+          ]
+        },
+        "b2": {
+          "data": [
+            {
+              "data:asText": "hello world"
+            }
+          ],
+          "type" : "text/plain"
+        }
+      }
+    },
+    "S1"
+  ],
+  [
+    "Blob/get",
+    {
+      "ids": [
+        "#b1",
+        "#b2"
+      ]
+    },
+    "G1"
+  ],
+  [
+    "Blob/get",
+    {
+      "ids": [
+        "#b1",
+        "#b2"
+      ],
+      "properties": [
+        "data:asText",
+        "size"
+      ]
+    },
+    "G2"
+  ],
+  [
+    "Blob/get",
+    {
+      "ids": [
+        "#b1",
+        "#b2"
+      ],
+      "properties": [
+        "data:asBase64",
+        "size"
+      ]
+    },
+    "G3"
+  ],
+  [
+    "Blob/get",
+    {
+      "offset": 0,
+      "length": 5,
+      "ids": [
+        "#b1",
+        "#b2"
+      ]
+    },
+    "G4"
+  ],
+  [
+    "Blob/get",
+    {
+      "offset": 20,
+      "length": 100,
+      "ids": [
+        "#b1",
+        "#b2"
+      ]
+    },
+    "G5"
+  ]
+]</pre><a href="#section-4.2.2-6" class="pilcrow">¶</a>
+</div>
+<p id="section-4.2.2-7">Responses:<a href="#section-4.2.2-7" class="pilcrow">¶</a></p>
+<div class="breakable lang-json sourcecode" id="section-4.2.2-8">
+<pre>[
+  [
+    "Blob/upload",
+    {
+      "oldState": null,
+      "created": {
+        "b2": {
+          "id": "G2aae6c35c94fcfb415dbe95f408b9ce91ee846ed",
+          "size": 11,
+          "type": "application/octet-stream"
+        },
+        "b1": {
+          "id": "G72cfa4804194563685d9a4b695f7ba20e7739576",
+          "size": 43,
+          "type": "text/plain"
+        }
+      },
+      "updated": null,
+      "destroyed": null,
+      "notCreated": null,
+      "notUpdated": null,
+      "notDestroyed": null,
+      "accountId": "account1"
+    },
+    "S1"
+  ],
+  [
+    "Blob/get",
+    {
+      "list": [
+        {
+          "id": "G72cfa4804194563685d9a4b695f7ba20e7739576",
+          "isEncodingProblem": true,
+          "data:asBase64": "VGhlIHF1aWNrIGJyb3duIGZveCBqdW1wZW
+                            Qgb3ZlciB0aGUggYEgZG9nLg==",
+          "size": 43
+        },
+        {
+          "id": "G2aae6c35c94fcfb415dbe95f408b9ce91ee846ed",
+          "data:asText": "hello world",
+          "size": 11
+        }
+      ],
+      "notFound": [],
+      "accountId": "account1"
+    },
+    "G1"
+  ],
+  [
+    "Blob/get",
+    {
+      "list": [
+        {
+          "id": "G72cfa4804194563685d9a4b695f7ba20e7739576",
+          "isEncodingProblem": true,
+          "size": 43
+        },
+        {
+          "id": "G2aae6c35c94fcfb415dbe95f408b9ce91ee846ed",
+          "data:asText": "hello world",
+          "size": 11
+        }
+      ],
+      "notFound": [],
+      "accountId": "account1"
+    },
+    "G2"
+  ],
+  [
+    "Blob/get",
+    {
+      "list": [
+        {
+          "id": "G72cfa4804194563685d9a4b695f7ba20e7739576",
+          "data:asBase64": "VGhlIHF1aWNrIGJyb3duIGZveCBqdW1wZW
+                            Qgb3ZlciB0aGUggYEgZG9nLg==",
+          "size": 43
+        },
+        {
+          "id": "G2aae6c35c94fcfb415dbe95f408b9ce91ee846ed",
+          "data:asBase64": "aGVsbG8gd29ybGQ=",
+          "size": 11
+        }
+      ],
+      "notFound": [],
+      "accountId": "account1"
+    },
+    "G3"
+  ],
+  [
+    "Blob/get",
+    {
+      "list": [
+        {
+          "id": "G72cfa4804194563685d9a4b695f7ba20e7739576",
+          "data:asText": "The q",
+          "size": 43
+        },
+        {
+          "id": "G2aae6c35c94fcfb415dbe95f408b9ce91ee846ed",
+          "data:asText": "hello",
+          "size": 11
+        }
+      ],
+      "notFound": [],
+      "accountId": "account1"
+    },
+    "G4"
+  ],
+  [
+    "Blob/get",
+    {
+      "list": [
+        {
+          "id": "G72cfa4804194563685d9a4b695f7ba20e7739576",
+          "isTruncated": true,
+          "isEncodingProblem": true,
+          "data:asBase64": "anVtcGVkIG92ZXIgdGhlIIGBIGRvZy4=",
+          "size": 43
+        },
+        {
+          "id": "G2aae6c35c94fcfb415dbe95f408b9ce91ee846ed",
+          "isTruncated": true,
+          "data:asText": "",
+          "size": 11
+        }
+      ],
+      "notFound": [],
+      "accountId": "account1"
+    },
+    "G5"
+  ]
+]</pre><a href="#section-4.2.2-8" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="blob-lookup">
+<section id="section-4.3">
+        <h3 id="name-blob-lookup"><a href="#section-4.3">4.3.&nbsp;&nbsp;Blob/lookup</a></h3>
+<p id="section-4.3-1">Given a list of blobIds, this method does a reverse lookup in each of
+the provided type names to find the list of Ids within that data type
+that reference the provided blob.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-2">Since different datatypes will have different semantics of "contains",
+the definition of "reference" is somewhat loose but roughly
+means "you could discover this blobId by looking at this object or
+at other objects recursively contained within this object".<a href="#section-4.3-2" class="pilcrow">¶</a></p>
+<p id="section-4.3-3">For example, with a server that supports <span>[<a href="#RFC8621" class="cite xref">RFC8621</a>]</span>, if a Mailbox references a blob and if any Emails
+within that Mailbox reference the blobId, then the Mailbox references that
+blobId.  For any Thread that references an Email that references a blobId, it
+can be said that the Thread references the blobId.<a href="#section-4.3-3" class="pilcrow">¶</a></p>
+<p id="section-4.3-4">However, this does not mean that if an Email references a Mailbox in its
+mailboxIds property, then any blobId referenced by other Emails in
+that Mailbox are also referenced by the initial Email.<a href="#section-4.3-4" class="pilcrow">¶</a></p>
+<p id="section-4.3-5"><strong>Parameters</strong><a href="#section-4.3-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.3-6.1">
+            <p id="section-4.3-6.1.1">accountId: "Id"<a href="#section-4.3-6.1.1" class="pilcrow">¶</a></p>
+<p id="section-4.3-6.1.2">The id of the account used for the call.<a href="#section-4.3-6.1.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.3-6.2">
+            <p id="section-4.3-6.2.1">typeNames: "String[]"<a href="#section-4.3-6.2.1" class="pilcrow">¶</a></p>
+<p id="section-4.3-6.2.2">A list of names from the "JMAP Data Types" registry or defined by
+private extensions that the client has requested.  Only names
+for which "Can reference blobs" is true may be specified, and the
+capability that defines each type must also be used by the overall
+JMAP request in which this method is called.<a href="#section-4.3-6.2.2" class="pilcrow">¶</a></p>
+<p id="section-4.3-6.2.3">If a type name is not known by the server, or the associated capability
+has not been requested, then the server returns an "unknownDataType"
+error.<a href="#section-4.3-6.2.3" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.3-6.3">
+            <p id="section-4.3-6.3.1">ids: "Id[]"<a href="#section-4.3-6.3.1" class="pilcrow">¶</a></p>
+<p id="section-4.3-6.3.2">A list of blobId values to be looked for.<a href="#section-4.3-6.3.2" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.3-7"><strong>Response</strong><a href="#section-4.3-7" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.3-8.1">
+            <p id="section-4.3-8.1.1">list: "BlobInfo[]"<a href="#section-4.3-8.1.1" class="pilcrow">¶</a></p>
+<p id="section-4.3-8.1.2">A list of BlobInfo objects.<a href="#section-4.3-8.1.2" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.3-9"><strong>BlobInfo Object</strong><a href="#section-4.3-9" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.3-10.1">
+            <p id="section-4.3-10.1.1">id: "Id"<a href="#section-4.3-10.1.1" class="pilcrow">¶</a></p>
+<p id="section-4.3-10.1.2">The blobId.<a href="#section-4.3-10.1.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.3-10.2">
+            <p id="section-4.3-10.2.1">matchedIds: "String[Id[]]"<a href="#section-4.3-10.2.1" class="pilcrow">¶</a></p>
+<p id="section-4.3-10.2.2">A map from type name to a list of Ids of that data type (e.g., the name
+"Email" maps to a list of emailIds).<a href="#section-4.3-10.2.2" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.3-11">If a blob is not visible to a user or does not exist on the server at all,
+then the server <span class="bcp14">MUST</span> still return an empty array for each type
+as this doesn't leak any information about whether the blob is on the server
+but not visible to the requesting user.<a href="#section-4.3-11" class="pilcrow">¶</a></p>
+<div id="blob-lookup-example">
+<section id="section-4.3.1">
+          <h4 id="name-blob-lookup-example"><a href="#section-4.3.1">4.3.1.&nbsp;&nbsp;Blob/lookup Example</a></h4>
+<p id="section-4.3.1-1">Method Call:<a href="#section-4.3.1-1" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-4.3.1-2">
+<pre>[
+  "Blob/lookup",
+  {
+    "typeNames": [
+      "Mailbox",
+      "Thread",
+      "Email"
+    ],
+    "ids": [
+      "Gd2f81008cf07d2425418f7f02a3ca63a8bc82003",
+      "not-a-blob"
+    ]
+  },
+  "R1"
+]</pre><a href="#section-4.3.1-2" class="pilcrow">¶</a>
+</div>
+<p id="section-4.3.1-3">Response:<a href="#section-4.3.1-3" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-4.3.1-4">
+<pre>[
+  "Blob/lookup",
+  {
+    "list": [
+      {
+        "id": "Gd2f81008cf07d2425418f7f02a3ca63a8bc82003",
+        "matchedIds": {
+          "Mailbox": [
+            "M54e97373",
+            "Mcbe6b662"
+          ],
+          "Thread": [
+            "T1530616e"
+          ],
+          "Email": [
+            "E16e70a73eb4",
+            "E84b0930cf16"
+          ]
+        }
+      }
+    ],
+    "notFound": [
+      "not-a-blob"
+    ]
+  },
+  "R1"
+]</pre><a href="#section-4.3.1-4" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-5">
+      <h2 id="name-security-considerations"><a href="#section-5">5.&nbsp;&nbsp;Security Considerations</a></h2>
+<p id="section-5-1">All security considerations for JMAP <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> apply to this specification.
+Additional considerations specific to the data types and functionality
+introduced by this document are described here.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">JSON parsers are not all consistent in handling non-UTF-8 data.
+JMAP requires that all JSON data be UTF-8 encoded, so servers
+<span class="bcp14">MUST</span> only return a null value if <code>data:asText</code> is
+requested for a range of octets that is not valid UTF-8 and set
+<code>isEncodingProblem: true</code>.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">Servers <span class="bcp14">MUST</span> apply any access controls, such that if the authenticated user would
+be unable to discover the blobId by making queries, then this fact cannot be
+discovered via a Blob/lookup.  For example, if an Email exists in a Mailbox that
+the authenticated user does not have access to see, then that emailId <span class="bcp14">MUST NOT</span> be
+returned in a lookup for a blob that is referenced by that email.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">The server <span class="bcp14">MUST NOT</span> trust that the data given to a
+Blob/upload is a well-formed instance of the specified media type. Also, if
+the server attempts to parse the given blob, only hardened parsers designed to
+deal with arbitrary untrusted data should be used.  The server <span class="bcp14">SHOULD NOT</span> reject data on the grounds that it is not a valid specimen of the
+stated type.<a href="#section-5-4" class="pilcrow">¶</a></p>
+<p id="section-5-5">With carefully chosen data sources, Blob/upload can be used to recreate
+dangerous content on the far side of security scanners (anti-virus or
+exfiltration scanners, for example) that may be watching the upload endpoint.
+Server implementations <span class="bcp14">SHOULD</span> provide a hook to allow security
+scanners to check the resulting blob after concatenating the data sources in
+the same way that they do for the upload endpoint.<a href="#section-5-5" class="pilcrow">¶</a></p>
+<p id="section-5-6">Digest algorithms can be expensive for servers to calculate.  Servers that
+share resources between multiple users should track resource usage by clients
+and rate-limit expensive operations to avoid resource starvation.<a href="#section-5-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-6">
+      <h2 id="name-iana-considerations"><a href="#section-6">6.&nbsp;&nbsp;IANA Considerations</a></h2>
+<div id="jmap-capability-registration-for-blob">
+<section id="section-6.1">
+        <h3 id="name-jmap-capability-registratio"><a href="#section-6.1">6.1.&nbsp;&nbsp;JMAP Capability Registration for "blob"</a></h3>
+<p id="section-6.1-1">IANA has registered the "blob" JMAP capability as follows:<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<dl class="dlCompact dlParallel" id="section-6.1-2">
+          <dt id="section-6.1-2.1">Capability Name:</dt>
+          <dd id="section-6.1-2.2">urn:ietf:params:jmap:blob<a href="#section-6.1-2.2" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-6.1-2.3">Specification document:</dt>
+          <dd id="section-6.1-2.4">RFC 9404<a href="#section-6.1-2.4" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-6.1-2.5">Intended use:</dt>
+          <dd id="section-6.1-2.6">common<a href="#section-6.1-2.6" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-6.1-2.7">Change Controller:</dt>
+          <dd id="section-6.1-2.8">IETF<a href="#section-6.1-2.8" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-6.1-2.9">Security and privacy considerations:</dt>
+          <dd id="section-6.1-2.10">RFC 9404, <a href="#security-considerations" class="auto internal xref">Section 5</a><a href="#section-6.1-2.10" class="pilcrow">¶</a>
+</dd>
+        
+</dl>
+</section>
+</div>
+<div id="jmap-error-codes-registration-for-unknowndatatype">
+<section id="section-6.2">
+        <h3 id="name-jmap-error-codes-registrati"><a href="#section-6.2">6.2.&nbsp;&nbsp;JMAP Error Codes Registration for "unknownDataType"</a></h3>
+<p id="section-6.2-1">IANA has registered the "unknownDataType" JMAP error code as follows:<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<dl class="dlCompact dlParallel" id="section-6.2-2">
+          <dt id="section-6.2-2.1">JMAP Error Code:</dt>
+          <dd id="section-6.2-2.2">unknownDataType<a href="#section-6.2-2.2" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-6.2-2.3">Intended use:</dt>
+          <dd id="section-6.2-2.4">common<a href="#section-6.2-2.4" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-6.2-2.5">Change Controller:</dt>
+          <dd id="section-6.2-2.6">IETF<a href="#section-6.2-2.6" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-6.2-2.7">Reference:</dt>
+          <dd id="section-6.2-2.8">RFC 9404<a href="#section-6.2-2.8" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-6.2-2.9">Description:</dt>
+          <dd id="section-6.2-2.10">The server does not recognise this data type, or
+  the capability to enable it is not present in the current Request
+  Object.<a href="#section-6.2-2.10" class="pilcrow">¶</a>
+</dd>
+        
+</dl>
+</section>
+</div>
+<div id="creation-of-jmap-data-types-registry">
+<section id="section-6.3">
+        <h3 id="name-creation-of-jmap-data-types"><a href="#section-6.3">6.3.&nbsp;&nbsp;Creation of "JMAP Data Types" Registry</a></h3>
+<p id="section-6.3-1">IANA has created a new registry called "JMAP Data Types".  <a href="#ianatable" class="auto internal xref">Table 1</a> shows the initial contents of this
+new registry.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<div id="ianatable">
+<div class="table-wrapper"><table class="center" id="table-1">
+          <caption><a href="#table-1" class="selfRef">Table 1</a></caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">Type Name</th>
+              <th class="text-left" rowspan="1" colspan="1">Can Ref Blobs</th>
+              <th class="text-left" rowspan="1" colspan="1">Can Use for State Change</th>
+              <th class="text-left" rowspan="1" colspan="1">Capability</th>
+              <th class="text-left" rowspan="1" colspan="1">Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">Core</td>
+              <td class="text-left" rowspan="1" colspan="1">No</td>
+              <td class="text-left" rowspan="1" colspan="1">No</td>
+              <td class="text-left" rowspan="1" colspan="1">urn:ietf:params:jmap:core</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">PushSubscription</td>
+              <td class="text-left" rowspan="1" colspan="1">No</td>
+              <td class="text-left" rowspan="1" colspan="1">No</td>
+              <td class="text-left" rowspan="1" colspan="1">urn:ietf:params:jmap:core</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">Mailbox</td>
+              <td class="text-left" rowspan="1" colspan="1">Yes</td>
+              <td class="text-left" rowspan="1" colspan="1">Yes</td>
+              <td class="text-left" rowspan="1" colspan="1">urn:ietf:params:jmap:mail</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC8621" class="cite xref">RFC8621</a>]</span>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">Thread</td>
+              <td class="text-left" rowspan="1" colspan="1">Yes</td>
+              <td class="text-left" rowspan="1" colspan="1">Yes</td>
+              <td class="text-left" rowspan="1" colspan="1">urn:ietf:params:jmap:mail</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC8621" class="cite xref">RFC8621</a>]</span>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">Email</td>
+              <td class="text-left" rowspan="1" colspan="1">Yes</td>
+              <td class="text-left" rowspan="1" colspan="1">Yes</td>
+              <td class="text-left" rowspan="1" colspan="1">urn:ietf:params:jmap:mail</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC8621" class="cite xref">RFC8621</a>]</span>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">EmailDelivery</td>
+              <td class="text-left" rowspan="1" colspan="1">No</td>
+              <td class="text-left" rowspan="1" colspan="1">Yes</td>
+              <td class="text-left" rowspan="1" colspan="1">urn:ietf:params:jmap:mail</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC8621" class="cite xref">RFC8621</a>]</span>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">SearchSnippet</td>
+              <td class="text-left" rowspan="1" colspan="1">No</td>
+              <td class="text-left" rowspan="1" colspan="1">No</td>
+              <td class="text-left" rowspan="1" colspan="1">urn:ietf:params:jmap:mail</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC8621" class="cite xref">RFC8621</a>]</span>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">Identity</td>
+              <td class="text-left" rowspan="1" colspan="1">No</td>
+              <td class="text-left" rowspan="1" colspan="1">Yes</td>
+              <td class="text-left" rowspan="1" colspan="1">urn:ietf:params:jmap:​submission</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC8621" class="cite xref">RFC8621</a>]</span>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">EmailSubmission</td>
+              <td class="text-left" rowspan="1" colspan="1">No</td>
+              <td class="text-left" rowspan="1" colspan="1">Yes</td>
+              <td class="text-left" rowspan="1" colspan="1">urn:ietf:params:jmap:​submission</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC8621" class="cite xref">RFC8621</a>]</span>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">VacationResponse</td>
+              <td class="text-left" rowspan="1" colspan="1">No</td>
+              <td class="text-left" rowspan="1" colspan="1">Yes</td>
+              <td class="text-left" rowspan="1" colspan="1">urn:ietf:params:jmap:​vacationresponse</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC8621" class="cite xref">RFC8621</a>]</span>
+</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">MDN</td>
+              <td class="text-left" rowspan="1" colspan="1">No</td>
+              <td class="text-left" rowspan="1" colspan="1">No</td>
+              <td class="text-left" rowspan="1" colspan="1">urn:ietf:params:jmap:mdn</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC9007" class="cite xref">RFC9007</a>]</span>
+</td>
+            </tr>
+          </tbody>
+        </table></div>
+</div>
+<p id="section-6.3-3">The registration policy for this registry is "Specification Required" <span>[<a href="#RFC8126" class="cite xref">RFC8126</a>]</span>. Either an RFC or a similarly stable reference document defines a JMAP Data Type
+and associated capability.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
+<p id="section-6.3-4">IANA will appoint designated experts to review requests for additions to this
+registry, with guidance to allow any registration that provides a stable document describing
+the capability and control over the URI namespace to which the capability URI points.<a href="#section-6.3-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<section id="section-7">
+      <h2 id="name-references"><a href="#section-7">7.&nbsp;&nbsp;References</a></h2>
+<section id="section-7.1">
+        <h3 id="name-normative-references"><a href="#section-7.1">7.1.&nbsp;&nbsp;Normative References</a></h3>
+<dl class="references">
+<dt id="RFC2119">[RFC2119]</dt>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+
+<dt id="RFC3230">[RFC3230]</dt>
+        <dd>
+<span class="refAuthor">Mogul, J.</span> and <span class="refAuthor">A. Van Hoff</span>, <span class="refTitle">"Instance Digests in HTTP"</span>, <span class="seriesInfo">RFC 3230</span>, <span class="seriesInfo">DOI 10.17487/RFC3230</span>, <time datetime="2002-01" class="refDate">January 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3230">https://www.rfc-editor.org/info/rfc3230</a>&gt;</span>. </dd>
+
+<dt id="RFC4648">[RFC4648]</dt>
+        <dd>
+<span class="refAuthor">Josefsson, S.</span>, <span class="refTitle">"The Base16, Base32, and Base64 Data Encodings"</span>, <span class="seriesInfo">RFC 4648</span>, <span class="seriesInfo">DOI 10.17487/RFC4648</span>, <time datetime="2006-10" class="refDate">October 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4648">https://www.rfc-editor.org/info/rfc4648</a>&gt;</span>. </dd>
+
+<dt id="RFC8174">[RFC8174]</dt>
+        <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+
+<dt id="RFC8620">[RFC8620]</dt>
+      <dd>
+<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"The JSON Meta Application Protocol (JMAP)"</span>, <span class="seriesInfo">RFC 8620</span>, <span class="seriesInfo">DOI 10.17487/RFC8620</span>, <time datetime="2019-07" class="refDate">July 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8620">https://www.rfc-editor.org/info/rfc8620</a>&gt;</span>. </dd>
+
+</dl>
+</section>
+<section id="section-7.2">
+        <h3 id="name-informative-references"><a href="#section-7.2">7.2.&nbsp;&nbsp;Informative References</a></h3>
+<dl class="references">
+<dt id="RFC7888">[RFC7888]</dt>
+        <dd>
+<span class="refAuthor">Melnikov, A., Ed.</span>, <span class="refTitle">"IMAP4 Non-synchronizing Literals"</span>, <span class="seriesInfo">RFC 7888</span>, <span class="seriesInfo">DOI 10.17487/RFC7888</span>, <time datetime="2016-05" class="refDate">May 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7888">https://www.rfc-editor.org/info/rfc7888</a>&gt;</span>. </dd>
+
+<dt id="RFC8126">[RFC8126]</dt>
+        <dd>
+<span class="refAuthor">Cotton, M.</span>, <span class="refAuthor">Leiba, B.</span>, and <span class="refAuthor">T. Narten</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="seriesInfo">BCP 26</span>, <span class="seriesInfo">RFC 8126</span>, <span class="seriesInfo">DOI 10.17487/RFC8126</span>, <time datetime="2017-06" class="refDate">June 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8126">https://www.rfc-editor.org/info/rfc8126</a>&gt;</span>. </dd>
+
+<dt id="RFC8621">[RFC8621]</dt>
+        <dd>
+<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"The JSON Meta Application Protocol (JMAP) for Mail"</span>, <span class="seriesInfo">RFC 8621</span>, <span class="seriesInfo">DOI 10.17487/RFC8621</span>, <time datetime="2019-08" class="refDate">August 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8621">https://www.rfc-editor.org/info/rfc8621</a>&gt;</span>. </dd>
+
+<dt id="RFC9007">[RFC9007]</dt>
+      <dd>
+<span class="refAuthor">Ouazana, R., Ed.</span>, <span class="refTitle">"Handling Message Disposition Notification with the JSON Meta Application Protocol (JMAP)"</span>, <span class="seriesInfo">RFC 9007</span>, <span class="seriesInfo">DOI 10.17487/RFC9007</span>, <time datetime="2021-03" class="refDate">March 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9007">https://www.rfc-editor.org/info/rfc9007</a>&gt;</span>. </dd>
+
+</dl>
+</section>
+</section>
+<div id="acknowledgements">
+<section id="appendix-A">
+      <h2 id="name-acknowledgements"><a href="#name-acknowledgements">Acknowledgements</a></h2>
+<p id="appendix-A-1"><span class="contact-name">Joris Baum</span>, <span class="contact-name">Jim Fenton</span>, <span class="contact-name">Neil Jenkins</span>, <span class="contact-name">Alexey Melnikov</span>, <span class="contact-name">Ken Murchison</span>, <span class="contact-name">Robert Stepanek</span>, and
+the JMAP Working Group in the IETF.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+
+
+
+
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo"><a href="#name-status-of-this-memo">Status of This Memo</a></h2>
+<p id="section-boilerplate.1-1">
+            This is an Internet Standards Track document.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+            This document is a product of the Internet Engineering Task Force
+            (IETF).  It represents the consensus of the IETF community.  It has
+            received public review and has been approved for publication by
+            the Internet Engineering Steering Group (IESG).  Further
+            information on Internet Standards is available in Section 2 of 
+            RFC 7841.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+            Information about the current status of this document, any
+            errata, and how to provide feedback on it may be obtained at
+            <span><a href="https://www.rfc-editor.org/info/rfc9404">https://www.rfc-editor.org/info/rfc9404</a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+</section>
+</div><div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice"><a href="#name-copyright-notice">Copyright Notice</a></h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2023 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>

@@ -2,7 +2,7 @@
 layout: article-rfc
 permalink: /spec/rfc9670/index.html
 toc: generated-rfc-toc/rfc9670.html
-title: RFC 9670 – JSON Meta Application Protocol (JMAP) Sharing
+title: 'RFC 9670 – JSON Meta Application Protocol (JMAP) Sharing'
 description: >-
     This document specifies a data model for sharing data between users using the JSON Meta Application Protocol (JMAP). Future documents can reference this document when defining data types to support a consistent model of sharing.
 meta:
@@ -63,13 +63,13 @@ meta:
 <p id="section-1.5.1-1">The <code>urn:ietf:params:jmap:principals</code> capability represents support for the Principal and ShareNotification data types and associated API methods.<a href="#section-1.5.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.5.1-2">The value of this property in the JMAP Session "capabilities" property is an empty object.<a href="#section-1.5.1-2" class="pilcrow">¶</a></p>
 <p id="section-1.5.1-3">The value of this property in an Account's "accountCapabilities" property is an object that <span class="bcp14">MUST</span> contain the following information on server capabilities and permissions for that Account:<a href="#section-1.5.1-3" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-1.5.1-4">
+<dl class="dlNewline" id="section-1.5.1-4">
             <dt id="section-1.5.1-4.1">
 <strong>currentUserPrincipalId</strong>: <code>Id|null</code>
 </dt>
             <dd id="section-1.5.1-4.2">The id of the Principal in this Account that corresponds to the user fetching this object, if any.<a href="#section-1.5.1-4.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
@@ -79,7 +79,7 @@ meta:
 <p id="section-1.5.2-1">The URI <code>urn:ietf:params:jmap:principals:owner</code> is solely used as a key in an Account's "accountCapabilities" property. It does not appear in the JMAP Session capabilities -- support is indicated by the <code>urn:ietf:params:jmap:principals</code> URI being present in the session capabilities.<a href="#section-1.5.2-1" class="pilcrow">¶</a></p>
 <p id="section-1.5.2-2">If <code>urn:ietf:params:jmap:principals:owner</code> is a key in an Account's "accountCapabilities" property, that Account (and the data therein) is owned by a Principal. Some Accounts may not be owned by a Principal (e.g., the Account that contains the data for the Principals themselves), in which case this property is omitted.<a href="#section-1.5.2-2" class="pilcrow">¶</a></p>
 <p id="section-1.5.2-3">The value of this property is an object with the following properties:<a href="#section-1.5.2-3" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-1.5.2-4">
+<dl class="dlNewline" id="section-1.5.2-4">
             <dt id="section-1.5.2-4.1">
 <strong>accountIdForPrincipal</strong>: <code>Id</code>
 </dt>
@@ -87,13 +87,13 @@ meta:
 The id of an Account with the <code>urn:ietf:params:jmap:principals</code>
 capability that contains the corresponding Principal object.<a href="#section-1.5.2-4.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-1.5.2-4.3">
 <strong>principalId</strong>:<code>Id</code>
 </dt>
             <dd id="section-1.5.2-4.4"> The id of the Principal that owns this Account.<a href="#section-1.5.2-4.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
@@ -108,12 +108,12 @@ capability that contains the corresponding Principal object.<a href="#section-1.
 <p id="section-2-2">In a shared environment, such as a workplace, a user may have access to a large number of Principals.<a href="#section-2-2" class="pilcrow">¶</a></p>
 <p id="section-2-3">In most systems, the user will have access to a single Account containing Principal objects. In some situations, for example, when aggregating data from different places, there may be multiple Accounts containing Principal objects.<a href="#section-2-3" class="pilcrow">¶</a></p>
 <p id="section-2-4">A <strong>Principal</strong> object has the following properties:<a href="#section-2-4" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-2-5">
+<dl class="dlNewline" id="section-2-5">
         <dt id="section-2-5.1">
 <strong>id</strong>: <code>Id</code> (immutable; server-set)</dt>
         <dd id="section-2-5.2">The id of the Principal.<a href="#section-2-5.2" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-2-5.3">
 <strong>type</strong>: <code>String</code>
 </dt>
@@ -137,42 +137,42 @@ capability that contains the corresponding Principal object.<a href="#section-1.
 </li>
           </ul>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-2-5.5">
 <strong>name</strong>: <code>String</code>
 </dt>
         <dd id="section-2-5.6">The name of the Principal, e.g., "Jane Doe" or "Room 4B".<a href="#section-2-5.6" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-2-5.7">
 <strong>description</strong>: <code>String|null</code>
 </dt>
         <dd id="section-2-5.8">A longer description of the Principal, for example, details about the facilities of a resource, or null if no description is available.<a href="#section-2-5.8" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-2-5.9">
 <strong>email</strong>: <code>String|null</code>
 </dt>
         <dd id="section-2-5.10">An email address for the Principal, or <code>null</code> if no email is available. If given, the value <span class="bcp14">MUST</span> conform to the "addr-spec" syntax, as defined in <span>[<a href="#RFC5322" class="cite xref">RFC5322</a>], <a href="https://rfc-editor.org/rfc/rfc5322#section-3.4.1" class="relref">Section 3.4.1</a></span>.<a href="#section-2-5.10" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-2-5.11">
 <strong>timeZone</strong>: <code>String|null</code>
 </dt>
         <dd id="section-2-5.12">The time zone for this Principal, if known. If not <code>null</code>, the value <span class="bcp14">MUST</span> be a time zone name from the IANA Time Zone Database <span>[<a href="#IANA-TZDB" class="cite xref">IANA-TZDB</a>]</span>.<a href="#section-2-5.12" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-2-5.13">
 <strong>capabilities</strong>: <code>String[Object]</code> (server-set)</dt>
         <dd id="section-2-5.14">A map of JMAP capability URIs to domain-specific information about the Principal in relation to that capability, as defined in the document that registered the capability.<a href="#section-2-5.14" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-2-5.15">
 <strong>accounts</strong>: <code>Id[Account]|null</code> (server-set)</dt>
         <dd id="section-2-5.16">A map of Account id to Account object for each JMAP Account containing data
 for this Principal that the user has access to, or <code>null</code> if none.<a href="#section-2-5.16" class="pilcrow">¶</a>
 </dd>
-      <dd class="break"></dd>
+      
 </dl>
 <div id="principal-get">
 <section id="section-2.1">
@@ -205,43 +205,43 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 <section id="section-2.4.1">
           <h4 id="name-filtering"><a href="#section-2.4.1">2.4.1.&nbsp;&nbsp;Filtering</a></h4>
 <p id="section-2.4.1-1">A <strong>FilterCondition</strong> object has the following properties, all of which are optional:<a href="#section-2.4.1-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-2.4.1-2">
+<dl class="dlNewline" id="section-2.4.1-2">
             <dt id="section-2.4.1-2.1">
 <strong>accountIds</strong>: <code>String[]</code>
 </dt>
             <dd id="section-2.4.1-2.2">A list of Account ids. The Principal matches if any of the ids in this list are keys in the Principal's "accounts" property (i.e., if any of the Account ids belong to the Principal).<a href="#section-2.4.1-2.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-2.4.1-2.3">
 <strong>email</strong>: <code>String</code>
 </dt>
             <dd id="section-2.4.1-2.4">The email property of the Principal contains the given string.<a href="#section-2.4.1-2.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-2.4.1-2.5">
 <strong>name</strong>: <code>String</code>
 </dt>
             <dd id="section-2.4.1-2.6">The name property of the Principal contains the given string.<a href="#section-2.4.1-2.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-2.4.1-2.7">
 <strong>text</strong>: <code>String</code>
 </dt>
             <dd id="section-2.4.1-2.8">The name, email, or description property of the Principal contains the given string.<a href="#section-2.4.1-2.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-2.4.1-2.9">
 <strong>type</strong>: <code>String</code>
 </dt>
             <dd id="section-2.4.1-2.10">The type must be exactly as given to match the condition.<a href="#section-2.4.1-2.10" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-2.4.1-2.11">
 <strong>timeZone</strong>: <code>String</code>
 </dt>
             <dd id="section-2.4.1-2.12">The timeZone must be exactly as given to match the condition.<a href="#section-2.4.1-2.12" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 <p id="section-2.4.1-3">All given conditions in the FilterCondition object must match for the Principal to match.<a href="#section-2.4.1-3" class="pilcrow">¶</a></p>
 <p id="section-2.4.1-4">Text matches for "contains" <span class="bcp14">SHOULD</span> be simple substring matches.<a href="#section-2.4.1-4" class="pilcrow">¶</a></p>
@@ -269,73 +269,73 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 <p id="section-3-4">The server <span class="bcp14">MAY</span> limit the maximum number of notifications it will store for a user. When the limit is reached, any new notification will cause the previously oldest notification to be automatically deleted.<a href="#section-3-4" class="pilcrow">¶</a></p>
 <p id="section-3-5">The server <span class="bcp14">MAY</span> coalesce notifications if appropriate or remove notifications after a certain period of time or that it deems are no longer relevant.<a href="#section-3-5" class="pilcrow">¶</a></p>
 <p id="section-3-6">A <strong>ShareNotification</strong> object has the following properties:<a href="#section-3-6" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-3-7">
+<dl class="dlNewline" id="section-3-7">
         <dt id="section-3-7.1">
 <strong>id</strong>: <code>String</code> (immutable; server-set)</dt>
         <dd id="section-3-7.2">The id of the ShareNotification.<a href="#section-3-7.2" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-3-7.3">
 <strong>created</strong>: <code>UTCDate</code> (immutable; server-set)</dt>
         <dd id="section-3-7.4">The time this notification was created.<a href="#section-3-7.4" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-3-7.5">
 <strong>changedBy</strong>: <code>Entity</code> (immutable; server-set)</dt>
         <dd id="section-3-7.6">
           <p id="section-3-7.6.1">Who made the change. An <strong>Entity</strong> object has the following properties:<a href="#section-3-7.6.1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlCompact dlNewline" id="section-3-7.6.2">
+<dl class="dlCompact dlNewline" id="section-3-7.6.2">
             <dt id="section-3-7.6.2.1">
 <strong>name</strong>: <code>String</code>
 </dt>
             <dd id="section-3-7.6.2.2">The name of the entity who made the change.<a href="#section-3-7.6.2.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-3-7.6.2.3">
 <strong>email</strong>: <code>String|null</code>
 </dt>
             <dd id="section-3-7.6.2.4">The email of the entity who made the change, or <code>null</code> if no email is available.<a href="#section-3-7.6.2.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-3-7.6.2.5">
 <strong>principalId</strong>: <code>Id|null</code>
 </dt>
             <dd id="section-3-7.6.2.6">The id of the Principal corresponding to the entity who made the change, or <code>null</code> if no associated Principal.<a href="#section-3-7.6.2.6" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-3-7.7">
 <strong>objectType</strong>: <code>String</code> (immutable; server-set)</dt>
         <dd id="section-3-7.8">The name of the data type for the object whose permissions have changed, as registered in the IANA "JMAP Data Types" registry <span>[<a href="#IANA-JMAP" class="cite xref">IANA-JMAP</a>]</span>, e.g., "Calendar" or "Mailbox".<a href="#section-3-7.8" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-3-7.9">
 <strong>objectAccountId</strong>: <code>Id</code> (immutable; server-set)</dt>
         <dd id="section-3-7.10">The id of the Account where this object exists.<a href="#section-3-7.10" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-3-7.11">
 <strong>objectId</strong>: <code>Id</code> (immutable; server-set)</dt>
         <dd id="section-3-7.12">The id of the object that this notification is about.<a href="#section-3-7.12" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-3-7.13">
 <strong>oldRights</strong>: <code>String[Boolean]|null</code> (immutable; server-set)</dt>
         <dd id="section-3-7.14">The "myRights" property of the object for the user before the change.<a href="#section-3-7.14" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-3-7.15">
 <strong>newRights</strong>: <code>String[Boolean]|null</code> (immutable; server-set)</dt>
         <dd id="section-3-7.16">The "myRights" property of the object for the user after the change.<a href="#section-3-7.16" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-3-7.17">
 <strong>name</strong>: <code>String</code> (immutable; server-set)</dt>
         <dd id="section-3-7.18">The name of the object at the time the notification was made. Determining the name will depend on the data type in question. For example, it might be the "title" property of a CalendarEvent or the "name" of a Mailbox. The name is to show users who have had their access rights to the object removed what it is that they can no longer access.<a href="#section-3-7.18" class="pilcrow">¶</a>
 </dd>
-      <dd class="break"></dd>
+      
 </dl>
 <div id="sharenotification-get">
 <section id="section-3.1">
@@ -364,31 +364,31 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 <section id="section-3.4.1">
           <h4 id="name-filtering-2"><a href="#section-3.4.1">3.4.1.&nbsp;&nbsp;Filtering</a></h4>
 <p id="section-3.4.1-1">A <strong>FilterCondition</strong> object has the following properties, all of which are optional:<a href="#section-3.4.1-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-3.4.1-2">
+<dl class="dlNewline" id="section-3.4.1-2">
             <dt id="section-3.4.1-2.1">
 <strong>after</strong>: <code>UTCDate|null</code>
 </dt>
             <dd id="section-3.4.1-2.2">The creation date must be on or after this date to match the condition.<a href="#section-3.4.1-2.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-3.4.1-2.3">
 <strong>before</strong>: <code>UTCDate|null</code>
 </dt>
             <dd id="section-3.4.1-2.4">The creation date must be before this date to match the condition.<a href="#section-3.4.1-2.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-3.4.1-2.5">
 <strong>objectType</strong>: <code>String</code>
 </dt>
             <dd id="section-3.4.1-2.6">The objectType value must be identical to the given value to match the condition.<a href="#section-3.4.1-2.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-3.4.1-2.7">
 <strong>objectAccountId</strong>: <code>Id</code>
 </dt>
             <dd id="section-3.4.1-2.8">The objectAccountId value must be identical to the given value to match the condition.<a href="#section-3.4.1-2.8" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 <p id="section-3.4.1-3">All given conditions in the FilterCondition object must match for the ShareNotification to match.<a href="#section-3.4.1-3" class="pilcrow">¶</a></p>
 </section>
@@ -413,19 +413,19 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 <section id="section-4">
       <h2 id="name-framework-for-shared-data"><a href="#section-4">4.&nbsp;&nbsp;Framework for Shared Data</a></h2>
 <p id="section-4-1">Shareable data types <span class="bcp14">MUST</span> define the following three properties:<a href="#section-4-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-4-2">
+<dl class="dlNewline" id="section-4-2">
         <dt id="section-4-2.1">
 <strong>isSubscribed</strong>: <code>Boolean</code>
 </dt>
         <dd id="section-4-2.2">The value <code>true</code> indicates that the user wishes to subscribe to see this data. The value <code>false</code> indicates that the user does not wish to subscribe to see this data. The initial value for this property when data is shared by another user is implementation dependent, although data types may give advice on appropriate defaults.<a href="#section-4-2.2" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-2.3">
 <strong>myRights</strong>: <code>String[Boolean]</code>
 </dt>
         <dd id="section-4-2.4">The set of permissions the user currently has. Appropriate permissions are domain specific and must be defined per data type. Each key is the name of a permission defined for that data type. The value for the key is <code>true</code> if the user has the permission or <code>false</code> if they do not.<a href="#section-4-2.4" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-2.5">
 <strong>shareWith</strong>: <code>Id[String[Boolean]]|null</code>
 </dt>
@@ -433,81 +433,81 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
           <p id="section-4-2.6.1">The value of this property is <code>null</code> if the data is not shared with anyone. Otherwise, it is a map where each key is the id of a Principal with which this data is shared, and the value associated with that key is the rights to give that Principal, in the same format as the "myRights" property. The Account id for the Principal id can be found in the capabilities of the Account this object is in (see <a href="#urn-ietf-params-jmap-principals-owner" class="auto internal xref">Section 1.5.2</a>).<a href="#section-4-2.6.1" class="pilcrow">¶</a></p>
 <p id="section-4-2.6.2">Users with appropriate permission may set this property to modify who the data is shared with. The Principal that owns the Account that this data is in <span class="bcp14">MUST NOT</span> be in the map, since the owner's rights are implicit.<a href="#section-4-2.6.2" class="pilcrow">¶</a></p>
 </dd>
-      <dd class="break"></dd>
+      
 </dl>
 <div id="example">
 <section id="section-4.1">
         <h3 id="name-example"><a href="#section-4.1">4.1.&nbsp;&nbsp;Example</a></h3>
 <p id="section-4.1-1">Suppose we are designing a data model for a very simple to-do list. There is a Todo data type representing a single item to do, each of which belongs to a single TodoList. The specification makes the TodoLists shareable by referencing this document and defining the common properties.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.1-2">First, it would define a set of domain-specific rights. For example, a TodoListRights object may have the following properties:<a href="#section-4.1-2" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-4.1-3">
+<dl class="dlNewline" id="section-4.1-3">
           <dt id="section-4.1-3.1">
 <strong>mayRead</strong>: <code>Boolean</code>
 </dt>
           <dd id="section-4.1-3.2">The user may fetch this TodoList and any Todos that belong to this TodoList.<a href="#section-4.1-3.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-4.1-3.3">
 <strong>mayWrite</strong>: <code>Boolean</code>
 </dt>
           <dd id="section-4.1-3.4">The user may create, update, or destroy Todos that belong to this TodoList and may change the "name" property of this TodoList.<a href="#section-4.1-3.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-4.1-3.5">
 <strong>mayAdmin</strong>: <code>Boolean</code>
 </dt>
           <dd id="section-4.1-3.6">The user may see and modify the "myRights" property of this TodoList and may destroy this TodoList.<a href="#section-4.1-3.6" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 <p id="section-4.1-4">Then in the TodoList data type, we would include the three common
    properties described in <a href="#framework-for-shared-data" class="auto internal xref">Section 4</a>, in addition to any type-specific
    properties (like "name" in this case):<a href="#section-4.1-4" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-4.1-5">
+<dl class="dlNewline" id="section-4.1-5">
           <dt id="section-4.1-5.1">
 <strong>id</strong>: <code>Id</code> (immutable; server-set)</dt>
           <dd id="section-4.1-5.2">The id of the object.<a href="#section-4.1-5.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-4.1-5.3">
 <strong>name</strong>: <code>String</code>
 </dt>
           <dd id="section-4.1-5.4">A name for this list of Todos.<a href="#section-4.1-5.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-4.1-5.5">
 <strong>isSubscribed</strong>: <code>Boolean</code>
 </dt>
           <dd id="section-4.1-5.6">True if the user has indicated they wish to see this list. If <code>false</code>, clients should not display this TodoList with the user's other TodoLists but should provide a means for users to see and subscribe to all TodoLists that have been shared with them.<a href="#section-4.1-5.6" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-4.1-5.7">
 <strong>myRights</strong>: <code>TodoListRights</code>
 </dt>
           <dd id="section-4.1-5.8">The set of permissions the user currently has for this TodoList.<a href="#section-4.1-5.8" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-4.1-5.9">
 <strong>shareWith</strong>: <code>Id[TodoListRights]|null</code>
 </dt>
           <dd id="section-4.1-5.10">If not shared with anyone, the value is <code>null</code>. Otherwise, it's a map where the keys are Principal ids and the values are the rights given to those Principals. Users with the "mayAdmin" right may set this property to modify who the data is shared with. The Principal that owns the Account that this data is in <span class="bcp14">MUST NOT</span> be in the map; their rights are implicit.<a href="#section-4.1-5.10" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 <p id="section-4.1-6">We would also define a new Principal capability with two properties:<a href="#section-4.1-6" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-4.1-7">
+<dl class="dlNewline" id="section-4.1-7">
           <dt id="section-4.1-7.1">
 <strong>accountId</strong>: <code>Id|null</code>
 </dt>
           <dd id="section-4.1-7.2">The accountId containing the Todo data for this Principal, if it has been shared with the requesting user.<a href="#section-4.1-7.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-4.1-7.3">
 <strong>mayShareWith</strong>: <code>Boolean</code>
 </dt>
           <dd id="section-4.1-7.4">The user may give this Principal permission to access a TodoList.<a href="#section-4.1-7.4" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 <p id="section-4.1-8">A client wishing to let the user configure sharing would look at the "capabilities" for the Account containing the user's Todo data and find the "urn:ietf:params:jmap:principals:owner" property, as per <a href="#urn-ietf-params-jmap-principals-owner" class="auto internal xref">Section 1.5.2</a>. For example, the JMAP Session object might contain:<a href="#section-4.1-8" class="pilcrow">¶</a></p>
 <span id="name-part-of-a-jmap-session-obje"></span><figure id="figure-1">
@@ -655,28 +655,28 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 <section id="section-7.1">
         <h3 id="name-jmap-capability-registratio"><a href="#section-7.1">7.1.&nbsp;&nbsp;JMAP Capability Registration for "principals"</a></h3>
 <p id="section-7.1-1">IANA has registered "principals" in the "JMAP Capabilities" registry as follows:<a href="#section-7.1-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-7.1-2">
+<dl class="dlCompact dlParallel" id="section-7.1-2">
           <dt id="section-7.1-2.1">Capability Name:</dt>
           <dd id="section-7.1-2.2">
             <code>urn:ietf:params:jmap:principals</code><a href="#section-7.1-2.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-7.1-2.3">Intended Use:</dt>
           <dd id="section-7.1-2.4">common<a href="#section-7.1-2.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-7.1-2.5">Change Controller:</dt>
           <dd id="section-7.1-2.6">IETF<a href="#section-7.1-2.6" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-7.1-2.7">Security and Privacy Considerations:</dt>
           <dd id="section-7.1-2.8">RFC 9670, <a href="#security-considerations" class="auto internal xref">Section 6</a><a href="#section-7.1-2.8" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-7.1-2.9">Reference:</dt>
           <dd id="section-7.1-2.10">RFC 9670<a href="#section-7.1-2.10" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 </section>
 </div>
@@ -684,28 +684,28 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 <section id="section-7.2">
         <h3 id="name-jmap-capability-registration"><a href="#section-7.2">7.2.&nbsp;&nbsp;JMAP Capability Registration for "principals:owner"</a></h3>
 <p id="section-7.2-1">IANA has registered "principals:owner" in the "JMAP Capabilities" registry as follows:<a href="#section-7.2-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-7.2-2">
+<dl class="dlCompact dlParallel" id="section-7.2-2">
           <dt id="section-7.2-2.1">Capability Name:</dt>
           <dd id="section-7.2-2.2">
             <code>urn:ietf:params:jmap:principals:owner</code><a href="#section-7.2-2.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-7.2-2.3">Intended Use:</dt>
           <dd id="section-7.2-2.4">common<a href="#section-7.2-2.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-7.2-2.5">Change Controller:</dt>
           <dd id="section-7.2-2.6">IETF<a href="#section-7.2-2.6" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-7.2-2.7">Security and Privacy Considerations:</dt>
           <dd id="section-7.2-2.8">RFC 9670, <a href="#security-considerations" class="auto internal xref">Section 6</a><a href="#section-7.2-2.8" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-7.2-2.9">Reference:</dt>
           <dd id="section-7.2-2.10">RFC 9670<a href="#section-7.2-2.10" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 </section>
 </div>
@@ -713,28 +713,28 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 <section id="section-7.3">
         <h3 id="name-jmap-data-type-registration"><a href="#section-7.3">7.3.&nbsp;&nbsp;JMAP Data Type Registration for "Principal"</a></h3>
 <p id="section-7.3-1">IANA has registered "Principal" in the "JMAP Data Types" registry as follows:<a href="#section-7.3-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-7.3-2">
+<dl class="dlCompact dlParallel" id="section-7.3-2">
           <dt id="section-7.3-2.1">Type Name:</dt>
           <dd id="section-7.3-2.2">Principal<a href="#section-7.3-2.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-7.3-2.3">Can Reference Blobs:</dt>
           <dd id="section-7.3-2.4">No<a href="#section-7.3-2.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-7.3-2.5">Can Use for State Change:</dt>
           <dd id="section-7.3-2.6">Yes<a href="#section-7.3-2.6" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-7.3-2.7">Capability:</dt>
           <dd id="section-7.3-2.8">
             <code>urn:ietf:params:jmap:principals</code><a href="#section-7.3-2.8" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-7.3-2.9">Reference:</dt>
           <dd id="section-7.3-2.10">RFC 9670<a href="#section-7.3-2.10" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 </section>
 </div>
@@ -742,28 +742,28 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 <section id="section-7.4">
         <h3 id="name-jmap-data-type-registration-"><a href="#section-7.4">7.4.&nbsp;&nbsp;JMAP Data Type Registration for "ShareNotification"</a></h3>
 <p id="section-7.4-1">IANA has registered "ShareNotification" in the "JMAP Data Types" registry as follows:<a href="#section-7.4-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-7.4-2">
+<dl class="dlCompact dlParallel" id="section-7.4-2">
           <dt id="section-7.4-2.1">Type Name:</dt>
           <dd id="section-7.4-2.2">ShareNotification<a href="#section-7.4-2.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-7.4-2.3">Can Reference Blobs:</dt>
           <dd id="section-7.4-2.4">No<a href="#section-7.4-2.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-7.4-2.5">Can Use for State Change:</dt>
           <dd id="section-7.4-2.6">Yes<a href="#section-7.4-2.6" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-7.4-2.7">Capability:</dt>
           <dd id="section-7.4-2.8">
             <code>urn:ietf:params:jmap:principals</code><a href="#section-7.4-2.8" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-7.4-2.9">Reference:</dt>
           <dd id="section-7.4-2.10">RFC 9670<a href="#section-7.4-2.10" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 </section>
 </div>
@@ -777,19 +777,19 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="RFC5322">[RFC5322]</dt>
         <dd>
 <span class="refAuthor">Resnick, P., Ed.</span>, <span class="refTitle">"Internet Message Format"</span>, <span class="seriesInfo">RFC 5322</span>, <span class="seriesInfo">DOI 10.17487/RFC5322</span>, <time datetime="2008-10" class="refDate">October 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5322">https://www.rfc-editor.org/info/rfc5322</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="RFC8174">[RFC8174]</dt>
         <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="RFC8620">[RFC8620]</dt>
       <dd>
 <span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"The JSON Meta Application Protocol (JMAP)"</span>, <span class="seriesInfo">RFC 8620</span>, <span class="seriesInfo">DOI 10.17487/RFC8620</span>, <time datetime="2019-07" class="refDate">July 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8620">https://www.rfc-editor.org/info/rfc8620</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 </dl>
 </section>
 <section id="section-8.2">
@@ -798,15 +798,15 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 <dt id="IANA-JMAP">[IANA-JMAP]</dt>
         <dd>
 <span class="refAuthor">IANA</span>, <span class="refTitle">"JMAP Data Types"</span>, <span>&lt;<a href="https://www.iana.org/assignments/jmap">https://www.iana.org/assignments/jmap</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="IANA-TZDB">[IANA-TZDB]</dt>
         <dd>
 <span class="refAuthor">IANA</span>, <span class="refTitle">"Time Zone Database"</span>, <span>&lt;<a href="https://www.iana.org/time-zones">https://www.iana.org/time-zones</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="RFC8264">[RFC8264]</dt>
       <dd>
 <span class="refAuthor">Saint-Andre, P.</span> and <span class="refAuthor">M. Blanchet</span>, <span class="refTitle">"PRECIS Framework: Preparation, Enforcement, and Comparison of Internationalized Strings in Application Protocols"</span>, <span class="seriesInfo">RFC 8264</span>, <span class="seriesInfo">DOI 10.17487/RFC8264</span>, <time datetime="2017-10" class="refDate">October 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8264">https://www.rfc-editor.org/info/rfc8264</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 </dl>
 </section>
 </section>

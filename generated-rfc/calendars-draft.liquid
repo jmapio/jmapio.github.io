@@ -1,8 +1,8 @@
 ---
 layout: article-rfc
-permalink: /spec/calendars/index.html
-toc: generated-rfc-toc/calendars.html
-title: JSON Meta Application Protocol (JMAP) for Calendars
+permalink: /spec/calendars-draft/index.html
+toc: generated-rfc-toc/calendars-draft.html
+title: 'JSON Meta Application Protocol (JMAP) for Calendars'
 description: >-
     This document specifies a data model for synchronizing calendar data with a server using JMAP. Clients can use this to efficiently read, write, and share calendars and events, receive push notifications for changes or event reminders, and keep track of changes made by others in a multi-user environment.
 meta:
@@ -67,43 +67,43 @@ meta:
           <h4 id="name-urnietfparamsjmapcalendars"><a href="#section-1.5.1">1.5.1.&nbsp;&nbsp;urn:ietf:params:jmap:calendars</a></h4>
 <p id="section-1.5.1-1">This represents support for the Calendar, CalendarEvent, CalendarEventNotification, and ParticipantIdentity data types and associated API methods, except for "CalendarEvent/parse". The value of this property in the JMAP Session "capabilities" property is an empty object.<a href="#section-1.5.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.5.1-2">The value of this property in an account's "accountCapabilities" property is an object that MUST contain the following information on server capabilities and permissions for that account:<a href="#section-1.5.1-2" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-1.5.1-3">
+<dl class="dlNewline" id="section-1.5.1-3">
             <dt id="section-1.5.1-3.1">
 <strong>maxCalendarsPerEvent</strong>: <code>UnsignedInt|null</code>
 </dt>
             <dd id="section-1.5.1-3.2">The maximum number of Calendars (see <a href="#calendars" class="auto internal xref">Section 4</a>) that can be assigned to a single CalendarEvent object (see <a href="#calendar-events" class="auto internal xref">Section 5</a>). This MUST be an integer &gt;= 1, or null for no limit (or rather, the limit is always the number of Calendars in the account).<a href="#section-1.5.1-3.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-1.5.1-3.3">
 <strong>minDateTime</strong>: <code>UTCDateTime</code>
 </dt>
             <dd id="section-1.5.1-3.4">The earliest date-time value the server is willing to accept for any date stored in a CalendarEvent.<a href="#section-1.5.1-3.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-1.5.1-3.5">
 <strong>maxDateTime</strong>: <code>UTCDateTime</code>
 </dt>
             <dd id="section-1.5.1-3.6">The latest date-time value the server is willing to accept for any date stored in a CalendarEvent.<a href="#section-1.5.1-3.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-1.5.1-3.7">
 <strong>maxExpandedQueryDuration</strong>: <code>Duration</code>
 </dt>
             <dd id="section-1.5.1-3.8">The maximum duration the user may query over when asking the server to expand recurrences.<a href="#section-1.5.1-3.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-1.5.1-3.9">
 <strong>maxParticipantsPerEvent</strong>: <code>UnsignedInt|null</code>
 </dt>
             <dd id="section-1.5.1-3.10">The maximum number of participants a single event may have, or null for no limit.<a href="#section-1.5.1-3.10" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-1.5.1-3.11">
 <strong>mayCreateCalendar</strong>: <code>Boolean</code>
 </dt>
             <dd id="section-1.5.1-3.12">If true, the user may create a calendar in this account.<a href="#section-1.5.1-3.12" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
@@ -113,13 +113,13 @@ meta:
 <p id="section-1.5.2-1">Represents support for the "Principal/getAvailability" method. Any account with this capability MUST also have the <code>urn:ietf:params:jmap:principals</code> capability (see <span><a href="https://rfc-editor.org/rfc/rfc9670#section-1.5.1" class="relref">Section 1.5.1</a> of [<a href="#RFC9670" class="cite xref">RFC9670</a>]</span>).<a href="#section-1.5.2-1" class="pilcrow">¶</a></p>
 <p id="section-1.5.2-2">The value of this property in the JMAP Session "capabilities" property is an empty object.<a href="#section-1.5.2-2" class="pilcrow">¶</a></p>
 <p id="section-1.5.2-3">The value of this property in an account's "accountCapabilities" property is an object that MUST contain the following information on server capabilities and permissions for that account:<a href="#section-1.5.2-3" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-1.5.2-4">
+<dl class="dlNewline" id="section-1.5.2-4">
             <dt id="section-1.5.2-4.1">
 <strong>maxAvailabilityDuration</strong>: <code>Duration</code>
 </dt>
             <dd id="section-1.5.2-4.2">The maximum duration over which the server is prepared to calculate availability in a single call (see <a href="#principal-getavailability" class="auto internal xref">Section 2.2</a>).<a href="#section-1.5.2-4.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
@@ -141,31 +141,31 @@ meta:
 <section id="section-2.1">
         <h3 id="name-principal-capability-urniet"><a href="#section-2.1">2.1.&nbsp;&nbsp;Principal Capability urn:ietf:params:jmap:calendars</a></h3>
 <p id="section-2.1-1">A "urn:ietf:params:jmap:calendars" property is added to the Principal "capabilities" object, the value of which is an object with the following properties:<a href="#section-2.1-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-2.1-2">
+<dl class="dlNewline" id="section-2.1-2">
           <dt id="section-2.1-2.1">
 <strong>accountId</strong>: <code>Id|null</code>
 </dt>
           <dd id="section-2.1-2.2">Id of Account with the <code>urn:ietf:params:jmap:calendars</code> capability that contains the calendar data for this Principal, or null if either (a) there is none (e.g. the Principal is a group just used for permissions management), or (b) the user does not have access to any data in the account (with the exception of free/busy, which is governed by the "mayGetAvailability" property). The corresponding Account object can be found in the Principal's "accounts" property, as per <span><a href="https://rfc-editor.org/rfc/rfc9670#section-2" class="relref">Section 2</a> of [<a href="#RFC9670" class="cite xref">RFC9670</a>]</span>.<a href="#section-2.1-2.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-2.1-2.3">
 <strong>mayGetAvailability</strong>: <code>Boolean</code>
 </dt>
           <dd id="section-2.1-2.4">If true, the user may call the "Principal/getAvailability" method with this Principal.<a href="#section-2.1-2.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-2.1-2.5">
 <strong>mayShareWith</strong>: <code>Boolean</code>
 </dt>
           <dd id="section-2.1-2.6">If true, the user may add this Principal as a calendar share target (by adding them to the "shareWith" property of a calendar, see <a href="#calendars" class="auto internal xref">Section 4</a>).<a href="#section-2.1-2.6" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-2.1-2.7">
 <strong>calendarAddress</strong>: <code>String</code>
 </dt>
           <dd id="section-2.1-2.8">If this Principal may be added as a participant to an event, this is the calendarAddress to use to receive iTIP scheduling messages.<a href="#section-2.1-2.8" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 </section>
 </div>
@@ -173,43 +173,43 @@ meta:
 <section id="section-2.2">
         <h3 id="name-principal-getavailability"><a href="#section-2.2">2.2.&nbsp;&nbsp;Principal/getAvailability</a></h3>
 <p id="section-2.2-1">This method calculates the availability of the Principal for scheduling within a requested time period. It takes the following arguments:<a href="#section-2.2-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-2.2-2">
+<dl class="dlNewline" id="section-2.2-2">
           <dt id="section-2.2-2.1">
 <strong>accountId</strong>: <code>Id</code>
 </dt>
           <dd id="section-2.2-2.2">The id of the account to use.<a href="#section-2.2-2.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-2.2-2.3">
 <strong>id</strong>: <code>Id</code>
 </dt>
           <dd id="section-2.2-2.4">The id of the Principal to calculate availability for.<a href="#section-2.2-2.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-2.2-2.5">
 <strong>utcStart</strong>: <code>UTCDateTime</code>
 </dt>
           <dd id="section-2.2-2.6">The start time (inclusive) of the period for which to return availability.<a href="#section-2.2-2.6" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-2.2-2.7">
 <strong>utcEnd</strong>: <code>UTCDateTime</code>
 </dt>
           <dd id="section-2.2-2.8">The end time (exclusive) of the period for which to return availability.<a href="#section-2.2-2.8" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-2.2-2.9">
 <strong>showDetails</strong>: <code>Boolean</code>
 </dt>
           <dd id="section-2.2-2.10">If true, event details will be returned if the user has permission to view them.<a href="#section-2.2-2.10" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-2.2-2.11">
 <strong>eventProperties</strong>: <code>String[]|null</code>
 </dt>
           <dd id="section-2.2-2.12">A list of properties to include in any CalendarEvent object returned. If null, all properties of the event will be returned. Otherwise, only properties with names in the given list will be returned.<a href="#section-2.2-2.12" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 <p id="section-2.2-3">The server will first find all relevant events, expanding any recurring events. Relevant events are ones where all of the following is true:<a href="#section-2.2-3" class="pilcrow">¶</a></p>
 <ul class="compact">
@@ -232,19 +232,19 @@ meta:
         </ul>
 <p id="section-2.2-5">If an event is in more than one calendar, it is relevant if all of the above are true for any one calendar that it is in.<a href="#section-2.2-5" class="pilcrow">¶</a></p>
 <p id="section-2.2-6">The server then generates a BusyPeriod object for each of these events. A <strong>BusyPeriod</strong> object has the following properties:<a href="#section-2.2-6" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-2.2-7">
+<dl class="dlNewline" id="section-2.2-7">
           <dt id="section-2.2-7.1">
 <strong>utcStart</strong>: <code>UTCDateTime</code>
 </dt>
           <dd id="section-2.2-7.2">The start time (inclusive) of the period this represents.<a href="#section-2.2-7.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-2.2-7.3">
 <strong>utcEnd</strong>: <code>UTCDateTime</code>
 </dt>
           <dd id="section-2.2-7.4">The end time (exclusive) of the period this represents.<a href="#section-2.2-7.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-2.2-7.5">
 <strong>busyStatus</strong>: <code>String</code> (optional, default "unavailable")</dt>
           <dd id="section-2.2-7.6">
@@ -261,7 +261,7 @@ meta:
 </li>
             </ul>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-2.2-7.7">
 <strong>event</strong>: <code>CalendarEvent|null</code>
 </dt>
@@ -277,44 +277,44 @@ meta:
             </ul>
 <p id="section-2.2-7.8.3">If an "eventProperties" argument was given, any properties in the JSCalendar Event that are not in the eventProperties list are removed from the returned representation.<a href="#section-2.2-7.8.3" class="pilcrow">¶</a></p>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-2.2-7.9">
 <strong>accountId</strong>: <code>Id|null</code>
 </dt>
           <dd id="section-2.2-7.10">The account id in which this event can be found, or null if the "event" property is null. (The id of the event may be requested in the eventProperties.)<a href="#section-2.2-7.10" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 <p id="section-2.2-8">The server MAY also generate BusyPeriod objects based on other information it has about the Principal's availability, such as office hours; the "event" and "accountId" properties will always be null for these.<a href="#section-2.2-8" class="pilcrow">¶</a></p>
 <p id="section-2.2-9">Finally, the server MUST merge and split BusyPeriod objects where the "event" property is null, such that none of them overlap and either there is a gap in time between any two objects (the utcEnd of one does not equal the utcStart of another) or those objects have a different "busyStatus" property. If there are overlapping BusyPeriod time ranges with different "busyStatus" properties the server MUST choose the value in the following order: confirmed &gt; unavailable &gt; tentative.<a href="#section-2.2-9" class="pilcrow">¶</a></p>
 <p id="section-2.2-10">The response has the following argument:<a href="#section-2.2-10" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-2.2-11">
+<dl class="dlNewline" id="section-2.2-11">
           <dt id="section-2.2-11.1">
 <strong>list</strong>: <code>BusyPeriod[]</code>
 </dt>
           <dd id="section-2.2-11.2">The list of BusyPeriod objects calculated as described above.<a href="#section-2.2-11.2" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 <p id="section-2.2-12">The following additional errors may be returned instead of the
 "Principal/getAvailability" response:<a href="#section-2.2-12" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-2.2-13">
+<dl class="dlNewline" id="section-2.2-13">
           <dt id="section-2.2-13.1"><strong>notFound</strong></dt>
           <dd id="section-2.2-13.2">No Principal with this id exists, or the user does not have permission to see that this Principal exists.<a href="#section-2.2-13.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-2.2-13.3"><strong>forbidden</strong></dt>
           <dd id="section-2.2-13.4">The user does not have permission to query this Principal's availability.<a href="#section-2.2-13.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-2.2-13.5"><strong>tooLarge</strong></dt>
           <dd id="section-2.2-13.6">The duration between utcStart and utcEnd is longer than the server is willing to calculate availability for.<a href="#section-2.2-13.6" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-2.2-13.7"><strong>rateLimit</strong></dt>
           <dd id="section-2.2-13.8">Too many availability requests have been made recently and the user is being rate limited. It may work to try again later.<a href="#section-2.2-13.8" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 </section>
 </div>
@@ -322,13 +322,13 @@ meta:
 <section id="section-2.3">
         <h3 id="name-principal-query-extension"><a href="#section-2.3">2.3.&nbsp;&nbsp;Principal/query extension</a></h3>
 <p id="section-2.3-1">The following extra optional property is added to the <strong>FilterCondition</strong> object for the <strong>Principal/query</strong> method when the <code>urn:ietf:params:jmap:principals:availability</code> capability is used:<a href="#section-2.3-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-2.3-2">
+<dl class="dlNewline" id="section-2.3-2">
           <dt id="section-2.3-2.1">
 <strong>calendarAddress</strong>: <code>String</code>
 </dt>
           <dd id="section-2.3-2.2">The given string is a calendarAddress belonging to the Principal.<a href="#section-2.3-2.2" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 </section>
 </div>
@@ -339,23 +339,23 @@ meta:
       <h2 id="name-participant-identities"><a href="#section-3">3.&nbsp;&nbsp;Participant Identities</a></h2>
 <p id="section-3-1">A ParticipantIdentity stores information about a URI that represents the user within that account in an event's participants.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">A <strong>ParticipantIdentity</strong> object has the following properties:<a href="#section-3-2" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-3-3">
+<dl class="dlNewline" id="section-3-3">
         <dt id="section-3-3.1">
 <strong>id</strong>: <code>Id</code> (immutable; server-set)</dt>
         <dd id="section-3-3.2">The id of the ParticipantIdentity.<a href="#section-3-3.2" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-3-3.3">
 <strong>name</strong>: <code>String</code> (default: "")</dt>
         <dd id="section-3-3.4">The display name of the participant to use when adding this participant to an event, e.g. "Joe Bloggs".<a href="#section-3-3.4" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-3-3.5">
 <strong>calendarAddress</strong>: <code>String</code>
 </dt>
         <dd id="section-3-3.6">The URI that represents this participant for iTIP scheduling <span>[<a href="#RFC5546" class="cite xref">RFC5546</a>]</span>.<a href="#section-3-3.6" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-3-3.7">
 <strong>isDefault</strong>: <code>Boolean</code> (server-set)</dt>
         <dd id="section-3-3.8">
@@ -370,7 +370,7 @@ feature to allow users to choose which identity to use based on the
 invitees.)<a href="#section-3-3.8.1" class="pilcrow">¶</a></p>
 <p id="section-3-3.8.2">If no participant identities have "isDefault" set, users with multiple clients may experience different default choices in each client, which can be confusing or lead to the wrong identity being used by accident.<a href="#section-3-3.8.2" class="pilcrow">¶</a></p>
 </dd>
-      <dd class="break"></dd>
+      
 </dl>
 <p id="section-3-4">A participant in an event corresponds to a ParticipantIdentity if the "calendarAddress" property of the participant is equivalent to the "calendarAddress" property of the identity after syntax-based normalisation, as per <span><a href="https://rfc-editor.org/rfc/rfc3986#section-6.2.2" class="relref">Section 6.2.2</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>.<a href="#section-3-4" class="pilcrow">¶</a></p>
 <p id="section-3-5">The following JMAP methods are supported.<a href="#section-3-5" class="pilcrow">¶</a></p>
@@ -390,7 +390,7 @@ invitees.)<a href="#section-3-3.8.1" class="pilcrow">¶</a></p>
 <section id="section-3.3">
         <h3 id="name-participantidentity-set"><a href="#section-3.3">3.3.&nbsp;&nbsp;ParticipantIdentity/set</a></h3>
 <p id="section-3.3-1">This is a standard "/set" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.3" class="relref">Section 5.3</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, but with the following additional request argument:<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-3.3-2">
+<dl class="dlNewline" id="section-3.3-2">
           <dt id="section-3.3-2.1">
 <strong>onSuccessSetIsDefault</strong>: <code>Id|null</code>
 </dt>
@@ -399,7 +399,7 @@ without error, the server will try to set this identity as the default. (For
 references to ParticipantIdentity creations, this is equivalent to a
 creation-reference, so the id will be the creation id prefixed with a "#".)<a href="#section-3.3-2.2" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 <p id="section-3.3-3">If the id is not found, or the change is not permitted by the server for
   policy reasons, it MUST be ignored and the currently default
@@ -418,23 +418,23 @@ creation-reference, so the id will be the creation id prefixed with a "#".)<a hr
       <h2 id="name-calendars"><a href="#section-4">4.&nbsp;&nbsp;Calendars</a></h2>
 <p id="section-4-1">A Calendar is a named collection of events. All events are associated with at least one calendar.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">A <strong>Calendar</strong> object has the following properties:<a href="#section-4-2" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-4-3">
+<dl class="dlNewline" id="section-4-3">
         <dt id="section-4-3.1">
 <strong>id</strong>: <code>Id</code> (immutable; server-set)</dt>
         <dd id="section-4-3.2">The id of the calendar.<a href="#section-4-3.2" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-3.3">
 <strong>name</strong>: <code>String</code>
 </dt>
         <dd id="section-4-3.4">The user-visible name of the calendar. This MUST NOT be the empty string and MUST NOT be greater than 255 octets in size when encoded as UTF-8.<a href="#section-4-3.4" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-3.5">
 <strong>description</strong>: <code>String|null</code> (default: null)</dt>
         <dd id="section-4-3.6">An optional longer-form description of the calendar, to provide context in shared environments where users need more than just the name.<a href="#section-4-3.6" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-3.7">
 <strong>color</strong>: <code>String|null</code> (default: null)</dt>
         <dd id="section-4-3.8">
@@ -442,7 +442,7 @@ creation-reference, so the id will be the creation id prefixed with a "#".)<a hr
 <p id="section-4-3.8.2">If not null, the value MUST be a case-insensitive color name taken from the set of names defined in Section 4.3 of CSS Color Module Level 3 <span>[<a href="#COLORS" class="cite xref">COLORS</a>]</span>, or an RGB value in hexadecimal notation, as defined in Section 4.2.1 of CSS Color Module Level 3.<a href="#section-4-3.8.2" class="pilcrow">¶</a></p>
 <p id="section-4-3.8.3">The color SHOULD have sufficient contrast when used as text on a white background, unless the user explicitly chooses otherwise. The Web Content Accessibility Guidelines <span>[<a href="#WCAG" class="cite xref">WCAG</a>]</span> recommend at least a 4.5:1 contrast ratio for readability.<a href="#section-4-3.8.3" class="pilcrow">¶</a></p>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-3.9">
 <strong>sortOrder</strong>: <code>UnsignedInt</code> (default: 0)</dt>
         <dd id="section-4-3.10">
@@ -452,7 +452,7 @@ is consistent between devices. The number MUST be an integer in the range
 <p id="section-4-3.10.2">A calendar with a lower order is to be displayed before a calendar with
 a higher order in any list of calendars in the client's UI. Calendars with equal order should be sorted in alphabetical order by name. The sorting should take into account locale-specific character order convention.<a href="#section-4-3.10.2" class="pilcrow">¶</a></p>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-3.11">
 <strong>isSubscribed</strong>: <code>Boolean</code>
 </dt>
@@ -461,12 +461,12 @@ a higher order in any list of calendars in the client's UI. Calendars with equal
 <p id="section-4-3.12.2">If false, the calendar SHOULD only be displayed when the user explicitly
 requests it or to offer it for the user to subscribe to. For example, a company may have a large number of shared calendars which all employees have permission to access, but the user would only subscribe to the ones they care about and want to be able to have normally accessible.<a href="#section-4-3.12.2" class="pilcrow">¶</a></p>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-3.13">
 <strong>isVisible</strong>: <code>Boolean</code> (default: true)</dt>
         <dd id="section-4-3.14">If true, the calendar's events should be displayed to the user. If false, the user has indicated they wish to temporarily hide this calendar's events. Clients MUST ignore this property if isSubscribed is false. If an event is in multiple calendars, it should be displayed if isVisible is true for any of those calendars.<a href="#section-4-3.14" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-3.15">
 <strong>isDefault</strong>: <code>Boolean</code> (server-set)</dt>
         <dd id="section-4-3.16">This SHOULD be true for exactly one calendar in any account, and MUST NOT be
@@ -477,7 +477,7 @@ which to make a choice. For example, if the user creates a new event, the
 client may automatically set the event as belonging to the default calendar
 from the user's primary account.<a href="#section-4-3.16" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-3.17">
 <strong>includeInAvailability</strong>: <code>String</code>
 </dt>
@@ -497,7 +497,7 @@ from the user's primary account.<a href="#section-4-3.16" class="pilcrow">¶</a>
 <p id="section-4-3.18.3">This should default to "all" for the calendars in the user's own account,
 and "none" for calendars shared with the user.<a href="#section-4-3.18.3" class="pilcrow">¶</a></p>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-3.19">
 <strong>defaultAlertsWithTime</strong>: <code>Id[Alert]|null</code>
 </dt>
@@ -505,7 +505,7 @@ and "none" for calendars shared with the user.<a href="#section-4-3.18.3" class=
           <p id="section-4-3.20.1">A map of alert ids to Alert objects (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-jscalendarbis-15#section-4.5.1" class="relref">Section 4.5.1</a> of [<a href="#I-D.ietf-calext-jscalendarbis" class="cite xref">I-D.ietf-calext-jscalendarbis</a>]</span>) to apply for events where "showWithoutTime" is false and "useDefaultAlerts" is true. Ids MUST be unique across all default alerts in the account, including those in other calendars; a UUID <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span> is recommended.  The "trigger" MUST NOT be an AbsoluteTrigger, as this would fire for every event at the same time and so does not make sense for a default alert.<a href="#section-4-3.20.1" class="pilcrow">¶</a></p>
 <p id="section-4-3.20.2">If omitted on creation, the default is server dependent. For example, servers may choose to always default to null, or may copy the alerts from the default calendar.<a href="#section-4-3.20.2" class="pilcrow">¶</a></p>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-3.21">
 <strong>defaultAlertsWithoutTime</strong>: <code>Id[Alert]|null</code>
 </dt>
@@ -513,12 +513,12 @@ and "none" for calendars shared with the user.<a href="#section-4-3.18.3" class=
           <p id="section-4-3.22.1">A map of alert ids to Alert objects (see <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-jscalendarbis-15#section-4.5.1" class="relref">Section 4.5.1</a> of [<a href="#I-D.ietf-calext-jscalendarbis" class="cite xref">I-D.ietf-calext-jscalendarbis</a>]</span>) to apply for events where "showWithoutTime" is true (commonly referred to as "all day" events) and "useDefaultAlerts" is true. Ids MUST be unique across all default alerts in the account, including those in other calendars; a UUID <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span> is recommended. The "trigger" MUST NOT be an AbsoluteTrigger, as this would fire for every event at the same time and so does not make sense for a default alert.<a href="#section-4-3.22.1" class="pilcrow">¶</a></p>
 <p id="section-4-3.22.2">If omitted on creation, the default is server dependent. For example, servers may choose to always default to null, or may copy the alerts from the default calendar.<a href="#section-4-3.22.2" class="pilcrow">¶</a></p>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-3.23">
 <strong>timeZone</strong>: <code>TimeZoneId|null</code> (default: null)</dt>
         <dd id="section-4-3.24">The time zone to use for events without a time zone when the server needs to resolve them into absolute time, e.g., for alerts or availability calculation. The value MUST be a time zone id from the IANA Time Zone Database <span>[<a href="#IANA-TZDB" class="cite xref">IANA-TZDB</a>]</span>. If null, the timeZone of the account's associated Principal will be used.<a href="#section-4-3.24" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-3.25">
 <strong>shareWith</strong>: <code>Id[CalendarRights]|null</code> (default: null)</dt>
         <dd id="section-4-3.26">
@@ -526,7 +526,7 @@ and "none" for calendars shared with the user.<a href="#section-4-3.18.3" class=
 <p id="section-4-3.26.2">The Principal to which this calendar belongs MUST NOT be in the map.<a href="#section-4-3.26.2" class="pilcrow">¶</a></p>
 <p id="section-4-3.26.3">The property may only be modified if the user has the mayShare right.<a href="#section-4-3.26.3" class="pilcrow">¶</a></p>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-3.27">
 <strong>myRights</strong>: <code>CalendarRights</code> (server-set)</dt>
         <dd id="section-4-3.28">
@@ -541,34 +541,34 @@ calendar.<a href="#section-4-3.28.2.2" class="pilcrow">¶</a>
 </li>
           </ul>
 </dd>
-      <dd class="break"></dd>
+      
 </dl>
 <p id="section-4-4">A <strong>CalendarRights</strong> object has the following properties:<a href="#section-4-4" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-4-5">
+<dl class="dlNewline" id="section-4-5">
         <dt id="section-4-5.1">
 <strong>mayReadFreeBusy</strong>: <code>Boolean</code>
 </dt>
         <dd id="section-4-5.2">The user may read the free-busy information for this calendar as part of a call to "Principal/getAvailability" (see <a href="#principal-getavailability" class="auto internal xref">Section 2.2</a>).<a href="#section-4-5.2" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-5.3">
 <strong>mayReadItems</strong>: <code>Boolean</code>
 </dt>
         <dd id="section-4-5.4">The user may fetch the events in this calendar.<a href="#section-4-5.4" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-5.5">
 <strong>mayWriteAll</strong>: <code>Boolean</code>
 </dt>
         <dd id="section-4-5.6">The user may create, modify or destroy all events in this calendar, or move events to or from this calendar. If this is true, the mayWriteOwn, mayUpdatePrivate and mayRSVP properties MUST all also be true.<a href="#section-4-5.6" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-5.7">
 <strong>mayWriteOwn</strong>: <code>Boolean</code>
 </dt>
         <dd id="section-4-5.8">The user may create, modify or destroy an event on this calendar if either they are the owner of the event (see below) or the event has no owner. This means the user may also transfer ownership by updating an event so they are no longer an owner.<a href="#section-4-5.8" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-5.9">
 <strong>mayUpdatePrivate</strong>: <code>Boolean</code>
 </dt>
@@ -576,7 +576,7 @@ calendar.<a href="#section-4-3.28.2.2" class="pilcrow">¶</a>
           <p id="section-4-5.10.1">The user may modify per-user properties (see <a href="#per-user-properties" class="auto internal xref">Section 5.4</a>) on all events in the calendar, even if they would not otherwise have permission to modify that event. These properties MUST all be stored per-user, and changes do not affect any other user of the calendar.<a href="#section-4-5.10.1" class="pilcrow">¶</a></p>
 <p id="section-4-5.10.2">The user may also modify these properties on a per-occurrence basis for recurring events (updating the "recurrenceOverrides" property of the event to do so).<a href="#section-4-5.10.2" class="pilcrow">¶</a></p>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-5.11">
 <strong>mayRSVP</strong>: <code>Boolean</code>
 </dt>
@@ -596,19 +596,19 @@ calendar.<a href="#section-4-3.28.2.2" class="pilcrow">¶</a>
 <p id="section-4-5.12.4">If the event has its "mayInviteOthers" property set to true (see <a href="#mayinviteothers" class="auto internal xref">Section 5.1.2</a>) and there is an existing Participant in the event corresponding to one of the user's ParticipantIdentity objects in the account, then the user may also add new participants. The "roles" property of any new participant MUST only contain "attendee".<a href="#section-4-5.12.4" class="pilcrow">¶</a></p>
 <p id="section-4-5.12.5">The user may also do all of the above on a per-occurrence basis for recurring events (updating the "recurrenceOverrides" property of the event to do so).<a href="#section-4-5.12.5" class="pilcrow">¶</a></p>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-5.13">
 <strong>mayShare</strong>: <code>Boolean</code>
 </dt>
         <dd id="section-4-5.14">The user may modify the "shareWith" property for this calendar.<a href="#section-4-5.14" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-4-5.15">
 <strong>mayDelete</strong>: <code>Boolean</code>
 </dt>
         <dd id="section-4-5.16">The user may delete the calendar itself.<a href="#section-4-5.16" class="pilcrow">¶</a>
 </dd>
-      <dd class="break"></dd>
+      
 </dl>
 <p id="section-4-6">The user is an <strong>owner</strong> for an event if the CalendarEvent object has a "participants" property, and one of the Participant objects both:<a href="#section-4-6" class="pilcrow">¶</a></p>
 <ol start="1" type="a" class="normal type-a" id="section-4-7">
@@ -635,12 +635,12 @@ calendar.<a href="#section-4-3.28.2.2" class="pilcrow">¶</a>
 <section id="section-4.3">
         <h3 id="name-calendar-set"><a href="#section-4.3">4.3.&nbsp;&nbsp;Calendar/set</a></h3>
 <p id="section-4.3-1">This is a standard "/set" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.3" class="relref">Section 5.3</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> but with the following additional request arguments:<a href="#section-4.3-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-4.3-2">
+<dl class="dlNewline" id="section-4.3-2">
           <dt id="section-4.3-2.1">
 <strong>onDestroyRemoveEvents</strong>: <code>Boolean</code> (default: false)</dt>
           <dd id="section-4.3-2.2">If false, any attempt to destroy a Calendar that still has CalendarEvents in it will be rejected with a <code>calendarHasEvent</code> SetError. If true, any CalendarEvents that were in the Calendar will be removed from it, and if in no other Calendars they will be destroyed. This MUST NOT send scheduling messages to participants. It MAY create CalendarEventNotification objects, if deemed likely to be helpful to the user. In the case of a calendar with a large number of events, the large number of notifications resulting from the single deletion is unlikely to be useful to the user, and the server MAY choose to omit creating them. In systems supporting JMAP Sharing, a single ShareNotification (as defined in <span><a href="https://rfc-editor.org/rfc/rfc9670#section-3" class="relref">Section 3</a> of [<a href="#RFC9670" class="cite xref">RFC9670</a>]</span>) MUST be created for each Principal the calendar was previously shared with, to inform them they no longer have access to the calendar.<a href="#section-4.3-2.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-4.3-2.3">
 <strong>onSuccessSetIsDefault</strong>: <code>Id|null</code>
 </dt>
@@ -656,7 +656,7 @@ creation-reference, so the id will be the creation id prefixed with a "#".)<a hr
   changed objects MUST be reported in either the "created" or "updated"
   argument in the response as  appropriate, with the server-set value included.<a href="#section-4.3-2.4.3" class="pilcrow">¶</a></p>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 <p id="section-4.3-3">The "shareWith" property may only be set by users that have the mayShare right.
 When modifying the "shareWith" property, the user cannot give a right to a Principal if the Principal did not already have that right and the user making the change also does not have that right. Any attempt to do so must be rejected with a <code>forbidden</code> SetError.<a href="#section-4.3-3" class="pilcrow">¶</a></p>
@@ -684,11 +684,11 @@ When modifying the "shareWith" property, the user cannot give a right to a Princ
 <p id="section-4.3-8">The "sortOrder", "isVisible", "includeInAvailability", "defaultAlertsWithTime", and "defaultAlertsWithoutTime" properties are initially the default value for each user with whom the calendar is shared; they are not inherited from the owner.<a href="#section-4.3-8" class="pilcrow">¶</a></p>
 <p id="section-4.3-9">The following extra SetError type is defined:<a href="#section-4.3-9" class="pilcrow">¶</a></p>
 <p id="section-4.3-10">For "destroy":<a href="#section-4.3-10" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-4.3-11">
+<dl class="dlNewline" id="section-4.3-11">
           <dt id="section-4.3-11.1"><strong>calendarHasEvent</strong></dt>
           <dd id="section-4.3-11.2">The Calendar has at least one CalendarEvent assigned to it, and the "onDestroyRemoveEvents" argument was false.<a href="#section-4.3-11.2" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 </section>
 </div>
@@ -698,28 +698,28 @@ When modifying the "shareWith" property, the user cannot give a right to a Princ
 <section id="section-5">
       <h2 id="name-calendar-events"><a href="#section-5">5.&nbsp;&nbsp;Calendar Events</a></h2>
 <p id="section-5-1">A <strong>CalendarEvent</strong> object contains information about an event, or recurring series of events, that takes place at a particular time. It is a JSCalendar Event object, as defined in <span>[<a href="#I-D.ietf-calext-jscalendarbis" class="cite xref">I-D.ietf-calext-jscalendarbis</a>]</span>, with the following additional properties:<a href="#section-5-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-5-2">
+<dl class="dlNewline" id="section-5-2">
         <dt id="section-5-2.1">
 <strong>id</strong>: <code>Id</code> (immutable; server-set)</dt>
         <dd id="section-5-2.2">The id of the CalendarEvent. The id uniquely identifies a JSCalendar Event with a particular uid and recurrenceId within a particular account.<a href="#section-5-2.2" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-5-2.3">
 <strong>baseEventId</strong>: <code>Id|null</code> (immutable; server-set)</dt>
         <dd id="section-5-2.4">This is only defined if the "id" property is a synthetic id, generated by the server to represent a particular instance of a recurring event (see <a href="#calendarevent-query" class="auto internal xref">Section 5.11</a>). This property gives the id of the "real" CalendarEvent this was generated from.<a href="#section-5-2.4" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-5-2.5">
 <strong>calendarIds</strong>: <code>Id[Boolean]</code>
 </dt>
         <dd id="section-5-2.6">The set of Calendar ids this event belongs to. An event MUST belong to one or more Calendars at all times (until it is destroyed). The set is represented as an object, with each key being a Calendar id. The value for each key in the object MUST be true.<a href="#section-5-2.6" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-5-2.7">
 <strong>isDraft</strong>: <code>Boolean</code> (default: false)</dt>
         <dd id="section-5-2.8">If true, this event is to be considered a draft. The server will not send any scheduling messages to participants or send push notifications for alerts. This may only be set to true upon creation. Once set to false, the value cannot be updated to true. This property MUST NOT appear in "recurrenceOverrides".<a href="#section-5-2.8" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-5-2.9">
 <strong>isOrigin</strong>: <code>Boolean</code> (server-set)</dt>
         <dd id="section-5-2.10">
@@ -733,7 +733,7 @@ invitation from another calendar system)? This is true if, and only if:<a href="
 </li>
           </ul>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-5-2.11">
 <strong>utcStart</strong>: <code>UTCDateTime</code>
 </dt>
@@ -745,18 +745,18 @@ invitation from another calendar system)? This is true if, and only if:<a href="
 <p id="section-5-2.12.5">Floating events (events without a time zone) will be interpreted as per the time zone given as a "CalendarEvent/get" argument.<a href="#section-5-2.12.5" class="pilcrow">¶</a></p>
 <p id="section-5-2.12.6">Note that it is not possible to accurately calculate the expansion of a recurrence rule or recurrence overrides with the "utcStart" property rather than the local start time. Even simple recurrences such as "repeat weekly" may cross a daylight-savings boundary and end up at a different UTC time. Clients that wish to use "utcStart" are RECOMMENDED to request the server expand recurrences (see <a href="#calendarevent-query" class="auto internal xref">Section 5.11</a>).<a href="#section-5-2.12.6" class="pilcrow">¶</a></p>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-5-2.13">
 <strong>utcEnd</strong>: <code>UTCDateTime</code>
 </dt>
         <dd id="section-5-2.14">The server calculates the end time in UTC from the start/timeZone/duration properties of the event. This property is not included by default and must be requested explicitly. Like utcStart, it is calculated at fetch time if requested and may change due to time zone data changes. Floating events will be interpreted as per the time zone given as a "CalendarEvent/get" argument.<a href="#section-5-2.14" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-5-2.15">
 <strong>useDefaultAlerts</strong>: <code>Boolean</code> (optional, default: false)</dt>
         <dd id="section-5-2.16">If true, use the user's default alerts and ignore the value of the <code>alerts</code> property (see <a href="#default-alerts" class="auto internal xref">Section 6.1</a>).<a href="#section-5-2.16" class="pilcrow">¶</a>
 </dd>
-      <dd class="break"></dd>
+      
 </dl>
 <p id="section-5-3">CalendarEvent objects MUST NOT have a "method" property as this is only used when representing iTIP <span>[<a href="#RFC5546" class="cite xref">RFC5546</a>]</span> scheduling messages, not events in a data store.<a href="#section-5-3" class="pilcrow">¶</a></p>
 <div id="additional-jscalendar-properties">
@@ -882,31 +882,31 @@ delivered out of order (if the "scheduleSequence" is the same).<a href="#section
 <section id="section-5.7">
         <h3 id="name-calendarevent-get"><a href="#section-5.7">5.7.&nbsp;&nbsp;CalendarEvent/get</a></h3>
 <p id="section-5.7-1">This is a standard "/get" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.1" class="relref">Section 5.1</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, with four extra arguments:<a href="#section-5.7-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-5.7-2">
+<dl class="dlNewline" id="section-5.7-2">
           <dt id="section-5.7-2.1">
 <strong>recurrenceOverridesBefore</strong>: <code>UTCDateTime|null</code>
 </dt>
           <dd id="section-5.7-2.2">If given, only recurrence overrides with a recurrence id before this date (when translated into UTC) will be returned.<a href="#section-5.7-2.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-5.7-2.3">
 <strong>recurrenceOverridesAfter</strong>: <code>UTCDateTime|null</code>
 </dt>
           <dd id="section-5.7-2.4">If given, only recurrence overrides with a recurrence id on or after this date (when translated into UTC) will be returned.<a href="#section-5.7-2.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-5.7-2.5">
 <strong>reduceParticipants</strong>: <code>Boolean</code> (default: false)</dt>
           <dd id="section-5.7-2.6">If true, only participants with the "owner" role or corresponding to the user's participant identities will be returned in the "participants" property of the base event and any recurrence overrides. If false, all participants will be returned.<a href="#section-5.7-2.6" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-5.7-2.7">
 <strong>timeZone</strong>: <code>TimeZoneId</code> (default "Etc/UTC")</dt>
           <dd id="section-5.7-2.8">The time zone to use when calculating the "utcStart"/"utcEnd" property of floating events. This argument has no effect if those properties are not requested.<a href="#section-5.7-2.8" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
-<p id="section-5.7-3">A CalendarEvent object is a JSCalendar Event object so may have arbitrary properties. If the client makes a "CalendarEvent/get" call with a null or omitted "properties" argument, all properties that are defined on the JSCalendar Event object in the store are returned except for "iCalendar". In addition, the "id", "calendarIds", "isDraft", and "isOrigin" properties MUST be included on each object. The "utcStart" and "utcEnd" computed properties are only returned if explicitly requested. If either are requested, the "recurrenceOverrides" property MUST NOT be requested (recurrence overrides cannot be interpreted accurately with just the UTC times). The "iCalendar" property is also only returned if explicitly requested.<a href="#section-5.7-3" class="pilcrow">¶</a></p>
+<p id="section-5.7-3">A CalendarEvent object is a JSCalendar Event object so may have arbitrary properties. If the client makes a "CalendarEvent/get" call with a null or omitted "properties" argument, all properties that are defined on the JSCalendar Event object in the store are returned except for "iCalComponent". In addition, the "id", "calendarIds", "isDraft", and "isOrigin" properties MUST be included on each object. The "utcStart" and "utcEnd" computed properties are only returned if explicitly requested. If either are requested, the "recurrenceOverrides" property MUST NOT be requested (recurrence overrides cannot be interpreted accurately with just the UTC times). The "iCalComponent" property is also only returned if explicitly requested.<a href="#section-5.7-3" class="pilcrow">¶</a></p>
 <p id="section-5.7-4">If specific properties are requested from the JSCalendar Event and the property is not present on the object in the server's store, the server MUST return the default value if known for that property.<a href="#section-5.7-4" class="pilcrow">¶</a></p>
 <p id="section-5.7-5">A requested id may represent a server-expanded single instance of a recurring event if the client asked the server to expand recurrences in "CalendarEvent/query". In such a case, the server will resolve any overrides and set the appropriate "start" and "recurrenceId" properties on the CalendarEvent object returned to the client. The "recurrenceRule" and "recurrenceOverrides" properties MUST be returned as null if requested for such an event.<a href="#section-5.7-5" class="pilcrow">¶</a></p>
 <p id="section-5.7-6">An event with the same uid/recurrenceId may appear in different accounts. Clients may coalesce the view of such events, but must be aware that the data may be different in the different accounts due to per-user properties, difference in permissions, etc.<a href="#section-5.7-6" class="pilcrow">¶</a></p>
@@ -934,13 +934,13 @@ delivered out of order (if the "scheduleSequence" is the same).<a href="#section
 <section id="section-5.9">
         <h3 id="name-calendarevent-set"><a href="#section-5.9">5.9.&nbsp;&nbsp;CalendarEvent/set</a></h3>
 <p id="section-5.9-1">This is a standard "/set" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.3" class="relref">Section 5.3</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, with the following extra argument:<a href="#section-5.9-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-5.9-2">
+<dl class="dlNewline" id="section-5.9-2">
           <dt id="section-5.9-2.1">
 <strong>sendSchedulingMessages</strong>: <code>Boolean</code> (default: false)</dt>
           <dd id="section-5.9-2.2">
             <p id="section-5.9-2.2.1">If true then any changes to scheduled events will be sent to all the participants (if the server is the origin of the event) or back to the origin (otherwise), as per <a href="#sending-invitations-and-responses" class="auto internal xref">Section 5.9.2</a>.<a href="#section-5.9-2.2.1" class="pilcrow">¶</a></p>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 <p id="section-5.9-3">An id may represent a server-expanded single instance of a recurring event if the client asked the server to expand recurrences in "CalendarEvent/query". When the synthetic id for such an instance is given, the server MUST process an update as an update to the recurrence override for that instance on the base event, and a destroy as removing just that instance.<a href="#section-5.9-3" class="pilcrow">¶</a></p>
 <p id="section-5.9-4">Clients MUST NOT send an update/destroy to both the base event and a synthetic instance in a single "/set" request; the result of this is undefined. Note however, a client may replace a series of explicit instances (each with the same uid but a different "recurrenceId" property) with the base event (same uid, no recurrenceId) in a single "/set" call. (So the "/set" will destroy the existing instances and create the new base event.) This will happen when someone is initially invited to a specific instance or instances of a recurring event, then later invited to the whole series.<a href="#section-5.9-4" class="pilcrow">¶</a></p>
@@ -982,11 +982,11 @@ value is less than or equal to the current "sequence" value on the server;<a hre
 <p id="section-5.9-20">The server MAY enforce that all events have an owner, for example in team calendars. If the user tries to create an event without participants in such a calendar, the server MUST automatically add a participant with the "owner" role corresponding to one of the user's ParticipantIdentities (see <a href="#participant-identities" class="auto internal xref">Section 3</a>).<a href="#section-5.9-20" class="pilcrow">¶</a></p>
 <p id="section-5.9-21">When creating an event with participants, or adding participants to an event that previously did not have participants, the server MUST set the "organizerCalendarAddress" property of the event if not present. Clients SHOULD NOT set the "organizerCalendarAddress" property for events when the user adds participants, as the server is better placed to choose the best address (for example, it might choose to user a different address per event).<a href="#section-5.9-21" class="pilcrow">¶</a></p>
 <p id="section-5.9-22">The following extra SetError type is defined:<a href="#section-5.9-22" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-5.9-23">
+<dl class="dlNewline" id="section-5.9-23">
           <dt id="section-5.9-23.1"><strong>noSupportedScheduleMethods</strong></dt>
           <dd id="section-5.9-23.2">The server was requested to send scheduling messages, but does not support any of the methods available for at least one of the recipients.<a href="#section-5.9-23.2" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 <div id="patching">
 <section id="section-5.9.1">
@@ -1212,18 +1212,18 @@ the occurrence on 2025-03-05, which starts an hour later than normal. Now, if Zo
 <section id="section-5.11">
         <h3 id="name-calendarevent-query"><a href="#section-5.11">5.11.&nbsp;&nbsp;CalendarEvent/query</a></h3>
 <p id="section-5.11-1">This is a standard "/query" method as described in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-5.5" class="relref">Section 5.5</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, with two extra arguments:<a href="#section-5.11-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-5.11-2">
+<dl class="dlNewline" id="section-5.11-2">
           <dt id="section-5.11-2.1">
 <strong>expandRecurrences</strong>: <code>Boolean</code> (default: false)</dt>
           <dd id="section-5.11-2.2">If true, the server will expand any recurring event. If true, the filter MUST be just a FilterCondition (not a FilterOperator) and MUST include both a "before" and "after" property. This ensures the server is not asked to return an infinite number of results.<a href="#section-5.11-2.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-5.11-2.3">
 <strong>timeZone</strong>: <code>TimeZoneId</code>
 </dt>
           <dd id="section-5.11-2.4">The time zone for before/after filter conditions (default: "Etc/UTC")<a href="#section-5.11-2.4" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 <p id="section-5.11-3">If expandRecurrences is true, a separate id will be returned for each instance of a recurring event that matches the query. This synthetic id is opaque to the client, but uniquely identifies the base event id + recurrence id within the account, allowing the server to resolve these for "/get" and "/set" operations. Otherwise, a single id will be returned for matching recurring events that represents the entire event.<a href="#section-5.11-3" class="pilcrow">¶</a></p>
 <p id="section-5.11-4">There is no necessary correspondence between the ids of different instances of the same expanded event.<a href="#section-5.11-4" class="pilcrow">¶</a></p>
@@ -1234,67 +1234,67 @@ the occurrence on 2025-03-05, which starts an hour later than normal. Now, if Zo
 <section id="section-5.11.1">
           <h4 id="name-filtering"><a href="#section-5.11.1">5.11.1.&nbsp;&nbsp;Filtering</a></h4>
 <p id="section-5.11.1-1">A <strong>FilterCondition</strong> object has the following properties, any of which may be omitted:<a href="#section-5.11.1-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-5.11.1-2">
+<dl class="dlNewline" id="section-5.11.1-2">
             <dt id="section-5.11.1-2.1">
 <strong>inCalendar</strong>: <code>Id</code>
 </dt>
             <dd id="section-5.11.1-2.2">A Calendar id. An event must be in this calendar to match the condition.<a href="#section-5.11.1-2.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-5.11.1-2.3">
 <strong>after</strong>: <code>LocalDateTime</code>
 </dt>
             <dd id="section-5.11.1-2.4">The end of the event, or any recurrence of the event, in the time zone given as the "timeZone" argument, must be after this date to match the condition.<a href="#section-5.11.1-2.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-5.11.1-2.5">
 <strong>before</strong>: <code>LocalDateTime</code>
 </dt>
             <dd id="section-5.11.1-2.6">The start of the event, or any recurrence of the event, in the time zone given as the "timeZone" argument, must be before this date to match the condition.<a href="#section-5.11.1-2.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-5.11.1-2.7">
 <strong>text</strong>: <code>String</code>
 </dt>
             <dd id="section-5.11.1-2.8">Looks for the text in the "title", "description", "locations" (matching name/description), "participants" (matching name/email) and any other textual properties of the event or any recurrence of the event.<a href="#section-5.11.1-2.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-5.11.1-2.9">
 <strong>title</strong>: <code>String</code>
 </dt>
             <dd id="section-5.11.1-2.10">Looks for the text in the "title" property of the event, or the overridden "title" property of a recurrence.<a href="#section-5.11.1-2.10" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-5.11.1-2.11">
 <strong>description</strong>: <code>String</code>
 </dt>
             <dd id="section-5.11.1-2.12">Looks for the text in the "description" property of the event, or the overridden "description" property of a recurrence.<a href="#section-5.11.1-2.12" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-5.11.1-2.13">
 <strong>location</strong>: <code>String</code>
 </dt>
             <dd id="section-5.11.1-2.14">Looks for the text in the "locations" property of the event (matching name/description of a location), or the overridden "locations" property of a recurrence.<a href="#section-5.11.1-2.14" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-5.11.1-2.15">
 <strong>owner</strong>: <code>String</code>
 </dt>
             <dd id="section-5.11.1-2.16">Looks for the text in the name or email fields of a participant in the "participants" property of the event, or the overridden "participants" property of a recurrence, where the participant has a role of "owner".<a href="#section-5.11.1-2.16" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-5.11.1-2.17">
 <strong>attendee</strong>: <code>String</code>
 </dt>
             <dd id="section-5.11.1-2.18">Looks for the text in the name or email fields of a participant in the "participants" property of the event, or the overridden "participants" property of a recurrence, where the participant has a role of "attendee".<a href="#section-5.11.1-2.18" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-5.11.1-2.19">
 <strong>uid</strong>: <code>String</code>
 </dt>
             <dd id="section-5.11.1-2.20">The uid of the event is exactly the given string.<a href="#section-5.11.1-2.20" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 <p id="section-5.11.1-3">If expandRecurrences is true, all conditions must match against the same instance of a recurring event for the instance to match. If expandRecurrences is false, all conditions must match, but they may each match any instance of the event.<a href="#section-5.11.1-3" class="pilcrow">¶</a></p>
 <p id="section-5.11.1-4">If zero properties are specified on the FilterCondition, the condition MUST always evaluate to true. If multiple properties are specified, ALL must apply for the condition to be true (it is equivalent to splitting the object into one-property conditions and making them all the child of an AND filter operator).<a href="#section-5.11.1-4" class="pilcrow">¶</a></p>
@@ -1358,52 +1358,52 @@ the occurrence on 2025-03-05, which starts an hour later than normal. Now, if Zo
 </li>
         </ul>
 <p id="section-5.13-4">The "CalendarEvent/parse" method takes the following arguments:<a href="#section-5.13-4" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-5.13-5">
+<dl class="dlNewline" id="section-5.13-5">
           <dt id="section-5.13-5.1">
 <strong>accountId</strong>: <code>Id</code>
 </dt>
           <dd id="section-5.13-5.2">The id of the account to use.<a href="#section-5.13-5.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-5.13-5.3">
 <strong>blobIds</strong>: <code>Id[]</code>
 </dt>
           <dd id="section-5.13-5.4">The ids of the blobs to parse.<a href="#section-5.13-5.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-5.13-5.5">
 <strong>properties</strong>: <code>String[]</code>
 </dt>
           <dd id="section-5.13-5.6">If supplied, only the properties listed in the array are returned for each <code>CalendarEvent</code> object. If omitted, defaults to all the properties.<a href="#section-5.13-5.6" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 <p id="section-5.13-6">The response object contains the following arguments:<a href="#section-5.13-6" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-5.13-7">
+<dl class="dlNewline" id="section-5.13-7">
           <dt id="section-5.13-7.1">
 <strong>accountId</strong>: <code>Id</code>
 </dt>
           <dd id="section-5.13-7.2">The id of the account used for the call.<a href="#section-5.13-7.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-5.13-7.3">
 <strong>parsed</strong>: <code>Id[CalendarEvent[]]|null</code>
 </dt>
           <dd id="section-5.13-7.4">A map of blob ids to parsed <code>CalendarEvent</code> objects representations for each successfully parsed blob, or null if none.<a href="#section-5.13-7.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-5.13-7.5">
 <strong>notFound</strong>: <code>Id[]|null</code>
 </dt>
           <dd id="section-5.13-7.6">A list of blob ids given that could not be found, or null if none.<a href="#section-5.13-7.6" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-5.13-7.7">
 <strong>notParsable</strong>: <code>Id[]|null</code>
 </dt>
           <dd id="section-5.13-7.8">A list of blob ids given that corresponded to blobs that could not be parsed as CalendarEvents, or null if none.<a href="#section-5.13-7.8" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 <p id="section-5.13-8">Parsed <code>iCalendars</code> are to be converted into <code>CalendarEvent</code> objects following the process defined in the <a href="https://datatracker.ietf.org/doc/draft-ietf-calext-jscalendar-icalendar">JSCalendar: Converting from and to iCalendar</a> document.<a href="#section-5.13-8" class="pilcrow">¶</a></p>
 </section>
@@ -1456,19 +1456,19 @@ the occurrence on 2025-03-05, which starts an hour later than normal. Now, if Zo
 <p id="section-6.4-1">Servers that support the <code>urn:ietf:params:jmap:calendars</code> capability MUST support registering for the pseudo-type "CalendarAlert" in push subscriptions and event source connections, as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, Sections <a href="https://rfc-editor.org/rfc/rfc8620#section-7.2" class="relref">7.2</a> and <a href="https://rfc-editor.org/rfc/rfc8620#section-7.3" class="relref">7.3</a>.<a href="#section-6.4-1" class="pilcrow">¶</a></p>
 <p id="section-6.4-2">If requested, a CalendarAlert notification will be pushed whenever an alert is triggered for the user. For Event Source connections, this notification is pushed as an event called "calendarAlert".<a href="#section-6.4-2" class="pilcrow">¶</a></p>
 <p id="section-6.4-3">A <strong>CalendarAlert</strong> object has the following properties:<a href="#section-6.4-3" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-6.4-4">
+<dl class="dlNewline" id="section-6.4-4">
           <dt id="section-6.4-4.1">
 <strong>@type</strong>: <code>String</code>
 </dt>
           <dd id="section-6.4-4.2">This MUST be the string "CalendarAlert".<a href="#section-6.4-4.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-6.4-4.3">
 <strong>accountId</strong>: <code>Id</code>
 </dt>
           <dd id="section-6.4-4.4">The account id for the calendar in which the alert triggered.<a href="#section-6.4-4.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-6.4-4.5">
 <strong>calendarEventId</strong>: <code>Id</code>
 </dt>
@@ -1476,26 +1476,26 @@ the occurrence on 2025-03-05, which starts an hour later than normal. Now, if Zo
 event this is the id of the base event, never a synthetic id for a particular
 instance.<a href="#section-6.4-4.6" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-6.4-4.7">
 <strong>uid</strong>: <code>String</code>
 </dt>
           <dd id="section-6.4-4.8">The "uid" property of the CalendarEvent for the alert that triggered.<a href="#section-6.4-4.8" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-6.4-4.9">
 <strong>recurrenceId</strong>: <code>LocalDateTime|null</code>
 </dt>
           <dd id="section-6.4-4.10">The recurrenceId for the instance of the event for which this alert is being
 triggered, or null if the event is not recurring.<a href="#section-6.4-4.10" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-6.4-4.11">
 <strong>alertId</strong>: <code>String</code>
 </dt>
           <dd id="section-6.4-4.12">The id for the alert that triggered.<a href="#section-6.4-4.12" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 </section>
 </div>
@@ -1517,59 +1517,59 @@ triggered, or null if the event is not recurring.<a href="#section-6.4-4.10" cla
 <p id="section-7-6">The server <span class="bcp14">MAY</span> limit the maximum number of notifications it will store for a user. When the limit is reached, any new notification will cause the previously oldest notification to be automatically deleted.<a href="#section-7-6" class="pilcrow">¶</a></p>
 <p id="section-7-7">The server <span class="bcp14">MAY</span> coalesce notifications if appropriate or remove notifications after a certain period of time or that it deems are no longer relevant.<a href="#section-7-7" class="pilcrow">¶</a></p>
 <p id="section-7-8">A <strong>CalendarEventNotification</strong> object has the following properties:<a href="#section-7-8" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-7-9">
+<dl class="dlNewline" id="section-7-9">
         <dt id="section-7-9.1">
 <strong>id</strong>: <code>Id</code>
 </dt>
         <dd id="section-7-9.2">The id of the CalendarEventNotification.<a href="#section-7-9.2" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-7-9.3">
 <strong>created</strong>: <code>UTCDateTime</code>
 </dt>
         <dd id="section-7-9.4">The time this notification was created.<a href="#section-7-9.4" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-7-9.5">
 <strong>changedBy</strong>: <code>Person</code>
 </dt>
         <dd id="section-7-9.6">
           <p id="section-7-9.6.1">Who made the change. The Person object has the following properties:<a href="#section-7-9.6.1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlCompact dlNewline" id="section-7-9.6.2">
+<dl class="dlCompact dlNewline" id="section-7-9.6.2">
             <dt id="section-7-9.6.2.1">
 <strong>name</strong>: <code>String</code>
 </dt>
             <dd id="section-7-9.6.2.2">The name of the person who made the change.<a href="#section-7-9.6.2.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-7-9.6.2.3">
 <strong>email</strong>: <code>String|null</code>
 </dt>
             <dd id="section-7-9.6.2.4">The email of the person who made the change, or null if no email is available.<a href="#section-7-9.6.2.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-7-9.6.2.5">
 <strong>principalId</strong>: <code>Id|null</code>
 </dt>
             <dd id="section-7-9.6.2.6">The id of the Principal corresponding to the person who made the change, if any. This will be null if the change was due to an entity outside of this user's organisation, e.g. an iTIP invitation from an external person.<a href="#section-7-9.6.2.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-7-9.6.2.7">
 <strong>calendarAddress</strong>: <code>String|null</code>
 </dt>
             <dd id="section-7-9.6.2.8">The calendarAddress URI of the person who made the change, if any. This may be set if the change was made due to receving a scheduling message, such as an iTIP message, in addition to changes made by internal users.<a href="#section-7-9.6.2.8" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-7-9.7">
 <strong>comment</strong>: <code>String|null</code>
 </dt>
         <dd id="section-7-9.8">Comment sent along with the change by the user that made it. (e.g. COMMENT
 property in an iTIP message), if any.<a href="#section-7-9.8" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-7-9.9">
 <strong>type</strong>: <code>String</code>
 </dt>
@@ -1587,31 +1587,31 @@ property in an iTIP message), if any.<a href="#section-7-9.8" class="pilcrow">¶
 </li>
           </ul>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-7-9.11">
 <strong>calendarEventId</strong>: <code>Id</code>
 </dt>
         <dd id="section-7-9.12">The id of the CalendarEvent that this notification is about.<a href="#section-7-9.12" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-7-9.13">
 <strong>isDraft</strong>: <code>Boolean</code> (created/updated only)</dt>
         <dd id="section-7-9.14">True if the event is a draft.<a href="#section-7-9.14" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-7-9.15">
 <strong>event</strong>: <code>JSCalendar Event</code>
 </dt>
         <dd id="section-7-9.16">The data before the change (if updated or destroyed), or the data
 after creation (if created).<a href="#section-7-9.16" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 <dt id="section-7-9.17">
 <strong>eventPatch</strong>: <code>PatchObject</code> (updated only)</dt>
         <dd id="section-7-9.18">A patch encoding the change between the data in the event property, and the
 data after the update.<a href="#section-7-9.18" class="pilcrow">¶</a>
 </dd>
-      <dd class="break"></dd>
+      
 </dl>
 <p id="section-7-10">If the change only affects a single instance of a recurring event, the server MAY set the event and eventPatch properties for just that instance; the calendarEventId MUST still be for the base event.<a href="#section-7-10" class="pilcrow">¶</a></p>
 <div id="calendareventnotification-get">
@@ -1642,31 +1642,31 @@ data after the update.<a href="#section-7-9.18" class="pilcrow">¶</a>
 <section id="section-7.4.1">
           <h4 id="name-filtering-2"><a href="#section-7.4.1">7.4.1.&nbsp;&nbsp;Filtering</a></h4>
 <p id="section-7.4.1-1">A <strong>FilterCondition</strong> object has the following properties:<a href="#section-7.4.1-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlNewline" id="section-7.4.1-2">
+<dl class="dlNewline" id="section-7.4.1-2">
             <dt id="section-7.4.1-2.1">
 <strong>after</strong>: <code>UTCDateTime|null</code>
 </dt>
             <dd id="section-7.4.1-2.2">The creation date must be on or after this date to match the condition.<a href="#section-7.4.1-2.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-7.4.1-2.3">
 <strong>before</strong>: <code>UTCDateTime|null</code>
 </dt>
             <dd id="section-7.4.1-2.4">The creation date must be before this date to match the condition.<a href="#section-7.4.1-2.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-7.4.1-2.5">
 <strong>type</strong>: <code>String</code>
 </dt>
             <dd id="section-7.4.1-2.6">The "type" property must be the same to match the condition.<a href="#section-7.4.1-2.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-7.4.1-2.7">
 <strong>calendarEventIds</strong>: <code>Id[]|null</code>
 </dt>
             <dd id="section-7.4.1-2.8">A list of event ids. The "calendarEventId" property of the notification must be in this list to match the condition.<a href="#section-7.4.1-2.8" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
@@ -2192,28 +2192,28 @@ makes no other change):<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 <section id="section-10.1">
         <h3 id="name-jmap-capability-registratio"><a href="#section-10.1">10.1.&nbsp;&nbsp;JMAP Capability Registration for "calendars"</a></h3>
 <p id="section-10.1-1">IANA will register the "calendars" JMAP Capability as follows:<a href="#section-10.1-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.1-2">
+<dl class="dlCompact dlParallel" id="section-10.1-2">
           <dt id="section-10.1-2.1">Capability Name:</dt>
           <dd id="section-10.1-2.2">
             <code>urn:ietf:params:jmap:calendars</code><a href="#section-10.1-2.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.1-2.3">Specification document:</dt>
           <dd id="section-10.1-2.4">this document<a href="#section-10.1-2.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.1-2.5">Intended use:</dt>
           <dd id="section-10.1-2.6">common<a href="#section-10.1-2.6" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.1-2.7">Change Controller:</dt>
           <dd id="section-10.1-2.8">IETF<a href="#section-10.1-2.8" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.1-2.9">Security and privacy considerations:</dt>
           <dd id="section-10.1-2.10">this document, <a href="#urn-ietf-params-jmap-calendars" class="auto internal xref">Section 1.5.1</a><a href="#section-10.1-2.10" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 </section>
 </div>
@@ -2221,28 +2221,28 @@ makes no other change):<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 <section id="section-10.2">
         <h3 id="name-jmap-capability-registration"><a href="#section-10.2">10.2.&nbsp;&nbsp;JMAP Capability Registration for "principals:availability"</a></h3>
 <p id="section-10.2-1">IANA will register the "principals:availability" JMAP Capability as follows:<a href="#section-10.2-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.2-2">
+<dl class="dlCompact dlParallel" id="section-10.2-2">
           <dt id="section-10.2-2.1">Capability Name:</dt>
           <dd id="section-10.2-2.2">
             <code>urn:ietf:params:jmap:principals:availability</code><a href="#section-10.2-2.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.2-2.3">Specification document:</dt>
           <dd id="section-10.2-2.4">this document<a href="#section-10.2-2.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.2-2.5">Intended use:</dt>
           <dd id="section-10.2-2.6">common<a href="#section-10.2-2.6" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.2-2.7">Change Controller:</dt>
           <dd id="section-10.2-2.8">IETF<a href="#section-10.2-2.8" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.2-2.9">Security and privacy considerations:</dt>
           <dd id="section-10.2-2.10">this document, <a href="#urn-ietf-params-jmap-principals-availability" class="auto internal xref">Section 1.5.2</a><a href="#section-10.2-2.10" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 </section>
 </div>
@@ -2250,28 +2250,28 @@ makes no other change):<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 <section id="section-10.3">
         <h3 id="name-jmap-data-type-registration"><a href="#section-10.3">10.3.&nbsp;&nbsp;JMAP Data Type Registration for "Calendar"</a></h3>
 <p id="section-10.3-1">IANA will register "Calendar" in the "JMAP Data Types" registry as follows:<a href="#section-10.3-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.3-2">
+<dl class="dlCompact dlParallel" id="section-10.3-2">
           <dt id="section-10.3-2.1">Type Name:</dt>
           <dd id="section-10.3-2.2">Calendar<a href="#section-10.3-2.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.3-2.3">Can reference blobs:</dt>
           <dd id="section-10.3-2.4">no<a href="#section-10.3-2.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.3-2.5">Can Use for State Change:</dt>
           <dd id="section-10.3-2.6">yes<a href="#section-10.3-2.6" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.3-2.7">Capability:</dt>
           <dd id="section-10.3-2.8">
             <code>urn:ietf:params:jmap:calendars</code><a href="#section-10.3-2.8" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.3-2.9">Specification document:</dt>
           <dd id="section-10.3-2.10">this document<a href="#section-10.3-2.10" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 </section>
 </div>
@@ -2279,28 +2279,28 @@ makes no other change):<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 <section id="section-10.4">
         <h3 id="name-jmap-data-type-registration-"><a href="#section-10.4">10.4.&nbsp;&nbsp;JMAP Data Type Registration for "CalendarEvent"</a></h3>
 <p id="section-10.4-1">IANA will register "CalendarEvent" in the "JMAP Data Types" registry as follows:<a href="#section-10.4-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.4-2">
+<dl class="dlCompact dlParallel" id="section-10.4-2">
           <dt id="section-10.4-2.1">Type Name:</dt>
           <dd id="section-10.4-2.2">CalendarEvent<a href="#section-10.4-2.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.4-2.3">Can reference blobs:</dt>
           <dd id="section-10.4-2.4">yes<a href="#section-10.4-2.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.4-2.5">Can Use for State Change:</dt>
           <dd id="section-10.4-2.6">yes<a href="#section-10.4-2.6" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.4-2.7">Capability:</dt>
           <dd id="section-10.4-2.8">
             <code>urn:ietf:params:jmap:calendars</code><a href="#section-10.4-2.8" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.4-2.9">Specification document:</dt>
           <dd id="section-10.4-2.10">this document<a href="#section-10.4-2.10" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 </section>
 </div>
@@ -2308,28 +2308,28 @@ makes no other change):<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 <section id="section-10.5">
         <h3 id="name-jmap-data-type-registration-f"><a href="#section-10.5">10.5.&nbsp;&nbsp;JMAP Data Type Registration for "CalendarEventNotification"</a></h3>
 <p id="section-10.5-1">IANA will register "CalendarEventNotification" in the "JMAP Data Types" registry as follows:<a href="#section-10.5-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.5-2">
+<dl class="dlCompact dlParallel" id="section-10.5-2">
           <dt id="section-10.5-2.1">Type Name:</dt>
           <dd id="section-10.5-2.2">CalendarEventNotification<a href="#section-10.5-2.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.5-2.3">Can reference blobs:</dt>
           <dd id="section-10.5-2.4">no<a href="#section-10.5-2.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.5-2.5">Can Use for State Change:</dt>
           <dd id="section-10.5-2.6">yes<a href="#section-10.5-2.6" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.5-2.7">Capability:</dt>
           <dd id="section-10.5-2.8">
             <code>urn:ietf:params:jmap:calendars</code><a href="#section-10.5-2.8" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.5-2.9">Specification document:</dt>
           <dd id="section-10.5-2.10">this document<a href="#section-10.5-2.10" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 </section>
 </div>
@@ -2337,28 +2337,28 @@ makes no other change):<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 <section id="section-10.6">
         <h3 id="name-jmap-data-type-registration-fo"><a href="#section-10.6">10.6.&nbsp;&nbsp;JMAP Data Type Registration for "ParticipantIdentity"</a></h3>
 <p id="section-10.6-1">IANA will register "ParticipantIdentity" in the "JMAP Data Types" registry as follows:<a href="#section-10.6-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.6-2">
+<dl class="dlCompact dlParallel" id="section-10.6-2">
           <dt id="section-10.6-2.1">Type Name:</dt>
           <dd id="section-10.6-2.2">ParticipantIdentity<a href="#section-10.6-2.2" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.6-2.3">Can reference blobs:</dt>
           <dd id="section-10.6-2.4">no<a href="#section-10.6-2.4" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.6-2.5">Can Use for State Change:</dt>
           <dd id="section-10.6-2.6">yes<a href="#section-10.6-2.6" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.6-2.7">Capability:</dt>
           <dd id="section-10.6-2.8">
             <code>urn:ietf:params:jmap:calendars</code><a href="#section-10.6-2.8" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 <dt id="section-10.6-2.9">Specification document:</dt>
           <dd id="section-10.6-2.10">this document<a href="#section-10.6-2.10" class="pilcrow">¶</a>
 </dd>
-        <dd class="break"></dd>
+        
 </dl>
 </section>
 </div>
@@ -2370,108 +2370,108 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 <div id="calendarhasevent">
 <section id="section-10.7.1">
           <h4 id="name-calendarhasevent"><a href="#section-10.7.1">10.7.1.&nbsp;&nbsp;calendarHasEvent</a></h4>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.7.1-1">
+<dl class="dlCompact dlParallel" id="section-10.7.1-1">
             <dt id="section-10.7.1-1.1">JMAP Error Code:</dt>
             <dd id="section-10.7.1-1.2">calendarHasEvent<a href="#section-10.7.1-1.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.7.1-1.3">Intended use:</dt>
             <dd id="section-10.7.1-1.4">common<a href="#section-10.7.1-1.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.7.1-1.5">Change controller:</dt>
             <dd id="section-10.7.1-1.6">IETF<a href="#section-10.7.1-1.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.7.1-1.7">Reference:</dt>
             <dd id="section-10.7.1-1.8">This document, <a href="#calendar-set" class="auto internal xref">Section 4.3</a><a href="#section-10.7.1-1.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.7.1-1.9">Description:</dt>
             <dd id="section-10.7.1-1.10">The Calendar has at least one CalendarEvent assigned to it, and the "onDestroyRemoveEvents" argument was false.<a href="#section-10.7.1-1.10" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
 <div id="nosupportedschedulemethods">
 <section id="section-10.7.2">
           <h4 id="name-nosupportedschedulemethods"><a href="#section-10.7.2">10.7.2.&nbsp;&nbsp;noSupportedScheduleMethods</a></h4>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.7.2-1">
+<dl class="dlCompact dlParallel" id="section-10.7.2-1">
             <dt id="section-10.7.2-1.1">JMAP Error Code:</dt>
             <dd id="section-10.7.2-1.2">noSupportedScheduleMethods<a href="#section-10.7.2-1.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.7.2-1.3">Intended use:</dt>
             <dd id="section-10.7.2-1.4">common<a href="#section-10.7.2-1.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.7.2-1.5">Change controller:</dt>
             <dd id="section-10.7.2-1.6">IETF<a href="#section-10.7.2-1.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.7.2-1.7">Reference:</dt>
             <dd id="section-10.7.2-1.8">This document, <a href="#calendarevent-set" class="auto internal xref">Section 5.9</a><a href="#section-10.7.2-1.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.7.2-1.9">Description:</dt>
             <dd id="section-10.7.2-1.10">The server was requested to send scheduling messages, but does not support any of the methods available for at least one of the recipients.<a href="#section-10.7.2-1.10" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
 <div id="expanddurationtoolarge">
 <section id="section-10.7.3">
           <h4 id="name-expanddurationtoolarge"><a href="#section-10.7.3">10.7.3.&nbsp;&nbsp;expandDurationTooLarge</a></h4>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.7.3-1">
+<dl class="dlCompact dlParallel" id="section-10.7.3-1">
             <dt id="section-10.7.3-1.1">JMAP Error Code:</dt>
             <dd id="section-10.7.3-1.2">expandDurationTooLarge<a href="#section-10.7.3-1.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.7.3-1.3">Intended use:</dt>
             <dd id="section-10.7.3-1.4">common<a href="#section-10.7.3-1.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.7.3-1.5">Change controller:</dt>
             <dd id="section-10.7.3-1.6">IETF<a href="#section-10.7.3-1.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.7.3-1.7">Reference:</dt>
             <dd id="section-10.7.3-1.8">This document, <a href="#calendarevent-query" class="auto internal xref">Section 5.11</a><a href="#section-10.7.3-1.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.7.3-1.9">Description:</dt>
             <dd id="section-10.7.3-1.10">The query has expandRecurrences set to true, and the duration between the "before" and "after" properties exceeds the maxExpandedQueryDuration limit.<a href="#section-10.7.3-1.10" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
 <div id="cannotcalculateoccurrences">
 <section id="section-10.7.4">
           <h4 id="name-cannotcalculateoccurrences"><a href="#section-10.7.4">10.7.4.&nbsp;&nbsp;cannotCalculateOccurrences</a></h4>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.7.4-1">
+<dl class="dlCompact dlParallel" id="section-10.7.4-1">
             <dt id="section-10.7.4-1.1">JMAP Error Code:</dt>
             <dd id="section-10.7.4-1.2">cannotCalculateOccurrences<a href="#section-10.7.4-1.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.7.4-1.3">Intended use:</dt>
             <dd id="section-10.7.4-1.4">common<a href="#section-10.7.4-1.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.7.4-1.5">Change controller:</dt>
             <dd id="section-10.7.4-1.6">IETF<a href="#section-10.7.4-1.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.7.4-1.7">Reference:</dt>
             <dd id="section-10.7.4-1.8">This document, <a href="#calendarevent-query" class="auto internal xref">Section 5.11</a><a href="#section-10.7.4-1.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.7.4-1.9">Description:</dt>
             <dd id="section-10.7.4-1.10">The server cannot expand a recurrence required to return the results for the requested query.<a href="#section-10.7.4-1.10" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
@@ -2516,393 +2516,393 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 <div id="id">
 <section id="section-10.9.1">
           <h4 id="name-id"><a href="#section-10.9.1">10.9.1.&nbsp;&nbsp;id</a></h4>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.1-1">
+<dl class="dlCompact dlParallel" id="section-10.9.1-1">
             <dt id="section-10.9.1-1.1">Property Name:</dt>
             <dd id="section-10.9.1-1.2">id<a href="#section-10.9.1-1.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.1-1.3">Property Type:</dt>
             <dd id="section-10.9.1-1.4">Not applicable<a href="#section-10.9.1-1.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.1-1.5">Property Context:</dt>
             <dd id="section-10.9.1-1.6">Event, Task<a href="#section-10.9.1-1.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.1-1.7">Intended Use:</dt>
             <dd id="section-10.9.1-1.8">Reserved<a href="#section-10.9.1-1.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.1-1.9">Is per-user:</dt>
             <dd id="section-10.9.1-1.10">no<a href="#section-10.9.1-1.10" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
 <div id="baseeventid">
 <section id="section-10.9.2">
           <h4 id="name-baseeventid"><a href="#section-10.9.2">10.9.2.&nbsp;&nbsp;baseEventId</a></h4>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.2-1">
+<dl class="dlCompact dlParallel" id="section-10.9.2-1">
             <dt id="section-10.9.2-1.1">Property Name:</dt>
             <dd id="section-10.9.2-1.2">baseEventId<a href="#section-10.9.2-1.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.2-1.3">Property Type:</dt>
             <dd id="section-10.9.2-1.4">Not applicable<a href="#section-10.9.2-1.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.2-1.5">Property Context:</dt>
             <dd id="section-10.9.2-1.6">Event, Task<a href="#section-10.9.2-1.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.2-1.7">Intended Use:</dt>
             <dd id="section-10.9.2-1.8">Reserved<a href="#section-10.9.2-1.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.2-1.9">Is per-user:</dt>
             <dd id="section-10.9.2-1.10">no<a href="#section-10.9.2-1.10" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
 <div id="calendarids">
 <section id="section-10.9.3">
           <h4 id="name-calendarids"><a href="#section-10.9.3">10.9.3.&nbsp;&nbsp;calendarIds</a></h4>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.3-1">
+<dl class="dlCompact dlParallel" id="section-10.9.3-1">
             <dt id="section-10.9.3-1.1">Property Name:</dt>
             <dd id="section-10.9.3-1.2">calendarIds<a href="#section-10.9.3-1.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.3-1.3">Property Type:</dt>
             <dd id="section-10.9.3-1.4">Not applicable<a href="#section-10.9.3-1.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.3-1.5">Property Context:</dt>
             <dd id="section-10.9.3-1.6">Event, Task<a href="#section-10.9.3-1.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.3-1.7">Intended Use:</dt>
             <dd id="section-10.9.3-1.8">Reserved<a href="#section-10.9.3-1.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.3-1.9">Is per-user:</dt>
             <dd id="section-10.9.3-1.10">no<a href="#section-10.9.3-1.10" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
 <div id="isdraft">
 <section id="section-10.9.4">
           <h4 id="name-isdraft"><a href="#section-10.9.4">10.9.4.&nbsp;&nbsp;isDraft</a></h4>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.4-1">
+<dl class="dlCompact dlParallel" id="section-10.9.4-1">
             <dt id="section-10.9.4-1.1">Property Name:</dt>
             <dd id="section-10.9.4-1.2">isDraft<a href="#section-10.9.4-1.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.4-1.3">Property Type:</dt>
             <dd id="section-10.9.4-1.4">Not applicable<a href="#section-10.9.4-1.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.4-1.5">Property Context:</dt>
             <dd id="section-10.9.4-1.6">Event, Task<a href="#section-10.9.4-1.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.4-1.7">Intended Use:</dt>
             <dd id="section-10.9.4-1.8">Reserved<a href="#section-10.9.4-1.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.4-1.9">Is per-user:</dt>
             <dd id="section-10.9.4-1.10">no<a href="#section-10.9.4-1.10" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
 <div id="isorigin">
 <section id="section-10.9.5">
           <h4 id="name-isorigin"><a href="#section-10.9.5">10.9.5.&nbsp;&nbsp;isOrigin</a></h4>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.5-1">
+<dl class="dlCompact dlParallel" id="section-10.9.5-1">
             <dt id="section-10.9.5-1.1">Property Name:</dt>
             <dd id="section-10.9.5-1.2">isOrigin<a href="#section-10.9.5-1.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.5-1.3">Property Type:</dt>
             <dd id="section-10.9.5-1.4">Not applicable<a href="#section-10.9.5-1.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.5-1.5">Property Context:</dt>
             <dd id="section-10.9.5-1.6">Event, Task<a href="#section-10.9.5-1.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.5-1.7">Intended Use:</dt>
             <dd id="section-10.9.5-1.8">Reserved<a href="#section-10.9.5-1.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.5-1.9">Is per-user:</dt>
             <dd id="section-10.9.5-1.10">no<a href="#section-10.9.5-1.10" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
 <div id="utcstart">
 <section id="section-10.9.6">
           <h4 id="name-utcstart"><a href="#section-10.9.6">10.9.6.&nbsp;&nbsp;utcStart</a></h4>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.6-1">
+<dl class="dlCompact dlParallel" id="section-10.9.6-1">
             <dt id="section-10.9.6-1.1">Property Name:</dt>
             <dd id="section-10.9.6-1.2">utcStart<a href="#section-10.9.6-1.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.6-1.3">Property Type:</dt>
             <dd id="section-10.9.6-1.4">Not applicable<a href="#section-10.9.6-1.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.6-1.5">Property Context:</dt>
             <dd id="section-10.9.6-1.6">Event, Task<a href="#section-10.9.6-1.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.6-1.7">Intended Use:</dt>
             <dd id="section-10.9.6-1.8">Reserved<a href="#section-10.9.6-1.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.6-1.9">Is per-user:</dt>
             <dd id="section-10.9.6-1.10">no<a href="#section-10.9.6-1.10" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
 <div id="utcend">
 <section id="section-10.9.7">
           <h4 id="name-utcend"><a href="#section-10.9.7">10.9.7.&nbsp;&nbsp;utcEnd</a></h4>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.7-1">
+<dl class="dlCompact dlParallel" id="section-10.9.7-1">
             <dt id="section-10.9.7-1.1">Property Name:</dt>
             <dd id="section-10.9.7-1.2">utcEnd<a href="#section-10.9.7-1.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.7-1.3">Property Type:</dt>
             <dd id="section-10.9.7-1.4">Not applicable<a href="#section-10.9.7-1.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.7-1.5">Property Context:</dt>
             <dd id="section-10.9.7-1.6">Event, Task<a href="#section-10.9.7-1.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.7-1.7">Intended Use:</dt>
             <dd id="section-10.9.7-1.8">Reserved<a href="#section-10.9.7-1.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.7-1.9">Is per-user:</dt>
             <dd id="section-10.9.7-1.10">no<a href="#section-10.9.7-1.10" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
 <div id="usedefaultalerts">
 <section id="section-10.9.8">
           <h4 id="name-usedefaultalerts"><a href="#section-10.9.8">10.9.8.&nbsp;&nbsp;useDefaultAlerts</a></h4>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.8-1">
+<dl class="dlCompact dlParallel" id="section-10.9.8-1">
             <dt id="section-10.9.8-1.1">Property Name:</dt>
             <dd id="section-10.9.8-1.2">useDefaultAlerts<a href="#section-10.9.8-1.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.8-1.3">Property Type:</dt>
             <dd id="section-10.9.8-1.4">Not applicable<a href="#section-10.9.8-1.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.8-1.5">Property Context:</dt>
             <dd id="section-10.9.8-1.6">Event<a href="#section-10.9.8-1.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.8-1.7">Intended Use:</dt>
             <dd id="section-10.9.8-1.8">Reserved<a href="#section-10.9.8-1.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.8-1.9">Is per-user:</dt>
             <dd id="section-10.9.8-1.10">yes<a href="#section-10.9.8-1.10" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
 <div id="mayinviteself-1">
 <section id="section-10.9.9">
           <h4 id="name-mayinviteself-2"><a href="#section-10.9.9">10.9.9.&nbsp;&nbsp;mayInviteSelf</a></h4>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.9-1">
+<dl class="dlCompact dlParallel" id="section-10.9.9-1">
             <dt id="section-10.9.9-1.1">Property Name:</dt>
             <dd id="section-10.9.9-1.2">mayInviteSelf<a href="#section-10.9.9-1.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.9-1.3">Property Type:</dt>
             <dd id="section-10.9.9-1.4">
               <code>Boolean</code> (default: false)<a href="#section-10.9.9-1.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.9-1.5">Property Context:</dt>
             <dd id="section-10.9.9-1.6">Event, Task<a href="#section-10.9.9-1.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.9-1.7">Reference:</dt>
             <dd id="section-10.9.9-1.8">This document, <a href="#mayinviteself" class="auto internal xref">Section 5.1.1</a>.<a href="#section-10.9.9-1.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.9-1.9">Intended Use:</dt>
             <dd id="section-10.9.9-1.10">Common<a href="#section-10.9.9-1.10" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.9-1.11">Is per-user:</dt>
             <dd id="section-10.9.9-1.12">no<a href="#section-10.9.9-1.12" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
 <div id="mayinviteothers-1">
 <section id="section-10.9.10">
           <h4 id="name-mayinviteothers-2"><a href="#section-10.9.10">10.9.10.&nbsp;&nbsp;mayInviteOthers</a></h4>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.10-1">
+<dl class="dlCompact dlParallel" id="section-10.9.10-1">
             <dt id="section-10.9.10-1.1">Property Name:</dt>
             <dd id="section-10.9.10-1.2">mayInviteOthers<a href="#section-10.9.10-1.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.10-1.3">Property Type:</dt>
             <dd id="section-10.9.10-1.4">
               <code>Boolean</code> (default: false)<a href="#section-10.9.10-1.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.10-1.5">Property Context:</dt>
             <dd id="section-10.9.10-1.6">Event, Task<a href="#section-10.9.10-1.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.10-1.7">Reference:</dt>
             <dd id="section-10.9.10-1.8">This document, <a href="#mayinviteothers" class="auto internal xref">Section 5.1.2</a>.<a href="#section-10.9.10-1.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.10-1.9">Intended Use:</dt>
             <dd id="section-10.9.10-1.10">Common<a href="#section-10.9.10-1.10" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.10-1.11">Is per-user:</dt>
             <dd id="section-10.9.10-1.12">no<a href="#section-10.9.10-1.12" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
 <div id="hideattendees-1">
 <section id="section-10.9.11">
           <h4 id="name-hideattendees-2"><a href="#section-10.9.11">10.9.11.&nbsp;&nbsp;hideAttendees</a></h4>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.11-1">
+<dl class="dlCompact dlParallel" id="section-10.9.11-1">
             <dt id="section-10.9.11-1.1">Property Name:</dt>
             <dd id="section-10.9.11-1.2">hideAttendees<a href="#section-10.9.11-1.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.11-1.3">Property Type:</dt>
             <dd id="section-10.9.11-1.4">
               <code>Boolean</code> (default: false)<a href="#section-10.9.11-1.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.11-1.5">Property Context:</dt>
             <dd id="section-10.9.11-1.6">Event, Task<a href="#section-10.9.11-1.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.11-1.7">Reference:</dt>
             <dd id="section-10.9.11-1.8">This document, <a href="#hideattendees" class="auto internal xref">Section 5.1.3</a>.<a href="#section-10.9.11-1.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.11-1.9">Intended Use:</dt>
             <dd id="section-10.9.11-1.10">Common<a href="#section-10.9.11-1.10" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.11-1.11">Is per-user:</dt>
             <dd id="section-10.9.11-1.12">no<a href="#section-10.9.11-1.12" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
 <div id="schedulesequence-1">
 <section id="section-10.9.12">
           <h4 id="name-schedulesequence-2"><a href="#section-10.9.12">10.9.12.&nbsp;&nbsp;scheduleSequence</a></h4>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.12-1">
+<dl class="dlCompact dlParallel" id="section-10.9.12-1">
             <dt id="section-10.9.12-1.1">Property Name:</dt>
             <dd id="section-10.9.12-1.2">scheduleSequence<a href="#section-10.9.12-1.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.12-1.3">Property Type:</dt>
             <dd id="section-10.9.12-1.4">Not applicable<a href="#section-10.9.12-1.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.12-1.5">Property Context:</dt>
             <dd id="section-10.9.12-1.6">Participant<a href="#section-10.9.12-1.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.12-1.7">Intended Use:</dt>
             <dd id="section-10.9.12-1.8">Reserved<a href="#section-10.9.12-1.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.12-1.9">Is per-user:</dt>
             <dd id="section-10.9.12-1.10">no<a href="#section-10.9.12-1.10" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
 <div id="scheduleupdated-1">
 <section id="section-10.9.13">
           <h4 id="name-scheduleupdated-2"><a href="#section-10.9.13">10.9.13.&nbsp;&nbsp;scheduleUpdated</a></h4>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.13-1">
+<dl class="dlCompact dlParallel" id="section-10.9.13-1">
             <dt id="section-10.9.13-1.1">Property Name:</dt>
             <dd id="section-10.9.13-1.2">scheduleUpdated<a href="#section-10.9.13-1.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.13-1.3">Property Type:</dt>
             <dd id="section-10.9.13-1.4">Not applicable<a href="#section-10.9.13-1.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.13-1.5">Property Context:</dt>
             <dd id="section-10.9.13-1.6">Participant<a href="#section-10.9.13-1.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.13-1.7">Intended Use:</dt>
             <dd id="section-10.9.13-1.8">Reserved<a href="#section-10.9.13-1.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.13-1.9">Is per-user:</dt>
             <dd id="section-10.9.13-1.10">no<a href="#section-10.9.13-1.10" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
 <div id="blobid">
 <section id="section-10.9.14">
           <h4 id="name-blobid"><a href="#section-10.9.14">10.9.14.&nbsp;&nbsp;blobId</a></h4>
-<span class="break"></span><dl class="dlCompact dlParallel" id="section-10.9.14-1">
+<dl class="dlCompact dlParallel" id="section-10.9.14-1">
             <dt id="section-10.9.14-1.1">Property Name:</dt>
             <dd id="section-10.9.14-1.2">blobId<a href="#section-10.9.14-1.2" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.14-1.3">Property Type:</dt>
             <dd id="section-10.9.14-1.4">Not applicable<a href="#section-10.9.14-1.4" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.14-1.5">Property Context:</dt>
             <dd id="section-10.9.14-1.6">Link<a href="#section-10.9.14-1.6" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.14-1.7">Intended Use:</dt>
             <dd id="section-10.9.14-1.8">Reserved<a href="#section-10.9.14-1.8" class="pilcrow">¶</a>
 </dd>
-            <dd class="break"></dd>
+            
 <dt id="section-10.9.14-1.9">Is per-user:</dt>
             <dd id="section-10.9.14-1.10">no<a href="#section-10.9.14-1.10" class="pilcrow">¶</a>
 </dd>
-          <dd class="break"></dd>
+          
 </dl>
 </section>
 </div>
@@ -2916,67 +2916,67 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 <dt id="RFC2119">[RFC2119]</dt>
       <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="RFC2397">[RFC2397]</dt>
       <dd>
 <span class="refAuthor">Masinter, L.</span>, <span class="refTitle">"The "data" URL scheme"</span>, <span class="seriesInfo">RFC 2397</span>, <span class="seriesInfo">DOI 10.17487/RFC2397</span>, <time datetime="1998-08" class="refDate">August 1998</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2397">https://www.rfc-editor.org/info/rfc2397</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="RFC3986">[RFC3986]</dt>
       <dd>
 <span class="refAuthor">Berners-Lee, T.</span>, <span class="refAuthor">Fielding, R.</span>, and <span class="refAuthor">L. Masinter</span>, <span class="refTitle">"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span class="seriesInfo">STD 66</span>, <span class="seriesInfo">RFC 3986</span>, <span class="seriesInfo">DOI 10.17487/RFC3986</span>, <time datetime="2005-01" class="refDate">January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3986">https://www.rfc-editor.org/info/rfc3986</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="RFC5545">[RFC5545]</dt>
       <dd>
 <span class="refAuthor">Desruisseaux, B., Ed.</span>, <span class="refTitle">"Internet Calendaring and Scheduling Core Object Specification (iCalendar)"</span>, <span class="seriesInfo">RFC 5545</span>, <span class="seriesInfo">DOI 10.17487/RFC5545</span>, <time datetime="2009-09" class="refDate">September 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5545">https://www.rfc-editor.org/info/rfc5545</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="RFC5546">[RFC5546]</dt>
       <dd>
 <span class="refAuthor">Daboo, C., Ed.</span>, <span class="refTitle">"iCalendar Transport-Independent Interoperability Protocol (iTIP)"</span>, <span class="seriesInfo">RFC 5546</span>, <span class="seriesInfo">DOI 10.17487/RFC5546</span>, <time datetime="2009-12" class="refDate">December 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5546">https://www.rfc-editor.org/info/rfc5546</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="RFC6376">[RFC6376]</dt>
       <dd>
 <span class="refAuthor">Crocker, D., Ed.</span>, <span class="refAuthor">Hansen, T., Ed.</span>, and <span class="refAuthor">M. Kucherawy, Ed.</span>, <span class="refTitle">"DomainKeys Identified Mail (DKIM) Signatures"</span>, <span class="seriesInfo">STD 76</span>, <span class="seriesInfo">RFC 6376</span>, <span class="seriesInfo">DOI 10.17487/RFC6376</span>, <time datetime="2011-09" class="refDate">September 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6376">https://www.rfc-editor.org/info/rfc6376</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="RFC8174">[RFC8174]</dt>
       <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="RFC8551">[RFC8551]</dt>
       <dd>
 <span class="refAuthor">Schaad, J.</span>, <span class="refAuthor">Ramsdell, B.</span>, and <span class="refAuthor">S. Turner</span>, <span class="refTitle">"Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 4.0 Message Specification"</span>, <span class="seriesInfo">RFC 8551</span>, <span class="seriesInfo">DOI 10.17487/RFC8551</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8551">https://www.rfc-editor.org/info/rfc8551</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="RFC8620">[RFC8620]</dt>
       <dd>
 <span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"The JSON Meta Application Protocol (JMAP)"</span>, <span class="seriesInfo">RFC 8620</span>, <span class="seriesInfo">DOI 10.17487/RFC8620</span>, <time datetime="2019-07" class="refDate">July 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8620">https://www.rfc-editor.org/info/rfc8620</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="RFC8792">[RFC8792]</dt>
       <dd>
 <span class="refAuthor">Watsen, K.</span>, <span class="refAuthor">Auerswald, E.</span>, <span class="refAuthor">Farrel, A.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Handling Long Lines in Content of Internet-Drafts and RFCs"</span>, <span class="seriesInfo">RFC 8792</span>, <span class="seriesInfo">DOI 10.17487/RFC8792</span>, <time datetime="2020-06" class="refDate">June 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8792">https://www.rfc-editor.org/info/rfc8792</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="RFC8984">[RFC8984]</dt>
       <dd>
 <span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">R. Stepanek</span>, <span class="refTitle">"JSCalendar: A JSON Representation of Calendar Data"</span>, <span class="seriesInfo">RFC 8984</span>, <span class="seriesInfo">DOI 10.17487/RFC8984</span>, <time datetime="2021-07" class="refDate">July 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8984">https://www.rfc-editor.org/info/rfc8984</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="RFC9562">[RFC9562]</dt>
       <dd>
 <span class="refAuthor">Davis, K.</span>, <span class="refAuthor">Peabody, B.</span>, and <span class="refAuthor">P. Leach</span>, <span class="refTitle">"Universally Unique IDentifiers (UUIDs)"</span>, <span class="seriesInfo">RFC 9562</span>, <span class="seriesInfo">DOI 10.17487/RFC9562</span>, <time datetime="2024-05" class="refDate">May 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9562">https://www.rfc-editor.org/info/rfc9562</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="RFC9670">[RFC9670]</dt>
       <dd>
 <span class="refAuthor">Jenkins, N., Ed.</span>, <span class="refTitle">"JSON Meta Application Protocol (JMAP) Sharing"</span>, <span class="seriesInfo">RFC 9670</span>, <span class="seriesInfo">DOI 10.17487/RFC9670</span>, <time datetime="2024-11" class="refDate">November 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9670">https://www.rfc-editor.org/info/rfc9670</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="I-D.ietf-calext-jscalendarbis">[I-D.ietf-calext-jscalendarbis]</dt>
       <dd>
 <span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">R. Stepanek</span>, <span class="refTitle">"JSCalendar 2.0: A JSON Representation of Calendar Data"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-calext-jscalendarbis-15</span>, <time datetime="2026-02-19" class="refDate">19 February 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-jscalendarbis-15">https://datatracker.ietf.org/doc/html/draft-ietf-calext-jscalendarbis-15</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="IANA-TZDB">[IANA-TZDB]</dt>
       <dd>
 <span class="refAuthor">IANA</span>, <span class="refTitle">"Time Zone Database"</span>, <span>&lt;<a href="https://www.iana.org/time-zones">https://www.iana.org/time-zones</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="COLORS">[COLORS]</dt>
     <dd>
 <span class="refAuthor">W3C</span>, <span class="refTitle">"CSS Color Module Level 3"</span>, <span>&lt;<a href="https://www.w3.org/TR/css-color-3/">https://www.w3.org/TR/css-color-3/</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 </dl>
 </section>
 <section id="section-12">
@@ -2985,19 +2985,19 @@ Error Codes" registry, as defined in <span>[<a href="#RFC8620" class="cite xref"
 <dt id="RFC4791">[RFC4791]</dt>
       <dd>
 <span class="refAuthor">Daboo, C.</span>, <span class="refAuthor">Desruisseaux, B.</span>, and <span class="refAuthor">L. Dusseault</span>, <span class="refTitle">"Calendaring Extensions to WebDAV (CalDAV)"</span>, <span class="seriesInfo">RFC 4791</span>, <span class="seriesInfo">DOI 10.17487/RFC4791</span>, <time datetime="2007-03" class="refDate">March 2007</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4791">https://www.rfc-editor.org/info/rfc4791</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="RFC6047">[RFC6047]</dt>
       <dd>
 <span class="refAuthor">Melnikov, A., Ed.</span>, <span class="refTitle">"iCalendar Message-Based Interoperability Protocol (iMIP)"</span>, <span class="seriesInfo">RFC 6047</span>, <span class="seriesInfo">DOI 10.17487/RFC6047</span>, <time datetime="2010-12" class="refDate">December 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6047">https://www.rfc-editor.org/info/rfc6047</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="RFC8607">[RFC8607]</dt>
       <dd>
 <span class="refAuthor">Daboo, C.</span>, <span class="refAuthor">Quillaud, A.</span>, and <span class="refAuthor">K. Murchison, Ed.</span>, <span class="refTitle">"Calendaring Extensions to WebDAV (CalDAV): Managed Attachments"</span>, <span class="seriesInfo">RFC 8607</span>, <span class="seriesInfo">DOI 10.17487/RFC8607</span>, <time datetime="2019-06" class="refDate">June 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8607">https://www.rfc-editor.org/info/rfc8607</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 <dt id="WCAG">[WCAG]</dt>
     <dd>
 <span class="refAuthor">W3C</span>, <span class="refTitle">"Web Content Accessibility Guidelines"</span>, <span>&lt;<a href="https://www.w3.org/TR/WCAG21/">https://www.w3.org/TR/WCAG21/</a>&gt;</span>. </dd>
-<dd class="break"></dd>
+
 </dl>
 </section>
 
