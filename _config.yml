@@ -6,3 +6,7 @@ sass:
 exclude:
   - _tmp
   - scripts
+  - package.json
+  - package-lock.json
+  - prettier.config.mjs
+  - stylelint.config.mjs
