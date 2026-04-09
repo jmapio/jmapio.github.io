@@ -7,6 +7,8 @@ description: >-
     faster, simpler, more powerful, and built for how email works today.
 stylesheets:
     - home
+scripts:
+    - home
 get_started:
     eyebrow: Get started
     title: Up and running in minutes
@@ -93,21 +95,16 @@ explore:
             </div>
             <div class='u-flex-spacer'></div>
             <div class='push-tl'>
-                <div class='push-row'>
-                    <span class='push-name'>JMAP push</span>
-                    <div class='push-track' id='push-track-j'>
-                        <div class='push-dot push-dot--j' id='push-dot-j'></div>
-                        <div class='push-flash' id='push-flash-j'>&#10003;</div>
-                    </div>
-                    <span class='push-time push-time--j' id='push-t-j'>&lt;1s</span>
+                <span class='push-name'>JMAP push</span>
+                <div class='push-track' id='push-track-j'>
+                    <div class='push-dot push-dot--j' id='push-dot-j'></div>
                 </div>
-                <div class='push-row'>
-                    <span class='push-name'>IMAP polling</span>
-                    <div class='push-track' id='push-track-i'>
-                        <div class='push-dot push-dot--i' id='push-dot-i' style='left:30%'></div>
-                    </div>
-                    <span class='push-time push-time--i' id='push-t-i'>30s+</span>
+                <span class='push-time push-time--j' id='push-t-j'>&lt;1s</span>
+                <span class='push-name'>IMAP polling</span>
+                <div class='push-track' id='push-track-i'>
+                    <div class='push-dot push-dot--i' id='push-dot-i'></div>
                 </div>
+                <span class='push-time push-time--i' id='push-t-i'>30s+</span>
             </div>
         </div>
     </div>

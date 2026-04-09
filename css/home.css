@@ -126,11 +126,11 @@
     border-radius: 2px;
 }
 .batt-fill--accent {
-    width: 80%;
+    width: 0;
     background: var(--theme-accent);
 }
 .batt-fill--muted {
-    width: 30%;
+    width: 0;
     background: var(--theme-muted);
     opacity: 0.5;
 }
@@ -186,11 +186,11 @@
     border-radius: 999px;
 }
 .doc-bar-jmap {
-    width: 19%;
+    width: 0;
     background: var(--theme-accent);
 }
 .doc-bar-imap {
-    width: 100%;
+    width: 0;
     background: var(--theme-muted);
     opacity: 0.4;
 }
@@ -209,15 +209,11 @@
 /* Real-time push */
 
 .push-tl {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: var(--space-m);
-}
-.push-row {
-    display: flex;
+    display: grid;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    grid-template-columns: auto 1fr auto;
+    margin-top: var(--space-m);
 }
 .push-name {
     min-width: 34px;
@@ -233,12 +229,14 @@
     border-radius: 999px;
 }
 .push-dot {
+    --_dot-size: 11px;
+
     transition: left 0.2s linear;
     position: absolute;
     top: -3.5px;
     left: 0%;
-    width: 11px;
-    height: 11px;
+    width: var(--_dot-size);
+    height: var(--_dot-size);
     border-radius: 50%;
 }
 .push-dot--j {
@@ -324,11 +322,11 @@
     text-align: right;
 }
 .bench-row--jmap .bench-fill {
-    width: 2.5%;
+    width: 0;
     background: var(--theme-accent);
 }
 .bench-row--tb .bench-fill {
-    width: 98%;
+    width: 0;
     background: var(--theme-muted);
     opacity: 0.35;
 }
@@ -450,6 +448,120 @@
     font-weight: 500;
 }
 
+/* --- Bento scroll animations --- */
+
+/* Bar fills: restore widths on view */
+.in-view .batt-fill--accent {
+    width: 80%;
+}
+.in-view .batt-fill--muted {
+    width: 30%;
+}
+.in-view .doc-bar-jmap {
+    width: 19%;
+}
+.in-view .doc-bar-imap {
+    width: 100%;
+}
+.in-view .bench-row--jmap .bench-fill {
+    width: 2.5%;
+}
+.in-view .bench-row--tb .bench-fill {
+    width: 98%;
+}
+
+/* HTTP stack: staggered slide-in from left, bottom to top */
+.hs-layer {
+    transition:
+        opacity 0.6s var(--ease-out),
+        transform 0.6s var(--ease-out);
+    transform: translateX(-12px);
+    opacity: 0;
+}
+.in-view .hs-layer {
+    transform: translateX(0);
+    opacity: 1;
+}
+.hs-layer:nth-child(4) {
+    transition-delay: 0.05s;
+}
+.hs-layer:nth-child(3) {
+    transition-delay: 0.12s;
+}
+.hs-layer:nth-child(2) {
+    transition-delay: 0.19s;
+}
+.hs-layer:nth-child(1) {
+    transition-delay: 0.26s;
+}
+
+/* Lang chips: staggered pop-in */
+.lang-chip {
+    transition:
+        opacity 0.4s var(--ease-out),
+        transform 0.4s var(--ease-out);
+    transform: scale(0.85);
+    opacity: 0;
+}
+.in-view .lang-chip {
+    transform: scale(1);
+    opacity: 1;
+}
+.lang-chip:nth-child(1) {
+    transition-delay: 0.05s;
+}
+.lang-chip:nth-child(2) {
+    transition-delay: 0.1s;
+}
+.lang-chip:nth-child(3) {
+    transition-delay: 0.15s;
+}
+.lang-chip:nth-child(4) {
+    transition-delay: 0.2s;
+}
+.lang-chip:nth-child(5) {
+    transition-delay: 0.25s;
+}
+.lang-chip:nth-child(6) {
+    transition-delay: 0.3s;
+}
+
+@keyframes back-and-forth-fast {
+    50%,
+    80% {
+        transform: translate3d(calc(100% - var(--_dot-size) / 2), 0, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes back-and-forth-slow {
+    80% {
+        transform: translate3d(calc(100% - var(--_dot-size) / 2), 0, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Push: faster race transition for JMAP dot */
+.in-view .push-dot--j {
+    animation: back-and-forth-fast 5s var(--ease-out) 0s infinite;
+}
+.in-view .push-dot--i {
+    animation: back-and-forth-slow 5s ease-out 0s infinite;
+}
+
+/* RFC card: simple fade-in */
+.bento__card--rfc .bento__card-wrapper {
+    transition: opacity 0.6s var(--ease-out);
+    opacity: 0;
+}
+.bento__card--rfc.in-view .bento__card-wrapper {
+    opacity: 1;
+}
+
 /* --- Standard section --- */
 
 .section {
@@ -528,4 +640,86 @@ code:not([class]) {
 }
 .get-started__p {
     color: var(--theme-body);
+}
+
+/* --- No-JS fallback: show final state --- */
+
+.no-js .batt-fill--accent {
+    width: 80%;
+}
+.no-js .batt-fill--muted {
+    width: 30%;
+}
+.no-js .doc-bar-jmap {
+    width: 19%;
+}
+.no-js .doc-bar-imap {
+    width: 100%;
+}
+.no-js .bench-row--jmap .bench-fill {
+    width: 2.5%;
+}
+.no-js .bench-row--tb .bench-fill {
+    width: 98%;
+}
+.no-js .hs-layer {
+    transform: none;
+    opacity: 1;
+}
+.no-js .lang-chip {
+    transform: none;
+    opacity: 1;
+}
+.no-js .bento__card--rfc .bento__card-wrapper {
+    opacity: 1;
+}
+
+/* --- Reduced motion --- */
+
+@media (prefers-reduced-motion: reduce) {
+    .batt-fill--accent {
+        width: 80%;
+    }
+    .batt-fill--muted {
+        width: 30%;
+    }
+    .doc-bar-jmap {
+        width: 19%;
+    }
+    .doc-bar-imap {
+        width: 100%;
+    }
+    .bench-row--jmap .bench-fill {
+        width: 2.5%;
+    }
+    .bench-row--tb .bench-fill {
+        width: 98%;
+    }
+    .hs-layer {
+        transform: none;
+        opacity: 1;
+    }
+    .lang-chip {
+        transform: none;
+        opacity: 1;
+    }
+    .bento__card--rfc .bento__card-wrapper {
+        opacity: 1;
+    }
+
+    .batt-fill,
+    .doc-bar-fill,
+    .bench-fill,
+    .hs-layer,
+    .lang-chip,
+    .push-dot,
+    .push-flash,
+    .bento__card--rfc .bento__card-wrapper {
+        transition-delay: 0s !important;
+        transition-duration: 0s !important;
+    }
+
+    .http-request__status-dot {
+        animation: none;
+    }
 }
