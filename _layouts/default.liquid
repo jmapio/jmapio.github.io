@@ -34,7 +34,7 @@
                 >
             {% endfor %}
         {% endif %}
-        <script type='module' src='{{ site.baseurl }}/js/main.js?ts={{ site.time | date: '%s' }}'></script>
+        <script type='module' src='{{ site.baseurl }}/js/header.js?ts={{ site.time | date: '%s' }}'></script>
         {% if layout.scripts %}
             {% for script in layout.scripts %}
                 <script
