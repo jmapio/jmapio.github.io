@@ -40,6 +40,22 @@
             {% endfor %}
         {% endif %}
         <script type='module' src='{{ site.baseurl }}/js/main.js?ts={{ site.time | date: '%s' }}'></script>
+        {% if layout.scripts %}
+            {% for script in layout.scripts %}
+                <script
+                    type='module'
+                    src='{{ site.baseurl }}/js/{{ script }}.js?ts={{ site.time | date: '%s' }}'
+                ></script>
+            {% endfor %}
+        {% endif %}
+        {% if page.scripts %}
+            {% for script in page.scripts %}
+                <script
+                    type='module'
+                    src='{{ site.baseurl }}/js/{{ script }}.js?ts={{ site.time | date: '%s' }}'
+                ></script>
+            {% endfor %}
+        {% endif %}
         <title>{{ page.title }}</title>
         <meta name='description' content='{{ page.description }}'>
     </head>
