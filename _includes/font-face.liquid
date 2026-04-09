@@ -1,0 +1,45 @@
+{% assign bricolage_grotesque_url = '/fonts/Bricolage_Grotesque/BricolageGrotesque-VariableFont_opsz,wdth,wght.woff2'
+    | relative_url
+%}
+{% assign instrument_sans_url = '/fonts/Instrument_Sans/InstrumentSans-VariableFont_wdth,wght.woff2' | relative_url %}
+{% assign instrument_sans_italic_url = '/fonts/Instrument_Sans/InstrumentSans-Italic-VariableFont_wdth,wght.woff2'
+    | relative_url
+%}
+<link rel='preload' as='font' type='font/woff2' href='{{ bricolage_grotesque_url }}' crossorigin>
+<link rel='preload' as='font' type='font/woff2' href='{{ instrument_sans_url }}' crossorigin>
+<link rel='preload' as='font' type='font/woff2' href='{{ instrument_sans_italic_url }}' crossorigin>
+<style>
+    @font-face {
+        font-family: 'Bricolage Grotesque';
+        font-style: normal;
+        font-weight: 200 800;
+        font-stretch: 100%;
+        font-display: swap;
+        src: url({{ bricolage_grotesque_url }}) format('woff2');
+        unicode-range:
+            U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+            U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+        font-family: 'Instrument Sans';
+        font-style: normal;
+        font-weight: 400 700;
+        font-stretch: 100%;
+        font-display: swap;
+        src: url({{ instrument_sans_url }}) format('woff2');
+        unicode-range:
+            U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+            U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+        font-family: 'Instrument Sans';
+        font-style: italic;
+        font-weight: 400 700;
+        font-stretch: 100%;
+        font-display: swap;
+        src: url({{ instrument_sans_italic_url }}) format('woff2');
+        unicode-range:
+            U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+            U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+</style>
