@@ -4,6 +4,16 @@ stylesheets:
     - article
     - toc
 ---
+{% if page.hero %}
+    {%
+        include components/hero.liquid
+        eyebrow=page.hero.eyebrow
+        title=page.hero.title
+        sub=page.hero.sub
+        links=page.hero.links
+    %}
+{% endif %}
+
 <section class='section section--document'>
     <div class='u-wrapper u-article-split'>
         <nav class='u-toc-wrapper'>

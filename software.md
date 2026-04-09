@@ -2,6 +2,153 @@
 layout: article
 permalink: /software/index.html
 title: JMAP Software Implementations
+hero:
+    title: See JMAP in action
+    eyebrow: Software
+    sub: >-
+        If you’re working on a project that uses JMAP, please make a pull
+        request to this page or email the mailing list and we’ll add you to the
+        list.
+    links:
+        - label: Add a project
+          href: https://github.com/jmapio/jmapio.github.io/compare
+        - label: Join mailing list
+          href: https://groups.google.com/g/jmap-discuss
 ---
 
-{% include jmap/software/software.mdown %}
+## Clients
+
+- **[aerc](https://aerc-mail.org/)**: A terminal email client for the discerning
+  hacker.
+- **[Bulwark Webmail](https://bulwarkmail.org/)**: (Next.js, AGPLv3): A modern,
+  open-source webmail client for Stalwart Mail Server. Fast and private
+  JMAP-native support for email, calendar, and contacts.
+- **[Cypht](https://github.com/cypht-org/cypht)**: (PHP, JS) Lightweight Open
+  Source webmail aggregator
+- **[Group-Office](https://github.com/Intermesh/groupoffice)** (Javascript):
+  Open source groupware and collaboration platform
+- **[JMAP Demo Webmail](https://github.com/jmapio/jmap-demo-webmail)**
+  (JavaScript, MIT): a sophisticated demo webmail client to be used as a base
+  for new projects.
+- **[JMAP::Tester](https://metacpan.org/pod/JMAP::Tester)** (Perl, Perl5): a
+  JMAP client made for testing JMAP servers.
+- **[JMAP Webmail](https://github.com/root-fr/jmap-webmail)** (TypeScript, MIT):
+  Privacy-focused webmail client with real-time push.
+- **[Ltt.rs](https://codeberg.org/iNPUTmice/lttrs-android)** (Java, Apache): an
+  email client for Android
+- **[Mailtemi](https://mailtemi.com)**: a native iOS/Android email client
+- **[mjmap](https://git.sr.ht/~rockorager/mjmap)** (Go, MPL-2.0): A
+  sendmail-compatible command line JMAP client.
+- **[meli](https://meli.delivery)** (Rust): terminal email client (GPLv3)
+- **[mujmap](https://github.com/elizagamedev/mujmap)** (Rust): Synchronize JMAP
+  mail with [notmuch](https://notmuchmail.org)
+- **[Parula](https://parula.beonex.com)**: Full email app with chat, video
+  conference and calendar. For Windows, macOS, Linux.
+- **[Twake Mail Client](https://github.com/linagora/tmail-flutter)** (Dart):
+  Android, iOS and web client
+
+## Servers
+
+- **[Apache James](http://james.apache.org/)** (Java, Apache): Apache James,
+  a.k.a. Java Apache Mail Enterprise Server is an open source mail server
+  written entirely in Java. The 3.0 series is adding JMAP support, upcoming
+  3.6.0 adds support for
+  [JMAP over websocket](https://www.rfc-editor.org/rfc/rfc8887.html).
+- **[atmail](https://www.atmail.com/blog/jmap-rfc-8620/)** (golang, proprietary)
+- **[Cyrus IMAP](https://www.cyrusimap.org/imap/download/release-notes/3.0/x/3.0.3.html)**
+  (C, BSD-style): A scalable enterprise-grade IMAP, CalDAV and CardDAV server.
+  The 3.0 series is adding JMAP support, instructions to enable it are
+  [here](https://www.cyrusimap.org/dev/imap/developer/jmap.html).
+- **[Group-Office](https://github.com/Intermesh/groupoffice)** (PHP): Open
+  source groupware and collaboration platform
+- **[hyper-auth-proxy](https://crates.io/crates/hyper-auth-proxy)** (Rust): A
+  proxy to do HTTP basic auth from a JWT token and redis session credentials;
+  build to add JWT bearer auth support to Cyrus's JMAP.
+- **[Stalwart](https://github.com/stalwartlabs/stalwart)** (Rust, AGPLv3):
+  Open-source JMAP server built for robustness, security, and scalability - with
+  complete support for JMAP Mail, Calendars, Contacts, File Storage, Sharing and
+  multiple extensions.
+- **[tmail-backend](https://github.com/linagora/tmail-backend)** (Java, Apache):
+  builds on Apache James with extra features
+
+## Libraries
+
+- **[go-jmap](https://sr.ht/~rockorager/go-jmap)** (Go, MIT): JMAP client
+  library written in Go
+- **[Java JMAP Library](https://codeberg.org/iNPUTmice/jmap/)** (Java 7,
+  Apache): a low level jmap-client library as well as a higher level jmap-mua
+  library.
+- **[jmap-client-ts](https://github.com/OpenPaaS-Suite/jmap-client-ts)**
+  (TypeScript, MIT): a lightweight promise-based API to make JMAP requests.
+- **[jmap-client](https://github.com/stalwartlabs/jmap-client)** (Rust;
+  Apache/MIT): JMAP client library written in Rust. Includes full support for
+  JMAP Core, JMAP Mail and JMAP over WebSocket.
+- **[jmap-jam](https://github.com/htunnicliff/jmap-jam)** (TypeScript, MIT): Jam
+  is a tiny, strongly-typed JMAP client with zero runtime dependencies. It has
+  friendly, fluent APIs that make working with JMAP a breeze.
+- **[JMAP-JS](https://github.com/jmapio/jmap-js)** (JavaScript, MIT): a full
+  implementation of the JMAP mail, calendar and contacts model in JavaScript. It
+  supports asynchronous local changes and is tolerant of network failure –
+  actions will update the UI instantly, then synchronise changes back to the
+  server when it can. It also has multi-level undo/redo support. Used by the
+  [demo webmail](https://github.com/jmapio/jmap-demo-webmail).
+- **[jmap-rs](https://gitlab.com/jmap-rs/jmap-rs)** (Rust; in development): Rust
+  client (and maybe server) library for JMAP
+- **[jmapc](https://pypi.org/project/jmapc/)** (Python;
+  [partially implemented](https://github.com/smkent/jmapc)): Python 3 client
+  library for JMAP mail
+- **[melib](https://meli.delivery)** (Rust): mail client library used in _meli_
+  (GPLv3)
+- **[Missive](https://github.com/jeffhuen/missive)** (Rust, MIT): Email library
+  with JMAP provider. Minimal spec-compliant client using reqwest+serde.
+- **[zend-jmap](https://github.com/WikiSuite/zend-jmap)** (PHP, New BSD): JMAP
+  for Zend Framework
+- **[jmap-yacl](https://github.com/ilyhalight/jmap-yacl)** (TypeScript, MIT):
+  Another lightweight client library for working with the JMAP, which supports
+  working with JavaScript, TypeScript, and also has built-in types for Typebox.
+  Not implemented yet: OAuth, Push
+- **[calcard](https://github.com/stalwartlabs/calcard)** (Rust; Apache/MIT):
+  JSCalendar/iCalendar and JSContact/vCard parsing, building and conversion
+  library for Rust. Try it [online](https://convert.jmap.cloud/).
+- **[jmap-tools](https://github.com/stalwartlabs/jmap-tools)** (Rust;
+  Apache/MIT): JMAP object parser with JSON Pointer querying and patching
+  support.
+- **[jmap-kit](https://github.com/lachlanhunt/jmap-kit)** (TypeScript, MIT): A
+  robust, type-safe SDK for building JMAP client applications in TypeScript,
+  with an extensible plugin architecture supporting standard and vendor
+  capabilities.
+
+## Proxies
+
+- **[JMAP-to-IMAP Proxy](https://github.com/jmapio/jmap-perl)** (Perl, MIT): a
+  complete JMAP server implementation that uses any IMAP, CalDAV and CardDAV
+  store as a backend.
+- **[IMAP-to-JMAP Proxy](https://github.com/stalwartlabs/imap-to-jmap/)** (Rust,
+  AGPLv3): Open-source IMAP4-to-JMAP proxy. Supports IMAP4rev2, IMAP4rev1 and
+  multiple extensions.
+
+## Planned
+
+- [Mimestream](https://mimestream.com/): a native macOS email client
+- [Mailtemi](https://mailtemi.com): a native macOS/GNOME (Linux/Windows) desktop
+  email and calendar client.
+
+## Requested
+
+- [Alps Webmail](https://todo.sr.ht/~migadu/alps/174)
+- [Claws Mail](https://www.thewildbeast.co.uk/claws-mail/bugzilla/show_bug.cgi?id=4057)
+- [DavMail](https://github.com/mguessan/davmail/issues/365)
+- [Evolution](https://gitlab.gnome.org/GNOME/evolution/-/issues/364)
+- [Geary](https://gitlab.gnome.org/GNOME/geary/-/issues/327)
+- [Horde IMP Webmail](https://bugs.horde.org/ticket/14683)
+- [K-9 Mail](https://github.com/k9mail/k-9/issues/3272)
+- [Mailu](https://github.com/Mailu/Mailu/issues/471)
+- [Nextcloud](https://github.com/nextcloud/mail/issues/2931)
+- [RainLoop Webmail](https://github.com/RainLoop/rainloop-webmail/issues/1378)
+- [SnappyMail](https://github.com/the-djmaze/snappymail/issues/1550)
+- [Thunderbird](https://bugzilla.mozilla.org/show_bug.cgi?id=1322991)
+
+If you're working on a project that uses JMAP, please
+[open an issue](https://github.com/jmapio/jmap/issues) or make a
+[pull request](https://github.com/jmapio/jmap/pulls) on GitHub to update this
+page.

@@ -2,6 +2,624 @@
 layout: article-toc
 permalink: /server/index.html
 title: JMAP Server Implementation Guide
+hero:
+    title: Advice for JMAP implementors
+    eyebrow: Implementation guide
+    sub: >-
+        This document describes a recommended set of database tables and
+        algorithms for efficiently implementing JMAP. It is intended to serve as
+        suggestions only; there may well be better ways to do it. The spec is
+        the authoritative guide on what constitutes a conformant JMAP
+        implementation.
 ---
 
-{% include jmap/server-guide/jmap-server-guide.mdown %}
+**Warning: this guide is outdated, it is based on an older draft of the JMAP
+specification**
+
+## Assigning Email Ids
+
+A good way of assigning an Email id is to use a secure hash function on the
+RFC5322 message. If you want to support having identical messages with different
+ids, you'll then need to keep hashing the result if there are collisions until
+you find an unused id. In general, I recommend not doing this.
+
+## Modification sequences
+
+A modification sequence, or **modseq**, is a 64-bit unsigned monotonically
+incrementing counter. Each user has their own modseq counter (in IMAP it's
+originally per-mailbox, but per user is backwards compatible with this). Every
+time a change occurs to data within the user, the modseq is incremented by one
+and the new value is associated with the changes. This is used in a number of
+data structures and algorithms below to efficiently calculate changes.
+
+## Data structures
+
+As ever in programming, get your data structures right and the server will
+practically write itself.
+
+### 1. Emails
+
+The mutable state and fields that need to be fetched for message list display
+for a message. The raw message itself is presumed to be stored in a separate
+(probably much slower) blob store, accessible again by the message id (or if ids
+are assigned by the blob store, add this as an extra property to the table).
+
+- **id**: `String` (The Email id)
+
+Properties below have the values as specified in the **Email** object in the
+JMAP Mail spec.
+
+- **blobId**: `String` (if different to Email id)
+- **threadId**: `String`
+- **mailboxIds**: `String[Boolean]` (Mutable)
+- **keywords**: `String[Boolean]` (Mutable)
+- **from**: `Emailer[]|null`
+- **to**: `Emailer[]|null`
+- **subject**: `String`
+- **date**: `Date`
+- **size**: `Number`
+- **preview**: `String`
+- **attachments**: `Attachment[]|null`
+
+Data sync properties:
+
+- **createdModSeq**: `Number` The modseq when the Email was created.
+- **updatedModSeq**: `Number` The modseq when the Email was last modified.
+- **deleted**: `Date|null` The timestamp when the Email was deleted.
+
+### 2. Threads
+
+- **id**: `String` (The thread id; UUID suggested)
+
+- **emails**: `ThreadEmail[]` The list of Emails belonging to the thread, sorted
+  as required in the spec, with drafts immediately after the Email they are in
+  reply to, then by date order.
+
+    A **ThreadEmail** has the following properties:
+    - **id**: `String` The Email id
+    - **mailboxIds**: `String[]`
+    - **isUnread**: `Boolean`
+    - **isFlagged**: `Boolean`
+
+Data sync properties:
+
+- **createdModSeq**: `Number` The modseq when the thread was created.
+- **updatedModSeq**: `Number` The modseq when the thread was last modified.
+- **deleted**: `Date|null` The timestamp when the thread was deleted.
+
+### 3. Mailboxes
+
+- **id**: `String` (The mailbox id; UUID suggested)
+
+- **name**: `String`
+- **parentId**: `String|null`
+- **role**: `String|null`
+- **sortOrder**: `Number`
+- **mayReadItems**: `Boolean`
+- **mayAddItems**: `Boolean`
+- **mayRemoveItems**: `Boolean`
+- **mayCreateChild**: `Boolean`
+- **mayRename**: `Boolean`
+- **mayDelete**: `Boolean`
+- **totalEmails**: `Number`
+- **unreadEmails**: `Number`
+- **totalThreads**: `Number`
+- **unreadThreads**: `Number`
+
+Data sync properties:
+
+- **createdModSeq**: `Number` The modseq when the mailbox was created.
+- **updatedModSeq**: `Number` The modseq when the mailbox was last modified.
+- **updatedNotCountsModSeq**: `Number` The modseq when any property other than
+  the email/thread counts was last modified.
+- **deleted**: `Date|null` The timestamp when the mailbox was deleted.
+
+- **highestUID**: `Number` The highest uid so far assigned to an Email in the
+  MailboxEmailList.
+- **emailHighestModSeq**: `Number` The highest mod seq of any Email in the
+  mailbox.
+- **emailListLowModSeq**: `Number` The lowest modseq we can calculate
+  MailboxEmailList updates from.
+
+### 4. MailboxEmailList
+
+This data structure allows for IMAP support, and for very fast response to the
+most common message list fetch/updates queries (where the filter is a single
+mailbox, and sort is date descending).
+
+- **id**: `mailboxId . (Max_Int64 - EmailDate) . uid` The id is a concatenation
+  of the mailbox id, then the message date inverted so date descending is the
+  forward order, then the UID assigned.
+
+- **messageId**: `String` The message id.
+- **threadId**: `String` The thread id of the message.
+- **updatedModSeq**: `String` The current `updatedModSeq` of the message.
+- **created**: `Date` Date this message was added to the mailbox.
+- **deleted**: `Date|null` Date this message was removed from the mailbox.
+
+Note, the updatedModSeq is set at the same time as the deleted field when the
+message is removed from the mailbox, but not then updated even if the message is
+changed again. (If the message is added back to the mailbox it will be assigned
+a new uid, so a new record will be created).
+
+### 5. EmailChangeLog
+
+A log of modseqs when messages are created/updated/destroyed, for faster
+responses to _Email/changes_.
+
+- **id**: The modseq of the change
+
+- **created**: `String[]` The list of email ids for messages that were created.
+- **updated**: `String[]` The list of email ids for messages that were updated.
+- **destroyed**: `String[]` The list of email ids for messages that were
+  destroyed.
+
+### 6. ThreadChangeLog
+
+A log of modseqs when threads are created/updated/destroyed, for faster
+responses to _Thread/changes_.
+
+- **id**: The modseq of the change
+
+- **created**: `String[]` The list of thread ids for threads that were created.
+- **updated**: `String[]` The list of thread ids for threads that were updated.
+- **destroyed**: `String[]` The list of thread ids for threads that were
+  destroyed.
+
+### 7. Refs to Thread
+
+This is solely used to look up the conversation to assign to a message on
+creation/import/delivery. Maps the RFC5322 message ids found in the
+`Message-ID`, `In-Reply-To` and `References` headers of each message received to
+the thread id assigned to that message.
+
+- **id**: `hash(rfc822id) . hash(subject)` The id is a concatenation of a secure
+  hash of the RFC5322 message id and a secure hash of the subject of the message
+  after stripping:
+    - Anything in square brackets
+    - All words followed by a colon from the beginning of the message
+    - All white space
+
+- **threadId**: `String` The thread id assigned to this message.
+- **lastSeen**: `Date` The date of the last time this id was seen in a new
+  message. This is used to clean up older entries after a while.
+
+If two messages share a common RFC5322 message id in the set of such ids within
+each message, and the messages have the same `Subject` header hash, then they
+should belong in the same thread. Otherwise they should belong in different
+threads.
+
+### 8. HighLowModSeqCache
+
+These are singleton values that need to be stored. If using a DB table, would be
+id/number values.
+
+- **highModSeq**: `Number` The highest mod seq that has been assigned, across
+  all types.
+- **highModSeqEmail**: `Number` The highest mod seq assigned to a message.
+- **highModSeqThread**: `Number` The highest mod seq assigned to a thread.
+- **highModSeqMailbox**: `Number` The highest mod seq assigned to a mailbox.
+- **lowModSeqEmail**: `Number` The lowest mod seq from which we can calculate
+  updates. Periodically we shorten the _EmailChangeLog_ by removing entries from
+  the beginning. At this point, the highest modseq value removed is set as the
+  `lowModSeqEmail`.
+- **lowModSeqThread**: `Number` The lowest mod seq from which we can calculate
+  updates. Periodically we shorten the _ThreadChangeLog_ by removing entries
+  from the beginning. At this point, the highest modseq value removed is set as
+  the `lowModSeqThread`.
+- **lowModSeqMailbox**: `Number` The lowest mod seq from which we can calculate
+  updates. Periodically we completely delete mailboxes that were marked deleted.
+  At this point, if higher than the current value, the `updatedModSeq` of the
+  mailbox is set as the new `lowModSeqMailbox`.
+
+### Other data
+
+There are two bits of data not included in the main database.
+
+### A. Raw messages
+
+The set of full raw messages, possibly in a blob store.
+
+### B. Email index
+
+For searching messages at any reasonable speed, an index is required from
+textual content within the message to the Email id. Describing how this should
+work is beyond the scope of this guide.
+
+## Algorithms
+
+The `state` property to return with getter calls to each type is:
+
+- **Email**: The `highModSeqEmail` value.
+- **Thread**: The `highModSeqThread` value.
+- **Mailbox**: The `highModSeqMailbox` value.
+- **Email/query**: The state property to use depends on the sort/filter of the
+  message list, as some optimisations can be made for common cases. The state
+  string should encode one or two values. In all cases, you need to include a
+  modseq value, which should be on of the following:
+    - If the sort or filter includes a mutable thread property (i.e threadUnread
+      or threadFlagged), use `max(highModSeqEmail, highModSeqThread)`.
+    - Otherwise, if the filter is or can be transformed to:
+      `AND( inMailbox: mailboxId, <other conditions>)`, use
+      `Mailbox.messagesHighestModSeq`
+    - Otherwise, use `highModSeqEmail`
+
+    If the filter is, or can be transformed to:
+    `AND( inMailbox: mailboxId, <other conditions>)`, also encode
+    `Mailbox.highestUID` into the state string; see _Email/queryChanges_
+    algorithm below for how these values will be used.
+
+### Email/changes
+
+If the modseq given == the current `highModSeqEmail` value, there are no
+changes. If it is lower than `lowModSeqEmail` we cannot calculate changes.
+
+If there are changes, find the first entry in the _EmailChangeLog_ with an id >=
+the given modseq, and read forward from there.
+
+### Thread/changes
+
+If the modseq given == the current `highModSeqThread` value, there are no
+changes. If it is lower than `lowModSeqThread` we cannot calculate changes.
+
+If there are changes, find the first entry in the _ThreadChangeLog_ with an
+id >= the given modseq, and read forward from there.
+
+### Mailbox/changes
+
+If the modseq given == the current `highModSeqMailbox` value, there are no
+changes. If it is lower than `lowModSeqMailbox` we cannot calculate changes.
+
+If there are changes, iterate through the set of Mailboxes comparing their
+`updatedModSeq` to the client mod seq. If higher, the mailbox has changed (if
+`deleted` is not `null` it has been deleted, otherwise it was created or
+updated). If the `updatedNotCountsModSeq` is _not_ higher, only counts have
+changed.
+
+### Email/query
+
+Check the current state string as would be returned for _Email/query_ with the
+same arguments. If it is the same as the state given, nothing has changed so you
+can return a response immediately. Otherwise…
+
+First you need to get the complete list of messages that match the given filter.
+In the common case of…
+
+    filter == { inMailbox: <mailboxId> }
+
+…you are simply fetching the list of messages in a mailbox. This list is already
+pre-calculated for each mailbox and kept on disk (data structure 4). You can
+simply slurp this into memory and sort if needed (again, in the common case of
+sorting date-descending, it will be pre-sorted). Skip any messages marked
+`deleted`.
+
+If the filter is more complex, you will need to do more work to get the set of
+matching messages and sort it. If there is a `String` component to the filter,
+first use the message index to get a set of matches. If there is a single
+_inMailbox_ component, use the _MailboxEmailList_ structure to get the list of
+messages in that mailbox. Finally iterate through and lookup each potential
+match in the messages table (data structure 1) to apply any other components of
+the filter. Finally sort as specified.
+
+Once you have the complete message list, you can find the requested section to
+return to the client. Since a client is likely to fetch a different portion of
+the same message list soon after, it is beneficial if the server can keep the
+last list requested by the user in a cache for a short time.
+
+    let collapseThreads = args.collapseThreads
+    let position = args.position
+    let anchor = args.anchor
+    let anchorOffset = args.anchorOffset
+    let limit = args.limit
+    let total = 0
+    let emailIds = [] # NB Max size of array is limit
+
+    # If not collapsing threads, we can just jump to the required section
+    if !collapseThreads {
+      total = messageList.length
+      for i = position; i < total; i = i + 1 {
+        emailIds.push( msg.id )
+      }
+    } else {
+      # Optimisation for the common case
+      let totalIsKnown = filter is just mailbox
+      let SeenThread = new Set()
+      let numFound = 0
+      foreach msg in sortedFilteredList {
+        if !SeenThread{ msg.threadId } {
+          SeenThread.add( msg.threadId )
+          total += 1
+          if position >= total && numFound < limit {
+            emailIds.push( msg.id )
+            numFound += 1
+            if numFound == limit && totalIsKnown {
+              break;
+            }
+          }
+        }
+      }
+      if totalIsKnown {
+        total = mailbox.totalThreads
+      }
+    }
+
+### Email/queryChanges
+
+For the common case of…
+
+    filter == { inMailbox: <messageId> }
+
+… take the complete message list for the mailbox (data structure 4), including
+those marked deleted. Sort if necessary. The state given by the user (as
+returned from _Email/query_) contains the previous `highestUID` and a
+`highestModSeq`. Then:
+
+    let index = -1
+    let total = 0
+    let added = []
+    let removed = []
+    let collapseThreads = args.collapseThreads
+    let uptoHasBeenFound = false
+
+    # A mutable sort is one which sorts by a mutable property, e.g.
+    # sort flagged messages/threads first.
+    let isMutable = sort.isMutable()
+
+    # Does the sort include a thread property (thread unread/thread flagged)
+    # or just message properties?
+    let isOnThreadUnreadOrFlagged = sort.isOnThreadUnreadOrFlagged()
+
+    # An exemplar is the first message in each thread in the list, given the
+    # sort order that
+    # The old exemplar is the exemplar in the client's old state.
+    let SeenExemplar = collapseThreads ? new Set() : null
+    let SeenOldExemplar = collapseThreads ? new Set() : null
+
+    foreach listMsg in messageList {
+
+      let isNewExemplar = false
+      let isOldExemplar = false
+
+      let isNew = ( listMsg.uid > args.highestUID )
+      let isChanged = ( listMsg.updatedModSeq > args.highestModSeq )
+      let isDeleted = ( listMsg.deleted != null )
+      let wasDeleted = ( isDeleted && !isChanged )
+
+      # Is this message the current exemplar?
+      if !isDeleted &&
+          ( !collapseThreads || !SeenExemplar{ listMsg.threadId } ) {
+        isNewExemplar = true
+        index += 1
+        total += 1
+        if collapseThreads {
+          SeenExemplar.set( listMsg.threadId )
+        }
+      }
+
+      # Was this message an old exemplar?
+      # 1. Must not have been added to mailbox after the client's state
+      # 2. Must have been removed from mailbox before the client's state
+      # 3. Must not have already found the old exemplar
+      if !isNew && !wasDeleted &&
+          ( !collapseThreads || !SeenOldExemplar{ listMsg.threadId } ) {
+        isOldExemplar = true
+        if collapseThreads {
+          SeenOldExemplar.set( listMsg.threadId )
+        }
+      }
+
+      if isOldExemplar && !isNewExemplar {
+        removed.push( listMsg.emailId )
+      }
+      else if !isOldExemplar && isNewExemplar {
+        added.push({
+          index: index,
+          id: listMsg.emailId
+        })
+      }
+      # Special case for mutable sorts (based on isFlagged/isUnread)
+      if isMutable && isOldExemplar && isNewExemplar {
+        # Has the isUnread/isFlagged status of the message/thread
+        # (as appropriate) possibly changed since the client's state?
+        let modSeq = isOnThreadUnreadOrFlagged ?
+          getThread( listMsg.threadId ).updatedModSeq :
+          listMsg.updatedModSeq
+        # If so, we need to remove the exemplar from the client view and add
+        # it back in at the correct position.
+        if modSeq > args.modSeq {
+          removed.push( listMsg.emailId )
+          added.push({
+            index: index,
+            id: listMsg.emailId,
+          })
+        }
+      }
+      # If this is the last message the client cares about, we can stop here
+      # and just return what we've calculated so far. We already know the total
+      # count for this message list as we keep it pre calculated and cached in
+      # the Mailbox object.
+      #
+      # However, if the sort is mutable we can't break early, as messages may
+      # have moved from the region we care about to lower down the list.
+      if !isMutable && !isNew && listMsg.emailId == args.upto {
+        break
+      }
+    } # End loop
+
+    total = getTotal( mailbox, collapseThreads )
+
+For other filters, you can use the following algorithm instead, but it does
+require a complete scan of all messages:
+
+    let index = -1
+    let total = 0
+    let added = []
+    let removed = []
+    let collapseThreads = args.collapseThreads
+    let uptoHasBeenFound = false
+
+    # A mutable filter/sort is one which uses a mutable property, e.g.
+    # flagged/unread state
+    let isMutable = sort.isMutable() || filter.isMutable()
+
+    # Does the sort or filter include a thread property (thread unread/thread
+    # flagged) or just message properties?
+    let isOnThreadUnreadOrFlagged =
+      sort.isOnThreadUnreadOrFlagged() || filter.isOnThreadUnreadOrFlagged()
+
+    # An exemplar is the first message in each thread in the list, given the
+    # sort order that
+    # The old exemplar is the exemplar in the client's old state.
+    let SeenExemplar = collapseThreads ? new Set() : null
+    let SeenOldExemplar = collapseThreads ? new Set() : null
+
+    # Get the full list of messages. Any non-mutable filter components
+    # may be applied at this stage, if possible.
+    let messages = allMessages().sortBy( args.sort )
+
+    foreach message in messages {
+
+      let isNewExemplar = false
+      let isOldExemplar = false
+
+      let isMatch = filter.matches( message )
+      let isNew = ( message.createdModSeq > args.highestModSeq )
+      let isChanged = ( message.updatedModSeq > args.highestModSeq )
+      let isDeleted = ( message.deleted != null )
+      let wasDeleted = ( isDeleted && !isChanged )
+
+      # Check for thread changed if necessary
+      if isOnThreadUnreadOrFlagged && !isChanged &&
+          getThread( listMsg.threadId ).updatedModSeq > args.highestModSeq {
+        isChanged = true
+      }
+
+      # Is this message the current exemplar?
+      if isMatch && !isDeleted &&
+          ( !collapseThreads || !SeenExemplar{ message.threadId } ) {
+        isNewExemplar = true
+        index += 1
+        total += 1
+        if collapseThreads {
+          SeenExemplar.set( listMsg.threadId )
+        }
+      }
+
+      # Was this message an old exemplar?
+      # 1. Must not have been created after the client's state
+      # 2. Must have been deleted before the client's state
+      # 3. Must match the filter, or have changed and the sort/filter is on a
+           mutable property so it may have matched before.
+      # 4. Must not have already found the old exemplar, or filter/sort is on a
+           mutable property.
+      if !isNew && !wasDeleted &&
+          ( isMatch || ( isMutable && isChanged ) ) &&
+          ( !collapseThreads || isMutable ||
+            !SeenOldExemplar{ listMsg.threadId } ) {
+        isOldExemplar = true
+        if collapseThreads && !isMutable {
+          SeenOldExemplar.set( listMsg.threadId )
+        }
+      }
+
+      if isOldExemplar && ( !isNewExemplar || isMutable ) {
+        removed.push( listMsg.emailId )
+      }
+      if isNewExemplar && ( !isOldExemplar || isMutable ) {
+        added.push({
+          index: index,
+          id: listMsg.emailId,
+        })
+      }
+    } # End loop
+
+## Conversion between RFC5322 messages and JMAP Email objects
+
+Extra advice on conversion:
+
+- When encoding the _name_ property for an EmailBodyPart (i.e. an attachment's
+  file name), for the most compatibility with existing clients you should
+  RFC2231 encode the name as the _filename_ parameter of the
+  _Content-Disposition_ MIME header, and also RFC2047 encode it as the _name_
+  parameter of the _Content-Type_ header (despite the latter being technically
+  invalid).
+
+## Vacation
+
+As mentioned in
+[RFC-5230 Sieve Vacation extension](https://tools.ietf.org/html/rfc5230),
+implementations should avoid sending vacation responses to mailing lists.
+Implementations should also avoid sending responses to well-known addresses like
+"MAILER-DAEMON", "LISTSERV", "majordomo", and other addresses typically used
+only by automated systems. Additionally, addresses ending in "-request" or
+beginning in "owner-", i.e., reserved for mailing list software, should also not
+receive vacation responses. Implementations should not respond to any message
+that contains a "List-Id" [RFC-2919](https://www.ietf.org/rfc/rfc2919.txt),
+"List-Help", "List-Subscribe", "List-Unsubscribe", "List-Post", "List-Owner", or
+"List-Archive" [RFC-2369](https://www.ietf.org/rfc/rfc2369.txt) header field.
+
+Also, be careful about infinite loops. Vacation responses should not be sent in
+response to another vacation response. To avoid doing so, as specified in
+[RFC-5230](https://tools.ietf.org/html/rfc5230), an Auto-Submitted header with a
+value of "auto-replied" should be included in any vacation message sent.
+Implementations should not send responses to email with an Auto-Submitted header
+with a value of "auto-replied".
+
+The server must keep track of sent notifications, in order to avoid sending
+notifications twice to the same recipient during the duration of a given
+vacation. Implementers must take care that if the vacation is modified, previous
+tracking information should be discarded.
+
+Finaly, implementations are encouraged to comply with
+[RFC-3824](https://tools.ietf.org/html/rfc3834), which defines a personal
+responder. To do so:
+
+- The Date field should be set to the date and time when the vacation response
+  was generated. Note that this may not be the same as the time the message was
+  delivered to the user.
+- The From field should be set to the address of the given account.
+- The To field should be set to the address of the recipient of the response.
+- An Auto-Submitted field with a value of "auto-replied" should be included in
+  the message header of any vacation message sent.
+- Replies must have the In-Reply-To field set to the Message-ID of the original
+  message, and the References field should be updated with the Message-ID of the
+  original message.
+
+If the original message lacks a Message-ID, an In-Reply-To need not be
+generated, and References need not be changed.
+[RFC-2822 section 3.6.4](https://tools.ietf.org/html/rfc2822#section-3.6.4)
+provides a complete description of how References fields should be generated.
+
+## Binary upload error response codes
+
+The upload handler is a standard HTTP resource, so must conform with the HTTP
+standard. For reference, here are some of the appropriate HTTP responses to
+return for client errors:
+
+### 400: Bad request
+
+The request was malformed (this includes the case where an `X-JMAP-AccountId`
+header is sent with a value that does not exist).
+
+### 401: Unauthorized
+
+The `Authorization` header was missing or did not contain a valid token.
+Reauthenticate and then retry the request. As per the HTTP spec, the response
+MUST have a `WWW-Authenticate` header listing the available authentication
+schemes.
+
+### 413: Request Entity Too Large
+
+The file is larger than the maximum size the server is willing to accept for a
+single file.
+
+### 415: Unsupported Media Type
+
+An unacceptable type is uploaded. The server MAY choose to not allow certain
+content types to be uploaded, such as executable files.
+
+### 429: Rate limited
+
+The client has made too many upload requests recently, or has too many
+concurrent uploads currently in progress. The response MAY include a
+`Retry-After` header indicating how long to wait before making a new request.
