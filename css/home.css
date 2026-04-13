@@ -540,7 +540,7 @@
     position: relative;
     border-top: 1px solid var(--theme-border);
     border-bottom: 1px solid var(--theme-border);
-    background: var(--theme-bg-2);
+    background: var(--theme-bg-alt);
 }
 
 .section__label {

@@ -156,7 +156,7 @@
 
     --theme-bg: var(--color-grey-1100);
     --theme-bg-fade: rgb(from var(--color-grey-1100) r g b / 90%);
-    --theme-bg-2: var(--color-white-fade-02);
+    --theme-bg-alt: var(--color-white-fade-02);
     --theme-bg-overlay:
         linear-gradient(
             101deg,
@@ -237,7 +237,7 @@
     --theme-accent-dim: var(--color-teal-950);
 
     --theme-bg: #eef5f3;
-    --theme-bg-2: #fff;
+    --theme-bg-alt: var(--color-white);
     --theme-border: var(--color-black-fade-15);
     --theme-border-strong: var(--color-black-fade-30);
 
