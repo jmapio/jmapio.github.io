@@ -102,26 +102,65 @@
 }
 .header__theme-button {
     transition:
-        color 0.15s,
-        border-color 0.15s;
+        background-color 0.4s ease,
+        border-color 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--theme-border-strong);
+    border: 1px solid var(--theme-button-theme-border);
     width: 32px;
     height: 32px;
-    background: transparent;
+    background: var(--theme-button-theme-bg);
     border-radius: var(--radius-m);
-    color: var(--theme-muted);
+    color: var(--theme-button-theme-fg);
     cursor: pointer;
 }
 .header__theme-button:hover {
-    border-color: var(--theme-accent);
-    color: var(--theme-accent);
+    background: var(--theme-button-theme-bg-hover);
+    border-color: var(--theme-button-theme-border-hover);
+    color: var(--theme-button-theme-fg-hover);
 }
 .header__theme-button > svg {
     width: 20px;
     height: 20px;
+}
+[data-theme='dark'] .header__theme-button > svg {
+    width: 24px;
+    height: 24px;
+}
+
+.header__theme-button .rays line {
+    transition:
+        transform 0.55s var(--ease-in),
+        opacity 0.35s linear;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-width: 2;
+    transform-origin: center center;
+}
+[data-theme='dark'] .rays line {
+    transform: scale(0.2) rotate(-45deg);
+    opacity: 0;
+}
+
+.header__theme-button .body-circle {
+    fill: currentColor;
+}
+
+.header__theme-button .cutout {
+    transition: transform 0.6s cubic-bezier(0.6, 0.05, 0.35, 1);
+    transform: translate(18px, -18px);
+}
+[data-theme='dark'] .cutout {
+    transform: translate(3px, -3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .i-theme,
+    .rays line,
+    .cutout {
+        transition: none !important;
+    }
 }
 
 @media (width <= 768px) {

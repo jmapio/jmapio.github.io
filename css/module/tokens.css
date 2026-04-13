@@ -84,6 +84,7 @@
     --radius-full: 9999px;
 
     /* -- Animation */
+    --ease-in: cubic-bezier(0.87, 0, 0.13, 1);
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     --dur-s: 150ms;
     --dur-m: 250ms;
@@ -203,6 +204,15 @@
     --theme-button-toc-fg-active: var(--theme-accent);
     --theme-button-toc-bg-hover: var(--color-white-fade-08);
 
+    --theme-button-theme-fg: var(--color-grey-100);
+    --theme-button-theme-fg-hover: var(--color-teal-300);
+    --theme-button-theme-border: var(--theme-button-standard-border);
+    --theme-button-theme-border-hover: var(
+        --theme-button-standard-border-hover
+    );
+    --theme-button-theme-bg: transparent;
+    --theme-button-theme-bg-hover: var(--color-white-fade-04);
+
     --theme-card-bg: var(--theme-glass-bg);
     --theme-card-border: var(--theme-glass-border);
     --theme-card-border-hover: var(--theme-button-standard-border-hover);
@@ -262,6 +272,13 @@
     --theme-button-toc-fg: var(--theme-muted);
     --theme-button-toc-fg-active: var(--theme-accent);
     --theme-button-toc-bg-hover: var(--color-teal-150);
+
+    --theme-button-theme-fg: var(--color-grey-400);
+    --theme-button-theme-fg-hover: var(--color-teal-500);
+    --theme-button-theme-border: var(--color-grey-200);
+    --theme-button-theme-border-hover: var(--color-teal-500);
+    --theme-button-theme-bg: transparent;
+    --theme-button-theme-bg-hover: var(--color-black-fade-04);
 
     --theme-card-bg: var(--theme-glass-bg);
     --theme-card-border: var(--theme-glass-border);
