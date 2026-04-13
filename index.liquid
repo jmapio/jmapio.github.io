@@ -71,7 +71,10 @@ explore:
             {{ page.description }}
         </p>
         <div class='hero__links'>
-            <a href='{{ site.baseurl }}/why-jmap/' class='button button--standard u-text-sm'>Why JMAP?</a>
+            <a href='{{ site.baseurl }}/why-jmap/' class='button button--cta u-text-sm'>
+                <span class='button__label'>Why JMAP?</span>
+                <span class='button__icon'>{% include icons/arrow-right.liquid -%}</span>
+            </a>
             <a href='{{ site.baseurl }}/spec/' class='button button--standard u-text-sm'>Explore the spec</a>
             <a href='{{ site.baseurl }}/software/' class='button button--standard u-text-sm'>Find apps and libraries</a>
         </div>

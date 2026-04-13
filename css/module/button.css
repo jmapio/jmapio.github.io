@@ -50,3 +50,9 @@
 .button__icon .i-external-link {
     transform: translate3d(0, -1px, 0);
 }
+.button .i-arrow-right {
+    transition: transform 0.3s var(--ease-out);
+}
+.button:hover .i-arrow-right {
+    transform: translate3d(2px, 0, 0);
+}
