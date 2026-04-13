@@ -1,15 +1,7 @@
 <nav class='header'>
     <div class='header__inner u-wrapper'>
         <div class='header__logo'>
-            <a href='{{ site.baseurl }}/' class='jmap-logo'>
-                <div class='jmap-logo__mark'>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                JMAP
-            </a>
+            {% include components/jmap-logo.liquid %}
         </div>
         <ul class='header__links'>
             {%- for item in site.data.nav -%}

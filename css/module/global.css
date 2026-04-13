@@ -70,35 +70,10 @@ h6 {
 .jmap-logo {
     display: flex;
     align-items: center;
-    flex-shrink: 0;
-    gap: 8px;
-    color: var(--theme-ink);
-    font-size: var(--text-size-base);
-    font-weight: var(--font-bold);
-    letter-spacing: -0.02em;
-    text-decoration: none;
 }
-.jmap-logo__mark {
-    display: grid;
-    flex-shrink: 0;
-    gap: 2.5px;
-    grid-template-columns: 1fr 1fr;
-    padding: 6px;
-    width: 28px;
-    height: 28px;
-    background: var(--theme-accent);
-    border-radius: var(--radius-m);
+.jmap-logo__icon {
+    fill: var(--theme-accent);
 }
-.jmap-logo__mark span {
-    background: var(--theme-accent-900);
-    border-radius: 2px;
-}
-.jmap-logo__mark span:nth-child(2) {
-    opacity: 0.55;
-}
-.jmap-logo__mark span:nth-child(3) {
-    opacity: 0.55;
-}
-.jmap-logo__mark span:nth-child(4) {
-    opacity: 0.25;
+.jmap-logo__text {
+    fill: var(--theme-logo-text);
 }
