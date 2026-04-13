@@ -287,7 +287,7 @@
 }
 .bench-val {
     min-width: 28px;
-    font-size: 9px;
+    font-size: 0.55em;
     text-align: right;
 }
 .bench-row--jmap .bench-fill {
@@ -360,6 +360,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-top: var(--space-xl);
     border-top: 1px solid var(--theme-border);
     padding-top: var(--space-m);
     font-family: var(--font-mono);
@@ -402,7 +403,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
-    margin-top: var(--space-xs);
+    margin-block: var(--space-xs);
 }
 .lang-chip {
     border: 1px solid var(--theme-border);
@@ -411,8 +412,8 @@
     border-radius: var(--radius-m);
     color: var(--theme-accent);
     font-family: var(--font-mono);
-    font-size: 9.5px;
-    font-weight: 500;
+    font-size: 0.55em;
+    font-weight: var(--font-medium);
 }
 
 /* --- Bento scroll animations --- */
@@ -558,12 +559,13 @@
 .section__inline-code,
 code:not([class]) {
     border: 1px solid var(--theme-border);
-    padding: 0.1em 0.4em;
+    padding: 0.1em 0.5ex;
     background: rgb(from var(--theme-accent) r g b / 14%);
     border-radius: 4px;
     color: var(--theme-accent);
     font-family: var(--font-mono);
     font-size: 0.85em;
+    margin-inline: 0.5ex;
 }
 
 /* --- Get started --- */
@@ -659,7 +661,6 @@ code:not([class]) {
     .hs-layer,
     .lang-chip,
     .push-dot,
-    .push-flash,
     .bento__card--rfc .bento__card-wrapper {
         transition-delay: 0s !important;
         transition-duration: 0s !important;
