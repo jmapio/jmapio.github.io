@@ -6,7 +6,11 @@
         {% if include.links %}
             <div class='hero__links'>
                 {% for link in include.links %}
-                    {% assign is_external = link.href contains 'https://' %}
+                    {% if link.href contains 'https://' %}
+                        {% assign is_external = true %}
+                    {% else %}
+                        {% assign is_external = false %}
+                    {% endif %}
                     <a
                         href='{{ link.href | relative_url }}'
                         class='hero__link button button--standard u-text-sm'
