@@ -39,7 +39,7 @@
     /* -- Fonts */
 
     /* @link https://fonts.google.com/share?selection.family=Bricolage+Grotesque:opsz,wght@12..96,200..800%7CInstrument+Sans:ital,wght@0,400..700;1,400..700 */
-    --font-base: 'Instrument Sans', 'Helvetica Neue', arial, sans-serif;
+    --font-base: 'DM Sans', 'Helvetica Neue', arial, sans-serif;
     --font-display: 'Bricolage Grotesque', 'Helvetica Neue', arial, sans-serif;
     --font-mono: menlo, consolas, monospace;
 
