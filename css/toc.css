@@ -19,8 +19,6 @@
     overflow: clip auto;
     position: sticky;
     top: calc(var(--nav-h) + 24px);
-    max-height: calc(100vh - (var(--nav-h) + var(--space-l)));
-    max-height: calc(100dvh - (var(--nav-h) + var(--space-l)));
     margin-inline: -16px;
     padding-inline: 16px;
     scrollbar-color: var(--theme-border) transparent;
@@ -37,6 +35,8 @@
 @media screen and (width > 768px) {
     .u-toc {
         width: 100%;
+        max-height: calc(100vh - (var(--nav-h) + var(--space-l)));
+        max-height: calc(100dvh - (var(--nav-h) + var(--space-l)));
     }
 }
 
