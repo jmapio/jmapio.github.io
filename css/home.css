@@ -26,14 +26,10 @@
 .bento__card {
     overflow: hidden;
     position: relative;
-    border: 1px solid rgb(255 255 255 / 8%);
-    backdrop-filter: blur(20px) saturate(160%);
-    background: rgb(255 255 255 / 3.5%);
+    border: 1px solid var(--theme-glass-border);
+    backdrop-filter: var(--theme-glass-blur);
+    background: var(--theme-glass-bg);
     border-radius: var(--radius-2xl);
-}
-[data-theme='light'] .bento__card {
-    background: rgb(255 255 255 / 70%);
-    border-color: rgb(13 122 104 / 10%);
 }
 
 .bento__card--battery {
@@ -241,16 +237,15 @@
 }
 .push-dot--j {
     background: var(--theme-accent);
-    box-shadow: 0 0 10px rgb(92 194 173 / 70%);
+    box-shadow: 0 0 10px rgb(from var(--theme-accent) r g b / 70%);
 }
 .push-dot--i {
-    background: var(--theme-muted);
-    opacity: 0.6;
+    background: rgb(from var(--theme-muted) r g b / 60%);
 }
 .push-time {
     min-width: 36px;
     font-family: var(--font-mono);
-    font-size: 9px;
+    font-size: 0.55em;
     text-align: right;
 }
 .push-time--j {
@@ -352,6 +347,8 @@
 /* HTTP stack */
 
 .hs {
+    --_base-bg: var(--theme-accent);
+
     display: flex;
     flex-direction: column;
     gap: 3px;
@@ -364,29 +361,25 @@
     text-align: center;
 }
 .hs-app {
-    background: rgb(92 194 173 / 14%);
+    background: rgb(from var(--_base-bg) r g b / 15%);
     border-color: var(--theme-accent);
     color: var(--theme-accent);
 }
 .hs-jmap {
-    background: rgb(92 194 173 / 8%);
+    background: rgb(from var(--_base-bg) r g b / 10%);
     border-color: var(--theme-accent);
     color: var(--theme-accent);
 }
 .hs-json {
-    background: rgb(255 255 255 / 4%);
+    background: rgb(from var(--_base-bg) r g b / 8%);
     border-color: var(--theme-muted);
     color: var(--theme-muted);
 }
 .hs-http {
-    background: rgb(255 255 255 / 2%);
+    background: rgb(from var(--_base-bg) r g b / 4%);
     border-color: var(--theme-muted);
     color: var(--theme-muted);
     opacity: 0.75;
-}
-[data-theme='light'] .hs-json,
-[data-theme='light'] .hs-http {
-    background: rgb(0 0 0 / 3%);
 }
 
 .bento__card--json .http-request {
@@ -419,10 +412,10 @@
 @keyframes status-pulse {
     0%,
     100% {
-        box-shadow: 0 0 0 0 rgb(92 194 173 / 40%);
+        box-shadow: 0 0 0 0 rgb(from var(--theme-accent) r g b / 40%);
     }
     50% {
-        box-shadow: 0 0 0 5px rgb(92 194 173 / 0%);
+        box-shadow: 0 0 0 5px rgb(from var(--theme-accent) r g b / 0%);
     }
 }
 .http-request__status-label {
@@ -440,7 +433,7 @@
 .lang-chip {
     border: 1px solid var(--theme-border);
     padding: 3px 9px;
-    background: var(--theme-accent-dim);
+    background: var(--theme-button-standard-bg);
     border-radius: var(--radius-m);
     color: var(--theme-accent);
     font-family: var(--font-mono);
@@ -592,7 +585,7 @@
 code:not([class]) {
     border: 1px solid var(--theme-border);
     padding: 0.1em 0.4em;
-    background: rgb(92 194 173 / 14%);
+    background: rgb(from var(--theme-accent) r g b / 14%);
     border-radius: 4px;
     color: var(--theme-accent);
     font-family: var(--font-mono);
@@ -610,20 +603,6 @@ code:not([class]) {
 }
 .get-started__card {
     counter-increment: steps;
-    transition:
-        border-color var(--dur-s),
-        transform 0.3s var(--ease-out),
-        box-shadow 0.3s;
-    border: 1px solid rgb(255 255 255 / 8%);
-    padding: var(--space-l);
-    backdrop-filter: blur(20px);
-    background: rgb(255 255 255 / 3.5%);
-    border-radius: var(--radius-2xl);
-}
-
-[data-theme='light'] .get-started__card {
-    background: rgb(255 255 255 / 70%);
-    border-color: rgb(13 122 104 / 10%);
 }
 .get-started__card::before {
     content: counter(steps, decimal-leading-zero);
@@ -633,13 +612,6 @@ code:not([class]) {
     font-family: var(--font-mono);
     font-size: var(--size-step--2);
     letter-spacing: 0.05em;
-}
-.get-started__h3 {
-    margin-bottom: var(--space-xs);
-    color: var(--theme-ink);
-}
-.get-started__p {
-    color: var(--theme-body);
 }
 
 /* --- No-JS fallback: show final state --- */

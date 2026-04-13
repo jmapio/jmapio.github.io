@@ -1,4 +1,5 @@
 html {
+    background: var(--theme-bg);
     scroll-behavior: smooth;
 }
 
@@ -14,7 +15,7 @@ html {
 
 body {
     line-height: var(--leading);
-    background: var(--theme-bg);
+    background: var(--theme-bg-overlay);
     color: var(--theme-body);
     font-family: var(--font-base);
     font-optical-sizing: auto;

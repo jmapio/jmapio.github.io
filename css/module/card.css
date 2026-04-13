@@ -3,16 +3,12 @@
     display: flex;
     position: relative;
     flex-direction: column;
-    border: 1px solid rgb(255 255 255 / 8%);
+    border: 1px solid var(--theme-card-border);
     padding: var(--space-l);
     height: 100%;
-    backdrop-filter: blur(20px) saturate(160%);
-    background: rgb(255 255 255 / 3.5%);
+    backdrop-filter: var(--theme-card-backdrop);
+    background: var(--theme-card-bg);
     border-radius: var(--radius-2xl);
-}
-[data-theme='light'] .card {
-    background: rgb(255 255 255 / 70%);
-    border-color: rgb(13 122 104 / 10%);
 }
 
 .card__eyebrow {
@@ -38,11 +34,8 @@
 }
 .card--link:hover {
     transform: translateY(-3px);
-    border-color: var(--theme-accent);
-    box-shadow: 0 12px 32px rgb(92 194 173 / 18%);
-}
-[data-theme='light'] .card--link:hover {
-    border-color: var(--theme-accent-dim);
+    border-color: var(--theme-card-border-hover);
+    box-shadow: var(--theme-card-shadow);
 }
 .card--link:hover .card__arrow {
     transform: translateX(4px);
@@ -54,13 +47,6 @@
     width: 24px;
     height: 24px;
     color: var(--theme-accent);
-}
-[data-theme='light'] .card__arrow {
-    background: rgb(255 255 255 / 70%);
-    border-color: rgb(13 122 104 / 10%);
-}
-[data-theme='light'] .card__arrow:hover {
-    box-shadow: 0 8px 24px rgb(13 122 104 / 14%);
 }
 
 .card-grid {

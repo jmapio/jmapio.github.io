@@ -290,14 +290,14 @@ explore:
         <h2 class='section__h2 u-text-3xl u-font-bold'>
             {{- page.get_started.title -}}
         </h2>
-        <div class='get-started__grid'>
+        <ol class='get-started__grid'>
             {% for card in page.get_started.cards %}
-                <div class='get-started__card'>
-                    <h3 class='get-started__h3 u-font-bold'>{{ card.title }}</h3>
-                    <p class='get-started__p u-text-sm'>{{ card.body }}</p>
-                </div>
+                <li class='card get-started__card'>
+                    <h3 class='card__title u-font-bold'>{{ card.title }}</h3>
+                    <p class='card__body u-text-sm'>{{ card.body }}</p>
+                </li>
             {% endfor %}
-        </div>
+        </ol>
     </div>
 </section>
 

@@ -1,12 +1,6 @@
 .header {
     transition: background 0.3s;
     display: flex;
-    backdrop-filter: blur(28px) saturate(200%);
-    background: rgb(8 16 15 / 72%);
-}
-[data-theme='light'] .header {
-    backdrop-filter: blur(28px) saturate(180%);
-    background: rgb(238 245 243 / 88%);
 }
 
 @media (width > 768px) {
@@ -17,6 +11,8 @@
         border-bottom: 1px solid rgb(92 194 173 / 14%);
         height: var(--nav-h);
         min-height: var(--nav-h);
+        backdrop-filter: var(--theme-glass-blur-strong);
+        background: var(--theme-header-bg);
         box-shadow:
             0 1px 0 rgb(92 194 173 / 6%),
             0 4px 24px rgb(0 0 0 / 18%);

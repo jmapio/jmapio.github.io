@@ -1,6 +1,5 @@
 .footer {
     border-top: 1px solid var(--theme-border);
-    background: var(--theme-bg-2);
     padding-block: var(--space-xl);
 }
 .footer__inner {

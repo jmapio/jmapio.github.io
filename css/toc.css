@@ -49,7 +49,7 @@
     display: block;
     position: relative;
     line-height: var(--leading-short);
-    color: var(--theme-muted);
+    color: var(--theme-button-toc-fg);
     font-size: var(--text-size-meta);
     hyphens: auto;
     padding-block: 8px;
@@ -69,11 +69,11 @@
 
 .u-toc li a:hover::after,
 .u-toc .highlight > a::after {
-    background: var(--theme-accent-dim);
+    background: var(--theme-button-toc-bg-hover);
 }
 
 .u-toc .highlight > a {
-    color: var(--theme-fg);
+    color: var(--theme-button-toc-fg-active);
 }
 
 ul.u-toc > li > p > a {
@@ -131,11 +131,20 @@ ul.u-toc > li > p > a {
     border: 1px solid var(--theme-border-strong);
     width: 52px;
     height: 52px;
-    background: var(--theme-surface);
+    background: var(--theme-button-standard-bg);
     border-radius: var(--radius-full);
     box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
     color: var(--theme-accent);
     cursor: pointer;
+}
+
+.toc-fab::before {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    inset: 0;
+    background: var(--theme-bg);
+    border-radius: var(--radius-full);
 }
 
 .toc-fab:not([hidden]) {
@@ -179,15 +188,11 @@ ul.u-toc > li > p > a {
     transition: background var(--dur-m) var(--ease-out);
     position: absolute;
     inset: 0;
-    background: rgb(0 0 0 / 0%);
+    background: transparent;
 }
 
 .toc-drawer.is-open .toc-drawer__backdrop {
-    background: rgb(0 0 0 / 50%);
-}
-
-[data-theme='light'] .toc-drawer.is-open .toc-drawer__backdrop {
-    background: rgb(0 0 0 / 30%);
+    background: var(--theme-modal-backdrop);
 }
 
 .toc-drawer__panel {
@@ -199,7 +204,7 @@ ul.u-toc > li > p > a {
     padding: var(--space-m) var(--space-l) var(--space-xl);
     width: 100%;
     max-height: 70vh;
-    background: var(--theme-surface);
+    background: var(--theme-bg);
     border-radius: var(--radius-xl) var(--radius-xl) 0 0;
     overflow-y: auto;
     overscroll-behavior: contain;

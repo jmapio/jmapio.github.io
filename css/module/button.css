@@ -9,40 +9,33 @@
     cursor: pointer;
 }
 .button--cta {
-    background: var(--theme-accent);
-    border-color: var(--theme-accent);
-    color: var(--theme-accent-900);
+    background: var(--theme-button-cta-bg);
+    border-color: var(--theme-button-cta-border);
+    color: var(--theme-button-cta-fg);
 }
 .button--cta:hover {
-    background: var(--theme-accent-bright);
-}
-[data-theme='light'] .button--cta:hover {
-    color: #fff;
+    background: var(--theme-button-cta-bg-hover);
+    border-color: var(--theme-button-cta-border-hover);
 }
 .button--standard {
-    backdrop-filter: blur(16px);
-    background: rgb(255 255 255 / 7%);
-    border-color: rgb(255 255 255 / 15%);
-    color: var(--theme-ink);
+    backdrop-filter: var(--theme-glass-blur);
+    background: var(--theme-button-standard-bg);
+    border-color: var(--theme-button-standard-border);
+    color: var(--theme-button-standard-fg);
 }
 .button--standard:hover {
-    border-color: var(--theme-border-strong);
-    color: var(--theme-accent);
-}
-[data-theme='light'] .button--standard {
-    background: rgb(255 255 255 / 70%);
-    border-color: var(--theme-border);
+    border-color: var(--theme-button-standard-border-hover);
+    color: var(--theme-button-standard-fg-hover);
 }
 
 .button--outline {
-    background: transparent;
-    border-color: var(--theme-border-strong);
-    color: var(--theme-ink);
+    background: var(--theme-button-outline-bg);
+    border-color: var(--theme-button-outline-border);
+    color: var(--theme-button-outline-fg);
 }
 .button--outline:hover {
-    border-color: var(--theme-accent);
-    color: var(--theme-accent);
-    text-decoration: none;
+    border-color: var(--theme-button-outline-border-hover);
+    color: var(--theme-button-outline-fg-hover);
 }
 .button--sm {
     padding: 5px 12px;
