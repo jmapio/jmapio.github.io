@@ -42,11 +42,11 @@
 }
 
 .button__icon {
-    flex-basis: 16px;
-    width: 16px;
-    height: 16px;
+    flex-basis: 24px;
+    width: 24px;
+    height: 24px;
 }
 
 .button__icon .i-external-link {
-    transform: translate3d(0, -2px, 0);
+    transform: translate3d(0, -1px, 0);
 }
