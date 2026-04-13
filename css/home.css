@@ -255,32 +255,6 @@
     color: var(--theme-muted);
 }
 
-/* Message arrival flash */
-.push-flash {
-    transition:
-        opacity 0.3s,
-        transform 0.3s;
-    display: flex;
-    position: absolute;
-    align-items: center;
-    justify-content: center;
-    transform: scale(0.5);
-    top: -8px;
-    right: 0;
-    border: 1px solid var(--theme-accent);
-    width: 20px;
-    height: 20px;
-    background: rgb(92 194 173 / 15%);
-    border-radius: 50%;
-    color: var(--theme-accent);
-    font-size: 8px;
-    opacity: 0;
-}
-.push-flash.active {
-    transform: scale(1);
-    opacity: 1;
-}
-
 /* Benchmark */
 
 .bench-bars {
