@@ -495,30 +495,23 @@
 }
 
 @keyframes back-and-forth-fast {
-    50%,
-    80% {
-        transform: translate3d(calc(100% - var(--_dot-size) / 2), 0, 0);
-    }
     100% {
-        transform: translate3d(0, 0, 0);
+        left: calc(100% - var(--_dot-size));
     }
 }
 
 @keyframes back-and-forth-slow {
-    80% {
-        transform: translate3d(calc(100% - var(--_dot-size) / 2), 0, 0);
-    }
     100% {
-        transform: translate3d(0, 0, 0);
+        left: calc(50% - var(--_dot-size));
     }
 }
 
 /* Push: faster race transition for JMAP dot */
 .in-view .push-dot--j {
-    animation: back-and-forth-fast 5s var(--ease-out) 0s infinite;
+    animation: back-and-forth-fast 3s var(--ease-out) 1s forwards;
 }
 .in-view .push-dot--i {
-    animation: back-and-forth-slow 5s ease-out 0s infinite;
+    animation: back-and-forth-slow 3s 1s ease-out forwards;
 }
 
 /* RFC card: simple fade-in */
