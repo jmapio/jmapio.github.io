@@ -2,19 +2,29 @@
 layout: article-toc
 permalink: /crash-course/index.html
 title: JMAP Crash Course
+hero:
+    eyebrow: Get started
+    title: JMAP Crash Course
+    sub: >-
+        This document will guide you through understanding the basics of JMAP
+        and writing your first program using it.
+    links:
+        - label: JMAP Core
+          href: /spec/rfc8620/
+        - label: JMAP Mail
+          href: /spec/rfc8621/
 ---
 
-# JMAP Crash Course
+## Preface
 
-This document will guide you through understanding the basics of JMAP and
-writing your first program using it. The examples in this document are written
-in Perl, but they should be simple enough to translate into any language you
-like.
+First, we strongly suggest you read the
+[core](https://www.rfc-editor.org/rfc/rfc8620.html) and
+[mail](https://www.rfc-editor.org/rfc/rfc8621.html) specifications. They’re
+clear and precise, and will cover lots of material that you’ll need to know.
+What we’re including here is just enough to get you started.
 
-First, we strongly suggest you read the [core](https://www.rfc-editor.org/rfc/rfc8620.html)
-and [mail](https://www.rfc-editor.org/rfc/rfc8621.html) specifications. They’re clear and
-precise, and will cover lots of material that you’ll need to know. What we’re
-including here is just enough to get you started.
+The examples in this document are written in Perl, but they should be simple
+enough to translate into any language you like.
 
 ## Core Concept: Request and Response
 

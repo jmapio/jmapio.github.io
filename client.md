@@ -2,14 +2,21 @@
 layout: article-toc
 permalink: /client/index.html
 title: JMAP Client Guide
+hero:
+    eyebrow: Implementation guide
+    title: JMAP Client Guide
+    sub: >-
+        This guide shows how you can use JMAP to efficiently minimise bandwidth
+        usage and round trips whilst still giving the user a complete view of
+        their mail.
 ---
 
-This guide shows how you can use JMAP to efficiently minimise bandwidth usage
-and round trips whilst still giving the user a complete view of their mail. This
-is particularly relevant to clients on mobile devices, where there is not the
-space to store a complete cache of all messages, or for web clients where you
-often do not have a permanent cache at all and must efficiently start from
-scratch each time the app is loaded.
+## Preface
+
+Minimising round trips is particularly relevant to clients on mobile devices,
+where there is not the space to store a complete cache of all messages, or for
+web clients where you often do not have a permanent cache at all and must
+efficiently start from scratch each time the app is loaded.
 
 A single login may have access to multiple accounts. In this guide I'm going to
 ignore this and just use the primary account, which I'm going to presume has
