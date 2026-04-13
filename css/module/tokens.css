@@ -179,6 +179,7 @@
     --theme-logo-text: var(--color-teal-50);
 
     --theme-header-bg: rgb(from var(--theme-bg) r g b / 92%);
+    --theme-footer-bg: transparent;
 
     --theme-button-standard-fg: var(--theme-ink);
     --theme-button-standard-fg-hover: var(--theme-accent);
@@ -250,6 +251,7 @@
     --theme-logo-text: var(--color-grey-900);
 
     --theme-header-bg: rgb(from var(--theme-bg) r g b / 92%);
+    --theme-footer-bg: var(--theme-bg-alt);
 
     --theme-button-standard-fg: var(--theme-ink);
     --theme-button-standard-fg-hover: var(--theme-accent);
