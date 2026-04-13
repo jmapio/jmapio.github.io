@@ -7,5 +7,6 @@
     ::view-transition-new(root) {
         animation-duration: 180ms;
         animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+        mix-blend-mode: normal;
     }
 }
