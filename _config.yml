@@ -11,4 +11,4 @@ exclude:
   - package.json
   - package-lock.json
   - prettier.config.mjs
-  - stylelint.config.mjs
+  - stylelint.config.js
