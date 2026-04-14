@@ -29,11 +29,10 @@ jobs:
             - uses: ruby/setup-ruby@v1
               with:
                   ruby-version: '3.3'
-
-            - run: gem install jekyll kramdown
+                  bundler-cache: true
 
             - name: Build with preview baseurl
-              run: jekyll build --baseurl /jmapio.github.io
+              run: bundle exec jekyll build --baseurl /jmapio.github.io
               env:
                   JEKYLL_ENV: preview
 
