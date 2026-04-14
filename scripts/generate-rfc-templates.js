@@ -88,7 +88,7 @@ const mergeHeadingAnchors = (domParent) => {
 
 // ---
 
-await fs.mkdir('generated-rfc');
+await fs.mkdir('generated-rfc', { recursive: true });
 await fs.mkdir(path.join('_includes', 'generated-rfc-toc'), {
     recursive: true,
 });
