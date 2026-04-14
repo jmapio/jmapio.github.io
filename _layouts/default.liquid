@@ -54,6 +54,18 @@
         {% endif %}
         <title>{{ page.title }}</title>
         <meta name='description' content='{{ page.description }}'>
+        {% assign og_slug = page.permalink | replace: '/index.html', '' | replace: '/', '-' | remove_first: '-' %}
+        {% if og_slug == '' %}{% assign og_slug = 'home' %}{% endif %}
+        <meta property='og:type' content='website'>
+        <meta property='og:title' content='{{ page.title }}'>
+        {% if page.description %}
+            <meta property='og:description' content='{{ page.description }}'>
+        {% endif %}
+        <meta property='og:url' content='{{ site.url }}{{ page.permalink }}'>
+        <meta property='og:image' content='{{ site.url }}/images/og/{{ og_slug }}.png'>
+        <meta property='og:image:width' content='1200'>
+        <meta property='og:image:height' content='630'>
+        <meta name='twitter:card' content='summary_large_image'>
     </head>
     <body>
         {% include theme-init.liquid %}
