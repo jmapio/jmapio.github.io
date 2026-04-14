@@ -42,9 +42,9 @@ h6 {
 
 .u-wrapper {
     box-sizing: content-box;
-    max-width: var(--grid-max-width);
     margin-inline: auto;
     padding-inline: var(--grid-gutter);
+    max-width: var(--grid-max-width);
 }
 
 .u-grid {

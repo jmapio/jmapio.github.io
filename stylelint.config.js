@@ -106,12 +106,16 @@ export default {
                         'left',
                         // ---
                         'margin',
+                        'margin-block',
+                        'margin-inline',
                         'margin-top',
                         'margin-right',
                         'margin-bottom',
                         'margin-left',
                         // ---
                         'border',
+                        'border-block',
+                        'border-inline',
                         'border-top',
                         'border-right',
                         'border-bottom',
@@ -123,6 +127,8 @@ export default {
                         'border-left-width',
                         // ---
                         'padding',
+                        'padding-block',
+                        'padding-inline',
                         'padding-top',
                         'padding-right',
                         'padding-bottom',

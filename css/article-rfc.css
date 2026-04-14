@@ -112,11 +112,11 @@
 }
 
 .u-rfc blockquote {
+    margin-block: var(--space-m);
     border-left: 3px solid var(--theme-accent);
     padding: var(--space-s) var(--space-m);
     background: var(--theme-accent-dim);
     border-radius: 0 var(--radius-m) var(--radius-m) 0;
-    margin-block: var(--space-m);
 }
 .u-rfc blockquote p {
     margin: 0;
@@ -135,6 +135,7 @@
     font-size: 0.85em;
 }
 .u-rfc pre {
+    margin-block: var(--space-m);
     border: 1px solid var(--theme-border);
     padding: var(--space-m);
     line-height: 1.7;
@@ -142,7 +143,6 @@
     border-radius: var(--radius-xl);
     font-family: var(--font-mono);
     font-size: var(--size-step--1);
-    margin-block: var(--space-m);
     overflow-x: auto;
 }
 .u-rfc pre code {

@@ -48,12 +48,12 @@
 .u-toc li a {
     display: block;
     position: relative;
+    padding-block: 8px;
     line-height: var(--leading-short);
     color: var(--theme-button-toc-fg);
     font-size: var(--text-size-meta);
     hyphens: auto;
     overflow-wrap: anywhere;
-    padding-block: 8px;
     white-space: break-spaces;
 }
 
@@ -253,8 +253,8 @@ ul.u-toc > li > p > a {
 }
 
 .toc-drawer__nav .u-toc li a {
-    font-size: var(--text-size-base);
     padding-block: 12px;
+    font-size: var(--text-size-base);
 }
 
 @media (prefers-reduced-motion: reduce) {

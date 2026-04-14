@@ -547,6 +547,7 @@
 
 .section__inline-code,
 code:not([class]) {
+    margin-inline: 0.5ex;
     border: 1px solid var(--theme-border);
     padding: 0.1em 0.5ex;
     background: rgb(from var(--theme-accent) r g b / 14%);
@@ -554,7 +555,6 @@ code:not([class]) {
     color: var(--theme-accent);
     font-family: var(--font-mono);
     font-size: 0.85em;
-    margin-inline: 0.5ex;
 }
 
 /* --- Get started --- */
