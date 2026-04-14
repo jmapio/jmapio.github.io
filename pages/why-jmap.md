@@ -23,7 +23,7 @@ JMAP's layered design delegates complexity to existing components:
   authorisation via standard headers
 - **JSON** handles encoding, eliminating the need for a custom parser (IMAP and
   SMTP both require complex bespoke parsers, CardDAV and CalDAV require this
-  *and also* wrap it in XML…)
+  _and also_ wrap it in XML…)
 - **Core JMAP** defines a small standard set of methods — `/get`, `/set`,
   `/query`, `/changes` — that work consistently across all data types
 - **Application specs** (e.g., JMAP for Mail) define only the data types and
@@ -51,9 +51,9 @@ existing HTTP infrastructure:
 - **DDoS protection** via Cloudflare and similar services
 - **Monitoring and logging** using the same tools as the rest of your HTTP
   infrastructure
-- **Compression** via your HTTP proxy — no mail server code changes needed.
-  IMAP requires explicit RFC 4978 support in the server, and doesn't support
-  modern, more performant compression algorithms.
+- **Compression** via your HTTP proxy — no mail server code changes needed. IMAP
+  requires explicit RFC 4978 support in the server, and doesn't support modern,
+  more performant compression algorithms.
 
 Many organisations also deploy corporate proxies and firewalls that block
 outgoing TCP connections on unexpected ports. HTTP is almost always allowed.
@@ -92,10 +92,10 @@ When a mail client is closed and reopened, it must synchronise with the server.
 This test measured bandwidth consumed when restarting the mail client with
 28,234 messages in the account:
 
-| Client           | Average  TCP connections | Traffic |
-| ---------------- | ---------------          | ------- |
-| JMAP             | 1                        |   13 KB |
-| Thunderbird      | 2.4                      | 2100 KB |
+| Client      | Average TCP connections | Traffic |
+| ----------- | ----------------------- | ------- |
+| JMAP        | 1                       | 13 KB   |
+| Thunderbird | 2.4                     | 2100 KB |
 
 Without CONDSTORE and QRESYNC support, IMAP clients must query the read/unread
 flags on every message in the user’s entire mailbox at startup. This scales
@@ -116,17 +116,17 @@ requires no download at all — the blob ID is simply copied into the new messag
 
 ## Improved battery life
 
-Battery testing showed a **2–3× reduction in battery usage** when switching to JMAP.
-The dominant factor is push notifications: IMAP without proper push support requires
-the device radio to wake periodically to poll the server, which is a significant
-battery drain.
+Battery testing showed a **2–3× reduction in battery usage** when switching to
+JMAP. The dominant factor is push notifications: IMAP without proper push
+support requires the device radio to wake periodically to poll the server, which
+is a significant battery drain.
 
 ## Webmail support
 
 IMAP cannot be used for webmail — it runs on raw TCP sockets not available to
-browsers. Every webmail provider (e.g., Gmail, iCloud Mail, Outlook.com) maintains a
-bespoke HTTP API service alongside their IMAP infrastructure. This is expensive
-to design, build, and maintain.
+browsers. Every webmail provider (e.g., Gmail, iCloud Mail, Outlook.com)
+maintains a bespoke HTTP API service alongside their IMAP infrastructure. This
+is expensive to design, build, and maintain.
 
 Because JMAP runs over HTTP, JMAP can be used directly by webmail clients. The
 Fastmail web client is built directly on Fastmail’s public JMAP API — including
@@ -141,5 +141,7 @@ view, multiple mailboxes, compose, and send.
 
 ## Simpler setup
 
-One protocol for sending and receiving mail (not to mention syncing contacts and calendars) is a huge win for usability. Email providers see a lot of support tickets where users can receive but not send, or vice versa, because one of these is misconfigured. This is always very confusing for regular users.
-
+One protocol for sending and receiving mail (not to mention syncing contacts and
+calendars) is a huge win for usability. Email providers see a lot of support
+tickets where users can receive but not send, or vice versa, because one of
+these is misconfigured. This is always very confusing for regular users.
