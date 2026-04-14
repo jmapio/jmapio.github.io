@@ -125,10 +125,16 @@
     width: 0;
     background: var(--theme-accent);
 }
+:is(.no-js, .in-view) .batt-fill--accent {
+    width: 80%;
+}
 .batt-fill--muted {
     width: 0;
     background: var(--theme-muted);
     opacity: 0.5;
+}
+:is(.no-js, .in-view) .batt-fill--muted {
+    width: 30%;
 }
 .batt-tip {
     flex-shrink: 0;
@@ -185,10 +191,16 @@
     width: 0;
     background: var(--theme-accent);
 }
+:is(.no-js, .in-view) .doc-bar-jmap {
+    width: 19%;
+}
 .doc-bar-imap {
     width: 0;
     background: var(--theme-muted);
     opacity: 0.4;
+}
+:is(.no-js, .in-view) .doc-bar-imap {
+    width: 100%;
 }
 .doc-bar-val {
     min-width: 30px;
@@ -239,9 +251,28 @@
     background: var(--theme-accent);
     box-shadow: 0 0 10px rgb(from var(--theme-accent) r g b / 70%);
 }
+.in-view .push-dot--j {
+    animation: back-and-forth-fast 3s var(--ease-out) 1s forwards;
+}
 .push-dot--i {
     background: rgb(from var(--theme-muted) r g b / 60%);
 }
+.in-view .push-dot--i {
+    animation: back-and-forth-slow 3s 1s ease-out forwards;
+}
+
+@keyframes back-and-forth-fast {
+    100% {
+        left: calc(100% - var(--_dot-size));
+    }
+}
+
+@keyframes back-and-forth-slow {
+    100% {
+        left: calc(50% - var(--_dot-size));
+    }
+}
+
 .push-time {
     min-width: 36px;
     font-family: var(--font-mono);
@@ -294,10 +325,16 @@
     width: 0;
     background: var(--theme-accent);
 }
+:is(.no-js, .in-view) .bench-row--jmap .bench-fill {
+    width: 2.5%;
+}
 .bench-row--tb .bench-fill {
     width: 0;
     background: var(--theme-muted);
     opacity: 0.35;
+}
+:is(.no-js, .in-view) .bench-row--tb .bench-fill {
+    width: 98%;
 }
 .bench-row--jmap .bench-val {
     color: var(--theme-accent);
@@ -329,10 +366,23 @@
     margin-top: var(--space-m);
 }
 .hs-layer {
+    transition:
+        opacity 0.6s var(--ease-out),
+        transform 0.6s var(--ease-out);
+    transform: translateX(-12px);
     border-left: 2px solid;
     padding: 6px 10px;
     border-radius: var(--radius-s);
+    opacity: 0;
     text-align: center;
+}
+.in-view .hs-layer {
+    transform: translateX(0);
+    opacity: 1;
+}
+.no-js .hs-layer {
+    transform: none;
+    opacity: 1;
 }
 .hs-app {
     background: rgb(from var(--_base-bg) r g b / 15%);
@@ -354,6 +404,18 @@
     border-color: var(--theme-muted);
     color: var(--theme-muted);
     opacity: 0.75;
+}
+.hs-layer:nth-child(4) {
+    transition-delay: 0.05s;
+}
+.hs-layer:nth-child(3) {
+    transition-delay: 0.12s;
+}
+.hs-layer:nth-child(2) {
+    transition-delay: 0.19s;
+}
+.hs-layer:nth-child(1) {
+    transition-delay: 0.26s;
 }
 
 .bento__card--json .http-request {
@@ -406,6 +468,10 @@
     margin-block: var(--space-xs);
 }
 .lang-chip {
+    transition:
+        opacity 0.4s var(--ease-out),
+        transform 0.4s var(--ease-out);
+    transform: scale(0.85);
     border: 1px solid var(--theme-border);
     padding: 3px 9px;
     background: var(--theme-button-standard-bg);
@@ -414,65 +480,14 @@
     font-family: var(--font-mono);
     font-size: 0.55em;
     font-weight: var(--font-medium);
-}
-
-/* --- Bento scroll animations --- */
-
-/* Bar fills: restore widths on view */
-.in-view .batt-fill--accent {
-    width: 80%;
-}
-.in-view .batt-fill--muted {
-    width: 30%;
-}
-.in-view .doc-bar-jmap {
-    width: 19%;
-}
-.in-view .doc-bar-imap {
-    width: 100%;
-}
-.in-view .bench-row--jmap .bench-fill {
-    width: 2.5%;
-}
-.in-view .bench-row--tb .bench-fill {
-    width: 98%;
-}
-
-/* HTTP stack: staggered slide-in from left, bottom to top */
-.hs-layer {
-    transition:
-        opacity 0.6s var(--ease-out),
-        transform 0.6s var(--ease-out);
-    transform: translateX(-12px);
-    opacity: 0;
-}
-.in-view .hs-layer {
-    transform: translateX(0);
-    opacity: 1;
-}
-.hs-layer:nth-child(4) {
-    transition-delay: 0.05s;
-}
-.hs-layer:nth-child(3) {
-    transition-delay: 0.12s;
-}
-.hs-layer:nth-child(2) {
-    transition-delay: 0.19s;
-}
-.hs-layer:nth-child(1) {
-    transition-delay: 0.26s;
-}
-
-/* Lang chips: staggered pop-in */
-.lang-chip {
-    transition:
-        opacity 0.4s var(--ease-out),
-        transform 0.4s var(--ease-out);
-    transform: scale(0.85);
     opacity: 0;
 }
 .in-view .lang-chip {
     transform: scale(1);
+    opacity: 1;
+}
+.no-js .lang-chip {
+    transform: none;
     opacity: 1;
 }
 .lang-chip:nth-child(1) {
@@ -494,31 +509,12 @@
     transition-delay: 0.3s;
 }
 
-@keyframes back-and-forth-fast {
-    100% {
-        left: calc(100% - var(--_dot-size));
-    }
-}
-
-@keyframes back-and-forth-slow {
-    100% {
-        left: calc(50% - var(--_dot-size));
-    }
-}
-
-/* Push: faster race transition for JMAP dot */
-.in-view .push-dot--j {
-    animation: back-and-forth-fast 3s var(--ease-out) 1s forwards;
-}
-.in-view .push-dot--i {
-    animation: back-and-forth-slow 3s 1s ease-out forwards;
-}
-
 /* RFC card: simple fade-in */
 .bento__card--rfc .bento__card-wrapper {
     transition: opacity 0.6s var(--ease-out);
     opacity: 0;
 }
+.no-js .bento__card--rfc .bento__card-wrapper,
 .bento__card--rfc.in-view .bento__card-wrapper {
     opacity: 1;
 }
@@ -581,38 +577,6 @@ code:not([class]) {
     font-family: var(--font-mono);
     font-size: var(--size-step--2);
     letter-spacing: 0.05em;
-}
-
-/* --- No-JS fallback: show final state --- */
-
-.no-js .batt-fill--accent {
-    width: 80%;
-}
-.no-js .batt-fill--muted {
-    width: 30%;
-}
-.no-js .doc-bar-jmap {
-    width: 19%;
-}
-.no-js .doc-bar-imap {
-    width: 100%;
-}
-.no-js .bench-row--jmap .bench-fill {
-    width: 2.5%;
-}
-.no-js .bench-row--tb .bench-fill {
-    width: 98%;
-}
-.no-js .hs-layer {
-    transform: none;
-    opacity: 1;
-}
-.no-js .lang-chip {
-    transform: none;
-    opacity: 1;
-}
-.no-js .bento__card--rfc .bento__card-wrapper {
-    opacity: 1;
 }
 
 /* --- Reduced motion --- */
