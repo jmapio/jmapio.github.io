@@ -7,6 +7,7 @@ docker run --rm \
   -v "$PWD:/site" \
   -w /site \
   -p 4000:4000 \
+  -p 35729:35729 \
   -it \
   ruby:3.3 \
   bash -c '
@@ -19,5 +20,5 @@ EOF
     fi
     bundle config set --local path vendor/bundle
     bundle install
-    bundle exec jekyll serve --host 0.0.0.0 --watch
+    bundle exec jekyll serve --host 0.0.0.0 --livereload
   '
