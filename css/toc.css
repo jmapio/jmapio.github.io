@@ -52,9 +52,9 @@
     color: var(--theme-button-toc-fg);
     font-size: var(--text-size-meta);
     hyphens: auto;
+    overflow-wrap: anywhere;
     padding-block: 8px;
     white-space: break-spaces;
-    word-break: break-word;
 }
 
 /* Using a psuedo element to keep alignment with page margin */

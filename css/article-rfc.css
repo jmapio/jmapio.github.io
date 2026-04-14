@@ -68,8 +68,8 @@
 }
 .u-rfc a {
     hyphens: auto;
+    overflow-wrap: anywhere;
     text-decoration: none;
-    word-break: break-word;
 }
 .u-rfc a:hover {
     text-decoration: underline;
