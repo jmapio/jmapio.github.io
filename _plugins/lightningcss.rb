@@ -19,6 +19,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
       "npx", "lightningcss",
       "--minify",
       "--bundle",
+      "--sourcemap",
       "--targets", targets,
       file,
       "-o", file

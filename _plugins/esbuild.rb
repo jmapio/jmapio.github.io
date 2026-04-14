@@ -22,7 +22,8 @@ Jekyll::Hooks.register :site, :post_write do |site|
       "--target=#{target}",
       file,
       "--outfile=#{file}",
-      "--allow-overwrite"
+      "--allow-overwrite",
+      "--sourcemap"
     ]
 
     _out, err, status = Open3.capture3(*cmd)
