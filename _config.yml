@@ -5,9 +5,6 @@ lightningcss:
   targets: defaults
 esbuild:
   target: es2022
-plugins:
-  - jekyll-github-metadata
-  - jekyll-sitemap
 exclude:
   - _tmp
   - _bin
