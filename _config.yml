@@ -1,8 +1,10 @@
 baseurl: ''
 url: 'http://jmap.io'
 markdown: kramdown
-sass:
-  style: compressed
+lightningcss:
+  targets: defaults
+esbuild:
+  target: es2022
 exclude:
   - _tmp
   - scripts
