@@ -2,6 +2,8 @@ require "open3"
 require "fileutils"
 
 Jekyll::Hooks.register :site, :post_write do |site|
+  next if Jekyll.env == "development"
+
   css_dir = File.join(site.dest, "css")
   next unless Dir.exist?(css_dir)
 

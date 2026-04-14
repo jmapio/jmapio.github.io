@@ -2,6 +2,8 @@ require "open3"
 require "fileutils"
 
 Jekyll::Hooks.register :site, :post_write do |site|
+  next if Jekyll.env == "development"
+
   js_dir = File.join(site.dest, "js")
   next unless Dir.exist?(js_dir)
 
