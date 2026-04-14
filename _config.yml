@@ -5,9 +5,13 @@ lightningcss:
   targets: defaults
 esbuild:
   target: es2022
+plugins:
+  - jekyll-github-metadata
 exclude:
   - _tmp
+  - _bin
   - scripts
+  - vendor
   - package.json
   - package-lock.json
   - prettier.config.mjs

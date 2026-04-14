@@ -5,7 +5,6 @@
 .jekyll-cache/
 .jekyll-metadata
 404.html
-Gemfile
 node_modules
 
 .venv
