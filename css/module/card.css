@@ -14,7 +14,7 @@
 .card__eyebrow {
     margin-bottom: var(--space-2xs);
     color: var(--theme-accent);
-    letter-spacing: var(--kerning-loose);
+    letter-spacing: var(--tracking-loose);
     text-transform: uppercase;
 }
 .card__title {

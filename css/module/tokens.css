@@ -62,10 +62,10 @@
     --text-size-article: var(--text-size-base);
     --text-size-jumbo: var(--size-step-7);
 
-    /* -- Kerning */
-    --kerning: normal;
-    --kerning-tight: -0.03em;
-    --kerning-loose: 0.09em;
+    /* -- Letter spacing */
+    --tracking: normal;
+    --tracking-tight: -0.03em;
+    --tracking-loose: 0.09em;
 
     /* -- Font weight */
     --font-thin: 100;

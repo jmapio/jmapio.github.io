@@ -99,6 +99,6 @@
 
 /* --- */
 
-.u-kerning-tight {
-    letter-spacing: var(--kerning-tight);
+.u-tracking-tight {
+    letter-spacing: var(--tracking-tight);
 }

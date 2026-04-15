@@ -73,7 +73,7 @@
     gap: 6px;
     margin-bottom: var(--space-xs);
     color: var(--theme-accent);
-    letter-spacing: var(--kerning-loose);
+    letter-spacing: var(--tracking-loose);
     text-transform: uppercase;
 }
 .bento__card-label > svg + span {
@@ -536,7 +536,7 @@
     display: block;
     margin-bottom: var(--space-s);
     color: var(--theme-accent);
-    letter-spacing: var(--kerning-loose);
+    letter-spacing: var(--tracking-loose);
     text-transform: uppercase;
 }
 .section__h2 {
