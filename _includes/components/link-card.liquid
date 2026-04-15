@@ -1,8 +1,8 @@
-<a class='card card--link' href='{{ site.baseurl }}{{ card.href }}'>
+<a class='card card--link {{ include.class }}' href='{{ site.baseurl }}{{ include.href }}'>
     <div class='card__content'>
-        <p class='card__eyebrow u-text-xs u-font-semibold'>{{ card.eyebrow }}</p>
-        <h2 class='card__title u-text-xl u-font-bold'>{{ card.title }}</h2>
-        <p class='card__body'>{{ card.body }}</p>
+        <p class='card__eyebrow u-text-sm u-font-bold'>{{ include.eyebrow }}</p>
+        <h2 class='card__title u-text-xl u-font-bold'>{{ include.title }}</h2>
+        <p class='card__body'>{{ include.body }}</p>
     </div>
     <div class='card__arrow'>{% include icons/arrow-right.liquid %}</div>
 </a>
