@@ -24,7 +24,7 @@
 }
 
 .u-text-xl {
-    line-height: var(--leading);
+    line-height: var(--leading-flat);
     font-size: var(--size-step-2);
 }
 
