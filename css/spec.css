@@ -1,0 +1,17 @@
+.section--spec {
+    padding-block: var(--space-2xl);
+
+    .section__description {
+        margin-top: var(--space-s);
+        max-width: 46ch;
+    }
+
+    .section__hr {
+        margin-top: var(--space-l);
+        margin-bottom: var(--space-xl);
+    }
+}
+
+.card--in-progress .card__eyebrow {
+    color: var(--theme-warning);
+}

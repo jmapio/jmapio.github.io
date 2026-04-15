@@ -137,3 +137,11 @@ summary::marker {
 address {
     font-style: normal;
 }
+
+hr {
+    margin: 0;
+    border: none;
+    padding: 0;
+    height: 1px;
+    background-color: #000;
+}

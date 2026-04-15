@@ -1,12 +1,15 @@
 ---
-layout: article
+layout: default
 permalink: /spec/index.html
+stylesheets:
+  - spec
 title: JMAP Specifications
 description: >-
     The specifications for the core JMAP protocol and access to mail and
     contacts stores using JMAP have been finalised and published.
 hero:
-    eyebrow: Specs
+    eyebrow: Specifications
+    eyebrow_icon: code-bracket
     title: JMAP RFC
     sub: >-
         The specifications for the core JMAP protocol and access to mail and
@@ -22,17 +25,23 @@ specs:
           that 
           are useful no matter what data type you might be syncing.
       items:
-          - label: The core JMAP protocol (RFC 8620)
+          - title: The core JMAP protocol
+            eyebrow: RFC 8620
             href: /spec/rfc8620/
-          - label: VAPID for JMAP Push (RFC 9749)
+          - title: VAPID for JMAP Push
+            eyebrow: RFC 9749
             href: /spec/rfc9749/
-          - label: JMAP Sharing (RFC 9670)
+          - title: JMAP Sharing
+            eyebrow: RFC 9670
             href: /spec/rfc9670/
-          - label: JMAP via WebSocket (RFC 8887)
+          - title: JMAP via WebSocket
+            eyebrow: RFC 8887
             href: /spec/rfc8887/
-          - label: JMAP Quotas (RFC 9425)
+          - title: JMAP Quotas
+            eyebrow: RFC 9425
             href: /spec/rfc9425/
-          - label: JMAP Blob Management (RFC 9404)
+          - title: JMAP Blob Management
+            eyebrow: RFC 9404
             href: /spec/rfc9404/
     - label: Mail
       description: >-
@@ -40,43 +49,71 @@ specs:
           find any issues, please email [jmap@ietf.org](mailto:jmap@ietf.org) or
           make a pull request on GitHub if you have a proposed fix.
       items:
-          - label: JMAP Mail (RFC 8621)
+          - title: JMAP Mail
+            eyebrow: RFC 8621
             href: /spec/rfc8621/
-          - label: JMAP Sieve Scripts Management (RFC 9661)]
+          - title: JMAP Sieve Scripts Management
+            eyebrow: RFC 9661
             href: /spec/rfc9661/
-          - label: JMAP MDN Handling (RFC 9007)
+          - title: JMAP MDN Handling
+            eyebrow: RFC 9007
             href: /spec/rfc9007/
-          - label: JMAP S/MIME Signature Verification (RFC 9219)
+          - title: JMAP S/MIME Signature Verification
+            eyebrow: RFC 9219
             href: /spec/rfc9219/
-    - label: Contacts
+    - label: Contacts and calendars
       items:
-          - label: JMAP Contacts (RFC 9610)
+          - title: JMAP Contacts
+            eyebrow: RFC 9610
             href: /spec/rfc9610/
-    - label: Calendars
-      items:
-          - label: JMAP Calendars (in progress)
+          - title: JMAP Calendars
+            eyebrow: In progress
             href: /spec/calendars-draft/
+            class: card--in-progress
     - label: Data formats
       description: >-
           JMAP was designed in conjunction with new JSON-based file formats for 
           contacts and calendars, which can also be used standalone or in other
           protocols.
       items:
-          - label: JSContact (RFC9553)
+          - title: JSContact
+            eyebrow: RFC 9553
             href: /spec/rfc9553/
-          - label: JSCalendar 2.0 (in progress)
+          - title: JSCalendar 2.0
+            eyebrow: In progress
             href: /spec/jscalendar-draft/
+            class: card--in-progress
 ---
+{%
+    include components/hero.liquid
+    eyebrow=page.hero.eyebrow
+    eyebrow_icon=page.hero.eyebrow_icon
+    title=page.hero.title
+    sub=page.hero.sub
+    links=page.hero.links
+%}
 {%- for section in page.specs -%}
-    <h2>{{ section.label }}</h2>
-    {%- if section.description -%}
-        <p>{{ section.description }}</p>
-    {%- endif -%}
-    <ul>
-        {%- for item in section.items -%}
-            <li>
-                <a href='{{ item.href | relative_url }}'>{{ item.label }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+    <section class='section section--spec'>
+        <div class='u-wrapper'>
+            <h2 class='section__title u-text-2xl u-font-bold'>{{ section.label }}</h2>
+            {%- if section.description -%}
+                <div class='section__description'>
+                    {{ section.description | markdownify }}
+                </div>
+            {%- endif -%}
+            <hr class='section__hr'>
+            <ul class='section__cards card-grid'>
+                {%- for item in section.items -%}
+                    {%
+                        include components/link-card.liquid
+                        eyebrow=item.eyebrow
+                        title=item.title
+                        body=item.body
+                        href=item.href
+                        class=item.class
+                    %}
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
 {% endfor %}

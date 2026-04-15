@@ -33,6 +33,10 @@ h6 {
     font-family: var(--font-display);
 }
 
+hr {
+    background-color: var(--theme-border);
+}
+
 .u-wrapper {
     box-sizing: content-box;
     margin-inline: auto;
