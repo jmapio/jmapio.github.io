@@ -33,13 +33,6 @@ h6 {
     font-family: var(--font-display);
 }
 
-[data-theme='dark'] .i-theme-light {
-    display: none;
-}
-[data-theme='light'] .i-theme-dark {
-    display: none;
-}
-
 .u-wrapper {
     box-sizing: content-box;
     margin-inline: auto;
