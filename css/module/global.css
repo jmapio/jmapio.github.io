@@ -55,6 +55,12 @@ h6 {
     height: 12px;
 }
 
+.u-sq-20 {
+    flex-basis: 20px;
+    width: 20px;
+    height: 20px;
+}
+
 .section {
     padding-block: var(--space-3xl);
 }
