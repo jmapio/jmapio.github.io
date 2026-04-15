@@ -44,13 +44,8 @@
     --font-mono: menlo, consolas, monospace;
 
     /* -- Leading */
-    --leading: 1.7;
-    --leading-short: 1.5;
-    --leading-slim: 1.2;
-    --leading-fine: 1.1;
+    --leading: 1.5;
     --leading-flat: 1;
-    --leading-mini: 0.9;
-    --leading-micro: 0.8;
 
     /* -- Text size */
     --text-size-base: var(--size-step-0);

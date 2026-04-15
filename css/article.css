@@ -8,13 +8,13 @@
 }
 .u-article h1 {
     margin-bottom: var(--space-m);
-    line-height: var(--leading-fine);
+    line-height: var(--leading-flat);
     font-size: var(--text-size-heading-1);
     font-weight: var(--font-bold);
 }
 .u-article h2 {
     margin-bottom: var(--space-s);
-    line-height: var(--leading-fine);
+    line-height: var(--leading-flat);
     font-size: var(--text-size-heading-2);
     font-weight: var(--font-bold);
 }
@@ -24,17 +24,17 @@
 .u-article h3 {
     margin-top: var(--space-2xl);
     margin-bottom: var(--space-s);
-    line-height: var(--leading-fine);
+    line-height: var(--leading-flat);
     font-size: var(--text-size-heading-3);
     font-weight: var(--font-semibold);
 }
 .u-article h4 {
-    line-height: var(--leading-fine);
+    line-height: var(--leading);
     font-size: var(--text-size-heading-4);
     font-weight: var(--font-semibold);
 }
 .u-article h5 {
-    line-height: var(--leading-slim);
+    line-height: var(--leading);
     font-size: var(--text-size-base);
     font-weight: var(--font-semibold);
 }

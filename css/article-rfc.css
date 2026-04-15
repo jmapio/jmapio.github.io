@@ -3,19 +3,18 @@
 }
 
 .u-rfc :is(h1, h2, h3, h4, h5, h6) {
-    line-height: 1.1;
     color: var(--theme-ink);
 }
 .u-rfc h1 {
     margin-bottom: var(--space-m);
-    line-height: var(--leading-fine);
+    line-height: var(--leading-flat);
     font-size: var(--text-size-heading-1);
     font-weight: var(--font-bold);
 }
 .u-rfc h2 {
     margin-top: var(--space-2xl);
     margin-bottom: var(--space-s);
-    line-height: var(--leading-fine);
+    line-height: var(--leading-flat);
     font-size: var(--text-size-heading-2);
     font-weight: var(--font-bold);
 }
@@ -25,19 +24,19 @@
 .u-rfc h3 {
     margin-top: var(--space-xl);
     margin-bottom: var(--space-s);
-    line-height: var(--leading-fine);
+    line-height: var(--leading);
     font-size: var(--text-size-heading-3);
     font-weight: var(--font-semibold);
 }
 .u-rfc h4 {
     margin-top: var(--space-xl);
     margin-bottom: var(--space-s);
-    line-height: var(--leading-fine);
+    line-height: var(--leading);
     font-size: var(--text-size-heading-4);
     font-weight: var(--font-semibold);
 }
 .u-rfc h5 {
-    line-height: var(--leading-slim);
+    line-height: var(--leading);
     font-size: var(--text-size-base);
     font-weight: var(--font-semibold);
 }

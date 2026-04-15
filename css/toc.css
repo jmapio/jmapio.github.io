@@ -49,7 +49,7 @@
     display: block;
     position: relative;
     padding-block: 8px;
-    line-height: var(--leading-short);
+    line-height: var(--leading);
     color: var(--theme-button-toc-fg);
     font-size: var(--text-size-meta);
     hyphens: auto;
