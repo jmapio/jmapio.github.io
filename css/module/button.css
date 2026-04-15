@@ -42,9 +42,9 @@
 }
 
 .button__icon {
-    flex-basis: 24px;
-    width: 24px;
-    height: 24px;
+    flex-basis: 20px;
+    width: 20px;
+    height: 20px;
 }
 
 .button__icon .i-external-link {
