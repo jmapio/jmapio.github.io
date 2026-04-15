@@ -35,7 +35,7 @@
 
 .hero__eyebrow {
     margin-bottom: var(--space-xs);
-    color: var(--theme-accent);
+    color: var(--theme-eyebrow);
     font-size: var(--size-step--2);
     font-weight: var(--font-semibold);
     letter-spacing: 0.1em;

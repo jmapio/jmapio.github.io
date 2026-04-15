@@ -167,6 +167,7 @@
     --theme-ink: var(--color-teal-50);
     --theme-body: var(--color-white-fade-80);
     --theme-muted: var(--color-white-fade-70);
+    --theme-eyebrow: var(--theme-accent);
 
     --theme-glass-bg: var(--color-white-fade-04);
     --theme-glass-border: var(--color-white-fade-08);
@@ -240,6 +241,7 @@
     --theme-ink: var(--color-teal-950);
     --theme-body: var(--color-teal-900);
     --theme-muted: #4a6460;
+    --theme-eyebrow: var(--color-teal-600);
 
     --theme-glass-bg: var(--color-white-fade-70);
     --theme-glass-border: var(--color-black-fade-08);

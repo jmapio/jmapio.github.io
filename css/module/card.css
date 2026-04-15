@@ -13,7 +13,7 @@
 
 .card__eyebrow {
     margin-bottom: var(--space-2xs);
-    color: var(--theme-accent);
+    color: var(--theme-eyebrow);
     letter-spacing: var(--tracking-loose);
     text-transform: uppercase;
 }
