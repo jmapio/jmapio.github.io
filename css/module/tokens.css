@@ -64,8 +64,8 @@
 
     /* -- Letter spacing */
     --tracking: normal;
-    --tracking-tight: -0.03em;
-    --tracking-loose: 0.09em;
+    --tracking-tight: -0.05ch;
+    --tracking-loose: 0.04ch;
 
     /* -- Font weight */
     --font-thin: 100;
