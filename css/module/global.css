@@ -4,7 +4,7 @@ html {
 }
 
 :target {
-    scroll-margin-block: calc(var(--nav-h) + 24px);
+    scroll-margin-block: 24px;
 }
 
 @media screen and (width > 768px) {
