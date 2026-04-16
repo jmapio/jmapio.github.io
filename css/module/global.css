@@ -23,6 +23,7 @@ body {
     font-size: var(--text-size-base);
     font-variation-settings: 'wdth' 100;
     font-weight: var(--font-regular);
+    scrollbar-gutter: stable;
 }
 
 body::after {
