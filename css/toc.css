@@ -136,6 +136,12 @@ ul.u-toc > li > p > a {
     box-shadow: 0 4px 20px rgb(0 0 0 / 25%);
     color: var(--theme-accent);
     cursor: pointer;
+
+    > svg {
+        flex-basis: 24px;
+        width: 24px;
+        height: 24px;
+    }
 }
 
 .toc-fab::before {
