@@ -110,13 +110,13 @@
     border: 1px solid var(--theme-button-theme-border);
     width: 32px;
     height: 32px;
-    background: var(--theme-button-theme-bg);
+    background: var(--theme-button-theme-page-bg);
     border-radius: var(--radius-m);
     color: var(--theme-button-theme-fg);
     cursor: pointer;
 }
 .header__theme-button:hover {
-    background: var(--theme-button-theme-bg-hover);
+    background: var(--theme-button-theme-page-bg-hover);
     border-color: var(--theme-button-theme-border-hover);
     color: var(--theme-button-theme-fg-hover);
 }

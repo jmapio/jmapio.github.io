@@ -6,7 +6,7 @@
     position: relative;
     border-top: 1px solid var(--theme-border);
     border-bottom: 1px solid var(--theme-border);
-    background: var(--theme-bg-alt);
+    background: var(--theme-page-bg-alt);
 }
 
 .section__label {

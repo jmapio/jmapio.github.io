@@ -1,5 +1,5 @@
 html {
-    background: var(--theme-bg);
+    background: var(--theme-page-bg);
     scroll-behavior: smooth;
 }
 
@@ -14,14 +14,23 @@ html {
 }
 
 body {
+    position: relative;
     line-height: var(--leading);
-    background: var(--theme-bg-overlay);
+    background: var(--theme-page-bg-overlay);
     color: var(--theme-body);
     font-family: var(--font-base);
     font-optical-sizing: auto;
     font-size: var(--text-size-base);
     font-variation-settings: 'wdth' 100;
     font-weight: var(--font-regular);
+}
+
+body::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--theme-page-bg-accent-overlay);
+    opacity: 0.5;
 }
 
 h1,

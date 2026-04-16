@@ -18,7 +18,7 @@
     border-bottom: 1px solid var(--theme-border);
     padding-top: var(--space-2xl);
     padding-bottom: var(--space-2xl);
-    background: var(--theme-bg-alt);
+    background: var(--theme-page-bg-alt);
 }
 
 @media (width > 768px) {

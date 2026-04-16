@@ -143,7 +143,7 @@ ul.u-toc > li > p > a {
     z-index: -1;
     position: absolute;
     inset: 0;
-    background: var(--theme-bg);
+    background: var(--theme-page-bg-page);
     border-radius: var(--radius-full);
 }
 
@@ -204,7 +204,7 @@ ul.u-toc > li > p > a {
     padding: var(--space-m) var(--space-l) var(--space-xl);
     width: 100%;
     max-height: 70vh;
-    background: var(--theme-bg);
+    background: var(--theme-page-bg);
     border-radius: var(--radius-xl) var(--radius-xl) 0 0;
     overflow-y: auto;
     overscroll-behavior: contain;

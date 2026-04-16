@@ -152,10 +152,10 @@
     --theme-accent-bright: var(--color-teal-50);
     --theme-accent-dim: var(--color-teal-950);
 
-    --theme-bg: var(--color-grey-1100);
-    --theme-bg-fade: rgb(from var(--color-grey-1100) r g b / 90%);
-    --theme-bg-alt: var(--color-white-fade-02);
-    --theme-bg-overlay:
+    --theme-page-bg: var(--color-grey-1100);
+    --theme-page-bg-fade: rgb(from var(--color-grey-1100) r g b / 90%);
+    --theme-page-bg-alt: var(--color-white-fade-02);
+    --theme-page-bg-overlay:
         linear-gradient(
             101deg,
             rgb(8 16 15 / 55%) 0%,
@@ -163,6 +163,14 @@
             rgb(8 16 15 / 0%) 65%
         ),
         linear-gradient(0deg, rgb(8 16 15 / 75%) 0%, rgb(8 16 15 / 0%) 30%);
+    --theme-page-bg-accent-overlay:
+        linear-gradient(
+            101deg,
+            rgb(11 133 122 / 5%) 0%,
+            rgb(92 194 173 / 8%) 40%,
+            rgb(8 106 97 / 5%) 65%
+        ),
+        linear-gradient(0deg, rgb(11 133 122 / 2%) 0%, rgb(92 194 173 / 0%) 30%);
 
     --theme-border: var(--color-white-fade-08);
     --theme-border-strong: var(--color-white-fade-15);
@@ -177,7 +185,7 @@
 
     --theme-logo-text: var(--color-teal-50);
 
-    --theme-header-bg: rgb(from var(--theme-bg) r g b / 92%);
+    --theme-header-bg: rgb(from var(--theme-page-bg) r g b / 92%);
     --theme-footer-bg: transparent;
 
     --theme-button-standard-fg: var(--theme-ink);
@@ -210,8 +218,8 @@
     --theme-button-theme-border-hover: var(
         --theme-button-standard-border-hover
     );
-    --theme-button-theme-bg: transparent;
-    --theme-button-theme-bg-hover: var(--color-white-fade-04);
+    --theme-button-theme-page-bg: transparent;
+    --theme-button-theme-page-bg-hover: var(--color-white-fade-04);
 
     --theme-card-bg: var(--theme-glass-bg);
     --theme-card-border: var(--theme-glass-border);
@@ -238,8 +246,8 @@
     --theme-accent-bright: var(--color-teal-750);
     --theme-accent-dim: var(--color-teal-950);
 
-    --theme-bg: #eef5f3;
-    --theme-bg-alt: var(--color-white);
+    --theme-page-bg: #eef5f3;
+    --theme-page-bg-alt: var(--color-white);
     --theme-border: var(--color-black-fade-15);
     --theme-border-strong: var(--color-black-fade-30);
 
@@ -252,8 +260,8 @@
     --theme-glass-border: var(--color-black-fade-08);
     --theme-logo-text: var(--color-grey-900);
 
-    --theme-header-bg: rgb(from var(--theme-bg) r g b / 92%);
-    --theme-footer-bg: var(--theme-bg-alt);
+    --theme-header-bg: rgb(from var(--theme-page-bg) r g b / 92%);
+    --theme-footer-bg: var(--theme-page-bg-alt);
 
     --theme-button-standard-fg: var(--color-teal-750);
     --theme-button-standard-fg-hover: var(--theme-accent);
@@ -281,8 +289,8 @@
     --theme-button-theme-fg-hover: var(--color-teal-500);
     --theme-button-theme-border: var(--color-grey-200);
     --theme-button-theme-border-hover: var(--color-teal-500);
-    --theme-button-theme-bg: transparent;
-    --theme-button-theme-bg-hover: var(--color-black-fade-04);
+    --theme-button-theme-page-bg: transparent;
+    --theme-button-theme-page-bg-hover: var(--color-black-fade-04);
 
     --theme-card-bg: var(--theme-glass-bg);
     --theme-card-border: var(--theme-glass-border);
