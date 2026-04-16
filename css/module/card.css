@@ -22,7 +22,7 @@
 }
 
 .card__eyebrow {
-    margin-bottom: var(--space-2xs);
+    margin-bottom: var(--space-s);
     color: var(--theme-eyebrow);
     letter-spacing: var(--tracking-loose);
     text-transform: uppercase;
@@ -31,7 +31,7 @@
     display: none;
 }
 .card__title {
-    margin-bottom: var(--space-s);
+    margin-bottom: var(--space-m);
     color: var(--theme-ink);
 }
 .card__body {
@@ -54,7 +54,7 @@
     transform: translateX(4px);
 }
 .card__icon {
-    margin-top: var(--space-m);
+    margin-top: var(--space-l);
     width: 24px;
     height: 24px;
     color: var(--theme-accent);
