@@ -68,10 +68,6 @@ specs:
                 calls, plus a reverse lookup to find where blobs are referenced
                 in other data.
     - label: Mail
-      description: >-
-          This spec is not yet final and may change before publication. If you 
-          find any issues, please email [jmap@ietf.org](mailto:jmap@ietf.org) or
-          make a pull request on GitHub if you have a proposed fix.
       items:
           - title: JMAP Mail
             eyebrow: RFC 8621
@@ -149,7 +145,7 @@ specs:
     links=page.hero.links
 %}
 {%- for section in page.specs -%}
-    <section class='section section--spec'>
+    <section class='section section--card-list'>
         <div class='u-wrapper'>
             <h2 class='section__title u-text-2xl u-font-bold'>{{ section.label }}</h2>
             {%- if section.description -%}
