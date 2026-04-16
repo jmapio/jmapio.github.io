@@ -245,7 +245,7 @@
 
     --theme-ink: var(--color-teal-950);
     --theme-body: var(--color-teal-900);
-    --theme-muted: #4a6460;
+    --theme-muted: var(--color-teal-700);
     --theme-eyebrow: var(--color-teal-600);
 
     --theme-glass-bg: var(--color-white-fade-70);
