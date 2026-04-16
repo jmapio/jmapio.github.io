@@ -4,6 +4,7 @@ permalink: /crash-course/index.html
 title: JMAP Crash Course
 hero:
     eyebrow: Get started
+    eyebrow_icon: forward
     title: JMAP Crash Course
     sub: >-
         This document will guide you through understanding the basics of JMAP

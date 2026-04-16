@@ -4,6 +4,7 @@ permalink: /client/index.html
 title: JMAP Client Guide
 hero:
     eyebrow: Implementation guide
+    eyebrow_icon: wrench-screwdriver
     title: JMAP Client Guide
     sub: >-
         This guide shows how you can use JMAP to efficiently minimise bandwidth

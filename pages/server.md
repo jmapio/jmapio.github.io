@@ -5,6 +5,7 @@ title: JMAP Server Implementation Guide
 hero:
     title: Advice for JMAP implementors
     eyebrow: Implementation guide
+    eyebrow_icon: wrench-screwdriver
     sub: >-
         This document describes a recommended set of database tables and
         algorithms for efficiently implementing JMAP. It is intended to serve as

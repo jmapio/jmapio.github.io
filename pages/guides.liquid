@@ -7,6 +7,7 @@ description: >-
     and client implementations.
 hero:
     eyebrow: Guides
+    eyebrow_icon: academic-hat
     title: Learn JMAP
     sub: >- 
         A walkthrough of the protocol alongside practical guides for server and
@@ -33,7 +34,13 @@ cards:
             See how JMAP can be used to minimise bandwidth usage and round
             trips.
 ---
-{% include components/hero.liquid eyebrow=page.hero.eyebrow title=page.hero.title sub=page.hero.sub %}
+{%
+    include components/hero.liquid
+    eyebrow=page.hero.eyebrow
+    eyebrow_icon=page.hero.eyebrow_icon
+    title=page.hero.title
+    sub=page.hero.sub
+%}
 
 <section class='section'>
     <div class='u-wrapper'>

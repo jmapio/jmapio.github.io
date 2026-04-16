@@ -7,6 +7,7 @@ description:
     in benchmarks and real implementation experience.'
 hero:
     eyebrow: The case for JMAP
+    eyebrow_icon: presentation-chart-line
     title: Why JMAP?
     sub: >-
         IMAP is not ageing well. It is slow and inefficient, and expensive and 

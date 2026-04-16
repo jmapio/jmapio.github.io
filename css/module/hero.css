@@ -39,6 +39,10 @@
     margin-bottom: var(--space-2xs);
     color: var(--theme-eyebrow);
     text-transform: uppercase;
+
+    .hero--eyebrow-warning & {
+        color: var(--theme-warning);
+    }
 }
 .hero__eyebrow svg {
     stroke-width: 2;
