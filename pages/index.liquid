@@ -84,20 +84,20 @@ explore:
 <section class='bento u-wrapper'>
     <div class='bento__card bento__card--push'>
         <div class='bento__card-wrapper'>
-            <div class='bento__card-label u-text-xs u-font-semibold'>
-                {% include icons/pulse.liquid class='u-sq-12' %}
+            <div class='bento__card-label u-text-sm u-font-semibold'>
+                <span class='bento__card-icon'>{% include icons/bell.liquid %}</span>
                 <span>Real-time push</span>
             </div>
-            <div class='bento__card-title u-text-lg u-font-bold'>
+            <h3 class='bento__card-title u-text-2xl u-font-bold'>
                 Instant updates.<br>
                 Zero overhead.
-            </div>
-            <div class='bento__card-body u-text-sm'>
+            </h3>
+            <div class='bento__card-body u-text-base'>
                 Get instant push via EventSource &mdash; one connection, all mailboxes. Or use WebPush for
                 mobile-compatible push, no permanent connection required.
             </div>
             <div class='u-flex-spacer'></div>
-            <div class='push-tl'>
+            <div class='push-tl u-text-xs'>
                 <span class='push-name'>JMAP push</span>
                 <div class='push-track' id='push-track-j'>
                     <div class='push-dot push-dot--j' id='push-dot-j'></div>
@@ -114,17 +114,19 @@ explore:
 
     <div class='bento__card bento__card--battery'>
         <div class='bento__card-wrapper'>
-            <div class='bento__card-label u-text-xs u-font-semibold'>Mobile battery life</div>
-            <div class='bento__card-title u-text-lg u-font-bold'>
+            <div class='bento__card-label u-text-sm u-font-semibold'>
+                <span class='bento__card-icon'>{% include icons/device-mobile-phone.liquid %}</span>
+                <span>Mobile battery life</span>
+            </div>
+            <h3 class='bento__card-title u-text-2xl u-font-bold'>
                 Efficiency that<br>
                 <i>matters</i>.
+            </h3>
+            <div class='bento__card-body u-text-base'>
+                2&ndash;3&times; better than IMAP<br>
+                Measured on real devices
             </div>
-            <div class='stat-num u-text-2xl u-font-bold'>2&ndash;3&times;</div>
-            <div class='bento__card-sub u-text-xs'>
-                better than IMAP<br>
-                measured on real devices
-            </div>
-            <div class='batt-row'>
+            <div class='batt-row u-text-sm'>
                 <div>
                     <div class='batt-wrap'>
                         <div class='batt-shell'>
@@ -134,7 +136,7 @@ explore:
                     </div>
                     <div class='batt-lbl'>JMAP</div>
                 </div>
-                <div style='margin-left:10px'>
+                <div>
                     <div class='batt-wrap'>
                         <div class='batt-shell'>
                             <div
@@ -152,17 +154,20 @@ explore:
 
     <div class='bento__card bento__card--bench'>
         <div class='bento__card-wrapper'>
-            <div class='bento__card-label u-text-xs u-font-semibold'>Performance</div>
-            <div class='bento__card-title u-text-lg u-font-bold'>
+            <div class='bento__card-label u-text-sm u-font-semibold'>
+                <span class='bento__card-icon'>{% include icons/arrow-path.liquid %}</span>
+                <span>Performance</span>
+            </div>
+            <h3 class='bento__card-title u-text-2xl u-font-bold'>
                 Rock solid sync.<br>
                 Every time.
-            </div>
-            <div class='bento__card-body u-text-sm'>
+            </h3>
+            <div class='bento__card-body u-text-base'>
                 Sync changes more easily, more efficiently, and much, much faster. A single HTTP roundtrip is often all
                 that's required.
             </div>
             <div class='u-flex-spacer'></div>
-            <div class='bench-bars' id='bench-bars'>
+            <div class='bench-bars u-text-xs' id='bench-bars'>
                 <div class='bench-row bench-row--jmap'>
                     <span class='bench-lbl'>JMAP</span>
                     <div class='bench-track'><div class='bench-fill'></div></div>
@@ -182,24 +187,27 @@ explore:
 
     <div class='bento__card bento__card--json'>
         <div class='bento__card-wrapper'>
-            <div class='bento__card-label u-text-xs u-font-semibold'>Standard HTTP + JSON</div>
-            <div class='bento__card-title u-text-lg u-font-bold'>
+            <div class='bento__card-label u-text-sm u-font-semibold'>
+                <span class='bento__card-icon'>{% include icons/rocket-launch.liquid %}</span>
+                <span>Standard HTTP + JSON</span>
+            </div>
+            <h3 class='bento__card-title u-text-2xl u-font-bold'>
                 Deployment<br>
                 made easy.
-            </div>
-            <div class='bento__card-body u-text-sm'>
+            </h3>
+            <div class='bento__card-body u-text-base'>
                 JMAP works natively with existing infrastructure like nginx, Cloudflare, WAFs, load balancers, and DDoS
                 protection — no specialist IMAP tooling required. And it works just as great for webmail as native
                 clients.
             </div>
-            <div class='hs'>
-                <div class='hs-layer hs-app u-text-xs u-font-semibold'>JMAP for Mail</div>
-                <div class='hs-layer hs-jmap u-text-xs'>JMAP Core</div>
-                <div class='hs-layer hs-json u-text-xs'>JSON</div>
-                <div class='hs-layer hs-http u-text-xs'>HTTP / TLS</div>
+            <div class='hs u-text-sm'>
+                <div class='hs-layer hs-app u-font-semibold'>JMAP for Mail</div>
+                <div class='hs-layer hs-jmap'>JMAP Core</div>
+                <div class='hs-layer hs-json'>JSON</div>
+                <div class='hs-layer hs-http'>HTTP / TLS</div>
             </div>
             <div class='u-flex-spacer'></div>
-            <div class='http-request'>
+            <div class='http-request u-text-sm'>
                 <span class='http-request__method'>POST /jmap/api</span>
                 <div class='http-request__status'>
                     <div class='http-request__status-dot'></div>
@@ -211,37 +219,39 @@ explore:
 
     <div class='bento__card bento__card--rfc'>
         <div class='bento__card-wrapper'>
-            <div class='bento__card-label u-text-xs u-font-semibold'>RFC</div>
-            <div class='bento__card-title u-text-lg u-font-bold'>An open IETF standard.</div>
-            <p class='bento__card-body u-text-sm'>
+            <div class='bento__card-label u-text-sm u-font-semibold'>
+                <span class='bento__card-icon'>{% include icons/check-badge.liquid %}</span>
+                <span>RFC</span>
+            </div>
+            <h3 class='bento__card-title u-text-2xl u-font-bold'>An open IETF standard.</h3>
+            <p class='bento__card-body u-text-base'>
                 No patents. No fees. Fully documented. JMAP is an open standard any organisation can implement, not more
                 proprietary lock-in from big tech companies.
             </p>
-            <div class='bento__card-links'>
-                <a
-                    href='{{ site.baseurl }}/spec/'
-                    class='button button--standard u-text-sm'
-                    target='_blank'
-                    rel='noopener'
-                    >Read the spec</a
-                >
+            <div class='bento__card-link-wrapper'>
+                <a href='{{ site.baseurl }}/spec/' class='button button--simple'>
+                    <span>Read the spec</span>
+                    <span class='button__icon'>{% include icons/arrow-right.liquid %}</span>
+                </a>
             </div>
         </div>
     </div>
 
     <div class='bento__card bento__card--spec'>
         <div class='bento__card-wrapper'>
-            <div class='bento__card-label u-text-xs u-font-semibold'>Spec complexity</div>
-            <div class='bento__card-title u-text-lg u-font-bold'>
+            <div class='bento__card-label u-text-sm u-font-semibold'>
+                <span class='bento__card-icon'>{% include icons/puzzle-piece.liquid %}</span>
+                <span>Spec complexity</span>
+            </div>
+            <h3 class='bento__card-title u-text-2xl u-font-bold'>
                 So. Much.<br>
                 Simpler.
-            </div>
-            <div class='stat-num u-text-2xl u-font-bold'>5&times;</div>
-            <div class='bento__card-sub u-text-xs'>
+            </h3>
+            <div class='bento__card-body u-text-base'>
                 smaller than IMAP<br>
                 51k vs 272k words
             </div>
-            <div class='doc-bars'>
+            <div class='doc-bars u-text-xs'>
                 <div class='doc-bar-row'>
                     <span class='doc-bar-lbl'>JMAP</span>
                     <div class='doc-bar-track'>
@@ -262,12 +272,15 @@ explore:
 
     <div class='bento__card bento__card--lang'>
         <div class='bento__card-wrapper'>
-            <div class='bento__card-label u-text-xs u-font-semibold'>Running code</div>
-            <div class='bento__card-title u-text-lg u-font-bold'>
+            <div class='bento__card-label u-text-sm u-font-semibold'>
+                <span class='bento__card-icon'>{% include icons/code-bracket.liquid %}</span>
+                <span>Running code</span>
+            </div>
+            <h3 class='bento__card-title u-text-2xl u-font-bold'>
                 A fast-growing<br>
                 ecosystem.
-            </div>
-            <div class='lang-chips'>
+            </h3>
+            <div class='lang-chips u-text-sm u-font-mono'>
                 <span class='lang-chip'>Webmail</span>
                 <span class='lang-chip'>Rust library</span>
                 <span class='lang-chip'>iOS app</span>
@@ -276,10 +289,11 @@ explore:
                 <span class='lang-chip'>Terminal client</span>
             </div>
             <div class='u-flex-spacer'></div>
-            <div>
-                <a href='{{ site.baseurl }}/software/' class='button button--outline button--sm u-text-sm'
-                    >Find implementations &rarr;</a
-                >
+            <div class='bento__card-link-wrapper'>
+                <a href='{{ site.baseurl }}/software/' class='button button--simple'>
+                    <span>Find implementations</span>
+                    <span class='button__icon'>{% include icons/arrow-right.liquid %}</span>
+                </a>
             </div>
         </div>
     </div>

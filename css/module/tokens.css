@@ -177,7 +177,7 @@
 
     --theme-ink: var(--color-teal-50);
     --theme-body: var(--color-white-fade-80);
-    --theme-muted: var(--color-white-fade-70);
+    --theme-muted: var(--color-grey-200);
     --theme-eyebrow: var(--theme-accent);
 
     --theme-glass-bg: var(--color-white-fade-04);
@@ -208,6 +208,9 @@
     --theme-button-outline-border: var(--theme-border-strong);
     --theme-button-outline-border-hover: var(--theme-accent);
 
+    --theme-button-simple-fg: var(--color-teal-150);
+    --theme-button-simple-fg-hover: var(--color-teal-50);
+
     --theme-button-toc-fg: var(--theme-muted);
     --theme-button-toc-fg-active: var(--theme-accent);
     --theme-button-toc-bg-hover: var(--color-white-fade-08);
@@ -222,6 +225,7 @@
     --theme-button-theme-page-bg-hover: var(--color-white-fade-04);
 
     --theme-card-bg: var(--theme-glass-bg);
+    --theme-card-fg-muted: var(--color-grey-300);
     --theme-card-border: var(--theme-glass-border);
     --theme-card-border-hover: var(--theme-button-standard-border-hover);
     --theme-card-backdrop: var(--theme-glass-blur);
@@ -234,7 +238,7 @@
     --theme-pre-bg: var(--color-black-fade-30);
 
     --theme-code-fg: var(--theme-accent);
-    --theme-code-bg: var(--color-grey-800);
+    --theme-code-bg: rgb(from var(--color-teal-400) r g b / 14%);
 
     --theme-diagram-bg: var(--color-black-fade-30);
 
@@ -247,7 +251,11 @@
     --theme-accent-dim: var(--color-teal-950);
 
     --theme-page-bg: #eef5f3;
+    --theme-page-bg-fade: rgb(from var(--color-grey-1100) r g b / 90%);
     --theme-page-bg-alt: var(--color-white);
+    --theme-page-bg-overlay: transparent;
+    --theme-page-bg-accent-overlay: transparent;
+
     --theme-border: var(--color-black-fade-15);
     --theme-border-strong: var(--color-black-fade-30);
 
@@ -281,6 +289,9 @@
     --theme-button-outline-border: var(--theme-border-strong);
     --theme-button-outline-border-hover: var(--theme-accent);
 
+    --theme-button-simple-fg: var(--color-teal-600);
+    --theme-button-simple-fg-hover: var(--color-teal-750);
+
     --theme-button-toc-fg: var(--theme-muted);
     --theme-button-toc-fg-active: var(--theme-accent);
     --theme-button-toc-bg-hover: var(--color-teal-150);
@@ -305,7 +316,7 @@
     --theme-pre-bg: var(--color-black-fade-02);
 
     --theme-code-fg: var(--theme-accent);
-    --theme-code-bg: var(--color-teal-150);
+    --theme-code-bg: rgb(from var(--color-teal-400) r g b / 14%);
 
     --theme-diagram-bg: var(--color-black-fade-02);
 

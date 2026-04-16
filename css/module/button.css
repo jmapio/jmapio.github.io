@@ -37,6 +37,16 @@
     border-color: var(--theme-button-outline-border-hover);
     color: var(--theme-button-outline-fg-hover);
 }
+
+.button--simple {
+    padding: 0;
+    color: var(--theme-button-simple-fg);
+
+    &:hover {
+        color: var(--theme-button-simple-fg-hover);
+    }
+}
+
 .button--sm {
     padding: 5px 12px;
 }
