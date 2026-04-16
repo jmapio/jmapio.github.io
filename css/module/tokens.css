@@ -55,7 +55,6 @@
     --text-size-heading-3: var(--size-step-2);
     --text-size-heading-4: var(--size-step-1);
     --text-size-article: var(--text-size-base);
-    --text-size-jumbo: var(--size-step-7);
 
     /* -- Letter spacing */
     --tracking: normal;

@@ -68,11 +68,6 @@
     font-size: var(--size-step-10);
 }
 
-.u-text-jumbo {
-    line-height: var(--leading-flat);
-    font-size: var(--text-size-jumbo);
-}
-
 /* --- */
 
 .u-font-light {
