@@ -149,7 +149,7 @@ ul.u-toc > li > p > a {
     z-index: -1;
     position: absolute;
     inset: 0;
-    background: var(--theme-page-bg-page);
+    background: var(--theme-page-bg);
     border-radius: var(--radius-full);
 }
 
