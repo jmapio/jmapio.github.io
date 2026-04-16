@@ -65,10 +65,6 @@ hr {
     height: 20px;
 }
 
-.section {
-    padding-block: var(--space-3xl);
-}
-
 /* --- Logo */
 .jmap-logo {
     display: flex;
