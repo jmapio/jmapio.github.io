@@ -1,3 +1,66 @@
+@property --mouse-x {
+    inherits: true;
+    initial-value: 70%;
+    syntax: '<percentage>';
+}
+
+@property --mouse-y {
+    inherits: true;
+    initial-value: 10%;
+    syntax: '<percentage>';
+}
+
+.hero--landing {
+    --dot-size: 2px;
+    --dot-spacing: 28px;
+
+    transition:
+        --mouse-x 0.5s var(--ease-out),
+        --mouse-y 0.5s var(--ease-out);
+    position: relative;
+
+    &.is-tracking {
+        transition: none;
+    }
+
+    &::before,
+    &::after {
+        pointer-events: none;
+    }
+
+    &::before {
+        content: '';
+        z-index: -1;
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            circle,
+            var(--theme-hero-dot-bg-dim) calc(var(--dot-size) / 2),
+            transparent calc(var(--dot-size) / 2)
+        );
+        background-size: var(--dot-spacing) var(--dot-spacing);
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            circle,
+            var(--theme-hero-dot-bg) calc(var(--dot-size) / 2),
+            transparent calc(var(--dot-size) / 2)
+        );
+        background-size: var(--dot-spacing) var(--dot-spacing);
+        mask-image: radial-gradient(
+            circle at var(--mouse-x, 70%) var(--mouse-y, 10%),
+            var(--color-white) 0%,
+            rgb(255 255 255 / 50%) 5%,
+            transparent 40%
+        );
+        mask-size: 100% 100%;
+    }
+}
+
 /* --- Bento --- */
 
 .bento {

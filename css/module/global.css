@@ -60,6 +60,22 @@ hr {
     gap: var(--grid-gutter);
 }
 
+.u-grid-wrapper {
+    display: grid;
+    column-gap: var(--grid-gutter);
+    grid-auto-rows: max-content;
+    grid-template-columns: 1fr minmax(0, var(--grid-max-width)) 1fr;
+
+    > * {
+        grid-column: 2;
+        min-width: 0;
+    }
+
+    .u-grid-bleed {
+        grid-column: 1 / -1;
+    }
+}
+
 .u-flex-spacer {
     flex: 1 1 auto;
 }
