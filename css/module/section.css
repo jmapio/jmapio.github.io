@@ -32,6 +32,7 @@ code:not([class]) {
     color: var(--theme-accent);
     font-family: var(--font-mono);
     font-size: 0.85em;
+    text-wrap: nowrap;
 }
 
 .section--card-list {
