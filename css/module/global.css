@@ -31,6 +31,7 @@ body::after {
     inset: 0;
     background: var(--theme-page-bg-accent-overlay);
     opacity: 0.5;
+    pointer-events: none;
 }
 
 h1,
