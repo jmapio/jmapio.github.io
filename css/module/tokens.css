@@ -154,30 +154,18 @@
     --theme-page-bg: var(--color-grey-1100);
     --theme-page-bg-fade: rgb(from var(--color-grey-1100) r g b / 90%);
     --theme-page-bg-alt: var(--color-white-fade-02);
-    --theme-page-bg-overlay:
-        linear-gradient(
-            101deg,
-            oklch(16.435% 0.0126 186.582deg / 55%) 0%,
-            oklch(16.435% 0.0126 186.582deg / 15%) 40%,
-            oklch(16.435% 0.0126 186.582deg / 0%) 65%
-        ),
-        linear-gradient(
-            0deg,
-            oklch(16.435% 0.0126 186.582deg / 75%) 0%,
-            oklch(16.435% 0.0126 186.582deg / 0%) 30%
-        );
-    --theme-page-bg-accent-overlay:
-        linear-gradient(
-            101deg,
-            oklch(55.536% 0.09604 184.635deg / 5%) 0%,
-            oklch(74.718% 0.1007 178.059deg / 8%) 40%,
-            oklch(47.229% 0.08138 184.588deg / 5%) 65%
-        ),
-        linear-gradient(
-            0deg,
-            oklch(55.536% 0.09604 184.635deg / 2%) 0%,
-            oklch(74.718% 0.1007 178.059deg / 0%) 30%
-        );
+    --theme-page-bg-overlay: linear-gradient(
+        101deg,
+        oklch(16.435% 0.0126 186.582deg / 55%) 0%,
+        oklch(16.435% 0.0126 186.582deg / 15%) 40%,
+        oklch(16.435% 0.0126 186.582deg / 0%) 65%
+    );
+    --theme-page-bg-accent-overlay: linear-gradient(
+        101deg,
+        oklch(55.536% 0.09604 184.635deg / 5%) 0%,
+        oklch(74.718% 0.1007 178.059deg / 8%) 40%,
+        oklch(47.229% 0.08138 184.588deg / 5%) 65%
+    );
 
     --theme-hero-dot-bg: var(--theme-accent);
     --theme-hero-dot-bg-dim: var(--color-teal-850);
