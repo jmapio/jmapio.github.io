@@ -1,22 +1,23 @@
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-const hero = document.querySelector('.hero--landing');
-if (hero && !prefersReduced.matches) {
-    hero.classList.add('not-tracking');
-    hero.addEventListener('pointerover', () => {
-        hero.classList.add('is-tracking');
-    });
-    hero.addEventListener('pointermove', (e) => {
-        const rect = hero.getBoundingClientRect();
+const dotGrid = document.querySelector('.dot-grid');
+const main = document.querySelector('main');
+if (dotGrid && main && !prefersReduced.matches) {
+    let timeoutId;
+    main.addEventListener('pointermove', (e) => {
+        clearTimeout(timeoutId);
+        dotGrid.classList.add('is-tracking');
+        const rect = dotGrid.getBoundingClientRect();
         const x = ((e.clientX - rect.left) / rect.width) * 100;
         const y = ((e.clientY - rect.top) / rect.height) * 100;
-        hero.style.setProperty('--mouse-x', `${x}%`);
-        hero.style.setProperty('--mouse-y', `${y}%`);
+        dotGrid.style.setProperty('--mouse-x', `${x}%`);
+        dotGrid.style.setProperty('--mouse-y', `${y}%`);
+        timeoutId = setTimeout(() => {
+            dotGrid.classList.remove('is-tracking');
+        }, 500);
     });
-    hero.addEventListener('pointerleave', (e) => {
-        hero.classList.remove('is-tracking');
-        hero.style.setProperty('--mouse-x', '70%');
-        hero.style.setProperty('--mouse-y', '10%');
+    main.addEventListener('pointerleave', (e) => {
+        dotGrid.classList.remove('is-tracking');
     });
 }
 

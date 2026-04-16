@@ -9,6 +9,7 @@
     cursor: pointer;
 }
 .button--cta {
+    backdrop-filter: var(--theme-glass-blur);
     background: var(--theme-button-cta-bg);
     border-color: var(--theme-button-cta-border);
     color: var(--theme-button-cta-fg);

@@ -1,26 +1,12 @@
-@property --mouse-x {
-    inherits: true;
-    initial-value: 70%;
-    syntax: '<percentage>';
-}
-
-@property --mouse-y {
-    inherits: true;
-    initial-value: 10%;
-    syntax: '<percentage>';
-}
-
-.hero--landing {
+.dot-grid {
     --dot-size: 2px;
-    --dot-spacing: 28px;
+    --dot-spacing: 20px;
 
-    transition:
-        --mouse-x 0.5s var(--ease-out),
-        --mouse-y 0.5s var(--ease-out);
-    position: relative;
+    position: absolute;
+    inset: 0;
 
-    &.is-tracking {
-        transition: none;
+    main:has(&) {
+        position: relative;
     }
 
     &::before,
@@ -43,6 +29,7 @@
 
     &::after {
         content: '';
+        transition: opacity 1s var(--ease-out);
         position: absolute;
         inset: 0;
         background: radial-gradient(
@@ -54,10 +41,15 @@
         mask-image: radial-gradient(
             circle at var(--mouse-x, 70%) var(--mouse-y, 10%),
             var(--color-white) 0%,
-            rgb(255 255 255 / 50%) 5%,
-            transparent 40%
+            rgb(255 255 255 / 50%) 2%,
+            transparent 5%
         );
         mask-size: 100% 100%;
+        opacity: 0;
+    }
+
+    &.is-tracking::after {
+        opacity: 1;
     }
 }
 
