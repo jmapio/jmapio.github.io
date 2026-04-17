@@ -1,0 +1,30 @@
+<button
+    class='toc-fab'
+    id='toc-fab'
+    aria-label='Table of contents'
+    aria-expanded='false'
+    aria-controls='toc-drawer'
+    hidden
+>
+    {% include icons/bars-3.liquid %}
+</button>
+
+<div
+    class='toc-drawer'
+    id='toc-drawer'
+    role='dialog'
+    aria-label='Table of contents'
+    aria-modal='true'
+    hidden
+>
+    <div class='toc-drawer__backdrop' data-toc-close></div>
+    <div class='toc-drawer__panel'>
+        <div class='toc-drawer__header'>
+            <span class='toc-drawer__title'>Contents</span>
+            <button class='toc-drawer__close' data-toc-close aria-label='Close'>
+                {% include icons/close.liquid %}
+            </button>
+        </div>
+        <nav class='toc-drawer__nav' id='toc-drawer-nav'></nav>
+    </div>
+</div>
