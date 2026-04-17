@@ -1,6 +1,7 @@
 ---
 layout: default
 stylesheets:
+    - article
     - article-rfc
     - toc
 scripts:
@@ -29,7 +30,7 @@ scripts:
         <nav class='u-toc-wrapper'>
             {% include {{ page.toc }} %}
         </nav>
-        <article class='u-rfc'>{{ content }}</article>
+        <article class='u-article u-article--rfc'>{{ content }}</article>
     </div>
 </section>
 
