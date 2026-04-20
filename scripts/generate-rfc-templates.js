@@ -64,7 +64,10 @@ ${meta.keywords.map((keyword) => `        - ${keyword}`).join('\n')}
 ---
 ${rfcHTML.trim()}
 `;
-    await fs.writeFile(path.join('generated-rfc', `${name}.liquid`), template);
+    await fs.writeFile(
+        path.join('pages', 'generated-rfc', `${name}.liquid`),
+        template,
+    );
 };
 
 const mergeHeadingAnchors = (domParent) => {
@@ -88,7 +91,7 @@ const mergeHeadingAnchors = (domParent) => {
 
 // ---
 
-await fs.mkdir('generated-rfc', { recursive: true });
+await fs.mkdir(path.join('pages', 'generated-rfc'), { recursive: true });
 await fs.mkdir(path.join('_includes', 'generated-rfc-toc'), {
     recursive: true,
 });
@@ -156,6 +159,12 @@ for (const fileName of DOCUMENTS) {
         .querySelectorAll('[style]')
         .forEach((el) => el.removeAttribute('style'));
     domBody.querySelectorAll('table').forEach((table) => {
+        table
+            .querySelectorAll('thead th:not([scope])')
+            .forEach((th) => th.setAttribute('scope', 'col'));
+        table
+            .querySelectorAll('tbody th:not([scope])')
+            .forEach((th) => th.setAttribute('scope', 'row'));
         const domTableWrapper = document.createElement('div');
         table.replaceWith(domTableWrapper);
         domTableWrapper.classList.add('table-wrapper');
