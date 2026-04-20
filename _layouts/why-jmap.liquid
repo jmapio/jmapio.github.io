@@ -111,7 +111,9 @@ scripts:
 
 <section class='section section--document'>
     <div class='u-wrapper u-article-split'>
-        <nav class='u-toc-wrapper'>{% include toc.liquid html=pageContent class='u-toc' h_min=2 h_max=2 %}</nav>
+        <nav class='u-toc-wrapper' aria-label='Table of contents'>
+            {% include toc.liquid html=pageContent class='u-toc' h_min=2 h_max=2 %}
+        </nav>
         <div>{{ pageContent }}</div>
     </div>
 </section>

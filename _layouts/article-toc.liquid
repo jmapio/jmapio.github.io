@@ -19,7 +19,7 @@ scripts:
 
 <section class='section section--document'>
     <div class='u-wrapper u-article-split'>
-        <nav class='u-toc-wrapper'>
+        <nav class='u-toc-wrapper' aria-label='Table of contents'>
             {% include toc.liquid html=content class='u-toc' h_min=1 h_max=2 flat_toc=true %}
         </nav>
         <article class='u-article'>{{ content }}</article>
