@@ -1,23 +1,25 @@
-<nav class='header' aria-label='Primary'>
+<header class='header'>
     <div class='header__inner u-wrapper'>
         <div class='header__logo'>
             {% include components/jmap-logo.liquid %}
         </div>
-        <ul class='header__links'>
-            {%- for item in site.data.nav -%}
-                <li>
-                    <a
-                        href='{{ item.href | relative_url }}'
-                        {%- assign item_as_page_url = item.href | append: 'index.html' -%}
-                        {%- if page.url == item_as_page_url -%}
-                            class='active'
-                        {%- endif -%}
-                    >
-                        {{- item.label -}}
-                    </a>
-                </li>
-            {%- endfor -%}
-        </ul>
+        <nav aria-label='Primary'>
+            <ul class='header__links'>
+                {%- for item in site.data.nav -%}
+                    <li>
+                        <a
+                            href='{{ item.href | relative_url }}'
+                            {%- assign item_as_page_url = item.href | append: 'index.html' -%}
+                            {%- if page.url == item_as_page_url -%}
+                                class='active'
+                            {%- endif -%}
+                        >
+                            {{- item.label -}}
+                        </a>
+                    </li>
+                {%- endfor -%}
+            </ul>
+        </nav>
         <div class='header__theme'>
             <button
                 class='header__theme-button'
@@ -46,4 +48,4 @@
             </button>
         </div>
     </div>
-</nav>
+</header>
