@@ -1,5 +1,6 @@
 .hero {
     overflow: hidden;
+    position: relative;
 }
 
 .hero--landing {
@@ -14,7 +15,6 @@
 }
 
 .hero--page {
-    position: relative;
     border-bottom: 1px solid var(--theme-border);
     padding-top: var(--space-2xl);
     padding-bottom: var(--space-2xl);

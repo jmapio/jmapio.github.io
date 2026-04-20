@@ -1,6 +1,6 @@
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-const dotGrid = document.querySelector('.dot-grid');
+const dotGrid = document.querySelector('.u-dot-grid--spotlight');
 const main = document.querySelector('main');
 if (dotGrid && main && !prefersReduced.matches) {
     let timeoutId;

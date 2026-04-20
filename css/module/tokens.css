@@ -168,8 +168,15 @@
         oklch(47.229% 0.08138 184.588deg / 5%) 65%
     );
 
-    --theme-hero-dot-bg: var(--theme-accent);
+    --theme-hero-dot-bg-spotlight: var(--theme-accent);
     --theme-hero-dot-bg-dim: var(--color-teal-850);
+    --theme-hero-dot-bg-gradient: oklch(from var(--color-teal-400) l c h / 60%);
+    --theme-hero-dot-bg-gradient-mask: linear-gradient(
+        200deg,
+        var(--color-black) 0%,
+        rgb(0 0 0 / 50%) 20%,
+        rgb(0 0 0 / 0%) 100%
+    );
 
     --theme-border: var(--color-white-fade-08);
     --theme-border-soft: var(--color-white-fade-04);
@@ -259,8 +266,14 @@
     --theme-page-bg-overlay: transparent;
     --theme-page-bg-accent-overlay: transparent;
 
-    --theme-hero-dot-bg: var(--color-teal-900);
+    --theme-hero-dot-bg-spotlight: var(--color-teal-900);
     --theme-hero-dot-bg-dim: var(--color-teal-250);
+    --theme-hero-dot-bg-gradient: oklch(from var(--color-teal-600) l c h / 30%);
+    --theme-hero-dot-bg-gradient-mask: linear-gradient(
+        200deg,
+        var(--color-black) 0%,
+        rgb(0 0 0 / 0%) 100%
+    );
     --theme-hero-bg: var(--color-teal-50);
 
     --theme-border: var(--color-black-fade-15);

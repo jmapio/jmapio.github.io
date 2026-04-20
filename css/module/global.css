@@ -138,3 +138,41 @@ hr {
 .jmap-logo__text {
     fill: var(--theme-logo-text);
 }
+
+/* --- */
+
+.u-dot-grid {
+    --dot-size: 2px;
+    --dot-spacing: 20px;
+    --dot-bg-before: var(--theme-hero-dot-bg-dim);
+
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            circle,
+            var(--dot-bg-before) calc(var(--dot-size) / 2),
+            transparent calc(var(--dot-size) / 2)
+        );
+        background-size: var(--dot-spacing) var(--dot-spacing);
+        pointer-events: none;
+    }
+
+    & ~ * {
+        position: relative;
+    }
+}
+
+.u-dot-grid--gradient {
+    --dot-bg-before: var(--theme-hero-dot-bg-gradient);
+
+    &::before {
+        mask-image: var(--theme-hero-dot-bg-gradient-mask);
+        mask-size: 100% 100%;
+    }
+}

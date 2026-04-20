@@ -1,30 +1,6 @@
-.dot-grid {
-    --dot-size: 2px;
-    --dot-spacing: 20px;
-
-    position: absolute;
-    inset: 0;
-
+.u-dot-grid--spotlight {
     main:has(&) {
         position: relative;
-    }
-
-    &::before,
-    &::after {
-        pointer-events: none;
-    }
-
-    &::before {
-        content: '';
-        z-index: -1;
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(
-            circle,
-            var(--theme-hero-dot-bg-dim) calc(var(--dot-size) / 2),
-            transparent calc(var(--dot-size) / 2)
-        );
-        background-size: var(--dot-spacing) var(--dot-spacing);
     }
 
     &::after {
@@ -34,7 +10,7 @@
         inset: 0;
         background: radial-gradient(
             circle,
-            var(--theme-hero-dot-bg) calc(var(--dot-size) / 2),
+            var(--theme-hero-dot-bg-spotlight) calc(var(--dot-size) / 2),
             transparent calc(var(--dot-size) / 2)
         );
         background-size: var(--dot-spacing) var(--dot-spacing);
@@ -46,6 +22,7 @@
         );
         mask-size: 100% 100%;
         opacity: 0;
+        pointer-events: none;
     }
 
     &.is-tracking::after {
