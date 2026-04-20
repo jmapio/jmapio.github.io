@@ -171,6 +171,18 @@ for (const fileName of DOCUMENTS) {
         domTableWrapper.append(table);
     });
 
+    domBody
+        .querySelectorAll('a[href^="http://"], a[href^="https://"]')
+        .forEach((anchor) => {
+            if (anchor.hasAttribute('target')) return;
+            anchor.setAttribute('target', '_blank');
+            anchor.setAttribute('rel', 'noopener');
+            const announce = document.createElement('span');
+            announce.className = 'u-visually-hidden';
+            announce.textContent = ' (opens in new window)';
+            anchor.append(announce);
+        });
+
     const tableOfContentsHTML = domTableOfContents.innerHTML;
     const basename = getFileNameWithoutExt(fileName);
     await fs.writeFile(

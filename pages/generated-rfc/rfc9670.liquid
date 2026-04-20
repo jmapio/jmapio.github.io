@@ -26,21 +26,21 @@ meta:
     "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
     described in BCP&nbsp;14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> 
     when, and only when, they appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
-<p id="section-1.1-2">Type signatures, examples, and property descriptions in this document follow the conventions established in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-1.1" class="relref">Section 1.1</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.  Data types defined in the core specification are also used in this document.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">Type signatures, examples, and property descriptions in this document follow the conventions established in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-1.1" class="relref" target="_blank" rel="noopener">Section 1.1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.  Data types defined in the core specification are also used in this document.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 <p id="section-1.1-3">Examples of API exchanges only show the methodCalls array of the Request object or the methodResponses array of the Response object. For compactness, the rest of the Request/Response object is omitted.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="terminology">
 <section id="section-1.2">
         <h3 id="name-terminology"><a href="#section-1.2">1.2.&nbsp;&nbsp;Terminology</a></h3>
-<p id="section-1.2-1">The same terminology is used in this document as in the core JMAP specification. See <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-1.6" class="relref">Section 1.6</a></span>.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.2-1">The same terminology is used in this document as in the core JMAP specification. See <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-1.6" class="relref" target="_blank" rel="noopener">Section 1.6<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 <p id="section-1.2-2">The terms "Principal" and "ShareNotification" (with this specific capitalization) are used to refer to the data types defined in this document and instances of those data types.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="data-model-overview">
 <section id="section-1.3">
         <h3 id="name-data-model-overview"><a href="#section-1.3">1.3.&nbsp;&nbsp;Data Model Overview</a></h3>
-<p id="section-1.3-1">A Principal (see <a href="#principals" class="auto internal xref">Section 2</a>) represents an individual, team, or resource (e.g., a room or projector). The object contains information about the entity being represented, such as a name, description, and time zone. It may also hold domain-specific information. A Principal may be associated with zero or more Accounts (see <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-1.6.2" class="relref">Section 1.6.2</a></span>) containing data belonging to the Principal. Managing the set of Principals within a system is out of scope for this specification, as it is highly domain specific. It is likely to map directly from a directory service or other user management system.<a href="#section-1.3-1" class="pilcrow">¶</a></p>
+<p id="section-1.3-1">A Principal (see <a href="#principals" class="auto internal xref">Section 2</a>) represents an individual, team, or resource (e.g., a room or projector). The object contains information about the entity being represented, such as a name, description, and time zone. It may also hold domain-specific information. A Principal may be associated with zero or more Accounts (see <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-1.6.2" class="relref" target="_blank" rel="noopener">Section 1.6.2<span class="u-visually-hidden"> (opens in new window)</span></a></span>) containing data belonging to the Principal. Managing the set of Principals within a system is out of scope for this specification, as it is highly domain specific. It is likely to map directly from a directory service or other user management system.<a href="#section-1.3-1" class="pilcrow">¶</a></p>
 <p id="section-1.3-2">Data types may allow users to share data with others by assigning permissions to Principals. When a user's permissions are changed, a ShareNotification object is created for them so a client can inform the user of the changes.<a href="#section-1.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -48,7 +48,7 @@ meta:
 <section id="section-1.4">
         <h3 id="name-subscribing-to-shared-data"><a href="#section-1.4">1.4.&nbsp;&nbsp;Subscribing to Shared Data</a></h3>
 <p id="section-1.4-1">Permissions determine whether a user <em>may</em> access data but not whether they <em>want</em> to. Some shared data is of equal importance as the user's own, while other data is just there should the user wish to explicitly go find it. Clients will often want to differentiate the two. For example, a company may share mailing list archives for all departments with all employees, but a user may only generally be interested in the few they belong to. They would have <em>permission</em> to access many mailboxes but can <em>subscribe</em> to just the ones they care about. The client would provide separate interfaces for reading mail in subscribed mailboxes and browsing all mailboxes they have permission to access in order to manage those that they are subscribed to.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
-<p id="section-1.4-2">The JMAP Session object (see <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-2" class="relref">Section 2</a></span>) is defined to include an object in the "accounts" property for every Account that the user has access to. Collaborative systems may share data between a very large number of Principals, most of which the user does not care about day to day. For servers implementing this specification, the Session object <span class="bcp14">MUST</span> only include Accounts where either the user is subscribed to at least one record (see <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-1.6.3" class="relref">Section 1.6.3</a></span>) in the Account or the Account belongs to the user. StateChange events (<span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-7.1" class="relref">Section 7.1</a></span>) for changes to data <span class="bcp14">SHOULD</span> only be sent for data the user has subscribed to and <span class="bcp14">MUST NOT</span> be sent for any Account where the user is not subscribed to any records in the Account, except where that Account belongs to the user.<a href="#section-1.4-2" class="pilcrow">¶</a></p>
+<p id="section-1.4-2">The JMAP Session object (see <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-2" class="relref" target="_blank" rel="noopener">Section 2<span class="u-visually-hidden"> (opens in new window)</span></a></span>) is defined to include an object in the "accounts" property for every Account that the user has access to. Collaborative systems may share data between a very large number of Principals, most of which the user does not care about day to day. For servers implementing this specification, the Session object <span class="bcp14">MUST</span> only include Accounts where either the user is subscribed to at least one record (see <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-1.6.3" class="relref" target="_blank" rel="noopener">Section 1.6.3<span class="u-visually-hidden"> (opens in new window)</span></a></span>) in the Account or the Account belongs to the user. StateChange events (<span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-7.1" class="relref" target="_blank" rel="noopener">Section 7.1<span class="u-visually-hidden"> (opens in new window)</span></a></span>) for changes to data <span class="bcp14">SHOULD</span> only be sent for data the user has subscribed to and <span class="bcp14">MUST NOT</span> be sent for any Account where the user is not subscribed to any records in the Account, except where that Account belongs to the user.<a href="#section-1.4-2" class="pilcrow">¶</a></p>
 <p id="section-1.4-3">The server <span class="bcp14">MAY</span> reject the user's attempt to subscribe to some resources even if they have permission to access them (e.g., a calendar representing a location).<a href="#section-1.4-3" class="pilcrow">¶</a></p>
 <p id="section-1.4-4">A user can query the set of Principals they have access to with "Principal/query" (see <a href="#principal-query" class="auto internal xref">Section 2.4</a>). The Principal object will contain an Account object for all Accounts where the user has permission to access data for that Principal, even if they are not yet subscribed.<a href="#section-1.4-4" class="pilcrow">¶</a></p>
 </section>
@@ -56,7 +56,7 @@ meta:
 <div id="addition-to-the-capabilities-object">
 <section id="section-1.5">
         <h3 id="name-addition-to-the-capabilitie"><a href="#section-1.5">1.5.&nbsp;&nbsp;Addition to the Capabilities Object</a></h3>
-<p id="section-1.5-1">The capabilities object is returned as part of the JMAP Session object; see <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-2" class="relref">Section 2</a></span>. This document defines two additional capability URIs.<a href="#section-1.5-1" class="pilcrow">¶</a></p>
+<p id="section-1.5-1">The capabilities object is returned as part of the JMAP Session object; see <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-2" class="relref" target="_blank" rel="noopener">Section 2<span class="u-visually-hidden"> (opens in new window)</span></a></span>. This document defines two additional capability URIs.<a href="#section-1.5-1" class="pilcrow">¶</a></p>
 <div id="urn-ietf-params-jmap-principals">
 <section id="section-1.5.1">
           <h4 id="name-urnietfparamsjmapprincipals"><a href="#section-1.5.1">1.5.1.&nbsp;&nbsp;urn:ietf:params:jmap:principals</a></h4>
@@ -153,7 +153,7 @@ capability that contains the corresponding Principal object.<a href="#section-1.
 <dt id="section-2-5.9">
 <strong>email</strong>: <code>String|null</code>
 </dt>
-        <dd id="section-2-5.10">An email address for the Principal, or <code>null</code> if no email is available. If given, the value <span class="bcp14">MUST</span> conform to the "addr-spec" syntax, as defined in <span>[<a href="#RFC5322" class="cite xref">RFC5322</a>], <a href="https://rfc-editor.org/rfc/rfc5322#section-3.4.1" class="relref">Section 3.4.1</a></span>.<a href="#section-2-5.10" class="pilcrow">¶</a>
+        <dd id="section-2-5.10">An email address for the Principal, or <code>null</code> if no email is available. If given, the value <span class="bcp14">MUST</span> conform to the "addr-spec" syntax, as defined in <span>[<a href="#RFC5322" class="cite xref">RFC5322</a>], <a href="https://rfc-editor.org/rfc/rfc5322#section-3.4.1" class="relref" target="_blank" rel="noopener">Section 3.4.1<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-2-5.10" class="pilcrow">¶</a>
 </dd>
         
 <dt id="section-2-5.11">
@@ -177,13 +177,13 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 <div id="principal-get">
 <section id="section-2.1">
         <h3 id="name-principal-get"><a href="#section-2.1">2.1.&nbsp;&nbsp;Principal/get</a></h3>
-<p id="section-2.1-1">This is a standard "/get" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.1" class="relref">Section 5.1</a></span>.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-1">This is a standard "/get" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.1" class="relref" target="_blank" rel="noopener">Section 5.1<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="principal-changes">
 <section id="section-2.2">
         <h3 id="name-principal-changes"><a href="#section-2.2">2.2.&nbsp;&nbsp;Principal/changes</a></h3>
-<p id="section-2.2-1">This is a standard "/changes" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.2" class="relref">Section 5.2</a></span>.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-1">This is a standard "/changes" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.2" class="relref" target="_blank" rel="noopener">Section 5.2<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
 <aside id="section-2.2-2">
           <p id="section-2.2-2.1">Note: Implementations backed by an external directory may be unable to calculate changes. In this case, they will always return a "cannotCalculateChanges" error as described in the core JMAP specification.<a href="#section-2.2-2.1" class="pilcrow">¶</a></p>
 </aside>
@@ -192,7 +192,7 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 <div id="principal-set">
 <section id="section-2.3">
         <h3 id="name-principal-set"><a href="#section-2.3">2.3.&nbsp;&nbsp;Principal/set</a></h3>
-<p id="section-2.3-1">This is a standard "/set" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.3" class="relref">Section 5.3</a></span>.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.3-1">This is a standard "/set" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.3" class="relref" target="_blank" rel="noopener">Section 5.3<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
 <p id="section-2.3-2">Managing Principals is likely tied to a directory service or some other vendor-specific solution. This management may occur out of band or via an additional capability defined elsewhere. Allowing direct user modification of properties has security considerations, as noted in <a href="#security-considerations" class="auto internal xref">Section 6</a>. A server <span class="bcp14">MUST</span> reject any change it doesn't allow with a "forbidden" SetError.<a href="#section-2.3-2" class="pilcrow">¶</a></p>
 <p id="section-2.3-3">Where a server does support changes via this API, it <span class="bcp14">SHOULD</span> allow an update to the "name", "description", and "timeZone" properties of the Principal with the same id as the "currentUserPrincipalId" in the Account capabilities. This allows the user to update their own details.<a href="#section-2.3-3" class="pilcrow">¶</a></p>
 </section>
@@ -200,7 +200,7 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 <div id="principal-query">
 <section id="section-2.4">
         <h3 id="name-principal-query"><a href="#section-2.4">2.4.&nbsp;&nbsp;Principal/query</a></h3>
-<p id="section-2.4-1">This is a standard "/query" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.5" class="relref">Section 5.5</a></span>.<a href="#section-2.4-1" class="pilcrow">¶</a></p>
+<p id="section-2.4-1">This is a standard "/query" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.5" class="relref" target="_blank" rel="noopener">Section 5.5<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-2.4-1" class="pilcrow">¶</a></p>
 <div id="filtering">
 <section id="section-2.4.1">
           <h4 id="name-filtering"><a href="#section-2.4.1">2.4.1.&nbsp;&nbsp;Filtering</a></h4>
@@ -252,7 +252,7 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 <div id="principal-querychanges">
 <section id="section-2.5">
         <h3 id="name-principal-querychanges"><a href="#section-2.5">2.5.&nbsp;&nbsp;Principal/queryChanges</a></h3>
-<p id="section-2.5-1">This is a standard "/queryChanges" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.6" class="relref">Section 5.6</a></span>.<a href="#section-2.5-1" class="pilcrow">¶</a></p>
+<p id="section-2.5-1">This is a standard "/queryChanges" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.6" class="relref" target="_blank" rel="noopener">Section 5.6<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-2.5-1" class="pilcrow">¶</a></p>
 <aside id="section-2.5-2">
           <p id="section-2.5-2.1">Note: Implementations backed by an external directory may be unable to calculate changes. In this case, they will always return a "cannotCalculateChanges" error as described in the core JMAP specification.<a href="#section-2.5-2.1" class="pilcrow">¶</a></p>
 </aside>
@@ -340,26 +340,26 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 <div id="sharenotification-get">
 <section id="section-3.1">
         <h3 id="name-sharenotification-get"><a href="#section-3.1">3.1.&nbsp;&nbsp;ShareNotification/get</a></h3>
-<p id="section-3.1-1">This is a standard "/get" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.1" class="relref">Section 5.1</a></span>.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-1">This is a standard "/get" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.1" class="relref" target="_blank" rel="noopener">Section 5.1<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sharenotification-changes">
 <section id="section-3.2">
         <h3 id="name-sharenotification-changes"><a href="#section-3.2">3.2.&nbsp;&nbsp;ShareNotification/changes</a></h3>
-<p id="section-3.2-1">This is a standard "/changes" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.2" class="relref">Section 5.2</a></span>.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-1">This is a standard "/changes" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.2" class="relref" target="_blank" rel="noopener">Section 5.2<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sharenotification-set">
 <section id="section-3.3">
         <h3 id="name-sharenotification-set"><a href="#section-3.3">3.3.&nbsp;&nbsp;ShareNotification/set</a></h3>
-<p id="section-3.3-1">This is a standard "/set" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.3" class="relref">Section 5.3</a></span>.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-1">This is a standard "/set" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.3" class="relref" target="_blank" rel="noopener">Section 5.3<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <p id="section-3.3-2">Only destroy is supported; any attempt to create/update <span class="bcp14">MUST</span> be rejected with a "forbidden" SetError.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sharenotification-query">
 <section id="section-3.4">
         <h3 id="name-sharenotification-query"><a href="#section-3.4">3.4.&nbsp;&nbsp;ShareNotification/query</a></h3>
-<p id="section-3.4-1">This is a standard "/query" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.5" class="relref">Section 5.5</a></span>.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<p id="section-3.4-1">This is a standard "/query" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.5" class="relref" target="_blank" rel="noopener">Section 5.5<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 <div id="filtering-1">
 <section id="section-3.4.1">
           <h4 id="name-filtering-2"><a href="#section-3.4.1">3.4.1.&nbsp;&nbsp;Filtering</a></h4>
@@ -404,7 +404,7 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 <div id="sharenotification-querychanges">
 <section id="section-3.5">
         <h3 id="name-sharenotification-querychan"><a href="#section-3.5">3.5.&nbsp;&nbsp;ShareNotification/queryChanges</a></h3>
-<p id="section-3.5-1">This is a standard "/queryChanges" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.6" class="relref">Section 5.6</a></span>.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
+<p id="section-3.5-1">This is a standard "/queryChanges" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.6" class="relref" target="_blank" rel="noopener">Section 5.6<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -606,8 +606,8 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 </div>
 <section id="section-5">
       <h2 id="name-internationalization-consid"><a href="#section-5">5.&nbsp;&nbsp;Internationalization Considerations</a></h2>
-<p id="section-5-1">Experience has shown that unrestricted use of Unicode can lead to problems such as inconsistent rendering, users reading text and interpreting it differently than intended, and unexpected results when copying text from one location to another. Servers <span class="bcp14">MAY</span> choose to mitigate this by restricting the set of characters allowed in otherwise unconstrained <code>String</code> fields. The FreeformClass, as documented in <span>[<a href="#RFC8264" class="cite xref">RFC8264</a>], <a href="https://rfc-editor.org/rfc/rfc8264#section-4.3" class="relref">Section 4.3</a></span>, might be a good starting point for this.<a href="#section-5-1" class="pilcrow">¶</a></p>
-<p id="section-5-2">Attempts to set a value containing code points outside of the permissible set can be handled in a few ways by the server. The first option is to simply strip the forbidden characters and store the resulting string. This is likely to be appropriate for control characters, for example, where they can end up in data accidentally due to copy-and-paste issues and are probably invisible to the end user. JMAP allows the server to transform data on create/update, as long as any changed properties are returned to the client in the "/set" response so it knows what has changed, as per <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.3" class="relref">Section 5.3</a></span>. Alternatively, the server <span class="bcp14">MAY</span> just reject the create/update with an "invalidProperties" SetError.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-1">Experience has shown that unrestricted use of Unicode can lead to problems such as inconsistent rendering, users reading text and interpreting it differently than intended, and unexpected results when copying text from one location to another. Servers <span class="bcp14">MAY</span> choose to mitigate this by restricting the set of characters allowed in otherwise unconstrained <code>String</code> fields. The FreeformClass, as documented in <span>[<a href="#RFC8264" class="cite xref">RFC8264</a>], <a href="https://rfc-editor.org/rfc/rfc8264#section-4.3" class="relref" target="_blank" rel="noopener">Section 4.3<span class="u-visually-hidden"> (opens in new window)</span></a></span>, might be a good starting point for this.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">Attempts to set a value containing code points outside of the permissible set can be handled in a few ways by the server. The first option is to simply strip the forbidden characters and store the resulting string. This is likely to be appropriate for control characters, for example, where they can end up in data accidentally due to copy-and-paste issues and are probably invisible to the end user. JMAP allows the server to transform data on create/update, as long as any changed properties are returned to the client in the "/set" response so it knows what has changed, as per <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.3" class="relref" target="_blank" rel="noopener">Section 5.3<span class="u-visually-hidden"> (opens in new window)</span></a></span>. Alternatively, the server <span class="bcp14">MAY</span> just reject the create/update with an "invalidProperties" SetError.<a href="#section-5-2" class="pilcrow">¶</a></p>
 </section>
 <div id="security-considerations">
 <section id="section-6">
@@ -776,19 +776,19 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 <dl class="references">
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
-<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc2119<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC5322">[RFC5322]</dt>
         <dd>
-<span class="refAuthor">Resnick, P., Ed.</span>, <span class="refTitle">"Internet Message Format"</span>, <span class="seriesInfo">RFC 5322</span>, <span class="seriesInfo">DOI 10.17487/RFC5322</span>, <time datetime="2008-10" class="refDate">October 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5322">https://www.rfc-editor.org/info/rfc5322</a>&gt;</span>. </dd>
+<span class="refAuthor">Resnick, P., Ed.</span>, <span class="refTitle">"Internet Message Format"</span>, <span class="seriesInfo">RFC 5322</span>, <span class="seriesInfo">DOI 10.17487/RFC5322</span>, <time datetime="2008-10" class="refDate">October 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5322" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc5322<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8174">[RFC8174]</dt>
         <dd>
-<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8174<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8620">[RFC8620]</dt>
       <dd>
-<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"The JSON Meta Application Protocol (JMAP)"</span>, <span class="seriesInfo">RFC 8620</span>, <span class="seriesInfo">DOI 10.17487/RFC8620</span>, <time datetime="2019-07" class="refDate">July 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8620">https://www.rfc-editor.org/info/rfc8620</a>&gt;</span>. </dd>
+<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"The JSON Meta Application Protocol (JMAP)"</span>, <span class="seriesInfo">RFC 8620</span>, <span class="seriesInfo">DOI 10.17487/RFC8620</span>, <time datetime="2019-07" class="refDate">July 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8620" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8620<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 </dl>
 </section>
@@ -797,15 +797,15 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 <dl class="references">
 <dt id="IANA-JMAP">[IANA-JMAP]</dt>
         <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"JMAP Data Types"</span>, <span>&lt;<a href="https://www.iana.org/assignments/jmap">https://www.iana.org/assignments/jmap</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"JMAP Data Types"</span>, <span>&lt;<a href="https://www.iana.org/assignments/jmap" target="_blank" rel="noopener">https://www.iana.org/assignments/jmap<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="IANA-TZDB">[IANA-TZDB]</dt>
         <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"Time Zone Database"</span>, <span>&lt;<a href="https://www.iana.org/time-zones">https://www.iana.org/time-zones</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Time Zone Database"</span>, <span>&lt;<a href="https://www.iana.org/time-zones" target="_blank" rel="noopener">https://www.iana.org/time-zones<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8264">[RFC8264]</dt>
       <dd>
-<span class="refAuthor">Saint-Andre, P.</span> and <span class="refAuthor">M. Blanchet</span>, <span class="refTitle">"PRECIS Framework: Preparation, Enforcement, and Comparison of Internationalized Strings in Application Protocols"</span>, <span class="seriesInfo">RFC 8264</span>, <span class="seriesInfo">DOI 10.17487/RFC8264</span>, <time datetime="2017-10" class="refDate">October 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8264">https://www.rfc-editor.org/info/rfc8264</a>&gt;</span>. </dd>
+<span class="refAuthor">Saint-Andre, P.</span> and <span class="refAuthor">M. Blanchet</span>, <span class="refTitle">"PRECIS Framework: Preparation, Enforcement, and Comparison of Internationalized Strings in Application Protocols"</span>, <span class="seriesInfo">RFC 8264</span>, <span class="seriesInfo">DOI 10.17487/RFC8264</span>, <time datetime="2017-10" class="refDate">October 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8264" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8264<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 </dl>
 </section>
@@ -829,7 +829,7 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 <p id="section-boilerplate.1-3">
             Information about the current status of this document, any
             errata, and how to provide feedback on it may be obtained at
-            <span><a href="https://www.rfc-editor.org/info/rfc9670">https://www.rfc-editor.org/info/rfc9670</a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+            <span><a href="https://www.rfc-editor.org/info/rfc9670" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9670<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 </section>
 </div><div id="copyright">
 <section id="section-boilerplate.2">
@@ -840,7 +840,7 @@ for this Principal that the user has access to, or <code>null</code> if none.<a 
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
             Provisions Relating to IETF Documents
-            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            (<span><a href="https://trustee.ietf.org/license-info" target="_blank" rel="noopener">https://trustee.ietf.org/license-info<span class="u-visually-hidden"> (opens in new window)</span></a></span>) in effect on the date of
             publication of this document. Please review these documents
             carefully, as they describe your rights and restrictions with
             respect to this document. Code Components extracted from this

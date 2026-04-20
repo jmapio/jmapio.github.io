@@ -101,10 +101,10 @@ meta:
 <p id="section-1.3-1">This section introduces the notations and terminology used to define data types in JSContact.<a href="#section-1.3-1" class="pilcrow">¶</a></p>
 <p id="section-1.3-2">The underlying format for JSContact is JSON, so its data types also build on JSON values. The terms "object"
           and "array" as well as the four primitive types ("strings", "numbers", "booleans", and "null") are to be
-          interpreted as described in <span><a href="https://rfc-editor.org/rfc/rfc8259#section-1" class="relref">Section 1</a> of [<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>. All JSContact data <span class="bcp14">MUST</span> be
+          interpreted as described in <span><a href="https://rfc-editor.org/rfc/rfc8259#section-1" class="relref" target="_blank" rel="noopener">Section 1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>. All JSContact data <span class="bcp14">MUST</span> be
           valid according to the constraints given in <span><a href="#RFC7493" class="internal xref">I-JSON</a> [<a href="#RFC7493" class="cite xref">RFC7493</a>]</span>. Unless otherwise noted, all
           member names in JSON objects and all string values are case-sensitive. Within the context of JSON objects, the
-          term "key" is synonymous with "member name" as defined in <span><a href="https://rfc-editor.org/rfc/rfc8259#section-1" class="relref">Section 1</a> of [<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>.<a href="#section-1.3-2" class="pilcrow">¶</a></p>
+          term "key" is synonymous with "member name" as defined in <span><a href="https://rfc-editor.org/rfc/rfc8259#section-1" class="relref" target="_blank" rel="noopener">Section 1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>.<a href="#section-1.3-2" class="pilcrow">¶</a></p>
 <div id="objects-and-properties">
 <section id="section-1.3.1">
           <h4 id="name-objects-and-properties"><a href="#section-1.3.1">1.3.1.&nbsp;&nbsp;Objects and Properties</a></h4>
@@ -271,7 +271,7 @@ meta:
           <h4 id="name-id"><a href="#section-1.4.1">1.4.1.&nbsp;&nbsp;Id</a></h4>
 <p id="section-1.4.1-1">Where "Id" is given as a data type, it means a String of at least 1 and a maximum of 255 octets in size,
             and it <span class="bcp14">MUST</span> only contain characters from the "URL and Filename Safe" base64url alphabet, as
-            defined in <span><a href="https://rfc-editor.org/rfc/rfc4648#section-5" class="relref">Section 5</a> of [<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, excluding the pad character ("="). This
+            defined in <span><a href="https://rfc-editor.org/rfc/rfc4648#section-5" class="relref" target="_blank" rel="noopener">Section 5<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, excluding the pad character ("="). This
             means the allowed characters are the ASCII alphanumeric characters ("A-Za-z0-9"), hyphen ("-"), and
             underscore ("_").<a href="#section-1.4.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.4.1-2">In many places in JSContact, a JSON map is used where the map keys are of type Id and the map values are
@@ -360,7 +360,7 @@ meta:
             
 <dt id="section-1.4.4-3.5">uri: String (mandatory).</dt>
             <dd id="section-1.4.4-3.6">
-              The resource value. This <span class="bcp14">MUST</span> be a <em>URI</em> as defined in <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3" class="relref">Section 3</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>.<a href="#section-1.4.4-3.6" class="pilcrow">¶</a>
+              The resource value. This <span class="bcp14">MUST</span> be a <em>URI</em> as defined in <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3" class="relref" target="_blank" rel="noopener">Section 3<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>.<a href="#section-1.4.4-3.6" class="pilcrow">¶</a>
 </dd>
             
 <dt id="section-1.4.4-3.7">mediaType: String (optional).</dt>
@@ -474,7 +474,7 @@ meta:
 <dt id="section-1.5.4-2.3">phoneticScript: String.</dt>
             <dd id="section-1.5.4-2.4">
               The script used in the value of the related phonetic property. This <span class="bcp14">MUST</span> be a valid script
-              subtag as defined in <span><a href="https://rfc-editor.org/rfc/rfc5646#section-2.2.3" class="relref">Section 2.2.3</a> of [<a href="#RFC5646" class="cite xref">RFC5646</a>]</span>.<a href="#section-1.5.4-2.4" class="pilcrow">¶</a>
+              subtag as defined in <span><a href="https://rfc-editor.org/rfc/rfc5646#section-2.2.3" class="relref" target="_blank" rel="noopener">Section 2.2.3<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC5646" class="cite xref">RFC5646</a>]</span>.<a href="#section-1.5.4-2.4" class="pilcrow">¶</a>
 </dd>
             
 <dt id="section-1.5.4-2.5">phoneticSystem: String.</dt>
@@ -539,7 +539,7 @@ meta:
 <p id="section-1.6.2-1">Several properties require their string value to be a URI as defined in <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>.
             Implementations <span class="bcp14">MUST</span> make sure to use proper percent-encoding for URIs that cannot be
             represented using unreserved URI characters.
-            <span><a href="https://rfc-editor.org/rfc/rfc3987#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC3987" class="cite xref">RFC3987</a>]</span>
+            <span><a href="https://rfc-editor.org/rfc/rfc3987#section-3.1" class="relref" target="_blank" rel="noopener">Section 3.1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC3987" class="cite xref">RFC3987</a>]</span>
             defines how to convert Internationalized Resource Identifiers to URIs.
             JSContact makes no recommendation on how to display URIs, but the WHATWG URL Living Standard (see
             "Internationalization and special characters" (Section 4.8.3) of <span>[<a href="#WHATWG-URL" class="cite xref">WHATWG-URL</a>]</span>) provides
@@ -586,7 +586,7 @@ meta:
             IANA-registered property names <span class="bcp14">MUST NOT</span> contain ASCII control characters (U+0000 to U+001F,
             U+007F), the COLON (U+003A), or the QUOTATION MARK (U+0022). They <span class="bcp14">MUST</span> only contain ASCII
             alphanumeric characters that match the ALPHA and DIGIT rules defined in
-            <span><a href="https://rfc-editor.org/rfc/rfc5234#appendix-B.1" class="relref">Appendix B.1</a> of [<a href="#RFC5234" class="cite xref">RFC5234</a>]</span>
+            <span><a href="https://rfc-editor.org/rfc/rfc5234#appendix-B.1" class="relref" target="_blank" rel="noopener">Appendix B.1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC5234" class="cite xref">RFC5234</a>]</span>
             or the COMMERCIAL AT (U+0040) character. IANA-registered property names <span class="bcp14">MUST</span> be notated in
             lower camel case.<a href="#section-1.7.2-3" class="pilcrow">¶</a></p>
 </section>
@@ -1008,7 +1008,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
               The relationship between the two objects is undefined if the set is empty.<a href="#section-2.1.8-3.4.1" class="pilcrow">¶</a></p>
 <p id="section-2.1.8-3.4.2">The initial list of <span><a href="#enumerated-values" class="internal xref">enumerated</a> (<a href="#enumerated-values" class="auto internal xref">Section 1.7.5</a>)</span> relation types matches the
                 IANA-registered <span><a href="#IANA-vCard" class="internal xref">TYPE</a> [<a href="#IANA-vCard" class="cite xref">IANA-vCard</a>]</span> parameter values of the vCard RELATED property
-                (<span><a href="https://rfc-editor.org/rfc/rfc6350#section-6.6.6" class="relref">Section 6.6.6</a> of [<a href="#RFC6350" class="cite xref">RFC6350</a>]</span>):<a href="#section-2.1.8-3.4.2" class="pilcrow">¶</a></p>
+                (<span><a href="https://rfc-editor.org/rfc/rfc6350#section-6.6.6" class="relref" target="_blank" rel="noopener">Section 6.6.6<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC6350" class="cite xref">RFC6350</a>]</span>):<a href="#section-2.1.8-3.4.2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2.1.8-3.4.3.1">
                   acquaintance<a href="#section-2.1.8-3.4.3.1" class="pilcrow">¶</a>
@@ -1735,7 +1735,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             
 <dt id="section-2.3.1-3.3">address: String (mandatory).</dt>
             <dd id="section-2.3.1-3.4">
-              The email address. This <span class="bcp14">MUST</span> be an <em>addr-spec</em> value as defined in <span><a href="https://rfc-editor.org/rfc/rfc5322#section-3.4.1" class="relref">Section 3.4.1</a> of [<a href="#RFC5322" class="cite xref">RFC5322</a>]</span>.<a href="#section-2.3.1-3.4" class="pilcrow">¶</a>
+              The email address. This <span class="bcp14">MUST</span> be an <em>addr-spec</em> value as defined in <span><a href="https://rfc-editor.org/rfc/rfc5322#section-3.4.1" class="relref" target="_blank" rel="noopener">Section 3.4.1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC5322" class="cite xref">RFC5322</a>]</span>.<a href="#section-2.3.1-3.4" class="pilcrow">¶</a>
 </dd>
             
 <dt id="section-2.3.1-3.5">contexts: String[Boolean] (optional).</dt>
@@ -1804,7 +1804,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <dd id="section-2.3.2-3.6">
               The identifier for the entity represented by the Card at the online service. This <span class="bcp14">MUST</span> be a <em>
               URI
-              </em> as defined in <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3" class="relref">Section 3</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>.<a href="#section-2.3.2-3.6" class="pilcrow">¶</a>
+              </em> as defined in <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3" class="relref" target="_blank" rel="noopener">Section 3<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>.<a href="#section-2.3.2-3.6" class="pilcrow">¶</a>
 </dd>
             
 <dt id="section-2.3.2-3.7">user: String (optional).</dt>
@@ -2077,7 +2077,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <dt id="section-2.4.2-3.3">uri: String (mandatory).</dt>
             <dd id="section-2.4.2-3.4">
               The address to use for calendar scheduling with the contact. This <span class="bcp14">MUST</span> be a URI as defined
-              in <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3" class="relref">Section 3</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>.<a href="#section-2.4.2-3.4" class="pilcrow">¶</a>
+              in <span><a href="https://rfc-editor.org/rfc/rfc3986#section-3" class="relref" target="_blank" rel="noopener">Section 3<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>.<a href="#section-2.4.2-3.4" class="pilcrow">¶</a>
 </dd>
             
 <dt id="section-2.4.2-3.5">contexts: String[Boolean] (optional).</dt>
@@ -3090,7 +3090,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 </dd>
           
 <dt id="section-3.1-2.9">Encoding considerations:</dt>
-          <dd id="section-3.1-2.10">This is the same as the encoding considerations of application/json, as specified in <span><a href="https://rfc-editor.org/rfc/rfc8259#section-11" class="relref">Section 11</a> of [<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>.<a href="#section-3.1-2.10" class="pilcrow">¶</a>
+          <dd id="section-3.1-2.10">This is the same as the encoding considerations of application/json, as specified in <span><a href="https://rfc-editor.org/rfc/rfc8259#section-11" class="relref" target="_blank" rel="noopener">Section 11<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>.<a href="#section-3.1-2.10" class="pilcrow">¶</a>
 </dd>
           
 <dt id="section-3.1-2.11">Security considerations:</dt>
@@ -3116,7 +3116,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 </dd>
           
 <dt id="section-3.1-2.19">Fragment identifier considerations:</dt>
-          <dd id="section-3.1-2.20">A JSON Pointer fragment identifier may be used, as defined in <span>[<a href="#RFC6901" class="cite xref">RFC6901</a>], <a href="https://rfc-editor.org/rfc/rfc6901#section-6" class="relref">Section 6</a></span>.<a href="#section-3.1-2.20" class="pilcrow">¶</a>
+          <dd id="section-3.1-2.20">A JSON Pointer fragment identifier may be used, as defined in <span>[<a href="#RFC6901" class="cite xref">RFC6901</a>], <a href="https://rfc-editor.org/rfc/rfc6901#section-6" class="relref" target="_blank" rel="noopener">Section 6<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-3.1-2.20" class="pilcrow">¶</a>
 </dd>
           
 <dt id="section-3.1-2.21">Additional information:</dt>
@@ -3173,8 +3173,8 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
         <h3 id="name-registry-policy-and-change-"><a href="#section-3.3">3.3.&nbsp;&nbsp;Registry Policy and Change Procedures</a></h3>
 <p id="section-3.3-1">Registry assignments that introduce <span><a href="#versioning" class="internal xref">backwards-incompatible</a> (<a href="#versioning" class="auto internal xref">Section 1.9</a>)</span> changes require
           the JSContact major version to change; other changes only require a change to the minor version. The registry
-          policy for assignments that require the JSContact major version to change is Standards Action (<span>[<a href="#RFC8126" class="cite xref">RFC8126</a>], <a href="https://rfc-editor.org/rfc/rfc8126#section-4.9" class="relref">Section 4.9</a></span>). The registry policy for other assignments is
-          Specification Required (<span>[<a href="#RFC8126" class="cite xref">RFC8126</a>], <a href="https://rfc-editor.org/rfc/rfc8126#section-4.6" class="relref">Section 4.6</a></span>).<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+          policy for assignments that require the JSContact major version to change is Standards Action (<span>[<a href="#RFC8126" class="cite xref">RFC8126</a>], <a href="https://rfc-editor.org/rfc/rfc8126#section-4.9" class="relref" target="_blank" rel="noopener">Section 4.9<span class="u-visually-hidden"> (opens in new window)</span></a></span>). The registry policy for other assignments is
+          Specification Required (<span>[<a href="#RFC8126" class="cite xref">RFC8126</a>], <a href="https://rfc-editor.org/rfc/rfc8126#section-4.6" class="relref" target="_blank" rel="noopener">Section 4.6<span class="u-visually-hidden"> (opens in new window)</span></a></span>).<a href="#section-3.3-1" class="pilcrow">¶</a></p>
 <p id="section-3.3-2">The designated expert (DE) decides if a major or minor version change is required and assigns the new version
           to the <span><a href="#iana-version-registry" class="internal xref">"JSContact Version" registry</a> (<a href="#iana-version-registry" class="auto internal xref">Section 3.4</a>)</span>. Version numbers increment by
           one, and a major version change resets the minor version to zero. An assignment may apply multiple changes and
@@ -5329,7 +5329,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <section id="section-4.2">
         <h3 id="name-uri-values"><a href="#section-4.2">4.2.&nbsp;&nbsp;URI Values</a></h3>
 <p id="section-4.2-1">Several JSContact properties contain URIs as values, and processing these properties requires extra care.
-          <span><a href="https://rfc-editor.org/rfc/rfc3986#section-7" class="relref">Section 7</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>
+          <span><a href="https://rfc-editor.org/rfc/rfc3986#section-7" class="relref" target="_blank" rel="noopener">Section 7<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>
           discusses security risks related to URIs.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.2-2">Fetching remote resources carries inherent risks. Connections must only be allowed on well-known ports, using
           allowed protocols (generally, just HTTP/HTTPS on their default ports). The URL must be resolved externally and
@@ -5350,11 +5350,11 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <dl class="references">
 <dt id="IANA-TZ">[IANA-TZ]</dt>
         <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"Time Zone Database"</span>, <span>&lt;<a href="https://www.iana.org/time-zones">https://www.iana.org/time-zones</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Time Zone Database"</span>, <span>&lt;<a href="https://www.iana.org/time-zones" target="_blank" rel="noopener">https://www.iana.org/time-zones<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="IANA-vCard">[IANA-vCard]</dt>
         <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"vCard Elements"</span>, <span>&lt;<a href="https://www.iana.org/assignments/vcard-elements">https://www.iana.org/assignments/vcard-elements</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"vCard Elements"</span>, <span>&lt;<a href="https://www.iana.org/assignments/vcard-elements" target="_blank" rel="noopener">https://www.iana.org/assignments/vcard-elements<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="ISO.3166-1">[ISO.3166-1]</dt>
         <dd>
@@ -5362,79 +5362,79 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 
 <dt id="RFC1034">[RFC1034]</dt>
         <dd>
-<span class="refAuthor">Mockapetris, P.</span>, <span class="refTitle">"Domain names - concepts and facilities"</span>, <span class="seriesInfo">STD 13</span>, <span class="seriesInfo">RFC 1034</span>, <span class="seriesInfo">DOI 10.17487/RFC1034</span>, <time datetime="1987-11" class="refDate">November 1987</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc1034">https://www.rfc-editor.org/info/rfc1034</a>&gt;</span>. </dd>
+<span class="refAuthor">Mockapetris, P.</span>, <span class="refTitle">"Domain names - concepts and facilities"</span>, <span class="seriesInfo">STD 13</span>, <span class="seriesInfo">RFC 1034</span>, <span class="seriesInfo">DOI 10.17487/RFC1034</span>, <time datetime="1987-11" class="refDate">November 1987</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc1034" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc1034<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC1035">[RFC1035]</dt>
         <dd>
-<span class="refAuthor">Mockapetris, P.</span>, <span class="refTitle">"Domain names - implementation and specification"</span>, <span class="seriesInfo">STD 13</span>, <span class="seriesInfo">RFC 1035</span>, <span class="seriesInfo">DOI 10.17487/RFC1035</span>, <time datetime="1987-11" class="refDate">November 1987</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc1035">https://www.rfc-editor.org/info/rfc1035</a>&gt;</span>. </dd>
+<span class="refAuthor">Mockapetris, P.</span>, <span class="refTitle">"Domain names - implementation and specification"</span>, <span class="seriesInfo">STD 13</span>, <span class="seriesInfo">RFC 1035</span>, <span class="seriesInfo">DOI 10.17487/RFC1035</span>, <time datetime="1987-11" class="refDate">November 1987</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc1035" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc1035<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC2046">[RFC2046]</dt>
         <dd>
-<span class="refAuthor">Freed, N.</span> and <span class="refAuthor">N. Borenstein</span>, <span class="refTitle">"Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types"</span>, <span class="seriesInfo">RFC 2046</span>, <span class="seriesInfo">DOI 10.17487/RFC2046</span>, <time datetime="1996-11" class="refDate">November 1996</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2046">https://www.rfc-editor.org/info/rfc2046</a>&gt;</span>. </dd>
+<span class="refAuthor">Freed, N.</span> and <span class="refAuthor">N. Borenstein</span>, <span class="refTitle">"Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types"</span>, <span class="seriesInfo">RFC 2046</span>, <span class="seriesInfo">DOI 10.17487/RFC2046</span>, <time datetime="1996-11" class="refDate">November 1996</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2046" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc2046<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
-<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc2119<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC2426">[RFC2426]</dt>
         <dd>
-<span class="refAuthor">Dawson, F.</span> and <span class="refAuthor">T. Howes</span>, <span class="refTitle">"vCard MIME Directory Profile"</span>, <span class="seriesInfo">RFC 2426</span>, <span class="seriesInfo">DOI 10.17487/RFC2426</span>, <time datetime="1998-09" class="refDate">September 1998</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2426">https://www.rfc-editor.org/info/rfc2426</a>&gt;</span>. </dd>
+<span class="refAuthor">Dawson, F.</span> and <span class="refAuthor">T. Howes</span>, <span class="refTitle">"vCard MIME Directory Profile"</span>, <span class="seriesInfo">RFC 2426</span>, <span class="seriesInfo">DOI 10.17487/RFC2426</span>, <time datetime="1998-09" class="refDate">September 1998</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2426" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc2426<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC3339">[RFC3339]</dt>
         <dd>
-<span class="refAuthor">Klyne, G.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"Date and Time on the Internet: Timestamps"</span>, <span class="seriesInfo">RFC 3339</span>, <span class="seriesInfo">DOI 10.17487/RFC3339</span>, <time datetime="2002-07" class="refDate">July 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3339">https://www.rfc-editor.org/info/rfc3339</a>&gt;</span>. </dd>
+<span class="refAuthor">Klyne, G.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"Date and Time on the Internet: Timestamps"</span>, <span class="seriesInfo">RFC 3339</span>, <span class="seriesInfo">DOI 10.17487/RFC3339</span>, <time datetime="2002-07" class="refDate">July 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3339" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc3339<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC4648">[RFC4648]</dt>
         <dd>
-<span class="refAuthor">Josefsson, S.</span>, <span class="refTitle">"The Base16, Base32, and Base64 Data Encodings"</span>, <span class="seriesInfo">RFC 4648</span>, <span class="seriesInfo">DOI 10.17487/RFC4648</span>, <time datetime="2006-10" class="refDate">October 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4648">https://www.rfc-editor.org/info/rfc4648</a>&gt;</span>. </dd>
+<span class="refAuthor">Josefsson, S.</span>, <span class="refTitle">"The Base16, Base32, and Base64 Data Encodings"</span>, <span class="seriesInfo">RFC 4648</span>, <span class="seriesInfo">DOI 10.17487/RFC4648</span>, <time datetime="2006-10" class="refDate">October 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4648" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc4648<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC5234">[RFC5234]</dt>
         <dd>
-<span class="refAuthor">Crocker, D., Ed.</span> and <span class="refAuthor">P. Overell</span>, <span class="refTitle">"Augmented BNF for Syntax Specifications: ABNF"</span>, <span class="seriesInfo">STD 68</span>, <span class="seriesInfo">RFC 5234</span>, <span class="seriesInfo">DOI 10.17487/RFC5234</span>, <time datetime="2008-01" class="refDate">January 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5234">https://www.rfc-editor.org/info/rfc5234</a>&gt;</span>. </dd>
+<span class="refAuthor">Crocker, D., Ed.</span> and <span class="refAuthor">P. Overell</span>, <span class="refTitle">"Augmented BNF for Syntax Specifications: ABNF"</span>, <span class="seriesInfo">STD 68</span>, <span class="seriesInfo">RFC 5234</span>, <span class="seriesInfo">DOI 10.17487/RFC5234</span>, <time datetime="2008-01" class="refDate">January 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5234" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc5234<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC5322">[RFC5322]</dt>
         <dd>
-<span class="refAuthor">Resnick, P., Ed.</span>, <span class="refTitle">"Internet Message Format"</span>, <span class="seriesInfo">RFC 5322</span>, <span class="seriesInfo">DOI 10.17487/RFC5322</span>, <time datetime="2008-10" class="refDate">October 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5322">https://www.rfc-editor.org/info/rfc5322</a>&gt;</span>. </dd>
+<span class="refAuthor">Resnick, P., Ed.</span>, <span class="refTitle">"Internet Message Format"</span>, <span class="seriesInfo">RFC 5322</span>, <span class="seriesInfo">DOI 10.17487/RFC5322</span>, <time datetime="2008-10" class="refDate">October 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5322" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc5322<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC5646">[RFC5646]</dt>
         <dd>
-<span class="refAuthor">Phillips, A., Ed.</span> and <span class="refAuthor">M. Davis, Ed.</span>, <span class="refTitle">"Tags for Identifying Languages"</span>, <span class="seriesInfo">BCP 47</span>, <span class="seriesInfo">RFC 5646</span>, <span class="seriesInfo">DOI 10.17487/RFC5646</span>, <time datetime="2009-09" class="refDate">September 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5646">https://www.rfc-editor.org/info/rfc5646</a>&gt;</span>. </dd>
+<span class="refAuthor">Phillips, A., Ed.</span> and <span class="refAuthor">M. Davis, Ed.</span>, <span class="refTitle">"Tags for Identifying Languages"</span>, <span class="seriesInfo">BCP 47</span>, <span class="seriesInfo">RFC 5646</span>, <span class="seriesInfo">DOI 10.17487/RFC5646</span>, <time datetime="2009-09" class="refDate">September 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5646" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc5646<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC5870">[RFC5870]</dt>
         <dd>
-<span class="refAuthor">Mayrhofer, A.</span> and <span class="refAuthor">C. Spanring</span>, <span class="refTitle">"A Uniform Resource Identifier for Geographic Locations ('geo' URI)"</span>, <span class="seriesInfo">RFC 5870</span>, <span class="seriesInfo">DOI 10.17487/RFC5870</span>, <time datetime="2010-06" class="refDate">June 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5870">https://www.rfc-editor.org/info/rfc5870</a>&gt;</span>. </dd>
+<span class="refAuthor">Mayrhofer, A.</span> and <span class="refAuthor">C. Spanring</span>, <span class="refTitle">"A Uniform Resource Identifier for Geographic Locations ('geo' URI)"</span>, <span class="seriesInfo">RFC 5870</span>, <span class="seriesInfo">DOI 10.17487/RFC5870</span>, <time datetime="2010-06" class="refDate">June 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5870" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc5870<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC6350">[RFC6350]</dt>
         <dd>
-<span class="refAuthor">Perreault, S.</span>, <span class="refTitle">"vCard Format Specification"</span>, <span class="seriesInfo">RFC 6350</span>, <span class="seriesInfo">DOI 10.17487/RFC6350</span>, <time datetime="2011-08" class="refDate">August 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6350">https://www.rfc-editor.org/info/rfc6350</a>&gt;</span>. </dd>
+<span class="refAuthor">Perreault, S.</span>, <span class="refTitle">"vCard Format Specification"</span>, <span class="seriesInfo">RFC 6350</span>, <span class="seriesInfo">DOI 10.17487/RFC6350</span>, <time datetime="2011-08" class="refDate">August 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6350" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc6350<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC6901">[RFC6901]</dt>
         <dd>
-<span class="refAuthor">Bryan, P., Ed.</span>, <span class="refAuthor">Zyp, K.</span>, and <span class="refAuthor">M. Nottingham, Ed.</span>, <span class="refTitle">"JavaScript Object Notation (JSON) Pointer"</span>, <span class="seriesInfo">RFC 6901</span>, <span class="seriesInfo">DOI 10.17487/RFC6901</span>, <time datetime="2013-04" class="refDate">April 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6901">https://www.rfc-editor.org/info/rfc6901</a>&gt;</span>. </dd>
+<span class="refAuthor">Bryan, P., Ed.</span>, <span class="refAuthor">Zyp, K.</span>, and <span class="refAuthor">M. Nottingham, Ed.</span>, <span class="refTitle">"JavaScript Object Notation (JSON) Pointer"</span>, <span class="seriesInfo">RFC 6901</span>, <span class="seriesInfo">DOI 10.17487/RFC6901</span>, <time datetime="2013-04" class="refDate">April 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6901" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc6901<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC7493">[RFC7493]</dt>
         <dd>
-<span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The I-JSON Message Format"</span>, <span class="seriesInfo">RFC 7493</span>, <span class="seriesInfo">DOI 10.17487/RFC7493</span>, <time datetime="2015-03" class="refDate">March 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7493">https://www.rfc-editor.org/info/rfc7493</a>&gt;</span>. </dd>
+<span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The I-JSON Message Format"</span>, <span class="seriesInfo">RFC 7493</span>, <span class="seriesInfo">DOI 10.17487/RFC7493</span>, <time datetime="2015-03" class="refDate">March 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7493" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc7493<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC7529">[RFC7529]</dt>
         <dd>
-<span class="refAuthor">Daboo, C.</span> and <span class="refAuthor">G. Yakushev</span>, <span class="refTitle">"Non-Gregorian Recurrence Rules in the Internet Calendaring and Scheduling Core Object Specification (iCalendar)"</span>, <span class="seriesInfo">RFC 7529</span>, <span class="seriesInfo">DOI 10.17487/RFC7529</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7529">https://www.rfc-editor.org/info/rfc7529</a>&gt;</span>. </dd>
+<span class="refAuthor">Daboo, C.</span> and <span class="refAuthor">G. Yakushev</span>, <span class="refTitle">"Non-Gregorian Recurrence Rules in the Internet Calendaring and Scheduling Core Object Specification (iCalendar)"</span>, <span class="seriesInfo">RFC 7529</span>, <span class="seriesInfo">DOI 10.17487/RFC7529</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7529" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc7529<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8126">[RFC8126]</dt>
         <dd>
-<span class="refAuthor">Cotton, M.</span>, <span class="refAuthor">Leiba, B.</span>, and <span class="refAuthor">T. Narten</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="seriesInfo">BCP 26</span>, <span class="seriesInfo">RFC 8126</span>, <span class="seriesInfo">DOI 10.17487/RFC8126</span>, <time datetime="2017-06" class="refDate">June 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8126">https://www.rfc-editor.org/info/rfc8126</a>&gt;</span>. </dd>
+<span class="refAuthor">Cotton, M.</span>, <span class="refAuthor">Leiba, B.</span>, and <span class="refAuthor">T. Narten</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="seriesInfo">BCP 26</span>, <span class="seriesInfo">RFC 8126</span>, <span class="seriesInfo">DOI 10.17487/RFC8126</span>, <time datetime="2017-06" class="refDate">June 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8126" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8126<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8141">[RFC8141]</dt>
         <dd>
-<span class="refAuthor">Saint-Andre, P.</span> and <span class="refAuthor">J. Klensin</span>, <span class="refTitle">"Uniform Resource Names (URNs)"</span>, <span class="seriesInfo">RFC 8141</span>, <span class="seriesInfo">DOI 10.17487/RFC8141</span>, <time datetime="2017-04" class="refDate">April 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8141">https://www.rfc-editor.org/info/rfc8141</a>&gt;</span>. </dd>
+<span class="refAuthor">Saint-Andre, P.</span> and <span class="refAuthor">J. Klensin</span>, <span class="refTitle">"Uniform Resource Names (URNs)"</span>, <span class="seriesInfo">RFC 8141</span>, <span class="seriesInfo">DOI 10.17487/RFC8141</span>, <time datetime="2017-04" class="refDate">April 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8141" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8141<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8174">[RFC8174]</dt>
         <dd>
-<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8174<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8259">[RFC8259]</dt>
       <dd>
-<span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The JavaScript Object Notation (JSON) Data Interchange Format"</span>, <span class="seriesInfo">STD 90</span>, <span class="seriesInfo">RFC 8259</span>, <span class="seriesInfo">DOI 10.17487/RFC8259</span>, <time datetime="2017-12" class="refDate">December 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8259">https://www.rfc-editor.org/info/rfc8259</a>&gt;</span>. </dd>
+<span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The JavaScript Object Notation (JSON) Data Interchange Format"</span>, <span class="seriesInfo">STD 90</span>, <span class="seriesInfo">RFC 8259</span>, <span class="seriesInfo">DOI 10.17487/RFC8259</span>, <time datetime="2017-12" class="refDate">December 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8259" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8259<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 </dl>
 </section>
@@ -5443,75 +5443,75 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <dl class="references">
 <dt id="IPA">[IPA]</dt>
         <dd>
-<span class="refAuthor">IPA</span>, <span class="refTitle">"International Phonetic Alphabet"</span>, <span>&lt;<a href="https://www.internationalphoneticalphabet.org/">https://www.internationalphoneticalphabet.org/</a>&gt;</span>. </dd>
+<span class="refAuthor">IPA</span>, <span class="refTitle">"International Phonetic Alphabet"</span>, <span>&lt;<a href="https://www.internationalphoneticalphabet.org/" target="_blank" rel="noopener">https://www.internationalphoneticalphabet.org/<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC3261">[RFC3261]</dt>
         <dd>
-<span class="refAuthor">Rosenberg, J.</span>, <span class="refAuthor">Schulzrinne, H.</span>, <span class="refAuthor">Camarillo, G.</span>, <span class="refAuthor">Johnston, A.</span>, <span class="refAuthor">Peterson, J.</span>, <span class="refAuthor">Sparks, R.</span>, <span class="refAuthor">Handley, M.</span>, and <span class="refAuthor">E. Schooler</span>, <span class="refTitle">"SIP: Session Initiation Protocol"</span>, <span class="seriesInfo">RFC 3261</span>, <span class="seriesInfo">DOI 10.17487/RFC3261</span>, <time datetime="2002-06" class="refDate">June 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3261">https://www.rfc-editor.org/info/rfc3261</a>&gt;</span>. </dd>
+<span class="refAuthor">Rosenberg, J.</span>, <span class="refAuthor">Schulzrinne, H.</span>, <span class="refAuthor">Camarillo, G.</span>, <span class="refAuthor">Johnston, A.</span>, <span class="refAuthor">Peterson, J.</span>, <span class="refAuthor">Sparks, R.</span>, <span class="refAuthor">Handley, M.</span>, and <span class="refAuthor">E. Schooler</span>, <span class="refTitle">"SIP: Session Initiation Protocol"</span>, <span class="seriesInfo">RFC 3261</span>, <span class="seriesInfo">DOI 10.17487/RFC3261</span>, <time datetime="2002-06" class="refDate">June 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3261" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc3261<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC3966">[RFC3966]</dt>
         <dd>
-<span class="refAuthor">Schulzrinne, H.</span>, <span class="refTitle">"The tel URI for Telephone Numbers"</span>, <span class="seriesInfo">RFC 3966</span>, <span class="seriesInfo">DOI 10.17487/RFC3966</span>, <time datetime="2004-12" class="refDate">December 2004</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3966">https://www.rfc-editor.org/info/rfc3966</a>&gt;</span>. </dd>
+<span class="refAuthor">Schulzrinne, H.</span>, <span class="refTitle">"The tel URI for Telephone Numbers"</span>, <span class="seriesInfo">RFC 3966</span>, <span class="seriesInfo">DOI 10.17487/RFC3966</span>, <time datetime="2004-12" class="refDate">December 2004</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3966" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc3966<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC3986">[RFC3986]</dt>
         <dd>
-<span class="refAuthor">Berners-Lee, T.</span>, <span class="refAuthor">Fielding, R.</span>, and <span class="refAuthor">L. Masinter</span>, <span class="refTitle">"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span class="seriesInfo">STD 66</span>, <span class="seriesInfo">RFC 3986</span>, <span class="seriesInfo">DOI 10.17487/RFC3986</span>, <time datetime="2005-01" class="refDate">January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3986">https://www.rfc-editor.org/info/rfc3986</a>&gt;</span>. </dd>
+<span class="refAuthor">Berners-Lee, T.</span>, <span class="refAuthor">Fielding, R.</span>, and <span class="refAuthor">L. Masinter</span>, <span class="refTitle">"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span class="seriesInfo">STD 66</span>, <span class="seriesInfo">RFC 3986</span>, <span class="seriesInfo">DOI 10.17487/RFC3986</span>, <time datetime="2005-01" class="refDate">January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3986" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc3986<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC3987">[RFC3987]</dt>
         <dd>
-<span class="refAuthor">Duerst, M.</span> and <span class="refAuthor">M. Suignard</span>, <span class="refTitle">"Internationalized Resource Identifiers (IRIs)"</span>, <span class="seriesInfo">RFC 3987</span>, <span class="seriesInfo">DOI 10.17487/RFC3987</span>, <time datetime="2005-01" class="refDate">January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3987">https://www.rfc-editor.org/info/rfc3987</a>&gt;</span>. </dd>
+<span class="refAuthor">Duerst, M.</span> and <span class="refAuthor">M. Suignard</span>, <span class="refTitle">"Internationalized Resource Identifiers (IRIs)"</span>, <span class="seriesInfo">RFC 3987</span>, <span class="seriesInfo">DOI 10.17487/RFC3987</span>, <time datetime="2005-01" class="refDate">January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3987" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc3987<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC6351">[RFC6351]</dt>
         <dd>
-<span class="refAuthor">Perreault, S.</span>, <span class="refTitle">"xCard: vCard XML Representation"</span>, <span class="seriesInfo">RFC 6351</span>, <span class="seriesInfo">DOI 10.17487/RFC6351</span>, <time datetime="2011-08" class="refDate">August 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6351">https://www.rfc-editor.org/info/rfc6351</a>&gt;</span>. </dd>
+<span class="refAuthor">Perreault, S.</span>, <span class="refTitle">"xCard: vCard XML Representation"</span>, <span class="seriesInfo">RFC 6351</span>, <span class="seriesInfo">DOI 10.17487/RFC6351</span>, <time datetime="2011-08" class="refDate">August 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6351" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc6351<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC6473">[RFC6473]</dt>
         <dd>
-<span class="refAuthor">Saint-Andre, P.</span>, <span class="refTitle">"vCard KIND:application"</span>, <span class="seriesInfo">RFC 6473</span>, <span class="seriesInfo">DOI 10.17487/RFC6473</span>, <time datetime="2011-12" class="refDate">December 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6473">https://www.rfc-editor.org/info/rfc6473</a>&gt;</span>. </dd>
+<span class="refAuthor">Saint-Andre, P.</span>, <span class="refTitle">"vCard KIND:application"</span>, <span class="seriesInfo">RFC 6473</span>, <span class="seriesInfo">DOI 10.17487/RFC6473</span>, <time datetime="2011-12" class="refDate">December 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6473" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc6473<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC6474">[RFC6474]</dt>
         <dd>
-<span class="refAuthor">Li, K.</span> and <span class="refAuthor">B. Leiba</span>, <span class="refTitle">"vCard Format Extensions: Place of Birth, Place and Date of Death"</span>, <span class="seriesInfo">RFC 6474</span>, <span class="seriesInfo">DOI 10.17487/RFC6474</span>, <time datetime="2011-12" class="refDate">December 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6474">https://www.rfc-editor.org/info/rfc6474</a>&gt;</span>. </dd>
+<span class="refAuthor">Li, K.</span> and <span class="refAuthor">B. Leiba</span>, <span class="refTitle">"vCard Format Extensions: Place of Birth, Place and Date of Death"</span>, <span class="seriesInfo">RFC 6474</span>, <span class="seriesInfo">DOI 10.17487/RFC6474</span>, <time datetime="2011-12" class="refDate">December 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6474" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc6474<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC6715">[RFC6715]</dt>
         <dd>
-<span class="refAuthor">Cauchie, D.</span>, <span class="refAuthor">Leiba, B.</span>, and <span class="refAuthor">K. Li</span>, <span class="refTitle">"vCard Format Extensions: Representing vCard Extensions Defined by the Open Mobile Alliance (OMA) Converged Address Book (CAB) Group"</span>, <span class="seriesInfo">RFC 6715</span>, <span class="seriesInfo">DOI 10.17487/RFC6715</span>, <time datetime="2012-08" class="refDate">August 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6715">https://www.rfc-editor.org/info/rfc6715</a>&gt;</span>. </dd>
+<span class="refAuthor">Cauchie, D.</span>, <span class="refAuthor">Leiba, B.</span>, and <span class="refAuthor">K. Li</span>, <span class="refTitle">"vCard Format Extensions: Representing vCard Extensions Defined by the Open Mobile Alliance (OMA) Converged Address Book (CAB) Group"</span>, <span class="seriesInfo">RFC 6715</span>, <span class="seriesInfo">DOI 10.17487/RFC6715</span>, <time datetime="2012-08" class="refDate">August 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6715" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc6715<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC6869">[RFC6869]</dt>
         <dd>
-<span class="refAuthor">Salgueiro, G.</span>, <span class="refAuthor">Clarke, J.</span>, and <span class="refAuthor">P. Saint-Andre</span>, <span class="refTitle">"vCard KIND:device"</span>, <span class="seriesInfo">RFC 6869</span>, <span class="seriesInfo">DOI 10.17487/RFC6869</span>, <time datetime="2013-02" class="refDate">February 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6869">https://www.rfc-editor.org/info/rfc6869</a>&gt;</span>. </dd>
+<span class="refAuthor">Salgueiro, G.</span>, <span class="refAuthor">Clarke, J.</span>, and <span class="refAuthor">P. Saint-Andre</span>, <span class="refTitle">"vCard KIND:device"</span>, <span class="seriesInfo">RFC 6869</span>, <span class="seriesInfo">DOI 10.17487/RFC6869</span>, <time datetime="2013-02" class="refDate">February 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6869" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc6869<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC7095">[RFC7095]</dt>
         <dd>
-<span class="refAuthor">Kewisch, P.</span>, <span class="refTitle">"jCard: The JSON Format for vCard"</span>, <span class="seriesInfo">RFC 7095</span>, <span class="seriesInfo">DOI 10.17487/RFC7095</span>, <time datetime="2014-01" class="refDate">January 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7095">https://www.rfc-editor.org/info/rfc7095</a>&gt;</span>. </dd>
+<span class="refAuthor">Kewisch, P.</span>, <span class="refTitle">"jCard: The JSON Format for vCard"</span>, <span class="seriesInfo">RFC 7095</span>, <span class="seriesInfo">DOI 10.17487/RFC7095</span>, <time datetime="2014-01" class="refDate">January 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7095" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc7095<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8605">[RFC8605]</dt>
         <dd>
-<span class="refAuthor">Hollenbeck, S.</span> and <span class="refAuthor">R. Carney</span>, <span class="refTitle">"vCard Format Extensions: ICANN Extensions for the Registration Data Access Protocol (RDAP)"</span>, <span class="seriesInfo">RFC 8605</span>, <span class="seriesInfo">DOI 10.17487/RFC8605</span>, <time datetime="2019-05" class="refDate">May 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8605">https://www.rfc-editor.org/info/rfc8605</a>&gt;</span>. </dd>
+<span class="refAuthor">Hollenbeck, S.</span> and <span class="refAuthor">R. Carney</span>, <span class="refTitle">"vCard Format Extensions: ICANN Extensions for the Registration Data Access Protocol (RDAP)"</span>, <span class="seriesInfo">RFC 8605</span>, <span class="seriesInfo">DOI 10.17487/RFC8605</span>, <time datetime="2019-05" class="refDate">May 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8605" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8605<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC9499">[RFC9499]</dt>
         <dd>
-<span class="refAuthor">Hoffman, P.</span> and <span class="refAuthor">K. Fujiwara</span>, <span class="refTitle">"DNS Terminology"</span>, <span class="seriesInfo">BCP 219</span>, <span class="seriesInfo">RFC 9499</span>, <span class="seriesInfo">DOI 10.17487/RFC9499</span>, <time datetime="2024-03" class="refDate">March 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9499">https://www.rfc-editor.org/info/rfc9499</a>&gt;</span>. </dd>
+<span class="refAuthor">Hoffman, P.</span> and <span class="refAuthor">K. Fujiwara</span>, <span class="refTitle">"DNS Terminology"</span>, <span class="seriesInfo">BCP 219</span>, <span class="seriesInfo">RFC 9499</span>, <span class="seriesInfo">DOI 10.17487/RFC9499</span>, <time datetime="2024-03" class="refDate">March 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9499" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9499<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC9554">[RFC9554]</dt>
         <dd>
-<span class="refAuthor">Stepanek, R.</span> and <span class="refAuthor">M. Loffredo</span>, <span class="refTitle">"vCard Format Extensions for JSContact"</span>, <span class="seriesInfo">RFC 9554</span>, <span class="seriesInfo">DOI 10.17487/RFC9554</span>, <time datetime="2024-05" class="refDate">May 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9554">https://www.rfc-editor.org/info/rfc9554</a>&gt;</span>. </dd>
+<span class="refAuthor">Stepanek, R.</span> and <span class="refAuthor">M. Loffredo</span>, <span class="refTitle">"vCard Format Extensions for JSContact"</span>, <span class="seriesInfo">RFC 9554</span>, <span class="seriesInfo">DOI 10.17487/RFC9554</span>, <time datetime="2024-05" class="refDate">May 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9554" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9554<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC9555">[RFC9555]</dt>
         <dd>
-<span class="refAuthor">Stepanek, R.</span> and <span class="refAuthor">M. Loffredo</span>, <span class="refTitle">"JSContact: Converting from and to vCard"</span>, <span class="seriesInfo">RFC 9555</span>, <span class="seriesInfo">DOI 10.17487/RFC9555</span>, <time datetime="2024-05" class="refDate">May 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9555">https://www.rfc-editor.org/info/rfc9555</a>&gt;</span>. </dd>
+<span class="refAuthor">Stepanek, R.</span> and <span class="refAuthor">M. Loffredo</span>, <span class="refTitle">"JSContact: Converting from and to vCard"</span>, <span class="seriesInfo">RFC 9555</span>, <span class="seriesInfo">DOI 10.17487/RFC9555</span>, <time datetime="2024-05" class="refDate">May 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9555" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9555<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC9562">[RFC9562]</dt>
         <dd>
-<span class="refAuthor">Davis, K.</span>, <span class="refAuthor">Peabody, B.</span>, and <span class="refAuthor">P. Leach</span>, <span class="refTitle">"Universally Unique IDentifiers (UUIDs)"</span>, <span class="seriesInfo">RFC 9562</span>, <span class="seriesInfo">DOI 10.17487/RFC9562</span>, <time datetime="2024-05" class="refDate">May 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9562">https://www.rfc-editor.org/info/rfc9562</a>&gt;</span>. </dd>
+<span class="refAuthor">Davis, K.</span>, <span class="refAuthor">Peabody, B.</span>, and <span class="refAuthor">P. Leach</span>, <span class="refTitle">"Universally Unique IDentifiers (UUIDs)"</span>, <span class="seriesInfo">RFC 9562</span>, <span class="seriesInfo">DOI 10.17487/RFC9562</span>, <time datetime="2024-05" class="refDate">May 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9562" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9562<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="UBiDi">[UBiDi]</dt>
         <dd>
-<span class="refAuthor">The Unicode Consortium</span>, <span class="refTitle">"Unicode Standard Annex #9: Unicode Bidirectional Algorithm"</span>, <span class="refContent">Revision 48</span>, <span class="seriesInfo">Unicode 15.1.0</span>, <time datetime="2023-08" class="refDate">August 2023</time>, <span>&lt;<a href="https://www.unicode.org/reports/tr9/">https://www.unicode.org/reports/tr9/</a>&gt;</span>. </dd>
+<span class="refAuthor">The Unicode Consortium</span>, <span class="refTitle">"Unicode Standard Annex #9: Unicode Bidirectional Algorithm"</span>, <span class="refContent">Revision 48</span>, <span class="seriesInfo">Unicode 15.1.0</span>, <time datetime="2023-08" class="refDate">August 2023</time>, <span>&lt;<a href="https://www.unicode.org/reports/tr9/" target="_blank" rel="noopener">https://www.unicode.org/reports/tr9/<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="WHATWG-URL">[WHATWG-URL]</dt>
       <dd>
-<span class="refAuthor">WHATWG</span>, <span class="refTitle">"URL Living Standard"</span>, <time datetime="2024-01" class="refDate">January 2024</time>, <span>&lt;<a href="https://url.spec.whatwg.org">https://url.spec.whatwg.org</a>&gt;</span>. </dd>
+<span class="refAuthor">WHATWG</span>, <span class="refTitle">"URL Living Standard"</span>, <time datetime="2024-01" class="refDate">January 2024</time>, <span>&lt;<a href="https://url.spec.whatwg.org" target="_blank" rel="noopener">https://url.spec.whatwg.org<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 </dl>
 </section>
@@ -5535,7 +5535,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <p id="section-boilerplate.1-3">
             Information about the current status of this document, any
             errata, and how to provide feedback on it may be obtained at
-            <span><a href="https://www.rfc-editor.org/info/rfc9553">https://www.rfc-editor.org/info/rfc9553</a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+            <span><a href="https://www.rfc-editor.org/info/rfc9553" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9553<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 </section>
 </div><div id="copyright">
 <section id="section-boilerplate.2">
@@ -5546,7 +5546,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
             Provisions Relating to IETF Documents
-            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            (<span><a href="https://trustee.ietf.org/license-info" target="_blank" rel="noopener">https://trustee.ietf.org/license-info<span class="u-visually-hidden"> (opens in new window)</span></a></span>) in effect on the date of
             publication of this document. Please review these documents
             carefully, as they describe your rights and restrictions with
             respect to this document. Code Components extracted from this

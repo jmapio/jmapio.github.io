@@ -71,7 +71,7 @@ meta:
 <section id="section-1.3">
         <h3 id="name-notational-conventions"><a href="#section-1.3">1.3.&nbsp;&nbsp;Notational Conventions</a></h3>
 <p id="section-1.3-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>", "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as described in BCP&nbsp;14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in all capitals, as shown here.<a href="#section-1.3-1" class="pilcrow">¶</a></p>
-<p id="section-1.3-2">The underlying format used for this specification is JSON. Consequently, the terms "object" and "array" as well as the four primitive types (strings, numbers, booleans, and null) are to be interpreted as described in <span><a href="https://rfc-editor.org/rfc/rfc8259#section-1" class="relref">Section 1</a> of [<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>.<a href="#section-1.3-2" class="pilcrow">¶</a></p>
+<p id="section-1.3-2">The underlying format used for this specification is JSON. Consequently, the terms "object" and "array" as well as the four primitive types (strings, numbers, booleans, and null) are to be interpreted as described in <span><a href="https://rfc-editor.org/rfc/rfc8259#section-1" class="relref" target="_blank" rel="noopener">Section 1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>.<a href="#section-1.3-2" class="pilcrow">¶</a></p>
 <p id="section-1.3-3">Some examples in this document contain "partial" JSON documents used for illustrative purposes. In these examples, an ellipsis "..." is used to indicate a portion of the document that has been removed for compactness.<a href="#section-1.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -81,10 +81,10 @@ meta:
 <p id="section-1.4-1">This section introduces the notations and terminology used to define data types in JSCalendar.<a href="#section-1.4-1" class="pilcrow">¶</a></p>
 <p id="section-1.4-2">The underlying format for JSCalendar is JSON, so its data types also build on JSON values. The terms "object"
           and "array" as well as the four primitive types ("strings", "numbers", "booleans", and "null") are to be
-          interpreted as described in <span><a href="https://rfc-editor.org/rfc/rfc8259#section-1" class="relref">Section 1</a> of [<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>. All JSCalendar data <span class="bcp14">MUST</span> be
+          interpreted as described in <span><a href="https://rfc-editor.org/rfc/rfc8259#section-1" class="relref" target="_blank" rel="noopener">Section 1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>. All JSCalendar data <span class="bcp14">MUST</span> be
           valid according to the constraints given in <span><a href="#RFC7493" class="internal xref">I-JSON</a> [<a href="#RFC7493" class="cite xref">RFC7493</a>]</span>. Unless otherwise noted, all
           member names in JSON objects and all string values are case-sensitive. Within the context of JSON objects, the
-          term "key" is synonymous with "member name" as defined in <span><a href="https://rfc-editor.org/rfc/rfc8259#section-1" class="relref">Section 1</a> of [<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>.<a href="#section-1.4-2" class="pilcrow">¶</a></p>
+          term "key" is synonymous with "member name" as defined in <span><a href="https://rfc-editor.org/rfc/rfc8259#section-1" class="relref" target="_blank" rel="noopener">Section 1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>.<a href="#section-1.4-2" class="pilcrow">¶</a></p>
 <div id="objects-and-properties">
 <section id="section-1.4.1">
           <h4 id="name-objects-and-properties"><a href="#section-1.4.1">1.4.1.&nbsp;&nbsp;Objects and Properties</a></h4>
@@ -220,7 +220,7 @@ meta:
 <div id="type-Id">
 <section id="section-1.5.1">
           <h4 id="name-id"><a href="#section-1.5.1">1.5.1.&nbsp;&nbsp;Id</a></h4>
-<p id="section-1.5.1-1">Where "Id" is given as a data type, it means a String of at least 1 and a maximum of 255 octets in size, and it <span class="bcp14">MUST</span> only contain characters from the "URL and Filename Safe" base64url alphabet, as defined in <span><a href="https://rfc-editor.org/rfc/rfc4648#section-5" class="relref">Section 5</a> of [<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, excluding the pad character ("="). This means the allowed characters are the ASCII alphanumeric characters ("A-Za-z0-9"), hyphen ("-"), and underscore ("_").<a href="#section-1.5.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.5.1-1">Where "Id" is given as a data type, it means a String of at least 1 and a maximum of 255 octets in size, and it <span class="bcp14">MUST</span> only contain characters from the "URL and Filename Safe" base64url alphabet, as defined in <span><a href="https://rfc-editor.org/rfc/rfc4648#section-5" class="relref" target="_blank" rel="noopener">Section 5<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC4648" class="cite xref">RFC4648</a>]</span>, excluding the pad character ("="). This means the allowed characters are the ASCII alphanumeric characters ("A-Za-z0-9"), hyphen ("-"), and underscore ("_").<a href="#section-1.5.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.5.1-2">In many places in JSCalendar, a JSON map is used where the map keys are of type Id and the map values are all the same type of object. This construction represents an unordered set of objects, with the added advantage that each entry has a name (the corresponding map key). This allows for more concise patching of objects, and, when applicable, for the objects in question to be referenced from other objects within the JSCalendar object.<a href="#section-1.5.1-2" class="pilcrow">¶</a></p>
 <p id="section-1.5.1-3">Unless otherwise specified for a particular property, there are no uniqueness constraints on an Id value (other than, of course, the requirement that you cannot have two values with the same key within a single JSON map). For example, two Event objects might use the same Ids in their respective <code>links</code> properties or, within the same Event object, the same Id could appear in the <code>participants</code> and <code>alerts</code> properties. These situations do not imply any semantic connections among the objects.<a href="#section-1.5.1-3" class="pilcrow">¶</a></p>
 </section>
@@ -294,7 +294,7 @@ meta:
             <li id="section-1.5.6-7.5">If the resulting time does not exist on the date due to a discontinuity in the time zone, use the semantics in <a href="#type-LocalDateTime" class="auto internal xref">Section 1.5.5</a> to convert to UTC and back to get a valid LocalDateTime.<a href="#section-1.5.6-7.5" class="pilcrow">¶</a>
 </li>
           </ol>
-<p id="section-1.5.6-8">These semantics match the iCalendar DURATION value type (<span>[<a href="#RFC5545" class="cite xref">RFC5545</a>], <a href="https://rfc-editor.org/rfc/rfc5545#section-3.3.6" class="relref">Section 3.3.6</a></span>).<a href="#section-1.5.6-8" class="pilcrow">¶</a></p>
+<p id="section-1.5.6-8">These semantics match the iCalendar DURATION value type (<span>[<a href="#RFC5545" class="cite xref">RFC5545</a>], <a href="https://rfc-editor.org/rfc/rfc5545#section-3.3.6" class="relref" target="_blank" rel="noopener">Section 3.3.6<span class="u-visually-hidden"> (opens in new window)</span></a></span>).<a href="#section-1.5.6-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="type-SignedDuration">
@@ -401,7 +401,7 @@ meta:
 </dd>
             
 <dt id="section-1.5.11-2.9">rel: String (optional).</dt>
-            <dd id="section-1.5.11-2.10">This identifies the relation of the linked resource to the object. If set, the value <span class="bcp14">MUST</span> be a link relation type as defined in <span><a href="https://rfc-editor.org/rfc/rfc8288#section-2.1" class="relref">Section 2.1</a> of [<a href="#RFC8288" class="cite xref">RFC8288</a>]</span> .<a href="#section-1.5.11-2.10" class="pilcrow">¶</a>
+            <dd id="section-1.5.11-2.10">This identifies the relation of the linked resource to the object. If set, the value <span class="bcp14">MUST</span> be a link relation type as defined in <span><a href="https://rfc-editor.org/rfc/rfc8288#section-2.1" class="relref" target="_blank" rel="noopener">Section 2.1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8288" class="cite xref">RFC8288</a>]</span> .<a href="#section-1.5.11-2.10" class="pilcrow">¶</a>
 </dd>
             
 <dt id="section-1.5.11-2.11">display: String[Boolean] (optional).</dt>
@@ -447,7 +447,7 @@ meta:
 </section>
 <section id="section-1.6.2">
           <h4 id="name-uris"><a href="#section-1.6.2">1.6.2.&nbsp;&nbsp;URIs</a></h4>
-<p id="section-1.6.2-1">Several properties require their string value to be a URI as defined in <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>. Implementations <span class="bcp14">MUST</span> make sure to use proper percent-encoding for URIs that cannot be represented using unreserved URI characters. <span><a href="https://rfc-editor.org/rfc/rfc3987#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC3987" class="cite xref">RFC3987</a>]</span> defines how to convert Internationalized Resource Identifiers to URIs. JSCalendar makes no recommendation on how to display URIs, but the WHATWG URL Living Standard (see "Internationalization and special characters" (Section 4.8.3) of <span>[<a href="#WHATWG-URL" class="cite xref">WHATWG-URL</a>]</span>) provides guidance for URLs found in the context of a web browser.<a href="#section-1.6.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.6.2-1">Several properties require their string value to be a URI as defined in <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>. Implementations <span class="bcp14">MUST</span> make sure to use proper percent-encoding for URIs that cannot be represented using unreserved URI characters. <span><a href="https://rfc-editor.org/rfc/rfc3987#section-3.1" class="relref" target="_blank" rel="noopener">Section 3.1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC3987" class="cite xref">RFC3987</a>]</span> defines how to convert Internationalized Resource Identifiers to URIs. JSCalendar makes no recommendation on how to display URIs, but the WHATWG URL Living Standard (see "Internationalization and special characters" (Section 4.8.3) of <span>[<a href="#WHATWG-URL" class="cite xref">WHATWG-URL</a>]</span>) provides guidance for URLs found in the context of a web browser.<a href="#section-1.6.2-1" class="pilcrow">¶</a></p>
 </section>
 </section>
 </div>
@@ -468,7 +468,7 @@ meta:
 <p id="section-1.7.2-1">An IANA-registered property is any property that has been registered according to the IANA property registry rules as outlined in <a href="#iana-considerations" class="auto internal xref">Section 7</a>. All properties defined in this specification, including their object value types and enumerated values, are registered at IANA.<a href="#section-1.7.2-1" class="pilcrow">¶</a></p>
 <p id="section-1.7.2-2">
             Implementations <span class="bcp14">MUST</span> validate IANA-registered properties in JSCalendar data, unless they are unknown to the implementation (<a href="#unknown-properties" class="auto internal xref">Section 1.7.4</a>). They <span class="bcp14">MUST</span> reject invalid IANA-registered properties. A property is invalid if its name matches the name of an IANA-registered property but the value violates its definition according to the JSCalendar specification version defined in the <span><a href="#prop-version" class="internal xref">version</a> (<a href="#prop-version" class="auto internal xref">Section 3.1.2</a>)</span> property.<a href="#section-1.7.2-2" class="pilcrow">¶</a></p>
-<p id="section-1.7.2-3">IANA-registered property names <span class="bcp14">MUST NOT</span> contain ASCII control characters (U+0000 to U+001F, U+007F), the COLON (U+003A), or the QUOTATION MARK (U+0022). They <span class="bcp14">MUST</span> only contain ASCII alphanumeric characters that match the ALPHA and DIGIT rules defined in <span><a href="https://rfc-editor.org/rfc/rfc5234#appendix-B.1" class="relref">Appendix B.1</a> of [<a href="#RFC5234" class="cite xref">RFC5234</a>]</span> or the COMMERCIAL AT (U+0040) character. IANA-registered property names <span class="bcp14">MUST</span> be notated in lower camel case.<a href="#section-1.7.2-3" class="pilcrow">¶</a></p>
+<p id="section-1.7.2-3">IANA-registered property names <span class="bcp14">MUST NOT</span> contain ASCII control characters (U+0000 to U+001F, U+007F), the COLON (U+003A), or the QUOTATION MARK (U+0022). They <span class="bcp14">MUST</span> only contain ASCII alphanumeric characters that match the ALPHA and DIGIT rules defined in <span><a href="https://rfc-editor.org/rfc/rfc5234#appendix-B.1" class="relref" target="_blank" rel="noopener">Appendix B.1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC5234" class="cite xref">RFC5234</a>]</span> or the COMMERCIAL AT (U+0040) character. IANA-registered property names <span class="bcp14">MUST</span> be notated in lower camel case.<a href="#section-1.7.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="reserved-properties">
@@ -644,7 +644,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <dt id="section-3.1.1-1.1">uid: String (mandatory).</dt>
             <dd id="section-3.1.1-1.2">
               <p id="section-3.1.1-1.2.1">This is a globally unique identifier used to associate objects representing the same event, task, group, or other object across different systems, calendars, and views. For recurring events and tasks, the UID is associated with the base object and therefore is the same for all occurrences; the combination of the UID with a <code>recurrenceId</code> identifies a particular instance.<a href="#section-3.1.1-1.2.1" class="pilcrow">¶</a></p>
-<p id="section-3.1.1-1.2.2">The generator of the identifier <span class="bcp14">MUST</span> guarantee that the identifier is unique. <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span> describes a range of established algorithms to generate universally unique identifiers (UUIDs). UUID version 4, described in <span><a href="https://rfc-editor.org/rfc/rfc9562#section-4.4" class="relref">Section 4.4</a> of [<a href="#RFC9562" class="cite xref">RFC9562</a>]</span>, is <span class="bcp14">RECOMMENDED</span>.<a href="#section-3.1.1-1.2.2" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-1.2.2">The generator of the identifier <span class="bcp14">MUST</span> guarantee that the identifier is unique. <span>[<a href="#RFC9562" class="cite xref">RFC9562</a>]</span> describes a range of established algorithms to generate universally unique identifiers (UUIDs). UUID version 4, described in <span><a href="https://rfc-editor.org/rfc/rfc9562#section-4.4" class="relref" target="_blank" rel="noopener">Section 4.4<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC9562" class="cite xref">RFC9562</a>]</span>, is <span class="bcp14">RECOMMENDED</span>.<a href="#section-3.1.1-1.2.2" class="pilcrow">¶</a></p>
 <p id="section-3.1.1-1.2.3">For compatibility with  UIDs <span>[<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>, implementations <span class="bcp14">MUST</span> be able to receive and persist values of at least 255 octets for this property, but they <span class="bcp14">MUST NOT</span> truncate values in the middle of a UTF-8 multi-octet sequence.<a href="#section-3.1.1-1.2.3" class="pilcrow">¶</a></p>
 </dd>
           
@@ -964,7 +964,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <dl class="dlParallel" id="section-3.2.12-1">
             <dt id="section-3.2.12-1.1">color: String (optional).</dt>
             <dd id="section-3.2.12-1.2">
-              <p id="section-3.2.12-1.2.1">This is a color clients <span class="bcp14">MAY</span> use when displaying this calendar object. The value is a color name taken from the set of names defined in <span><a href="https://www.w3.org/TR/css-color-3/#svg-color" class="relref">Section 4.3</a> of [<a href="#CSS3" class="cite xref">CSS3</a>]</span> or an RGB value in six-digit hexadecimal notation, as defined in <span><a href="https://www.w3.org/TR/css-color-3/#rgb-color" class="relref">Section 4.2.1</a> of [<a href="#CSS3" class="cite xref">CSS3</a>]</span>. Values are case-insensitive.<a href="#section-3.2.12-1.2.1" class="pilcrow">¶</a></p>
+              <p id="section-3.2.12-1.2.1">This is a color clients <span class="bcp14">MAY</span> use when displaying this calendar object. The value is a color name taken from the set of names defined in <span><a href="https://www.w3.org/TR/css-color-3/#svg-color" class="relref" target="_blank" rel="noopener">Section 4.3<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#CSS3" class="cite xref">CSS3</a>]</span> or an RGB value in six-digit hexadecimal notation, as defined in <span><a href="https://www.w3.org/TR/css-color-3/#rgb-color" class="relref" target="_blank" rel="noopener">Section 4.2.1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#CSS3" class="cite xref">CSS3</a>]</span>. Values are case-insensitive.<a href="#section-3.2.12-1.2.1" class="pilcrow">¶</a></p>
 </dd>
           
 </dl>
@@ -1488,7 +1488,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <dl class="dlParallel" id="section-3.4.4-1">
             <dt id="section-3.4.4-1.1">organizerCalendarAddress: String (optional).</dt>
             <dd id="section-3.4.4-1.2">
-              <p id="section-3.4.4-1.2.1">This is a URI as defined by <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> or any other IANA-registered form for a URI. It is the same as the CAL-ADDRESS value of an iCalendar <span>ORGANIZER property [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.4.3" class="relref">Section 3.8.4.3</a>)</span> — it globally identifies a particular organizer, even across different calendaring objects.<a href="#section-3.4.4-1.2.1" class="pilcrow">¶</a></p>
+              <p id="section-3.4.4-1.2.1">This is a URI as defined by <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> or any other IANA-registered form for a URI. It is the same as the CAL-ADDRESS value of an iCalendar <span>ORGANIZER property [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.4.3" class="relref" target="_blank" rel="noopener">Section 3.8.4.3<span class="u-visually-hidden"> (opens in new window)</span></a>)</span> — it globally identifies a particular organizer, even across different calendaring objects.<a href="#section-3.4.4-1.2.1" class="pilcrow">¶</a></p>
 </dd>
           
 </dl>
@@ -1516,7 +1516,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 </dd>
             
 <dt id="section-3.4.5-3.5">email: String (optional).</dt>
-            <dd id="section-3.4.5-3.6">This is the email address to use to contact the participant or, for example, match with an address book entry. If set, the value <span class="bcp14">MUST</span> be a valid "addr-spec" value as defined in <span><a href="https://rfc-editor.org/rfc/rfc5322#section-3.4.1" class="relref">Section 3.4.1</a> of [<a href="#RFC5322" class="cite xref">RFC5322</a>]</span> .<a href="#section-3.4.5-3.6" class="pilcrow">¶</a>
+            <dd id="section-3.4.5-3.6">This is the email address to use to contact the participant or, for example, match with an address book entry. If set, the value <span class="bcp14">MUST</span> be a valid "addr-spec" value as defined in <span><a href="https://rfc-editor.org/rfc/rfc5322#section-3.4.1" class="relref" target="_blank" rel="noopener">Section 3.4.1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC5322" class="cite xref">RFC5322</a>]</span> .<a href="#section-3.4.5-3.6" class="pilcrow">¶</a>
 </dd>
             
 <dt id="section-3.4.5-3.7">description: String (optional).</dt>
@@ -1528,7 +1528,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 </dd>
             
 <dt id="section-3.4.5-3.11">calendarAddress: String (optional).</dt>
-            <dd id="section-3.4.5-3.12">This is a URI as defined by <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> or any other IANA-registered form for a URI. It is the same as the CAL-ADDRESS value of an iCalendar <span>ATTENDEE property [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.4.1" class="relref">Section 3.8.4.1</a>)</span> or <span>ORGANIZER property [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.4.3" class="relref">Section 3.8.4.3</a>)</span> — it globally identifies a particular participant, even across different calendaring objects.<a href="#section-3.4.5-3.12" class="pilcrow">¶</a>
+            <dd id="section-3.4.5-3.12">This is a URI as defined by <span>[<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> or any other IANA-registered form for a URI. It is the same as the CAL-ADDRESS value of an iCalendar <span>ATTENDEE property [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.4.1" class="relref" target="_blank" rel="noopener">Section 3.8.4.1<span class="u-visually-hidden"> (opens in new window)</span></a>)</span> or <span>ORGANIZER property [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.4.3" class="relref" target="_blank" rel="noopener">Section 3.8.4.3<span class="u-visually-hidden"> (opens in new window)</span></a>)</span> — it globally identifies a particular participant, even across different calendaring objects.<a href="#section-3.4.5-3.12" class="pilcrow">¶</a>
 </dd>
             
 <dt id="section-3.4.5-3.13">kind: String (optional).</dt>
@@ -1616,7 +1616,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             
 <dt id="section-3.4.5-3.21">sentBy: String (optional).</dt>
             <dd id="section-3.4.5-3.22">
-              <p id="section-3.4.5-3.22.1">This is the email address in the "From" header of the email that last updated this participant via iMIP. If this property is set, then the calendarAddress property <span class="bcp14">MUST</span> be set. This <span class="bcp14">SHOULD</span> only be set if the email address is different to that in the mailto URI of this participant's <code>calendarAddress</code> property (i.e., the response was received from a different address to that which the invitation was sent to). If set, the value <span class="bcp14">MUST</span> be a valid "addr-spec" value as defined in <span><a href="https://rfc-editor.org/rfc/rfc5322#section-3.4.1" class="relref">Section 3.4.1</a> of [<a href="#RFC5322" class="cite xref">RFC5322</a>]</span> .<a href="#section-3.4.5-3.22.1" class="pilcrow">¶</a></p>
+              <p id="section-3.4.5-3.22.1">This is the email address in the "From" header of the email that last updated this participant via iMIP. If this property is set, then the calendarAddress property <span class="bcp14">MUST</span> be set. This <span class="bcp14">SHOULD</span> only be set if the email address is different to that in the mailto URI of this participant's <code>calendarAddress</code> property (i.e., the response was received from a different address to that which the invitation was sent to). If set, the value <span class="bcp14">MUST</span> be a valid "addr-spec" value as defined in <span><a href="https://rfc-editor.org/rfc/rfc5322#section-3.4.1" class="relref" target="_blank" rel="noopener">Section 3.4.1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC5322" class="cite xref">RFC5322</a>]</span> .<a href="#section-3.4.5-3.22.1" class="pilcrow">¶</a></p>
 </dd>
             
 <dt id="section-3.4.5-3.23">delegatedTo: String[Boolean] (optional).</dt>
@@ -2394,7 +2394,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <div id="uri-values">
 <section id="section-6.3">
         <h3 id="name-uri-values"><a href="#section-6.3">6.3.&nbsp;&nbsp;URI Values</a></h3>
-<p id="section-6.3-1">Several JSCalendar properties contain URIs as values, and processing these properties requires extra care. <span><a href="https://rfc-editor.org/rfc/rfc3986#section-7" class="relref">Section 7</a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> discusses security risks related to URIs.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3-1">Several JSCalendar properties contain URIs as values, and processing these properties requires extra care. <span><a href="https://rfc-editor.org/rfc/rfc3986#section-7" class="relref" target="_blank" rel="noopener">Section 7<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span> discusses security risks related to URIs.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.3-2">Fetching remote resources carries inherent risks. Connections must only be allowed on well-known ports, using allowed protocols (generally, just HTTP/HTTPS on their default ports). The URL must be resolved externally and not allowed to access internal resources. Connecting to an external source reveals IP (and therefore often location) information.<a href="#section-6.3-2" class="pilcrow">¶</a></p>
 <p id="section-6.3-3">A maliciously constructed JSCalendar object may contain a very large number of URIs. In the case of published calendars with a large number of subscribers, such objects could be widely distributed. Implementations should be careful to limit the automatic fetching of linked resources to reduce the risk of this being an amplification vector for a denial-of-service attack.<a href="#section-6.3-3" class="pilcrow">¶</a></p>
 </section>
@@ -2469,7 +2469,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 </dd>
           
 <dt id="section-7.1-2.9">Encoding considerations:</dt>
-          <dd id="section-7.1-2.10">This is the same as the encoding considerations of application/json, as specified in <span><a href="https://rfc-editor.org/rfc/rfc8259#section-11" class="relref">Section 11</a> of [<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>.<a href="#section-7.1-2.10" class="pilcrow">¶</a>
+          <dd id="section-7.1-2.10">This is the same as the encoding considerations of application/json, as specified in <span><a href="https://rfc-editor.org/rfc/rfc8259#section-11" class="relref" target="_blank" rel="noopener">Section 11<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>.<a href="#section-7.1-2.10" class="pilcrow">¶</a>
 </dd>
           
 <dt id="section-7.1-2.11">Security considerations:</dt>
@@ -2489,7 +2489,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 </dd>
           
 <dt id="section-7.1-2.19">Fragment identifier considerations:</dt>
-          <dd id="section-7.1-2.20">A JSON Pointer fragment identifier may be used, as defined in <span>[<a href="#RFC6901" class="cite xref">RFC6901</a>], <a href="https://rfc-editor.org/rfc/rfc6901#section-6" class="relref">Section 6</a></span>.<a href="#section-7.1-2.20" class="pilcrow">¶</a>
+          <dd id="section-7.1-2.20">A JSON Pointer fragment identifier may be used, as defined in <span>[<a href="#RFC6901" class="cite xref">RFC6901</a>], <a href="https://rfc-editor.org/rfc/rfc6901#section-6" class="relref" target="_blank" rel="noopener">Section 6<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-7.1-2.20" class="pilcrow">¶</a>
 </dd>
           
 <dt id="section-7.1-2.21">Additional information:</dt>
@@ -2536,7 +2536,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <div id="iana-registry-policy">
 <section id="section-7.2">
         <h3 id="name-registry-policy-and-change-"><a href="#section-7.2">7.2.&nbsp;&nbsp;Registry Policy and Change Procedures</a></h3>
-<p id="section-7.2-1">Registry assignments that introduce <span><a href="#versioning" class="internal xref">backwards-incompatible</a> (<a href="#versioning" class="auto internal xref">Section 1.9</a>)</span> changes require the JSCalendar major version to change; other changes only require a change to the minor version. The registry policy for assignments that require the JSCalendar major version to change is Standards Action (<span>[<a href="#RFC8126" class="cite xref">RFC8126</a>], <a href="https://rfc-editor.org/rfc/rfc8126#section-4.9" class="relref">Section 4.9</a></span>). The registry policy for other assignments is Specification Required (<span>[<a href="#RFC8126" class="cite xref">RFC8126</a>], <a href="https://rfc-editor.org/rfc/rfc8126#section-4.6" class="relref">Section 4.6</a></span>).<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.2-1">Registry assignments that introduce <span><a href="#versioning" class="internal xref">backwards-incompatible</a> (<a href="#versioning" class="auto internal xref">Section 1.9</a>)</span> changes require the JSCalendar major version to change; other changes only require a change to the minor version. The registry policy for assignments that require the JSCalendar major version to change is Standards Action (<span>[<a href="#RFC8126" class="cite xref">RFC8126</a>], <a href="https://rfc-editor.org/rfc/rfc8126#section-4.9" class="relref" target="_blank" rel="noopener">Section 4.9<span class="u-visually-hidden"> (opens in new window)</span></a></span>). The registry policy for other assignments is Specification Required (<span>[<a href="#RFC8126" class="cite xref">RFC8126</a>], <a href="https://rfc-editor.org/rfc/rfc8126#section-4.6" class="relref" target="_blank" rel="noopener">Section 4.6<span class="u-visually-hidden"> (opens in new window)</span></a></span>).<a href="#section-7.2-1" class="pilcrow">¶</a></p>
 <p id="section-7.2-2">The designated expert (DE) decides if a major or minor version change is required and assigns the new version to the <span><a href="#iana-version-registry" class="internal xref">"JSCalendar Version" registry</a> (<a href="#iana-version-registry" class="auto internal xref">Section 7.3</a>)</span>. Version numbers increment by one, and a major version change resets the minor version to zero. An assignment may apply multiple changes and to more than one registry at once, in which case a single version change is sufficient. If the registry policy is Specification Required, then the DE may decide that it is enough to document the new assignment in the Description item of the respective registry.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
 <p id="section-7.2-3">A registration <span class="bcp14">MUST</span> have an intended usage of "common", "reserved", or "obsolete".<a href="#section-7.2-3" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -6119,135 +6119,135 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <dl class="references">
 <dt id="CLDR">[CLDR]</dt>
         <dd>
-<span class="refTitle">"Unicode Common Locale Data Repository"</span>, <span>&lt;<a href="http://cldr.unicode.org/">http://cldr.unicode.org/</a>&gt;</span>. </dd>
+<span class="refTitle">"Unicode Common Locale Data Repository"</span>, <span>&lt;<a href="http://cldr.unicode.org/" target="_blank" rel="noopener">http://cldr.unicode.org/<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="CSS3">[CSS3]</dt>
         <dd>
-<span class="refAuthor">Çelik, T.</span>, <span class="refAuthor">Lilley, C.</span>, and <span class="refAuthor">L. Baron</span>, <span class="refTitle">"CSS Color Module Level 3"</span>, <span class="refContent">W3C Recommendation</span>, <time datetime="2022-01" class="refDate">January 2022</time>, <span>&lt;<a href="https://www.w3.org/TR/css-color-3/">https://www.w3.org/TR/css-color-3/</a>&gt;</span>. </dd>
+<span class="refAuthor">Çelik, T.</span>, <span class="refAuthor">Lilley, C.</span>, and <span class="refAuthor">L. Baron</span>, <span class="refTitle">"CSS Color Module Level 3"</span>, <span class="refContent">W3C Recommendation</span>, <time datetime="2022-01" class="refDate">January 2022</time>, <span>&lt;<a href="https://www.w3.org/TR/css-color-3/" target="_blank" rel="noopener">https://www.w3.org/TR/css-color-3/<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC1034">[RFC1034]</dt>
         <dd>
-<span class="refAuthor">Mockapetris, P.</span>, <span class="refTitle">"Domain names - concepts and facilities"</span>, <span class="seriesInfo">STD 13</span>, <span class="seriesInfo">RFC 1034</span>, <span class="seriesInfo">DOI 10.17487/RFC1034</span>, <time datetime="1987-11" class="refDate">November 1987</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc1034">https://www.rfc-editor.org/info/rfc1034</a>&gt;</span>. </dd>
+<span class="refAuthor">Mockapetris, P.</span>, <span class="refTitle">"Domain names - concepts and facilities"</span>, <span class="seriesInfo">STD 13</span>, <span class="seriesInfo">RFC 1034</span>, <span class="seriesInfo">DOI 10.17487/RFC1034</span>, <time datetime="1987-11" class="refDate">November 1987</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc1034" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc1034<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC1035">[RFC1035]</dt>
         <dd>
-<span class="refAuthor">Mockapetris, P.</span>, <span class="refTitle">"Domain names - implementation and specification"</span>, <span class="seriesInfo">STD 13</span>, <span class="seriesInfo">RFC 1035</span>, <span class="seriesInfo">DOI 10.17487/RFC1035</span>, <time datetime="1987-11" class="refDate">November 1987</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc1035">https://www.rfc-editor.org/info/rfc1035</a>&gt;</span>. </dd>
+<span class="refAuthor">Mockapetris, P.</span>, <span class="refTitle">"Domain names - implementation and specification"</span>, <span class="seriesInfo">STD 13</span>, <span class="seriesInfo">RFC 1035</span>, <span class="seriesInfo">DOI 10.17487/RFC1035</span>, <time datetime="1987-11" class="refDate">November 1987</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc1035" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc1035<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
-<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc2119<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC2397">[RFC2397]</dt>
         <dd>
-<span class="refAuthor">Masinter, L.</span>, <span class="refTitle">"The "data" URL scheme"</span>, <span class="seriesInfo">RFC 2397</span>, <span class="seriesInfo">DOI 10.17487/RFC2397</span>, <time datetime="1998-08" class="refDate">August 1998</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2397">https://www.rfc-editor.org/info/rfc2397</a>&gt;</span>. </dd>
+<span class="refAuthor">Masinter, L.</span>, <span class="refTitle">"The "data" URL scheme"</span>, <span class="seriesInfo">RFC 2397</span>, <span class="seriesInfo">DOI 10.17487/RFC2397</span>, <time datetime="1998-08" class="refDate">August 1998</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2397" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc2397<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC2445">[RFC2445]</dt>
         <dd>
-<span class="refAuthor">Dawson, F.</span> and <span class="refAuthor">D. Stenerson</span>, <span class="refTitle">"Internet Calendaring and Scheduling Core Object Specification (iCalendar)"</span>, <span class="seriesInfo">RFC 2445</span>, <span class="seriesInfo">DOI 10.17487/RFC2445</span>, <time datetime="1998-11" class="refDate">November 1998</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2445">https://www.rfc-editor.org/info/rfc2445</a>&gt;</span>. </dd>
+<span class="refAuthor">Dawson, F.</span> and <span class="refAuthor">D. Stenerson</span>, <span class="refTitle">"Internet Calendaring and Scheduling Core Object Specification (iCalendar)"</span>, <span class="seriesInfo">RFC 2445</span>, <span class="seriesInfo">DOI 10.17487/RFC2445</span>, <time datetime="1998-11" class="refDate">November 1998</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2445" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc2445<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC3339">[RFC3339]</dt>
         <dd>
-<span class="refAuthor">Klyne, G.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"Date and Time on the Internet: Timestamps"</span>, <span class="seriesInfo">RFC 3339</span>, <span class="seriesInfo">DOI 10.17487/RFC3339</span>, <time datetime="2002-07" class="refDate">July 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3339">https://www.rfc-editor.org/info/rfc3339</a>&gt;</span>. </dd>
+<span class="refAuthor">Klyne, G.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"Date and Time on the Internet: Timestamps"</span>, <span class="seriesInfo">RFC 3339</span>, <span class="seriesInfo">DOI 10.17487/RFC3339</span>, <time datetime="2002-07" class="refDate">July 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3339" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc3339<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC3986">[RFC3986]</dt>
         <dd>
-<span class="refAuthor">Berners-Lee, T.</span>, <span class="refAuthor">Fielding, R.</span>, and <span class="refAuthor">L. Masinter</span>, <span class="refTitle">"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span class="seriesInfo">STD 66</span>, <span class="seriesInfo">RFC 3986</span>, <span class="seriesInfo">DOI 10.17487/RFC3986</span>, <time datetime="2005-01" class="refDate">January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3986">https://www.rfc-editor.org/info/rfc3986</a>&gt;</span>. </dd>
+<span class="refAuthor">Berners-Lee, T.</span>, <span class="refAuthor">Fielding, R.</span>, and <span class="refAuthor">L. Masinter</span>, <span class="refTitle">"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span class="seriesInfo">STD 66</span>, <span class="seriesInfo">RFC 3986</span>, <span class="seriesInfo">DOI 10.17487/RFC3986</span>, <time datetime="2005-01" class="refDate">January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3986" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc3986<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC4589">[RFC4589]</dt>
         <dd>
-<span class="refAuthor">Schulzrinne, H.</span> and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"Location Types Registry"</span>, <span class="seriesInfo">RFC 4589</span>, <span class="seriesInfo">DOI 10.17487/RFC4589</span>, <time datetime="2006-07" class="refDate">July 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4589">https://www.rfc-editor.org/info/rfc4589</a>&gt;</span>. </dd>
+<span class="refAuthor">Schulzrinne, H.</span> and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"Location Types Registry"</span>, <span class="seriesInfo">RFC 4589</span>, <span class="seriesInfo">DOI 10.17487/RFC4589</span>, <time datetime="2006-07" class="refDate">July 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4589" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc4589<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC4648">[RFC4648]</dt>
         <dd>
-<span class="refAuthor">Josefsson, S.</span>, <span class="refTitle">"The Base16, Base32, and Base64 Data Encodings"</span>, <span class="seriesInfo">RFC 4648</span>, <span class="seriesInfo">DOI 10.17487/RFC4648</span>, <time datetime="2006-10" class="refDate">October 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4648">https://www.rfc-editor.org/info/rfc4648</a>&gt;</span>. </dd>
+<span class="refAuthor">Josefsson, S.</span>, <span class="refTitle">"The Base16, Base32, and Base64 Data Encodings"</span>, <span class="seriesInfo">RFC 4648</span>, <span class="seriesInfo">DOI 10.17487/RFC4648</span>, <time datetime="2006-10" class="refDate">October 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4648" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc4648<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC5234">[RFC5234]</dt>
         <dd>
-<span class="refAuthor">Crocker, D., Ed.</span> and <span class="refAuthor">P. Overell</span>, <span class="refTitle">"Augmented BNF for Syntax Specifications: ABNF"</span>, <span class="seriesInfo">STD 68</span>, <span class="seriesInfo">RFC 5234</span>, <span class="seriesInfo">DOI 10.17487/RFC5234</span>, <time datetime="2008-01" class="refDate">January 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5234">https://www.rfc-editor.org/info/rfc5234</a>&gt;</span>. </dd>
+<span class="refAuthor">Crocker, D., Ed.</span> and <span class="refAuthor">P. Overell</span>, <span class="refTitle">"Augmented BNF for Syntax Specifications: ABNF"</span>, <span class="seriesInfo">STD 68</span>, <span class="seriesInfo">RFC 5234</span>, <span class="seriesInfo">DOI 10.17487/RFC5234</span>, <time datetime="2008-01" class="refDate">January 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5234" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc5234<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC5322">[RFC5322]</dt>
         <dd>
-<span class="refAuthor">Resnick, P., Ed.</span>, <span class="refTitle">"Internet Message Format"</span>, <span class="seriesInfo">RFC 5322</span>, <span class="seriesInfo">DOI 10.17487/RFC5322</span>, <time datetime="2008-10" class="refDate">October 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5322">https://www.rfc-editor.org/info/rfc5322</a>&gt;</span>. </dd>
+<span class="refAuthor">Resnick, P., Ed.</span>, <span class="refTitle">"Internet Message Format"</span>, <span class="seriesInfo">RFC 5322</span>, <span class="seriesInfo">DOI 10.17487/RFC5322</span>, <time datetime="2008-10" class="refDate">October 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5322" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc5322<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC5545">[RFC5545]</dt>
         <dd>
-<span class="refAuthor">Desruisseaux, B., Ed.</span>, <span class="refTitle">"Internet Calendaring and Scheduling Core Object Specification (iCalendar)"</span>, <span class="seriesInfo">RFC 5545</span>, <span class="seriesInfo">DOI 10.17487/RFC5545</span>, <time datetime="2009-09" class="refDate">September 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5545">https://www.rfc-editor.org/info/rfc5545</a>&gt;</span>. </dd>
+<span class="refAuthor">Desruisseaux, B., Ed.</span>, <span class="refTitle">"Internet Calendaring and Scheduling Core Object Specification (iCalendar)"</span>, <span class="seriesInfo">RFC 5545</span>, <span class="seriesInfo">DOI 10.17487/RFC5545</span>, <time datetime="2009-09" class="refDate">September 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5545" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc5545<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC5546">[RFC5546]</dt>
         <dd>
-<span class="refAuthor">Daboo, C., Ed.</span>, <span class="refTitle">"iCalendar Transport-Independent Interoperability Protocol (iTIP)"</span>, <span class="seriesInfo">RFC 5546</span>, <span class="seriesInfo">DOI 10.17487/RFC5546</span>, <time datetime="2009-12" class="refDate">December 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5546">https://www.rfc-editor.org/info/rfc5546</a>&gt;</span>. </dd>
+<span class="refAuthor">Daboo, C., Ed.</span>, <span class="refTitle">"iCalendar Transport-Independent Interoperability Protocol (iTIP)"</span>, <span class="seriesInfo">RFC 5546</span>, <span class="seriesInfo">DOI 10.17487/RFC5546</span>, <time datetime="2009-12" class="refDate">December 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5546" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc5546<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC5646">[RFC5646]</dt>
         <dd>
-<span class="refAuthor">Phillips, A., Ed.</span> and <span class="refAuthor">M. Davis, Ed.</span>, <span class="refTitle">"Tags for Identifying Languages"</span>, <span class="seriesInfo">BCP 47</span>, <span class="seriesInfo">RFC 5646</span>, <span class="seriesInfo">DOI 10.17487/RFC5646</span>, <time datetime="2009-09" class="refDate">September 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5646">https://www.rfc-editor.org/info/rfc5646</a>&gt;</span>. </dd>
+<span class="refAuthor">Phillips, A., Ed.</span> and <span class="refAuthor">M. Davis, Ed.</span>, <span class="refTitle">"Tags for Identifying Languages"</span>, <span class="seriesInfo">BCP 47</span>, <span class="seriesInfo">RFC 5646</span>, <span class="seriesInfo">DOI 10.17487/RFC5646</span>, <time datetime="2009-09" class="refDate">September 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5646" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc5646<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC5870">[RFC5870]</dt>
         <dd>
-<span class="refAuthor">Mayrhofer, A.</span> and <span class="refAuthor">C. Spanring</span>, <span class="refTitle">"A Uniform Resource Identifier for Geographic Locations ('geo' URI)"</span>, <span class="seriesInfo">RFC 5870</span>, <span class="seriesInfo">DOI 10.17487/RFC5870</span>, <time datetime="2010-06" class="refDate">June 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5870">https://www.rfc-editor.org/info/rfc5870</a>&gt;</span>. </dd>
+<span class="refAuthor">Mayrhofer, A.</span> and <span class="refAuthor">C. Spanring</span>, <span class="refTitle">"A Uniform Resource Identifier for Geographic Locations ('geo' URI)"</span>, <span class="seriesInfo">RFC 5870</span>, <span class="seriesInfo">DOI 10.17487/RFC5870</span>, <time datetime="2010-06" class="refDate">June 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5870" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc5870<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC6638">[RFC6638]</dt>
         <dd>
-<span class="refAuthor">Daboo, C.</span> and <span class="refAuthor">B. Desruisseaux</span>, <span class="refTitle">"Scheduling Extensions to CalDAV"</span>, <span class="seriesInfo">RFC 6638</span>, <span class="seriesInfo">DOI 10.17487/RFC6638</span>, <time datetime="2012-06" class="refDate">June 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6638">https://www.rfc-editor.org/info/rfc6638</a>&gt;</span>. </dd>
+<span class="refAuthor">Daboo, C.</span> and <span class="refAuthor">B. Desruisseaux</span>, <span class="refTitle">"Scheduling Extensions to CalDAV"</span>, <span class="seriesInfo">RFC 6638</span>, <span class="seriesInfo">DOI 10.17487/RFC6638</span>, <time datetime="2012-06" class="refDate">June 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6638" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc6638<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC6838">[RFC6838]</dt>
         <dd>
-<span class="refAuthor">Freed, N.</span>, <span class="refAuthor">Klensin, J.</span>, and <span class="refAuthor">T. Hansen</span>, <span class="refTitle">"Media Type Specifications and Registration Procedures"</span>, <span class="seriesInfo">BCP 13</span>, <span class="seriesInfo">RFC 6838</span>, <span class="seriesInfo">DOI 10.17487/RFC6838</span>, <time datetime="2013-01" class="refDate">January 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6838">https://www.rfc-editor.org/info/rfc6838</a>&gt;</span>. </dd>
+<span class="refAuthor">Freed, N.</span>, <span class="refAuthor">Klensin, J.</span>, and <span class="refAuthor">T. Hansen</span>, <span class="refTitle">"Media Type Specifications and Registration Procedures"</span>, <span class="seriesInfo">BCP 13</span>, <span class="seriesInfo">RFC 6838</span>, <span class="seriesInfo">DOI 10.17487/RFC6838</span>, <time datetime="2013-01" class="refDate">January 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6838" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc6838<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC6901">[RFC6901]</dt>
         <dd>
-<span class="refAuthor">Bryan, P., Ed.</span>, <span class="refAuthor">Zyp, K.</span>, and <span class="refAuthor">M. Nottingham, Ed.</span>, <span class="refTitle">"JavaScript Object Notation (JSON) Pointer"</span>, <span class="seriesInfo">RFC 6901</span>, <span class="seriesInfo">DOI 10.17487/RFC6901</span>, <time datetime="2013-04" class="refDate">April 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6901">https://www.rfc-editor.org/info/rfc6901</a>&gt;</span>. </dd>
+<span class="refAuthor">Bryan, P., Ed.</span>, <span class="refAuthor">Zyp, K.</span>, and <span class="refAuthor">M. Nottingham, Ed.</span>, <span class="refTitle">"JavaScript Object Notation (JSON) Pointer"</span>, <span class="seriesInfo">RFC 6901</span>, <span class="seriesInfo">DOI 10.17487/RFC6901</span>, <time datetime="2013-04" class="refDate">April 2013</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6901" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc6901<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC7493">[RFC7493]</dt>
         <dd>
-<span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The I-JSON Message Format"</span>, <span class="seriesInfo">RFC 7493</span>, <span class="seriesInfo">DOI 10.17487/RFC7493</span>, <time datetime="2015-03" class="refDate">March 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7493">https://www.rfc-editor.org/info/rfc7493</a>&gt;</span>. </dd>
+<span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The I-JSON Message Format"</span>, <span class="seriesInfo">RFC 7493</span>, <span class="seriesInfo">DOI 10.17487/RFC7493</span>, <time datetime="2015-03" class="refDate">March 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7493" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc7493<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC7529">[RFC7529]</dt>
         <dd>
-<span class="refAuthor">Daboo, C.</span> and <span class="refAuthor">G. Yakushev</span>, <span class="refTitle">"Non-Gregorian Recurrence Rules in the Internet Calendaring and Scheduling Core Object Specification (iCalendar)"</span>, <span class="seriesInfo">RFC 7529</span>, <span class="seriesInfo">DOI 10.17487/RFC7529</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7529">https://www.rfc-editor.org/info/rfc7529</a>&gt;</span>. </dd>
+<span class="refAuthor">Daboo, C.</span> and <span class="refAuthor">G. Yakushev</span>, <span class="refTitle">"Non-Gregorian Recurrence Rules in the Internet Calendaring and Scheduling Core Object Specification (iCalendar)"</span>, <span class="seriesInfo">RFC 7529</span>, <span class="seriesInfo">DOI 10.17487/RFC7529</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7529" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc7529<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC7809">[RFC7809]</dt>
         <dd>
-<span class="refAuthor">Daboo, C.</span>, <span class="refTitle">"Calendaring Extensions to WebDAV (CalDAV): Time Zones by Reference"</span>, <span class="seriesInfo">RFC 7809</span>, <span class="seriesInfo">DOI 10.17487/RFC7809</span>, <time datetime="2016-03" class="refDate">March 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7809">https://www.rfc-editor.org/info/rfc7809</a>&gt;</span>. </dd>
+<span class="refAuthor">Daboo, C.</span>, <span class="refTitle">"Calendaring Extensions to WebDAV (CalDAV): Time Zones by Reference"</span>, <span class="seriesInfo">RFC 7809</span>, <span class="seriesInfo">DOI 10.17487/RFC7809</span>, <time datetime="2016-03" class="refDate">March 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7809" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc7809<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8126">[RFC8126]</dt>
         <dd>
-<span class="refAuthor">Cotton, M.</span>, <span class="refAuthor">Leiba, B.</span>, and <span class="refAuthor">T. Narten</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="seriesInfo">BCP 26</span>, <span class="seriesInfo">RFC 8126</span>, <span class="seriesInfo">DOI 10.17487/RFC8126</span>, <time datetime="2017-06" class="refDate">June 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8126">https://www.rfc-editor.org/info/rfc8126</a>&gt;</span>. </dd>
+<span class="refAuthor">Cotton, M.</span>, <span class="refAuthor">Leiba, B.</span>, and <span class="refAuthor">T. Narten</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="seriesInfo">BCP 26</span>, <span class="seriesInfo">RFC 8126</span>, <span class="seriesInfo">DOI 10.17487/RFC8126</span>, <time datetime="2017-06" class="refDate">June 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8126" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8126<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8174">[RFC8174]</dt>
         <dd>
-<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8174<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8259">[RFC8259]</dt>
         <dd>
-<span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The JavaScript Object Notation (JSON) Data Interchange Format"</span>, <span class="seriesInfo">STD 90</span>, <span class="seriesInfo">RFC 8259</span>, <span class="seriesInfo">DOI 10.17487/RFC8259</span>, <time datetime="2017-12" class="refDate">December 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8259">https://www.rfc-editor.org/info/rfc8259</a>&gt;</span>. </dd>
+<span class="refAuthor">Bray, T., Ed.</span>, <span class="refTitle">"The JavaScript Object Notation (JSON) Data Interchange Format"</span>, <span class="seriesInfo">STD 90</span>, <span class="seriesInfo">RFC 8259</span>, <span class="seriesInfo">DOI 10.17487/RFC8259</span>, <time datetime="2017-12" class="refDate">December 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8259" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8259<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8288">[RFC8288]</dt>
         <dd>
-<span class="refAuthor">Nottingham, M.</span>, <span class="refTitle">"Web Linking"</span>, <span class="seriesInfo">RFC 8288</span>, <span class="seriesInfo">DOI 10.17487/RFC8288</span>, <time datetime="2017-10" class="refDate">October 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8288">https://www.rfc-editor.org/info/rfc8288</a>&gt;</span>. </dd>
+<span class="refAuthor">Nottingham, M.</span>, <span class="refTitle">"Web Linking"</span>, <span class="seriesInfo">RFC 8288</span>, <span class="seriesInfo">DOI 10.17487/RFC8288</span>, <time datetime="2017-10" class="refDate">October 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8288" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8288<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8984">[RFC8984]</dt>
         <dd>
-<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">R. Stepanek</span>, <span class="refTitle">"JSCalendar: A JSON Representation of Calendar Data"</span>, <span class="seriesInfo">RFC 8984</span>, <span class="seriesInfo">DOI 10.17487/RFC8984</span>, <time datetime="2021-07" class="refDate">July 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8984">https://www.rfc-editor.org/info/rfc8984</a>&gt;</span>. </dd>
+<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">R. Stepanek</span>, <span class="refTitle">"JSCalendar: A JSON Representation of Calendar Data"</span>, <span class="seriesInfo">RFC 8984</span>, <span class="seriesInfo">DOI 10.17487/RFC8984</span>, <time datetime="2021-07" class="refDate">July 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8984" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8984<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC9073">[RFC9073]</dt>
         <dd>
-<span class="refAuthor">Douglass, M.</span>, <span class="refTitle">"Event Publishing Extensions to iCalendar"</span>, <span class="seriesInfo">RFC 9073</span>, <span class="seriesInfo">DOI 10.17487/RFC9073</span>, <time datetime="2021-08" class="refDate">August 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9073">https://www.rfc-editor.org/info/rfc9073</a>&gt;</span>. </dd>
+<span class="refAuthor">Douglass, M.</span>, <span class="refTitle">"Event Publishing Extensions to iCalendar"</span>, <span class="seriesInfo">RFC 9073</span>, <span class="seriesInfo">DOI 10.17487/RFC9073</span>, <time datetime="2021-08" class="refDate">August 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9073" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9073<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC9074">[RFC9074]</dt>
         <dd>
-<span class="refAuthor">Daboo, C.</span> and <span class="refAuthor">K. Murchison, Ed.</span>, <span class="refTitle">""VALARM" Extensions for iCalendar"</span>, <span class="seriesInfo">RFC 9074</span>, <span class="seriesInfo">DOI 10.17487/RFC9074</span>, <time datetime="2021-08" class="refDate">August 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9074">https://www.rfc-editor.org/info/rfc9074</a>&gt;</span>. </dd>
+<span class="refAuthor">Daboo, C.</span> and <span class="refAuthor">K. Murchison, Ed.</span>, <span class="refTitle">""VALARM" Extensions for iCalendar"</span>, <span class="seriesInfo">RFC 9074</span>, <span class="seriesInfo">DOI 10.17487/RFC9074</span>, <time datetime="2021-08" class="refDate">August 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9074" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9074<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC9253">[RFC9253]</dt>
         <dd>
-<span class="refAuthor">Douglass, M.</span>, <span class="refTitle">"Support for iCalendar Relationships"</span>, <span class="seriesInfo">RFC 9253</span>, <span class="seriesInfo">DOI 10.17487/RFC9253</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9253">https://www.rfc-editor.org/info/rfc9253</a>&gt;</span>. </dd>
+<span class="refAuthor">Douglass, M.</span>, <span class="refTitle">"Support for iCalendar Relationships"</span>, <span class="seriesInfo">RFC 9253</span>, <span class="seriesInfo">DOI 10.17487/RFC9253</span>, <time datetime="2022-08" class="refDate">August 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9253" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9253<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC9562">[RFC9562]</dt>
         <dd>
-<span class="refAuthor">Davis, K.</span>, <span class="refAuthor">Peabody, B.</span>, and <span class="refAuthor">P. Leach</span>, <span class="refTitle">"Universally Unique IDentifiers (UUIDs)"</span>, <span class="seriesInfo">RFC 9562</span>, <span class="seriesInfo">DOI 10.17487/RFC9562</span>, <time datetime="2024-05" class="refDate">May 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9562">https://www.rfc-editor.org/info/rfc9562</a>&gt;</span>. </dd>
+<span class="refAuthor">Davis, K.</span>, <span class="refAuthor">Peabody, B.</span>, and <span class="refAuthor">P. Leach</span>, <span class="refTitle">"Universally Unique IDentifiers (UUIDs)"</span>, <span class="seriesInfo">RFC 9562</span>, <span class="seriesInfo">DOI 10.17487/RFC9562</span>, <time datetime="2024-05" class="refDate">May 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9562" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9562<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="TZDB">[TZDB]</dt>
       <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"Time Zone Database"</span>, <span>&lt;<a href="https://www.iana.org/time-zones">https://www.iana.org/time-zones</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Time Zone Database"</span>, <span>&lt;<a href="https://www.iana.org/time-zones" target="_blank" rel="noopener">https://www.iana.org/time-zones<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 </dl>
 </section>
@@ -6256,67 +6256,67 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <dl class="references">
 <dt id="I-D.ietf-calext-ical-tasks">[I-D.ietf-calext-ical-tasks]</dt>
         <dd>
-<span class="refAuthor">Apthorp, A.</span> and <span class="refAuthor">M. Douglass</span>, <span class="refTitle">"Task Extensions to iCalendar"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-calext-ical-tasks-17</span>, <time datetime="2025-12-09" class="refDate">9 December 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-ical-tasks-17">https://datatracker.ietf.org/doc/html/draft-ietf-calext-ical-tasks-17</a>&gt;</span>. </dd>
+<span class="refAuthor">Apthorp, A.</span> and <span class="refAuthor">M. Douglass</span>, <span class="refTitle">"Task Extensions to iCalendar"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-calext-ical-tasks-17</span>, <time datetime="2025-12-09" class="refDate">9 December 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-ical-tasks-17" target="_blank" rel="noopener">https://datatracker.ietf.org/doc/html/draft-ietf-calext-ical-tasks-17<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="I-D.ietf-calext-icalendar-jscalendar-extensions">[I-D.ietf-calext-icalendar-jscalendar-extensions]</dt>
         <dd>
-<span class="refAuthor">Stepanek, R.</span>, <span class="refTitle">"iCalendar Format Extensions for JSCalendar"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-calext-icalendar-jscalendar-extensions-05</span>, <time datetime="2026-01-19" class="refDate">19 January 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-icalendar-jscalendar-extensions-05">https://datatracker.ietf.org/doc/html/draft-ietf-calext-icalendar-jscalendar-extensions-05</a>&gt;</span>. </dd>
+<span class="refAuthor">Stepanek, R.</span>, <span class="refTitle">"iCalendar Format Extensions for JSCalendar"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-calext-icalendar-jscalendar-extensions-05</span>, <time datetime="2026-01-19" class="refDate">19 January 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-icalendar-jscalendar-extensions-05" target="_blank" rel="noopener">https://datatracker.ietf.org/doc/html/draft-ietf-calext-icalendar-jscalendar-extensions-05<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="I-D.ietf-calext-jscalendar-icalendar">[I-D.ietf-calext-jscalendar-icalendar]</dt>
         <dd>
-<span class="refAuthor">Stepanek, R.</span>, <span class="refTitle">"JSCalendar: Converting from and to iCalendar"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-calext-jscalendar-icalendar-22</span>, <time datetime="2026-01-22" class="refDate">22 January 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-jscalendar-icalendar-22">https://datatracker.ietf.org/doc/html/draft-ietf-calext-jscalendar-icalendar-22</a>&gt;</span>. </dd>
+<span class="refAuthor">Stepanek, R.</span>, <span class="refTitle">"JSCalendar: Converting from and to iCalendar"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-calext-jscalendar-icalendar-22</span>, <time datetime="2026-01-22" class="refDate">22 January 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-jscalendar-icalendar-22" target="_blank" rel="noopener">https://datatracker.ietf.org/doc/html/draft-ietf-calext-jscalendar-icalendar-22<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="I-D.ietf-jmap-calendars">[I-D.ietf-jmap-calendars]</dt>
         <dd>
-<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">M. Douglass</span>, <span class="refTitle">"JSON Meta Application Protocol (JMAP) for Calendars"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jmap-calendars-26</span>, <time datetime="2025-11-04" class="refDate">4 November 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jmap-calendars-26">https://datatracker.ietf.org/doc/html/draft-ietf-jmap-calendars-26</a>&gt;</span>. </dd>
+<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">M. Douglass</span>, <span class="refTitle">"JSON Meta Application Protocol (JMAP) for Calendars"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jmap-calendars-26</span>, <time datetime="2025-11-04" class="refDate">4 November 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jmap-calendars-26" target="_blank" rel="noopener">https://datatracker.ietf.org/doc/html/draft-ietf-jmap-calendars-26<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="ISO.9070.1991">[ISO.9070.1991]</dt>
         <dd>
-<span class="refAuthor">ISO/IEC</span>, <span class="refTitle">"Information technology -- SGML support facilities -- Registration procedures for public text owner identifiers"</span>, <span class="refContent">Edition 2</span>, <span class="seriesInfo">ISO/IEC 9070:1991</span>, <time datetime="1991-04" class="refDate">April 1991</time>, <span>&lt;<a href="https://www.iso.org/standard/16645.html">https://www.iso.org/standard/16645.html</a>&gt;</span>. </dd>
+<span class="refAuthor">ISO/IEC</span>, <span class="refTitle">"Information technology -- SGML support facilities -- Registration procedures for public text owner identifiers"</span>, <span class="refContent">Edition 2</span>, <span class="seriesInfo">ISO/IEC 9070:1991</span>, <time datetime="1991-04" class="refDate">April 1991</time>, <span>&lt;<a href="https://www.iso.org/standard/16645.html" target="_blank" rel="noopener">https://www.iso.org/standard/16645.html<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="LOCATIONTYPES">[LOCATIONTYPES]</dt>
         <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"Location Types Registry"</span>, <span>&lt;<a href="https://www.iana.org/assignments/location-type-registry">https://www.iana.org/assignments/location-type-registry</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Location Types Registry"</span>, <span>&lt;<a href="https://www.iana.org/assignments/location-type-registry" target="_blank" rel="noopener">https://www.iana.org/assignments/location-type-registry<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="MEDIATYPES">[MEDIATYPES]</dt>
         <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"Media Types"</span>, <span>&lt;<a href="https://www.iana.org/assignments/media-types">https://www.iana.org/assignments/media-types</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Media Types"</span>, <span>&lt;<a href="https://www.iana.org/assignments/media-types" target="_blank" rel="noopener">https://www.iana.org/assignments/media-types<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC3987">[RFC3987]</dt>
         <dd>
-<span class="refAuthor">Duerst, M.</span> and <span class="refAuthor">M. Suignard</span>, <span class="refTitle">"Internationalized Resource Identifiers (IRIs)"</span>, <span class="seriesInfo">RFC 3987</span>, <span class="seriesInfo">DOI 10.17487/RFC3987</span>, <time datetime="2005-01" class="refDate">January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3987">https://www.rfc-editor.org/info/rfc3987</a>&gt;</span>. </dd>
+<span class="refAuthor">Duerst, M.</span> and <span class="refAuthor">M. Suignard</span>, <span class="refTitle">"Internationalized Resource Identifiers (IRIs)"</span>, <span class="seriesInfo">RFC 3987</span>, <span class="seriesInfo">DOI 10.17487/RFC3987</span>, <time datetime="2005-01" class="refDate">January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3987" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc3987<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC6376">[RFC6376]</dt>
         <dd>
-<span class="refAuthor">Crocker, D., Ed.</span>, <span class="refAuthor">Hansen, T., Ed.</span>, and <span class="refAuthor">M. Kucherawy, Ed.</span>, <span class="refTitle">"DomainKeys Identified Mail (DKIM) Signatures"</span>, <span class="seriesInfo">STD 76</span>, <span class="seriesInfo">RFC 6376</span>, <span class="seriesInfo">DOI 10.17487/RFC6376</span>, <time datetime="2011-09" class="refDate">September 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6376">https://www.rfc-editor.org/info/rfc6376</a>&gt;</span>. </dd>
+<span class="refAuthor">Crocker, D., Ed.</span>, <span class="refAuthor">Hansen, T., Ed.</span>, and <span class="refAuthor">M. Kucherawy, Ed.</span>, <span class="refTitle">"DomainKeys Identified Mail (DKIM) Signatures"</span>, <span class="seriesInfo">STD 76</span>, <span class="seriesInfo">RFC 6376</span>, <span class="seriesInfo">DOI 10.17487/RFC6376</span>, <time datetime="2011-09" class="refDate">September 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6376" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc6376<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC7265">[RFC7265]</dt>
         <dd>
-<span class="refAuthor">Kewisch, P.</span>, <span class="refAuthor">Daboo, C.</span>, and <span class="refAuthor">M. Douglass</span>, <span class="refTitle">"jCal: The JSON Format for iCalendar"</span>, <span class="seriesInfo">RFC 7265</span>, <span class="seriesInfo">DOI 10.17487/RFC7265</span>, <time datetime="2014-05" class="refDate">May 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7265">https://www.rfc-editor.org/info/rfc7265</a>&gt;</span>. </dd>
+<span class="refAuthor">Kewisch, P.</span>, <span class="refAuthor">Daboo, C.</span>, and <span class="refAuthor">M. Douglass</span>, <span class="refTitle">"jCal: The JSON Format for iCalendar"</span>, <span class="seriesInfo">RFC 7265</span>, <span class="seriesInfo">DOI 10.17487/RFC7265</span>, <time datetime="2014-05" class="refDate">May 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7265" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc7265<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC7986">[RFC7986]</dt>
         <dd>
-<span class="refAuthor">Daboo, C.</span>, <span class="refTitle">"New Properties for iCalendar"</span>, <span class="seriesInfo">RFC 7986</span>, <span class="seriesInfo">DOI 10.17487/RFC7986</span>, <time datetime="2016-10" class="refDate">October 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7986">https://www.rfc-editor.org/info/rfc7986</a>&gt;</span>. </dd>
+<span class="refAuthor">Daboo, C.</span>, <span class="refTitle">"New Properties for iCalendar"</span>, <span class="seriesInfo">RFC 7986</span>, <span class="seriesInfo">DOI 10.17487/RFC7986</span>, <time datetime="2016-10" class="refDate">October 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7986" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc7986<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8499">[RFC8499]</dt>
         <dd>
-<span class="refAuthor">Hoffman, P.</span>, <span class="refAuthor">Sullivan, A.</span>, and <span class="refAuthor">K. Fujiwara</span>, <span class="refTitle">"DNS Terminology"</span>, <span class="seriesInfo">RFC 8499</span>, <span class="seriesInfo">DOI 10.17487/RFC8499</span>, <time datetime="2019-01" class="refDate">January 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8499">https://www.rfc-editor.org/info/rfc8499</a>&gt;</span>. </dd>
+<span class="refAuthor">Hoffman, P.</span>, <span class="refAuthor">Sullivan, A.</span>, and <span class="refAuthor">K. Fujiwara</span>, <span class="refTitle">"DNS Terminology"</span>, <span class="seriesInfo">RFC 8499</span>, <span class="seriesInfo">DOI 10.17487/RFC8499</span>, <time datetime="2019-01" class="refDate">January 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8499" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8499<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8607">[RFC8607]</dt>
         <dd>
-<span class="refAuthor">Daboo, C.</span>, <span class="refAuthor">Quillaud, A.</span>, and <span class="refAuthor">K. Murchison, Ed.</span>, <span class="refTitle">"Calendaring Extensions to WebDAV (CalDAV): Managed Attachments"</span>, <span class="seriesInfo">RFC 8607</span>, <span class="seriesInfo">DOI 10.17487/RFC8607</span>, <time datetime="2019-06" class="refDate">June 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8607">https://www.rfc-editor.org/info/rfc8607</a>&gt;</span>. </dd>
+<span class="refAuthor">Daboo, C.</span>, <span class="refAuthor">Quillaud, A.</span>, and <span class="refAuthor">K. Murchison, Ed.</span>, <span class="refTitle">"Calendaring Extensions to WebDAV (CalDAV): Managed Attachments"</span>, <span class="seriesInfo">RFC 8607</span>, <span class="seriesInfo">DOI 10.17487/RFC8607</span>, <time datetime="2019-06" class="refDate">June 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8607" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8607<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC9553">[RFC9553]</dt>
         <dd>
-<span class="refAuthor">Stepanek, R.</span> and <span class="refAuthor">M. Loffredo</span>, <span class="refTitle">"JSContact: A JSON Representation of Contact Data"</span>, <span class="seriesInfo">RFC 9553</span>, <span class="seriesInfo">DOI 10.17487/RFC9553</span>, <time datetime="2024-05" class="refDate">May 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9553">https://www.rfc-editor.org/info/rfc9553</a>&gt;</span>. </dd>
+<span class="refAuthor">Stepanek, R.</span> and <span class="refAuthor">M. Loffredo</span>, <span class="refTitle">"JSContact: A JSON Representation of Contact Data"</span>, <span class="seriesInfo">RFC 9553</span>, <span class="seriesInfo">DOI 10.17487/RFC9553</span>, <time datetime="2024-05" class="refDate">May 2024</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9553" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9553<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="UBiDi">[UBiDi]</dt>
         <dd>
-<span class="refAuthor">The Unicode Consortium</span>, <span class="refTitle">"Unicode Standard Annex #9: Unicode Bidirectional Algorithm"</span>, <span class="refContent">Revision 48</span>, <span class="seriesInfo">Unicode 15.1.0</span>, <time datetime="2023-08" class="refDate">August 2023</time>, <span>&lt;<a href="https://www.unicode.org/reports/tr9/">https://www.unicode.org/reports/tr9/</a>&gt;</span>. </dd>
+<span class="refAuthor">The Unicode Consortium</span>, <span class="refTitle">"Unicode Standard Annex #9: Unicode Bidirectional Algorithm"</span>, <span class="refContent">Revision 48</span>, <span class="seriesInfo">Unicode 15.1.0</span>, <time datetime="2023-08" class="refDate">August 2023</time>, <span>&lt;<a href="https://www.unicode.org/reports/tr9/" target="_blank" rel="noopener">https://www.unicode.org/reports/tr9/<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="WHATWG-URL">[WHATWG-URL]</dt>
       <dd>
-<span class="refAuthor">WHATWG</span>, <span class="refTitle">"URL Living Standard"</span>, <time datetime="2024-01" class="refDate">January 2024</time>, <span>&lt;<a href="https://url.spec.whatwg.org">https://url.spec.whatwg.org</a>&gt;</span>. </dd>
+<span class="refAuthor">WHATWG</span>, <span class="refTitle">"URL Living Standard"</span>, <time datetime="2024-01" class="refDate">January 2024</time>, <span>&lt;<a href="https://url.spec.whatwg.org" target="_blank" rel="noopener">https://url.spec.whatwg.org<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 </dl>
 </section>
@@ -6330,13 +6330,13 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <p id="appendix-A.1-1">All verified errata of RFC 8984 was applied to this document:<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A.1-2.1">
-            <a href="https://www.rfc-editor.org/errata/eid6872">Errata 6872</a><a href="#appendix-A.1-2.1" class="pilcrow">¶</a>
+            <a href="https://www.rfc-editor.org/errata/eid6872" target="_blank" rel="noopener">Errata 6872<span class="u-visually-hidden"> (opens in new window)</span></a><a href="#appendix-A.1-2.1" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="appendix-A.1-2.2">
-            <a href="https://www.rfc-editor.org/errata/eid6873">Errata 6873</a><a href="#appendix-A.1-2.2" class="pilcrow">¶</a>
+            <a href="https://www.rfc-editor.org/errata/eid6873" target="_blank" rel="noopener">Errata 6873<span class="u-visually-hidden"> (opens in new window)</span></a><a href="#appendix-A.1-2.2" class="pilcrow">¶</a>
 </li>
           <li class="normal" id="appendix-A.1-2.3">
-            <a href="https://www.rfc-editor.org/errata/eid8028">Errata 8028</a><a href="#appendix-A.1-2.3" class="pilcrow">¶</a>
+            <a href="https://www.rfc-editor.org/errata/eid8028" target="_blank" rel="noopener">Errata 8028<span class="u-visually-hidden"> (opens in new window)</span></a><a href="#appendix-A.1-2.3" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
@@ -6351,8 +6351,8 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <dt id="appendix-A.2.1-2.1">
 <strong>excludedRecurrenceRules</strong>:</dt>
             <dd id="appendix-A.2.1-2.2">
-              <p id="appendix-A.2.1-2.2.1">This is incompatible with iCalendar, which deprecated the <span>EXRULE property [<a href="#RFC2445" class="cite xref">RFC2445</a>] (<a href="https://rfc-editor.org/rfc/rfc2445#section-4.8.5.2" class="relref">Section 4.8.5.2</a>)</span> in <span>[<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>.<a href="#appendix-A.2.1-2.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2.1-2.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.3.4" class="relref">Section 4.3.4</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.1-2.2.2" class="pilcrow">¶</a></p>
+              <p id="appendix-A.2.1-2.2.1">This is incompatible with iCalendar, which deprecated the <span>EXRULE property [<a href="#RFC2445" class="cite xref">RFC2445</a>] (<a href="https://rfc-editor.org/rfc/rfc2445#section-4.8.5.2" class="relref" target="_blank" rel="noopener">Section 4.8.5.2<span class="u-visually-hidden"> (opens in new window)</span></a>)</span> in <span>[<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>.<a href="#appendix-A.2.1-2.2.1" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.1-2.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.3.4" class="relref" target="_blank" rel="noopener">Section 4.3.4<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.1-2.2.2" class="pilcrow">¶</a></p>
 </dd>
           
 </dl>
@@ -6360,7 +6360,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <dt id="appendix-A.2.1-3.1">
 <strong>recurrenceRules</strong>:</dt>
             <dd id="appendix-A.2.1-3.2">
-              <p id="appendix-A.2.1-3.2.1">This is incompatible with the following definitions of the iCalendar <span>RRULE property [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.5.3" class="relref">Section 3.8.5.3</a>)</span>:<a href="#appendix-A.2.1-3.2.1" class="pilcrow">¶</a></p>
+              <p id="appendix-A.2.1-3.2.1">This is incompatible with the following definitions of the iCalendar <span>RRULE property [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.5.3" class="relref" target="_blank" rel="noopener">Section 3.8.5.3<span class="u-visually-hidden"> (opens in new window)</span></a>)</span>:<a href="#appendix-A.2.1-3.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A.2.1-3.2.2.1">The RRULE property <span class="bcp14">SHOULD NOT</span> be specified more than once.<a href="#appendix-A.2.1-3.2.2.1" class="pilcrow">¶</a>
 </li>
@@ -6368,7 +6368,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 </li>
               </ul>
 <p id="appendix-A.2.1-3.2.3">The newly defined single-valued <span><a href="#prop-recurrenceRule" class="internal xref">recurrenceRule property</a> (<a href="#prop-recurrenceRule" class="auto internal xref">Section 3.3.3</a>)</span> replaces it.<a href="#appendix-A.2.1-3.2.3" class="pilcrow">¶</a></p>
-<p id="appendix-A.2.1-3.2.4">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.3.3" class="relref">Section 4.3.3</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.1-3.2.4" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.1-3.2.4">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.3.3" class="relref" target="_blank" rel="noopener">Section 4.3.3<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.1-3.2.4" class="pilcrow">¶</a></p>
 </dd>
           
 </dl>
@@ -6380,12 +6380,12 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <ul class="normal">
 <li class="normal" id="appendix-A.2.1-4.2.2.1">Custom time zones in calendaring data increase implementation complexity, introduce inefficiencies and are error-prone, as described for CalDAV and iCalendar in <span>[<a href="#RFC7809" class="cite xref">RFC7809</a>]</span>.<a href="#appendix-A.2.1-4.2.2.1" class="pilcrow">¶</a>
 </li>
-                <li class="normal" id="appendix-A.2.1-4.2.2.2">In practice, the only non-IANA time zone identifiers are Microsoft time zone names. These can be converted to IANA time zones, e.g. using the <a href="https://icu.unicode.org/">International Components for Unicode</a> software library.<a href="#appendix-A.2.1-4.2.2.2" class="pilcrow">¶</a>
+                <li class="normal" id="appendix-A.2.1-4.2.2.2">In practice, the only non-IANA time zone identifiers are Microsoft time zone names. These can be converted to IANA time zones, e.g. using the <a href="https://icu.unicode.org/" target="_blank" rel="noopener">International Components for Unicode<span class="u-visually-hidden"> (opens in new window)</span></a> software library.<a href="#appendix-A.2.1-4.2.2.2" class="pilcrow">¶</a>
 </li>
-                <li class="normal" id="appendix-A.2.1-4.2.2.3">The property contradicts the stated goal of JSCalendar to avoid ambiguities and pitfalls of iCalendar, defined in <span><a href="https://rfc-editor.org/rfc/rfc8984#section-1.1" class="relref">Section 1.1</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.1-4.2.2.3" class="pilcrow">¶</a>
+                <li class="normal" id="appendix-A.2.1-4.2.2.3">The property contradicts the stated goal of JSCalendar to avoid ambiguities and pitfalls of iCalendar, defined in <span><a href="https://rfc-editor.org/rfc/rfc8984#section-1.1" class="relref" target="_blank" rel="noopener">Section 1.1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.1-4.2.2.3" class="pilcrow">¶</a>
 </li>
               </ul>
-<p id="appendix-A.2.1-4.2.3">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.7.2" class="relref">Section 4.7.2</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.1-4.2.3" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.1-4.2.3">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.7.2" class="relref" target="_blank" rel="noopener">Section 4.7.2<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.1-4.2.3" class="pilcrow">¶</a></p>
 </dd>
           
 </dl>
@@ -6395,14 +6395,14 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <dd id="appendix-A.2.1-5.2">
               <p id="appendix-A.2.1-5.2.1">This property was obsoleted for the following reasons:<a href="#appendix-A.2.1-5.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-A.2.1-5.2.2.1">It only is relevant for rich-text descriptions, but the related iCalendar <span>STYLED-DESCRIPTION property [<a href="#RFC9073" class="cite xref">RFC9073</a>] (<a href="https://rfc-editor.org/rfc/rfc9073#section-6.5" class="relref">Section 6.5</a>)</span> does not support referring to attached media.<a href="#appendix-A.2.1-5.2.2.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-A.2.1-5.2.2.1">It only is relevant for rich-text descriptions, but the related iCalendar <span>STYLED-DESCRIPTION property [<a href="#RFC9073" class="cite xref">RFC9073</a>] (<a href="https://rfc-editor.org/rfc/rfc9073#section-6.5" class="relref" target="_blank" rel="noopener">Section 6.5<span class="u-visually-hidden"> (opens in new window)</span></a>)</span> does not support referring to attached media.<a href="#appendix-A.2.1-5.2.2.1" class="pilcrow">¶</a>
 </li>
                 <li class="normal" id="appendix-A.2.1-5.2.2.2">It only is applicable for Link objects having a "data:" URI as href property value. But even the definition of the Link object recommends not to use "data:" URIs as values in the href property.<a href="#appendix-A.2.1-5.2.2.2" class="pilcrow">¶</a>
 </li>
-                <li class="normal" id="appendix-A.2.1-5.2.2.3">A Link with "data:" URI converts to an iCalendar <span>BINARY value [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.3.1" class="relref">Section 3.3.1</a>)</span>. But these are marginally supported by CalDAV clients, which tend to prefer using WebDAV managed attachments <span>[<a href="#RFC8607" class="cite xref">RFC8607</a>]</span>.<a href="#appendix-A.2.1-5.2.2.3" class="pilcrow">¶</a>
+                <li class="normal" id="appendix-A.2.1-5.2.2.3">A Link with "data:" URI converts to an iCalendar <span>BINARY value [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.3.1" class="relref" target="_blank" rel="noopener">Section 3.3.1<span class="u-visually-hidden"> (opens in new window)</span></a>)</span>. But these are marginally supported by CalDAV clients, which tend to prefer using WebDAV managed attachments <span>[<a href="#RFC8607" class="cite xref">RFC8607</a>]</span>.<a href="#appendix-A.2.1-5.2.2.3" class="pilcrow">¶</a>
 </li>
               </ul>
-<p id="appendix-A.2.1-5.2.3">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-1.4.11" class="relref">Section 1.4.11</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.1-5.2.3" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.1-5.2.3">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-1.4.11" class="relref" target="_blank" rel="noopener">Section 1.4.11<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.1-5.2.3" class="pilcrow">¶</a></p>
 </dd>
           
 </dl>
@@ -6412,14 +6412,14 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <dd id="appendix-A.2.1-6.2">
               <p id="appendix-A.2.1-6.2.1">These got replaced with the newly defined <span><a href="#prop-endTimeZone" class="internal xref">Event.endTimeZone property</a> (<a href="#prop-endTimeZone" class="auto internal xref">Section 4.1.3</a>)</span>:<a href="#appendix-A.2.1-6.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-A.2.1-6.2.2.1">They were meant to be equivalent to the iCalendar <span>DTEND property [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.2.2" class="relref">Section 3.8.2.2</a>)</span>. But the semantics were undefined if multiple Location objects had "relativeTo=end" and the "timeZone" property set.<a href="#appendix-A.2.1-6.2.2.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-A.2.1-6.2.2.1">They were meant to be equivalent to the iCalendar <span>DTEND property [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.2.2" class="relref" target="_blank" rel="noopener">Section 3.8.2.2<span class="u-visually-hidden"> (opens in new window)</span></a>)</span>. But the semantics were undefined if multiple Location objects had "relativeTo=end" and the "timeZone" property set.<a href="#appendix-A.2.1-6.2.2.1" class="pilcrow">¶</a>
 </li>
                 <li class="normal" id="appendix-A.2.1-6.2.2.2">Their semantics were undefined for Task objects.<a href="#appendix-A.2.1-6.2.2.2" class="pilcrow">¶</a>
 </li>
-                <li class="normal" id="appendix-A.2.1-6.2.2.3">They were incompatible with the iCalendar <span>VLOCATION component [<a href="#RFC9073" class="cite xref">RFC9073</a>] (<a href="https://rfc-editor.org/rfc/rfc9073#section-7.2" class="relref">Section 7.2</a>)</span>, which neither defines how to set a time zone identifier or how the VLOCATION relates to start and end.<a href="#appendix-A.2.1-6.2.2.3" class="pilcrow">¶</a>
+                <li class="normal" id="appendix-A.2.1-6.2.2.3">They were incompatible with the iCalendar <span>VLOCATION component [<a href="#RFC9073" class="cite xref">RFC9073</a>] (<a href="https://rfc-editor.org/rfc/rfc9073#section-7.2" class="relref" target="_blank" rel="noopener">Section 7.2<span class="u-visually-hidden"> (opens in new window)</span></a>)</span>, which neither defines how to set a time zone identifier or how the VLOCATION relates to start and end.<a href="#appendix-A.2.1-6.2.2.3" class="pilcrow">¶</a>
 </li>
               </ul>
-<p id="appendix-A.2.1-6.2.3">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.2.5" class="relref">Section 4.2.5</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.1-6.2.3" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.1-6.2.3">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.2.5" class="relref" target="_blank" rel="noopener">Section 4.2.5<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.1-6.2.3" class="pilcrow">¶</a></p>
 </dd>
           
 </dl>
@@ -6427,7 +6427,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <dt id="appendix-A.2.1-7.1">
 <strong>Participant.locationId</strong>:</dt>
             <dd id="appendix-A.2.1-7.2">
-              <p id="appendix-A.2.1-7.2.1">This is incompatible with the iCalendar <span>PARTICIPANT component [<a href="#RFC9073" class="cite xref">RFC9073</a>] (<a href="https://rfc-editor.org/rfc/rfc9073#section-7.1" class="relref">Section 7.1</a>)</span>:<a href="#appendix-A.2.1-7.2.1" class="pilcrow">¶</a></p>
+              <p id="appendix-A.2.1-7.2.1">This is incompatible with the iCalendar <span>PARTICIPANT component [<a href="#RFC9073" class="cite xref">RFC9073</a>] (<a href="https://rfc-editor.org/rfc/rfc9073#section-7.1" class="relref" target="_blank" rel="noopener">Section 7.1<span class="u-visually-hidden"> (opens in new window)</span></a>)</span>:<a href="#appendix-A.2.1-7.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A.2.1-7.2.2.1">The PARTICIPANT component may contain multiple VLOCATION components and LOCATION properties.<a href="#appendix-A.2.1-7.2.2.1" class="pilcrow">¶</a>
 </li>
@@ -6441,7 +6441,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
                 <li class="normal" id="appendix-A.2.1-7.2.4.2">It now states: "Multiple participants may partake in the event."<a href="#appendix-A.2.1-7.2.4.2" class="pilcrow">¶</a>
 </li>
               </ul>
-<p id="appendix-A.2.1-7.2.5">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref">Section 4.4.6</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.1-7.2.5" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.1-7.2.5">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref" target="_blank" rel="noopener">Section 4.4.6<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.1-7.2.5" class="pilcrow">¶</a></p>
 </dd>
           
 </dl>
@@ -6449,8 +6449,8 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <dt id="appendix-A.2.1-8.1">
 <strong>Participant.language</strong>:</dt>
             <dd id="appendix-A.2.1-8.2">
-              <p id="appendix-A.2.1-8.2.1">No equivalent element exists in iCalendar and its current single-valued definition is likely to conflict with any related future extension of the <span>PARTICIPANT component [<a href="#RFC9073" class="cite xref">RFC9073</a>] (<a href="https://rfc-editor.org/rfc/rfc9073#section-7.1" class="relref">Section 7.1</a>)</span>.<a href="#appendix-A.2.1-8.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2.1-8.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref">Section 4.4.6</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.1-8.2.2" class="pilcrow">¶</a></p>
+              <p id="appendix-A.2.1-8.2.1">No equivalent element exists in iCalendar and its current single-valued definition is likely to conflict with any related future extension of the <span>PARTICIPANT component [<a href="#RFC9073" class="cite xref">RFC9073</a>] (<a href="https://rfc-editor.org/rfc/rfc9073#section-7.1" class="relref" target="_blank" rel="noopener">Section 7.1<span class="u-visually-hidden"> (opens in new window)</span></a>)</span>.<a href="#appendix-A.2.1-8.2.1" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.1-8.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref" target="_blank" rel="noopener">Section 4.4.6<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.1-8.2.2" class="pilcrow">¶</a></p>
 </dd>
           
 </dl>
@@ -6460,12 +6460,12 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <dd id="appendix-A.2.1-9.2">
               <p id="appendix-A.2.1-9.2.1">This became obsolete for the following reasons:<a href="#appendix-A.2.1-9.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-A.2.1-9.2.2.1">It is incompatible with the newly introduced iCalendar <span>VSTATUS component [<a href="#I-D.ietf-calext-ical-tasks" class="cite xref">I-D.ietf-calext-ical-tasks</a>] (<a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-ical-tasks-17#section-12.1" class="relref">Section 12.1</a>)</span>, which may occur multiple times in the PARTICIPANT and VTODO components.<a href="#appendix-A.2.1-9.2.2.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-A.2.1-9.2.2.1">It is incompatible with the newly introduced iCalendar <span>VSTATUS component [<a href="#I-D.ietf-calext-ical-tasks" class="cite xref">I-D.ietf-calext-ical-tasks</a>] (<a href="https://datatracker.ietf.org/doc/html/draft-ietf-calext-ical-tasks-17#section-12.1" class="relref" target="_blank" rel="noopener">Section 12.1<span class="u-visually-hidden"> (opens in new window)</span></a>)</span>, which may occur multiple times in the PARTICIPANT and VTODO components.<a href="#appendix-A.2.1-9.2.2.1" class="pilcrow">¶</a>
 </li>
                 <li class="normal" id="appendix-A.2.1-9.2.2.2">The VSTATUS component introduces new semantics to a task's progress and status, which better be defined by a future JSCalendar extension for tasks.<a href="#appendix-A.2.1-9.2.2.2" class="pilcrow">¶</a>
 </li>
               </ul>
-<p id="appendix-A.2.1-9.2.3">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref">Section 4.4.6</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8984#section-5.2.6" class="relref">Section 5.2.6</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.1-9.2.3" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.1-9.2.3">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref" target="_blank" rel="noopener">Section 4.4.6<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8984#section-5.2.6" class="relref" target="_blank" rel="noopener">Section 5.2.6<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.1-9.2.3" class="pilcrow">¶</a></p>
 </dd>
           
 </dl>
@@ -6474,7 +6474,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <strong>{TimeZone|TimeZoneRule}.*</strong>:</dt>
             <dd id="appendix-A.2.1-10.2">
               <p id="appendix-A.2.1-10.2.1">All properties defined solely for the TimeZone and TimeZoneRule object types became obsolete, because the "timeZones" property became obsolete.<a href="#appendix-A.2.1-10.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2.1-10.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.7.2" class="relref">Section 4.7.2</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.1-10.2.2" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.1-10.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.7.2" class="relref" target="_blank" rel="noopener">Section 4.7.2<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.1-10.2.2" class="pilcrow">¶</a></p>
 </dd>
           
 </dl>
@@ -6491,7 +6491,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <strong>useDefaultAlerts</strong>:</dt>
               <dd id="appendix-A.2.2.1-2.2">
                 <p id="appendix-A.2.2.1-2.2.1">No equivalent element exists in iCalendar and no consensus for default alarms in CalDAV and iCalendar was found at IETF as part of <span>[<a href="#RFC9074" class="cite xref">RFC9074</a>]</span>.<a href="#appendix-A.2.2.1-2.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2.2.1-2.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.1" class="relref">Section 4.4.1</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.1-2.2.2" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.2.1-2.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.1" class="relref" target="_blank" rel="noopener">Section 4.4.1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.1-2.2.2" class="pilcrow">¶</a></p>
 </dd>
             
 </dl>
@@ -6500,7 +6500,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <strong>Participant.scheduleSequence</strong>:</dt>
               <dd id="appendix-A.2.2.1-3.2">
                 <p id="appendix-A.2.2.1-3.2.1">This requires further work by IETF to update <span><a href="#RFC5546" class="internal xref">iTIP</a> [<a href="#RFC5546" class="cite xref">RFC5546</a>]</span> with the PARTICIPANT component and JSCalendar. This property may later be redefined for common use.<a href="#appendix-A.2.2.1-3.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2.2.1-3.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref">Section 4.4.6</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.1-3.2.2" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.2.1-3.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref" target="_blank" rel="noopener">Section 4.4.6<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.1-3.2.2" class="pilcrow">¶</a></p>
 </dd>
             
 </dl>
@@ -6509,7 +6509,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <strong>Participant.scheduleUpdated</strong>:</dt>
               <dd id="appendix-A.2.2.1-4.2">
                 <p id="appendix-A.2.2.1-4.2.1">This requires further work by IETF to update <span><a href="#RFC5546" class="internal xref">iTIP</a> [<a href="#RFC5546" class="cite xref">RFC5546</a>]</span> with the PARTICIPANT component and JSCalendar. This property may later be redefined for common use.<a href="#appendix-A.2.2.1-4.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2.2.1-4.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref">Section 4.4.6</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.1-4.2.2" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.2.1-4.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref" target="_blank" rel="noopener">Section 4.4.6<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.1-4.2.2" class="pilcrow">¶</a></p>
 </dd>
             
 </dl>
@@ -6522,7 +6522,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <strong>replyTo</strong>:</dt>
               <dd id="appendix-A.2.2.2-2.2">
                 <p id="appendix-A.2.2.2-2.2.1">This requires further work by IETF. For compatibility with iCalendar, the newly introduced <span><a href="#prop-organizerCalendarAddress" class="internal xref">organizerCalendarAddress property</a> (<a href="#prop-organizerCalendarAddress" class="auto internal xref">Section 3.4.4</a>)</span> replaces it.<a href="#appendix-A.2.2.2-2.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2.2.2-2.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.4" class="relref">Section 4.4.4</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.2-2.2.2" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.2.2-2.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.4" class="relref" target="_blank" rel="noopener">Section 4.4.4<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.2-2.2.2" class="pilcrow">¶</a></p>
 </dd>
             
 </dl>
@@ -6531,7 +6531,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <strong>requestStatus</strong>:</dt>
               <dd id="appendix-A.2.2.2-3.2">
                 <p id="appendix-A.2.2.2-3.2.1">This mainly is applicable in scheduling over CalDAV.<a href="#appendix-A.2.2.2-3.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2.2.2-3.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.7" class="relref">Section 4.4.7</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.2-3.2.2" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.2.2-3.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.7" class="relref" target="_blank" rel="noopener">Section 4.4.7<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.2-3.2.2" class="pilcrow">¶</a></p>
 </dd>
             
 </dl>
@@ -6539,8 +6539,8 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
               <dt id="appendix-A.2.2.2-4.1">
 <strong>{Event|Task}.sentBy</strong>:</dt>
               <dd id="appendix-A.2.2.2-4.2">
-                <p id="appendix-A.2.2.2-4.2.1">No equivalent element exists in iCalendar and this property mainly is relevant in context of a combined calendaring and mail service. Note that the Participant.sentBy property does <em>not</em> become reserved: it is equivalent to the iCalendar <span>SENT-BY [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.2.18" class="relref">Section 3.2.18</a>)</span> parameter.<a href="#appendix-A.2.2.2-4.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2.2.2-4.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.5" class="relref">Section 4.4.5</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.2-4.2.2" class="pilcrow">¶</a></p>
+                <p id="appendix-A.2.2.2-4.2.1">No equivalent element exists in iCalendar and this property mainly is relevant in context of a combined calendaring and mail service. Note that the Participant.sentBy property does <em>not</em> become reserved: it is equivalent to the iCalendar <span>SENT-BY [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.2.18" class="relref" target="_blank" rel="noopener">Section 3.2.18<span class="u-visually-hidden"> (opens in new window)</span></a>)</span> parameter.<a href="#appendix-A.2.2.2-4.2.1" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.2.2-4.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.5" class="relref" target="_blank" rel="noopener">Section 4.4.5<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.2-4.2.2" class="pilcrow">¶</a></p>
 </dd>
             
 </dl>
@@ -6548,8 +6548,8 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
               <dt id="appendix-A.2.2.2-5.1">
 <strong>Participant.invitedBy</strong>:</dt>
               <dd id="appendix-A.2.2.2-5.2">
-                <p id="appendix-A.2.2.2-5.2.1">This requires further work by IETF. Specifically, the iTIP definitions of the <span>REPLY method [<a href="#RFC5546" class="cite xref">RFC5546</a>] (<a href="https://rfc-editor.org/rfc/rfc5546#section-3.2.3" class="relref">Section 3.2.3</a>)</span> and how to forward invitation requests (<span><a href="https://rfc-editor.org/rfc/rfc5546#section-4.2.8" class="relref">Section 4.2.8</a> of [<a href="#RFC5546" class="cite xref">RFC5546</a>]</span>) must be updated.<a href="#appendix-A.2.2.2-5.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2.2.2-5.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref">Section 4.4.6</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.2-5.2.2" class="pilcrow">¶</a></p>
+                <p id="appendix-A.2.2.2-5.2.1">This requires further work by IETF. Specifically, the iTIP definitions of the <span>REPLY method [<a href="#RFC5546" class="cite xref">RFC5546</a>] (<a href="https://rfc-editor.org/rfc/rfc5546#section-3.2.3" class="relref" target="_blank" rel="noopener">Section 3.2.3<span class="u-visually-hidden"> (opens in new window)</span></a>)</span> and how to forward invitation requests (<span><a href="https://rfc-editor.org/rfc/rfc5546#section-4.2.8" class="relref" target="_blank" rel="noopener">Section 4.2.8<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC5546" class="cite xref">RFC5546</a>]</span>) must be updated.<a href="#appendix-A.2.2.2-5.2.1" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.2.2-5.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref" target="_blank" rel="noopener">Section 4.4.6<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.2-5.2.2" class="pilcrow">¶</a></p>
 </dd>
             
 </dl>
@@ -6558,7 +6558,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <strong>Participant.participationComment</strong>:</dt>
               <dd id="appendix-A.2.2.2-6.2">
                 <p id="appendix-A.2.2.2-6.2.1">This requires further work by IETF to update <span><a href="#RFC5546" class="internal xref">iTIP</a> [<a href="#RFC5546" class="cite xref">RFC5546</a>]</span> with the PARTICIPANT component or JSCalendar. This property may later be redefined for common use.<a href="#appendix-A.2.2.2-6.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2.2.2-6.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref">Section 4.4.6</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.2-6.2.2" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.2.2-6.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref" target="_blank" rel="noopener">Section 4.4.6<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.2-6.2.2" class="pilcrow">¶</a></p>
 </dd>
             
 </dl>
@@ -6567,7 +6567,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <strong>Participant.scheduleAgent</strong>:</dt>
               <dd id="appendix-A.2.2.2-7.2">
                 <p id="appendix-A.2.2.2-7.2.1">This only is applicable in scheduling over CalDAV.<a href="#appendix-A.2.2.2-7.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2.2.2-7.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref">Section 4.4.6</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.2-7.2.2" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.2.2-7.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref" target="_blank" rel="noopener">Section 4.4.6<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.2-7.2.2" class="pilcrow">¶</a></p>
 </dd>
             
 </dl>
@@ -6576,7 +6576,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <strong>Participant.scheduleForceSend</strong>:</dt>
               <dd id="appendix-A.2.2.2-8.2">
                 <p id="appendix-A.2.2.2-8.2.1">This only is applicable in scheduling over CalDAV.<a href="#appendix-A.2.2.2-8.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2.2.2-8.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref">Section 4.4.6</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.2-8.2.2" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.2.2-8.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref" target="_blank" rel="noopener">Section 4.4.6<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.2-8.2.2" class="pilcrow">¶</a></p>
 </dd>
             
 </dl>
@@ -6585,7 +6585,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <strong>Participant.scheduleStatus</strong>:</dt>
               <dd id="appendix-A.2.2.2-9.2">
                 <p id="appendix-A.2.2.2-9.2.1">This only is applicable in scheduling over CalDAV.<a href="#appendix-A.2.2.2-9.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2.2.2-9.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref">Section 4.4.6</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.2-9.2.2" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.2.2-9.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref" target="_blank" rel="noopener">Section 4.4.6<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.2-9.2.2" class="pilcrow">¶</a></p>
 </dd>
             
 </dl>
@@ -6594,7 +6594,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <strong>Participant.sendTo</strong>:</dt>
               <dd id="appendix-A.2.2.2-10.2">
                 <p id="appendix-A.2.2.2-10.2.1">This requires further work by IETF. For compatibility with iCalendar, the newly introduced <span><a href="#prop-participants" class="internal xref">Participant.calendarAddress property</a> (<a href="#prop-participants" class="auto internal xref">Section 3.4.5</a>)</span> replaces it.<a href="#appendix-A.2.2.2-10.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2.2.2-10.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref">Section 4.4.6</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.2-10.2.2" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.2.2-10.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.4.6" class="relref" target="_blank" rel="noopener">Section 4.4.6<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.2-10.2.2" class="pilcrow">¶</a></p>
 </dd>
             
 </dl>
@@ -6607,7 +6607,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <strong>localizations</strong>:</dt>
               <dd id="appendix-A.2.2.3-2.2">
                 <p id="appendix-A.2.2.3-2.2.1">This requires further work by IETF. The "localizations" property primarily was introduced in JSCalendar for event publishing, but neither the <span><a href="#RFC9073" class="internal xref">Event Publishing extensions for iCalendar</a> [<a href="#RFC9073" class="cite xref">RFC9073</a>]</span> nor other iCalendar extensions define how to localize iCalendar data. This property may later be redefined for common use.<a href="#appendix-A.2.2.3-2.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2.2.3-2.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.6.1" class="relref">Section 4.6.1</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.3-2.2.2" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.2.3-2.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.6.1" class="relref" target="_blank" rel="noopener">Section 4.6.1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.3-2.2.2" class="pilcrow">¶</a></p>
 </dd>
             
 </dl>
@@ -6620,7 +6620,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <strong>Location.description, VirtualLocation.description</strong>:</dt>
               <dd id="appendix-A.2.2.4-2.2">
                 <p id="appendix-A.2.2.4-2.2.1">This requires further work by IETF. The VirtualLocation "description" property does not convert to any parameter of the CONFERENCE property. It would require to define a new parameter or to introduce a new component to augment the CONFERENCE property with a DESCRIPTION or STYLED-DESCRIPTION property. For consistency, the Location "description" property became reserved, too.<a href="#appendix-A.2.2.4-2.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2.2.4-2.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.2.5" class="relref">Section 4.2.5</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.2.6" class="relref">Section 4.2.6</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.4-2.2.2" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.2.4-2.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.2.5" class="relref" target="_blank" rel="noopener">Section 4.2.5<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.2.6" class="relref" target="_blank" rel="noopener">Section 4.2.6<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.4-2.2.2" class="pilcrow">¶</a></p>
 </dd>
             
 </dl>
@@ -6633,7 +6633,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <strong>excluded</strong>:</dt>
               <dd id="appendix-A.2.2.5-2.2">
                 <p id="appendix-A.2.2.5-2.2.1">This property name already was defined for internal use only in the recurrenceOverrides property, but registering it for common use had made it appear as being a regular property. Making this a reserved property is to help clarify its purpose. <a href="#prop-recurrenceOverrides" class="auto internal xref">Section 3.3.4</a> has been updated accordingly.<a href="#appendix-A.2.2.5-2.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2.2.5-2.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.3.4" class="relref">Section 4.3.4</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.5-2.2.2" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.2.5-2.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.3.4" class="relref" target="_blank" rel="noopener">Section 4.3.4<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.2.2.5-2.2.2" class="pilcrow">¶</a></p>
 </dd>
             
 </dl>
@@ -6656,7 +6656,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <dt id="appendix-A.2.3-3.1">
 <strong>Alert.relatedTo</strong>:</dt>
             <dd id="appendix-A.2.3-3.2">
-              <p id="appendix-A.2.3-3.2.1">The original definition instructed to set the "parent" relation on a snooze alert. It now instructs to set the newly defined "snooze" relation, for compatibility with the VALARM "SNOOZE" relationship type (<span><a href="https://rfc-editor.org/rfc/rfc9074#section-7" class="relref">Section 7</a> of [<a href="#RFC9074" class="cite xref">RFC9074</a>]</span>.<a href="#appendix-A.2.3-3.2.1" class="pilcrow">¶</a></p>
+              <p id="appendix-A.2.3-3.2.1">The original definition instructed to set the "parent" relation on a snooze alert. It now instructs to set the newly defined "snooze" relation, for compatibility with the VALARM "SNOOZE" relationship type (<span><a href="https://rfc-editor.org/rfc/rfc9074#section-7" class="relref" target="_blank" rel="noopener">Section 7<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC9074" class="cite xref">RFC9074</a>]</span>.<a href="#appendix-A.2.3-3.2.1" class="pilcrow">¶</a></p>
 <p id="appendix-A.2.3-3.2.2">The original definition did not define that the map keys represent keys of Alert objects in the "alerts" property.<a href="#appendix-A.2.3-3.2.2" class="pilcrow">¶</a></p>
 <p id="appendix-A.2.3-3.2.3">See <a href="#prop-alerts" class="auto internal xref">Section 3.5.1</a>.<a href="#appendix-A.2.3-3.2.3" class="pilcrow">¶</a></p>
 </dd>
@@ -6684,7 +6684,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <dt id="appendix-A.2.3-6.1">
 <strong>Link.display</strong>:</dt>
             <dd id="appendix-A.2.3-6.2">
-              <p id="appendix-A.2.3-6.2.1">The original definition only allowed one purpose to be set, which is incompatible with the multi-valued iCalendar <span>DISPLAY parameter [<a href="#RFC7986" class="cite xref">RFC7986</a>] (<a href="https://rfc-editor.org/rfc/rfc7986#section-6.1" class="relref">Section 6.1</a>)</span>. It now supports setting multiple purposes.<a href="#appendix-A.2.3-6.2.1" class="pilcrow">¶</a></p>
+              <p id="appendix-A.2.3-6.2.1">The original definition only allowed one purpose to be set, which is incompatible with the multi-valued iCalendar <span>DISPLAY parameter [<a href="#RFC7986" class="cite xref">RFC7986</a>] (<a href="https://rfc-editor.org/rfc/rfc7986#section-6.1" class="relref" target="_blank" rel="noopener">Section 6.1<span class="u-visually-hidden"> (opens in new window)</span></a>)</span>. It now supports setting multiple purposes.<a href="#appendix-A.2.3-6.2.1" class="pilcrow">¶</a></p>
 <p id="appendix-A.2.3-6.2.2">Setting this property does not anymore require the "rel" property of the Link object be set to "icon".<a href="#appendix-A.2.3-6.2.2" class="pilcrow">¶</a></p>
 <p id="appendix-A.2.3-6.2.3">See <a href="#type-Link" class="auto internal xref">Section 1.5.11</a>.<a href="#appendix-A.2.3-6.2.3" class="pilcrow">¶</a></p>
 </dd>
@@ -6694,7 +6694,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <dt id="appendix-A.2.3-7.1">
 <strong>Link.rel</strong>:</dt>
             <dd id="appendix-A.2.3-7.2">
-              <p id="appendix-A.2.3-7.2.1">The original definition restricted the value of this property to registered link types. It now also allows extension relation types for compatibility with the <span>LINKREL parameter [<a href="#RFC9253" class="cite xref">RFC9253</a>] (<a href="https://rfc-editor.org/rfc/rfc9253#section-6.1" class="relref">Section 6.1</a>)</span>.<a href="#appendix-A.2.3-7.2.1" class="pilcrow">¶</a></p>
+              <p id="appendix-A.2.3-7.2.1">The original definition restricted the value of this property to registered link types. It now also allows extension relation types for compatibility with the <span>LINKREL parameter [<a href="#RFC9253" class="cite xref">RFC9253</a>] (<a href="https://rfc-editor.org/rfc/rfc9253#section-6.1" class="relref" target="_blank" rel="noopener">Section 6.1<span class="u-visually-hidden"> (opens in new window)</span></a>)</span>.<a href="#appendix-A.2.3-7.2.1" class="pilcrow">¶</a></p>
 <p id="appendix-A.2.3-7.2.2">See <a href="#type-Link" class="auto internal xref">Section 1.5.11</a>.<a href="#appendix-A.2.3-7.2.2" class="pilcrow">¶</a></p>
 </dd>
           
@@ -6742,13 +6742,13 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <dd id="appendix-A.2.3-11.2">
               <p id="appendix-A.2.3-11.2.1">The original definition was incompatible with iCalendar:<a href="#appendix-A.2.3-11.2.1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-A.2.3-11.2.2.1">It did not cover the "REQ-PARTICIPANT" value of the <span>ROLE parameter [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.2.16" class="relref">Section 3.2.16</a>)</span>. It now defines the new "required" role.<a href="#appendix-A.2.3-11.2.2.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-A.2.3-11.2.2.1">It did not cover the "REQ-PARTICIPANT" value of the <span>ROLE parameter [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.2.16" class="relref" target="_blank" rel="noopener">Section 3.2.16<span class="u-visually-hidden"> (opens in new window)</span></a>)</span>. It now defines the new "required" role.<a href="#appendix-A.2.3-11.2.2.1" class="pilcrow">¶</a>
 </li>
                 <li class="normal" id="appendix-A.2.3-11.2.2.2">The "roles" property is multi-valued but the ROLE parameter is single-valued and only allowed to be set once on an ATTENDEE. For compatibility, a precendence of Participant roles got defined for converting roles to iCalendar.<a href="#appendix-A.2.3-11.2.2.2" class="pilcrow">¶</a>
 </li>
                 <li class="normal" id="appendix-A.2.3-11.2.2.3">It was mandatory for a Participant, but the (now reserved) sendTo property was not. This was incompatible with iCalendar, which required an ATTENDEE property to set the ROLE parameter. It now is optional, but requires the calendarAddress property to be set.<a href="#appendix-A.2.3-11.2.2.3" class="pilcrow">¶</a>
 </li>
-                <li class="normal" id="appendix-A.2.3-11.2.2.4">It defined a "contact" role, but this role later got redefined as an enumerated value of the <span>PARTICIPANT-TYPE property [<a href="#RFC9073" class="cite xref">RFC9073</a>] (<a href="https://rfc-editor.org/rfc/rfc9073#section-6.2" class="relref">Section 6.2</a>)</span>. It now removed this role and leaves defining participant types to a future JSCalendar extension.<a href="#appendix-A.2.3-11.2.2.4" class="pilcrow">¶</a>
+                <li class="normal" id="appendix-A.2.3-11.2.2.4">It defined a "contact" role, but this role later got redefined as an enumerated value of the <span>PARTICIPANT-TYPE property [<a href="#RFC9073" class="cite xref">RFC9073</a>] (<a href="https://rfc-editor.org/rfc/rfc9073#section-6.2" class="relref" target="_blank" rel="noopener">Section 6.2<span class="u-visually-hidden"> (opens in new window)</span></a>)</span>. It now removed this role and leaves defining participant types to a future JSCalendar extension.<a href="#appendix-A.2.3-11.2.2.4" class="pilcrow">¶</a>
 </li>
                 <li class="normal" id="appendix-A.2.3-11.2.2.5">The "attendee" role got removed. There is no equivalent ROLE value in iCalendar and any Participant with a calendarAddress by definition is an ATTENDEE in iCalendar.<a href="#appendix-A.2.3-11.2.2.5" class="pilcrow">¶</a>
 </li>
@@ -6763,7 +6763,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <dt id="appendix-A.2.3-12.1">
 <strong>Relation.relation</strong>:</dt>
             <dd id="appendix-A.2.3-12.2">
-              <p id="appendix-A.2.3-12.2.1">The original definition specified the empty relation to represent an unspecified relationship. It now defines the empty relation to default to "parent", unless overridden, for compatibility with the <span>RELATED-TO property [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.4.5" class="relref">Section 3.8.4.5</a>)</span>.<a href="#appendix-A.2.3-12.2.1" class="pilcrow">¶</a></p>
+              <p id="appendix-A.2.3-12.2.1">The original definition specified the empty relation to represent an unspecified relationship. It now defines the empty relation to default to "parent", unless overridden, for compatibility with the <span>RELATED-TO property [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.4.5" class="relref" target="_blank" rel="noopener">Section 3.8.4.5<span class="u-visually-hidden"> (opens in new window)</span></a>)</span>.<a href="#appendix-A.2.3-12.2.1" class="pilcrow">¶</a></p>
 <p id="appendix-A.2.3-12.2.2">See <a href="#type-Relation" class="auto internal xref">Section 1.5.10</a>.<a href="#appendix-A.2.3-12.2.2" class="pilcrow">¶</a></p>
 </dd>
           
@@ -6772,8 +6772,8 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <dt id="appendix-A.2.3-13.1">
 <strong>Task.{due|start}</strong>:</dt>
             <dd id="appendix-A.2.3-13.2">
-              <p id="appendix-A.2.3-13.2.1">The original definition defined these as optional, but this is incompatible with iCalendar: if the Task object's timeZone property is set, then it requires the <span>DUE property [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.2.3" class="relref">Section 3.8.2.3</a>)</span> or <span>DTSTART property [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.2.4" class="relref">Section 3.8.2.4</a>)</span> be set in the VTODO component. It now requires at least one of the "due" or "start" properties be set, if the "timeZone" property is set.<a href="#appendix-A.2.3-13.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2.3-13.2.2">The original definition did not require the "start" property be set if the "recurrenceRule" property is set. But this is incompatible with the <span>RRULE property [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.5.3" class="relref">Section 3.8.5.3</a>)</span>, which requires the DTSTART property be set in the VTODO component. The "start" property now is required if the "recurrenceRule" or "recurrenceId" properties are set.<a href="#appendix-A.2.3-13.2.2" class="pilcrow">¶</a></p>
+              <p id="appendix-A.2.3-13.2.1">The original definition defined these as optional, but this is incompatible with iCalendar: if the Task object's timeZone property is set, then it requires the <span>DUE property [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.2.3" class="relref" target="_blank" rel="noopener">Section 3.8.2.3<span class="u-visually-hidden"> (opens in new window)</span></a>)</span> or <span>DTSTART property [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.2.4" class="relref" target="_blank" rel="noopener">Section 3.8.2.4<span class="u-visually-hidden"> (opens in new window)</span></a>)</span> be set in the VTODO component. It now requires at least one of the "due" or "start" properties be set, if the "timeZone" property is set.<a href="#appendix-A.2.3-13.2.1" class="pilcrow">¶</a></p>
+<p id="appendix-A.2.3-13.2.2">The original definition did not require the "start" property be set if the "recurrenceRule" property is set. But this is incompatible with the <span>RRULE property [<a href="#RFC5545" class="cite xref">RFC5545</a>] (<a href="https://rfc-editor.org/rfc/rfc5545#section-3.8.5.3" class="relref" target="_blank" rel="noopener">Section 3.8.5.3<span class="u-visually-hidden"> (opens in new window)</span></a>)</span>, which requires the DTSTART property be set in the VTODO component. The "start" property now is required if the "recurrenceRule" or "recurrenceId" properties are set.<a href="#appendix-A.2.3-13.2.2" class="pilcrow">¶</a></p>
 <p id="appendix-A.2.3-13.2.3">The "showWithoutTime" property having value "true" now requires at least one of the "due" or "start" properties be set.<a href="#appendix-A.2.3-13.2.3" class="pilcrow">¶</a></p>
 <p id="appendix-A.2.3-13.2.4">See <a href="#jstask-props" class="auto internal xref">Section 4.2</a>.<a href="#appendix-A.2.3-13.2.4" class="pilcrow">¶</a></p>
 </dd>
@@ -6789,7 +6789,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <dt id="appendix-A.2.4-2.1">
 <strong>mainLocationId</strong>:</dt>
             <dd id="appendix-A.2.4-2.2">
-              <p id="appendix-A.2.4-2.2.1">This got introduced for better interoperatibility with iCalendar, where the VEVENT and VTODO components allow at most one LOCATION property to be present. While <span>VLOCATION components [<a href="#RFC9073" class="cite xref">RFC9073</a>] (<a href="https://rfc-editor.org/rfc/rfc9073#section-7.2" class="relref">Section 7.2</a>)</span> may occur multiple times, implementations need to know which Location to choose for the LOCATION property.<a href="#appendix-A.2.4-2.2.1" class="pilcrow">¶</a></p>
+              <p id="appendix-A.2.4-2.2.1">This got introduced for better interoperatibility with iCalendar, where the VEVENT and VTODO components allow at most one LOCATION property to be present. While <span>VLOCATION components [<a href="#RFC9073" class="cite xref">RFC9073</a>] (<a href="https://rfc-editor.org/rfc/rfc9073#section-7.2" class="relref" target="_blank" rel="noopener">Section 7.2<span class="u-visually-hidden"> (opens in new window)</span></a>)</span> may occur multiple times, implementations need to know which Location to choose for the LOCATION property.<a href="#appendix-A.2.4-2.2.1" class="pilcrow">¶</a></p>
 <p id="appendix-A.2.4-2.2.2">See <a href="#prop-mainLocationId" class="auto internal xref">Section 3.2.6</a>.<a href="#appendix-A.2.4-2.2.2" class="pilcrow">¶</a></p>
 </dd>
           
@@ -6834,7 +6834,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <dt id="appendix-A.2.4-7.1">
 <strong>Location.descriptionContentType</strong>:</dt>
             <dd id="appendix-A.2.4-7.2">
-              <p id="appendix-A.2.4-7.2.1">This is for compatibility with the iCalendar <span>STYLED-DESCRIPTION property [<a href="#RFC9073" class="cite xref">RFC9073</a>] (<a href="https://rfc-editor.org/rfc/rfc9073#section-6.5" class="relref">Section 6.5</a>)</span> of the VLOCATION component.<a href="#appendix-A.2.4-7.2.1" class="pilcrow">¶</a></p>
+              <p id="appendix-A.2.4-7.2.1">This is for compatibility with the iCalendar <span>STYLED-DESCRIPTION property [<a href="#RFC9073" class="cite xref">RFC9073</a>] (<a href="https://rfc-editor.org/rfc/rfc9073#section-6.5" class="relref" target="_blank" rel="noopener">Section 6.5<span class="u-visually-hidden"> (opens in new window)</span></a>)</span> of the VLOCATION component.<a href="#appendix-A.2.4-7.2.1" class="pilcrow">¶</a></p>
 <p id="appendix-A.2.4-7.2.2">See <a href="#prop-locations" class="auto internal xref">Section 3.2.5</a>.<a href="#appendix-A.2.4-7.2.2" class="pilcrow">¶</a></p>
 </dd>
           
@@ -6852,7 +6852,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <dt id="appendix-A.2.4-9.1">
 <strong>Participant.descriptionContentType</strong>:</dt>
             <dd id="appendix-A.2.4-9.2">
-              <p id="appendix-A.2.4-9.2.1">This is for compatibility with the iCalendar <span>STYLED-DESCRIPTION property [<a href="#RFC9073" class="cite xref">RFC9073</a>] (<a href="https://rfc-editor.org/rfc/rfc9073#section-6.5" class="relref">Section 6.5</a>)</span> of the PARTICIPANT component.<a href="#appendix-A.2.4-9.2.1" class="pilcrow">¶</a></p>
+              <p id="appendix-A.2.4-9.2.1">This is for compatibility with the iCalendar <span>STYLED-DESCRIPTION property [<a href="#RFC9073" class="cite xref">RFC9073</a>] (<a href="https://rfc-editor.org/rfc/rfc9073#section-6.5" class="relref" target="_blank" rel="noopener">Section 6.5<span class="u-visually-hidden"> (opens in new window)</span></a>)</span> of the PARTICIPANT component.<a href="#appendix-A.2.4-9.2.1" class="pilcrow">¶</a></p>
 <p id="appendix-A.2.4-9.2.2">See <a href="#prop-locations" class="auto internal xref">Section 3.2.5</a>.<a href="#appendix-A.2.4-9.2.2" class="pilcrow">¶</a></p>
 </dd>
           
@@ -6861,7 +6861,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <dt id="appendix-A.2.4-10.1">
 <strong>VirtualLocation.descriptionContentType</strong>:</dt>
             <dd id="appendix-A.2.4-10.2">
-              <p id="appendix-A.2.4-10.2.1">This is for consistency with the definition of the Location object type. The newly defined VCONFERENCE component will be allowed to contain the <span>STYLED-DESCRIPTION property [<a href="#RFC9073" class="cite xref">RFC9073</a>] (<a href="https://rfc-editor.org/rfc/rfc9073#section-6.5" class="relref">Section 6.5</a>)</span>.<a href="#appendix-A.2.4-10.2.1" class="pilcrow">¶</a></p>
+              <p id="appendix-A.2.4-10.2.1">This is for consistency with the definition of the Location object type. The newly defined VCONFERENCE component will be allowed to contain the <span>STYLED-DESCRIPTION property [<a href="#RFC9073" class="cite xref">RFC9073</a>] (<a href="https://rfc-editor.org/rfc/rfc9073#section-6.5" class="relref" target="_blank" rel="noopener">Section 6.5<span class="u-visually-hidden"> (opens in new window)</span></a>)</span>.<a href="#appendix-A.2.4-10.2.1" class="pilcrow">¶</a></p>
 <p id="appendix-A.2.4-10.2.2">See <a href="#prop-virtualLocations" class="auto internal xref">Section 3.2.7</a>.<a href="#appendix-A.2.4-10.2.2" class="pilcrow">¶</a></p>
 </dd>
           
@@ -6881,7 +6881,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <strong>TimeZone, TimeZoneRule</strong>:</dt>
             <dd id="appendix-A.3.1-2.2">
               <p id="appendix-A.3.1-2.2.1">The "timeZones" property became obsolete.<a href="#appendix-A.3.1-2.2.1" class="pilcrow">¶</a></p>
-<p id="appendix-A.3.1-2.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.7.2" class="relref">Section 4.7.2</a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.3.1-2.2.2" class="pilcrow">¶</a></p>
+<p id="appendix-A.3.1-2.2.2">See <span><a href="https://rfc-editor.org/rfc/rfc8984#section-4.7.2" class="relref" target="_blank" rel="noopener">Section 4.7.2<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8984" class="cite xref">RFC8984</a>]</span>.<a href="#appendix-A.3.1-2.2.2" class="pilcrow">¶</a></p>
 </dd>
           
 </dl>
@@ -6895,7 +6895,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
             <dt id="appendix-A.3.2-2.1">
 <strong>Duration, LocalDateTime, UTCDateTime</strong>:</dt>
             <dd id="appendix-A.3.2-2.2">
-              <p id="appendix-A.3.2-2.2.1">The original definitions supported fractional seconds. This is incompatible with the iCalendar DATE-TIME and DURATION types defined in <span><a href="https://rfc-editor.org/rfc/rfc5545#section-3.3.5" class="relref">Section 3.3.5</a> of [<a href="#RFC5545" class="cite xref">RFC5545</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc5545#section-3.3.6" class="relref">Section 3.3.6</a> of [<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>.<a href="#appendix-A.3.2-2.2.1" class="pilcrow">¶</a></p>
+              <p id="appendix-A.3.2-2.2.1">The original definitions supported fractional seconds. This is incompatible with the iCalendar DATE-TIME and DURATION types defined in <span><a href="https://rfc-editor.org/rfc/rfc5545#section-3.3.5" class="relref" target="_blank" rel="noopener">Section 3.3.5<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC5545" class="cite xref">RFC5545</a>]</span> and <span><a href="https://rfc-editor.org/rfc/rfc5545#section-3.3.6" class="relref" target="_blank" rel="noopener">Section 3.3.6<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC5545" class="cite xref">RFC5545</a>]</span>.<a href="#appendix-A.3.2-2.2.1" class="pilcrow">¶</a></p>
 </dd>
           
 </dl>
@@ -6924,7 +6924,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
         Internet-Drafts are working documents of the Internet Engineering Task
         Force (IETF). Note that other groups may also distribute working
         documents as Internet-Drafts. The list of current Internet-Drafts is
-        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+        at <span><a href="https://datatracker.ietf.org/drafts/current/" target="_blank" rel="noopener">https://datatracker.ietf.org/drafts/current/<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-3">
         Internet-Drafts are draft documents valid for a maximum of six months
         and may be updated, replaced, or obsoleted by other documents at any
@@ -6942,7 +6942,7 @@ v-name = 1*(WSP / "!" / %x23-2e / %x30-7d / NON-ASCII)
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
             Provisions Relating to IETF Documents
-            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            (<span><a href="https://trustee.ietf.org/license-info" target="_blank" rel="noopener">https://trustee.ietf.org/license-info<span class="u-visually-hidden"> (opens in new window)</span></a></span>) in effect on the date of
             publication of this document. Please review these documents
             carefully, as they describe your rights and restrictions with
             respect to this document. Code Components extracted from this

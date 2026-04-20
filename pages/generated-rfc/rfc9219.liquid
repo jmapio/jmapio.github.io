@@ -23,7 +23,7 @@ meta:
         signature body part and all signed body parts (when the
         multipart/signed media type <span>[<a href="#RFC1847" class="cite xref">RFC1847</a>]</span>
         is used) or to download and decode the Cryptographic Message Syntax (CMS)
-        (when the application/pkcs7-mime media type (<span><a href="https://rfc-editor.org/rfc/rfc8551#section-3.2" class="relref">Section 3.2</a> of [<a href="#RFC8551" class="cite xref">RFC8551</a>]</span>) is used).  The
+        (when the application/pkcs7-mime media type (<span><a href="https://rfc-editor.org/rfc/rfc8551#section-3.2" class="relref" target="_blank" rel="noopener">Section 3.2<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8551" class="cite xref">RFC8551</a>]</span>) is used).  The
         use of the extension implies the client trusts the JMAP server's
         S/MIME signature verification code and configuration.  This extension
         is suitable for cases where reduction in network bandwidth and
@@ -41,14 +41,14 @@ meta:
          appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">
       Type signatures, examples, and property descriptions in this document
-      follow the conventions established in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-1.1" class="relref">Section 1.1</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.
+      follow the conventions established in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-1.1" class="relref" target="_blank" rel="noopener">Section 1.1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.
       Data types defined in the core specification are also used in this document.<a href="#section-2-2" class="pilcrow">¶</a></p>
 </section>
 <section id="section-3">
       <h2 id="name-addition-to-the-capabilitie"><a href="#section-3">3.&nbsp;&nbsp;Addition to the Capabilities Object</a></h2>
 <p id="section-3-1">
         The <strong>capabilities</strong> object is returned as part of the standard JMAP
-        Session object; see <span><a href="https://rfc-editor.org/rfc/rfc8620#section-2" class="relref">Section 2</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.
+        Session object; see <span><a href="https://rfc-editor.org/rfc/rfc8620#section-2" class="relref" target="_blank" rel="noopener">Section 2<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.
         Servers supporting this
         specification <span class="bcp14">MUST</span> add a property called
         "urn:ietf:params:jmap:smimeverify" to the capabilities object.<a href="#section-3-1" class="pilcrow">¶</a></p>
@@ -200,7 +200,7 @@ meta:
         (in the language specified in the Content-Language header field, if any)
         of a problem with the signature, the signing certificate, or the signing certificate
  chain.
-        (See <span><a href="https://rfc-editor.org/rfc/rfc8620#section-3.8" class="relref">Section 3.8</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> in regards to how this
+        (See <span><a href="https://rfc-editor.org/rfc/rfc8620#section-3.8" class="relref" target="_blank" rel="noopener">Section 3.8<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> in regards to how this
  is affected
         by the language selection.)
         In one example, the signing certificate might be expired
@@ -440,7 +440,7 @@ meta:
       attack would be difficult to detect.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">
       Integrity protection of the channel between the client and the server is provided by use of TLS,
-      as required by the JMAP specification (see <span><a href="https://rfc-editor.org/rfc/rfc8620#section-8.1" class="relref">Section 8.1</a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>).<a href="#section-6-2" class="pilcrow">¶</a></p>
+      as required by the JMAP specification (see <span><a href="https://rfc-editor.org/rfc/rfc8620#section-8.1" class="relref" target="_blank" rel="noopener">Section 8.1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>).<a href="#section-6-2" class="pilcrow">¶</a></p>
 <p id="section-6-3">Constant recalculation of the S/MIME signature status can result in a denial-of-service condition.
       For that reason, it is <span class="bcp14">RECOMMENDED</span> that servers cache results of signature verification for up to 24 hours.<a href="#section-6-3" class="pilcrow">¶</a></p>
 </section>
@@ -452,31 +452,31 @@ meta:
 <dl class="references">
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
-<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc2119<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC5280">[RFC5280]</dt>
         <dd>
-<span class="refAuthor">Cooper, D.</span>, <span class="refAuthor">Santesson, S.</span>, <span class="refAuthor">Farrell, S.</span>, <span class="refAuthor">Boeyen, S.</span>, <span class="refAuthor">Housley, R.</span>, and <span class="refAuthor">W. Polk</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile"</span>, <span class="seriesInfo">RFC 5280</span>, <span class="seriesInfo">DOI 10.17487/RFC5280</span>, <time datetime="2008-05" class="refDate">May 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5280">https://www.rfc-editor.org/info/rfc5280</a>&gt;</span>. </dd>
+<span class="refAuthor">Cooper, D.</span>, <span class="refAuthor">Santesson, S.</span>, <span class="refAuthor">Farrell, S.</span>, <span class="refAuthor">Boeyen, S.</span>, <span class="refAuthor">Housley, R.</span>, and <span class="refAuthor">W. Polk</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile"</span>, <span class="seriesInfo">RFC 5280</span>, <span class="seriesInfo">DOI 10.17487/RFC5280</span>, <time datetime="2008-05" class="refDate">May 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5280" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc5280<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8174">[RFC8174]</dt>
         <dd>
-<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8174<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8550">[RFC8550]</dt>
         <dd>
-<span class="refAuthor">Schaad, J.</span>, <span class="refAuthor">Ramsdell, B.</span>, and <span class="refAuthor">S. Turner</span>, <span class="refTitle">"Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 4.0 Certificate Handling"</span>, <span class="seriesInfo">RFC 8550</span>, <span class="seriesInfo">DOI 10.17487/RFC8550</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8550">https://www.rfc-editor.org/info/rfc8550</a>&gt;</span>. </dd>
+<span class="refAuthor">Schaad, J.</span>, <span class="refAuthor">Ramsdell, B.</span>, and <span class="refAuthor">S. Turner</span>, <span class="refTitle">"Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 4.0 Certificate Handling"</span>, <span class="seriesInfo">RFC 8550</span>, <span class="seriesInfo">DOI 10.17487/RFC8550</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8550" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8550<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8551">[RFC8551]</dt>
         <dd>
-<span class="refAuthor">Schaad, J.</span>, <span class="refAuthor">Ramsdell, B.</span>, and <span class="refAuthor">S. Turner</span>, <span class="refTitle">"Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 4.0 Message Specification"</span>, <span class="seriesInfo">RFC 8551</span>, <span class="seriesInfo">DOI 10.17487/RFC8551</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8551">https://www.rfc-editor.org/info/rfc8551</a>&gt;</span>. </dd>
+<span class="refAuthor">Schaad, J.</span>, <span class="refAuthor">Ramsdell, B.</span>, and <span class="refAuthor">S. Turner</span>, <span class="refTitle">"Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 4.0 Message Specification"</span>, <span class="seriesInfo">RFC 8551</span>, <span class="seriesInfo">DOI 10.17487/RFC8551</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8551" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8551<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8620">[RFC8620]</dt>
         <dd>
-<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"The JSON Meta Application Protocol (JMAP)"</span>, <span class="seriesInfo">RFC 8620</span>, <span class="seriesInfo">DOI 10.17487/RFC8620</span>, <time datetime="2019-07" class="refDate">July 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8620">https://www.rfc-editor.org/info/rfc8620</a>&gt;</span>. </dd>
+<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"The JSON Meta Application Protocol (JMAP)"</span>, <span class="seriesInfo">RFC 8620</span>, <span class="seriesInfo">DOI 10.17487/RFC8620</span>, <time datetime="2019-07" class="refDate">July 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8620" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8620<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8621">[RFC8621]</dt>
       <dd>
-<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"The JSON Meta Application Protocol (JMAP) for Mail"</span>, <span class="seriesInfo">RFC 8621</span>, <span class="seriesInfo">DOI 10.17487/RFC8621</span>, <time datetime="2019-08" class="refDate">August 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8621">https://www.rfc-editor.org/info/rfc8621</a>&gt;</span>. </dd>
+<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"The JSON Meta Application Protocol (JMAP) for Mail"</span>, <span class="seriesInfo">RFC 8621</span>, <span class="seriesInfo">DOI 10.17487/RFC8621</span>, <time datetime="2019-08" class="refDate">August 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8621" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8621<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 </dl>
 </section>
@@ -485,7 +485,7 @@ meta:
 <dl class="references">
 <dt id="RFC1847">[RFC1847]</dt>
       <dd>
-<span class="refAuthor">Galvin, J.</span>, <span class="refAuthor">Murphy, S.</span>, <span class="refAuthor">Crocker, S.</span>, and <span class="refAuthor">N. Freed</span>, <span class="refTitle">"Security Multiparts for MIME: Multipart/Signed and Multipart/Encrypted"</span>, <span class="seriesInfo">RFC 1847</span>, <span class="seriesInfo">DOI 10.17487/RFC1847</span>, <time datetime="1995-10" class="refDate">October 1995</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc1847">https://www.rfc-editor.org/info/rfc1847</a>&gt;</span>. </dd>
+<span class="refAuthor">Galvin, J.</span>, <span class="refAuthor">Murphy, S.</span>, <span class="refAuthor">Crocker, S.</span>, and <span class="refAuthor">N. Freed</span>, <span class="refTitle">"Security Multiparts for MIME: Multipart/Signed and Multipart/Encrypted"</span>, <span class="seriesInfo">RFC 1847</span>, <span class="seriesInfo">DOI 10.17487/RFC1847</span>, <time datetime="1995-10" class="refDate">October 1995</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc1847" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc1847<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 </dl>
 </section>
@@ -517,7 +517,7 @@ meta:
 <p id="section-boilerplate.1-3">
             Information about the current status of this document, any
             errata, and how to provide feedback on it may be obtained at
-            <span><a href="https://www.rfc-editor.org/info/rfc9219">https://www.rfc-editor.org/info/rfc9219</a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+            <span><a href="https://www.rfc-editor.org/info/rfc9219" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9219<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 </section>
 </div><div id="copyright">
 <section id="section-boilerplate.2">
@@ -528,7 +528,7 @@ meta:
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
             Provisions Relating to IETF Documents
-            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            (<span><a href="https://trustee.ietf.org/license-info" target="_blank" rel="noopener">https://trustee.ietf.org/license-info<span class="u-visually-hidden"> (opens in new window)</span></a></span>) in effect on the date of
             publication of this document. Please review these documents
             carefully, as they describe your rights and restrictions with
             respect to this document. Code Components extracted from this

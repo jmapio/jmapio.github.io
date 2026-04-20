@@ -48,7 +48,7 @@ conventions described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>
 <section id="section-3">
       <h2 id="name-addition-to-the-capabilitie"><a href="#section-3">3.&nbsp;&nbsp;Addition to the Capabilities Object</a></h2>
 <p id="section-3-1">The capabilities object is returned as part of the JMAP Session
-object; see <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-2" class="relref">Section 2</a></span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
+object; see <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-2" class="relref" target="_blank" rel="noopener">Section 2<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">This document defines an additional capability URI.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <div id="urn-ietf-params-jmap-blob">
 <section id="section-3.1">
@@ -199,12 +199,12 @@ mapping from the creation id.<a href="#section-4.1-5" class="pilcrow">¶</a></p>
 <code>notCreated</code> response with a map from the failed creation id to a
 <code>SetError</code> object.<a href="#section-4.1-9" class="pilcrow">¶</a></p>
 <p id="section-4.1-10">For each successful upload, servers <span class="bcp14">MUST</span> add an entry to the
-<code>createdIds</code> map (<span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-3.3" class="relref">Section 3.3</a></span>) for the request; even if the caller did not explicitly pass a
+<code>createdIds</code> map (<span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-3.3" class="relref" target="_blank" rel="noopener">Section 3.3<span class="u-visually-hidden"> (opens in new window)</span></a></span>) for the request; even if the caller did not explicitly pass a
 createdIds, the value must be available to later methods defined in the same
 Request Object. This allows the blobId to be used via back-reference in
 subsequent method calls.<a href="#section-4.1-10" class="pilcrow">¶</a></p>
 <p id="section-4.1-11">The created blob will have the same lifetime and same expiry semantics as
-any other binary object created via the mechanism specified in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-6" class="relref">Section 6</a></span>.<a href="#section-4.1-11" class="pilcrow">¶</a></p>
+any other binary object created via the mechanism specified in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-6" class="relref" target="_blank" rel="noopener">Section 6<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-4.1-11" class="pilcrow">¶</a></p>
 <p id="section-4.1-12">Uploads using this mechanism will be restricted by the maxUploadSize limit
 for JMAP requests specified by the server, and clients <span class="bcp14">SHOULD</span>
 consider using the upload mechanism defined by <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> for blobs larger than a megabyte.<a href="#section-4.1-12" class="pilcrow">¶</a></p>
@@ -1209,23 +1209,23 @@ the capability and control over the URI namespace to which the capability URI po
 <dl class="references">
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
-<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc2119<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC3230">[RFC3230]</dt>
         <dd>
-<span class="refAuthor">Mogul, J.</span> and <span class="refAuthor">A. Van Hoff</span>, <span class="refTitle">"Instance Digests in HTTP"</span>, <span class="seriesInfo">RFC 3230</span>, <span class="seriesInfo">DOI 10.17487/RFC3230</span>, <time datetime="2002-01" class="refDate">January 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3230">https://www.rfc-editor.org/info/rfc3230</a>&gt;</span>. </dd>
+<span class="refAuthor">Mogul, J.</span> and <span class="refAuthor">A. Van Hoff</span>, <span class="refTitle">"Instance Digests in HTTP"</span>, <span class="seriesInfo">RFC 3230</span>, <span class="seriesInfo">DOI 10.17487/RFC3230</span>, <time datetime="2002-01" class="refDate">January 2002</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3230" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc3230<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC4648">[RFC4648]</dt>
         <dd>
-<span class="refAuthor">Josefsson, S.</span>, <span class="refTitle">"The Base16, Base32, and Base64 Data Encodings"</span>, <span class="seriesInfo">RFC 4648</span>, <span class="seriesInfo">DOI 10.17487/RFC4648</span>, <time datetime="2006-10" class="refDate">October 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4648">https://www.rfc-editor.org/info/rfc4648</a>&gt;</span>. </dd>
+<span class="refAuthor">Josefsson, S.</span>, <span class="refTitle">"The Base16, Base32, and Base64 Data Encodings"</span>, <span class="seriesInfo">RFC 4648</span>, <span class="seriesInfo">DOI 10.17487/RFC4648</span>, <time datetime="2006-10" class="refDate">October 2006</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc4648" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc4648<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8174">[RFC8174]</dt>
         <dd>
-<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8174<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8620">[RFC8620]</dt>
       <dd>
-<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"The JSON Meta Application Protocol (JMAP)"</span>, <span class="seriesInfo">RFC 8620</span>, <span class="seriesInfo">DOI 10.17487/RFC8620</span>, <time datetime="2019-07" class="refDate">July 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8620">https://www.rfc-editor.org/info/rfc8620</a>&gt;</span>. </dd>
+<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"The JSON Meta Application Protocol (JMAP)"</span>, <span class="seriesInfo">RFC 8620</span>, <span class="seriesInfo">DOI 10.17487/RFC8620</span>, <time datetime="2019-07" class="refDate">July 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8620" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8620<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 </dl>
 </section>
@@ -1234,19 +1234,19 @@ the capability and control over the URI namespace to which the capability URI po
 <dl class="references">
 <dt id="RFC7888">[RFC7888]</dt>
         <dd>
-<span class="refAuthor">Melnikov, A., Ed.</span>, <span class="refTitle">"IMAP4 Non-synchronizing Literals"</span>, <span class="seriesInfo">RFC 7888</span>, <span class="seriesInfo">DOI 10.17487/RFC7888</span>, <time datetime="2016-05" class="refDate">May 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7888">https://www.rfc-editor.org/info/rfc7888</a>&gt;</span>. </dd>
+<span class="refAuthor">Melnikov, A., Ed.</span>, <span class="refTitle">"IMAP4 Non-synchronizing Literals"</span>, <span class="seriesInfo">RFC 7888</span>, <span class="seriesInfo">DOI 10.17487/RFC7888</span>, <time datetime="2016-05" class="refDate">May 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7888" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc7888<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8126">[RFC8126]</dt>
         <dd>
-<span class="refAuthor">Cotton, M.</span>, <span class="refAuthor">Leiba, B.</span>, and <span class="refAuthor">T. Narten</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="seriesInfo">BCP 26</span>, <span class="seriesInfo">RFC 8126</span>, <span class="seriesInfo">DOI 10.17487/RFC8126</span>, <time datetime="2017-06" class="refDate">June 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8126">https://www.rfc-editor.org/info/rfc8126</a>&gt;</span>. </dd>
+<span class="refAuthor">Cotton, M.</span>, <span class="refAuthor">Leiba, B.</span>, and <span class="refAuthor">T. Narten</span>, <span class="refTitle">"Guidelines for Writing an IANA Considerations Section in RFCs"</span>, <span class="seriesInfo">BCP 26</span>, <span class="seriesInfo">RFC 8126</span>, <span class="seriesInfo">DOI 10.17487/RFC8126</span>, <time datetime="2017-06" class="refDate">June 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8126" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8126<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC8621">[RFC8621]</dt>
         <dd>
-<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"The JSON Meta Application Protocol (JMAP) for Mail"</span>, <span class="seriesInfo">RFC 8621</span>, <span class="seriesInfo">DOI 10.17487/RFC8621</span>, <time datetime="2019-08" class="refDate">August 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8621">https://www.rfc-editor.org/info/rfc8621</a>&gt;</span>. </dd>
+<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"The JSON Meta Application Protocol (JMAP) for Mail"</span>, <span class="seriesInfo">RFC 8621</span>, <span class="seriesInfo">DOI 10.17487/RFC8621</span>, <time datetime="2019-08" class="refDate">August 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8621" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8621<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 <dt id="RFC9007">[RFC9007]</dt>
       <dd>
-<span class="refAuthor">Ouazana, R., Ed.</span>, <span class="refTitle">"Handling Message Disposition Notification with the JSON Meta Application Protocol (JMAP)"</span>, <span class="seriesInfo">RFC 9007</span>, <span class="seriesInfo">DOI 10.17487/RFC9007</span>, <time datetime="2021-03" class="refDate">March 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9007">https://www.rfc-editor.org/info/rfc9007</a>&gt;</span>. </dd>
+<span class="refAuthor">Ouazana, R., Ed.</span>, <span class="refTitle">"Handling Message Disposition Notification with the JSON Meta Application Protocol (JMAP)"</span>, <span class="seriesInfo">RFC 9007</span>, <span class="seriesInfo">DOI 10.17487/RFC9007</span>, <time datetime="2021-03" class="refDate">March 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9007" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9007<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
 
 </dl>
 </section>
@@ -1277,7 +1277,7 @@ the JMAP Working Group in the IETF.<a href="#appendix-A-1" class="pilcrow">¶</a
 <p id="section-boilerplate.1-3">
             Information about the current status of this document, any
             errata, and how to provide feedback on it may be obtained at
-            <span><a href="https://www.rfc-editor.org/info/rfc9404">https://www.rfc-editor.org/info/rfc9404</a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+            <span><a href="https://www.rfc-editor.org/info/rfc9404" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9404<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 </section>
 </div><div id="copyright">
 <section id="section-boilerplate.2">
@@ -1288,7 +1288,7 @@ the JMAP Working Group in the IETF.<a href="#appendix-A-1" class="pilcrow">¶</a
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
             Provisions Relating to IETF Documents
-            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            (<span><a href="https://trustee.ietf.org/license-info" target="_blank" rel="noopener">https://trustee.ietf.org/license-info<span class="u-visually-hidden"> (opens in new window)</span></a></span>) in effect on the date of
             publication of this document. Please review these documents
             carefully, as they describe your rights and restrictions with
             respect to this document. Code Components extracted from this
