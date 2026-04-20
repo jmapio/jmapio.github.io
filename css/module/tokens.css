@@ -113,6 +113,7 @@
     --color-black-fade-04: oklch(0% 0 0deg / 4%);
     --color-black-fade-08: oklch(0% 0 0deg / 8%);
     --color-black-fade-15: oklch(0% 0 0deg / 15%);
+    --color-black-fade-18: oklch(0% 0 0deg / 18%);
     --color-black-fade-30: oklch(0% 0 0deg / 30%);
     --color-black-fade-50: oklch(0% 0 0deg / 50%);
 
@@ -171,6 +172,7 @@
     --theme-hero-dot-bg-dim: var(--color-teal-850);
 
     --theme-border: var(--color-white-fade-08);
+    --theme-border-soft: var(--color-white-fade-04);
     --theme-border-strong: var(--color-white-fade-15);
 
     --theme-ink: var(--color-teal-50);
@@ -184,6 +186,9 @@
     --theme-logo-text: var(--color-teal-50);
 
     --theme-header-bg: rgb(from var(--theme-page-bg) r g b / 92%);
+    --theme-header-border: var(--theme-border);
+    --theme-header-shadow:
+        0 1px oklab(75% -0.1 0 / 6%), 0 4px 24px var(--color-black-fade-18);
     --theme-footer-bg: transparent;
 
     --theme-button-standard-fg: var(--theme-ink);
@@ -248,7 +253,7 @@
     --theme-accent-bright: var(--color-teal-750);
     --theme-accent-dim: var(--color-teal-950);
 
-    --theme-page-bg: #eef5f3;
+    --theme-page-bg: var(--color-teal-100);
     --theme-page-bg-fade: rgb(from var(--color-grey-1100) r g b / 90%);
     --theme-page-bg-alt: var(--color-white);
     --theme-page-bg-overlay: transparent;
@@ -256,8 +261,10 @@
 
     --theme-hero-dot-bg: var(--color-teal-900);
     --theme-hero-dot-bg-dim: var(--color-teal-250);
+    --theme-hero-bg: var(--color-teal-50);
 
     --theme-border: var(--color-black-fade-15);
+    --theme-border-soft: var(--color-black-fade-04);
     --theme-border-strong: var(--color-black-fade-30);
 
     --theme-ink: var(--color-teal-950);
@@ -269,7 +276,11 @@
     --theme-glass-border: var(--color-black-fade-08);
     --theme-logo-text: var(--color-grey-900);
 
-    --theme-header-bg: rgb(from var(--theme-page-bg) r g b / 92%);
+    --theme-header-bg: oklch(from var(--theme-page-bg) l c h / 92%);
+    --theme-header-border: var(--theme-border-soft);
+    --theme-header-shadow:
+        0px 0.1px 0.1px oklch(78.892% 0.00009 271.152deg / 26%),
+        0.2px 2.1px 2.6px -1.8px oklch(78.892% 0.00009 271.152deg / 35%);
     --theme-footer-bg: var(--theme-page-bg-alt);
 
     --theme-button-standard-fg: var(--color-teal-750);

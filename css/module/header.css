@@ -8,20 +8,12 @@
         z-index: 9999;
         position: sticky;
         top: 0;
-        border-bottom: 1px solid rgb(92 194 173 / 14%);
+        border-bottom: 1px solid var(--theme-header-border);
         height: var(--nav-h);
         min-height: var(--nav-h);
         backdrop-filter: var(--theme-glass-blur-strong);
         background: var(--theme-header-bg);
-        box-shadow:
-            0 1px 0 rgb(92 194 173 / 6%),
-            0 4px 24px rgb(0 0 0 / 18%);
-    }
-    [data-theme='light'] .header {
-        border-bottom: 1px solid rgb(13 122 104 / 15%);
-        box-shadow:
-            0 1px 0 rgb(13 122 104 / 8%),
-            0 4px 24px rgb(0 0 0 / 7%);
+        box-shadow: var(--theme-header-shadow);
     }
 }
 
