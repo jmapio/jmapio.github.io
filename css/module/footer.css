@@ -62,10 +62,11 @@
 
 .footer .i-external-link {
     display: inline;
-    vertical-align: -1px;
+    transform: translate3d(0, 1px, 0);
     margin-left: 2px;
-    width: 10px;
-    height: 10px;
+    width: 14px;
+    height: 14px;
+    stroke-width: 2;
 }
 
 @media (width <= 768px) {
