@@ -68,6 +68,7 @@
 }
 
 .u-toc li a:hover::after,
+.u-toc li a:focus-visible::after,
 .u-toc .highlight > a::after {
     background: var(--theme-button-toc-bg-hover);
 }

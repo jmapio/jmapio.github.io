@@ -82,10 +82,12 @@
     border-radius: 999px;
     transform-origin: left;
 }
-.header__links > li > a:hover {
+.header__links > li > a:hover,
+.header__links > li > a:focus-visible {
     color: var(--theme-ink);
 }
 .header__links > li > a:hover::after,
+.header__links > li > a:focus-visible::after,
 .header__links > li > a.active::after {
     transform: scaleX(1);
 }
@@ -107,7 +109,8 @@
     color: var(--theme-button-theme-fg);
     cursor: pointer;
 }
-.header__theme-button:hover {
+.header__theme-button:hover,
+.header__theme-button:focus-visible {
     background: var(--theme-button-theme-page-bg-hover);
     border-color: var(--theme-button-theme-border-hover);
     color: var(--theme-button-theme-fg-hover);

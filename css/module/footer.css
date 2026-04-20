@@ -34,7 +34,8 @@
     font-size: var(--text-size-meta);
     text-decoration: none;
 }
-.footer__col a:hover {
+.footer__col a:hover,
+.footer__col a:focus-visible {
     color: var(--theme-accent);
     text-decoration: underline;
     text-decoration-color: var(--theme-accent);

@@ -3,6 +3,12 @@ html {
     scroll-behavior: smooth;
 }
 
+:focus-visible {
+    border-radius: 2px;
+    outline: 2px solid var(--theme-accent);
+    outline-offset: 2px;
+}
+
 :target {
     scroll-margin-block: 24px;
 }

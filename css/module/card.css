@@ -45,12 +45,14 @@
         box-shadow var(--dur-m);
     justify-content: space-between;
 }
-.card--link:hover {
+.card--link:hover,
+.card--link:focus-visible {
     transform: translateY(-3px);
     border-color: var(--theme-card-border-hover);
     box-shadow: var(--theme-card-shadow);
 }
-.card--link:hover .i-arrow-right {
+.card--link:hover .i-arrow-right,
+.card--link:focus-visible .i-arrow-right {
     transform: translateX(4px);
 }
 .card__icon {

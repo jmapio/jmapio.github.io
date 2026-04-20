@@ -57,7 +57,8 @@
     color: var(--theme-accent);
     text-decoration: none;
 }
-.u-article a:hover {
+.u-article a:hover,
+.u-article a:focus-visible {
     text-decoration: underline;
     text-underline-offset: 3px;
 }
