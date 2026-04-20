@@ -255,7 +255,7 @@
 
     --theme-page-bg: var(--color-teal-100);
     --theme-page-bg-fade: rgb(from var(--color-grey-1100) r g b / 90%);
-    --theme-page-bg-alt: var(--color-white);
+    --theme-page-bg-alt: var(--color-teal-50);
     --theme-page-bg-overlay: transparent;
     --theme-page-bg-accent-overlay: transparent;
 
