@@ -50,21 +50,19 @@ const collectPages = async () => {
         const isRFC = fm.layout === 'article-rfc';
         const isHome = slug === 'home';
 
-        const eyebrow =
-            fm.hero?.eyebrow ?? (isRFC ? 'Spec' : isHome ? 'JMAP' : '');
-        const title = isHome
-            ? 'The API for<br><span style="color:var(--theme-accent)">better email</span>'
-            : (fm.hero?.title ?? fm.title ?? slug);
-        const description = isRFC ? '' : (fm.hero?.sub ?? fm.description ?? '');
+        const eyebrow = fm.og_image?.eyebrow ?? fm.hero?.eyebrow ?? '';
+        const title = fm.og_image?.title ?? fm.hero?.title ?? fm.title ?? slug;
+        const description =
+            fm.og_image?.description ?? fm.hero?.sub ?? fm.description ?? '';
 
         const titleLen = title.length;
-        const canModifyClass = !isHome && description;
-        const titleClass =
-            canModifyClass && titleLen > 90
-                ? 'og-title og-title--sm'
-                : canModifyClass && titleLen > 60
-                  ? 'og-title og-title--md'
-                  : 'og-title';
+        const titleClass = fm.og_image?.class
+            ? `og-title ${fm.og_image.class}`
+            : titleLen > 90
+              ? 'og-title og-title--sm'
+              : titleLen > 60
+                ? 'og-title og-title--md'
+                : 'og-title';
 
         pages.push({ slug, eyebrow, title, description, titleClass });
     }
