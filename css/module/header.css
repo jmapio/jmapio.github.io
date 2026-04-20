@@ -79,7 +79,7 @@
     left: 0;
     height: 2px;
     background: var(--theme-accent);
-    border-radius: 999px;
+    border-radius: var(--radius-full);
     transform-origin: left;
 }
 .header__links > li > a:hover,
