@@ -20,6 +20,9 @@
             {{ include.children }}
         {%- endif -%}
     </div>
+    {% if is_external %}
+        <span class='u-visually-hidden'>(opens in new window)</span>
+    {% endif %}
     {% capture icon_template %}icons/{{ include.icon | default: default_icon }}.liquid{% endcapture %}
     <div class='card__icon'>{% include {{ icon_template }} %}</div>
 </a>

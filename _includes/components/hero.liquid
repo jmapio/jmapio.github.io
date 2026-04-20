@@ -27,6 +27,7 @@
                     >
                         <span class='button__label'>{{- link.label -}}</span>
                         {% if is_external %}
+                            <span class='u-visually-hidden'>(opens in new window)</span>
                             <span class='button__icon'>
                                 {% include icons/external-link.liquid %}
                             </span>

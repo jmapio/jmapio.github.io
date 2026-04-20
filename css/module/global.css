@@ -71,6 +71,18 @@ hr {
     background-color: var(--theme-border);
 }
 
+.u-visually-hidden {
+    overflow: hidden;
+    position: absolute;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    width: 1px;
+    height: 1px;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
 .u-wrapper {
     box-sizing: content-box;
     margin-inline: auto;
