@@ -48,12 +48,22 @@ const getMetaTags = (document) => {
     return { authors, keywords, description };
 };
 
-const writeTemplate = async (name, rfcHTML, meta, title) => {
+const writeTemplate = async (name, rfcHTML, meta, titleComponents) => {
+    const joinedTitle = titleComponents.join(' – ');
+    const isDraft = /draft/i.test(name);
+    const ogImageEyebrow =
+        titleComponents.length > 1
+            ? titleComponents[0]
+            : isDraft
+              ? 'Draft specification'
+              : 'Specification';
+    const ogImageTitle =
+        titleComponents.length > 1 ? titleComponents[1] : titleComponents[0];
     const template = `---
 layout: article-rfc
 permalink: /spec/${name}/index.html
 toc: generated-rfc-toc/${name}.html
-title: ${quote(title.trim())}
+title: ${quote(joinedTitle.trim())}
 description: >-
     ${meta.description.trim().replaceAll('\n', ' ')}
 meta:
@@ -61,6 +71,11 @@ meta:
 ${meta.authors.map((author) => `        - ${author}`).join('\n')}
     keywords:
 ${meta.keywords.map((keyword) => `        - ${keyword}`).join('\n')}
+og_image:
+    eyebrow: '${ogImageEyebrow}'
+    title: '${ogImageTitle}'
+    description: ''
+is_draft: ${isDraft}
 ---
 ${rfcHTML.trim()}
 `;
@@ -152,7 +167,7 @@ for (const fileName of DOCUMENTS) {
     domCopyright.parentElement.appendChild(domCopyright);
 
     const domH1 = domBody.querySelectorAll('h1');
-    const title = [...domH1].map((el) => el.textContent).join(' – ');
+    const titleComponents = [...domH1].map((el) => el.textContent);
     domH1.forEach((h1) => h1.remove());
     domBody.querySelectorAll('script').forEach((script) => script.remove());
     domBody
@@ -202,5 +217,5 @@ for (const fileName of DOCUMENTS) {
         { encoding: 'utf-8' },
     );
 
-    await writeTemplate(basename, rfcHTML, meta, title);
+    await writeTemplate(basename, rfcHTML, meta, titleComponents);
 }
