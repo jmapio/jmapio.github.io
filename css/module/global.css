@@ -9,6 +9,23 @@ html {
     outline-offset: 2px;
 }
 
+.u-skip-link {
+    z-index: 10000;
+    position: absolute;
+    top: var(--space-s);
+    left: var(--space-s);
+    padding: var(--space-2xs) var(--space-s);
+    background: var(--theme-accent);
+    border-radius: var(--radius-m);
+    clip-path: inset(50%);
+    color: var(--theme-page-bg);
+    font-size: var(--text-size-meta);
+    font-weight: var(--font-semibold);
+}
+.u-skip-link:focus {
+    clip-path: none;
+}
+
 :target {
     scroll-margin-block: 24px;
 }
