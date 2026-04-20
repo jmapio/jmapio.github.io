@@ -1,6 +1,8 @@
 ---
 layout: article-toc
 permalink: /crash-course/index.html
+redirect_from:
+    - /crash-course.html
 title: JMAP Crash Course
 hero:
     eyebrow: Get started

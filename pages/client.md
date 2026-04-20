@@ -1,6 +1,8 @@
 ---
 layout: article-toc
 permalink: /client/index.html
+redirect_from:
+    - /client.html
 title: JMAP Client Guide
 hero:
     eyebrow: Implementation guide

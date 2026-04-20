@@ -1,6 +1,8 @@
 ---
 layout: article-toc
 permalink: /server/index.html
+redirect_from:
+    - /server.html
 title: JMAP Server Implementation Guide
 hero:
     title: Advice for JMAP implementors
