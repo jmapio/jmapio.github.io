@@ -1,5 +1,5 @@
 baseurl: ''
-url: 'http://jmap.io'
+url: 'https://jmap.io'
 markdown: kramdown
 lightningcss:
     targets: defaults
