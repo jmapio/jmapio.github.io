@@ -1,5 +1,8 @@
 {
     "name": "jmapio.github.io",
+    "engines": {
+        "node": "24"
+    },
     "scripts": {
         "generate-og": "node scripts/generate-og-images.js",
         "lint-prettier": "prettier --check .",
