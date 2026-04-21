@@ -13,13 +13,14 @@ _bin/local-build
 
 This will launch a Jekyll dev server with the `--livereload` flag.
 
+<!-- prettier-ignore -->
 > [!NOTE] 
 > The LightningCSS and esbuild post-write hooks only run for
 > non-development builds. When `JEKYLL_ENV=development` (the default for
 > `jekyll serve`), CSS and JS are emitted as-is from the bundled `module/`
 > sources.
 
-Generating a full build of the site can be done locally via: 
+Generating a full build of the site can be done locally via:
 
 ```sh
 _bin/full-build
