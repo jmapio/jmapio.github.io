@@ -31,7 +31,7 @@ jobs:
                   ruby-version: .ruby-version
                   bundler-cache: true
 
-            - run: jekyll build
+            - run: bundle exec jekyll build
               env:
                   JEKYLL_ENV: production
 
