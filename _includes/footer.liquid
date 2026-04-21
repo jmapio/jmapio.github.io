@@ -1,0 +1,64 @@
+<footer class='footer'>
+    <div class='u-wrapper'>
+        <div class='footer__inner'>
+            <div class='footer__brand'>
+                {% include components/jmap-logo.liquid %}
+                <p>The open internet standard replacing IMAP with a simpler, faster, and more capable protocol.</p>
+            </div>
+            <div class='footer__col'>
+                <h3>Learn</h3>
+                <ul>
+                    <li><a href='{{ site.baseurl }}/why-jmap/'>Why JMAP?</a></li>
+                    <li><a href='{{ site.baseurl }}/client/'>Client guide</a></li>
+                    <li><a href='{{ site.baseurl }}/server/'>Server guide</a></li>
+                    <li><a href='{{ site.baseurl }}/crash-course/'>Crash course</a></li>
+                </ul>
+            </div>
+            <div class='footer__col'>
+                <h3>Implement</h3>
+                <ul>
+                    <li><a href='{{ site.baseurl }}/spec/'>Specifications</a></li>
+                    <li><a href='{{ site.baseurl }}/software/'>Software and Libraries</a></li>
+                    <li>
+                        <a href='https://github.com/jmapio/jmap' target='_blank' rel='noopener'
+                            >GitHub <span class='u-visually-hidden'>(opens in new window)</span>
+                            {%- include icons/external-link-micro.liquid -%}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class='footer__col'>
+                <h3>Community</h3>
+                <ul>
+                    <li>
+                        <a href='https://datatracker.ietf.org/group/jmap/about/' target='_blank' rel='noopener'
+                            >IETF JMAP Working Group <span class='u-visually-hidden'>(opens in new window)</span>
+                            {%- include icons/external-link-micro.liquid -%}
+                        </a>
+                    </li>
+                    <li>
+                        <a href='https://mailarchive.ietf.org/arch/browse/jmap/' target='_blank' rel='noopener'
+                            >Mailing list archives <span class='u-visually-hidden'>(opens in new window)</span>
+                            {%- include icons/external-link-micro.liquid -%}
+                        </a>
+                    </li>
+                    <li>
+                        <a href='https://github.com/jmapio/jmap/issues' target='_blank' rel='noopener'
+                            >GitHub issues <span class='u-visually-hidden'>(opens in new window)</span>
+                            {%- include icons/external-link-micro.liquid -%}
+                        </a>
+                    </li>
+                    <li>
+                        <a href='https://www.fastmail.com' target='_blank' rel='noopener'
+                            >Fastmail <span class='u-visually-hidden'>(opens in new window)</span>
+                            {%- include icons/external-link-micro.liquid -%}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class='footer__bottom'>
+            <span>&copy; {{ 'now' | date: '%Y' }} JMAP contributors. An open IETF standard. </span>
+        </div>
+    </div>
+</footer>

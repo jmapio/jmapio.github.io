@@ -1,0 +1,147 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    /* Allows animated transitions from <length> to auto etc. */
+    interpolate-size: allow-keywords;
+}
+
+html {
+    text-size-adjust: none;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+body {
+    min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+    line-height: 1.1;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    text-wrap: balance;
+}
+
+p {
+    text-wrap: pretty;
+}
+
+a {
+    color: currentColor;
+    text-decoration: none;
+    text-decoration-skip-ink: auto;
+}
+
+img,
+picture {
+    display: block;
+    max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+textarea:not([rows]) {
+    min-height: 10em;
+}
+
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+    vertical-align: baseline;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    font-size: 100%;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+button {
+    overflow: visible;
+    appearance: none;
+    margin: 0;
+    border: none;
+    padding: 0;
+    width: auto;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+}
+
+/* Remove inner border and padding in Firefox */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+summary {
+    cursor: pointer;
+}
+summary::-webkit-details-marker, /* For older WebKit/Blink browsers */
+summary::marker {
+    content: '';
+    display: none;
+}
+
+address {
+    font-style: normal;
+}
+
+hr {
+    margin: 0;
+    border: none;
+    padding: 0;
+    height: 1px;
+    background-color: #000;
+}

@@ -1,0 +1,544 @@
+---
+layout: article-rfc
+permalink: /spec/rfc9219/index.html
+toc: generated-rfc-toc/rfc9219.html
+title: 'RFC 9219 – S/MIME Signature Verification Extension to the JSON Meta Application Protocol (JMAP)'
+description: >-
+    This document specifies an extension to "The JSON Meta Application Protocol  (JMAP) for Mail" (RFC 8621) for returning the S/MIME signature verification status.
+meta:
+    authors:
+        - Alexey Melnikov
+    keywords:
+        - JMAP
+        - S/MIME
+og_image:
+    eyebrow: 'RFC 9219'
+    title: 'S/MIME Signature Verification Extension to the JSON Meta Application Protocol (JMAP)'
+    description: ''
+is_draft: false
+---
+<section id="section-1">
+      <h2 id="name-introduction"><a href="#section-1">1.&nbsp;&nbsp;Introduction</a></h2>
+<p id="section-1-1">
+        <span><a href="#RFC8621" class="internal xref">JMAP for Mail</a> [<a href="#RFC8621" class="cite xref">RFC8621</a>]</span> is a JSON-based application protocol for synchronizing email data
+        between a client and a server.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">
+        This document describes an extension to JMAP for returning the S/MIME
+        signature verification status <span>[<a href="#RFC8551" class="cite xref">RFC8551</a>]</span>, without requiring a JMAP client to download the
+        signature body part and all signed body parts (when the
+        multipart/signed media type <span>[<a href="#RFC1847" class="cite xref">RFC1847</a>]</span>
+        is used) or to download and decode the Cryptographic Message Syntax (CMS)
+        (when the application/pkcs7-mime media type (<span><a href="https://rfc-editor.org/rfc/rfc8551#section-3.2" class="relref" target="_blank" rel="noopener">Section 3.2<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8551" class="cite xref">RFC8551</a>]</span>) is used).  The
+        use of the extension implies the client trusts the JMAP server's
+        S/MIME signature verification code and configuration.  This extension
+        is suitable for cases where reduction in network bandwidth and
+        client-side code complexity outweigh security concerns about trusting
+        the JMAP server to perform S/MIME signature verifications. One
+        possible use case is when the same organization controls both the JMAP
+        server and the JMAP client.<a href="#section-1-2" class="pilcrow">¶</a></p>
+</section>
+<section id="section-2">
+      <h2 id="name-conventions-used-in-this-do"><a href="#section-2">2.&nbsp;&nbsp;Conventions Used in This Document</a></h2>
+<p id="section-2-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>",
+         "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>", "<span class="bcp14">MAY</span>",
+         and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as described in
+         BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
+         appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">
+      Type signatures, examples, and property descriptions in this document
+      follow the conventions established in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-1.1" class="relref" target="_blank" rel="noopener">Section 1.1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.
+      Data types defined in the core specification are also used in this document.<a href="#section-2-2" class="pilcrow">¶</a></p>
+</section>
+<section id="section-3">
+      <h2 id="name-addition-to-the-capabilitie"><a href="#section-3">3.&nbsp;&nbsp;Addition to the Capabilities Object</a></h2>
+<p id="section-3-1">
+        The <strong>capabilities</strong> object is returned as part of the standard JMAP
+        Session object; see <span><a href="https://rfc-editor.org/rfc/rfc8620#section-2" class="relref" target="_blank" rel="noopener">Section 2<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.
+        Servers supporting this
+        specification <span class="bcp14">MUST</span> add a property called
+        "urn:ietf:params:jmap:smimeverify" to the capabilities object.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">
+        The value of this property is an empty object in both the JMAP
+        Session <em>capabilities</em> property and an account's
+        <em>accountCapabilities</em> property.<a href="#section-3-2" class="pilcrow">¶</a></p>
+</section>
+<div id="smime">
+<section id="section-4">
+      <h2 id="name-extension-for-s-mime-signat"><a href="#section-4">4.&nbsp;&nbsp;Extension for S/MIME Signature Verification</a></h2>
+<div id="email-get-ext">
+<section id="section-4.1">
+        <h3 id="name-extension-to-email-get"><a href="#section-4.1">4.1.&nbsp;&nbsp;Extension to Email/get</a></h3>
+<p id="section-4.1-1">
+      
+        <span>[<a href="#RFC8621" class="cite xref">RFC8621</a>]</span> defines the Email/get method for retrieving message-specific information.
+        This document defines the following pseudo values in the <em>properties</em> argument:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<dl class="dlNewline" id="section-4.1-2">
+          <dt id="section-4.1-2.1">
+<strong>smimeStatus</strong>:</dt>
+          <dd id="section-4.1-2.2">If "smimeStatus" is included in the list of requested
+          properties, it <span class="bcp14">MUST</span> be interpreted by the server as a request to
+          return the "smimeStatus" response property.<a href="#section-4.1-2.2" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-4.1-2.3">
+<strong>smimeStatusAtDelivery</strong>:</dt>
+          <dd id="section-4.1-2.4">If "smimeStatusAtDelivery" is included in the list of requested
+        properties, it <span class="bcp14">MUST</span> be interpreted by the server as a request to
+        return the "smimeStatusAtDelivery" response property. (It is effectively the same as
+ the "smimeStatus"
+        value calculated at the date/time of delivery, as specified by "receivedAt".)<a href="#section-4.1-2.4" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-4.1-2.5">
+<strong>smimeErrors</strong>:</dt>
+          <dd id="section-4.1-2.6">If "smimeErrors" is included in the list of requested
+        properties, it <span class="bcp14">MUST</span> be interpreted by the server as a request to
+        return the "smimeErrors" response property.<a href="#section-4.1-2.6" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-4.1-2.7">
+<strong>smimeVerifiedAt</strong>:</dt>
+          <dd id="section-4.1-2.8">If "smimeVerifiedAt" is included in the list of requested
+        properties, it <span class="bcp14">MUST</span> be interpreted by the server as a request to
+        return the "smimeVerifiedAt" response property.<a href="#section-4.1-2.8" class="pilcrow">¶</a>
+</dd>
+        
+</dl>
+<p id="section-4.1-3">The "smimeStatus" response property is defined as follows:<a href="#section-4.1-3" class="pilcrow">¶</a></p>
+<dl class="dlNewline" id="section-4.1-4">
+          <dt id="section-4.1-4.1">
+<strong>smimeStatus</strong>:</dt>
+          <dd id="section-4.1-4.2">
+            <p id="section-4.1-4.2.1">"String|null" (server-set). null signifies that the message doesn't
+        contain any signature. Otherwise, this property contains the S/MIME signature
+        and certificate verification status calculated according to
+        <span>[<a href="#RFC8551" class="cite xref">RFC8551</a>]</span>, <span>[<a href="#RFC8550" class="cite xref">RFC8550</a>]</span>, and <span>[<a href="#RFC5280" class="cite xref">RFC5280</a>]</span>.
+        Possible string values of the property are
+        listed below.  Servers <span class="bcp14">MAY</span> return other values not defined below,
+        as defined in extensions to this document.
+        Clients <span class="bcp14">MUST</span> treat unrecognized values as "unknown" or "signed/failed".
+        Note that the value of this property might change over time.<a href="#section-4.1-4.2.1" class="pilcrow">¶</a></p>
+<dl class="dlNewline" id="section-4.1-4.2.2">
+              <dt id="section-4.1-4.2.2.1">unknown:</dt>
+              <dd id="section-4.1-4.2.2.2">
+            An S/MIME message, but it was neither signed nor encrypted.
+            This can also be returned for a multipart/signed message that
+            contains an unrecognized signing protocol (for example, OpenPGP).<a href="#section-4.1-4.2.2.2" class="pilcrow">¶</a>
+</dd>
+              
+<dt id="section-4.1-4.2.2.3">signed:</dt>
+              <dd id="section-4.1-4.2.2.4">
+            An S/MIME signed message, but the signature was not yet
+            verified.  Some servers might not attempt to verify a signature
+            until a particular message is requested by the client.
+            (This is a useful optimization for a JMAP server to avoid doing work until exact
+     information is needed.
+            A JMAP client that only needs to display an icon that signifies presence of an
+     S/MIME signature can still use this value.)
+            JMAP servers compliant with this document <span class="bcp14">SHOULD</span> attempt signature
+     verification
+            and return "signed/verified" or "signed/failed" instead of this signature
+            status.<a href="#section-4.1-4.2.2.4" class="pilcrow">¶</a>
+</dd>
+              
+<dt id="section-4.1-4.2.2.5">signed/verified:</dt>
+              <dd id="section-4.1-4.2.2.6">
+            An S/MIME signed message, and the sender's signature
+            was successfully verified according to
+            <span>[<a href="#RFC8551" class="cite xref">RFC8551</a>]</span> and <span>[<a href="#RFC8550" class="cite xref">RFC8550</a>]</span>. 
+            Additionally, the signer email address extracted from the S/MIME
+            certificate matches the From header field value, and
+            the signer certificate <span class="bcp14">SHOULD</span> be checked for revocation.<a href="#section-4.1-4.2.2.6" class="pilcrow">¶</a>
+</dd>
+              
+<dt id="section-4.1-4.2.2.7">signed/failed:</dt>
+              <dd id="section-4.1-4.2.2.8">
+            S/MIME signed message, but the signature failed to
+            verify according to <span>[<a href="#RFC8551" class="cite xref">RFC8551</a>]</span> and <span>[<a href="#RFC8550" class="cite xref">RFC8550</a>]</span>.
+            This might be because of a policy-related decision (e.g., the message signer
+     email address
+            doesn't match the From header field value), the message was modified,
+            the signer's certificate has expired or was revoked, etc.<a href="#section-4.1-4.2.2.8" class="pilcrow">¶</a>
+</dd>
+              
+<dt id="section-4.1-4.2.2.9">encrypted+signed/verified:</dt>
+              <dd id="section-4.1-4.2.2.10">
+            This value is reserved for future use. It is typically handled in the same way as "signed/verified".<a href="#section-4.1-4.2.2.10" class="pilcrow">¶</a>
+</dd>
+              
+<dt id="section-4.1-4.2.2.11">encrypted+signed/failed:</dt>
+              <dd id="section-4.1-4.2.2.12">
+            This value is reserved for future use. It is typically handled in the same way as "signed/failed".<a href="#section-4.1-4.2.2.12" class="pilcrow">¶</a>
+</dd>
+            
+</dl>
+</dd>
+        
+</dl>
+<p id="section-4.1-5">The "smimeStatusAtDelivery" response property
+      has the same syntax as "smimeStatus" but is calculated in relationship to the "receivedAt"
+      date/time.
+      Unlike "smimeStatus", the "smimeStatusAtDelivery" response property
+      value doesn't change unless trust anchors are added. (For example, addition of a trust anchor
+      can change the value of a message "smimeStatusAtDelivery" property from "signed/failed"
+      to "signed/verified". Note that trust anchor removal doesn't affect this response property.)
+      The "smimeStatusAtDelivery" response property value allows clients to compare the S/MIME
+      signature verification status at delivery with the current status as returned
+      by "smimeStatus", for example, to help to answer questions like
+      "was the signature valid at the time of delivery?".<a href="#section-4.1-5" class="pilcrow">¶</a></p>
+<p id="section-4.1-6">Note that the "smimeStatusAtDelivery" response property
+      value doesn't have to be calculated at delivery time. A JMAP server
+      can defer its calculation until it is explicitly requested;
+      however, once it is calculated, its value is remembered for later use.<a href="#section-4.1-6" class="pilcrow">¶</a></p>
+<p id="section-4.1-7">The "smimeErrors" response property is defined as follows:<a href="#section-4.1-7" class="pilcrow">¶</a></p>
+<dl class="dlNewline" id="section-4.1-8">
+          <dt id="section-4.1-8.1">
+<strong>smimeErrors</strong>:</dt>
+          <dd id="section-4.1-8.2">"String[]|null" (server-set). null signifies that the message doesn't
+        contain any signature or that there were no errors when verifying
+        the S/MIME signature. (That is, this property is non-null only
+        when the corresponding "smimeStatus" response property value
+        is "signed/failed" or "encrypted+signed/failed".
+ Note that future extensions to this document
+        can specify other "smimeStatus" values that can be used with "smimeErrors".)
+        Each string in the array is a human-readable description
+        (in the language specified in the Content-Language header field, if any)
+        of a problem with the signature, the signing certificate, or the signing certificate
+ chain.
+        (See <span><a href="https://rfc-editor.org/rfc/rfc8620#section-3.8" class="relref" target="_blank" rel="noopener">Section 3.8<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> in regards to how this
+ is affected
+        by the language selection.)
+        In one example, the signing certificate might be expired
+        and the message From email address might not correspond to any of the email
+        addresses in the signing certificate.
+        In another example, the certificate might be expired and the JMAP server might
+ be unable
+        to retrieve a Certificate Revocation List (CRL) for the certificate.
+        In both of these cases, there would be 2 elements in the array.<a href="#section-4.1-8.2" class="pilcrow">¶</a>
+</dd>
+        
+</dl>
+<p id="section-4.1-9">The "smimeVerifiedAt" response property is defined as follows:<a href="#section-4.1-9" class="pilcrow">¶</a></p>
+<dl class="dlNewline" id="section-4.1-10">
+          <dt id="section-4.1-10.1">
+<strong>smimeVerifiedAt</strong>:</dt>
+          <dd id="section-4.1-10.2">"UTCDate|null" (server-set). null signifies that the message doesn't
+        contain any S/MIME signature or that there is a signature, but there was no attempt
+        to verify it.
+        (Retrieval of the "smimeStatus" value can be used to distinguish these 2 cases).
+        In all other cases, it is set to the date and time of when the S/MIME signature
+        was most recently verified.
+        Note that a request to fetch "smimeStatus", "smimeStatusAtDelivery", and/or "smimeErrors" would force this response
+        property to be set to a non-null value if an S/MIME signature exists.<a href="#section-4.1-10.2" class="pilcrow">¶</a>
+</dd>
+        
+</dl>
+<p id="section-4.1-11">The "smimeStatus" and "smimeErrors" values are calculated at the time the
+ corresponding JMAP 
+      request is processed (but see below about the effect of result caching),
+      not at the time when the message is generated (according to its
+      Date header field value). In all cases, "smimeVerifiedAt" is set to the time when
+      "smimeStatus" and "smimeErrors" were last updated.
+      As recalculating these values is expensive for the server,
+      they <span class="bcp14">MAY</span> be cached for up to 24 hours from the moment when they were calculated.<a href="#section-4.1-11" class="pilcrow">¶</a></p>
+<p id="section-4.1-12" class="keepWithNext">
+        Example 1: Retrieval of minimal information about a message, including its From, Subject, and Date header fields,
+        as well as the S/MIME signature verification status at delivery and date/time when the message was received.<a href="#section-4.1-12" class="pilcrow">¶</a></p>
+<div class="sourcecode" id="section-4.1-13">
+<pre>["Email/get", {
+"ids": [ "fe123u457" ],
+"properties": [ "mailboxIds", "from", "subject", "date",
+ "smimeStatusAtDelivery", "receivedAt" ]
+}, "#1"]
+</pre><a href="#section-4.1-13" class="pilcrow">¶</a>
+</div>
+<p id="section-4.1-14">This might result in the following response:<a href="#section-4.1-14" class="pilcrow">¶</a></p>
+<div class="sourcecode" id="section-4.1-15">
+<pre>[["Email/get", {
+   "accountId": "abc",
+   "state": "51234123231",
+   "list": [
+     {
+       "id": "fe123u457",
+       "mailboxIds": { "f123": true },
+       "from": [{"name": "Joe Bloggs",
+               "email": "joe@bloggs.example.net"}],
+       "subject": "Dinner tonight?",
+       "date": "2020-07-07T14:12:00Z",
+       "smimeStatusAtDelivery": "signed/verified",
+       "receivedAt": "2020-07-07T14:15:18Z"
+     }
+   ]
+}, "#1"]]
+</pre><a href="#section-4.1-15" class="pilcrow">¶</a>
+</div>
+<p id="section-4.1-16" class="keepWithNext">
+        Example 2: Retrieval of minimal information about a message, including its From, Subject, and Date header fields,
+        as well as the latest S/MIME signature verification status, S/MIME verification errors (if any), and
+        when the S/MIME signature status was last verified.
+        The response contains 2 S/MIME errors related to S/MIME signature verification.<a href="#section-4.1-16" class="pilcrow">¶</a></p>
+<div class="sourcecode" id="section-4.1-17">
+<pre>["Email/get", {
+"ids": [ "ag123u123" ],
+"properties": [ "mailboxIds", "from", "subject", "date",
+ "smimeStatus", "smimeErrors", "smimeVerifiedAt" ]
+}, "#1"]
+</pre><a href="#section-4.1-17" class="pilcrow">¶</a>
+</div>
+<p id="section-4.1-18">This might result in the following response:<a href="#section-4.1-18" class="pilcrow">¶</a></p>
+<div class="sourcecode" id="section-4.1-19">
+<pre>[["Email/get", {
+   "accountId": "abc",
+   "state": "47234123231",
+   "list": [
+     {
+       "id": "ag123u123",
+       "mailboxIds": { "f123": true },
+       "from": [{"name": "Jane Doe",
+               "email": "jdoe@example.com"}],
+       "subject": "Company takeover",
+       "date": "2020-01-31T23:00:00Z",
+       "smimeStatus": "signed/failed",
+       "smimeErrors": [
+         "From email address doesn't match the certificate",
+         "Can't retrieve CRL from the CRL URL"],
+       "smimeVerifiedAt": "2020-03-01T12:11:19Z"
+     }
+   ]
+}, "#1"]]
+</pre><a href="#section-4.1-19" class="pilcrow">¶</a>
+</div>
+<section id="section-4.1.1">
+          <h4 id="name-smimestatus-response-proper"><a href="#section-4.1.1">4.1.1.&nbsp;&nbsp;"smimeStatus" Response Property Extensibility</a></h4>
+<p id="section-4.1.1-1">
+          Future extensions to this document can specify extra allowed values for the "smimeStatus" response property.
+          All values (defined in this document or in extensions to this document) <span class="bcp14">MUST</span> be in ASCII.
+          (Note that this response property contains tokens; thus, it is not subject to
+          internationalization or localization).<a href="#section-4.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-2">
+          New "smimeStatus" response property values defined in extensions may affect the behavior of
+          properties, such as the "smimeErrors" response property of Email/get (see <a href="#email-get-ext" class="auto internal xref">Section 4.1</a>) or the
+          "hasVerifiedSmime" property of Email/query (see <a href="#email-query-ext" class="auto internal xref">Section 4.2</a>). In particular,
+          the new values can be treated similarly to values defined in this document.<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-4.1.1-3">
+          For example, a putative JMAP extension for automatically decrypting S/MIME messages can specify
+          two additional values, one specifying that a message is both encrypted and signed with a valid S/MIME signature
+          (e.g. "encrypted+signed/verified")
+          and another one specifying that a message is both encrypted and signed with an invalid S/MIME signature
+          (e.g. "encrypted+signed/failed").
+          The former value can be treated as "signed/verified" (and would thus affect "hasVerifiedSmime")
+          and the latter can be treated as "signed/failed" (and thus can be used with "smimeErrors").<a href="#section-4.1.1-3" class="pilcrow">¶</a></p>
+</section>
+</section>
+</div>
+<div id="email-query-ext">
+<section id="section-4.2">
+        <h3 id="name-extension-to-email-query"><a href="#section-4.2">4.2.&nbsp;&nbsp;Extension to Email/query</a></h3>
+<p id="section-4.2-1">
+        <span>[<a href="#RFC8621" class="cite xref">RFC8621</a>]</span> defines the Email/query method for searching for messages with specific properties.
+        This document defines the following properties of the <strong>FilterCondition</strong> object:<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<dl class="dlNewline" id="section-4.2-2">
+          <dt id="section-4.2-2.1">
+<strong>hasSmime</strong>:</dt>
+          <dd id="section-4.2-2.2">"Boolean". If "hasSmime" has the value true, only messages with "smimeStatus"
+   other than null match the condition.
+          If "hasSmime" has the value false, only messages with "smimeStatus" equal to null
+   match the condition.<a href="#section-4.2-2.2" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-4.2-2.3">
+<strong>hasVerifiedSmime</strong>:</dt>
+          <dd id="section-4.2-2.4">
+            <p id="section-4.2-2.4.1">"Boolean". If "hasVerifiedSmime" has the value true, only messages with
+   "smimeStatus" equal
+          to "signed/verified" or "encrypted+signed/verified" (*) match the condition.
+          If "hasVerifiedSmime" has the value false, only messages with "smimeStatus" not
+   equal
+          to "signed/verified" and not equal to "encrypted+signed/verified" (*) (including
+   the value null) match the condition.
+          Note that use of this attribute is potentially expensive for a JMAP server, as it
+   forces
+          calculation of the "smimeStatus" property value for each message. However, caching of the 
+   "smimeStatus"
+          values should ameliorate this cost somewhat.<a href="#section-4.2-2.4.1" class="pilcrow">¶</a></p>
+<p id="section-4.2-2.4.2">
+          (*) as well as the "smimeStatus" values added by future extensions to this document
+          that are explicitly specified as having similar effect to "signed/verified" as far
+   as
+          "hasVerifiedSmime" calculation is concerned.<a href="#section-4.2-2.4.2" class="pilcrow">¶</a></p>
+</dd>
+          
+<dt id="section-4.2-2.5">
+<strong>hasVerifiedSmimeAtDelivery</strong>:</dt>
+          <dd id="section-4.2-2.6">"Boolean". The "hasVerifiedSmimeAtDelivery" property is handled similarly to
+   the "hasVerifiedSmime" property,
+          but the value of "smimeStatusAtDelivery" is used instead of "smimeStatus" to assess
+          whether a particular message matches the condition.<a href="#section-4.2-2.6" class="pilcrow">¶</a>
+</dd>
+        
+</dl>
+</section>
+</div>
+<section id="section-4.3">
+        <h3 id="name-interaction-with-email-chan"><a href="#section-4.3">4.3.&nbsp;&nbsp;Interaction with Email/changes</a></h3>
+<p id="section-4.3-1">Changes to the "smimeVerifiedAt" response property value <span class="bcp14">MUST NOT</span>
+        cause the message to be included in the "updated" argument of the Email/changes response.
+        However, changes to the "smimeStatus", "smimeStatusAtDelivery", and/or "smimeErrors"
+        response properties <span class="bcp14">MUST</span> result in message inclusion in the "updated" argument of the
+ Email/changes response.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+</section>
+</section>
+</div>
+<section id="section-5">
+      <h2 id="name-iana-considerations"><a href="#section-5">5.&nbsp;&nbsp;IANA Considerations</a></h2>
+<section id="section-5.1">
+        <h3 id="name-jmap-capability-registratio"><a href="#section-5.1">5.1.&nbsp;&nbsp;JMAP Capability Registration for "smimeverify"</a></h3>
+<p id="section-5.1-1">
+          IANA has registered the "smimeverify" JMAP capability as follows:<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<dl class="dlCompact dlParallel" id="section-5.1-2">
+          <dt id="section-5.1-2.1">Capability Name:</dt>
+          <dd id="section-5.1-2.2">urn:ietf:params:jmap:smimeverify<a href="#section-5.1-2.2" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-5.1-2.3">Specification document:</dt>
+          <dd id="section-5.1-2.4">RFC 9219<a href="#section-5.1-2.4" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-5.1-2.5">Intended use:</dt>
+          <dd id="section-5.1-2.6">common<a href="#section-5.1-2.6" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-5.1-2.7">Change Controller:</dt>
+          <dd id="section-5.1-2.8">IETF<a href="#section-5.1-2.8" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-5.1-2.9">Security and privacy considerations:</dt>
+          <dd id="section-5.1-2.10">RFC 9219, <a href="#seccons" class="auto internal xref">Section 6</a><a href="#section-5.1-2.10" class="pilcrow">¶</a>
+</dd>
+        
+</dl>
+</section>
+</section>
+<div id="seccons">
+<section id="section-6">
+      <h2 id="name-security-considerations"><a href="#section-6">6.&nbsp;&nbsp;Security Considerations</a></h2>
+<p id="section-6-1">
+      Use of the server-side S/MIME signature verification JMAP extension requires
+      the client to trust the server signature verification code, the server configuration, and
+      the server's operational practices
+      to perform S/MIME signature verification, as well as to trust that the channel between
+      the client and the server is integrity protected.
+      (For example, if the server is not configured
+      with some trust anchors, some messages will have the "signed/failed" status
+      instead of "signed/verified".)
+      A malicious or compromised server could
+      return a false verification status to a client.  A successful verification could
+      be conveyed to a client for a forged or altered message.  A properly signed
+      message could be signaled as having a failed signature verification or no
+      signature at all.  In the case of the latter attack, no new attack surface is
+      presented with this extension above what a malicious or compromised server could
+      already do by stripping or tampering with the S/MIME information in the
+      message.  In the case of the former attack, client software capable of
+      performing S/MIME signature verification could detect this attack.  Local
+      configuration of the client should determine if this client-side verification
+      should occur.  For clients without local verification capabilities, such an
+      attack would be difficult to detect.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">
+      Integrity protection of the channel between the client and the server is provided by use of TLS,
+      as required by the JMAP specification (see <span><a href="https://rfc-editor.org/rfc/rfc8620#section-8.1" class="relref" target="_blank" rel="noopener">Section 8.1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>).<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-3">Constant recalculation of the S/MIME signature status can result in a denial-of-service condition.
+      For that reason, it is <span class="bcp14">RECOMMENDED</span> that servers cache results of signature verification for up to 24 hours.<a href="#section-6-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<section id="section-7">
+      <h2 id="name-references"><a href="#section-7">7.&nbsp;&nbsp;References</a></h2>
+<section id="section-7.1">
+        <h3 id="name-normative-references"><a href="#section-7.1">7.1.&nbsp;&nbsp;Normative References</a></h3>
+<dl class="references">
+<dt id="RFC2119">[RFC2119]</dt>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc2119<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC5280">[RFC5280]</dt>
+        <dd>
+<span class="refAuthor">Cooper, D.</span>, <span class="refAuthor">Santesson, S.</span>, <span class="refAuthor">Farrell, S.</span>, <span class="refAuthor">Boeyen, S.</span>, <span class="refAuthor">Housley, R.</span>, and <span class="refAuthor">W. Polk</span>, <span class="refTitle">"Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile"</span>, <span class="seriesInfo">RFC 5280</span>, <span class="seriesInfo">DOI 10.17487/RFC5280</span>, <time datetime="2008-05" class="refDate">May 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5280" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc5280<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC8174">[RFC8174]</dt>
+        <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8174<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC8550">[RFC8550]</dt>
+        <dd>
+<span class="refAuthor">Schaad, J.</span>, <span class="refAuthor">Ramsdell, B.</span>, and <span class="refAuthor">S. Turner</span>, <span class="refTitle">"Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 4.0 Certificate Handling"</span>, <span class="seriesInfo">RFC 8550</span>, <span class="seriesInfo">DOI 10.17487/RFC8550</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8550" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8550<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC8551">[RFC8551]</dt>
+        <dd>
+<span class="refAuthor">Schaad, J.</span>, <span class="refAuthor">Ramsdell, B.</span>, and <span class="refAuthor">S. Turner</span>, <span class="refTitle">"Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 4.0 Message Specification"</span>, <span class="seriesInfo">RFC 8551</span>, <span class="seriesInfo">DOI 10.17487/RFC8551</span>, <time datetime="2019-04" class="refDate">April 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8551" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8551<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC8620">[RFC8620]</dt>
+        <dd>
+<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"The JSON Meta Application Protocol (JMAP)"</span>, <span class="seriesInfo">RFC 8620</span>, <span class="seriesInfo">DOI 10.17487/RFC8620</span>, <time datetime="2019-07" class="refDate">July 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8620" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8620<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC8621">[RFC8621]</dt>
+      <dd>
+<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"The JSON Meta Application Protocol (JMAP) for Mail"</span>, <span class="seriesInfo">RFC 8621</span>, <span class="seriesInfo">DOI 10.17487/RFC8621</span>, <time datetime="2019-08" class="refDate">August 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8621" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8621<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+</dl>
+</section>
+<section id="section-7.2">
+        <h3 id="name-informative-references"><a href="#section-7.2">7.2.&nbsp;&nbsp;Informative References</a></h3>
+<dl class="references">
+<dt id="RFC1847">[RFC1847]</dt>
+      <dd>
+<span class="refAuthor">Galvin, J.</span>, <span class="refAuthor">Murphy, S.</span>, <span class="refAuthor">Crocker, S.</span>, and <span class="refAuthor">N. Freed</span>, <span class="refTitle">"Security Multiparts for MIME: Multipart/Signed and Multipart/Encrypted"</span>, <span class="seriesInfo">RFC 1847</span>, <span class="seriesInfo">DOI 10.17487/RFC1847</span>, <time datetime="1995-10" class="refDate">October 1995</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc1847" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc1847<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+</dl>
+</section>
+</section>
+<section id="appendix-A">
+      <h2 id="name-acknowledgements"><a href="#name-acknowledgements">Acknowledgements</a></h2>
+<p id="appendix-A-1">This document is a product of the JMAP Working Group.
+      Special thank you to <span class="contact-name">Bron Gondwana</span>, <span class="contact-name">Neil       Jenkins</span>, <span class="contact-name">Murray Kucherawy</span>, <span class="contact-name">Kirsty Paine</span>,
+      <span class="contact-name">Benjamin Kaduk</span>, <span class="contact-name">Roman Danyliw</span>, <span class="contact-name">Peter Yee</span>, <span class="contact-name">Robert Wilton</span>,
+      <span class="contact-name">Erik Kline</span>, and <span class="contact-name">Menachem Dodge</span> for
+      suggestions, comments, and corrections to this document.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+</section>
+
+
+
+
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo"><a href="#name-status-of-this-memo">Status of This Memo</a></h2>
+<p id="section-boilerplate.1-1">
+            This is an Internet Standards Track document.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+            This document is a product of the Internet Engineering Task Force
+            (IETF).  It represents the consensus of the IETF community.  It has
+            received public review and has been approved for publication by
+            the Internet Engineering Steering Group (IESG).  Further
+            information on Internet Standards is available in Section 2 of 
+            RFC 7841.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+            Information about the current status of this document, any
+            errata, and how to provide feedback on it may be obtained at
+            <span><a href="https://www.rfc-editor.org/info/rfc9219" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9219<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+</section>
+</div><div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice"><a href="#name-copyright-notice">Copyright Notice</a></h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2022 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info" target="_blank" rel="noopener">https://trustee.ietf.org/license-info<span class="u-visually-hidden"> (opens in new window)</span></a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>

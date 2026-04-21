@@ -1,0 +1,349 @@
+:root {
+    /* -- Fluid type scale */
+
+    /* @link https://utopia.fyi/type/calculator?c=328,16,1.2,1116,18,1.25,9,3,&s=0.75%7C0.5%7C0.25,1.5%7C2%7C3%7C4%7C6,s-l&g=s,l,xl,12 */
+    --size-step--3: clamp(0.576rem, 0.5798rem + -0.0055vw, 0.5787rem);
+    --size-step--2: clamp(0.6944rem, 0.6838rem + 0.0519vw, 0.72rem);
+    --size-step--1: clamp(0.8333rem, 0.8056rem + 0.1354vw, 0.9rem);
+    --size-step-0: clamp(1rem, 0.948rem + 0.2538vw, 1.125rem);
+    --size-step-1: clamp(1.2rem, 1.1141rem + 0.4188vw, 1.4063rem);
+    --size-step-2: clamp(1.44rem, 1.3077rem + 0.6453vw, 1.7578rem);
+    --size-step-3: clamp(1.728rem, 1.5327rem + 0.9528vw, 2.1973rem);
+    --size-step-4: clamp(2.0736rem, 1.7935rem + 1.3665vw, 2.7466rem);
+    --size-step-5: clamp(2.4883rem, 2.095rem + 1.9186vw, 3.4332rem);
+    --size-step-6: clamp(2.986rem, 2.4426rem + 2.6509vw, 4.2915rem);
+    --size-step-7: clamp(3.5832rem, 2.8418rem + 3.6167vw, 5.3644rem);
+    --size-step-8: clamp(4.2998rem, 3.2985rem + 4.8847vw, 6.7055rem);
+    --size-step-9: clamp(5.1598rem, 3.8186rem + 6.5424vw, 8.3819rem);
+
+    /* -- Spacing */
+
+    /* @link https://utopia.fyi/space/calculator?c=328,16,1.2,1116,18,1.25,9,3,&s=0.75%7C0.5%7C0.25,1.5%7C2%7C3%7C4%7C6,s-l&g=s,l,xl,12 */
+    --space-3xs: 4px;
+    --space-2xs: 8px;
+    --space-xs: clamp(0.75rem, 0.698rem + 0.2538vw, 0.875rem);
+    --space-s: clamp(1rem, 0.948rem + 0.2538vw, 1.125rem);
+    --space-m: clamp(1.5rem, 1.422rem + 0.3807vw, 1.6875rem);
+    --space-l: clamp(2rem, 1.8959rem + 0.5076vw, 2.25rem);
+    --space-xl: clamp(3rem, 2.8439rem + 0.7614vw, 3.375rem);
+    --space-2xl: clamp(4rem, 3.7919rem + 1.0152vw, 4.5rem);
+    --space-3xl: clamp(6rem, 5.6878rem + 1.5228vw, 6.75rem);
+
+    /* -- Grid */
+
+    /* @link https://utopia.fyi/grid/calculator?c=328,16,1.2,1116,18,1.25,9,3,&s=0.75%7C0.5%7C0.25,1.5%7C2%7C3%7C4%7C6,s-l&g=s,l,xl,12 */
+    --grid-max-width: 69.75rem;
+    --grid-gutter: var(--space-s-l, clamp(1rem, 0.4797rem + 2.5381vw, 2.25rem));
+    --grid-columns: 12;
+
+    /* -- Fonts */
+
+    /* @link https://fonts.google.com/share?selection.family=Bricolage+Grotesque:opsz,wght@12..96,200..800%7CInstrument+Sans:ital,wght@0,400..700;1,400..700 */
+    --font-base: 'DM Sans', 'Helvetica Neue', arial, sans-serif;
+    --font-display: 'Bricolage Grotesque', 'Helvetica Neue', arial, sans-serif;
+    --font-mono: menlo, consolas, monospace;
+
+    /* -- Leading */
+    --leading: 1.5;
+    --leading-flat: 1;
+
+    /* -- Text size */
+    --text-size-base: var(--size-step-0);
+    --text-size-meta: var(--size-step--1);
+    --text-size-heading-1: var(--size-step-4);
+    --text-size-heading-2: var(--size-step-3);
+    --text-size-heading-3: var(--size-step-2);
+    --text-size-heading-4: var(--size-step-1);
+    --text-size-article: var(--text-size-base);
+
+    /* -- Letter spacing */
+    --tracking: normal;
+    --tracking-tight: -0.05ch;
+    --tracking-loose: 0.04ch;
+
+    /* -- Font weight */
+    --font-thin: 100;
+    --font-light: 300;
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+
+    /* -- Corner radius */
+    --radius-s: 4px;
+    --radius-m: 8px;
+    --radius-l: 12px;
+    --radius-xl: 16px;
+    --radius-2xl: 20px;
+    --radius-full: 9999px;
+
+    /* -- Animation */
+    --ease-in: cubic-bezier(0.87, 0, 0.13, 1);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --dur-s: 150ms;
+    --dur-m: 250ms;
+    --dur-l: 500ms;
+
+    --nav-h: 66px;
+    --sidebar-w: 260px;
+    --page-max: 1280px;
+
+    /* -- Colors */
+    --color-teal-50: oklch(98.33% 0.00648 186.262deg);
+    --color-teal-100: oklch(95.646% 0.01487 192.174deg);
+    --color-teal-150: oklch(91.966% 0.03245 182.376deg);
+    --color-teal-200: oklch(89.358% 0.04401 182.245deg);
+    --color-teal-250: oklch(84.323% 0.06482 180.048deg);
+    --color-teal-300: oklch(79.401% 0.08449 179.311deg);
+    --color-teal-400: oklch(74.718% 0.1007 178.059deg);
+    --color-teal-450: oklch(66.213% 0.10116 177.379deg);
+    --color-teal-500: oklch(55.536% 0.09604 184.635deg);
+    --color-teal-600: oklch(51.265% 0.08861 184.583deg);
+    --color-teal-700: oklch(47.229% 0.08138 184.588deg);
+    --color-teal-750: oklch(43.104% 0.07399 184.593deg);
+    --color-teal-800: oklch(38.585% 0.06544 185.927deg);
+    --color-teal-850: oklch(34.232% 0.0576 186.162deg);
+    --color-teal-900: oklch(29.695% 0.04991 184.463deg);
+    --color-teal-950: oklch(19.76% 0.03155 187.676deg);
+
+    --color-mist-300: oklch(69.069% 0.04993 187.782deg);
+
+    --color-black: oklch(0% 0 0deg);
+    --color-black-fade-02: oklch(0% 0 0deg / 2%);
+    --color-black-fade-04: oklch(0% 0 0deg / 4%);
+    --color-black-fade-08: oklch(0% 0 0deg / 8%);
+    --color-black-fade-15: oklch(0% 0 0deg / 15%);
+    --color-black-fade-18: oklch(0% 0 0deg / 18%);
+    --color-black-fade-30: oklch(0% 0 0deg / 30%);
+    --color-black-fade-50: oklch(0% 0 0deg / 50%);
+
+    --color-white: oklch(100% 0.00011 271.152deg);
+    --color-white-fade-02: oklch(100% 0.00011 271.152deg / 2%);
+    --color-white-fade-04: oklch(100% 0.00011 271.152deg / 4%);
+    --color-white-fade-08: oklch(100% 0.00011 271.152deg / 8%);
+    --color-white-fade-15: oklch(100% 0.00011 271.152deg / 15%);
+    --color-white-fade-70: oklch(100% 0.00011 271.152deg / 70%);
+    --color-white-fade-80: oklch(100% 0.00011 271.152deg / 80%);
+
+    --color-grey-50: oklch(92.797% 0.00011 271.152deg);
+    --color-grey-100: oklch(85.682% 0.00113 201.886deg);
+    --color-grey-200: oklch(78.21% 0.00189 248.919deg);
+    --color-grey-300: oklch(70.736% 0.00233 199.009deg);
+    --color-grey-400: oklch(63.174% 0.00239 198.753deg);
+    --color-grey-500: oklch(55.066% 0.00295 229.642deg);
+    --color-grey-600: oklch(46.849% 0.00383 197.793deg);
+    --color-grey-700: oklch(38.041% 0.00439 220.04deg);
+    --color-grey-800: oklch(28.954% 0.00599 214.654deg);
+    --color-grey-900: oklch(19.188% 0.00655 214.629deg);
+    --color-grey-950: oklch(17.404% 0.02768 251.15deg);
+    --color-grey-1000: oklch(21.629% 0.04474 256.182deg);
+    --color-grey-1100: oklch(21.154% 0.0309 245.835deg);
+    --color-grey-1200: oklch(17.404% 0.02768 251.15deg);
+
+    --color-orange-300: oklch(83.657% 0.11647 66.276deg);
+    --color-orange-700: oklch(55.341% 0.17385 38.39deg);
+
+    --theme-glass-blur: blur(10px);
+    --theme-glass-blur-strong: blur(20px);
+}
+
+[data-theme='dark'] {
+    --theme-accent: var(--color-teal-400);
+    --theme-accent-bright: var(--color-teal-50);
+    --theme-accent-dim: var(--color-teal-950);
+
+    --theme-page-bg: var(--color-grey-1100);
+    --theme-page-bg-fade: rgb(from var(--color-grey-1100) r g b / 90%);
+    --theme-page-bg-alt: var(--color-white-fade-02);
+    --theme-page-bg-overlay: linear-gradient(
+        101deg,
+        oklch(16.435% 0.0126 186.582deg / 55%) 0%,
+        oklch(16.435% 0.0126 186.582deg / 15%) 40%,
+        oklch(16.435% 0.0126 186.582deg / 0%) 65%
+    );
+    --theme-page-bg-accent-overlay: linear-gradient(
+        101deg,
+        oklch(55.536% 0.09604 184.635deg / 5%) 0%,
+        oklch(74.718% 0.1007 178.059deg / 8%) 40%,
+        oklch(47.229% 0.08138 184.588deg / 5%) 65%
+    );
+
+    --theme-hero-dot-bg-spotlight: var(--theme-accent);
+    --theme-hero-dot-bg-dim: var(--color-teal-850);
+    --theme-hero-dot-bg-gradient: oklch(from var(--color-teal-400) l c h / 60%);
+    --theme-hero-dot-bg-gradient-mask: linear-gradient(
+        200deg,
+        var(--color-black) 0%,
+        rgb(0 0 0 / 50%) 20%,
+        rgb(0 0 0 / 0%) 100%
+    );
+
+    --theme-border: var(--color-white-fade-08);
+    --theme-border-soft: var(--color-white-fade-04);
+    --theme-border-strong: var(--color-white-fade-15);
+
+    --theme-ink: var(--color-teal-50);
+    --theme-body: var(--color-white-fade-80);
+    --theme-muted: var(--color-grey-200);
+    --theme-eyebrow: var(--theme-accent);
+
+    --theme-glass-bg: var(--color-white-fade-04);
+    --theme-glass-border: var(--color-white-fade-08);
+
+    --theme-logo-text: var(--color-teal-50);
+
+    --theme-header-bg: rgb(from var(--theme-page-bg) r g b / 92%);
+    --theme-header-border: var(--theme-border);
+    --theme-header-shadow:
+        0 1px oklab(75% -0.1 0 / 6%), 0 4px 24px var(--color-black-fade-18);
+    --theme-footer-bg: transparent;
+
+    --theme-button-standard-fg: var(--theme-ink);
+    --theme-button-standard-fg-hover: var(--theme-accent);
+    --theme-button-standard-bg: var(--color-white-fade-08);
+    --theme-button-standard-border: var(--color-white-fade-15);
+    --theme-button-standard-border-hover: rgb(
+        from var(--theme-accent) r g b / 50%
+    );
+
+    --theme-button-cta-fg: var(--color-teal-950);
+    --theme-button-cta-bg: var(--theme-accent);
+    --theme-button-cta-bg-hover: var(--color-teal-250);
+    --theme-button-cta-border: var(--theme-accent);
+    --theme-button-cta-border-hover: var(--color-teal-250);
+
+    --theme-button-outline-fg: var(--theme-ink);
+    --theme-button-outline-fg-hover: var(--theme-accent);
+    --theme-button-outline-bg: transparent;
+    --theme-button-outline-border: var(--theme-border-strong);
+    --theme-button-outline-border-hover: var(--theme-accent);
+
+    --theme-button-simple-fg: var(--color-teal-150);
+    --theme-button-simple-fg-hover: var(--color-teal-50);
+
+    --theme-button-toc-fg: var(--theme-muted);
+    --theme-button-toc-fg-active: var(--theme-accent);
+    --theme-button-toc-bg-hover: var(--color-white-fade-08);
+
+    --theme-button-theme-fg: var(--color-grey-100);
+    --theme-button-theme-fg-hover: var(--color-teal-300);
+    --theme-button-theme-border: var(--theme-button-standard-border);
+    --theme-button-theme-border-hover: var(
+        --theme-button-standard-border-hover
+    );
+    --theme-button-theme-page-bg: transparent;
+    --theme-button-theme-page-bg-hover: var(--color-white-fade-04);
+
+    --theme-card-bg: var(--theme-glass-bg);
+    --theme-card-fg-muted: var(--color-grey-300);
+    --theme-card-border: var(--theme-glass-border);
+    --theme-card-border-hover: var(--theme-button-standard-border-hover);
+    --theme-card-backdrop: var(--theme-glass-blur);
+    --theme-card-shadow: 0 12px 32px
+        rgb(from var(--theme-card-border-hover) r g b / 15%);
+
+    --theme-modal-backdrop: var(--color-black-fade-50);
+
+    --theme-pre-fg: var(--theme-ink);
+    --theme-pre-bg: var(--color-black-fade-30);
+
+    --theme-code-fg: var(--theme-accent);
+    --theme-code-bg: rgb(from var(--color-teal-400) r g b / 14%);
+
+    --theme-diagram-bg: var(--color-black-fade-30);
+
+    --theme-warning: var(--color-orange-300);
+}
+
+[data-theme='light'] {
+    --theme-accent: var(--color-teal-500);
+    --theme-accent-bright: var(--color-teal-750);
+    --theme-accent-dim: var(--color-teal-950);
+
+    --theme-page-bg: var(--color-teal-100);
+    --theme-page-bg-fade: rgb(from var(--color-grey-1100) r g b / 90%);
+    --theme-page-bg-alt: var(--color-teal-50);
+    --theme-page-bg-overlay: transparent;
+    --theme-page-bg-accent-overlay: transparent;
+
+    --theme-hero-dot-bg-spotlight: var(--color-teal-900);
+    --theme-hero-dot-bg-dim: var(--color-teal-250);
+    --theme-hero-dot-bg-gradient: oklch(from var(--color-teal-600) l c h / 30%);
+    --theme-hero-dot-bg-gradient-mask: linear-gradient(
+        200deg,
+        var(--color-black) 0%,
+        rgb(0 0 0 / 0%) 100%
+    );
+    --theme-hero-bg: var(--color-teal-50);
+
+    --theme-border: var(--color-black-fade-15);
+    --theme-border-soft: var(--color-black-fade-04);
+    --theme-border-strong: var(--color-black-fade-30);
+
+    --theme-ink: var(--color-teal-950);
+    --theme-body: var(--color-teal-900);
+    --theme-muted: var(--color-teal-700);
+    --theme-eyebrow: var(--color-teal-600);
+
+    --theme-glass-bg: var(--color-white-fade-70);
+    --theme-glass-border: var(--color-black-fade-08);
+    --theme-logo-text: var(--color-grey-900);
+
+    --theme-header-bg: oklch(from var(--theme-page-bg) l c h / 92%);
+    --theme-header-border: var(--theme-border-soft);
+    --theme-header-shadow:
+        0px 0.1px 0.1px oklch(78.892% 0.00009 271.152deg / 26%),
+        0.2px 2.1px 2.6px -1.8px oklch(78.892% 0.00009 271.152deg / 35%);
+    --theme-footer-bg: var(--theme-page-bg-alt);
+
+    --theme-button-standard-fg: var(--color-teal-750);
+    --theme-button-standard-fg-hover: var(--theme-accent);
+    --theme-button-standard-bg: var(--color-white-fade-70);
+    --theme-button-standard-border: var(--color-teal-200);
+    --theme-button-standard-border-hover: var(--color-teal-250);
+
+    --theme-button-cta-fg: var(--color-white);
+    --theme-button-cta-bg: var(--theme-accent);
+    --theme-button-cta-bg-hover: var(--color-teal-700);
+    --theme-button-cta-border: var(--theme-accent);
+    --theme-button-cta-border-hover: var(--color-teal-700);
+
+    --theme-button-outline-fg: var(--theme-ink);
+    --theme-button-outline-fg-hover: var(--theme-accent);
+    --theme-button-outline-bg: transparent;
+    --theme-button-outline-border: var(--theme-border-strong);
+    --theme-button-outline-border-hover: var(--theme-accent);
+
+    --theme-button-simple-fg: var(--color-teal-600);
+    --theme-button-simple-fg-hover: var(--color-teal-750);
+
+    --theme-button-toc-fg: var(--theme-muted);
+    --theme-button-toc-fg-active: var(--theme-accent);
+    --theme-button-toc-bg-hover: var(--color-teal-150);
+
+    --theme-button-theme-fg: var(--color-grey-400);
+    --theme-button-theme-fg-hover: var(--color-teal-500);
+    --theme-button-theme-border: var(--color-grey-200);
+    --theme-button-theme-border-hover: var(--color-teal-500);
+    --theme-button-theme-page-bg: transparent;
+    --theme-button-theme-page-bg-hover: var(--color-black-fade-04);
+
+    --theme-card-bg: var(--theme-glass-bg);
+    --theme-card-border: var(--theme-glass-border);
+    --theme-card-border-hover: var(--theme-button-standard-border-hover);
+    --theme-card-backdrop: var(--theme-glass-blur);
+    --theme-card-shadow: 0 12px 32px
+        rgb(from var(--theme-card-border-hover) r g b / 15%);
+
+    --theme-modal-backdrop: var(--color-black-fade-30);
+
+    --theme-pre-fg: var(--theme-body);
+    --theme-pre-bg: var(--color-black-fade-02);
+
+    --theme-code-fg: var(--theme-accent);
+    --theme-code-bg: rgb(from var(--color-teal-400) r g b / 14%);
+
+    --theme-diagram-bg: var(--color-black-fade-02);
+
+    --theme-warning: var(--color-orange-700);
+}

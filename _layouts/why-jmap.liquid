@@ -1,0 +1,121 @@
+---
+layout: default
+stylesheets:
+    - article
+    - toc
+    - why-jmap
+scripts:
+    - toc
+---
+{%
+    include components/hero.liquid
+    eyebrow=page.hero.eyebrow
+    eyebrow_icon=page.hero.eyebrow_icon
+    title=page.hero.title
+    sub=page.hero.sub
+%}
+
+{% capture pageContent %}
+<article class='u-article'>{{ content }}</article>
+<div class='faq'>
+    <h2 class='faq__h2' id="faq">Frequently asked questions</h2>
+    <details class='faq__details'>
+        <summary class='faq__summary'>
+            What is JMAP?
+            <span class='faq__expand'>
+                {% include icons/plus.liquid %}
+            </span>
+        </summary>
+        <div class='faq__answer'>
+            <p>
+                JMAP (JSON Meta Application Protocol) is an open IETF standard for synchronising mail, calendars, and contacts between a client and server. It replaces IMAP, CardDAV, and CalDAV with a single consistent protocol built on HTTPS and JSON, with efficient batch requests and real-time push updates built in.
+            </p>
+        </div>
+    </details>
+    <details class='faq__details'>
+        <summary class='faq__summary'>
+            Is JMAP a replacement for IMAP?
+            <span class='faq__expand'>
+                {% include icons/plus.liquid %}
+            </span>
+        </summary>
+        <div class='faq__answer'>
+            <p>
+                Yes. JMAP covers everything IMAP does &mdash; reading,
+                searching, moving, flagging, and even sending email &mdash; with a much cleaner and more efficient API. JMAP also replaces POP3, client-side SMTP, CardDAV, and CalDAV.
+            </p>
+            <p>
+                JMAP does not replace server-to-server SMTP. Email servers still use SMTP to route messages between domains.
+            </p>
+        </div>
+    </details>
+    <details class='faq__details'>
+        <summary class='faq__summary'>
+            Which email providers support JMAP?
+            <span class='faq__expand'>
+                {% include icons/plus.liquid %}
+            </span>
+        </summary>
+        <div class='faq__answer'>
+            <p>
+                <strong><a href="https://www.fastmail.com">Fastmail</a></strong> is the largest JMAP provider and was instrumental in developing the standard &mdash; their web, desktop, and mobile clients all run on JMAP.
+            </p>
+            <p><strong>Stalwart Mail Server</strong> is a modern open-source server with complete JMAP support. <strong>Apache James</strong> and <strong>Cyrus IMAP</strong> also both support JMAP.
+            </p>
+        </div>
+    </details>
+    <details class='faq__details'>
+        <summary class='faq__summary'>
+            Is JMAP stable enough to build on?
+            <span class='faq__expand'>
+                {% include icons/plus.liquid %}
+            </span>
+        </summary>
+        <div class='faq__answer'>
+            <p>
+                Yes. RFC 8620 (Core), RFC 8621 (Mail), and RFC 9610 (Contacts) are published IETF standards and will not change in backwards-incompatible ways. Fastmail has been running their entire production email service on JMAP since 2019.
+            </p>
+        </div>
+    </details>
+    <details class='faq__details'>
+        <summary class='faq__summary'>
+            How does JMAP handle authentication?
+            <span class='faq__expand'>
+                {% include icons/plus.liquid %}
+            </span>
+        </summary>
+        <div class='faq__answer'>
+            <p>
+                JMAP deliberately does not define its own authentication mechanism, it just uses standard HTTP authentication. In practice, that's often OAuth 2.0 with Bearer tokens. This means JMAP works with your existing identity infrastructure without any changes.
+            </p>
+        </div>
+    </details>
+    <details class='faq__details'>
+        <summary class='faq__summary'>
+            How does JMAP perform compared to IMAP?
+            <span class='faq__expand'>
+                {% include icons/plus.liquid %}
+            </span>
+        </summary>
+        <div class='faq__answer'>
+            <p>
+                JMAP performs as well or better than IMAP in all tested scenarios. The white paper contains detailed benchmarks.
+            </p>
+            <p>
+                Modern IMAP with all extensions enabled can get a lot closer to JMAP's efficiency, but this requires both the client and server to implement the right extensions &mdash; which is rarely the case in practice.
+            </p>
+        </div>
+    </details>
+</div>
+{% endcapture %}
+
+<section class='section section--document'>
+    <div class='u-wrapper u-article-split'>
+        <nav class='u-toc-wrapper' aria-label='Table of contents'>
+            {% include toc.liquid html=pageContent class='u-toc' h_min=2 h_max=2 %}
+        </nav>
+        <div>{{ pageContent }}</div>
+    </div>
+</section>
+
+{% include components/toc-fab.liquid %}

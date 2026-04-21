@@ -1,0 +1,1003 @@
+---
+layout: article-toc
+permalink: /client/index.html
+redirect_from:
+    - /client.html
+title: JMAP Client Guide
+hero:
+    eyebrow: Implementation guide
+    eyebrow_icon: wrench-screwdriver
+    title: JMAP Client Guide
+    sub: >-
+        This guide shows how you can use JMAP to efficiently minimise bandwidth
+        usage and round trips whilst still giving the user a complete view of
+        their mail.
+---
+
+## Preface
+
+Minimising round trips is particularly relevant to clients on mobile devices,
+where there is not the space to store a complete cache of all messages, or for
+web clients where you often do not have a permanent cache at all and must
+efficiently start from scratch each time the app is loaded.
+
+A single login may have access to multiple accounts. In this guide I'm going to
+ignore this and just use the primary account, which I'm going to presume has
+full read-write mail access.
+
+## Cold boot
+
+When a user first logs in and you have no data cached for them, first call:
+
+```json
+[
+    [
+        "Mailbox/get",
+        {
+            "accountId": "u123456",
+            "ids": null
+        },
+        "0"
+    ]
+]
+```
+
+This will fetch the list of mailboxes for the user, and the permissions and
+roles for each. Here's an example of the response you might receive:
+
+```json
+[
+    [
+        "Mailbox/get",
+        {
+            "accountId": "u123456",
+            "state": "123",
+            "list": [
+                {
+                    "id": "mailbox1",
+                    "name": "Inbox",
+                    "parentId": null,
+                    "role": "inbox",
+                    "sortOrder": 0,
+                    "totalEmails": 1424,
+                    "unreadEmails": 3,
+                    "totalThreads": 1213,
+                    "unreadThreads": 2,
+                    "myRights": {
+                        "mayAddItems": true,
+                        "mayRename": false,
+                        "maySubmit": true,
+                        "mayDelete": false,
+                        "maySetKeywords": true,
+                        "mayRemoveItems": true,
+                        "mayCreateChild": true,
+                        "maySetSeen": true,
+                        "mayReadItems": true
+                    },
+                    "isSubscribed": true
+                },
+                {
+                    "id": "mailbox2",
+                    "name": "Sent",
+                    "parentId": null,
+                    "role": "sent",
+                    "sortOrder": 0,
+                    "totalEmails": 41,
+                    "unreadEmails": 0,
+                    "totalThreads": 32,
+                    "unreadThreads": 2,
+                    "myRights": {
+                        "mayAddItems": true,
+                        "mayRename": false,
+                        "maySubmit": true,
+                        "mayDelete": false,
+                        "maySetKeywords": true,
+                        "mayRemoveItems": true,
+                        "mayCreateChild": true,
+                        "maySetSeen": true,
+                        "mayReadItems": true
+                    },
+                    "isSubscribed": true
+                },
+                {
+                    "id": "mailbox3",
+                    "name": "Trash",
+                    "parentId": null,
+                    "role": "trash",
+                    "sortOrder": 0,
+                    "totalEmails": 3,
+                    "unreadEmails": 0,
+                    "totalThreads": 2,
+                    "unreadThreads": 0,
+                    "myRights": {
+                        "mayAddItems": true,
+                        "mayRename": false,
+                        "maySubmit": true,
+                        "mayDelete": false,
+                        "maySetKeywords": true,
+                        "mayRemoveItems": true,
+                        "mayCreateChild": false,
+                        "maySetSeen": true,
+                        "mayReadItems": true
+                    },
+                    "isSubscribed": true
+                },
+                {
+                    "id": "mailbox4",
+                    "name": "Awaiting Reply",
+                    "parentId": "mailbox2",
+                    "role": null,
+                    "sortOrder": 0,
+                    "totalEmails": 0,
+                    "unreadEmails": 0,
+                    "totalThreads": 0,
+                    "unreadThreads": 0,
+                    "myRights": {
+                        "mayAddItems": true,
+                        "mayRename": false,
+                        "maySubmit": true,
+                        "mayDelete": false,
+                        "maySetKeywords": true,
+                        "mayRemoveItems": true,
+                        "mayCreateChild": true,
+                        "maySetSeen": true,
+                        "mayReadItems": true
+                    },
+                    "isSubscribed": true
+                }
+            ],
+            "notFound": []
+        },
+        "0"
+    ]
+]
+```
+
+In this (simple) example, the user has four mailboxes. Three at the top level
+(Inbox, Sent and Trash) and one submailbox of Sent called "Awaiting Reply". The
+first 3 have `role` attributes, so they are to be used for the designated system
+roles (these are much as you would expect, but see the spec for full details).
+Note, you should always use the `role` attribute, as names may be localised (or
+even different between different servers with the same language)!
+
+The Sent mailbox has no unread messages, but 2 unread threads. This is not an
+error! A thread is considered unread if any of the messages in it are unread,
+even if those messages are actually in a different mailbox. In this case, the 3
+unread messages in the Inbox must all be replies to messages in the Sent
+mailbox. Email clients will probably want to hide unread thread counts for
+mailboxes with a role of "sent" or "archive".
+
+Presuming the client defaults to showing the `role=inbox` mailbox, we now use a
+chain of method calls to get all the data we need to display the messages at the
+top of the mailbox and the threads they participate in.
+
+First we do a query for the `id`s of first 10 messages in the mailbox, sorted
+descending by received date:
+
+```json
+[
+    // First we do a query for the id of first 10 messages in the mailbox
+    [ "Email/query", {
+        "accountId": "u123456",
+        "filter": {
+            "inMailbox": "mailbox1"
+        },
+        "sort": [
+            { "property": "receivedAt", "isAscending": false }
+        ],
+        "position": 0,
+        "collapseThreads": true,
+        "limit": 10,
+        "calculateTotal": true
+    }, "0" ],
+
+    // Then we fetch the threadId of each of those messages
+    [ "Email/get", {
+        "accountId": "u123456",
+        "#ids": {
+            "name": "Email/query",
+            "path": "/ids",
+            "resultOf": "0"
+        },
+        "properties": [ "threadId" ]
+    }, "1" ],
+
+    // Next we get the emailIds of the messages in those threads
+    [ "Thread/get", {
+        "accountId": "u123456",
+        "#ids": {
+            "name": "Email/get",
+            "path": "/list/*/threadId",
+            "resultOf": "1"
+        }
+    }, "2" ],
+
+    // Finally we get the data for all those emails
+    [ "Email/get", {
+        "accountId": "u123456",
+        "#ids": {
+            "name": "Thread/get",
+            "path": "/list/*/emailIds",
+            "resultOf": "2"
+        },
+        "properties": [ ... ]
+    }, "3" ]
+]
+```
+
+This might return the following:
+
+```json
+[
+    [ "Email/query", {
+        "accountId": "u123456",
+        "ids": [
+            "fm1u314",
+            "fm1u312",
+            "fm1u298",
+            "fm1u286",
+            "fm1u265",
+            "fm1u254",
+            "fm1u241",
+            "fm1u211",
+            "fm1u109",
+            "fm1u313"
+        ],
+        "queryState": "123:0",
+        "position": 0,
+        "canCalculateChanges": true,
+        "total": 10
+    }, "0" ],
+    [ "Email/get", {
+        "accountId": "u123456",
+        "list": [
+            { "id": "fm1u314", "threadId": "4f512aafed75e7fb" },
+            { "id": "fm1u312", "threadId": "fed75e7fb4f512aa" },
+            { "id": "fm1u298", "threadId": "75e7fb4f512aafed" },
+            { "id": "fm1u286", "threadId": "512aafed75e7fb4f" },
+            { "id": "fm1u265", "threadId": "fb4f512aafed75e7" },
+            { "id": "fm1u254", "threadId": "2aafed75e7fb4f51" },
+            { "id": "fm1u241", "threadId": "afed75fb4f512ae7" },
+            { "id": "fm1u211", "threadId": "e7fb4f512aafed75" },
+            { "id": "fm1u109", "threadId": "ed75e74f51fb2aaf" },
+            { "id": "fm1u313", "threadId": "b4f5ed75e712aaff" }
+        ],
+        "state": "123",
+        "notFound": []
+    }, "1" ],
+    [ "Thread/get", {
+        "accountId": "u123456",
+        "list": [
+            { "id": "4f512aafed75e7fb", "emailIds": [ ... ] },
+            { "id": "fed75e7fb4f512aa", "emailIds": [ ... ] },
+            { "id": "75e7fb4f512aafed", "emailIds": [ ... ] },
+            { "id": "512aafed75e7fb4f", "emailIds": [ ... ] },
+            { "id": "fb4f512aafed75e7", "emailIds": [ ... ] },
+            { "id": "2aafed75e7fb4f51", "emailIds": [ ... ] },
+            { "id": "afed75fb4f512ae7", "emailIds": [ ... ] },
+            { "id": "e7fb4f512aafed75", "emailIds": [ ... ] },
+            { "id": "ed75e74f51fb2aaf", "emailIds": [ ... ] },
+            { "id": "b4f5ed75e712aaff", "emailIds": [ ... ] }
+        ],
+        "state": "123"
+    }, "2" ],
+    [ "Email/get", {
+        "accountId": "u123456",
+        "list": [{
+            "id": "fm1u314",
+            "threadId": "4f512aafed75e7fb",
+            "mailboxIds": {
+                "mailbox1": true
+            },
+            "keywords": {
+                "$seen": true
+            },
+            "hasAttachment": false,
+            "from": [
+                { "name": "Joe Bloggs", "email": "joebloggs@example.com" }
+            ],
+            "to": [
+                { "name": "Jane Doe", "email": "janedoe@example.com" }
+            ],
+            "subject": "Camping trip",
+            "receivedAt": "2014-07-24T15:04:51Z",
+            "preview": "Hey Joe. Fancy a trip out west next week? I hea…"
+        }, ... ],
+        "state": "123",
+        "notFound": []
+    }, "3" ]
+]
+```
+
+We now have the header information for all the messages in the top 10 threads in
+the Inbox, plus a full list of mailboxes and their unread counts. Providing the
+screen cannot fit more than 10 messages without scrolling, this is sufficient to
+display a standard mail interface as though **all data was loaded**, even though
+we have only made 2 round trips to the server, and transferred minimal data.
+(Obviously, you can request more than 10 in the request if you need more to show
+the initial screen).
+
+## Paging in data as the interface is navigated
+
+In our example Inbox, there are 1213 threads, but so far we have only loaded in
+data for the first 10. As the user scrolls down, we need to page in the data for
+the section of the mailbox that becomes visible (and indeed, to avoid the user
+having to wait, it's advisable to preload a little way ahead too). This is just
+another call to `Email/query`, as in the cold boot example, but with the
+`position` argument changed to the index for the section required.
+
+Similarly, if we switch mailboxes, or want to do a search, we can use the same
+call as well. However, remember in JMAP the same message may appear in multiple
+mailboxes, so to avoid downloading the same data multiple times, it's advisable
+to just fetch the message list without also getting the message or thread
+objects (except in certain situations, such as the very first request; the exact
+heuristics for deciding between the two can be made arbitrarily clever and
+complex).
+
+```json
+[
+    [
+        "Email/query",
+        {
+            "accountId": "u123456",
+            "filter": {
+                "inMailbox": "mailbox1"
+            },
+            "sort": [{ "property": "receivedAt", "isAscending": false }],
+            "collapseThreads": true,
+            "position": 10,
+            "limit": 10
+        },
+        "0"
+    ],
+    [
+        "Email/get",
+        {
+            "accountId": "u123456",
+            "#ids": {
+                "name": "Email/query",
+                "path": "/ids",
+                "resultOf": "0"
+            },
+            "properties": ["threadId"]
+        },
+        "1"
+    ]
+]
+```
+
+After the list has been returned, a second request can be made directly to
+`Thread/get` with the thread ids (or to `Email/get` with the message ids) to
+fetch the ones you are missing.
+
+## Opening a thread
+
+So far we have only fetched the minimal amount of information we need to display
+a mailbox entry for a message or thread. When opening a thread from the mailbox,
+we now need to fetch the rest of the message details. Exactly what you wish to
+fetch depends on what information your client displays. Suppose we open the 2nd
+thread in the example Inbox above. I'm presuming we already know the list of
+message ids in the thread from the data received when we fetched the mailbox.
+
+```json
+[
+    [
+        "Email/get",
+        {
+            "accountId": "u123456",
+            "ids": ["fm1u312", "fm2u12", "fm1u304"],
+            "properties": [
+                "blobId",
+                "messageId",
+                "inReplyTo",
+                "references",
+                "sender",
+                "cc",
+                "bcc",
+                "replyTo",
+                "sentAt",
+                "htmlBody",
+                "bodyValues"
+            ],
+            "fetchHTMLBodyValues": true
+        }
+    ]
+]
+```
+
+Alternatively, a client may want to just request the `blobId` property, then
+download the original RFC2822 message using the `downloadUrl` template retrieved
+from the Session Object.
+
+## Staying in sync
+
+Suppose a new message arrives, or the user performs some actions on their
+messages using a different client. A push notification comes in to indicate the
+state has changed on the server, or you get a response back to a method call
+with a different state string to the previous call. We now need to efficiently
+work out exactly what has changed so that we can update the model in the client
+and keep it in sync, without throwing away all of our data and starting again.
+
+To efficiently stay in sync, we can call:
+
+```json
+[
+    // Fetch a list of mailbox ids that have changed
+    [ "Mailbox/changes", {
+        "accountId": "u123456",
+        "sinceState": "123"
+    }, "0" ],
+
+    // Fetch any mailboxes that have been created
+    [ "Mailbox/get", {
+        "accountId": "u123456",
+        "#ids": {
+            "name": "Mailbox/changes",
+            "path": "/created",
+            "resultOf": "0",
+        }
+    }, "1" ],
+
+    // Fetch any mailboxes that have been updated
+    [ "Mailbox/get", {
+        "accountId": "u123456",
+        "#ids": {
+            "name": "Mailbox/changes",
+            "path": "/updated",
+            "resultOf": "0"
+        },
+        "#properties": {
+            "name": "Mailbox/changes",
+            "path": "/updatedProperties",
+            "resultOf": "0"
+        }
+    }, "2" ],
+
+    // Get the updated result of our previous query
+    [ "Email/queryChanges", {
+        "accountId": "u123456",
+        "filter": {
+            "inMailbox": "mailbox1"
+        },
+        "sort": [
+            { "property": "receivedAt", "isAscending": false }
+        ],
+        "sinceQueryState": "123:0",
+        "maxChanges": 100,
+        "upToId": "fm1u313"
+    }, "3" ],
+
+    // Fetch the threadId for emails in the update query result
+    [ "Email/get", {
+        "accountId": "u123456",
+        "#ids": {
+            "name": "Email/queryChanges",
+            "path": "/added",
+            "resultOf": "3"
+        },
+        "properties": [ "threadId" ]
+    }, "4" ],
+
+    // Fetch threads for those emails
+    [ "Thread/get", {
+        "accountId": "u123456",
+        "#ids": {
+            "name": "Email/get",
+            "path": "/list/*/threadId",
+            "resultOf": "4"
+        }
+    }, "5" ],
+
+    // Fetch emails for those threads
+    [ "Email/get", {
+        "accountId": "u123456",
+        "#ids": {
+            "name": "Thread/get",
+            "path": "/list/*/emailIds",
+            "resultOf": "5"
+        },
+        "properties": [ ... ]
+    }, "6" ],
+
+    // Fetch a list of created/updated/deleted Emails
+    [ "Email/changes", {
+        "accountId": "u123456",
+        "sinceState": "123",
+        "maxChanges": 30
+    }, "7" ],
+
+    // Fetch a list of created/udpated/deleted Threads
+    [ "Thread/changes", {
+        "accountId": "u123456",
+        "sinceState": "123",
+        "maxChanges": 30
+    }, "8" ]
+]
+```
+
+This is a good example of multiple method calls combined into a single request.
+Let's have a look at what they are doing.
+
+1. `Mailbox/changes`: This will return the ids of any mailboxes that have been
+   created or modified (e.g. renamed, or have changed counts). It will also
+   return the ids of any mailboxes that have been deleted. We then use one call
+   to `Mailbox/get` to fetch any newly created mailboxes and another call to
+   `Mailbox/get` to refetch the any properties that have changed on updated
+   mailboxes. Note that the `Mailbox/changes` call returns an array of
+   `updatedProperties` that we can use in the second `Mailbox/get` to only fetch
+   the count properties (if those are the only changes). If some other property
+   changes `updatedProperties` will be `null`, causing the second `Mailbox/get`
+   to fetch all properties.
+2. `Email/queryChanges`: Our query result may have changed, so we fetch a list
+   of email ids that have been added to or removed from the result. We're also
+   refetching the `threadId` of any emails added to the result, the `emailIds`
+   of the emails in those threads, and the data used to display those emails in
+   the interface. We'll look at the response to this and how it is used to
+   update the client cache below.
+3. `Email/changes`: Gets the list of ids for all messages which have been
+   created or updated, plus the list of messages which have been deleted.
+4. `Thread/changes`: Gets the list of threads which have had messages added or
+   removed from the thread.
+
+In each case, the `sinceState` and `sinceQueryState` arguments come from the
+response to our previous calls to get the records or queries of that type.
+
+### Handling a standard response
+
+In the common case, not many changes will have occurred since we last synced
+with the server, and the data returned from this request will be sufficient to
+fully bring the client into sync with the server.
+
+The `maxChanges` argument prevents methods from returning huge volumes of data
+in the case where a large number of changes have been made. If we get a
+`tooManyChanges` error in response to one of our method calls then we will then
+have to do more work to get back in sync, as detailed below.
+
+Let's look at a common case example, where two new messages have been delivered
+to the Inbox and one other existing message has been marked as read. We might
+get back a response something like:
+
+```json
+[
+    [ "Mailbox/changes", {
+        "accountId": "u123456",
+        "oldState": "123",
+        "newState": "124",
+        "created": [],
+        "destroyed": [],
+        "updated": [ "mailbox1" ],
+        "updatedProperties": [ "totalEmails", "unreadEmails", "totalThreads", "unreadThreads" ]
+    }, "0" ],
+    [ "Mailbox/get", {
+        "accountId": "u123456",
+        "list": [],
+        "notFound": [],
+        "state": "124"
+    }, "1" ],
+    [ "Mailbox/get", {
+        "accountId": "u123456",
+        "list": [{
+            "id": "mailbox1",
+            "totalEmails": 1426,
+            "totalThreads": 1214,
+            "unreadEmails": 4,
+            "unreadThreads": 3
+        }],
+        "notFound": [],
+        "state": "124"
+    }, "2" ],
+    [ "Email/queryChanges", {
+        "accountId": "u123456",
+        "newQueryState": "124:0",
+        "oldQueryState": "123:0",
+        "added": [{
+            "id": "fm1u316",
+            "index": 0
+        }, {
+            "id": "fm1u315",
+            "index": 1
+        }],
+        "removed": []
+    }, "3" ],
+    [ "Email/get", {
+        "accountId": "u123456",
+        "list": [{
+            "id": "fm1u316",
+            "threadId": "afed75fb4f512ae7"
+        }, {
+            "id": "fm1u315",
+            "threadId": "b4aae3925af0a0a2"
+        }],
+        "notFound": [],
+        "state": "124"
+    }, "4" ],
+    [ "Thread/get", {
+        "accountId": "u123456",
+        "list": [{
+            "id": "afed75fb4f512ae7",
+            "emailIds": [ "fm1u241", "fm1u316" ]
+        }, {
+            "id": "b4aae3925af0a0a2",
+            "emailIds": [ "fm1u315" ]
+        }],
+        "notFound": [],
+        "state": "124"
+    }, "5" ],
+    [ "Email/get", {
+        "accountId": "u123456",
+        "list": [{
+            "id": "fm1u316",
+            "threadId": "afed75fb4f512ae7",
+            "mailboxIds": {
+                "mailbox1": true
+            },
+            "keywords": {},
+            "hasAttachment": false,
+            "from": [
+                { "name": "Joe Bloggs", "email": "joebloggs@example.com" }
+            ],
+            "to": [
+                { "name": "Jane Doe", "email": "janedoe@example.com" }
+            ],
+            "subject": "Camping trip",
+            "receivedAt": "2014-07-24T15:04:51Z",
+            "preview": "Hey Joe. Fancy a trip out west next week? I hea…"
+        }, {
+            "id": "fm1u315",
+            "threadId": "b4aae3925af0a0a2",
+            "mailboxIds": {
+                "mailbox1": true
+            },
+            "keywords": {},
+            "hasAttachment": false,
+            "from": [
+                { "name": "Joe Bloggs", "email": "joebloggs@example.com" }
+            ],
+            "to": [
+                { "name": "Jane Doe", "email": "janedoe@example.com" }
+            ],
+            "subject": "Camping trip",
+            "receivedAt": "2014-07-24T15:04:51Z",
+            "preview": "Hey Joe. Fancy a trip out west next week? I hea…"
+        }],
+        "notFound": [],
+        "state": "124"
+    }, "6" ],
+    [ "Email/changes", {
+        "accountId": "u123456",
+        "created": [ "fm1u316", "fm1u315" ],
+        "destroyed": [],
+        "updated": [ "fm1u314" ],
+        "newState": "124",
+        "oldState": "123"
+    }, "7" ],
+    [ "Thread/changes", {
+        "accountId": "u123456",
+        "created": [ "b4aae3925af0a0a2" ],
+        "destroyed": [],
+        "updated": [ "afed75fb4f512ae7", "4f512aafed75e7fb" ],
+        "newState": "124",
+        "oldState": "123"
+    }, "8" ]
+```
+
+Here's how we apply this information to our current state to stay in sync:
+
+1.  `Mailbox/changes`/`Mailbox/get`: The inbox is the only mailbox to have
+    changed, and only the counts have changed. The new counts are returned in
+    the second `Mailbox/get` response, so we just need to update our cache with
+    the new properties to bring us fully in sync.
+2.  `Email/queryChanges`: This is more interesting.
+
+    Suppose the client has a sparse list of messageIds (for example, the user
+    opened the mailbox, loading the first section, then jumped to the middle):
+
+        [ 'm1u1', 'm1u2', 'm1u3', 'm1u4', -, -, -, 'm1u8', -, ...]
+
+    To update this to match the new server state:
+    1. Check the `oldQueryState` property matches the current state of the
+       query. Also check the sort and search are the same. If any of these don't
+       match, abort and re-request an update from the actual current state.
+    2. If the `newQueryState` property is the same as the current state of the
+       query, nothing to do, so return.
+    3. If there's an `upToId`, search for this id. If found, remove anything
+       after it in the results. If not found, abort, reset the results and start
+       again with `Email/query`.
+    4. Search for each email `id` in the `removed` list and remove them from the
+       client's results (without leaving a gap – this is a splice operation). If
+       any can't be found, keep processing but after finishing, null out
+       anything after the first gap in the list. e.g. referring to the example
+       sparse list above, 'm1u8' would be removed as it's after the first gap.
+    5. Iterate through the `added` list **in order**, inserting the email `id`
+       at the positions indicated (again this is a splice operation and will
+       shift everything else further along).
+    6. Set the list length to that given in the `total` property.
+
+    Note, adding or removing an item to/from the results shifts the position of
+    everything around it.
+
+    e.g. adding 'm2' in position 2: `[ 'm1', 'm3' ] -> [ 'm1', 'm2', 'm3' ]`
+
+    e.g. removing 'm2': `[ 'm1', 'm2', 'm3' ] -> [ 'm1', 'm3' ]`
+
+3.  `Email/changes`: The `destroyed` array has 0 length. The `created` array has
+    two message ids that we don’t have in memory, so we can ignore them. The
+    `updated` array has one message id, which we have in our cache so we should
+    mark is as needing an update (i.e. the keywords might be out of date).
+4.  `Thread/changes`: There are two changed threads here. One existing thread
+    has a new message in it, the other is a brand new thread to create in our
+    cache.
+
+After applying these changes, our cache is nearly in sync with the server. We
+need to inspect the result of both `Email/changes` and `Thread/changes` and
+perform one more request to fetch the properties of any objects we have in
+memory that are now out of date.
+
+After the second request our cache is completely in sync with the server, even
+though we only have a partial data set cached, and we only made two HTTP
+requests.
+
+Now let's look at the more difficult cases, when errors occur.
+
+### Handling errors
+
+The most common error will be a `tooManyChanges` error, when the number of
+changes exceeds the number we were prepared to accept. In this case, it would be
+more efficient to throw away much of our cache, or mark it as potentially dirty,
+and then just fetch the information we need right now (similar to the cold boot
+situation), rather than fetching a potentially large set of updates. Let's look
+at the errors for each method.
+
+`Email/queryChanges`: If there are more changes than the `maxChanges` argument,
+or the server is unable to calculate updates from the state requested, you will
+receive an appropriate error back. In these cases, you simply have to throw away
+the current query result in the cache and request the section you are interested
+in with a standard `Email/query` call.
+
+`Email/changes`: Mark each message you have in cache as needing an update, and
+fetch these when the message is next required by the user (note, since only the
+flags and mailboxes it belongs to are mutable, the data you need to fetch can be
+reduced).
+
+`Thread/changes`: Just like with `Email/changes`, flush your cache of threads.
+
+In each of the error cases, a single further HTTP request should be sufficient
+to get the necessary data to update the client to the correct state.
+
+### Handling message list without delta updates
+
+The response to `Email/query` includes a property called `canCalculateChanges`,
+which lets you know whether the server supports a call to `Email/queryChanges`
+for the given query (servers may not support it at all, or may only support it
+when there is no search involved etc.). In this case, we have to fetch the bit
+of the query currently on display, and just throw away all of our cached data
+for the query. Note, however, we don't have to throw away all the message
+data, we just have to fetch the message ids, so it's still not too inefficient.
+
+## Performing actions
+
+Modifying the state is the most complex operation to get right, as changes to
+messages may change counts in mailboxes, or thread membership, and the client
+may not have sufficient information to work out all the effects; it must apply
+the change then get the rest of the updates from the server.
+
+### Selecting all
+
+If you select all, you need to fetch the complete message list for the mailbox
+currently displayed.
+
+When applying actions to threads, you will often wish to apply the same action
+to every message in the thread in the same mailbox as the one explicitly
+selected, or even to all the messages in the thread, regardless of mailbox. The
+most efficient way to do the former is to perform the same query, but with
+`collapseThreads: false`. You can then easily build a map of threadId to
+messages ids for messages in the list. If you need to find all messages in the
+thread, regardless of query, you will need to fetch the Thread object for every
+thread in the query result (but you don't need to fetch any message details).
+You can do this in a single `Email/query`/`Thread/get` request, although if it's
+a long message list you may wish to break this up into a few calls to avoid a
+single large request blocking the UI for too long.
+
+### Moving a message
+
+Moving a message from the Inbox to the Trash is simple:
+
+```json
+[
+    "Email/set",
+    {
+        "accountId": "u123456",
+        "update": {
+            "fm1u254": {
+                "mailboxIds/mailbox3": true,
+                "mailboxIds/mailbox1": null
+            }
+        }
+    },
+    "0"
+]
+```
+
+We can then do a resync as in section 4 to update the client cache. This is
+easy, but means there's a noticeable delay performing every action, and we
+cannot operate in an offline mode and resync later. We can improve on this,
+although it makes it considerably more complicated. We can apply the effects we
+think the changes will have instantly then compare this with the results we get
+back from the server.
+
+1. **Mailbox counts**.
+
+    For each message moved:
+    - Decrement the `totalMessages` count for the source mailbox.
+    - Increment the `totalMessages` count for the destination mailbox.
+    - If unread, decrement the `unreadMessages` count for the source mailbox.
+    - If unread, increment the `unreadMessages` count for the destination
+      mailbox.
+
+    If there are no other messages in the thread in the source mailbox:
+    - Decrement the `totalThreads` count for the source mailbox.
+    - If any of the messages in the thread are unread, decrement the
+      `unreadThreads` count for the source mailbox.
+
+    If there are no other messages in the thread already in the destination
+    mailbox:
+    - Increment the `totalThreads` count for the destination mailbox.
+    - If any of the messages in the thread are unread, increment the
+      `unreadThreads` count for the destination mailbox.
+
+    There are slight added complexities if moving a message into or out of the
+    Trash; refer to the spec for full details.
+
+2. **Query**. Splice each selected message being moved from the current query
+   (from which it was selected by the user). You may also try to insert them at
+   the correct position in the query of the destination mailbox:
+
+    From the thread object, you know if there are any other messages in the
+    thread already in the mailbox. As the message list in the thread object is
+    sorted by date, as long as the mailbox list is also sorted by date, you can
+    now work out if the message is a new exemplar in the message list or not. If
+    it is, binary search the list by date to find where to insert it. If you
+    don't have message headers for all the message list loaded, you may not be
+    able to determine the correct spot. In this case, it should be inserted
+    anyway so the user can access it; the mistake will be corrected when the
+    next sync with the server occurs.
+
+3. **Thread**. No changes to make.
+
+4. **Message**. Update the `mailboxIds` property on the message object.
+
+When you next do resync, whether that's a second or several days later, apply
+the changes and fetch the delta update (as per section 4) in a single request,
+and when the response is received, undo the preemptive changes made above and
+apply the real changes. Hopefully the end result will be the same, and there
+will be no noticeable difference to the user.
+
+## Keeping a full copy of mail in sync
+
+JMAP can also be used to efficiently download and keep in sync the entire set of
+a user's mail. To do this, you would firstly get the full set of mailboxes, then
+fetch the full list of message ids, and finally download (in batches) the actual
+messages. From this point on, you would only need to get the delta updates.
+Presuming you also want to optimise for fetching new mail first, you could do
+something like when you want to get the latest updates:
+
+```json
+[
+    // Sync mailbox changes
+    [
+        "Mailbox/changes",
+        {
+            "accountId": "u123456",
+            "sinceState": "m123456789",
+            "maxChanges": 50
+        },
+        "0"
+    ],
+    [
+        "Mailbox/get",
+        {
+            "accountId": "u123456",
+            "#ids": {
+                "name": "Mailbox/changes",
+                "path": "/added",
+                "resultOf": "0"
+            }
+        },
+        "1"
+    ],
+    [
+        "Mailbox/get",
+        {
+            "accountId": "u123456",
+            "#ids": {
+                "name": "Mailbox/changes",
+                "path": "/updated",
+                "resultOf": "0"
+            },
+            "#properties": {
+                "name": "Mailbox/changes",
+                "path": "/updatedProperties",
+                "resultOf": "0"
+            }
+        },
+        "2"
+    ],
+
+    // Sync message changes
+    [
+        "Email/changes",
+        {
+            "accountId": "u123456",
+            "sinceState": "m815034",
+            "maxChanges": 50
+        },
+        "3"
+    ],
+    [
+        "Email/get",
+        {
+            "accountId": "u123456",
+            "#ids": {
+                "name": "Email/changes",
+                "path": "/added",
+                "resultOf": "3"
+            },
+            "properties": [
+                "id",
+                "threadId",
+                "mailboxIds",
+                "keywords",
+                "hasAttachment",
+                "from",
+                "to",
+                "subject",
+                "receivedAt",
+                "preview"
+            ]
+        },
+        "4"
+    ],
+    [
+        "Email/get",
+        {
+            "accountId": "u123456",
+            "#ids": {
+                "name": "Email/changes",
+                "path": "/updated",
+                "resultOf": "3"
+            },
+            "properties": ["mailboxIds", "keywords"]
+        },
+        "5"
+    ],
+
+    [
+        "Email/query",
+        {
+            "filter": {
+                "inMailboxes": ["${inboxId}"]
+            },
+            "sort": ["date desc", "id desc"],
+            "collapseThreads": false,
+            "position": 0,
+            "limit": 100
+        },
+        "6"
+    ]
+]
+```
+
+The first two method call chains get the delta updates to mailboxes and messages
+(if the client has a copy of all messages locally, it has no need to use the
+server to get threads as it already has all the information). In the common case
+where there are fewer than 50 message changes since last time, this will bring
+the client fully up to date (barring downloading new message bodies, attachments
+and other details, which it can easily schedule at its leisure).
+
+However, if there have been a large number of changes since last time, the
+client is not yet fully up to date. It can continue to call `Email/changes` to
+fetch more changes until it reaches the current state. Simultaneously, it can
+use the response to the `Email/query` call in the first request to see if there
+are any new message ids at the top of the Inbox. These can be downloaded first
+so the user has immediate access to new messages (by the end of the second round
+trip) while the other changes then continue to sync across afterwards.

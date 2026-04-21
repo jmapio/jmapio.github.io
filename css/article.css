@@ -1,0 +1,168 @@
+.u-article {
+    max-width: 80ch;
+}
+
+.u-article :is(h1, h2, h3, h4, h5, h6) {
+    color: var(--theme-ink);
+}
+.u-article h1 {
+    margin-bottom: var(--space-m);
+    line-height: var(--leading-flat);
+    font-size: var(--text-size-heading-1);
+    font-weight: var(--font-bold);
+}
+.u-article h2 {
+    margin-bottom: var(--space-s);
+    line-height: var(--leading-flat);
+    font-size: var(--text-size-heading-2);
+    font-weight: var(--font-bold);
+}
+.u-article h2:not(:first-child) {
+    margin-top: var(--space-2xl);
+}
+.u-article h3 {
+    margin-top: var(--space-2xl);
+    margin-bottom: var(--space-s);
+    line-height: var(--leading-flat);
+    font-size: var(--text-size-heading-3);
+    font-weight: var(--font-semibold);
+}
+.u-article h4 {
+    line-height: var(--leading);
+    font-size: var(--text-size-heading-4);
+    font-weight: var(--font-semibold);
+}
+.u-article h5 {
+    line-height: var(--leading);
+    font-size: var(--text-size-base);
+    font-weight: var(--font-semibold);
+}
+.u-article p {
+    line-height: var(--leading);
+    font-size: var(--text-size-article);
+}
+.u-article > p {
+    max-width: 68ch;
+}
+.u-article p + :is(p, ul, ol) {
+    margin-top: var(--space-m);
+}
+.u-article :is(ul, ol, blockquote) + p {
+    margin-top: var(--space-xl);
+}
+.u-article p + blockquote {
+    margin-top: var(--space-l);
+}
+.u-article a {
+    color: var(--theme-accent);
+    text-decoration: none;
+}
+.u-article a:hover,
+.u-article a:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.u-article ul > li {
+    margin-left: 18px;
+    list-style: disc;
+}
+.u-article li + li {
+    margin-top: var(--space-s);
+}
+
+.u-article blockquote {
+    margin-block: var(--space-m);
+    border-left: 3px solid var(--theme-accent);
+    padding: var(--space-s) var(--space-m);
+    background: var(--theme-accent-dim);
+    border-radius: 0 var(--radius-m) var(--radius-m) 0;
+}
+.u-article blockquote p {
+    margin: 0;
+}
+.u-article blockquote strong {
+    color: var(--theme-ink);
+}
+
+.u-article code {
+    border: 1px solid var(--theme-border);
+    padding: 0.15em 0.45em;
+    background: var(--theme-code-bg);
+    border-radius: var(--radius-s);
+    color: var(--theme-accent-bright);
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+}
+.u-article pre {
+    margin-block: var(--space-m);
+    border: 1px solid var(--theme-border);
+    padding: var(--space-m);
+    line-height: 1.7;
+    background: var(--theme-pre-bg);
+    border-radius: var(--radius-xl);
+    font-family: var(--font-mono);
+    font-size: var(--size-step--1);
+    overflow-x: auto;
+}
+.u-article pre code {
+    border: none;
+    padding: 0;
+    background: none;
+    color: var(--theme-body);
+    font-size: inherit;
+}
+
+/* --- Table --- */
+
+.u-article .table-wrapper {
+    overflow: auto;
+    margin-block: var(--space-l);
+}
+.u-article table {
+    border: 1px solid var(--theme-border);
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: var(--radius-l);
+    font-size: var(--size-step--1);
+}
+.u-article table th {
+    border-bottom: 1px solid var(--theme-border);
+    padding: var(--space-xs) var(--space-s);
+    background: var(--theme-glass-bg);
+    color: var(--theme-ink);
+    font-family: var(--font-body);
+    font-size: var(--size-step--2);
+    font-weight: var(--font-semibold);
+    letter-spacing: 0.06em;
+    text-align: left;
+    text-transform: uppercase;
+}
+.u-article table td {
+    vertical-align: top;
+    border-bottom: 1px solid var(--theme-border);
+    padding: var(--space-xs) var(--space-s);
+    line-height: 1.6;
+}
+.u-article table tr:last-child td {
+    border-bottom: none;
+}
+.u-article table tr:nth-child(even) td {
+    background: var(--theme-glass-bg);
+}
+.u-article table td:first-child {
+    color: var(--theme-accent);
+    font-family: var(--font-mono);
+    font-size: var(--size-step--2);
+    font-weight: var(--font-semibold);
+    white-space: nowrap;
+}
+
+/* --- */
+
+.u-article .author {
+    margin-bottom: var(--space-s);
+    color: var(--theme-muted);
+    font-size: var(--size-step--1);
+    font-style: italic;
+}

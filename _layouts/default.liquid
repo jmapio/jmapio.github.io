@@ -1,0 +1,82 @@
+<!doctype html>
+<html
+    lang='en'
+    data-theme='dark'
+    class='no-js'
+>
+    <head>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=yes'>
+        {% if jekyll.environment == 'preview' %}
+            <meta name='robots' content='noindex, nofollow'>
+        {% endif %}
+        {% include font-face.liquid %}
+        <link
+            href='{{ site.baseurl }}/css/main.css?ts={{ site.time | date: '%s' }}'
+            rel='stylesheet'
+            type='text/css'
+        >
+        {% if layout.stylesheets %}
+            {% for style in layout.stylesheets %}
+                <link
+                    href='{{ site.baseurl }}/css/{{ style }}.css?ts={{ site.time | date: '%s' }}'
+                    rel='stylesheet'
+                    type='text/css'
+                >
+            {% endfor %}
+        {% endif %}
+        {% if page.stylesheets %}
+            {% for style in page.stylesheets %}
+                <link
+                    href='{{ site.baseurl }}/css/{{ style }}.css?ts={{ site.time | date: '%s' }}'
+                    rel='stylesheet'
+                    type='text/css'
+                >
+            {% endfor %}
+        {% endif %}
+        <script type='module' src='{{ site.baseurl }}/js/header.js?ts={{ site.time | date: '%s' }}'></script>
+        <script type='module' src='{{ site.baseurl }}/js/prefetch.js?ts={{ site.time | date: '%s' }}'></script>
+        {% if layout.scripts %}
+            {% for script in layout.scripts %}
+                <script
+                    type='module'
+                    src='{{ site.baseurl }}/js/{{ script }}.js?ts={{ site.time | date: '%s' }}'
+                ></script>
+            {% endfor %}
+        {% endif %}
+        {% if page.scripts %}
+            {% for script in page.scripts %}
+                <script
+                    type='module'
+                    src='{{ site.baseurl }}/js/{{ script }}.js?ts={{ site.time | date: '%s' }}'
+                ></script>
+            {% endfor %}
+        {% endif %}
+        <title>{{ page.title }}</title>
+        <meta name='description' content='{{ page.description }}'>
+        {% assign og_slug = page.permalink | replace: '/index.html', '' | replace: '/', '-' | remove_first: '-' %}
+        {% if og_slug == '' %}{% assign og_slug = 'home' %}{% endif %}
+        <meta property='og:type' content='website'>
+        <meta property='og:title' content='{{ page.title }}'>
+        {% if page.description %}
+            <meta property='og:description' content='{{ page.description }}'>
+        {% endif %}
+        <meta property='og:url' content='{{ site.url }}{{ page.permalink }}'>
+        <meta property='og:image' content='{{ site.url }}/images/og/{{ og_slug }}.png'>
+        <meta property='og:image:width' content='1200'>
+        <meta property='og:image:height' content='630'>
+        <meta name='twitter:card' content='summary_large_image'>
+    </head>
+    <body>
+        {% include theme-init.liquid %}
+        <a href='#main' class='u-skip-link'>Skip to content</a>
+        {% include header.liquid %}
+        <main id='main'>{{ content }}</main>
+        {% include footer.liquid %}
+        <script
+            defer
+            src='https://static.cloudflareinsights.com/beacon.min.js'
+            data-cf-beacon='{"token": "5cafd4ae0400412b85e675f8296f7a36"}'
+        ></script>
+    </body>
+</html>

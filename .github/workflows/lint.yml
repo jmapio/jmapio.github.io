@@ -1,0 +1,25 @@
+name: Lint
+
+on:
+    pull_request:
+
+permissions:
+    contents: read
+
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v6
+
+            - uses: actions/setup-node@v6
+              with:
+                  node-version-file: .node-version
+
+            - run: npm ci
+
+            - name: Prettier
+              run: npm run lint-prettier
+
+            - name: Stylelint
+              run: npm run lint-stylelint

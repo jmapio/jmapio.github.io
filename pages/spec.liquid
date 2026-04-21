@@ -1,0 +1,173 @@
+---
+layout: default
+permalink: /spec/index.html
+redirect_from:
+    - /spec.html
+stylesheets:
+    - spec
+title: JMAP Specifications
+description: >-
+    The specifications for the core JMAP protocol and access to mail and
+    contacts stores using JMAP have been finalised and published.
+hero:
+    eyebrow: Specifications
+    eyebrow_icon: code-bracket
+    title: JMAP RFC
+    sub: >-
+        The specifications for the core JMAP protocol and access to mail and
+        contacts stores using JMAP have been finalised and published. The JMAP 
+        working group is currently working on the calendars specs.
+    links:
+        - href: https://datatracker.ietf.org/wg/jmap/about/
+          label: JMAP working group
+specs:
+    - label: Core
+      description: >-
+          These specifications define the core sync protocol and extensions
+          that 
+          are useful no matter what data type you might be syncing.
+      items:
+          - title: The core JMAP protocol
+            eyebrow: RFC 8620
+            href: /spec/rfc8620/
+            body: >-
+                Defines the generic JMAP protocol for efficiently querying,
+                fetching, and modifying JSON data, with push notifications and
+                fast resync.
+          - title: VAPID for JMAP Push
+            eyebrow: RFC 9749
+            href: /spec/rfc9749/
+            body: >-
+                Lets JMAP servers advertise their ability to authenticate Web
+                Push notifications using the Voluntary Application Server ID
+                protocol.
+          - title: JMAP Sharing
+            eyebrow: RFC 9670
+            href: /spec/rfc9670/
+            body: >-
+                Defines a reusable data model for sharing data between users in
+                JMAP, providing a consistent base for other data types to build
+                on.
+          - title: JMAP via WebSocket
+            eyebrow: RFC 8887
+            href: /spec/rfc8887/
+            body: >-
+                Binds JMAP to a WebSocket transport layer, providing higher
+                performance than the standard HTTP binding for connected
+                clients.
+          - title: JMAP Quotas
+            eyebrow: RFC 9425
+            href: /spec/rfc9425/
+            body: >-
+                Defines a data model for reading and syncing account quotas
+                over JMAP, so clients can surface storage and message-count
+                limits.
+          - title: JMAP Blob Management
+            eyebrow: RFC 9404
+            href: /spec/rfc9404/
+            body: >-
+                Extends JMAP with inline blob creation and access via method
+                calls, plus a reverse lookup to find where blobs are referenced
+                in other data.
+    - label: Mail
+      items:
+          - title: JMAP Mail
+            eyebrow: RFC 8621
+            href: /spec/rfc8621/
+            body: >-
+                Defines the JMAP data model for email, letting clients
+                efficiently search, access, organise, and send messages with
+                push-based sync.
+          - title: JMAP Sieve Scripts Management
+            eyebrow: RFC 9661
+            href: /spec/rfc9661/
+            body: >-
+                Defines a JMAP data model for managing Sieve scripts on a
+                server, so clients can efficiently search, access, organise,
+                and validate them.
+          - title: JMAP MDN Handling
+            eyebrow: RFC 9007
+            href: /spec/rfc9007/
+            body: >-
+                Defines a JMAP data model for Message Disposition
+                Notifications, enabling read-receipt workflows to be handled
+                alongside regular mail.
+          - title: JMAP S/MIME Signature Verification
+            eyebrow: RFC 9219
+            href: /spec/rfc9219/
+            body: >-
+                Extends JMAP Mail so servers can return the S/MIME signature
+                verification status of messages alongside the rest of the
+                message data.
+    - label: Contacts and calendars
+      items:
+          - title: JMAP Contacts
+            eyebrow: RFC 9610
+            href: /spec/rfc9610/
+            body: >-
+                Defines the JMAP data model for contacts, letting clients
+                synchronise address book data with a server using push-based
+                updates.
+          - title: JMAP Calendars
+            eyebrow: In progress
+            href: /spec/calendars-draft/
+            class: card--in-progress
+            body: >-
+                A JMAP data model for calendar sync, letting clients read,
+                write, and share calendars and events with push notifications
+                and reminders.
+    - label: Data formats
+      description: >-
+          JMAP was designed in conjunction with new JSON-based file formats for 
+          contacts and calendars, which can also be used standalone or in other
+          protocols.
+      items:
+          - title: JSContact
+            eyebrow: RFC 9553
+            href: /spec/rfc9553/
+            body: >-
+                A JSON data model for contact cards, designed as an
+                unambiguous, extensible alternative to vCard for address book
+                storage and exchange.
+          - title: JSCalendar 2.0
+            eyebrow: In progress
+            href: /spec/jscalendar-draft/
+            class: card--in-progress
+            body: >-
+                Version 2.0 of the JSON data model for calendar data, improving
+                interoperability with iCalendar and aligning conventions with
+                JSContact.
+---
+{%
+    include components/hero.liquid
+    eyebrow=page.hero.eyebrow
+    eyebrow_icon=page.hero.eyebrow_icon
+    title=page.hero.title
+    sub=page.hero.sub
+    links=page.hero.links
+%}
+{%- for section in page.specs -%}
+    <section class='section section--card-list'>
+        <div class='u-wrapper'>
+            <h2 class='section__title u-text-2xl u-font-bold'>{{ section.label }}</h2>
+            {%- if section.description -%}
+                <div class='section__description'>
+                    {{ section.description | markdownify }}
+                </div>
+            {%- endif -%}
+            <hr class='section__hr'>
+            <ul class='section__cards card-grid'>
+                {%- for item in section.items -%}
+                    {%
+                        include components/link-card.liquid
+                        eyebrow=item.eyebrow
+                        title=item.title
+                        body=item.body
+                        href=item.href
+                        class=item.class
+                    %}
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endfor %}

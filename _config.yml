@@ -1,3 +1,16 @@
-baseurl: ""
-url: "http://jmap.io"
+baseurl: ''
+url: 'https://jmap.io'
 markdown: kramdown
+lightningcss:
+    targets: defaults
+esbuild:
+    target: es2022
+exclude:
+    - _tmp
+    - _bin
+    - scripts
+    - vendor
+    - package.json
+    - package-lock.json
+    - prettier.config.mjs
+    - stylelint.config.js

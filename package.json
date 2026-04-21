@@ -1,0 +1,25 @@
+{
+    "name": "jmapio.github.io",
+    "engines": {
+        "node": "24"
+    },
+    "scripts": {
+        "generate-og": "node scripts/generate-og-images.js",
+        "lint-prettier": "prettier --check .",
+        "lint-stylelint": "stylelint 'css/**/*.css'"
+    },
+    "type": "module",
+    "homepage": "https://jmap.io",
+    "devDependencies": {
+        "@shopify/prettier-plugin-liquid": "^1.10.2",
+        "esbuild": "^0.28.0",
+        "gray-matter": "^4.0.3",
+        "jsdom": "^29.0.2",
+        "lightningcss-cli": "^1.32.0",
+        "playwright": "^1.59.1",
+        "prettier": "^3.8.2",
+        "stylelint": "^17.7.0",
+        "stylelint-config-standard": "^40.0.0",
+        "stylelint-order": "^8.1.1"
+    }
+}

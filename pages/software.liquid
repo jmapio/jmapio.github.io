@@ -1,0 +1,368 @@
+---
+layout: default
+permalink: /software/index.html
+redirect_from:
+    - /software.html
+stylesheets:
+    - software
+title: JMAP Software Implementations
+description: >-
+    Open source and proprietary software implementing the JMAP protocol —
+    clients, servers, libraries, and proxies.
+hero:
+    eyebrow: Software
+    eyebrow_icon: command-line
+    title: See JMAP in action
+    sub: >-
+        If you're working on a project that uses JMAP, please make a pull
+        request to this page or email the mailing list and we'll add you to
+        the list.
+    links:
+        - label: Add a project
+          href: https://github.com/jmapio/jmapio.github.io/compare
+        - label: Join mailing list
+          href: https://groups.google.com/g/jmap-discuss
+sections:
+    - label: Clients
+      items:
+          - title: aerc
+            href: https://aerc-mail.org/
+            languages: [Go]
+            body: A terminal email client for the discerning hacker.
+          - title: Bulwark Webmail
+            href: https://bulwarkmail.org/
+            languages: [Next.js]
+            license: AGPLv3
+            body: >-
+                A modern, open-source webmail client for Stalwart Mail Server.
+                Fast and private JMAP-native support for email, calendar, and
+                contacts.
+          - title: Cypht
+            href: https://github.com/cypht-org/cypht
+            languages: [PHP, JS]
+            body: Lightweight Open Source webmail aggregator.
+          - title: Group-Office
+            href: https://github.com/Intermesh/groupoffice
+            languages: [Javascript]
+            body: Open source groupware and collaboration platform.
+          - title: JMAP Demo Webmail
+            href: https://github.com/jmapio/jmap-demo-webmail
+            languages: [JavaScript]
+            license: MIT
+            body: >-
+                A sophisticated demo webmail client to be used as a base for
+                new projects.
+          - title: "JMAP::Tester"
+            href: https://metacpan.org/pod/JMAP::Tester
+            languages: [Perl, Perl5]
+            body: A JMAP client made for testing JMAP servers.
+          - title: JMAP Webmail
+            href: https://github.com/root-fr/jmap-webmail
+            languages: [TypeScript]
+            license: MIT
+            body: Privacy-focused webmail client with real-time push.
+          - title: Ltt.rs
+            href: https://codeberg.org/iNPUTmice/lttrs-android
+            languages: [Java]
+            license: Apache
+            body: An email client for Android.
+          - title: Mailtemi
+            href: https://mailtemi.com
+            body: A native iOS/Android email client.
+          - title: mjmap
+            href: https://git.sr.ht/~rockorager/mjmap
+            languages: [Go]
+            license: MPL-2.0
+            body: A sendmail-compatible command line JMAP client.
+          - title: meli
+            href: https://meli.delivery
+            languages: [Rust]
+            license: GPLv3
+            body: Terminal email client.
+          - title: mujmap
+            href: https://github.com/elizagamedev/mujmap
+            languages: [Rust]
+            body: Synchronize JMAP mail with notmuch.
+          - title: Parula
+            href: https://parula.beonex.com
+            body: >-
+                Full email app with chat, video conference and calendar. For
+                Windows, macOS, Linux.
+          - title: Twake Mail Client
+            href: https://github.com/linagora/tmail-flutter
+            languages: [Dart]
+            body: Android, iOS and web client.
+    - label: Servers
+      items:
+          - title: Apache James
+            href: https://james.apache.org/
+            languages: [Java]
+            license: Apache
+            body: >-
+                Apache James, a.k.a. Java Apache Mail Enterprise Server is an
+                open source mail server written entirely in Java. The 3.0
+                series is adding JMAP support, upcoming 3.6.0 adds support for
+                JMAP over websocket.
+          - title: atmail
+            href: https://www.atmail.com/blog/jmap-rfc-8620/
+            languages: [Go]
+            license: Proprietary
+            body: >-
+              Email hosting and collaboration platform for service providers and
+              businesses, offering webmail, calendar, and mail server solutions
+          - title: Cyrus IMAP
+            href: https://www.cyrusimap.org/imap/download/release-notes/3.0/x/3.0.3.html
+            languages: [C]
+            license: BSD-style
+            body: >-
+                A scalable enterprise-grade IMAP, CalDAV and CardDAV server.
+                The 3.0 series is adding JMAP support; instructions to enable
+                it are in the developer docs.
+          - title: Group-Office
+            href: https://github.com/Intermesh/groupoffice
+            languages: [PHP]
+            body: Open source groupware and collaboration platform.
+          - title: hyper-auth-proxy
+            href: https://crates.io/crates/hyper-auth-proxy
+            languages: [Rust]
+            body: >-
+                A proxy to do HTTP basic auth from a JWT token and redis
+                session credentials; built to add JWT bearer auth support to
+                Cyrus's JMAP.
+          - title: Stalwart
+            href: https://github.com/stalwartlabs/stalwart
+            languages: [Rust]
+            license: AGPLv3
+            body: >-
+                Open-source JMAP server built for robustness, security, and
+                scalability — with complete support for JMAP Mail, Calendars,
+                Contacts, File Storage, Sharing and multiple extensions.
+          - title: tmail-backend
+            href: https://github.com/linagora/tmail-backend
+            languages: [Java]
+            license: Apache
+            body: Builds on Apache James with extra features.
+    - label: Libraries
+      items:
+          - title: go-jmap
+            href: https://sr.ht/~rockorager/go-jmap
+            languages: [Go]
+            license: MIT
+            body: JMAP client library written in Go.
+          - title: Java JMAP Library
+            href: https://codeberg.org/iNPUTmice/jmap/
+            languages: [Java 7]
+            license: Apache
+            body: >-
+                A low level jmap-client library as well as a higher level
+                jmap-mua library.
+          - title: jmap-client-ts
+            href: https://github.com/OpenPaaS-Suite/jmap-client-ts
+            languages: [TypeScript]
+            license: MIT
+            body: A lightweight promise-based API to make JMAP requests.
+          - title: jmap-client
+            href: https://github.com/stalwartlabs/jmap-client
+            languages: [Rust]
+            license: Apache/MIT
+            body: >-
+                JMAP client library written in Rust. Includes full support for
+                JMAP Core, JMAP Mail and JMAP over WebSocket.
+          - title: jmap-jam
+            href: https://github.com/htunnicliff/jmap-jam
+            languages: [TypeScript]
+            license: MIT
+            body: >-
+                Jam is a tiny, strongly-typed JMAP client with zero runtime
+                dependencies. It has friendly, fluent APIs that make working
+                with JMAP a breeze.
+          - title: JMAP-JS
+            href: https://github.com/jmapio/jmap-js
+            languages: [JavaScript]
+            license: MIT
+            body: >-
+                A full implementation of the JMAP mail, calendar and contacts
+                model in JavaScript. It supports asynchronous local changes
+                and is tolerant of network failure — actions update the UI
+                instantly, then synchronise back to the server when they can.
+                Multi-level undo/redo support. Used by the demo webmail.
+          - title: jmap-rs
+            href: https://gitlab.com/jmap-rs/jmap-rs
+            languages: [Rust]
+            body: Rust client (and maybe server) library for JMAP.
+          - title: jmapc
+            href: https://pypi.org/project/jmapc/
+            languages: [Python]
+            body: Python 3 client library for JMAP mail (partially implemented).
+          - title: melib
+            href: https://meli.delivery
+            languages: [Rust]
+            license: GPLv3
+            body: Mail client library used in meli.
+          - title: Missive
+            href: https://github.com/jeffhuen/missive
+            languages: [Rust]
+            license: MIT
+            body: >-
+                Email library with JMAP provider. Minimal spec-compliant
+                client using reqwest+serde.
+          - title: zend-jmap
+            href: https://github.com/WikiSuite/zend-jmap
+            languages: [PHP]
+            license: New BSD
+            body: JMAP for Zend Framework.
+          - title: jmap-yacl
+            href: https://github.com/ilyhalight/jmap-yacl
+            languages: [TypeScript]
+            license: MIT
+            body: >-
+                Another lightweight client library for JMAP, supporting
+                JavaScript and TypeScript with built-in types for Typebox.
+                OAuth and Push not yet implemented.
+          - title: calcard
+            href: https://github.com/stalwartlabs/calcard
+            languages: [Rust]
+            license: Apache/MIT
+            body: >-
+                JSCalendar/iCalendar and JSContact/vCard parsing, building and
+                conversion library for Rust. Try it online at convert.jmap.cloud.
+          - title: jmap-tools
+            href: https://github.com/stalwartlabs/jmap-tools
+            languages: [Rust]
+            license: Apache/MIT
+            body: >-
+                JMAP object parser with JSON Pointer querying and patching
+                support.
+          - title: jmap-kit
+            href: https://github.com/lachlanhunt/jmap-kit
+            languages: [TypeScript]
+            license: MIT
+            body: >-
+                A robust, type-safe SDK for building JMAP client applications
+                in TypeScript, with an extensible plugin architecture
+                supporting standard and vendor capabilities.
+    - label: Proxies
+      items:
+          - title: JMAP-to-IMAP Proxy
+            href: https://github.com/jmapio/jmap-perl
+            languages: [Perl]
+            license: MIT
+            body: >-
+                A complete JMAP server implementation that uses any IMAP,
+                CalDAV and CardDAV store as a backend.
+          - title: IMAP-to-JMAP Proxy
+            href: https://github.com/stalwartlabs/imap-to-jmap/
+            languages: [Rust]
+            license: AGPLv3
+            body: >-
+                Open-source IMAP4-to-JMAP proxy. Supports IMAP4rev2, IMAP4rev1
+                and multiple extensions.
+    - label: Planned
+      description: >-
+          Projects that have publicly committed to adding JMAP support but are
+          not yet shipping.
+      items:
+          - title: Mimestream
+            href: https://mimestream.com/
+            body: A native macOS email client.
+          - title: Mailtemi
+            href: https://mailtemi.com
+            body: >-
+                A native macOS/GNOME (Linux/Windows) desktop email and
+                calendar client.
+    - label: Requested
+      description: >-
+          Tracking issues for projects that don't yet support JMAP.
+      items:
+          - title: Alps Webmail
+            href: https://todo.sr.ht/~migadu/alps/174
+            class: card--title-only
+          - title: Claws Mail
+            href: https://www.thewildbeast.co.uk/claws-mail/bugzilla/show_bug.cgi?id=4057
+            class: card--title-only
+          - title: DavMail
+            href: https://github.com/mguessan/davmail/issues/365
+            class: card--title-only
+          - title: Evolution
+            href: https://gitlab.gnome.org/GNOME/evolution/-/issues/364
+            class: card--title-only
+          - title: Geary
+            href: https://gitlab.gnome.org/GNOME/geary/-/issues/327
+            class: card--title-only
+          - title: Horde IMP Webmail
+            href: https://bugs.horde.org/ticket/14683
+            class: card--title-only
+          - title: K-9 Mail
+            href: https://github.com/k9mail/k-9/issues/3272
+            class: card--title-only
+          - title: Mailu
+            href: https://github.com/Mailu/Mailu/issues/471
+            class: card--title-only
+          - title: Nextcloud
+            href: https://github.com/nextcloud/mail/issues/2931
+            class: card--title-only
+          - title: RainLoop Webmail
+            href: https://github.com/RainLoop/rainloop-webmail/issues/1378
+            class: card--title-only
+          - title: SnappyMail
+            href: https://github.com/the-djmaze/snappymail/issues/1550
+            class: card--title-only
+          - title: Thunderbird
+            href: https://bugzilla.mozilla.org/show_bug.cgi?id=1322991
+            class: card--title-only
+---
+{%
+    include components/hero.liquid
+    eyebrow=page.hero.eyebrow
+    eyebrow_icon=page.hero.eyebrow_icon
+    title=page.hero.title
+    sub=page.hero.sub
+    links=page.hero.links
+%}
+{%- for section in page.sections -%}
+    <section class='section section--card-list'>
+        <div class='u-wrapper'>
+            <h2 class='section__title u-text-2xl u-font-bold'>{{ section.label }}</h2>
+            {%- if section.description -%}
+                <div class='section__description'>
+                    {{ section.description | markdownify }}
+                </div>
+            {%- endif -%}
+            <hr class='section__hr'>
+            <ul class='section__cards card-grid'>
+                {%- for item in section.items -%}
+                    {% assign eyebrow = item.languages | default: '' | array_to_sentence_string: '&' %}
+                    {% capture card_children %}
+                        {% if item.license %}
+                          <div class="card__license u-text-sm">
+                            {{ item.license }}
+                          </div>
+                        {% endif %}
+                    {% endcapture %}
+                    {%
+                        include components/link-card.liquid
+                        eyebrow=eyebrow
+                        title=item.title
+                        body=item.body
+                        href=item.href
+                        children=card_children
+                        class=item.class
+                    %}
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% endfor %}
+
+<section class='section section--add-project'>
+    <div class='u-wrapper'>
+        <p class='section--add-project__body'>
+            Missing a project? Open a pull request on
+            <a class='section--add-project__link' href='https://github.com/jmapio/jmapio.github.io/compare'>
+                <span>GitHub</span>
+                <span class='u-sq-20'>{% include icons/external-link.liquid %}</span>
+            </a>
+            to add it
+        </p>
+    </div>
+</section>

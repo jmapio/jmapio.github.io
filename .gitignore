@@ -3,6 +3,9 @@
 
 # ignore the jekyll files
 .jekyll-cache/
+.jekyll-metadata
 404.html
-Gemfile
-Gemfile.lock
+node_modules
+
+.venv
+_tmp

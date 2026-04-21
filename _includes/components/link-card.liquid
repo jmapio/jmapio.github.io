@@ -1,0 +1,28 @@
+{%- if include.href contains 'https://' -%}
+    {% assign is_external = true %}
+{% else %}
+    {% assign is_external = false %}
+{%- endif -%}
+{% if is_external %}
+    {%- capture link_target -%}
+        target="_blank"
+    {%- endcapture -%}
+    {% assign default_icon = 'external-link' %}
+{% else %}
+    {% assign default_icon = 'arrow-right' %}
+{% endif %}
+<a class='card card--link {{ include.class }}' href='{{ include.href | relative_url }}' {{ link_target }}>
+    <div class='card__content'>
+        <p class='card__eyebrow u-text-sm u-font-bold'>{{ include.eyebrow }}</p>
+        <h2 class='card__title u-text-xl u-font-bold'>{{ include.title }}</h2>
+        <p class='card__body'>{{ include.body }}</p>
+        {%- if include.children -%}
+            {{ include.children }}
+        {%- endif -%}
+    </div>
+    {% if is_external %}
+        <span class='u-visually-hidden'>(opens in new window)</span>
+    {% endif %}
+    {% capture icon_template %}icons/{{ include.icon | default: default_icon }}.liquid{% endcapture %}
+    <div class='card__icon'>{% include {{ icon_template }} %}</div>
+</a>

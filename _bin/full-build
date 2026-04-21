@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+_bin/generate-rfcs
+_bin/generate-og-images
+_bin/jekyll-build

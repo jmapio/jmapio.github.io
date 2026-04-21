@@ -1,0 +1,41 @@
+<section class='hero {{ include.class | default: 'hero--page' }}'>
+    <div class='u-dot-grid u-dot-grid--gradient'></div>
+    <div class='u-wrapper'>
+        <p class='hero__eyebrow u-text-sm u-font-bold'>
+            {% if include.eyebrow_icon %}
+                <span class='u-sq-20'>
+                    {% include icons/{{ include.eyebrow_icon }}.liquid %}
+                </span>
+            {% endif %}
+            <span>{{ include.eyebrow }}</span>
+        </p>
+        <h1 class='hero__h1 u-text-5xl u-font-bold u-tracking-tight'>{{ include.title }}</h1>
+        <p class='hero__sub'>{{ include.sub }}</p>
+        {% if include.links %}
+            <div class='hero__links'>
+                {% for link in include.links %}
+                    {% if link.href contains 'https://' %}
+                        {% assign is_external = true %}
+                    {% else %}
+                        {% assign is_external = false %}
+                    {% endif %}
+                    <a
+                        href='{{ link.href | relative_url }}'
+                        class='hero__link button button--standard u-text-sm'
+                        {%- if is_external -%}
+                            target='_blank'
+                        {%- endif -%}
+                    >
+                        <span class='button__label'>{{- link.label -}}</span>
+                        {% if is_external %}
+                            <span class='u-visually-hidden'>(opens in new window)</span>
+                            <span class='button__icon'>
+                                {% include icons/external-link.liquid %}
+                            </span>
+                        {% endif %}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</section>

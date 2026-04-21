@@ -1,0 +1,99 @@
+.u-text-2xs {
+    line-height: var(--leading);
+    font-size: var(--size-step--3);
+}
+
+.u-text-xs {
+    line-height: var(--leading);
+    font-size: var(--size-step--2);
+}
+
+.u-text-sm {
+    line-height: var(--leading);
+    font-size: var(--size-step--1);
+}
+
+.u-text-base {
+    line-height: var(--leading);
+    font-size: var(--size-step-0);
+}
+
+.u-text-lg {
+    line-height: var(--leading);
+    font-size: var(--size-step-1);
+}
+
+.u-text-xl {
+    line-height: var(--leading-flat);
+    font-size: var(--size-step-2);
+}
+
+.u-text-2xl {
+    line-height: var(--leading-flat);
+    font-size: var(--size-step-3);
+}
+
+.u-text-3xl {
+    line-height: var(--leading-flat);
+    font-size: var(--size-step-4);
+}
+
+.u-text-4xl {
+    line-height: var(--leading-flat);
+    font-size: var(--size-step-5);
+}
+
+.u-text-5xl {
+    line-height: var(--leading-flat);
+    font-size: var(--size-step-6);
+}
+
+.u-text-6xl {
+    line-height: var(--leading-flat);
+    font-size: var(--size-step-7);
+}
+
+.u-text-7xl {
+    line-height: var(--leading-flat);
+    font-size: var(--size-step-8);
+}
+
+.u-text-8xl {
+    line-height: var(--leading-flat);
+    font-size: var(--size-step-9);
+}
+
+.u-text-9xl {
+    line-height: var(--leading-flat);
+    font-size: var(--size-step-10);
+}
+
+/* --- */
+
+.u-font-light {
+    font-weight: var(--font-light);
+}
+.u-font-normal {
+    font-weight: var(--font-regular);
+}
+.u-font-medium {
+    font-weight: var(--font-medium);
+}
+.u-font-semibold {
+    font-weight: var(--font-semibold);
+}
+.u-font-bold {
+    font-weight: var(--font-bold);
+}
+
+/* --- */
+
+.u-font-mono {
+    font-family: var(--font-mono);
+}
+
+/* --- */
+
+.u-tracking-tight {
+    letter-spacing: var(--tracking-tight);
+}

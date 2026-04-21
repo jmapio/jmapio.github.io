@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+cd "$(dirname "$0")/.."
+
+docker run --rm \
+  -v "$PWD:/site" \
+  -w /site \
+  -it \
+  mcr.microsoft.com/playwright:v1.59.1-jammy \
+  bash -c '
+    npm ci
+    npm run generate-og
+  '

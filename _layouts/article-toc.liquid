@@ -1,0 +1,29 @@
+---
+layout: default
+stylesheets:
+    - article
+    - toc
+scripts:
+    - toc
+---
+{% if page.hero %}
+    {%
+        include components/hero.liquid
+        eyebrow=page.hero.eyebrow
+        eyebrow_icon=page.hero.eyebrow_icon
+        title=page.hero.title
+        sub=page.hero.sub
+        links=page.hero.links
+    %}
+{% endif %}
+
+<section class='section section--document'>
+    <div class='u-wrapper u-article-split'>
+        <nav class='u-toc-wrapper' aria-label='Table of contents'>
+            {% include toc.liquid html=content class='u-toc' h_min=1 h_max=2 flat_toc=true %}
+        </nav>
+        <article class='u-article'>{{ content }}</article>
+    </div>
+</section>
+
+{% include components/toc-fab.liquid %}

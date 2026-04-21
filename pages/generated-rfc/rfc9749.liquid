@@ -1,0 +1,210 @@
+---
+layout: article-rfc
+permalink: /spec/rfc9749/index.html
+toc: generated-rfc-toc/rfc9749.html
+title: 'RFC 9749 – Use of Voluntary Application Server Identification (VAPID) in JSON Meta Application Protocol (JMAP) Web Push'
+description: >-
+    This document defines a method for JSON Meta Application Protocol (JMAP) servers to advertise their       capability to authenticate Web Push notifications using the Voluntary       Application Server Identification (VAPID) protocol.
+meta:
+    authors:
+        - Daniel Gultsch
+    keywords:
+
+og_image:
+    eyebrow: 'RFC 9749'
+    title: 'Use of Voluntary Application Server Identification (VAPID) in JSON Meta Application Protocol (JMAP) Web Push'
+    description: ''
+is_draft: false
+---
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction"><a href="#section-1">1.&nbsp;&nbsp;Introduction</a></h2>
+<p id="section-1-1">JMAP <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> specifies how clients can subscribe to events using a protocol that is compatible with Web Push <span>[<a href="#RFC8030" class="cite xref">RFC8030</a>]</span>. Some push services require that the application server authenticate all push messages using the VAPID protocol <span>[<a href="#RFC8292" class="cite xref">RFC8292</a>]</span>. To facilitate that, the client (or user agent in Web Push terminology) needs the VAPID public key of the application server to pass along to the push service when retrieving a new endpoint.<a href="#section-1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="conventions-used-in-this-document">
+<section id="section-2">
+      <h2 id="name-conventions-used-in-this-do"><a href="#section-2">2.&nbsp;&nbsp;Conventions Used in This Document</a></h2>
+<p id="section-2-1">
+    The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>",
+    "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>",
+    "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+    "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are
+    to be interpreted as described in BCP&nbsp;14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span>
+        <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in all capitals,
+    as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="discovering-support-for-vapid">
+<section id="section-3">
+      <h2 id="name-discovering-support-for-vap"><a href="#section-3">3.&nbsp;&nbsp;Discovering Support for VAPID</a></h2>
+<p id="section-3-1">The JMAP capabilities object is returned as part of the standard JMAP session object (see <span><a href="https://rfc-editor.org/rfc/rfc8620#section-2" class="relref" target="_blank" rel="noopener">Section 2<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>). Servers supporting this specification <span class="bcp14">MUST</span> add a property called <code>urn:ietf:params:jmap:webpush-vapid</code> to the capabilities object. The value of this property is an object that <span class="bcp14">MUST</span> contain the following information:<a href="#section-3-1" class="pilcrow">¶</a></p>
+<dl class="dlCompact dlNewline" id="section-3-2">
+        <dt id="section-3-2.1">
+<code>applicationServerKey</code>: "String"</dt>
+        <dd id="section-3-2.2">The Elliptic Curve Digital Signature Algorithm (ECDSA) public key that the push service will use to
+          authenticate the application server, in its uncompressed form (as
+          described in Section 2.3.3 of <span>[<a href="#SEC1" class="cite xref">SEC1</a>]</span>) and encoded using
+          base64url encoding <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>. Current systems use the
+          P-256 curve <span>[<a href="#FIPS186" class="cite xref">FIPS186</a>]</span>.<a href="#section-3-2.2" class="pilcrow">¶</a>
+</dd>
+      
+</dl>
+<aside id="section-3-3">
+        <p id="section-3-3.1">Informative Note: The format of the application server key was chosen to ensure compatibility with the browser API (Section 7.2 of <span>[<a href="#PUSH-API" class="cite xref">PUSH-API</a>]</span>), allowing the key to be directly copied and used without additional transformation. Additionally, as noted in <span><a href="https://rfc-editor.org/rfc/rfc8292#section-3.2" class="relref" target="_blank" rel="noopener">Section 3.2<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8292" class="cite xref">RFC8292</a>]</span>, the X9.62 encoding (which is compatible with SEC1 encoding) simplifies key comparisons and is more compact than alternative formats.<a href="#section-3-3.1" class="pilcrow">¶</a></p>
+</aside>
+</section>
+</div>
+<div id="issuing-push-notifications">
+<section id="section-4">
+      <h2 id="name-issuing-push-notifications"><a href="#section-4">4.&nbsp;&nbsp;Issuing Push Notifications</a></h2>
+<p id="section-4-1">Every time the server sends a push message to a <code>PushSubscription</code> URL, it <span class="bcp14">MUST</span> authenticate the POST request using the protocol outlined in <span>[<a href="#RFC8292" class="cite xref">RFC8292</a>]</span>. This includes both <code>StateChange</code> events and <code>PushVerification</code> notifications. To authenticate the request, the server <span class="bcp14">MUST</span> use a JSON Web Token (JWT) signed by the private key corresponding to the application server key. This application server key <span class="bcp14">MUST</span> be the one that was advertised in the capabilities object at the time the <code>PushSubscription</code> was created.<a href="#section-4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="key-rotation">
+<section id="section-5">
+      <h2 id="name-key-rotation"><a href="#section-5">5.&nbsp;&nbsp;Key Rotation</a></h2>
+<p id="section-5-1">When a server needs to replace its VAPID key, it <span class="bcp14">MUST</span> update the <code>sessionState</code> per <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>. The client <span class="bcp14">MUST</span> monitor the JMAP session object for changes to the VAPID key and <span class="bcp14">MUST</span> recreate its push subscription when it detects such a change.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">After key rotation, the server <span class="bcp14">MAY</span> continue to send push notifications for existing push subscriptions using the old application server key for a transitional period. This allows clients time to recreate their respective push subscriptions. At the end of the transitional period (or immediately for implementations that do not have one), the server <span class="bcp14">MUST</span> destroy push subscriptions that use the old key.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">When destroying push subscriptions that include the data type <code>PushSubscription</code>, the server <span class="bcp14">MAY</span> issue one final <code>StateChange</code> push notification using the old URL and application server key to notify the client of changes to the <code>PushSubscription</code> data type. This prompts the client to make a <code>PushSubscription/changes</code> method call. The response to this call will contain an updated <code>sessionState</code>, which refers to a session object that contains the new VAPID key.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">A race condition can occur when the server updates its VAPID key after the client has refreshed the session object but before calling the <code>PushSubscription/set</code> method. This situation causes the server to send a <code>PushVerification</code> object to a push resource URL that is now associated with an outdated VAPID key. Consequently, the push service will reject the <code>PushVerification</code> with a 403 (Forbidden) status code, as specified in <span><a href="https://rfc-editor.org/rfc/rfc8292#section-4.2" class="relref" target="_blank" rel="noopener">Section 4.2<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8292" class="cite xref">RFC8292</a>]</span>.<a href="#section-5-4" class="pilcrow">¶</a></p>
+<p id="section-5-5">To alleviate this problem, the client <span class="bcp14">MUST</span> check if the <code>sessionState</code> in the response from the <code>PushSubscription/set</code> method points to a session object with an <code>applicationServerKey</code> that matches their expectations. If there is a mismatch, the client <span class="bcp14">MAY</span> retry creating the <code>PushSubscription</code>. Additionally, the client <span class="bcp14">MAY</span> destroy the <code>PushSubscription</code> from the earlier, failed attempt.<a href="#section-5-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-6">
+      <h2 id="name-security-considerations"><a href="#section-6">6.&nbsp;&nbsp;Security Considerations</a></h2>
+<p id="section-6-1">During the key rotation process, synchronization issues between the client and server may arise. Specifically, a client might restrict a push subscription with the push service to an outdated key, while the server sends the <code>PushVerification</code> object authenticated with the newly rotated key. This mismatch leads to the push service rejecting the <code>PushVerification</code> request with a 403 (Forbidden) status code, as specified in <span><a href="https://rfc-editor.org/rfc/rfc8292#section-4.2" class="relref" target="_blank" rel="noopener">Section 4.2<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8292" class="cite xref">RFC8292</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">Per the requirements of <span><a href="https://rfc-editor.org/rfc/rfc8620#section-7.2" class="relref" target="_blank" rel="noopener">Section 7.2<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>, the server <span class="bcp14">MUST NOT</span> retry the rejected <code>PushVerification</code> request. Consequently, the <code>PushVerification</code> object will not be delivered to the client.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-3">To mitigate such issues, the client is responsible for detecting and resolving any synchronization discrepancies, as outlined in <a href="#key-rotation" class="auto internal xref">Section 5</a> of this document.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-6-4">The inclusion of the <code>urn:ietf:params:jmap:webpush-vapid</code> property in the JMAP capabilities object is limited to providing information about the server's support for VAPID. This property does not reveal sensitive information, nor does it introduce new security or privacy risks beyond those inherent to JMAP and Web Push. The security considerations for JMAP <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> (especially Sections <a href="https://rfc-editor.org/rfc/rfc8620#section-8.6" class="relref" target="_blank" rel="noopener">8.6<span class="u-visually-hidden"> (opens in new window)</span></a> and <a href="https://rfc-editor.org/rfc/rfc8620#section-8.7" class="relref" target="_blank" rel="noopener">8.7<span class="u-visually-hidden"> (opens in new window)</span></a>), Web Push <span>[<a href="#RFC8030" class="cite xref">RFC8030</a>]</span>, and VAPID <span>[<a href="#RFC8292" class="cite xref">RFC8292</a>]</span> apply to this document.<a href="#section-6-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-7">
+      <h2 id="name-iana-considerations"><a href="#section-7">7.&nbsp;&nbsp;IANA Considerations</a></h2>
+<div id="registration-of-the-jmap-capability-for-vapid">
+<section id="section-7.1">
+        <h3 id="name-registration-of-the-jmap-ca"><a href="#section-7.1">7.1.&nbsp;&nbsp;Registration of the JMAP Capability for VAPID</a></h3>
+<p id="section-7.1-1">IANA has registered the following new capability in the "JMAP Capabilities" registry:<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+<dl class="dlCompact dlParallel" id="section-7.1-2">
+          <dt id="section-7.1-2.1">Capability Name:</dt>
+          <dd id="section-7.1-2.2">
+            <code>urn:ietf:params:jmap:webpush-vapid</code><a href="#section-7.1-2.2" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-7.1-2.3">Intended Use:</dt>
+          <dd id="section-7.1-2.4">common<a href="#section-7.1-2.4" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-7.1-2.5">Change Controller:</dt>
+          <dd id="section-7.1-2.6">IETF<a href="#section-7.1-2.6" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-7.1-2.7">Security and Privacy Considerations:</dt>
+          <dd id="section-7.1-2.8">RFC 9749, <a href="#security-considerations" class="auto internal xref">Section 6</a><a href="#section-7.1-2.8" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-7.1-2.9">Reference:</dt>
+          <dd id="section-7.1-2.10">RFC 9749<a href="#section-7.1-2.10" class="pilcrow">¶</a>
+</dd>
+        
+</dl>
+</section>
+</div>
+</section>
+</div>
+<div id="sec-combined-references">
+<section id="section-8">
+      <h2 id="name-references"><a href="#section-8">8.&nbsp;&nbsp;References</a></h2>
+<div id="sec-normative-references">
+<section id="section-8.1">
+        <h3 id="name-normative-references"><a href="#section-8.1">8.1.&nbsp;&nbsp;Normative References</a></h3>
+<dl class="references">
+<dt id="FIPS186">[FIPS186]</dt>
+        <dd>
+<span class="refAuthor">NIST</span>, <span class="refTitle">"Digital Signature Standard (DSS)"</span>, <span class="seriesInfo">NIST FIPS 186-5</span>, <span class="seriesInfo">DOI 10.6028/NIST.FIPS.186-5</span>, <time datetime="2023-02" class="refDate">February 2023</time>, <span>&lt;<a href="https://doi.org/10.6028/NIST.FIPS.186-5" target="_blank" rel="noopener">https://doi.org/10.6028/NIST.FIPS.186-5<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="SEC1">[SEC1]</dt>
+        <dd>
+<span class="refAuthor">Standards for Efficient Cryptography Group</span>, <span class="refTitle">"SEC 1: Elliptic Curve Cryptography"</span>, <span class="refContent">Version 2.0</span>, <time datetime="2009-05" class="refDate">May 2009</time>, <span>&lt;<a href="http://www.secg.org/sec1-v2.pdf" target="_blank" rel="noopener">http://www.secg.org/sec1-v2.pdf<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC8620">[RFC8620]</dt>
+        <dd>
+<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"The JSON Meta Application Protocol (JMAP)"</span>, <span class="seriesInfo">RFC 8620</span>, <span class="seriesInfo">DOI 10.17487/RFC8620</span>, <time datetime="2019-07" class="refDate">July 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8620" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8620<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC8030">[RFC8030]</dt>
+        <dd>
+<span class="refAuthor">Thomson, M.</span>, <span class="refAuthor">Damaggio, E.</span>, and <span class="refAuthor">B. Raymor, Ed.</span>, <span class="refTitle">"Generic Event Delivery Using HTTP Push"</span>, <span class="seriesInfo">RFC 8030</span>, <span class="seriesInfo">DOI 10.17487/RFC8030</span>, <time datetime="2016-12" class="refDate">December 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8030" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8030<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC8292">[RFC8292]</dt>
+        <dd>
+<span class="refAuthor">Thomson, M.</span> and <span class="refAuthor">P. Beverloo</span>, <span class="refTitle">"Voluntary Application Server Identification (VAPID) for Web Push"</span>, <span class="seriesInfo">RFC 8292</span>, <span class="seriesInfo">DOI 10.17487/RFC8292</span>, <time datetime="2017-11" class="refDate">November 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8292" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8292<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC2119">[RFC2119]</dt>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc2119<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC8174">[RFC8174]</dt>
+        <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8174<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC7515">[RFC7515]</dt>
+      <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">N. Sakimura</span>, <span class="refTitle">"JSON Web Signature (JWS)"</span>, <span class="seriesInfo">RFC 7515</span>, <span class="seriesInfo">DOI 10.17487/RFC7515</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7515" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc7515<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+</dl>
+</section>
+</div>
+<div id="sec-informative-references">
+<section id="section-8.2">
+        <h3 id="name-informative-references"><a href="#section-8.2">8.2.&nbsp;&nbsp;Informative References</a></h3>
+<dl class="references">
+<dt id="PUSH-API">[PUSH-API]</dt>
+      <dd>
+<span class="refAuthor">Beverloo, P., Ed.</span>, <span class="refAuthor">Thomson, M., Ed.</span>, and <span class="refAuthor">M. Caceres, Ed.</span>, <span class="refTitle">"Push API"</span>, <span class="refContent">W3C Working Draft</span>, <time datetime="2024-09" class="refDate">September 2024</time>, <span>&lt;<a href="https://www.w3.org/TR/push-api/" target="_blank" rel="noopener">https://www.w3.org/TR/push-api/<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+</dl>
+</section>
+</div>
+</section>
+</div>
+
+
+
+
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo"><a href="#name-status-of-this-memo">Status of This Memo</a></h2>
+<p id="section-boilerplate.1-1">
+            This is an Internet Standards Track document.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+            This document is a product of the Internet Engineering Task Force
+            (IETF).  It represents the consensus of the IETF community.  It has
+            received public review and has been approved for publication by
+            the Internet Engineering Steering Group (IESG).  Further
+            information on Internet Standards is available in Section 2 of 
+            RFC 7841.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+            Information about the current status of this document, any
+            errata, and how to provide feedback on it may be obtained at
+            <span><a href="https://www.rfc-editor.org/info/rfc9749" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9749<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+</section>
+</div><div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice"><a href="#name-copyright-notice">Copyright Notice</a></h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2025 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info" target="_blank" rel="noopener">https://trustee.ietf.org/license-info<span class="u-visually-hidden"> (opens in new window)</span></a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>

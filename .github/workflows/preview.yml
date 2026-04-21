@@ -1,0 +1,54 @@
+name: Deploy Preview
+
+on:
+    push:
+        branches-ignore:
+            - master
+
+permissions:
+    contents: read
+    pages: write
+    id-token: write
+
+concurrency:
+    group: pages-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v6
+
+            - uses: actions/setup-node@v6
+              with:
+                  node-version-file: .node-version
+
+            - run: npm ci
+
+            - uses: ruby/setup-ruby@v1
+              with:
+                  ruby-version: .ruby-version
+                  bundler-cache: true
+
+            - name: Build with preview baseurl
+              run: bundle exec jekyll build --baseurl /jmapio.github.io
+              env:
+                  JEKYLL_ENV: preview
+
+            - name: Remove CNAME for preview
+              run: rm -f _site/CNAME
+
+            - uses: actions/upload-pages-artifact@v5
+              with:
+                  path: _site
+
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        steps:
+            - id: deployment
+              uses: actions/deploy-pages@v5

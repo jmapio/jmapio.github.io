@@ -1,0 +1,19 @@
+#!/bin/bash
+set -e
+
+cd "$(dirname "$0")/.."
+
+docker build -f Dockerfile.rfc -t jmapio-rfc .
+
+mkdir -p _tmp pages/generated-rfc _includes/generated-rfc-toc
+
+docker run --rm \
+  -v "$PWD/_tmp:/site/_tmp" \
+  -v "$PWD/pages/generated-rfc:/site/pages/generated-rfc" \
+  -v "$PWD/_includes/generated-rfc-toc:/site/_includes/generated-rfc-toc" \
+  -it \
+  jmapio-rfc \
+  bash -c '
+    node scripts/fetch-rfc-xml.js
+    node scripts/generate-rfc-templates.js
+  '

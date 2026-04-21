@@ -1,0 +1,21 @@
+---
+layout: default
+stylesheets:
+    - article
+---
+{% if page.hero %}
+    {%
+        include components/hero.liquid
+        eyebrow=page.hero.eyebrow
+        eyebrow_icon=page.hero.eyebrow_icon
+        title=page.hero.title
+        sub=page.hero.sub
+        links=page.hero.links
+    %}
+{% endif %}
+
+<section class='section'>
+    <article class='u-wrapper u-article'>
+        {{ content }}
+    </article>
+</section>

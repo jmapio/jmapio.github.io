@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+cd "$(dirname "$0")/.."
+
+docker build -t jmapio-build .
+
+mkdir -p _site
+docker run --rm \
+  -v "$PWD/_site:/site/_site" \
+  -it \
+  jmapio-build \
+  bash -c '
+    bundle exec jekyll build
+  '

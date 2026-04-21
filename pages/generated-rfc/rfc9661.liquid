@@ -1,0 +1,1257 @@
+---
+layout: article-rfc
+permalink: /spec/rfc9661/index.html
+toc: generated-rfc-toc/rfc9661.html
+title: 'RFC 9661 – The JSON Meta Application Protocol (JMAP) for Sieve Scripts'
+description: >-
+    This document specifies a data model for managing Sieve       scripts on a server using the JSON Meta Application Protocol       (JMAP).       Clients can use this protocol to efficiently search, access,       organize, and validate Sieve scripts.
+meta:
+    authors:
+        - Kenneth Murchison
+    keywords:
+        - JMAP
+        - JSON
+        - Sieve
+og_image:
+    eyebrow: 'RFC 9661'
+    title: 'The JSON Meta Application Protocol (JMAP) for Sieve Scripts'
+    description: ''
+is_draft: false
+---
+<section id="section-1">
+      <h2 id="name-introduction"><a href="#section-1">1.&nbsp;&nbsp;Introduction</a></h2>
+<p id="section-1-1"><span><a href="#RFC8620" class="internal xref">The JSON Meta Application Protocol (JMAP)</a> [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>
+      is a generic protocol for
+      synchronizing data, such as mail, calendars, or contacts, between
+      a client and a server.
+
+      It is optimized for mobile and web environments, and it aims to
+      provide a consistent interface to different data types.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">This specification defines a data model for managing
+      <span><a href="#RFC5228" class="internal xref">Sieve scripts</a> [<a href="#RFC5228" class="cite xref">RFC5228</a>]</span> on
+      a server using JMAP.
+
+      The data model is designed to allow a server to provide
+      consistent access to the same scripts via
+      <span><a href="#RFC5804" class="internal xref">ManageSieve</a> [<a href="#RFC5804" class="cite xref">RFC5804</a>]</span> as well as JMAP.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<section id="section-1.1">
+        <h3 id="name-notational-conventions"><a href="#section-1.1">1.1.&nbsp;&nbsp;Notational Conventions</a></h3>
+<p id="section-1.1-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>",
+        "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>",
+        "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>",
+        "<span class="bcp14">SHOULD NOT</span>",
+        "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+        "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document
+        are to be interpreted as described in BCP&nbsp;14
+        <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only
+        when, they appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">Type signatures, examples, and property descriptions in
+        this document follow the conventions established in
+        <span><a href="https://rfc-editor.org/rfc/rfc8620#section-1.1" class="relref" target="_blank" rel="noopener">Section 1.1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.
+        This document also uses data types and terminology established
+        in Sections&nbsp;<a href="https://rfc-editor.org/rfc/rfc8620#section-1.2" class="relref" target="_blank" rel="noopener">1.2<span class="u-visually-hidden"> (opens in new window)</span></a> through <a href="https://rfc-editor.org/rfc/rfc8620#section-1.6" class="relref" target="_blank" rel="noopener">1.6<span class="u-visually-hidden"> (opens in new window)</span></a> of
+        <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+<p id="section-1.1-3">The term "SieveScript" (with this specific capitalization) is
+        used to refer to the data type defined in <a href="#object" class="auto internal xref">Section 2</a>
+        and instances of this data type used throughout this document.
+        Servers <span class="bcp14">MUST</span> support all properties specified for the
+        data type defined in this document.<a href="#section-1.1-3" class="pilcrow">¶</a></p>
+<p id="section-1.1-4">For brevity, JMAP API examples
+        (see <span><a href="https://rfc-editor.org/rfc/rfc8620#section-3" class="relref" target="_blank" rel="noopener">Section 3<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>)
+        only show the "methodCalls" property of the "Request"
+        object and the "methodResponses" property of the "Response"
+        object.
+        All other examples are shown using the
+        <span><a href="#RFC9112" class="internal xref">HTTP/1.1 protocol</a> [<a href="#RFC9112" class="cite xref">RFC9112</a>]</span>.<a href="#section-1.1-4" class="pilcrow">¶</a></p>
+</section>
+<section id="section-1.2">
+        <h3 id="name-addition-to-the-capabilitie"><a href="#section-1.2">1.2.&nbsp;&nbsp;Addition to the Capabilities Object</a></h3>
+<p id="section-1.2-1">The "capabilities" object is returned as part of the JMAP
+        Session object;
+        see <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-2" class="relref" target="_blank" rel="noopener">Section 2<span class="u-visually-hidden"> (opens in new window)</span></a></span>.
+        This document defines one additional capability URI.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<div id="capa">
+<section id="section-1.2.1">
+          <h4 id="name-urnietfparamsjmapsieve"><a href="#section-1.2.1">1.2.1.&nbsp;&nbsp;urn:ietf:params:jmap:sieve</a></h4>
+<p id="section-1.2.1-1">The urn:ietf:params:jmap:sieve URI represents support for
+          the SieveScript data type and associated API methods.
+          The value of this property in the JMAP Session
+          "capabilities" property is an object that <span class="bcp14">MUST</span> contain
+          the following information on server capabilities:<a href="#section-1.2.1-1" class="pilcrow">¶</a></p>
+<dl class="dlParallel" id="section-1.2.1-2">
+            <dt id="section-1.2.1-2.1">
+<strong>implementation</strong>:</dt>
+            <dd id="section-1.2.1-2.2">
+              <p id="section-1.2.1-2.2.1">
+                <code>String</code><a href="#section-1.2.1-2.2.1" class="pilcrow">¶</a></p>
+<p id="section-1.2.1-2.2.2">
+                The name and version of the Sieve implementation.<a href="#section-1.2.1-2.2.2" class="pilcrow">¶</a></p>
+</dd>
+          
+</dl>
+<p id="section-1.2.1-3">The value of this property in an account's
+          "accountCapabilities" property is an object that <span class="bcp14">MUST</span> contain
+          the following information on per-account server capabilities:<a href="#section-1.2.1-3" class="pilcrow">¶</a></p>
+<dl class="dlParallel" id="section-1.2.1-4">
+            <dt id="section-1.2.1-4.1">
+<strong>maxSizeScriptName</strong>:</dt>
+            <dd id="section-1.2.1-4.2">
+              <p id="section-1.2.1-4.2.1"><code>UnsignedInt</code><a href="#section-1.2.1-4.2.1" class="pilcrow">¶</a></p>
+<p id="section-1.2.1-4.2.2">
+                The maximum length, in octets, allowed for the
+                name of a SieveScript.
+                For compatibility with ManageSieve, this <span class="bcp14">MUST</span> be at
+                least 512 (up to 128 Unicode characters).<a href="#section-1.2.1-4.2.2" class="pilcrow">¶</a></p>
+</dd>
+            
+<dt id="section-1.2.1-4.3">
+<strong>maxSizeScript</strong>:</dt>
+            <dd id="section-1.2.1-4.4">
+              <p id="section-1.2.1-4.4.1"><code>UnsignedInt|null</code><a href="#section-1.2.1-4.4.1" class="pilcrow">¶</a></p>
+<p id="section-1.2.1-4.4.2">
+                The maximum size (in octets) of a Sieve script the
+                server is willing to store for the user,
+                or <code>null</code> for no limit.<a href="#section-1.2.1-4.4.2" class="pilcrow">¶</a></p>
+</dd>
+            
+<dt id="section-1.2.1-4.5">
+<strong>maxNumberScripts</strong>:</dt>
+            <dd id="section-1.2.1-4.6">
+              <p id="section-1.2.1-4.6.1"><code>UnsignedInt|null</code><a href="#section-1.2.1-4.6.1" class="pilcrow">¶</a></p>
+<p id="section-1.2.1-4.6.2">
+                The maximum number of Sieve scripts the server is
+                willing to store for the user,
+                or <code>null</code> for no limit.<a href="#section-1.2.1-4.6.2" class="pilcrow">¶</a></p>
+</dd>
+            
+<dt id="section-1.2.1-4.7">
+<strong>maxNumberRedirects</strong>:</dt>
+            <dd id="section-1.2.1-4.8">
+              <p id="section-1.2.1-4.8.1"><code>UnsignedInt|null</code><a href="#section-1.2.1-4.8.1" class="pilcrow">¶</a></p>
+<p id="section-1.2.1-4.8.2">
+                The maximum number of Sieve "redirect" actions a
+                script can perform during a single evaluation,
+                or <code>null</code> for no limit.
+                Note that this is different from the total number of
+                "redirect" actions a script can contain.<a href="#section-1.2.1-4.8.2" class="pilcrow">¶</a></p>
+</dd>
+            
+<dt id="section-1.2.1-4.9">
+<strong>sieveExtensions</strong>:</dt>
+            <dd id="section-1.2.1-4.10">
+              <p id="section-1.2.1-4.10.1"><code>String[]</code><a href="#section-1.2.1-4.10.1" class="pilcrow">¶</a></p>
+<p id="section-1.2.1-4.10.2">
+                A list of case-sensitive Sieve capability strings (as
+                listed in the Sieve "require" action; see
+                <span>[<a href="#RFC5228" class="cite xref">RFC5228</a>], <a href="https://rfc-editor.org/rfc/rfc5228#section-3.2" class="relref" target="_blank" rel="noopener">Section 3.2<span class="u-visually-hidden"> (opens in new window)</span></a></span>)
+                indicating the extensions supported by the Sieve engine.<a href="#section-1.2.1-4.10.2" class="pilcrow">¶</a></p>
+</dd>
+            
+<dt id="section-1.2.1-4.11">
+<strong>notificationMethods</strong>:</dt>
+            <dd id="section-1.2.1-4.12">
+              <p id="section-1.2.1-4.12.1"><code>String[]|null</code><a href="#section-1.2.1-4.12.1" class="pilcrow">¶</a></p>
+<p id="section-1.2.1-4.12.2">
+                A list of
+                <span><a href="#RFC3986" class="internal xref">URI scheme parts</a> [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>
+                for notification methods supported by the Sieve
+                <span><a href="#RFC5435" class="internal xref">"enotify" extension</a> [<a href="#RFC5435" class="cite xref">RFC5435</a>]</span>,
+                or <code>null</code> if the extension
+                is not supported by the Sieve engine.<a href="#section-1.2.1-4.12.2" class="pilcrow">¶</a></p>
+</dd>
+            
+<dt id="section-1.2.1-4.13">
+<strong>externalLists</strong>:</dt>
+            <dd id="section-1.2.1-4.14">
+              <p id="section-1.2.1-4.14.1"><code>String[]|null</code><a href="#section-1.2.1-4.14.1" class="pilcrow">¶</a></p>
+<p id="section-1.2.1-4.14.2">
+                A list of
+                <span><a href="#RFC3986" class="internal xref">URI scheme parts</a> [<a href="#RFC3986" class="cite xref">RFC3986</a>]</span>
+                for externally stored list types supported by the
+                Sieve <span><a href="#RFC6134" class="internal xref">"extlists" extension</a> [<a href="#RFC6134" class="cite xref">RFC6134</a>]</span>,
+                or <code>null</code> if the extension
+                is not supported by the Sieve engine.<a href="#section-1.2.1-4.14.2" class="pilcrow">¶</a></p>
+</dd>
+          
+</dl>
+</section>
+</div>
+<div id="session">
+<section id="section-1.2.2">
+          <h4 id="name-example"><a href="#section-1.2.2">1.2.2.&nbsp;&nbsp;Example</a></h4>
+<p id="section-1.2.2-1" class="keepWithNext">
+            This example JMAP Session object shows a user that has access to their
+            own Sieve scripts with support for a few Sieve extensions:<a href="#section-1.2.2-1" class="pilcrow">¶</a></p>
+<div class="breakable lang-json sourcecode" id="section-1.2.2-2">
+<pre>{
+  "capabilities": {
+    "urn:ietf:params:jmap:core": {
+      ...
+    },
+    "urn:ietf:params:jmap:mail": {},
+    "urn:ietf:params:jmap:quota": {},
+    "urn:ietf:params:jmap:blob": {},
+    "urn:ietf:params:jmap:sieve": {
+      "implementation": "ACME Email Filtering"
+    },
+    "urn:ietf:params:jmap:vacationresponse": {},
+    ...
+  },
+  "accounts": {
+    "ken": {
+      "name": "ken@example.com",
+      "isPersonal": true,
+      "isReadOnly": false,
+      "accountCapabilities": {
+        "urn:ietf:params:jmap:core": {},
+        "urn:ietf:params:jmap:quota": {},
+        "urn:ietf:params:jmap:mail": {
+          ...
+        },
+        "urn:ietf:params:jmap:blob": {
+          "supportedTypeNames": [
+            "Email"
+            "SieveScript",
+            ...
+          ],
+          ...
+        },
+        "urn:ietf:params:jmap:sieve": {
+          "maxSizeScriptName": 512,
+          "maxSizeScript": 65536,
+          "maxNumberScripts": 5,
+          "maxNumberRedirects": null,
+          "sieveExtensions": [
+            "fileinto",
+            "imap4flags",
+            "enotify",
+            ...
+          ],
+          "notificationMethods": [
+            "mailto"
+          ],
+          "externalLists": null,
+        },
+        "urn:ietf:params:jmap:vacationresponse": {},
+        ...
+      },
+      ...
+    }
+  },
+  "primaryAccounts": {
+    "urn:ietf:params:jmap:mail": "ken",
+    "urn:ietf:params:jmap:sieve": "ken",
+    "urn:ietf:params:jmap:vacationresponse": "ken",
+    ...
+  },
+  "username": "ken@example.com",
+  "apiUrl": "/jmap/",
+  "downloadUrl":
+    "/jmap/download/{accountId}/{blobId}/{name}?accept={type}",
+  "uploadUrl": "/jmap/upload/{accountId}/",
+  ...
+}
+</pre><a href="#section-1.2.2-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+</section>
+</section>
+<div id="object">
+<section id="section-2">
+      <h2 id="name-sieve-scripts"><a href="#section-2">2.&nbsp;&nbsp;Sieve Scripts</a></h2>
+<p id="section-2-1">A "SieveScript" object represents
+      a single <span><a href="#RFC5228" class="internal xref">Sieve script</a> [<a href="#RFC5228" class="cite xref">RFC5228</a>]</span> for
+      filtering email messages at the time of final delivery.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<div id="props">
+<section id="section-2.1">
+        <h3 id="name-sieve-script-properties"><a href="#section-2.1">2.1.&nbsp;&nbsp;Sieve Script Properties</a></h3>
+<p id="section-2.1-1">A "SieveScript" object has the
+        following properties:<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<dl class="dlParallel" id="section-2.1-2">
+          <dt id="section-2.1-2.1">
+<strong>id</strong>:</dt>
+          <dd id="section-2.1-2.2">
+            <p id="section-2.1-2.2.1"><code>Id</code>
+            (immutable; server-set)<a href="#section-2.1-2.2.1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2.2.2">
+              The id of the script.<a href="#section-2.1-2.2.2" class="pilcrow">¶</a></p>
+</dd>
+          
+<dt id="section-2.1-2.3">
+<strong>name</strong>:</dt>
+          <dd id="section-2.1-2.4">
+            <p id="section-2.1-2.4.1"><code>String|null</code>
+            (optional; default is server dependent)<a href="#section-2.1-2.4.1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2.4.2">
+              User-visible name for the SieveScript.
+              If non-null, this <span class="bcp14">MUST</span> be a
+              <span><a href="#RFC5198" class="internal xref">Net-Unicode string</a> [<a href="#RFC5198" class="cite xref">RFC5198</a>]</span>
+              of at least 1 character in length, subject to the
+              maximum size given in the "capability" object.<a href="#section-2.1-2.4.2" class="pilcrow">¶</a></p>
+<p id="section-2.1-2.4.3">
+              For compatibility with ManageSieve, servers <span class="bcp14">MUST</span> reject
+              names that contain any of the following Unicode characters:
+              U+0000-U+001F, U+007F-U+009F, U+2028, or U+2029.<a href="#section-2.1-2.4.3" class="pilcrow">¶</a></p>
+<p id="section-2.1-2.4.4">
+              Servers <span class="bcp14">MAY</span> reject names that violate server policy
+              (e.g., names containing a slash (/)).<a href="#section-2.1-2.4.4" class="pilcrow">¶</a></p>
+<p id="section-2.1-2.4.5">
+              The name <span class="bcp14">MUST</span> be unique among all SieveScripts within an
+              account.<a href="#section-2.1-2.4.5" class="pilcrow">¶</a></p>
+</dd>
+          
+<dt id="section-2.1-2.5">
+<strong>blobId</strong>:</dt>
+          <dd id="section-2.1-2.6">
+            <p id="section-2.1-2.6.1"><code>Id</code><a href="#section-2.1-2.6.1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2.6.2">
+              The id of the blob containing the raw octets of the script.<a href="#section-2.1-2.6.2" class="pilcrow">¶</a></p>
+</dd>
+          
+<dt id="section-2.1-2.7">
+<strong>isActive</strong>:</dt>
+          <dd id="section-2.1-2.8">
+            <p id="section-2.1-2.8.1"><code>Boolean</code>
+            (server-set; default: false)<a href="#section-2.1-2.8.1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2.8.2">
+              Indicator that the SieveScript is actively filtering
+              incoming messages.<a href="#section-2.1-2.8.2" class="pilcrow">¶</a></p>
+<p id="section-2.1-2.8.3">
+              A user may have at most one active script.
+              The <span><a href="#set" class="internal xref">SieveScript/set method</a> (<a href="#set" class="auto internal xref">Section 2.4</a>)</span> is
+              used for changing the active script or disabling Sieve
+              processing.<a href="#section-2.1-2.8.3" class="pilcrow">¶</a></p>
+</dd>
+        
+</dl>
+</section>
+</div>
+<div id="content">
+<section id="section-2.2">
+        <h3 id="name-sieve-script-content"><a href="#section-2.2">2.2.&nbsp;&nbsp;Sieve Script Content</a></h3>
+<p id="section-2.2-1">A script <span class="bcp14">MUST</span> be <span><a href="#RFC3629" class="internal xref">UTF-8 content</a> [<a href="#RFC3629" class="cite xref">RFC3629</a>]</span>
+          of at least 1 character in length, subject to the
+          syntax of <span><a href="#RFC5228" class="internal xref">Sieve</a> [<a href="#RFC5228" class="cite xref">RFC5228</a>]</span>.
+          A script <span class="bcp14">MUST NOT</span> contain any "require" statement(s)
+          mentioning Sieve capability strings not present in the
+          <span><a href="#capa" class="internal xref">"capability" object</a> (<a href="#capa" class="auto internal xref">Section 1.2.1</a>)</span>.
+          Note that if the Sieve <span><a href="#RFC5463" class="internal xref">"ihave" capability string</a> [<a href="#RFC5463" class="cite xref">RFC5463</a>]</span>
+          is present in the "capability" object,
+          the script <span class="bcp14">MAY</span> mention unrecognized/unsupported extensions
+          in the "ihave" test.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-2">Script content is treated as a binary blob and
+          uploaded/downloaded via the mechanisms provided in  
+          Sections&nbsp;<a href="https://rfc-editor.org/rfc/rfc8620#section-6.1" class="relref" target="_blank" rel="noopener">6.1<span class="u-visually-hidden"> (opens in new window)</span></a> and <a href="https://rfc-editor.org/rfc/rfc8620#section-6.2" class="relref" target="_blank" rel="noopener">6.2<span class="u-visually-hidden"> (opens in new window)</span></a> of <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>,
+          respectively, and/or via the JMAP Blob management methods provided in
+          Sections&nbsp;<a href="https://rfc-editor.org/rfc/rfc9404#section-4.1" class="relref" target="_blank" rel="noopener">4.1<span class="u-visually-hidden"> (opens in new window)</span></a> and <a href="https://rfc-editor.org/rfc/rfc9404#section-4.2" class="relref" target="_blank" rel="noopener">4.2<span class="u-visually-hidden"> (opens in new window)</span></a> of <span>[<a href="#RFC9404" class="cite xref">RFC9404</a>]</span>,
+          respectively.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.2-3">Downloading script content via the JMAP downloadUrl or the
+          Blob/get method provides functionality equivalent to that of the
+          GETSCRIPT command defined in <span>[<a href="#RFC5804" class="cite xref">RFC5804</a>]</span>.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="get">
+<section id="section-2.3">
+        <h3 id="name-sievescript-get"><a href="#section-2.3">2.3.&nbsp;&nbsp;SieveScript/get</a></h3>
+<p id="section-2.3-1">This is a standard "/get" method as described in
+        <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.1" class="relref" target="_blank" rel="noopener">Section 5.1<span class="u-visually-hidden"> (opens in new window)</span></a></span>.
+        The "ids" argument may be
+        <code>null</code> to fetch all scripts at once.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.3-2">This method provides functionality equivalent to that of the
+        LISTSCRIPTS command defined in <span>[<a href="#RFC5804" class="cite xref">RFC5804</a>]</span>.<a href="#section-2.3-2" class="pilcrow">¶</a></p>
+<section id="section-2.3.1">
+          <h4 id="name-examples"><a href="#section-2.3.1">2.3.1.&nbsp;&nbsp;Examples</a></h4>
+<p id="section-2.3.1-1" class="keepWithNext">
+            List all scripts:<a href="#section-2.3.1-1" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-2.3.1-2">
+<pre>[
+  ["SieveScript/get", {
+    "accountId": "ken"
+  }, "0"]
+]
+
+[
+  [
+    "SieveScript/get",
+    {
+      "state": "1634915373.240633104-120",
+      "list": [
+        {
+          "id": "2d647053-dded-418d-917a-63eda3ac8f7b",
+          "name": "test1",
+          "isActive": true,
+          "blobId": "S7"
+        }
+      ],
+      "notFound": [],
+      "accountId": "ken"
+    },
+    "0"
+  ]
+]
+</pre><a href="#section-2.3.1-2" class="pilcrow">¶</a>
+</div>
+<p id="section-2.3.1-3" class="keepWithNext">
+            Download the script content via
+            the JMAP downloadUrl as advertised in the example in <a href="#session" class="auto internal xref">Section 1.2.2</a>:<a href="#section-2.3.1-3" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.3.1-4">
+<pre>GET /jmap/download/ken/S7/test1.siv?accept=application/sieve HTTP/1.1
+Host: jmap.example.com
+Authorization: Basic a2VuOnBhc3N3b3Jk
+
+HTTP/1.1 200 OK
+Date: Fri, 22 Oct 2021 15:27:38 GMT
+Content-Type: application/sieve; charset=utf-8
+Content-Disposition: attachment; filename="test1.siv"
+Content-Length: 49
+
+require ["fileinto"];
+fileinto "INBOX.target";
+</pre><a href="#section-2.3.1-4" class="pilcrow">¶</a>
+</div>
+<p id="section-2.3.1-5" class="keepWithNext">
+            Fetch script properties
+            and content in a single JMAP API request using the
+            <span><a href="#RFC9404" class="internal xref">JMAP Blob management extension</a> [<a href="#RFC9404" class="cite xref">RFC9404</a>]</span>:<a href="#section-2.3.1-5" class="pilcrow">¶</a></p>
+<div class="breakable lang-json sourcecode" id="section-2.3.1-6">
+<pre>[
+  ["SieveScript/get", {
+    "accountId": "ken",
+    "ids": [ "2d647053-dded-418d-917a-63eda3ac8f7b" ]
+  }, "0"],
+  ["Blob/get", {
+    "accountId": "ken",
+    "#ids": {
+      "resultOf": "0",
+      "name": "SieveScript/get",
+      "path": "/list/*/blobId"
+    }
+  }, "1"]
+]
+
+[
+  [
+    "SieveScript/get",
+    {
+      "state": "1634915373.240633104-120",
+      "list": [
+        {
+          "id": "2d647053-dded-418d-917a-63eda3ac8f7b",
+          "name": "test1",
+          "isActive": true,
+          "blobId": "S7"
+        }
+      ],
+      "notFound": [],
+      "accountId": "ken"
+    },
+    "0"
+  ],
+  [
+    "Blob/get",
+    {
+      "list": [
+        {
+          "id": "S7",
+          "data:asText":
+     "require [\"fileinto\"];\\r\\nfileinto \"INBOX.target\";\\r\\n",
+          "size": 49
+        }
+      ],
+      "notFound": [],
+      "accountId": "ken"
+    },
+    "1"
+  ]
+]
+</pre><a href="#section-2.3.1-6" class="pilcrow">¶</a>
+</div>
+</section>
+</section>
+</div>
+<div id="set">
+<section id="section-2.4">
+        <h3 id="name-sievescript-set"><a href="#section-2.4">2.4.&nbsp;&nbsp;SieveScript/set</a></h3>
+<p id="section-2.4-1">This is a standard "/set" method as described in
+        <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.3" class="relref" target="_blank" rel="noopener">Section 5.3<span class="u-visually-hidden"> (opens in new window)</span></a></span>,
+        but with the following additional optional request arguments:<a href="#section-2.4-1" class="pilcrow">¶</a></p>
+<dl class="dlParallel" id="section-2.4-2">
+          <dt id="section-2.4-2.1">
+<strong>onSuccessActivateScript</strong>:</dt>
+          <dd id="section-2.4-2.2">
+            <p id="section-2.4-2.2.1"><code>Id</code><a href="#section-2.4-2.2.1" class="pilcrow">¶</a></p>
+<p id="section-2.4-2.2.2">
+            The id of the SieveScript to activate if and
+            only if all of the creations, modifications, and
+            destructions (if any) succeed.
+            (For references to SieveScript creations, this is
+            equivalent to a creation-reference, so the id will be the
+            creation id prefixed with a "#".)
+            The currently active SieveScript (if any) will be deactivated
+            before activating the specified SieveScript.<a href="#section-2.4-2.2.2" class="pilcrow">¶</a></p>
+<p id="section-2.4-2.2.3">
+            If omitted, or if the id is either invalid or nonexistent, it <span class="bcp14">MUST</span> be
+            ignored, and the currently active SieveScript (if any) will
+            remain as such.<a href="#section-2.4-2.2.3" class="pilcrow">¶</a></p>
+<p id="section-2.4-2.2.4">
+            The id of any activated SieveScript <span class="bcp14">MUST</span> be reported in
+            either the "created" or "updated" argument in the response
+            as appropriate, including a value of "true" for  the "isActive"
+            property.
+            The id of any deactivated SieveScript <span class="bcp14">MUST</span> be reported in
+            the "updated" argument in the response, including a value of
+            "false" for the "isActive" property.<a href="#section-2.4-2.2.4" class="pilcrow">¶</a></p>
+</dd>
+          
+<dt id="section-2.4-2.3">
+<strong>onSuccessDeactivateScript</strong>:</dt>
+          <dd id="section-2.4-2.4">
+            <p id="section-2.4-2.4.1"><code>Boolean</code><a href="#section-2.4-2.4.1" class="pilcrow">¶</a></p>
+<p id="section-2.4-2.4.2">
+            If "true", the currently active
+            SieveScript (if any) will be deactivated if and only if
+            all of the creations, modifications, and destructions (if
+            any) succeed.
+            If "false" or omitted, the currently active SieveScript (if
+            any) will remain as such.<a href="#section-2.4-2.4.2" class="pilcrow">¶</a></p>
+<p id="section-2.4-2.4.3">
+
+            The id of any deactivated SieveScript <span class="bcp14">MUST</span> be reported in
+            the "updated" argument in the response, including a value of
+            "false" for the "isActive" property.<a href="#section-2.4-2.4.3" class="pilcrow">¶</a></p>
+</dd>
+        
+</dl>
+<p id="section-2.4-3">If both the "onSuccessActivateScript" and
+        "onSuccessDeactivateScript" arguments are
+        present in the request, then
+        "onSuccessDeactivateScript" <span class="bcp14">MUST</span> be processed first.
+        If neither argument is present in the request, the currently
+        active SieveScript (if any) will remain as such.<a href="#section-2.4-3" class="pilcrow">¶</a></p>
+<p id="section-2.4-4">This method provides functionality equivalent to that of the
+        PUTSCRIPT, DELETESCRIPT, RENAMESCRIPT, and SETACTIVE commands defined
+        in <span>[<a href="#RFC5804" class="cite xref">RFC5804</a>]</span>.<a href="#section-2.4-4" class="pilcrow">¶</a></p>
+<p id="section-2.4-5">Script content must first be uploaded as per
+        <a href="#content" class="auto internal xref">Section 2.2</a> prior to referencing it in a
+        SieveScript/set call.<a href="#section-2.4-5" class="pilcrow">¶</a></p>
+<p id="section-2.4-6">If the SieveScript cannot be created or updated because it
+        would result in two SieveScripts with the same name, the
+        server <span class="bcp14">MUST</span> reject the request with an "alreadyExists"
+        SetError.
+        An "existingId" property of type "Id" <span class="bcp14">MUST</span> be included on the
+        SetError object with the id of the existing SieveScript.<a href="#section-2.4-6" class="pilcrow">¶</a></p>
+<p id="section-2.4-7">If the SieveScript cannot be created or updated because
+        its size exceeds the "maxSizeScript" limit, the server <span class="bcp14">MUST</span>
+        reject the request with a "tooLarge" SetError.<a href="#section-2.4-7" class="pilcrow">¶</a></p>
+<p id="section-2.4-8">If the SieveScript cannot be created because it would
+        exceed the "maxNumberScripts" limit or would exceed a
+        server-imposed storage limit, the server <span class="bcp14">MUST</span>
+        reject the request with an "overQuota" SetError.<a href="#section-2.4-8" class="pilcrow">¶</a></p>
+<p id="section-2.4-9">The active SieveScript <span class="bcp14">MUST NOT</span> be destroyed
+        unless it is first deactivated in a separate SieveScript/set
+        method call.<a href="#section-2.4-9" class="pilcrow">¶</a></p>
+<p id="section-2.4-10">The following extra SetError types are defined:<a href="#section-2.4-10" class="pilcrow">¶</a></p>
+<p id="section-2.4-11">For "create" and "update":<a href="#section-2.4-11" class="pilcrow">¶</a></p>
+<dl class="dlParallel" id="section-2.4-12">
+          <dt id="section-2.4-12.1">
+<strong>invalidSieve</strong>:</dt>
+          <dd id="section-2.4-12.2">
+            <p id="section-2.4-12.2.1">
+              The SieveScript content violates the
+              <span><a href="#RFC5228" class="internal xref">Sieve grammar</a> [<a href="#RFC5228" class="cite xref">RFC5228</a>]</span>,
+              and/or one
+              or more extensions mentioned in the script's "require"
+              statement(s) are not supported by the Sieve interpreter.
+              The "description" property on
+              the SetError object <span class="bcp14">SHOULD</span> contain a specific error
+              message giving at least the line number of the first error.<a href="#section-2.4-12.2.1" class="pilcrow">¶</a></p>
+</dd>
+        
+</dl>
+<p id="section-2.4-13">For "destroy":<a href="#section-2.4-13" class="pilcrow">¶</a></p>
+<dl class="dlParallel" id="section-2.4-14">
+          <dt id="section-2.4-14.1">
+<strong>sieveIsActive</strong>:</dt>
+          <dd id="section-2.4-14.2">
+            <p id="section-2.4-14.2.1">
+              The SieveScript is active.<a href="#section-2.4-14.2.1" class="pilcrow">¶</a></p>
+</dd>
+        
+</dl>
+<section id="section-2.4.1">
+          <h4 id="name-examples-2"><a href="#section-2.4.1">2.4.1.&nbsp;&nbsp;Examples</a></h4>
+<p id="section-2.4.1-1" class="keepWithNext">
+                Upload a script
+                requiring the Imap4Flags Extension
+                <span>[<a href="#RFC5232" class="cite xref">RFC5232</a>]</span>
+                using the JMAP uploadUrl as advertised in the example in
+                <a href="#session" class="auto internal xref">Section 1.2.2</a>:<a href="#section-2.4.1-1" class="pilcrow">¶</a></p>
+<div class="lang-http-message sourcecode" id="section-2.4.1-2">
+<pre>POST /jmap/upload/ken/ HTTP/1.1
+Host: jmap.example.com
+Authorization: Basic a2VuOnBhc3N3b3Jk
+Content-Type: application/sieve
+Content-Length: 98
+
+require "imapflags";
+
+if address :is ["To", "Cc"] "jmap@ietf.org" {
+  setflag "\\Flagged";
+}
+
+
+HTTP/1.1 201 Created
+Date: Thu, 10 Dec 2020 17:14:31 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 171
+
+{
+  "accountId": "ken",
+  "blobId": "Gabcc83e44a6e19991c4568d0b94e1767c83dd123",
+  "type": "application/sieve"
+  "size": 98
+}
+</pre><a href="#section-2.4.1-2" class="pilcrow">¶</a>
+</div>
+<p id="section-2.4.1-3" class="keepWithNext">
+                Create and activate
+                a script using the uploaded blob.
+                Note that the response shows that an existing active
+                script has been deactivated in lieu of the newly
+                created script being activated.<a href="#section-2.4.1-3" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-2.4.1-4">
+<pre>[
+  ["SieveScript/set", {
+    "accountId": "ken",
+    "create": {
+      "A": {
+        "name": null,
+        "blobId": "Gabcc83e44a6e19991c4568d0b94e1767c83dd123"
+      }
+    },
+    "onSuccessActivateScript": "#A"
+  }, "0"]
+]
+
+[
+  [
+    "SieveScript/set",
+    {
+      "oldState": "1603741717.50737918-4096",
+      "newState": "1603741751.227268529-4096",
+      "created": {
+        "A": {
+          "id": "dd1b164f-8cdc-448c-9f54",
+          "name": "ken-20201210T171432-0",
+          "blobId": "Sdd1b164f-8cdc-448c-9f54",
+          "isActive": true
+        }
+      },
+      "updated": {
+        "8abd6f4a-bcb4d-87650-3fcd": {
+          "isActive": false
+        }
+      },
+      "destroyed": null,
+      "notCreated": null,
+      "notUpdated": null,
+      "notDestroyed": null,
+      "accountId": "ken"
+    },
+    "0"
+  ]
+]
+</pre><a href="#section-2.4.1-4" class="pilcrow">¶</a>
+</div>
+<p id="section-2.4.1-5" class="keepWithNext">
+            Update the script content using
+            the <span><a href="#RFC9404" class="internal xref">JMAP Blob management extension</a> [<a href="#RFC9404" class="cite xref">RFC9404</a>]</span>:<a href="#section-2.4.1-5" class="pilcrow">¶</a></p>
+<div class="breakable lang-json sourcecode" id="section-2.4.1-6">
+<pre>{
+[
+  ["Blob/upload", {
+    "accountId": "ken",
+    "create": {
+      "B": {
+        "data": [ {
+          "data:asText":
+            "redirect \"ken@example.com\"\r\n;"
+         } ],
+        "type": "application/sieve"
+      }
+    }
+  }, "1"],
+  ["SieveScript/set", {
+    "accountId": "ken",
+    "update": { "dd1b164f-8cdc-448c-9f54": {
+      "blobId": "#B"
+      }
+    }
+  }, "2"]
+]
+
+[
+  [
+    "Blob/upload",
+    {
+      "oldState": null,
+      "newState": "1603741700.309607123-0128",
+      "created": {
+        "B": {
+          "id": "G969c83e44a6e10871c4568d0b94e1767c83ddeae",
+          "blobId": "G969c83e44a6e10871c4568d0b94e1767c83ddeae",
+          "type": "application/sieve",
+          "size": 29
+        }
+      },
+      "notCreated": null,
+      "accountId": "ken"
+    },
+    "1"
+  ],
+  [
+    "SieveScript/set",
+    {
+      "oldState": "1603741751.227268529-4096",
+      "newState": "1603742603.309607868-4096",
+      "created": null,
+      "updated": {
+        "dd1b164f-8cdc-448c-9f54": null
+      },
+      "destroyed": null,
+      "notCreated": null,
+      "notUpdated": null,
+      "notDestroyed": null,
+      "accountId": "ken"
+    },
+    "2"
+  ]
+]
+</pre><a href="#section-2.4.1-6" class="pilcrow">¶</a>
+</div>
+<p id="section-2.4.1-7" class="keepWithNext">
+            Update the script name, and deactivate it:<a href="#section-2.4.1-7" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-2.4.1-8">
+<pre>[
+  ["SieveScript/set", {
+    "accountId": "ken",
+    "update": { "dd1b164f-8cdc-448c-9f54": {
+      "name": "myscript"
+      }
+    },
+    "onSuccessDeactivateScript": true
+  }, "3"]
+]
+
+[
+  [
+    "SieveScript/set",
+    {
+      "oldState": "1603742603.309607868-4096",
+      "newState": "1603742967.852315428-4096",
+      "created": null,
+      "updated": {
+        "dd1b164f-8cdc-448c-9f54": {
+          "isActive": false
+        }
+      },
+      "destroyed": null,
+      "notCreated": null,
+      "notUpdated": null,
+      "notDestroyed": null,
+      "accountId": "ken"
+    },
+    "3"
+  ]
+]
+</pre><a href="#section-2.4.1-8" class="pilcrow">¶</a>
+</div>
+<p id="section-2.4.1-9" class="keepWithNext">
+            Reactivate the script:<a href="#section-2.4.1-9" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-2.4.1-10">
+<pre>[
+  ["SieveScript/set", {
+    "accountId": "ken",
+    "onSuccessActivateScript": "dd1b164f-8cdc-448c-9f54"
+  }, "4"]
+]
+
+[
+  [
+    "SieveScript/set",
+    {
+      "oldState": "1603742967.852315428-4096",
+      "newState": "1603744460.316617118-4096",
+      "created": null,
+      "updated": {
+        "dd1b164f-8cdc-448c-9f54": {
+          "isActive": true
+        }
+      },
+      "destroyed": null,
+      "notCreated": null,
+      "notUpdated": null,
+      "notDestroyed": null,
+      "accountId": "ken"
+    },
+    "4"
+  ]
+]
+</pre><a href="#section-2.4.1-10" class="pilcrow">¶</a>
+</div>
+<p id="section-2.4.1-11" class="keepWithNext">
+            Deactivate and destroy the active script:<a href="#section-2.4.1-11" class="pilcrow">¶</a></p>
+<div class="breakable lang-json sourcecode" id="section-2.4.1-12">
+<pre>[
+  ["SieveScript/set", {
+    "accountId": "ken",
+    "onSuccessDeactivateScript": true
+  }, "5"],
+  ["SieveScript/set", {
+    "accountId": "ken",
+    "destroy": [ "dd1b164f-8cdc-448c-9f54" ]
+  }, "6"]
+]
+
+[
+  [
+    "SieveScript/set",
+    {
+      "oldState": "1603744460.316617118-4096",
+      "newState": "1603744637.575375572-4096",
+      "created": null,
+      "updated": {
+        "dd1b164f-8cdc-448c-9f54": {
+          "isActive": false
+        }
+      },
+      "destroyed": null,
+      "notCreated": null,
+      "notUpdated": null,
+      "notDestroyed": null,
+      "accountId": "ken"
+    },
+    "5"
+  ],
+  [
+    "SieveScript/set",
+    {
+      "oldState": "1603744637.575375572-4096",
+      "newState": "1603744637.854390875-4096",
+      "created": null,
+      "updated": null,
+      "destroyed": [
+        "dd1b164f-8cdc-448c-9f54"
+      ],
+      "notCreated": null,
+      "notUpdated": null,
+      "notDestroyed": null,
+      "accountId": "ken"
+    },
+    "6"
+  ]
+]
+</pre><a href="#section-2.4.1-12" class="pilcrow">¶</a>
+</div>
+</section>
+</section>
+</div>
+<section id="section-2.5">
+        <h3 id="name-sievescript-query"><a href="#section-2.5">2.5.&nbsp;&nbsp;SieveScript/query</a></h3>
+<p id="section-2.5-1">This is a standard "/query" method as described in
+        <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.5" class="relref" target="_blank" rel="noopener">Section 5.5<span class="u-visually-hidden"> (opens in new window)</span></a></span>.
+
+        A "FilterCondition" object has the
+        following properties, either of which may be omitted:<a href="#section-2.5-1" class="pilcrow">¶</a></p>
+<dl class="dlParallel" id="section-2.5-2">
+          <dt id="section-2.5-2.1">
+<strong>name</strong>:</dt>
+          <dd id="section-2.5-2.2">
+            <p id="section-2.5-2.2.1"><code>String</code><a href="#section-2.5-2.2.1" class="pilcrow">¶</a></p>
+<p id="section-2.5-2.2.2">
+            The SieveScript "name" property contains the given string.<a href="#section-2.5-2.2.2" class="pilcrow">¶</a></p>
+</dd>
+          
+<dt id="section-2.5-2.3">
+<strong>isActive</strong>:</dt>
+          <dd id="section-2.5-2.4">
+            <p id="section-2.5-2.4.1"><code>Boolean</code><a href="#section-2.5-2.4.1" class="pilcrow">¶</a></p>
+<p id="section-2.5-2.4.2">
+            The "isActive" property of the SieveScript must be
+            identical to the value given to match the condition.<a href="#section-2.5-2.4.2" class="pilcrow">¶</a></p>
+</dd>
+        
+</dl>
+<p id="section-2.5-3">The following SieveScript properties <span class="bcp14">MUST</span> be supported for
+        sorting:<a href="#section-2.5-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2.5-4.1">
+            <p id="section-2.5-4.1.1"><strong>name</strong><a href="#section-2.5-4.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-2.5-4.2">
+            <strong>isActive</strong><a href="#section-2.5-4.2" class="pilcrow">¶</a>
+</li>
+        </ul>
+</section>
+<section id="section-2.6">
+        <h3 id="name-sievescript-validate"><a href="#section-2.6">2.6.&nbsp;&nbsp;SieveScript/validate</a></h3>
+<p id="section-2.6-1">This method is used by the client to verify Sieve script
+        validity without storing the script on the server.<a href="#section-2.6-1" class="pilcrow">¶</a></p>
+<p id="section-2.6-2">The method takes the following arguments:<a href="#section-2.6-2" class="pilcrow">¶</a></p>
+<dl class="dlParallel" id="section-2.6-3">
+          <dt id="section-2.6-3.1">
+<strong>accountId</strong>:</dt>
+          <dd id="section-2.6-3.2">
+            <p id="section-2.6-3.2.1"><code>Id</code><a href="#section-2.6-3.2.1" class="pilcrow">¶</a></p>
+<p id="section-2.6-3.2.2">
+              The id of the account to use.<a href="#section-2.6-3.2.2" class="pilcrow">¶</a></p>
+</dd>
+          
+<dt id="section-2.6-3.3">
+<strong>blobId</strong>:</dt>
+          <dd id="section-2.6-3.4">
+            <p id="section-2.6-3.4.1"><code>Id</code><a href="#section-2.6-3.4.1" class="pilcrow">¶</a></p>
+<p id="section-2.6-3.4.2">
+              The id of the blob containing the raw octets of the
+              script to validate,
+              subject to the same requirements in
+              <a href="#content" class="auto internal xref">Section 2.2</a>.<a href="#section-2.6-3.4.2" class="pilcrow">¶</a></p>
+</dd>
+        
+</dl>
+<p id="section-2.6-4">The response has the following arguments:<a href="#section-2.6-4" class="pilcrow">¶</a></p>
+<dl class="dlParallel" id="section-2.6-5">
+          <dt id="section-2.6-5.1">
+<strong>accountId</strong>:</dt>
+          <dd id="section-2.6-5.2">
+            <p id="section-2.6-5.2.1"><code>Id</code><a href="#section-2.6-5.2.1" class="pilcrow">¶</a></p>
+<p id="section-2.6-5.2.2">
+              The id of the account used for this call.<a href="#section-2.6-5.2.2" class="pilcrow">¶</a></p>
+</dd>
+          
+<dt id="section-2.6-5.3">
+<strong>error</strong>:</dt>
+          <dd id="section-2.6-5.4">
+            <p id="section-2.6-5.4.1"><code>SetError|null</code><a href="#section-2.6-5.4.1" class="pilcrow">¶</a></p>
+<p id="section-2.6-5.4.2">
+              An "invalidSieve" SetError object if the script content
+              is invalid (see <a href="#set" class="auto internal xref">Section 2.4</a>),
+              or <code>null</code> if the
+              script content is valid.<a href="#section-2.6-5.4.2" class="pilcrow">¶</a></p>
+</dd>
+        
+</dl>
+<p id="section-2.6-6">This method provides functionality equivalent to that of the
+        CHECKSCRIPT command defined in <span>[<a href="#RFC5804" class="cite xref">RFC5804</a>]</span>.<a href="#section-2.6-6" class="pilcrow">¶</a></p>
+<p id="section-2.6-7">Script content must first be uploaded as per
+        <a href="#content" class="auto internal xref">Section 2.2</a> prior to referencing it in a
+        SieveScript/validate call.<a href="#section-2.6-7" class="pilcrow">¶</a></p>
+</section>
+</section>
+</div>
+<div id="quotas">
+<section id="section-3">
+      <h2 id="name-quotas"><a href="#section-3">3.&nbsp;&nbsp;Quotas</a></h2>
+<p id="section-3-1">Servers <span class="bcp14">SHOULD</span> impose quotas on Sieve scripts to prevent
+      malicious users from exceeding available storage.
+      Administration of such quotas is outside of the scope of this
+      specification; however, <span>[<a href="#RFC9425" class="cite xref">RFC9425</a>]</span> defines a data
+      model for users to obtain quota details over JMAP.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">The mechanism for handling SieveScript requests that would place
+      a user over a quota setting is discussed in <a href="#set" class="auto internal xref">Section 2.4</a>.<a href="#section-3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="vacation">
+<section id="section-4">
+      <h2 id="name-compatibility-with-jmap-vac"><a href="#section-4">4.&nbsp;&nbsp;Compatibility with JMAP Vacation Response</a></h2>
+<p id="section-4-1"><span><a href="https://rfc-editor.org/rfc/rfc8621#section-8" class="relref" target="_blank" rel="noopener">Section 8<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8621" class="cite xref">RFC8621</a>]</span> defines a
+      "VacationResponse" object to represent an autoresponder to
+      incoming email messages.
+      Servers that implement the VacationResponse as a Sieve script
+      that resides among other user scripts are subject to the
+      following requirements:<a href="#section-4-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4-2.1">
+          <span class="bcp14">MUST</span> allow the VacationResponse Sieve script to be fetched
+        by the <span><a href="#get" class="internal xref">SieveScript/get method</a> (<a href="#get" class="auto internal xref">Section 2.3</a>)</span>.<a href="#section-4-2.1" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-4-2.2">
+          <span class="bcp14">MUST</span> allow the VacationResponse Sieve script to be
+        activated or deactivated via the "onSuccessActivateScript" argument to
+        the <span><a href="#set" class="internal xref">SieveScript/set method</a> (<a href="#set" class="auto internal xref">Section 2.4</a>)</span>.<a href="#section-4-2.2" class="pilcrow">¶</a>
+</li>
+        <li class="normal" id="section-4-2.3">
+          <span class="bcp14">MUST NOT</span> allow the VacationResponse Sieve script to be
+        destroyed or have its content updated by the
+        <span><a href="#set" class="internal xref">SieveScript/set method</a> (<a href="#set" class="auto internal xref">Section 2.4</a>)</span>.
+        Any such request <span class="bcp14">MUST</span> be rejected with a "forbidden" SetError.
+        A "description" property <span class="bcp14">MAY</span> be present with an explanation
+        that the script can only be modified by a VacationResponse/set
+        method.<a href="#section-4-2.3" class="pilcrow">¶</a>
+</li>
+      </ul>
+</section>
+</div>
+<div id="security">
+<section id="section-5">
+      <h2 id="name-security-considerations"><a href="#section-5">5.&nbsp;&nbsp;Security Considerations</a></h2>
+<p id="section-5-1">All security considerations discussed in
+      <span><a href="#RFC8620" class="internal xref">JMAP</a> [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>
+      and <span><a href="#RFC5228" class="internal xref">Sieve</a> [<a href="#RFC5228" class="cite xref">RFC5228</a>]</span>
+      apply to this specification.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">Additionally, implementations <span class="bcp14">MUST</span> treat Sieve script content
+      as untrusted data.  As such, script parsers <span class="bcp14">MUST</span> fail gracefully
+      in the face of syntactically invalid or malicious content and
+      <span class="bcp14">MUST</span> be prepared to deal with resource exhaustion (e.g.,
+      allocation of enormous strings, lists, or command blocks).<a href="#section-5-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<section id="section-6">
+      <h2 id="name-iana-considerations"><a href="#section-6">6.&nbsp;&nbsp;IANA Considerations</a></h2>
+<section id="section-6.1">
+        <h3 id="name-jmap-capability-registratio"><a href="#section-6.1">6.1.&nbsp;&nbsp;JMAP Capability Registration for "sieve"</a></h3>
+<p id="section-6.1-1">IANA has registered "sieve" in the "JMAP Capabilities" registry as follows:<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<dl class="dlParallel" id="section-6.1-2">
+          <dt id="section-6.1-2.1">Capability Name:</dt>
+          <dd id="section-6.1-2.2">
+            <code>urn:ietf:params:jmap:sieve</code><a href="#section-6.1-2.2" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-6.1-2.3">Reference:</dt>
+          <dd id="section-6.1-2.4">RFC 9661<a href="#section-6.1-2.4" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-6.1-2.5">Intended Use:</dt>
+          <dd id="section-6.1-2.6">common<a href="#section-6.1-2.6" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-6.1-2.7">Change Controller:</dt>
+          <dd id="section-6.1-2.8">IETF<a href="#section-6.1-2.8" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-6.1-2.9">Security and Privacy Considerations:</dt>
+          <dd id="section-6.1-2.10">RFC 9661,
+        <a href="#security" class="auto internal xref">Section 5</a><a href="#section-6.1-2.10" class="pilcrow">¶</a>
+</dd>
+        
+</dl>
+</section>
+<section id="section-6.2">
+        <h3 id="name-jmap-data-type-registration"><a href="#section-6.2">6.2.&nbsp;&nbsp;JMAP Data Type  Registration for "SieveScript"</a></h3>
+<p id="section-6.2-1">IANA has registered "SieveScript" in the "JMAP Data Types" registry as follows:<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<dl class="dlParallel" id="section-6.2-2">
+          <dt id="section-6.2-2.1">Type Name:</dt>
+          <dd id="section-6.2-2.2">
+            <code>SieveScript</code><a href="#section-6.2-2.2" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-6.2-2.3">Can Reference Blobs:</dt>
+          <dd id="section-6.2-2.4">Yes<a href="#section-6.2-2.4" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-6.2-2.5">Can Use for State Change:</dt>
+          <dd id="section-6.2-2.6">Yes<a href="#section-6.2-2.6" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-6.2-2.7">Capability:</dt>
+          <dd id="section-6.2-2.8">
+            <code>urn:ietf:params:jmap:sieve</code><a href="#section-6.2-2.8" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-6.2-2.9">Reference:</dt>
+          <dd id="section-6.2-2.10">RFC 9661<a href="#section-6.2-2.10" class="pilcrow">¶</a>
+</dd>
+        
+</dl>
+</section>
+<section id="section-6.3">
+        <h3 id="name-jmap-error-codes-registry"><a href="#section-6.3">6.3.&nbsp;&nbsp;JMAP Error Codes Registry</a></h3>
+<p id="section-6.3-1">
+          IANA has registered the following two new error codes in the
+          "JMAP Error Codes" registry, as defined in
+          <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-6.3-1" class="pilcrow">¶</a></p>
+<section id="section-6.3.1">
+          <h4 id="name-invalidsieve"><a href="#section-6.3.1">6.3.1.&nbsp;&nbsp;invalidSieve</a></h4>
+<dl class="dlParallel" id="section-6.3.1-1">
+            <dt id="section-6.3.1-1.1">JMAP Error Code:</dt>
+            <dd id="section-6.3.1-1.2">invalidSieve<a href="#section-6.3.1-1.2" class="pilcrow">¶</a>
+</dd>
+            
+<dt id="section-6.3.1-1.3">Intended Use:</dt>
+            <dd id="section-6.3.1-1.4">common<a href="#section-6.3.1-1.4" class="pilcrow">¶</a>
+</dd>
+            
+<dt id="section-6.3.1-1.5">Change Controller:</dt>
+            <dd id="section-6.3.1-1.6">IETF<a href="#section-6.3.1-1.6" class="pilcrow">¶</a>
+</dd>
+            
+<dt id="section-6.3.1-1.7">Reference:</dt>
+            <dd id="section-6.3.1-1.8">RFC 9661, <a href="#set" class="auto internal xref">Section 2.4</a><a href="#section-6.3.1-1.8" class="pilcrow">¶</a>
+</dd>
+            
+<dt id="section-6.3.1-1.9">Description:</dt>
+            <dd id="section-6.3.1-1.10">The SieveScript violates the
+          <span><a href="#RFC5228" class="internal xref">Sieve grammar</a> [<a href="#RFC5228" class="cite xref">RFC5228</a>]</span>, and/or one
+          or more extensions mentioned in the script's "require"
+          statement(s) are not supported by the Sieve interpreter.<a href="#section-6.3.1-1.10" class="pilcrow">¶</a>
+</dd>
+          
+</dl>
+</section>
+<section id="section-6.3.2">
+          <h4 id="name-sieveisactive"><a href="#section-6.3.2">6.3.2.&nbsp;&nbsp;sieveIsActive</a></h4>
+<dl class="dlParallel" id="section-6.3.2-1">
+            <dt id="section-6.3.2-1.1">JMAP Error Code:</dt>
+            <dd id="section-6.3.2-1.2">sieveIsActive<a href="#section-6.3.2-1.2" class="pilcrow">¶</a>
+</dd>
+            
+<dt id="section-6.3.2-1.3">Intended Use:</dt>
+            <dd id="section-6.3.2-1.4">common<a href="#section-6.3.2-1.4" class="pilcrow">¶</a>
+</dd>
+            
+<dt id="section-6.3.2-1.5">Change Controller:</dt>
+            <dd id="section-6.3.2-1.6">IETF<a href="#section-6.3.2-1.6" class="pilcrow">¶</a>
+</dd>
+            
+<dt id="section-6.3.2-1.7">Reference:</dt>
+            <dd id="section-6.3.2-1.8">RFC 9661, <a href="#set" class="auto internal xref">Section 2.4</a><a href="#section-6.3.2-1.8" class="pilcrow">¶</a>
+</dd>
+            
+<dt id="section-6.3.2-1.9">Description:</dt>
+            <dd id="section-6.3.2-1.10">The client tried to destroy the active
+          SieveScript.<a href="#section-6.3.2-1.10" class="pilcrow">¶</a>
+</dd>
+          
+</dl>
+</section>
+</section>
+</section>
+<section id="section-7">
+      <h2 id="name-references"><a href="#section-7">7.&nbsp;&nbsp;References</a></h2>
+<section id="section-7.1">
+        <h3 id="name-normative-references"><a href="#section-7.1">7.1.&nbsp;&nbsp;Normative References</a></h3>
+<dl class="references">
+<dt id="RFC2119">[RFC2119]</dt>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc2119<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC3629">[RFC3629]</dt>
+        <dd>
+<span class="refAuthor">Yergeau, F.</span>, <span class="refTitle">"UTF-8, a transformation format of ISO 10646"</span>, <span class="seriesInfo">STD 63</span>, <span class="seriesInfo">RFC 3629</span>, <span class="seriesInfo">DOI 10.17487/RFC3629</span>, <time datetime="2003-11" class="refDate">November 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3629" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc3629<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC3986">[RFC3986]</dt>
+        <dd>
+<span class="refAuthor">Berners-Lee, T.</span>, <span class="refAuthor">Fielding, R.</span>, and <span class="refAuthor">L. Masinter</span>, <span class="refTitle">"Uniform Resource Identifier (URI): Generic Syntax"</span>, <span class="seriesInfo">STD 66</span>, <span class="seriesInfo">RFC 3986</span>, <span class="seriesInfo">DOI 10.17487/RFC3986</span>, <time datetime="2005-01" class="refDate">January 2005</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3986" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc3986<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC5198">[RFC5198]</dt>
+        <dd>
+<span class="refAuthor">Klensin, J.</span> and <span class="refAuthor">M. Padlipsky</span>, <span class="refTitle">"Unicode Format for Network Interchange"</span>, <span class="seriesInfo">RFC 5198</span>, <span class="seriesInfo">DOI 10.17487/RFC5198</span>, <time datetime="2008-03" class="refDate">March 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5198" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc5198<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC5228">[RFC5228]</dt>
+        <dd>
+<span class="refAuthor">Guenther, P., Ed.</span> and <span class="refAuthor">T. Showalter, Ed.</span>, <span class="refTitle">"Sieve: An Email Filtering Language"</span>, <span class="seriesInfo">RFC 5228</span>, <span class="seriesInfo">DOI 10.17487/RFC5228</span>, <time datetime="2008-01" class="refDate">January 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5228" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc5228<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC5435">[RFC5435]</dt>
+        <dd>
+<span class="refAuthor">Melnikov, A., Ed.</span>, <span class="refAuthor">Leiba, B., Ed.</span>, <span class="refAuthor">Segmuller, W.</span>, and <span class="refAuthor">T. Martin</span>, <span class="refTitle">"Sieve Email Filtering: Extension for Notifications"</span>, <span class="seriesInfo">RFC 5435</span>, <span class="seriesInfo">DOI 10.17487/RFC5435</span>, <time datetime="2009-01" class="refDate">January 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5435" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc5435<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC6134">[RFC6134]</dt>
+        <dd>
+<span class="refAuthor">Melnikov, A.</span> and <span class="refAuthor">B. Leiba</span>, <span class="refTitle">"Sieve Extension: Externally Stored Lists"</span>, <span class="seriesInfo">RFC 6134</span>, <span class="seriesInfo">DOI 10.17487/RFC6134</span>, <time datetime="2011-07" class="refDate">July 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6134" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc6134<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC8174">[RFC8174]</dt>
+        <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8174<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC8620">[RFC8620]</dt>
+        <dd>
+<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"The JSON Meta Application Protocol (JMAP)"</span>, <span class="seriesInfo">RFC 8620</span>, <span class="seriesInfo">DOI 10.17487/RFC8620</span>, <time datetime="2019-07" class="refDate">July 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8620" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8620<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC8621">[RFC8621]</dt>
+      <dd>
+<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"The JSON Meta Application Protocol (JMAP) for Mail"</span>, <span class="seriesInfo">RFC 8621</span>, <span class="seriesInfo">DOI 10.17487/RFC8621</span>, <time datetime="2019-08" class="refDate">August 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8621" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8621<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+</dl>
+</section>
+<section id="section-7.2">
+        <h3 id="name-informative-references"><a href="#section-7.2">7.2.&nbsp;&nbsp;Informative References</a></h3>
+<dl class="references">
+<dt id="RFC5232">[RFC5232]</dt>
+        <dd>
+<span class="refAuthor">Melnikov, A.</span>, <span class="refTitle">"Sieve Email Filtering: Imap4flags Extension"</span>, <span class="seriesInfo">RFC 5232</span>, <span class="seriesInfo">DOI 10.17487/RFC5232</span>, <time datetime="2008-01" class="refDate">January 2008</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5232" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc5232<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC5463">[RFC5463]</dt>
+        <dd>
+<span class="refAuthor">Freed, N.</span>, <span class="refTitle">"Sieve Email Filtering: Ihave Extension"</span>, <span class="seriesInfo">RFC 5463</span>, <span class="seriesInfo">DOI 10.17487/RFC5463</span>, <time datetime="2009-03" class="refDate">March 2009</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5463" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc5463<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC5804">[RFC5804]</dt>
+        <dd>
+<span class="refAuthor">Melnikov, A., Ed.</span> and <span class="refAuthor">T. Martin</span>, <span class="refTitle">"A Protocol for Remotely Managing Sieve Scripts"</span>, <span class="seriesInfo">RFC 5804</span>, <span class="seriesInfo">DOI 10.17487/RFC5804</span>, <time datetime="2010-07" class="refDate">July 2010</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc5804" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc5804<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC9112">[RFC9112]</dt>
+        <dd>
+<span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP/1.1"</span>, <span class="seriesInfo">STD 99</span>, <span class="seriesInfo">RFC 9112</span>, <span class="seriesInfo">DOI 10.17487/RFC9112</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9112" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9112<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC9404">[RFC9404]</dt>
+        <dd>
+<span class="refAuthor">Gondwana, B., Ed.</span>, <span class="refTitle">"JSON Meta Application Protocol (JMAP) Blob Management Extension"</span>, <span class="seriesInfo">RFC 9404</span>, <span class="seriesInfo">DOI 10.17487/RFC9404</span>, <time datetime="2023-08" class="refDate">August 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9404" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9404<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC9425">[RFC9425]</dt>
+      <dd>
+<span class="refAuthor">Cordier, R., Ed.</span>, <span class="refTitle">"JSON Meta Application Protocol (JMAP) for Quotas"</span>, <span class="seriesInfo">RFC 9425</span>, <span class="seriesInfo">DOI 10.17487/RFC9425</span>, <time datetime="2023-06" class="refDate">June 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9425" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9425<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+</dl>
+</section>
+</section>
+<section id="appendix-A">
+      <h2 id="name-acknowledgments"><a href="#name-acknowledgments">Acknowledgments</a></h2>
+<p id="appendix-A-1">The concepts in this document are based largely on those in
+      <span>[<a href="#RFC5804" class="cite xref">RFC5804</a>]</span>. 
+      The author would like to thank the authors of that document for
+      providing both inspiration and some borrowed text for this
+      document.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">The author would also like to thank the following
+      individuals for contributing their ideas and support for
+      writing this specification: <span class="contact-name">Joris Baum</span>, <span class="contact-name">Mauro De Gennaro</span>,
+      <span class="contact-name">Bron Gondwana</span>, <span class="contact-name">Neil Jenkins</span>, <span class="contact-name">Alexey Melnikov</span>, and <span class="contact-name">Ricardo Signes</span>.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+</section>
+
+
+
+
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo"><a href="#name-status-of-this-memo">Status of This Memo</a></h2>
+<p id="section-boilerplate.1-1">
+            This is an Internet Standards Track document.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+            This document is a product of the Internet Engineering Task Force
+            (IETF).  It represents the consensus of the IETF community.  It has
+            received public review and has been approved for publication by
+            the Internet Engineering Steering Group (IESG).  Further
+            information on Internet Standards is available in Section 2 of 
+            RFC 7841.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+            Information about the current status of this document, any
+            errata, and how to provide feedback on it may be obtained at
+            <span><a href="https://www.rfc-editor.org/info/rfc9661" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9661<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+</section>
+</div><div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice"><a href="#name-copyright-notice">Copyright Notice</a></h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2024 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info" target="_blank" rel="noopener">https://trustee.ietf.org/license-info<span class="u-visually-hidden"> (opens in new window)</span></a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>

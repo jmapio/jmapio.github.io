@@ -1,0 +1,37 @@
+---
+layout: default
+stylesheets:
+    - article
+    - article-rfc
+    - toc
+scripts:
+    - toc
+---
+{% if page.permalink contains 'draft' %}
+    {% assign eyebrow = 'Draft specification' %}
+    {% assign eyebrow_icon = 'exclamation-triangle' %}
+    {% assign hero_class = 'hero--page hero--eyebrow-warning' %}
+{% else %}
+    {% assign eyebrow = 'Specification' %}
+    {% assign eyebrow_icon = 'check-badge' %}
+    {% assign hero_class = 'hero--page' %}
+{% endif %}
+{%
+    include components/hero.liquid
+    class=hero_class
+    eyebrow=eyebrow
+    eyebrow_icon=eyebrow_icon
+    title=page.title
+    sub=page.description
+%}
+
+<section class='section section--document'>
+    <div class='u-wrapper u-article-split'>
+        <nav class='u-toc-wrapper' aria-label='Table of contents'>
+            {% include {{ page.toc }} %}
+        </nav>
+        <article class='u-article u-article--rfc'>{{ content }}</article>
+    </div>
+</section>
+
+{% include components/toc-fab.liquid %}

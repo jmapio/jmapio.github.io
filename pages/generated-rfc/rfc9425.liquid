@@ -1,0 +1,538 @@
+---
+layout: article-rfc
+permalink: /spec/rfc9425/index.html
+toc: generated-rfc-toc/rfc9425.html
+title: 'RFC 9425 – JSON Meta Application Protocol (JMAP) for Quotas'
+description: >-
+    This document specifies a data model for handling quotas on accounts with a server using the JSON Meta Application Protocol (JMAP).
+meta:
+    authors:
+        - René Cordier
+    keywords:
+        - JMAP
+        - JSON
+        - email
+        - quotas
+og_image:
+    eyebrow: 'RFC 9425'
+    title: 'JSON Meta Application Protocol (JMAP) for Quotas'
+    description: ''
+is_draft: false
+---
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction"><a href="#section-1">1.&nbsp;&nbsp;Introduction</a></h2>
+<p id="section-1-1">The JSON Meta Application Protocol (JMAP) <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> is a
+generic protocol for synchronizing data, such as mails, calendars, or contacts
+between a client and a server. It is optimized for mobile and web environments
+and aims to provide a consistent interface to different data types.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">This specification defines a data model for handling quotas over JMAP,
+allowing a user to obtain details about a certain quota.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">This specification does not address quota administration, which should be handled by other means.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<div id="notational-conventions">
+<section id="section-1.1">
+        <h3 id="name-notational-conventions"><a href="#section-1.1">1.1.&nbsp;&nbsp;Notational Conventions</a></h3>
+<p id="section-1.1-1">
+    The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>",
+    "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>",
+    "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+    "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are
+    to be interpreted as described in BCP&nbsp;14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span>
+          <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in all capitals,
+    as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-2">Type signatures, examples, and property descriptions in this document
+follow the conventions established in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-1.1" class="relref" target="_blank" rel="noopener">Section 1.1<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>. Data types defined in the core
+specification are also used in this document.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="terminology">
+<section id="section-1.2">
+        <h3 id="name-terminology"><a href="#section-1.2">1.2.&nbsp;&nbsp;Terminology</a></h3>
+<p id="section-1.2-1">This document reuses the terminology from the core JMAP specification established in <span><a href="https://rfc-editor.org/rfc/rfc8620#section-1.6" class="relref" target="_blank" rel="noopener">Section 1.6<span class="u-visually-hidden"> (opens in new window)</span></a> of [<a href="#RFC8620" class="cite xref">RFC8620</a>]</span>.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.2-2">The term "Quota" (when capitalized) is used to refer to the data type
+defined in <a href="#quota" class="auto internal xref">Section 4</a> and instance of that
+data type.<a href="#section-1.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="addition-to-the-capabilities-object">
+<section id="section-2">
+      <h2 id="name-addition-to-the-capabilitie"><a href="#section-2">2.&nbsp;&nbsp;Addition to the Capabilities Object</a></h2>
+<p id="section-2-1">The capabilities object is returned as part of the JMAP Session object; see <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-2" class="relref" target="_blank" rel="noopener">Section 2<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">This document defines one additional capability URI.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<div id="urn-ietf-params-jmap-quota">
+<section id="section-2.1">
+        <h3 id="name-urnietfparamsjmapquota"><a href="#section-2.1">2.1.&nbsp;&nbsp;urn:ietf:params:jmap:quota</a></h3>
+<p id="section-2.1-1">This represents support for the Quota data type and associated API methods. Servers supporting this specification <span class="bcp14">MUST</span> add a property called "urn:ietf:params:jmap:quota" to the capabilities object.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+<p id="section-2.1-2">The value of this property is an empty object in both the JMAP Session capabilities property and an account's accountCapabilities property.<a href="#section-2.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="sub-types-of-the-quota-data-type">
+<section id="section-3">
+      <h2 id="name-sub-types-of-the-quota-data"><a href="#section-3">3.&nbsp;&nbsp;Sub-types of the Quota Data Type</a></h2>
+<p id="section-3-1">There are two fields within the Quota data type, which have an enumerated set of possible values.  These are:<a href="#section-3-1" class="pilcrow">¶</a></p>
+<div id="scope">
+<section id="section-3.1">
+        <h3 id="name-scope"><a href="#section-3.1">3.1.&nbsp;&nbsp;Scope</a></h3>
+<p id="section-3.1-1">The Scope data type is used to represent the entities the quota applies to. It is defined as a "String" with values from the following set:<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.1-2.1">
+            <p id="section-3.1-2.1.1">account: The quota information applies to just the client's account.<a href="#section-3.1-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.1-2.2">
+            <p id="section-3.1-2.2.1">domain: The quota information applies to all accounts sharing this domain.<a href="#section-3.1-2.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.1-2.3">
+            <p id="section-3.1-2.3.1">global: The quota information applies to all accounts belonging to the server.<a href="#section-3.1-2.3.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="resourcetype">
+<section id="section-3.2">
+        <h3 id="name-resourcetype"><a href="#section-3.2">3.2.&nbsp;&nbsp;ResourceType</a></h3>
+<p id="section-3.2-1">The ResourceType data type is used to act as a unit of measure for the quota usage. It is defined as a "String" with values from the following set:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.2-2.1">
+            <p id="section-3.2-2.1.1">count: The quota is measured in a number of data type objects. For example, a
+  quota can have a limit of 50 "Mail" objects.<a href="#section-3.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.2-2.2">
+            <p id="section-3.2-2.2.1">octets: The quota is measured in size (in octets). For example, a quota can have a limit of 25000 octets.<a href="#section-3.2-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+</section>
+</div>
+<div id="quota">
+<section id="section-4">
+      <h2 id="name-quota"><a href="#section-4">4.&nbsp;&nbsp;Quota</a></h2>
+<p id="section-4-1">The Quota is an object that displays the limit set to an account usage. It then shows as well the current usage in regard to that limit.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<div id="properties-of-the-quota-object">
+<section id="section-4.1">
+        <h3 id="name-properties-of-the-quota-obj"><a href="#section-4.1">4.1.&nbsp;&nbsp;Properties of the Quota Object</a></h3>
+<p id="section-4.1-1">The Quota object <span class="bcp14">MUST</span> contain the following fields:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.1-2.1">
+            <p id="section-4.1-2.1.1">id: <code>Id</code><a href="#section-4.1-2.1.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2.1.2">The unique identifier for this object.<a href="#section-4.1-2.1.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-2.2">
+            <p id="section-4.1-2.2.1">resourceType: <code>String</code><a href="#section-4.1-2.2.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2.2.2">The resource type of the quota as defined in <a href="#resourcetype" class="auto internal xref">Section 3.2</a>.<a href="#section-4.1-2.2.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-2.3">
+            <p id="section-4.1-2.3.1">used: <code>UnsignedInt</code><a href="#section-4.1-2.3.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2.3.2">The current usage of the defined quota, using the "resourceType" defined as
+  unit of measure.  Computation of this value is handled by the
+  server.<a href="#section-4.1-2.3.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-2.4">
+            <p id="section-4.1-2.4.1">hardLimit: <code>UnsignedInt</code><a href="#section-4.1-2.4.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2.4.2">The hard limit set by this quota, using the "resourceType" defined as unit
+  of measure. Objects in scope may not be created or updated if this limit is
+  reached.<a href="#section-4.1-2.4.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-2.5">
+            <p id="section-4.1-2.5.1">scope: <code>String</code><a href="#section-4.1-2.5.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2.5.2">The "Scope" of this quota as defined in <a href="#scope" class="auto internal xref">Section 3.1</a>.<a href="#section-4.1-2.5.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-2.6">
+            <p id="section-4.1-2.6.1">name: <code>String</code><a href="#section-4.1-2.6.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2.6.2">The name of the quota. Useful for managing quotas and using queries for searching.<a href="#section-4.1-2.6.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-2.7">
+            <p id="section-4.1-2.7.1">types: <code>String[]</code><a href="#section-4.1-2.7.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-2.7.2">A list of all the type names as defined in the "JMAP Types Names" registry (e.g., Email, Calendar, etc.) to which this quota applies.
+
+  This allows the quotas to be assigned to distinct or shared data types.<a href="#section-4.1-2.7.2" class="pilcrow">¶</a></p>
+<p id="section-4.1-2.7.3">The server <span class="bcp14">MUST</span> filter out any types for which the client did not request the associated capability in the "using" section of the request.
+  Further, the server <span class="bcp14">MUST NOT</span> return Quota objects for which there are no types recognized by the client.<a href="#section-4.1-2.7.3" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.1-3">The Quota object <span class="bcp14">MAY</span> contain the following fields:<a href="#section-4.1-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.1-4.1">
+            <p id="section-4.1-4.1.1">warnLimit: <code>UnsignedInt|null</code><a href="#section-4.1-4.1.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-4.1.2">The warn limit set by this quota, using the "resourceType"
+  defined as unit of measure.  It can be used to send a warning to an entity
+  about to reach the hard limit soon, but with no action taken yet. If set, it
+  <span class="bcp14">SHOULD</span> be lower than the "softLimit" (if present and
+  different from null) and the "hardLimit".<a href="#section-4.1-4.1.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-4.2">
+            <p id="section-4.1-4.2.1">softLimit: <code>UnsignedInt|null</code><a href="#section-4.1-4.2.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-4.2.2">The soft limit set by this quota, using the "resourceType" defined
+  as unit of measure.  It can be used to still allow some operations but refuse
+  some others. What is allowed or not is up to the server. For example, it could
+  be used for blocking outgoing events of an entity (sending emails, creating
+  calendar events, etc.) while still receiving incoming events (receiving emails,
+  receiving calendars events, etc.). If set, it <span class="bcp14">SHOULD</span> be higher
+  than the "warnLimit" (if present and different from null) but lower
+  than the "hardLimit".<a href="#section-4.1-4.2.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-4.3">
+            <p id="section-4.1-4.3.1">description: <code>String|null</code><a href="#section-4.1-4.3.1" class="pilcrow">¶</a></p>
+<p id="section-4.1-4.3.2">Arbitrary, free, human-readable description of this quota. It might be used
+  to explain where the different limits come from and explain the entities and
+  data types this quota applies to. The description <span class="bcp14">MUST</span> be
+  encoded in UTF-8 <span>[<a href="#RFC3629" class="cite xref">RFC3629</a>]</span> as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-1.5" class="relref" target="_blank" rel="noopener">Section 1.5<span class="u-visually-hidden"> (opens in new window)</span></a></span>, and selected based on an
+  Accept-Language header in the request (as defined in <span>[<a href="#RFC9110" class="cite xref">RFC9110</a>], <a href="https://rfc-editor.org/rfc/rfc9110#section-12.5.4" class="relref" target="_blank" rel="noopener">Section 12.5.4<span class="u-visually-hidden"> (opens in new window)</span></a></span>) or out-of-band information about the
+  user's language or locale.<a href="#section-4.1-4.3.2" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.1-5">The following JMAP methods are supported.<a href="#section-4.1-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="quota-get">
+<section id="section-4.2">
+        <h3 id="name-quota-get"><a href="#section-4.2">4.2.&nbsp;&nbsp;Quota/get</a></h3>
+<p id="section-4.2-1">Standard "/get" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.1" class="relref" target="_blank" rel="noopener">Section 5.1<span class="u-visually-hidden"> (opens in new window)</span></a></span>. The <em>id</em>'s argument may be "null"
+to fetch all quotas of the account at once, as demonstrated in <a href="#fetching-quotas" class="auto internal xref">Section 5.1</a>.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="quota-changes">
+<section id="section-4.3">
+        <h3 id="name-quota-changes"><a href="#section-4.3">4.3.&nbsp;&nbsp;Quota/changes</a></h3>
+<p id="section-4.3-1">Standard "/changes" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.2" class="relref" target="_blank" rel="noopener">Section 5.2<span class="u-visually-hidden"> (opens in new window)</span></a></span>, but with one extra argument in the response:<a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.3-2.1">
+            <p id="section-4.3-2.1.1">updatedProperties: <code>String[]|null</code><a href="#section-4.3-2.1.1" class="pilcrow">¶</a></p>
+<p id="section-4.3-2.1.2">If only the "used" Quota property has changed since the old
+  state, this will be a list containing only that property. If the server is
+  unable to tell if only "used" has changed, it <span class="bcp14">MUST</span> be
+  null.<a href="#section-4.3-2.1.2" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.3-3">Since "used" frequently changes, but other properties are generally only
+changed rarely, the server can help the client optimize data transfer by
+keeping track of changes to quota usage separate from other state changes. The
+updatedProperties array may be used directly via a back-reference in a
+subsequent Quota/get call in the same request, so only these properties are
+returned if nothing else has changed.<a href="#section-4.3-3" class="pilcrow">¶</a></p>
+<p id="section-4.3-4">Servers <span class="bcp14">MAY</span> decide to add other properties to the list that
+they judge to be changing frequently.<a href="#section-4.3-4" class="pilcrow">¶</a></p>
+<p id="section-4.3-5">This method's usage is demonstrated in <a href="#requesting-latest-quota-changes" class="auto internal xref">Section 5.2</a>.<a href="#section-4.3-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="quota-query">
+<section id="section-4.4">
+        <h3 id="name-quota-query"><a href="#section-4.4">4.4.&nbsp;&nbsp;Quota/query</a></h3>
+<p id="section-4.4-1">This is a standard "/query" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.5" class="relref" target="_blank" rel="noopener">Section 5.5<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.4-2">A FilterCondition object has the following properties, any of which may be included or  omitted:<a href="#section-4.4-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.4-3.1">
+            <p id="section-4.4-3.1.1">name: <code>String</code><a href="#section-4.4-3.1.1" class="pilcrow">¶</a></p>
+<p id="section-4.4-3.1.2">The Quota <em>name</em> property contains the given string.<a href="#section-4.4-3.1.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.4-3.2">
+            <p id="section-4.4-3.2.1">scope: <code>String</code><a href="#section-4.4-3.2.1" class="pilcrow">¶</a></p>
+<p id="section-4.4-3.2.2">The Quota <em>scope</em> property must match the given value exactly.<a href="#section-4.4-3.2.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.4-3.3">
+            <p id="section-4.4-3.3.1">resourceType: <code>String</code><a href="#section-4.4-3.3.1" class="pilcrow">¶</a></p>
+<p id="section-4.4-3.3.2">The Quota <em>resourceType</em> property must match the given value exactly.<a href="#section-4.4-3.3.2" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.4-3.4">
+            <p id="section-4.4-3.4.1">type: <code>String</code><a href="#section-4.4-3.4.1" class="pilcrow">¶</a></p>
+<p id="section-4.4-3.4.2">The Quota <em>types</em> property contains the given value.<a href="#section-4.4-3.4.2" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-4.4-4">A Quota object matches the FilterCondition if, and only if, all the given conditions
+match. If zero properties are specified, it is automatically true for all objects.<a href="#section-4.4-4" class="pilcrow">¶</a></p>
+<p id="section-4.4-5">The following Quota properties <span class="bcp14">MUST</span> be supported for sorting:<a href="#section-4.4-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.4-6.1">name<a href="#section-4.4-6.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="section-4.4-6.2">used<a href="#section-4.4-6.2" class="pilcrow">¶</a>
+</li>
+        </ul>
+</section>
+</div>
+<div id="quota-querychanges">
+<section id="section-4.5">
+        <h3 id="name-quota-querychanges"><a href="#section-4.5">4.5.&nbsp;&nbsp;Quota/queryChanges</a></h3>
+<p id="section-4.5-1">This is a standard "/queryChanges" method as described in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-5.6" class="relref" target="_blank" rel="noopener">Section 5.6<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-4.5-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="examples">
+<section id="section-5">
+      <h2 id="name-examples"><a href="#section-5">5.&nbsp;&nbsp;Examples</a></h2>
+<div id="fetching-quotas">
+<section id="section-5.1">
+        <h3 id="name-fetching-quotas"><a href="#section-5.1">5.1.&nbsp;&nbsp;Fetching Quotas</a></h3>
+<p id="section-5.1-1">Request fetching all quotas related to an account:<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-5.1-2">
+<pre>[[ "Quota/get", {
+  "accountId": "u33084183",
+  "ids": null
+}, "0" ]]
+</pre><a href="#section-5.1-2" class="pilcrow">¶</a>
+</div>
+<p id="section-5.1-3">With response:<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-5.1-4">
+<pre>[[ "Quota/get", {
+  "accountId": "u33084183",
+  "state": "78540",
+  "list": [{
+    "id": "2a06df0d-9865-4e74-a92f-74dcc814270e",
+    "resourceType": "count",
+    "used": 1056,
+    "warnLimit": 1600,
+    "softLimit": 1800,
+    "hardLimit": 2000,
+    "scope": "account",
+    "name": "bob@example.com",
+    "description": "Personal account usage. When the soft limit is
+                    reached, the user is not allowed to send mails or
+                    create contacts and calendar events anymore.",
+    "types" : [ "Mail", "Calendar", "Contact" ]
+  }, {
+    "id": "3b06df0e-3761-4s74-a92f-74dcc963501x",
+    "resourceType": "octets",
+    ...
+  }, ...],
+  "notFound": []
+}, "0" ]]
+</pre><a href="#section-5.1-4" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="requesting-latest-quota-changes">
+<section id="section-5.2">
+        <h3 id="name-requesting-latest-quota-cha"><a href="#section-5.2">5.2.&nbsp;&nbsp;Requesting Latest Quota Changes</a></h3>
+<p id="section-5.2-1">Request fetching the changes for a specific quota:<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-5.2-2">
+<pre>[[ "Quota/changes", {
+  "accountId": "u33084183",
+  "sinceState": "78540",
+  "maxChanges": 20
+}, "0" ],
+[ "Quota/get", {
+  "accountId": "u33084183",
+  "#ids": {
+    "resultOf": "0",
+    "name": "Quota/changes",
+    "path": "/updated"
+  },
+  "#properties": {
+    "resultOf": "0",
+    "name": "Quota/changes",
+    "path": "/updatedProperties"
+  }
+}, "1" ]]
+</pre><a href="#section-5.2-2" class="pilcrow">¶</a>
+</div>
+<p id="section-5.2-3">With response:<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+<div class="lang-json sourcecode" id="section-5.2-4">
+<pre>[[ "Quota/changes", {
+  "accountId": "u33084183",
+  "oldState": "78540",
+  "newState": "78542",
+  "hasMoreChanges": false,
+  "updatedProperties": ["used"],
+  "created": [],
+  "updated": ["2a06df0d-9865-4e74-a92f-74dcc814270e"],
+  "destroyed": []
+}, "0" ],
+[ "Quota/get", {
+  "accountId": "u33084183",
+  "state": "10826",
+  "list": [{
+    "id": "2a06df0d-9865-4e74-a92f-74dcc814270e",
+    "used": 1246
+  }],
+  "notFound": []
+}, "1" ]]
+</pre><a href="#section-5.2-4" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="push">
+<section id="section-6">
+      <h2 id="name-push"><a href="#section-6">6.&nbsp;&nbsp;Push</a></h2>
+<p id="section-6-1">Servers <span class="bcp14">MUST</span> support the JMAP push mechanisms, as specified
+in <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>], <a href="https://rfc-editor.org/rfc/rfc8620#section-7" class="relref" target="_blank" rel="noopener">Section 7<span class="u-visually-hidden"> (opens in new window)</span></a></span>, to allow
+clients to receive notifications when the state changes for the Quota type
+defined in this specification.<a href="#section-6-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-7">
+      <h2 id="name-iana-considerations"><a href="#section-7">7.&nbsp;&nbsp;IANA Considerations</a></h2>
+<div id="jmap-capability-registration-for-quota">
+<section id="section-7.1">
+        <h3 id="name-jmap-capability-registratio"><a href="#section-7.1">7.1.&nbsp;&nbsp;JMAP Capability Registration for "quota"</a></h3>
+<p id="section-7.1-1">IANA has registered the "quota" JMAP Capability as follows:<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+<dl class="dlParallel" id="section-7.1-2">
+          <dt id="section-7.1-2.1">Capability Name:</dt>
+          <dd id="section-7.1-2.2">urn:ietf:params:jmap:quota<a href="#section-7.1-2.2" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-7.1-2.3">Reference:</dt>
+          <dd id="section-7.1-2.4">RFC 9425<a href="#section-7.1-2.4" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-7.1-2.5">Intended Use:</dt>
+          <dd id="section-7.1-2.6">common<a href="#section-7.1-2.6" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-7.1-2.7">Change Controller:</dt>
+          <dd id="section-7.1-2.8">IETF<a href="#section-7.1-2.8" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-7.1-2.9">Security and Privacy Considerations:</dt>
+          <dd id="section-7.1-2.10">RFC 9425, <a href="#security-considerations" class="auto internal xref">Section 8</a><a href="#section-7.1-2.10" class="pilcrow">¶</a>
+</dd>
+        
+</dl>
+</section>
+</div>
+<div id="jmap-datatype-registration-for-quota">
+<section id="section-7.2">
+        <h3 id="name-jmap-data-type-registration"><a href="#section-7.2">7.2.&nbsp;&nbsp;JMAP Data Type Registration for "Quota"</a></h3>
+<p id="section-7.2-1">IANA has registered the "Quota" Data Type as follows:<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<dl class="dlParallel" id="section-7.2-2">
+          <dt id="section-7.2-2.1">Type Name:</dt>
+          <dd id="section-7.2-2.2">Quota<a href="#section-7.2-2.2" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-7.2-2.3">Can Reference Blobs:</dt>
+          <dd id="section-7.2-2.4">No<a href="#section-7.2-2.4" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-7.2-2.5">Can Use for State Change:</dt>
+          <dd id="section-7.2-2.6">Yes<a href="#section-7.2-2.6" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-7.2-2.7">Capability:</dt>
+          <dd id="section-7.2-2.8">urn:ietf:params:jmap:quota<a href="#section-7.2-2.8" class="pilcrow">¶</a>
+</dd>
+          
+<dt id="section-7.2-2.9">Reference:</dt>
+          <dd id="section-7.2-2.10">RFC 9425<a href="#section-7.2-2.10" class="pilcrow">¶</a>
+</dd>
+        
+</dl>
+</section>
+</div>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-8">
+      <h2 id="name-security-considerations"><a href="#section-8">8.&nbsp;&nbsp;Security Considerations</a></h2>
+<p id="section-8-1">All security considerations of JMAP <span>[<a href="#RFC8620" class="cite xref">RFC8620</a>]</span> apply to this
+specification.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-2">Implementors should be careful to make sure the implementation of the
+extension specified in this document does not violate the site's security
+policy. The resource usage of other users is likely to be considered
+confidential information and should not be divulged to unauthorized
+persons.<a href="#section-8-2" class="pilcrow">¶</a></p>
+<p id="section-8-3">As for any resource shared across users (for example, a quota with the
+"domain" or "global" scope), a user that can consume the resource can affect
+the resources available to the other users. For example, a user could spam
+themselves with events and make the shared resource hit the limit and unusable
+for others (implementors could mitigate that with some rate-limiting
+implementation on the server).<a href="#section-8-3" class="pilcrow">¶</a></p>
+<p id="section-8-4">Also, revealing domain and global quota counts to all users may cause
+privacy leakage of other sensitive data, or at least the existence of other
+sensitive data. For example, some users are part of a private list belonging
+to the server, so they shouldn't know how many users are in there. However, by
+comparing the quota count before and after sending a message to the list, it
+could reveal the number of people of the list, as the domain or global quota
+count would go up by the number of people subscribed. In order to limit those
+attacks, quotas with "domain" or "global" scope <span class="bcp14">SHOULD</span> only be
+visible to server administrators and not to general users.<a href="#section-8-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<section id="section-9">
+      <h2 id="name-normative-references"><a href="#section-9">9.&nbsp;&nbsp;Normative References</a></h2>
+<dl class="references">
+<dt id="RFC2119">[RFC2119]</dt>
+      <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc2119<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC3629">[RFC3629]</dt>
+      <dd>
+<span class="refAuthor">Yergeau, F.</span>, <span class="refTitle">"UTF-8, a transformation format of ISO 10646"</span>, <span class="seriesInfo">STD 63</span>, <span class="seriesInfo">RFC 3629</span>, <span class="seriesInfo">DOI 10.17487/RFC3629</span>, <time datetime="2003-11" class="refDate">November 2003</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc3629" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc3629<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC8174">[RFC8174]</dt>
+      <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8174<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC8620">[RFC8620]</dt>
+      <dd>
+<span class="refAuthor">Jenkins, N.</span> and <span class="refAuthor">C. Newman</span>, <span class="refTitle">"The JSON Meta Application Protocol (JMAP)"</span>, <span class="seriesInfo">RFC 8620</span>, <span class="seriesInfo">DOI 10.17487/RFC8620</span>, <time datetime="2019-07" class="refDate">July 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8620" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc8620<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC9007">[RFC9007]</dt>
+      <dd>
+<span class="refAuthor">Ouazana, R., Ed.</span>, <span class="refTitle">"Handling Message Disposition Notification with the JSON Meta Application Protocol (JMAP)"</span>, <span class="seriesInfo">RFC 9007</span>, <span class="seriesInfo">DOI 10.17487/RFC9007</span>, <time datetime="2021-03" class="refDate">March 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9007" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9007<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+<dt id="RFC9110">[RFC9110]</dt>
+    <dd>
+<span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Semantics"</span>, <span class="seriesInfo">STD 97</span>, <span class="seriesInfo">RFC 9110</span>, <span class="seriesInfo">DOI 10.17487/RFC9110</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9110" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9110<span class="u-visually-hidden"> (opens in new window)</span></a>&gt;</span>. </dd>
+
+</dl>
+</section>
+<div id="acknowledgements">
+<section id="appendix-A">
+      <h2 id="name-acknowledgements"><a href="#name-acknowledgements">Acknowledgements</a></h2>
+<p id="appendix-A-1">Thank you to <span class="contact-name">Michael Bailly</span>, who co-wrote the first
+draft version of this document, before deciding to turn to other matters.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">Thank you to <span class="contact-name">Benoit Tellier</span> for his constant help and
+support on writing this document.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<p id="appendix-A-3">Thank you to <span class="contact-name">Raphael Ouazana</span> for sharing his own
+experience on how to write an RFC after finalizing his own document: <span>[<a href="#RFC9007" class="cite xref">RFC9007</a>]</span>.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
+<p id="appendix-A-4">Thank you to <span class="contact-name">Bron Gondwana</span>, <span class="contact-name">Neil Jenkins</span>, <span class="contact-name">Alexey Melnikov</span>, <span class="contact-name">Joris Baum</span>, and the people from the IETF JMAP working group in general, who
+helped with extensive discussions, reviews, and feedback.<a href="#appendix-A-4" class="pilcrow">¶</a></p>
+<p id="appendix-A-5">Thank you to the people in the IETF organization, who took the time to
+read, understand, comment, and give great feedback in the last rounds.<a href="#appendix-A-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+
+
+
+
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo"><a href="#name-status-of-this-memo">Status of This Memo</a></h2>
+<p id="section-boilerplate.1-1">
+            This is an Internet Standards Track document.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+            This document is a product of the Internet Engineering Task Force
+            (IETF).  It represents the consensus of the IETF community.  It has
+            received public review and has been approved for publication by
+            the Internet Engineering Steering Group (IESG).  Further
+            information on Internet Standards is available in Section 2 of 
+            RFC 7841.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+            Information about the current status of this document, any
+            errata, and how to provide feedback on it may be obtained at
+            <span><a href="https://www.rfc-editor.org/info/rfc9425" target="_blank" rel="noopener">https://www.rfc-editor.org/info/rfc9425<span class="u-visually-hidden"> (opens in new window)</span></a></span>.<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+</section>
+</div><div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice"><a href="#name-copyright-notice">Copyright Notice</a></h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2023 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info" target="_blank" rel="noopener">https://trustee.ietf.org/license-info<span class="u-visually-hidden"> (opens in new window)</span></a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
