@@ -23,14 +23,14 @@
     column-gap: var(--space-l);
     grid-template-areas:
         'logo . theme'
-        'links links links';
+        'nav nav nav';
     grid-template-columns: auto 1fr auto;
     width: 100%;
 }
 
 @media (width > 768px) {
     .header__inner {
-        grid-template-areas: 'logo links theme';
+        grid-template-areas: 'logo nav theme';
     }
 }
 
@@ -41,11 +41,13 @@
     column-gap: 24px;
     grid-area: logo;
 }
+.header__nav {
+    grid-area: nav;
+}
 .header__links {
     display: flex;
     flex-wrap: wrap;
     column-gap: 24px;
-    grid-area: links;
 }
 
 @media (width > 768px) {

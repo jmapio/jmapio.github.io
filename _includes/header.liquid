@@ -3,7 +3,7 @@
         <div class='header__logo'>
             {% include components/jmap-logo.liquid %}
         </div>
-        <nav aria-label='Primary'>
+        <nav class='header__nav' aria-label='Primary'>
             <ul class='header__links'>
                 {%- for item in site.data.nav -%}
                     <li>
