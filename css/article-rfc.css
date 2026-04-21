@@ -34,8 +34,8 @@
 }
 
 .u-article--rfc :not(pre) code {
-    text-wrap: wrap;
     overflow-wrap: anywhere;
+    text-wrap: wrap;
 }
 
 /* --- Pilcrow --- */
