@@ -58,7 +58,10 @@
             </div>
         </div>
         <div class='footer__bottom'>
-            <span>&copy; {{ 'now' | date: '%Y' }} JMAP contributors. An open IETF standard. </span>
+            <button class='footer__randomizer' aria-label='Show another JMAP backronym'>
+                {% include icons/heart-micro.liquid %}
+            </button>
+            <span class='footer__backronym'>JavaScript? Most Assuredly Pointless</span>
         </div>
     </div>
 </footer>
