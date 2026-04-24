@@ -8,7 +8,6 @@ esbuild:
 exclude:
     - _tmp
     - _bin
-    - scripts
     - vendor
     - package.json
     - package-lock.json

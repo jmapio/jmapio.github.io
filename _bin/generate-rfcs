@@ -14,6 +14,6 @@ docker run --rm \
   -it \
   jmapio-rfc \
   bash -c '
-    node scripts/fetch-rfc-xml.js
-    node scripts/generate-rfc-templates.js
+    node _scripts/fetch-rfc-xml.js
+    node _scripts/generate-rfc-templates.js
   '
