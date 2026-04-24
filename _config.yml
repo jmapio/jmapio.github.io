@@ -6,10 +6,8 @@ lightningcss:
 esbuild:
     target: es2022
 exclude:
-    - _tmp
-    - _bin
-    - vendor
     - package.json
     - package-lock.json
     - prettier.config.mjs
     - stylelint.config.js
+    - README.md
