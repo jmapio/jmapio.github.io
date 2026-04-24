@@ -14,6 +14,52 @@ hero:
         difficult to implement and deploy. JMAP makes it vastly easier to build
         and deploy modern email apps, reduce server costs, and increase
         performance and battery life.
+faq:
+    - question: What is JMAP?
+      answer: |
+          JMAP (JSON Meta Application Protocol) is an open IETF standard for
+          synchronising mail, calendars, and contacts between a client and
+          server. It replaces IMAP, CardDAV, and CalDAV with a single consistent
+          protocol built on HTTPS and JSON, with efficient batch requests and
+          real-time push updates built in.
+    - question: Is JMAP a replacement for IMAP?
+      answer: |
+          Yes. JMAP covers everything IMAP does — reading, searching, moving,
+          flagging, and even sending email — with a much cleaner and more
+          efficient API. JMAP also replaces POP3, client-side SMTP, CardDAV,
+          and CalDAV.
+
+          JMAP does not replace server-to-server SMTP. Email servers still use
+          SMTP to route messages between domains.
+    - question: Which email providers support JMAP?
+      answer: |
+          **[Fastmail](https://www.fastmail.com)** is the largest JMAP provider
+          and was instrumental in developing the standard — their web, desktop,
+          and mobile clients all run on JMAP.
+
+          **Stalwart Mail Server** is a modern open-source server with complete
+          JMAP support. **Apache James** and **Cyrus IMAP** also both
+          support JMAP.
+    - question: Is JMAP stable enough to build on?
+      answer: |
+          Yes. RFC 8620 (Core), RFC 8621 (Mail), and RFC 9610 (Contacts) are
+          published IETF standards and will not change in backwards-incompatible
+          ways. Fastmail has been running their entire production email service
+          on JMAP since 2019.
+    - question: How does JMAP handle authentication?
+      answer: |
+          JMAP deliberately does not define its own authentication mechanism, it
+          just uses standard HTTP authentication. In practice, that's often
+          OAuth 2.0 with Bearer tokens. This means JMAP works with your existing
+          identity infrastructure without any changes.
+    - question: How does JMAP perform compared to IMAP?
+      answer: |
+          JMAP performs as well or better than IMAP in all tested scenarios. The
+          white paper contains detailed benchmarks.
+
+          Modern IMAP with all extensions enabled can get a lot closer to JMAP's
+          efficiency, but this requires both the client and server to implement
+          the right extensions — which is rarely the case in practice.
 ---
 
 ## JMAP is simpler than IMAP
