@@ -221,6 +221,13 @@ ul.u-toc > li > p > a {
     transform: translateY(0);
 }
 
+.toc-drawer__panel:focus,
+.toc-drawer__panel:focus-visible,
+.toc-drawer__title:focus,
+.toc-drawer__title:focus-visible {
+    outline: none;
+}
+
 .toc-drawer__header {
     display: flex;
     align-items: center;

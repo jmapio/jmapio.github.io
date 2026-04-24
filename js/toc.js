@@ -52,6 +52,7 @@ if (toc) {
     const drawerNav = document.getElementById('toc-drawer-nav');
 
     if (fab && drawer && drawerNav) {
+        const drawerPanel = drawer.querySelector('.toc-drawer__panel');
         drawerNav.appendChild(toc.cloneNode(true));
 
         const mql = window.matchMedia('(max-width: 768px)');
@@ -90,9 +91,8 @@ if (toc) {
             drawer.classList.add('is-open');
             document.body.style.overflow = 'hidden';
 
-            const closeBtn = drawer.querySelector('.toc-drawer__close');
-            if (closeBtn) {
-                closeBtn.focus();
+            if (drawerPanel) {
+                drawerPanel.focus();
             }
 
             document.addEventListener('keydown', onDrawerKeydown);
@@ -107,8 +107,7 @@ if (toc) {
             document.body.style.overflow = '';
             document.removeEventListener('keydown', onDrawerKeydown);
 
-            const panel = drawer.querySelector('.toc-drawer__panel');
-            panel.addEventListener(
+            drawerPanel.addEventListener(
                 'transitionend',
                 () => {
                     drawer.hidden = true;
@@ -134,16 +133,19 @@ if (toc) {
                 return;
             }
 
-            const focusable = drawer.querySelectorAll(
-                'a[href], button:not([disabled])',
+            const focusable = Array.from(
+                drawer.querySelectorAll('a[href], button:not([disabled])'),
             );
             const first = focusable[0];
             const last = focusable[focusable.length - 1];
+            const isInFocusable = focusable.includes(document.activeElement);
 
-            if (e.shiftKey && document.activeElement === first) {
-                e.preventDefault();
-                last.focus();
-            } else if (!e.shiftKey && document.activeElement === last) {
+            if (e.shiftKey) {
+                if (!isInFocusable || document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                }
+            } else if (!isInFocusable || document.activeElement === last) {
                 e.preventDefault();
                 first.focus();
             }
