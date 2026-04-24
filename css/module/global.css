@@ -127,6 +127,20 @@ hr {
     height: 20px;
 }
 
+/* --- */
+
+.u-inline-code {
+    margin-inline: 0.5ex;
+    border: 1px solid var(--theme-border);
+    padding: 0.1em 0.5ex;
+    background: var(--theme-code-bg);
+    border-radius: var(--radius-s);
+    color: var(--theme-accent);
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    text-wrap: nowrap;
+}
+
 /* --- Logo */
 .jmap-logo {
     display: flex;
