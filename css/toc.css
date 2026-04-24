@@ -127,8 +127,8 @@ ul.u-toc > li > p > a {
     position: fixed;
     align-items: center;
     justify-content: center;
-    right: var(--space-l);
-    bottom: var(--space-l);
+    right: calc(env(safe-area-inset-right, 0) + var(--space-l));
+    bottom: calc(env(safe-area-inset-bottom, 0) + var(--space-s));
     border: 1px solid var(--theme-border-strong);
     width: 52px;
     height: 52px;
