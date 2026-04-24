@@ -331,23 +331,25 @@ sections:
             <hr class='section__hr'>
             <ul class='section__cards card-grid'>
                 {%- for item in section.items -%}
-                    {% assign eyebrow = item.languages | default: '' | array_to_sentence_string: '&' %}
-                    {% capture card_children %}
-                        {% if item.license %}
-                          <div class="card__license u-text-sm">
-                            {{ item.license }}
-                          </div>
-                        {% endif %}
-                    {% endcapture %}
-                    {%
-                        include components/link-card.liquid
-                        eyebrow=eyebrow
-                        title=item.title
-                        body=item.body
-                        href=item.href
-                        children=card_children
-                        class=item.class
-                    %}
+                    <li>
+                        {% assign eyebrow = item.languages | default: '' | array_to_sentence_string: '&' %}
+                        {% capture card_children %}
+                            {% if item.license %}
+                                <div class="card__license u-text-sm">
+                                    {{ item.license }}
+                                </div>
+                            {% endif %}
+                        {% endcapture %}
+                        {%
+                            include components/link-card.liquid
+                            eyebrow=eyebrow
+                            title=item.title
+                            body=item.body
+                            href=item.href
+                            children=card_children
+                            class=item.class
+                        %}
+                    </li>
                 {% endfor %}
             </ul>
         </div>
