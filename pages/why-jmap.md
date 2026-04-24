@@ -54,8 +54,7 @@ faq:
           identity infrastructure without any changes.
     - question: How does JMAP perform compared to IMAP?
       answer: |
-          JMAP performs as well or better than IMAP in all tested scenarios. The
-          white paper contains detailed benchmarks.
+          JMAP performs as well or better than IMAP in all tested scenarios.
 
           Modern IMAP with all extensions enabled can get a lot closer to JMAP's
           efficiency, but this requires both the client and server to implement
