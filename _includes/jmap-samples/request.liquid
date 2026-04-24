@@ -1,6 +1,0 @@
-{% highlight json %}
-{ "using": [ "urn:ietf:params:jmap:core", "urn:ietf:params:jmap:mail" ], "methodCalls": [ [ "Email/query", {
-"accountId": "u12345", "filter": { "inMailbox": "inbox" }, "sort": [ { "property": "receivedAt", "isAscending": false }
-], "limit": 20 }, "r1" ], [ "Email/get", { "accountId": "u12345", "#ids": { "resultOf": "r1", "name": "Email/query",
-"path": "/ids" } }, "r2" ] ] }
-{% endhighlight %}

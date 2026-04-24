@@ -40,13 +40,13 @@ _bin/generate-rfcs
 The pipeline is two steps:
 
 ```sh
-node scripts/fetch-rfc-xml.js          # fetches RFC and draft XMLs into _tmp/rfc-xml/
-node scripts/generate-rfc-templates.js # runs xml2rfc and writes Liquid templates + ToC includes
+node _scripts/fetch-rfc-xml.js          # fetches RFC and draft XMLs into _tmp/rfc-xml/
+node _scripts/generate-rfc-templates.js # runs xml2rfc and writes Liquid templates + ToC includes
 ```
 
 The list of source documents (RFCs and active drafts) lives at the top of
-`scripts/fetch-rfc-xml.js` — update it there when a new RFC or draft revision is
-published.
+`_scripts/fetch-rfc-xml.js` — update it there when a new RFC or draft revision
+is published.
 
 ## Generating OG images
 
@@ -54,7 +54,7 @@ published.
 _bin/generate-og-images
 ```
 
-This uses Playwright to screenshot `scripts/og-image.html` for each page in
+This uses Playwright to screenshot `_scripts/og-image.html` for each page in
 `pages/` and writes the results to `images/og/`.
 
 ## Linting and formatting

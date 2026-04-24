@@ -4,7 +4,7 @@
         "node": "24"
     },
     "scripts": {
-        "generate-og": "node scripts/generate-og-images.js",
+        "generate-og": "node _scripts/generate-og-images.js",
         "lint-prettier": "prettier --check .",
         "lint-stylelint": "stylelint 'css/**/*.css'"
     },

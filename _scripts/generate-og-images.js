@@ -73,7 +73,7 @@ const collectPages = async () => {
 // ---
 
 const htmlTemplate = await fs.readFile(
-    path.join(ROOT, 'scripts', 'og-image.html'),
+    path.join(ROOT, '_scripts', 'og-image.html'),
     { encoding: 'utf8' },
 );
 
