@@ -158,14 +158,16 @@ specs:
             <hr class='section__hr'>
             <ul class='section__cards card-grid'>
                 {%- for item in section.items -%}
-                    {%
-                        include components/link-card.liquid
-                        eyebrow=item.eyebrow
-                        title=item.title
-                        body=item.body
-                        href=item.href
-                        class=item.class
-                    %}
+                    <li>
+                        {%
+                            include components/link-card.liquid
+                            eyebrow=item.eyebrow
+                            title=item.title
+                            body=item.body
+                            href=item.href
+                            class=item.class
+                        %}
+                    </li>
                 {% endfor %}
             </ul>
         </div>

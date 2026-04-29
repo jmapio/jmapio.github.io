@@ -17,6 +17,8 @@ scripts:
     %}
 {% endif %}
 
+{% include components/toc-fab.liquid %}
+
 <section class='section section--document'>
     <div class='u-wrapper u-article-split'>
         <nav class='u-toc-wrapper' aria-label='Table of contents'>
@@ -25,5 +27,3 @@ scripts:
         <article class='u-article'>{{ content }}</article>
     </div>
 </section>
-
-{% include components/toc-fab.liquid %}

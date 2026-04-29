@@ -53,9 +53,12 @@
     border-radius: 50%;
     color: var(--theme-muted);
 }
+.faq__summary:hover .faq__expand {
+    background: var(--theme-glass-bg);
+    color: var(--theme-accent);
+}
 details[open] .faq__expand {
     transform: rotate(45deg);
-    background: var(--theme-accent-dim);
     border-color: var(--theme-accent);
     color: var(--theme-accent);
 }

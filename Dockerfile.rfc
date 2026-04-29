@@ -17,4 +17,4 @@ RUN python3 -m venv .venv \
 COPY package.json package-lock.json ./
 RUN npm ci
 
-COPY scripts ./scripts
+COPY _scripts ./_scripts
