@@ -142,15 +142,18 @@ hr {
 }
 
 /* --- Logo */
-.jmap-logo {
+
+.jmap-combomark-link {
     display: flex;
     align-items: center;
 }
-.jmap-logo__icon {
-    fill: var(--theme-accent);
-}
-.jmap-logo__text {
-    fill: var(--theme-logo-text);
+.i-jmap-combomark {
+    .logomark {
+        fill: var(--theme-accent);
+    }
+    .wordmark {
+        fill: var(--theme-logo-text);
+    }
 }
 
 /* --- */

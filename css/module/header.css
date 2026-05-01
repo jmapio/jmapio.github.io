@@ -40,6 +40,11 @@
     flex-wrap: wrap;
     column-gap: 24px;
     grid-area: logo;
+
+    .i-jmap-combomark {
+        width: 84px;
+        height: 32px;
+    }
 }
 .header__nav {
     grid-area: nav;
