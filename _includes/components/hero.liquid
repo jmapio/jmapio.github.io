@@ -25,6 +25,9 @@
                         {%- if is_external -%}
                             target='_blank'
                         {%- endif -%}
+                        {% if link.download %}
+                            download
+                        {% endif %}
                     >
                         <span class='button__label'>{{- link.label -}}</span>
                         {% if is_external %}
@@ -32,6 +35,8 @@
                             <span class='button__icon'>
                                 {% include icons/external-link.liquid %}
                             </span>
+                        {% elsif link.icon %}
+                            <span class='button__icon'>{% include icons/{{ link.icon }}.liquid %}</span>
                         {% endif %}
                     </a>
                 {% endfor %}

@@ -106,7 +106,7 @@
     --color-teal-900: oklch(29.695% 0.04991 184.463deg);
     --color-teal-950: oklch(19.76% 0.03155 187.676deg);
 
-    --color-green-500: oklch(70.55% 0.1461 154.077deg);
+    --color-green-500: oklch(70.57% 0.14516 154.422deg);
 
     --color-mist-300: oklch(69.069% 0.04993 187.782deg);
 
@@ -255,6 +255,8 @@
     --theme-diagram-bg: var(--color-black-fade-30);
 
     --theme-warning: var(--color-orange-300);
+
+    --theme-logo-card-bg: var(--color-grey-800);
 }
 
 [data-theme='light'] {
@@ -348,4 +350,6 @@
     --theme-diagram-bg: var(--color-black-fade-02);
 
     --theme-warning: var(--color-orange-700);
+
+    --theme-logo-card-bg: var(--color-white);
 }

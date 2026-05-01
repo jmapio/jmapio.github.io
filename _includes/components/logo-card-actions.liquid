@@ -1,0 +1,15 @@
+<div class='logo-card__actions'>
+    <a
+        class='button button--outline logo-card__button u-text-sm'
+        href='{{ include.download_url }}'
+        download
+    >
+        <span>Download</span>
+        {% include icons/arrow-down-tray.liquid %}
+    </a>
+    <button class='button button--outline logo-card__button u-text-sm' data-action='copy'>
+        <span class='button__label'>Copy</span>
+        {% include icons/document-duplicate.liquid %}
+        <span data-clipboard-content>{{ include.clipboard_content }}</span>
+    </button>
+</div>

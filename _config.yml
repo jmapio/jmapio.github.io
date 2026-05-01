@@ -11,3 +11,15 @@ exclude:
     - prettier.config.mjs
     - stylelint.config.js
     - README.md
+collections_dir: _collections
+collections:
+    combomark:
+        output: true
+        order:
+            - jmap-combination-mark-light.liquid
+            - jmap-combination-mark-dark.liquid
+    logomark:
+        output: true
+        order:
+            - jmap-logomark-light.liquid
+            - jmap-logomark-dark.liquid
