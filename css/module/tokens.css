@@ -97,7 +97,7 @@
     --color-teal-300: oklch(79.401% 0.08449 179.311deg);
     --color-teal-400: oklch(74.718% 0.1007 178.059deg);
     --color-teal-450: oklch(66.213% 0.10116 177.379deg);
-    --color-teal-500: oklch(55.536% 0.09604 184.635deg);
+    --color-teal-500: oklch(51.965% 0.09327 177.281deg);
     --color-teal-600: oklch(51.265% 0.08861 184.583deg);
     --color-teal-700: oklch(47.229% 0.08138 184.588deg);
     --color-teal-750: oklch(43.104% 0.07399 184.593deg);
@@ -105,6 +105,8 @@
     --color-teal-850: oklch(34.232% 0.0576 186.162deg);
     --color-teal-900: oklch(29.695% 0.04991 184.463deg);
     --color-teal-950: oklch(19.76% 0.03155 187.676deg);
+
+    --color-green-500: oklch(70.55% 0.1461 154.077deg);
 
     --color-mist-300: oklch(69.069% 0.04993 187.782deg);
 
@@ -148,7 +150,7 @@
 }
 
 [data-theme='dark'] {
-    --theme-accent: var(--color-teal-400);
+    --theme-accent: var(--color-green-500);
     --theme-accent-bright: var(--color-teal-50);
     --theme-accent-dim: var(--color-teal-950);
 
@@ -190,7 +192,7 @@
     --theme-glass-bg: var(--color-white-fade-04);
     --theme-glass-border: var(--color-white-fade-08);
 
-    --theme-logo-text: var(--color-teal-50);
+    --theme-logo-text: var(--color-grey-100);
 
     --theme-header-bg: rgb(from var(--theme-page-bg) r g b / 92%);
     --theme-header-border: var(--theme-border);
@@ -287,7 +289,7 @@
 
     --theme-glass-bg: var(--color-white-fade-70);
     --theme-glass-border: var(--color-black-fade-08);
-    --theme-logo-text: var(--color-grey-900);
+    --theme-logo-text: var(--color-grey-800);
 
     --theme-header-bg: oklch(from var(--theme-page-bg) l c h / 92%);
     --theme-header-border: var(--theme-border-soft);
