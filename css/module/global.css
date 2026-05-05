@@ -4,8 +4,10 @@ html {
 }
 
 :focus-visible {
+    --_ring-color: var(--theme-accent);
+
     border-radius: 2px;
-    outline: 2px solid var(--theme-accent);
+    outline: 2px solid var(--_ring-color);
     outline-offset: 2px;
 }
 
@@ -142,15 +144,19 @@ hr {
 }
 
 /* --- Logo */
-.jmap-logo {
+
+.jmap-combomark-link {
     display: flex;
     align-items: center;
 }
-.jmap-logo__icon {
-    fill: var(--theme-accent);
-}
-.jmap-logo__text {
-    fill: var(--theme-logo-text);
+.i-jmap-combomark,
+.i-jmap-logomark {
+    .logomark {
+        fill: var(--theme-accent);
+    }
+    .wordmark {
+        fill: var(--theme-logo-text);
+    }
 }
 
 /* --- */

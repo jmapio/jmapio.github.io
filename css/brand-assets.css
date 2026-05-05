@@ -1,0 +1,135 @@
+.asset-grid {
+    display: grid;
+    gap: var(--space-l);
+    margin-top: var(--space-xl);
+}
+.asset-grid--logos {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 440px), 1fr));
+}
+.asset-grid--colors {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+}
+
+.logo-card {
+    overflow: hidden;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-3xl) var(--space-m);
+    background: var(--theme-logo-card-bg);
+    border-radius: var(--radius-2xl);
+
+    .i-jmap-combomark {
+        width: 210px;
+    }
+    .i-jmap-logomark {
+        width: 69px;
+    }
+}
+
+.logo-card__actions {
+    transition:
+        opacity var(--dur-l) var(--ease-out),
+        transform var(--dur-l) var(--ease-out);
+    display: flex;
+    position: absolute;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    transform: translate3d(0, calc(100% + var(--space-s)), 0);
+    right: var(--space-s);
+    bottom: var(--space-s);
+    color: var(--theme-body);
+    opacity: 0;
+
+    .logo-card:hover &,
+    &:focus-within {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+
+    .logo-card__button {
+        background: var(--theme-logo-card-bg);
+    }
+
+    svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.color-card {
+    padding: var(--space-l) var(--space-l) var(--space-3xl) var(--space-l);
+    border-radius: var(--radius-2xl);
+
+    dl {
+        display: grid;
+        align-items: center;
+        gap: 0 var(--space-xs);
+        grid-template-columns: auto 1fr;
+        margin-top: var(--space-3xs);
+    }
+
+    dd {
+        position: relative;
+        width: fit-content;
+
+        svg {
+            --_size: 16px;
+
+            position: absolute;
+            top: calc(1px + var(--space-2xs));
+            right: 0;
+            width: var(--_size);
+            height: var(--_size);
+            opacity: 0;
+
+            dd:hover &,
+            button:focus-visible & {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.color-card__button {
+    padding-top: var(--space-2xs);
+    padding-right: calc(16px + var(--space-3xs));
+    padding-bottom: var(--space-2xs);
+    cursor: pointer;
+
+    &:focus-visible {
+        --_ring-color: var(--color-grey-950);
+    }
+    .color-card--black &:focus-visible {
+        --_ring-color: var(--color-grey-100);
+    }
+}
+
+@media (pointer: coarse) {
+    .color-card__value {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+}
+
+.color-card--green {
+    background: var(--color-green-500);
+    color: var(--color-grey-800);
+}
+.color-card--teal {
+    background: var(--color-teal-500);
+    color: var(--color-grey-100);
+}
+.color-card--black {
+    background: var(--color-grey-800);
+    color: var(--color-grey-100);
+}
+.color-card--grey {
+    background: var(--color-grey-100);
+    color: var(--color-grey-800);
+}
+
+[data-clipboard-content] {
+    display: none;
+}

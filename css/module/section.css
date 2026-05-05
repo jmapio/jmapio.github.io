@@ -22,13 +22,13 @@
     color: var(--theme-ink);
 }
 
+.section__description {
+    margin-top: var(--space-s);
+    max-width: 46ch;
+}
+
 .section--card-list {
     padding-block: var(--space-2xl);
-
-    .section__description {
-        margin-top: var(--space-s);
-        max-width: 46ch;
-    }
 
     .section__hr {
         margin-top: var(--space-l);

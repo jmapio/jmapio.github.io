@@ -8,12 +8,20 @@
     gap: var(--space-xl);
     grid-template-columns: 1.5fr 1fr 1fr 1fr;
 }
-.footer__brand p {
-    margin-top: var(--space-xs);
-    max-width: 28ch;
-    line-height: 1.6;
-    color: var(--theme-muted);
-    font-size: var(--text-size-meta);
+.footer__brand {
+    p {
+        margin-top: var(--space-xs);
+        max-width: 28ch;
+        line-height: 1.6;
+        color: var(--theme-muted);
+        font-size: var(--text-size-meta);
+    }
+
+    .i-jmap-combomark {
+        flex-shrink: 0;
+        width: 84px;
+        height: 32px;
+    }
 }
 .footer__col h3 {
     margin-bottom: var(--space-s);

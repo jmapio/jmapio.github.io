@@ -1,0 +1,219 @@
+---
+layout: default
+permalink: /brand/index.html
+stylesheets:
+    - brand-assets
+scripts:
+    - brand-assets
+title: JMAP logo
+description: >-
+    Brand assets and guidelines for showcasing JMAP with clarity and
+    consistency.
+hero:
+    eyebrow: Brand toolkit
+    eyebrow_icon: megaphone
+    title: JMAP <span class='hero__accent'>logo</span>
+    links:
+        - 
+            label: Download brand assets
+            href: /brand/jmap-brand-assets.zip
+            download: true
+            icon: arrow-down-tray
+combomark:
+    title: JMAP combination mark
+    description: >-
+        Use the combination mark as the primary representation of JMAP whenever
+        space permits.
+    items:
+        -
+            theme: light
+            raw_asset: assets/jmap-combination-mark-light
+            display_asset: icons/jmap-combomark.liquid
+        -
+            theme: dark
+            raw_asset: assets/jmap-combination-mark-dark
+            display_asset: icons/jmap-combomark.liquid
+logo:
+    title: JMAP mark
+    description: >-
+        The mark is a compact alternative for tight layouts and logo grids.
+        Default to the combination mark when brand recognition matters most.
+    items:
+        -
+            theme: light
+            raw_asset: assets/jmap-logomark-light
+            display_asset: icons/jmap-logomark.liquid
+        -
+            theme: dark
+            raw_asset: assets/jmap-logomark-dark
+            display_asset: icons/jmap-logomark.liquid
+colors:
+    title: Colors
+    description: >-
+        Comfortable against light and dark backgrounds, JMAP's primary brand
+        color is teal.
+    cards:
+        -
+            id: teal
+            title: JMAP teal
+            codes:
+                -
+                    format: HEX
+                    value: '#0D7A68'
+                -
+                    format: HSL
+                    value: 170 81% 27%
+                    clipboard_content: hsl(170 81% 27%)
+                -
+                    format: RGB
+                    value: 13 122 104
+                    clipboard_content: rgb(13 122 104)
+                -
+                    format: CMYK
+                    value: 87, 31, 65, 14
+        -
+            id: grey
+            title: JMAP grey
+            codes:
+                -
+                    format: HEX
+                    value: '#CFD0D0'
+                -
+                    format: HSL
+                    value: 180 1% 81%
+                    clipboard_content: hsl(180 1% 81%)
+                -
+                    format: RGB
+                    value: 207 208 208
+                    clipboard_content: rgb(207 208 208)
+                -
+                    format: CMYK
+                    value: 18, 13, 14, 0
+        -
+            id: black
+            title: JMAP black
+            codes:
+                -
+                    format: HEX
+                    value: '#282C2D'
+                -
+                    format: HSL
+                    value: 192 6% 17%
+                    clipboard_content: hsl(192 6% 17%)
+                -
+                    format: RGB
+                    value: 40 44 45
+                    clipboard_content: rgb(40 44 45)
+                -
+                    format: CMYK
+                    value: 73, 64, 62, 64
+        -
+            id: green
+            title: JMAP green
+            codes:
+                -
+                    format: HEX
+                    value: '#45BA75'
+                -
+                    format: HSL
+                    value: 145 46% 50%
+                    clipboard_content: hsl(145 46% 50%)
+                -
+                    format: RGB
+                    value: 69 186 117
+                    clipboard_content: rgb(69 186 117)
+                -
+                    format: CMYK
+                    value: 70, 0, 74, 0
+---
+{%
+    include components/hero.liquid
+    eyebrow=page.hero.eyebrow
+    eyebrow_icon=page.hero.eyebrow_icon
+    title=page.hero.title
+    sub=page.description
+    links=page.hero.links
+%}
+
+<section class='section'>
+    <div class='u-wrapper'>
+        <h2 class='section__title u-text-2xl u-font-bold'>{{ page.combomark.title }}</h2>
+        <div class='section__description'>
+            {{ page.combomark.description | markdownify }}
+        </div>
+        <ul class='asset-grid asset-grid--logos'>
+            {% assign combomark_collection = site.collections | where: 'label', 'combomark' | first %}
+            {% for item in combomark_collection.docs %}
+                <li class='logo-card logo-card__{{ item.theme }}' data-theme='{{ item.theme }}' tabindex='0'>
+                    {% include icons/jmap-combomark.liquid %}
+                    {% assign download_url = item.permalink | relative_url %}
+                    {%
+                        include components/logo-card-actions.liquid
+                        download_url=download_url
+                        clipboard_content=item.content
+                    %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+
+<section class='section'>
+    <div class='u-wrapper'>
+        <h2 class='section__title u-text-2xl u-font-bold'>{{ page.logo.title }}</h2>
+        <div class='section__description'>
+            {{ page.logo.description | markdownify }}
+        </div>
+        <ul class='asset-grid asset-grid--logos'>
+            {% assign logomark_collection = site.collections | where: 'label', 'logomark' | first %}
+            {% for item in logomark_collection.docs %}
+                <li class='logo-card logo-card__{{ item.theme }}' data-theme='{{ item.theme }}' tabindex='0'>
+                    {% include icons/jmap-logomark.liquid %}
+                    {% assign download_url = item.permalink | relative_url %}
+                    {%
+                        include components/logo-card-actions.liquid
+                        download_url=download_url
+                        clipboard_content=item.content
+                    %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+
+<section class='section'>
+    <div class='u-wrapper'>
+        <h2 class='section__title u-text-2xl u-font-bold'>{{ page.colors.title }}</h2>
+        <div class='section__description'>
+            {{ page.colors.description | markdownify }}
+        </div>
+        <ul class='asset-grid asset-grid--colors'>
+            {% for item in page.colors.cards %}
+                <li class='color-card color-card--{{ item.id }}'>
+                    <h3 class='u-text-lg u-font-bold'>{{ item.title }}</h3>
+                    <dl class='u-text-sm'>
+                        {% for code in item.codes %}
+                            <dt>{{ code.format }}</dt>
+                            <dd>
+                                <button class='color-card__button' data-action='copy'>
+                                    <span class='color-card__value'>{{ code.value }}</span>
+                                    {% include icons/document-duplicate-micro.liquid %}
+                                    <span data-clipboard-content>
+                                        {{- code.clipboard_content | default: code.value -}}
+                                    </span>
+                                </button>
+                            </dd>
+                        {% endfor %}
+                    </dl>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+
+<template id='js-icons'>
+    {% include icons/check.liquid %}
+    {% include icons/check-micro.liquid %}
+    {% include icons/close.liquid %}
+    {% include icons/close-micro.liquid %}
+</template>
