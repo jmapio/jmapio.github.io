@@ -27,14 +27,18 @@
           position: absolute;
           top: 60px;
           left: 80px;
+
+          svg {
+            width: 120px;
+          }
       }
 
       .og-eyebrow {
           color: var(--theme-accent);
           font-family: var(--font-base);
-          font-size: 18px;
+          font-size: 26px;
           font-weight: 600;
-          letter-spacing: 0.1em;
+          letter-spacing: var(--tracking-loose);
           text-transform: uppercase;
           margin-bottom: 20px;
       }
@@ -42,22 +46,23 @@
       .og-title {
           color: var(--theme-ink);
           font-family: var(--font-display);
-          font-size: 64px;
+          font-size: 80px;
           font-weight: 700;
           line-height: 1;
           letter-spacing: -0.03em;
           max-width: 20ch;
+          letter-spacing: var(--tracking-tight);
       }
 
-      .og-title--md { font-size: 48px; }
-      .og-title--sm { font-size: 40px; }
+      .og-title--md { font-size: 64px; }
+      .og-title--sm { font-size: 52px; }
 
       .og-title + .og-description { margin-top: 24px; }
 
       .og-description {
           color: var(--theme-body);
           font-family: var(--font-base);
-          font-size: 22px;
+          font-size: 32px;
           line-height: 1.5;
           max-width: 50ch;
           display: -webkit-box;
@@ -78,7 +83,7 @@
   </head>
   <body>
     <div class="og-logo">
-      <svg xmlns="http://www.w3.org/2000/svg" width="111" height="39" viewBox="0 0 74 26" fill="none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74 26" fill="none">
         <path fill="var(--theme-accent)" d="M50.5387 19.0693L50.5271 11.2073L48.1522 17.4977L46.1653 17.5016L43.7826 11.1917L43.7632 19.0693L41.2563 19.0655V6.77949L44.8653 6.77173L47.1587 12.8449L49.4483 6.77561H53.0378V19.0655L50.5387 19.0693Z" />
         <path fill="var(--theme-accent)" d="M61.04 15.93H57.431V19.0655H54.9009V8.78966C55.0445 7.67593 55.906 6.90758 57.008 6.77563H61.4319C62.4913 6.87653 63.3179 7.5634 63.543 8.61504V19.0655H61.0361V15.93H61.04ZM61.04 13.3843V9.33683H57.431V13.3882L61.04 13.3843Z" />
         <path fill="var(--theme-accent)" d="M71.7512 15.9067L68.0491 15.93V19.0694H65.4995V8.42879C65.4995 7.51685 66.2368 6.77954 67.1488 6.77954H71.7744C72.958 6.91536 73.8195 7.77685 73.8932 8.96044V13.6792C73.8932 14.8357 72.9697 15.9067 71.7473 15.9145L71.7512 15.9067ZM71.3592 13.3843V9.33686H68.0491V13.3882H71.3592V13.3843Z" />
