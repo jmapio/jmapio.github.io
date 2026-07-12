@@ -290,6 +290,12 @@ sections:
                 imports an account from a wide range of source protocols (JMAP, 
                 IMAP, CalDAV, CardDAV, WebDAV, ManageSieve, Maildir, Google 
                 Takeout and MS Exchange) and exports it into a target JMAP server.
+          - title: "JMAP Screener"
+            href: https://github.com/kwatson/jmap-screener
+            languages: [Go]
+            license: Apache
+            body: >-
+                A lightweight daemon for JMAP that turns mailbox moves into learned sender rules. Unknown mail starts in a Screener folder, while trusted senders are automatically routed using generated Sieve filters.
     - label: Proxies
       items:
           - title: JMAP-to-IMAP Proxy
