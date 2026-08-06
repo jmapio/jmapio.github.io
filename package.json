@@ -16,7 +16,7 @@
         "gray-matter": "^4.0.3",
         "jsdom": "^29.1.1",
         "lightningcss-cli": "^1.33.0",
-        "playwright": "^1.62.0",
+        "playwright": "^1.62.1",
         "prettier": "^3.9.6",
         "stylelint": "^17.14.1",
         "stylelint-config-standard": "^40.0.0",
