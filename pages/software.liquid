@@ -115,24 +115,24 @@ sections:
             languages: [Java]
             license: Apache
             body: An email client for Android.
-          - title: Mailtemi
-            href: https://mailtemi.com
-            body: A native iOS/Android email client.
-          - title: MailSalon
-            href: https://github.com/SeraphinaDX/MailSalon
-            languages: [Go]
-            license: GPLv3
-            body: Go based TUI client written for MailSalonSync.
-          - title: meli
-            href: https://meli-email.org/
-            languages: [Rust]
-            license: GPLv3
-            body: Terminal email client.
           - title: Mailo
             href: https://github.com/nekromoff/mailo
             languages: [C++]
             license: GPLv3
             body: The fast KDE-only email client.
+          - title: MailSalon
+            href: https://github.com/SeraphinaDX/MailSalon
+            languages: [Go]
+            license: GPLv3
+            body: Go based TUI client written for MailSalonSync.
+          - title: Mailtemi
+            href: https://mailtemi.com
+            body: A native iOS/Android email client.
+          - title: meli
+            href: https://meli-email.org/
+            languages: [Rust]
+            license: GPLv3
+            body: Terminal email client.
           - title: Parula
             href: https://parula.beonex.com
             body: >-
@@ -226,6 +226,13 @@ sections:
             body: Builds on Apache James with extra features.
     - label: Libraries
       items:
+          - title: calcard
+            href: https://github.com/stalwartlabs/calcard
+            languages: [Rust]
+            license: Apache/MIT
+            body: >-
+                JSCalendar/iCalendar and JSContact/vCard parsing, building and
+                conversion library for Rust. Try it online at convert.jmap.cloud.
           - title: go-jmap
             href: https://sr.ht/~rockorager/go-jmap
             languages: [Go]
@@ -268,10 +275,33 @@ sections:
                 and is tolerant of network failure — actions update the UI
                 instantly, then synchronise back to the server when they can.
                 Multi-level undo/redo support. Used by the demo webmail.
+          - title: jmap-kit
+            href: https://github.com/lachlanhunt/jmap-kit
+            languages: [TypeScript]
+            license: MIT
+            body: >-
+                A robust, type-safe SDK for building JMAP client applications
+                in TypeScript, with an extensible plugin architecture
+                supporting standard and vendor capabilities.
           - title: jmap-rs
             href: https://gitlab.com/jmap-rs/jmap-rs
             languages: [Rust]
             body: Rust client (and maybe server) library for JMAP.
+          - title: jmap-tools
+            href: https://github.com/stalwartlabs/jmap-tools
+            languages: [Rust]
+            license: Apache/MIT
+            body: >-
+                JMAP object parser with JSON Pointer querying and patching
+                support.
+          - title: jmap-yacl
+            href: https://github.com/ilyhalight/jmap-yacl
+            languages: [TypeScript]
+            license: MIT
+            body: >-
+                Another lightweight client library for JMAP, supporting
+                JavaScript and TypeScript with built-in types for Typebox.
+                OAuth and Push not yet implemented.
           - title: jmapc
             href: https://pypi.org/project/jmapc/
             languages: [Python]
@@ -318,36 +348,6 @@ sections:
             languages: [PHP]
             license: New BSD
             body: JMAP for Zend Framework.
-          - title: jmap-yacl
-            href: https://github.com/ilyhalight/jmap-yacl
-            languages: [TypeScript]
-            license: MIT
-            body: >-
-                Another lightweight client library for JMAP, supporting
-                JavaScript and TypeScript with built-in types for Typebox.
-                OAuth and Push not yet implemented.
-          - title: calcard
-            href: https://github.com/stalwartlabs/calcard
-            languages: [Rust]
-            license: Apache/MIT
-            body: >-
-                JSCalendar/iCalendar and JSContact/vCard parsing, building and
-                conversion library for Rust. Try it online at convert.jmap.cloud.
-          - title: jmap-tools
-            href: https://github.com/stalwartlabs/jmap-tools
-            languages: [Rust]
-            license: Apache/MIT
-            body: >-
-                JMAP object parser with JSON Pointer querying and patching
-                support.
-          - title: jmap-kit
-            href: https://github.com/lachlanhunt/jmap-kit
-            languages: [TypeScript]
-            license: MIT
-            body: >-
-                A robust, type-safe SDK for building JMAP client applications
-                in TypeScript, with an extensible plugin architecture
-                supporting standard and vendor capabilities.
     - label: Tools
       items:
           - title: "JMAP::Tester"
@@ -363,6 +363,12 @@ sections:
                 search, sync and manage mail from the terminal; installs via
                 Homebrew. Works with any JMAP server (Stalwart, Fastmail,
                 Cyrus).
+          - title: "JMAP Screener"
+            href: https://github.com/kwatson/jmap-screener
+            languages: [Go]
+            license: Apache
+            body: >-
+                A lightweight daemon for JMAP that turns mailbox moves into learned sender rules. Unknown mail starts in a Screener folder, while trusted senders are automatically routed using generated Sieve filters.
           - title: MailSalonSync
             href: https://github.com/SeraphinaDX/MailSalonSync
             languages: [Go]
@@ -377,6 +383,22 @@ sections:
             href: https://github.com/elizagamedev/mujmap
             languages: [Rust]
             body: Synchronize JMAP mail with notmuch.
+          - title: SolidPing
+            href: https://github.com/fclairamb/solidping
+            languages: [Go]
+            license: AGPL-3.0
+            body: >-
+                Self-hosted uptime monitoring that reads a JMAP inbox for
+                passive email-reception checks.
+          - title: Vandelay
+            href: https://github.com/stalwartlabs/vandelay
+            languages: [Rust]
+            license: MIT/Apache
+            body: >-
+                One-shot account migration and backup utility for JMAP. It
+                imports an account from a wide range of source protocols (JMAP,
+                IMAP, CalDAV, CardDAV, WebDAV, ManageSieve, Maildir, Google
+                Takeout and MS Exchange) and exports it into a target JMAP server.
           - title: xin
             href: https://github.com/onevcat/xin
             languages: [Rust]
@@ -386,37 +408,8 @@ sections:
                 automation (Fastmail-first). Emits stable JSON by default and
                 covers search, read, send, drafts, labels, batch actions and a
                 streaming watch mode for inbox changes.
-          - title: Vandelay
-            href: https://github.com/stalwartlabs/vandelay
-            languages: [Rust]
-            license: MIT/Apache
-            body: >-
-                One-shot account migration and backup utility for JMAP. It 
-                imports an account from a wide range of source protocols (JMAP, 
-                IMAP, CalDAV, CardDAV, WebDAV, ManageSieve, Maildir, Google 
-                Takeout and MS Exchange) and exports it into a target JMAP server.
-          - title: "JMAP Screener"
-            href: https://github.com/kwatson/jmap-screener
-            languages: [Go]
-            license: Apache
-            body: >-
-                A lightweight daemon for JMAP that turns mailbox moves into learned sender rules. Unknown mail starts in a Screener folder, while trusted senders are automatically routed using generated Sieve filters.
-          - title: SolidPing
-            href: https://github.com/fclairamb/solidping
-            languages: [Go]
-            license: AGPL-3.0
-            body: >-
-                Self-hosted uptime monitoring that reads a JMAP inbox for
-                passive email-reception checks.
     - label: Proxies
       items:
-          - title: JMAP-to-IMAP Proxy
-            href: https://github.com/jmapio/jmap-perl
-            languages: [Perl]
-            license: MIT
-            body: >-
-                A complete JMAP server implementation that uses any IMAP,
-                CalDAV and CardDAV store as a backend.
           - title: IMAP-to-JMAP Proxy
             href: https://github.com/stalwartlabs/imap-to-jmap/
             languages: [Rust]
@@ -424,6 +417,13 @@ sections:
             body: >-
                 Open-source IMAP4-to-JMAP proxy. Supports IMAP4rev2, IMAP4rev1
                 and multiple extensions.
+          - title: JMAP-to-IMAP Proxy
+            href: https://github.com/jmapio/jmap-perl
+            languages: [Perl]
+            license: MIT
+            body: >-
+                A complete JMAP server implementation that uses any IMAP,
+                CalDAV and CardDAV store as a backend.
     - label: Planned
       description: >-
           Projects that have publicly committed to adding JMAP support but are
@@ -432,7 +432,7 @@ sections:
           - title: Mimestream
             href: https://mimestream.com/
             body: A native macOS email client.
-          - title: Mailtemi
+          - title: Mailtemi (desktop)
             href: https://mailtemi.com
             body: >-
                 A native macOS/GNOME (Linux/Windows) desktop email and
