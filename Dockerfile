@@ -1,4 +1,4 @@
-FROM ruby:3.3.4-slim
+FROM ruby:4.0.9-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV JEKYLL_ENV=production
